@@ -188,6 +188,10 @@ def test_staged_recipes_compile_complete_contact_gated_skill_sequences():
             entry['name']: entry for entry in recipe['objects'] if entry['name'].startswith(('factory_', 'taoyuan_'))
         } == reference_workcell_objects
         assert not any(entry['name'] == 'factory_backdrop_visual' for entry in recipe['objects'])
+        assert ('assembly_support' in objects) is bool(recipe['fabrica_canonical'].get('official_bimanual_hold', False))
+        if recipe['fabrica_canonical'].get('official_bimanual_hold', False):
+            for part_name in actual_parts:
+                assert objects[part_name].get('collision_approximation') == 'sdf'
         for robot_name, robot in robots.items():
             reference_robot = reference_robots[robot_name]
             for field in (
@@ -381,43 +385,52 @@ def test_staged_recipes_compile_complete_contact_gated_skill_sequences():
         assert recipe['max_steps'] >= len(recipe['phases']) * 360
         assert recipe['max_steps'] >= TASKS[task_name] * 7000
         base_part_id = recipe['fabrica_canonical_resolved']['base_part']
-        base_release = next(
-            phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_release_and_lock'
-        )
-        rebased_targets = set(base_release['lock'][0]['rebase_targets'])
+        official_hold = bool(recipe['fabrica_canonical'].get('official_bimanual_hold', False))
+        if official_hold:
+            place_phase = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_place')
+            rebase_spec = place_phase['rebase_from_object']
+            rebased_targets = set(rebase_spec['targets'])
+            assert rebase_spec['enable_collision'] is True
+            assert rebase_spec['object'] == f'fabrica_{task_name}_{base_part_id}'
+        else:
+            base_release = next(
+                phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_release_and_lock'
+            )
+            rebased_targets = set(base_release['lock'][0]['rebase_targets'])
+            base_retreat = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_retreat')
+            base_park = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_park')
         assert {criterion['target'] for criterion in recipe['success']} <= rebased_targets
         assert rebased_targets == set(recipe['domain_randomization']['groups']['assembly_base']['targets'])
-        base_retreat = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_retreat')
-        base_park = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_park')
-        np.testing.assert_allclose(
-            base_retreat['local_skill']['offset'],
-            [0.0, 0.0, 0.06],
-        )
-        park_offset = np.asarray(base_park['local_skill']['offset'], dtype=float)
-        assert base_park['local_skill']['lock_target_position'] is True
-        assert base_park['local_skill']['lock_target_orientation'] is False
-        base_robot_name = recipe['fabrica_canonical']['base_robot']
-        robot_to_assembly = (
-            np.asarray(robots[base_robot_name]['position'], dtype=float)[:2]
-            - np.asarray(recipe['fabrica_canonical']['assembly_origin'], dtype=float)[:2]
-        )
-        assert np.dot(park_offset[:2], robot_to_assembly) > 0.0
-        assert np.isclose(np.linalg.norm(park_offset[:2]), 0.35)
-        assert np.isclose(park_offset[2], 0.02)
-        np.testing.assert_allclose(
-            base_park['local_skill']['workspace_center'],
-            robots[base_robot_name]['position'],
-        )
-        assert np.isclose(
-            base_park['local_skill']['workspace_minimum_planar_radius'],
-            0.28,
-        )
-        assert all(
-            'rebase_targets' not in lock_spec
-            for phase in recipe['phases']
-            if phase is not base_release
-            for lock_spec in phase.get('lock', [])
-        )
+        if not official_hold:
+            np.testing.assert_allclose(
+                base_retreat['local_skill']['offset'],
+                [0.0, 0.0, 0.06],
+            )
+            park_offset = np.asarray(base_park['local_skill']['offset'], dtype=float)
+            assert base_park['local_skill']['lock_target_position'] is True
+            assert base_park['local_skill']['lock_target_orientation'] is False
+            base_robot_name = recipe['fabrica_canonical']['base_robot']
+            robot_to_assembly = (
+                np.asarray(robots[base_robot_name]['position'], dtype=float)[:2]
+                - np.asarray(recipe['fabrica_canonical']['assembly_origin'], dtype=float)[:2]
+            )
+            assert np.dot(park_offset[:2], robot_to_assembly) > 0.0
+            assert np.isclose(np.linalg.norm(park_offset[:2]), 0.35)
+            assert np.isclose(park_offset[2], 0.02)
+            np.testing.assert_allclose(
+                base_park['local_skill']['workspace_center'],
+                robots[base_robot_name]['position'],
+            )
+            assert np.isclose(
+                base_park['local_skill']['workspace_minimum_planar_radius'],
+                0.28,
+            )
+            assert all(
+                'rebase_targets' not in lock_spec
+                for phase in recipe['phases']
+                if phase is not base_release
+                for lock_spec in phase.get('lock', [])
+            )
         assert all(Path(objects[name]['usd_path']).is_file() for name in actual_parts)
         assert Path(objects['optical_board']['usd_path']).is_file()
         assert Path(objects['fabrica_fixture']['usd_path']).is_file()
@@ -433,28 +446,56 @@ def test_staged_recipes_compile_complete_contact_gated_skill_sequences():
         close_phases = [
             phase for phase in recipe['phases'] if (phase.get('local_skill') or {}).get('name') == 'ur5e_close_gripper'
         ]
-        assert len(close_phases) == TASKS[task_name]
+        if official_hold:
+            assert len(close_phases) > TASKS[task_name]
+        else:
+            assert len(close_phases) == TASKS[task_name]
         assert resolved['stabilize_fixture_parts'] is True
-        initial_locks = recipe['phases'][0]['lock']
         base_object = f'fabrica_{task_name}_{base_part_id}'
-        assert {lock_spec['object'] for lock_spec in initial_locks} == actual_parts
-        assert {lock_spec['target'] for lock_spec in initial_locks} == {
-            f'part_{object_name.rsplit("_", 1)[-1]}_fixture_pickup' for object_name in actual_parts
-        }
-        for lock_spec in initial_locks:
-            assert lock_spec['snap_free_object'] is True
-            assert lock_spec['free_snap_steps'] == 0
-            assert lock_spec['position_tolerance'] == 0.03
-            assert lock_spec['orientation_tolerance'] == 0.20
-            assert lock_spec['disable_collision_on_lock'] is True
-            assert lock_spec['target'] in recipe['domain_randomization']['groups']['start_parts']['targets']
+        if official_hold:
+            settle = recipe['phases'][0]
+            assert settle['name'] == 'fixture_parts_settle'
+            assert 'lock' not in settle
+            assert {'object': 'fabrica_fixture', 'enabled': True} in settle['object_collisions']
+            for phase in recipe['phases']:
+                assert {'object': 'fabrica_fixture', 'enabled': False} not in phase.get('object_collisions', [])
+            for part_name in actual_parts:
+                assert {'object': part_name, 'enabled': True} in settle['object_collisions']
+            assert settle['advance']['type'] == 'objects_static'
+            assert not any(phase.get('name', '').endswith('_grip_handoff') for phase in recipe['phases'])
+            assert not any(
+                phase.get('name', '').endswith('_regrasp_from_support') for phase in recipe['phases']
+            )
+        else:
+            initial_locks = recipe['phases'][0]['lock']
+            assert {lock_spec['object'] for lock_spec in initial_locks} == actual_parts
+            assert {lock_spec['target'] for lock_spec in initial_locks} == {
+                f'part_{object_name.rsplit("_", 1)[-1]}_fixture_pickup' for object_name in actual_parts
+            }
+            for lock_spec in initial_locks:
+                assert lock_spec['snap_free_object'] is True
+                assert lock_spec['free_snap_steps'] == 0
+                assert lock_spec['position_tolerance'] == 0.03
+                assert lock_spec['orientation_tolerance'] == 0.20
+                assert lock_spec['disable_collision_on_lock'] is True
+                assert lock_spec['target'] in recipe['domain_randomization']['groups']['start_parts']['targets']
         for phase in close_phases:
             local_skill = phase['local_skill']
             attach = phase['attach'][0]
-            assert 'unlock' not in phase
             assert 'unlock_after_steps' not in phase
+            if official_hold:
+                assert 'unlock' not in phase
+                assert phase.get('object_collisions') == [
+                    {'object': local_skill['object'], 'enabled': True}
+                ]
+            else:
+                assert 'unlock' not in phase
             if local_skill['object'] == base_object:
-                assert phase['fixture_lock'][0]['target'] == f'part_{base_part_id}_fixture_pickup'
+                if official_hold:
+                    assert 'fixture_lock' not in phase
+                else:
+                    assert phase['fixture_lock'][0]['target'] == f'part_{base_part_id}_fixture_pickup'
+                    assert phase['fixture_lock'][0]['disable_collision_on_lock'] is True
             else:
                 assert 'fixture_lock' not in phase
             assert local_skill['close_until_contact'] is True
@@ -480,11 +521,34 @@ def test_staged_recipes_compile_complete_contact_gated_skill_sequences():
             assert attach['measure_force_contact'] is True
             assert local_skill['measure_force_contact'] is True
             assert attach['min_attach_steps'] == 24
-            assert phase['advance']['min_steps'] == 24
+            if official_hold:
+                assert phase['advance']['min_steps'] == 48
+                assert 'unlock' not in phase
+                assert phase.get('object_collisions') == [
+                    {'object': local_skill['object'], 'enabled': True}
+                ]
+            else:
+                assert phase['advance']['min_steps'] == 24
             assert attach['allow_noncontact_fixed_joint'] is False
             assert attach['position_tolerance'] == 0.007
             assert attach['orientation_tolerance'] == 0.10
-            assert attach['filter_gripper_collisions_on_attach'] is False
+            if official_hold:
+                assert attach['attachment_mode'] == 'pure_physical_grasp'
+                # Friction grasp needs finger↔part collision — never filter pairs.
+                assert attach['filter_gripper_collisions_on_attach'] is False
+                assert attach['force_enable_collision_on_attach'] is True
+                assert attach['disable_collision_on_attach'] is False
+                assert attach['allow_caging_hold_for_physical_grasp'] is True
+            else:
+                assert attach['attachment_mode'] == 'fixed_joint'
+                assert attach['filter_gripper_collisions_on_attach'] is (
+                    phase['name'].startswith('hold_')
+                )
+            if official_hold and (
+                phase['name'].startswith('hold_')
+                or (phase['name'].startswith('base_') and phase['name'].endswith('_close_and_attach'))
+            ):
+                assert attach['force_enable_collision_on_attach'] is True
             assert attach['compliant_hold_linear_limit'] == 0.006
             assert attach['compliant_hold_angular_limit_degrees'] == 6.0
             assert attach['compliant_hold_linear_max_force'] == 20.0
@@ -642,11 +706,103 @@ def test_staged_recipes_compile_complete_contact_gated_skill_sequences():
             if phase['name'].endswith('_release_and_lock'):
                 for lock_spec in phase.get('lock', []):
                     assert lock_spec['position_tolerance'] == 0.015
+                    if official_hold and not phase['name'].startswith('base_'):
+                        assert lock_spec['disable_collision_on_lock'] is False
+                        assert lock_spec['pin_pose'] is True
+                        assert lock_spec['freeze_current_pose'] is False
+                        assert lock_spec['detach_on_lock'] is True
+                        assert lock_spec['teleport_to_target_once'] is True
+            if (
+                official_hold
+                and phase['name'].endswith('_release')
+                and not phase['name'].endswith('_release_and_lock')
+                and not phase['name'].startswith('base_')
+            ):
+                # Post-insert / hold switch / final: open+detach only, no pin.
+                assert not phase.get('lock')
+                assert phase.get('detach')
 
         for success in recipe['success']:
             assert success['target'] in targets
             assert success['require_released'] is True
             assert success['require_static'] is True
+
+        if task_name == 'beam':
+            phase_order = {phase['name']: index for index, phase in enumerate(recipe['phases'])}
+            assert 'base_6_release_and_lock' not in phase_order
+            assert (
+                phase_order['base_6_place']
+                < phase_order['base_6_set_down']
+                < phase_order['assemble_00_part_3_move_above']
+            )
+            set_down = recipe['phases'][phase_order['base_6_set_down']]
+            assert set_down['gripper_commands']['franka_right'] == 'close'
+            assert not set_down.get('detach')
+            assert not set_down.get('lock')
+            assert set_down.get('unlock') == ['fabrica_beam_6']
+            assert set_down.get('object_collisions') == [
+                {'object': 'fabrica_beam_6', 'enabled': True}
+            ]
+            assert 'franka_right' in set_down.get('local_skills', {})
+            assert 'base_6_regrasp_hold' not in phase_order
+            assert 'base_6_clear_hold_overlap' not in phase_order
+            assert recipe['phases'][phase_order['base_6_place']]['rebase_from_object']['preserve_z'] is True
+            assert recipe['phases'][phase_order['base_6_place']]['rebase_from_object']['position_tolerance'] == 0.05
+            support = objects['assembly_support']
+            assert support['kind'] == 'static_cube'
+            assert support['visible'] is False
+            assert support['scale'][2] >= 0.12
+            board = objects['optical_board']
+            assert support['position'][2] + 0.5 * support['scale'][2] == board['position'][2]
+            fixture_support = objects['fixture_support']
+            assert fixture_support['kind'] == 'static_cube'
+            assert fixture_support['visible'] is False
+            assert fixture_support['scale'][2] >= 0.25
+            assert fixture_support['static_friction'] <= 0.4
+            assert fixture_support['friction_combine_mode'] == 'min'
+            assert objects['fabrica_fixture']['friction_combine_mode'] == 'min'
+            assert objects['fabrica_fixture']['static_friction'] <= 0.35
+            assert fixture_support.get('tracked') is True
+            assert 'fixture_support' in recipe['domain_randomization']['groups']['start_parts']['objects']
+            assert 'fixture_support' not in recipe['domain_randomization']['fixed_objects']
+            for phase in recipe['phases']:
+                for entry in phase.get('object_collisions') or []:
+                    if entry.get('object') in {'fixture_support', 'factory_tabletop_visual'}:
+                        assert entry.get('enabled') is True, phase.get('name')
+            assert 'fabrica_fixture' in recipe['domain_randomization']['groups']['start_parts']['objects']
+            assert phase_order['assemble_00_part_3_park'] < phase_order['hold_6_to_3_switch_release']
+            assert 'hold_6_to_3_switch_retreat' not in phase_order
+            assert 'hold_6_switch_release_and_lock' not in phase_order
+            assert 'hold_3_prepare_regrasp' not in phase_order
+            assert phase_order['hold_6_to_3_switch_release'] < phase_order['hold_3_approach_clearance']
+            assert phase_order['hold_3_approach_clearance'] < phase_order['hold_3_move_above']
+            assert 'hold_3_lift' not in phase_order
+            assert phase_order['hold_3_close_and_attach'] < phase_order['assemble_01_part_1_move_above']
+            assert phase_order['assemble_01_part_1_park'] < phase_order['hold_3_to_6_switch_release']
+            assert phase_order['hold_3_to_6_switch_release'] < phase_order['hold_6_approach_clearance']
+            assert phase_order['hold_6_close_and_attach'] < phase_order['assemble_02_part_2_move_above']
+            assert phase_order['assemble_02_part_2_park'] < phase_order['hold_6_to_2_switch_release']
+            assert phase_order['hold_2_close_and_attach'] < phase_order['assemble_03_part_0_move_above']
+            assert phase_order['assemble_03_part_0_park'] < phase_order['hold_2_final_release']
+            for phase_name, held_part in (
+                ('assemble_00_part_3_insert_00', 'fabrica_beam_6'),
+                ('assemble_01_part_1_descend', 'fabrica_beam_3'),
+                ('assemble_02_part_2_insert_09', 'fabrica_beam_6'),
+                ('assemble_03_part_0_close_and_attach', 'fabrica_beam_2'),
+            ):
+                companion = recipe['phases'][phase_order[phase_name]]['local_skills']['franka_right']
+                assert companion['name'] == 'ur5e_hold_part_end'
+                assert companion['object'] == held_part
+                assert companion['gripper_command'] == 'contact_hold'
+            hold_attach = recipe['phases'][phase_order['hold_3_close_and_attach']]['attach'][0]
+            assert hold_attach['attachment_mode'] == 'pure_physical_grasp'
+            assert hold_attach['filter_gripper_collisions_on_attach'] is False
+            assert hold_attach['force_enable_collision_on_attach'] is True
+            assert hold_attach['disable_collision_on_attach'] is False
+            assert objects['fabrica_beam_6']['static_friction'] <= 1.0
+            assert objects['fabrica_fixture'].get('kinematic_anchor') is True
+            assert objects['optical_board']['static_friction'] >= 1.5
+            assert support['static_friction'] >= 1.5
 
         if task_name == 'car':
             car_cover_final = next(
@@ -695,6 +851,7 @@ def test_staged_transport_uses_layout_aware_high_clearance_paths():
             phase['local_skill']['object'].rsplit('_', 1)[-1]: phase['local_skill']
             for phase in recipe['phases']
             if (phase.get('local_skill') or {}).get('name') == 'ur5e_preshape_gripper'
+            and not phase['name'].startswith('hold_')
         }
 
         for part_id, grasp in grasp_by_part.items():
@@ -743,11 +900,12 @@ def test_staged_transport_uses_layout_aware_high_clearance_paths():
             phases[f'{base_prefix}_pickup_clearance']['local_skill']['target_object_target']
             == f'part_{base_part}_pickup_clearance'
         )
-        assert (
-            phase_order[f'{base_prefix}_release_and_lock']
-            < phase_order[f'{base_prefix}_retreat']
-            < phase_order[f'{base_prefix}_park']
-        )
+        if not recipe['fabrica_canonical'].get('official_bimanual_hold', False):
+            assert (
+                phase_order[f'{base_prefix}_release_and_lock']
+                < phase_order[f'{base_prefix}_retreat']
+                < phase_order[f'{base_prefix}_park']
+            )
 
         for step_index, step in enumerate(task['assembly_steps']):
             part_id = str(step['move_part'])
@@ -855,13 +1013,16 @@ def test_staged_transport_uses_layout_aware_high_clearance_paths():
                 phases[f'{prefix}_retreat']['local_skill']['offset'],
                 dtype=float,
             )
-            np.testing.assert_allclose(np.linalg.norm(retreat_offset), 0.06)
-            np.testing.assert_allclose(
-                retreat_offset,
-                -0.06 * insertion_axis,
-            )
+            if recipe['fabrica_canonical'].get('official_bimanual_hold', False):
+                np.testing.assert_allclose(retreat_offset, [0.0, 0.0, 0.28])
+            else:
+                np.testing.assert_allclose(np.linalg.norm(retreat_offset), 0.06)
+                np.testing.assert_allclose(
+                    retreat_offset,
+                    -0.06 * insertion_axis,
+                )
             assert (
-                phase_order[f'{prefix}_release_and_lock']
+                phase_order[f'{prefix}_release' if recipe['fabrica_canonical'].get('official_bimanual_hold', False) else f'{prefix}_release_and_lock']
                 < phase_order[f'{prefix}_retreat']
                 < phase_order[f'{prefix}_park']
             )

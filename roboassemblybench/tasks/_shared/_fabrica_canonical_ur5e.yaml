@@ -2,7 +2,7 @@ extends: _dual_franka_assembly_base.yaml
 
 scene_profile: taoyuan_grscenes_tabletop
 scene_asset_path: ${ISAAC_ASSETS_ROOT}/Isaac/Environments/Simple_Warehouse/warehouse_with_forklifts.usd
-scene_asset_fallback_path: ${BENCHMARK_ROOT}/scenes/usd/factory_cell.usda
+scene_asset_fallback_path: ${BENCHMARK_ROOT}/scenes/usd/factory_cell_tabletop.usda
 max_steps: 22000
 phase_timeout_steps: 1200
 phase_timeout_action: fail
@@ -116,6 +116,11 @@ metadata:
       require_success: true
       fallback: fail
     ur5e_retreat_vertical:
+      adapter: toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter
+      requires_held_object: false
+      require_success: true
+      fallback: fail
+    ur5e_hold_part_end:
       adapter: toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter
       requires_held_object: false
       require_success: true

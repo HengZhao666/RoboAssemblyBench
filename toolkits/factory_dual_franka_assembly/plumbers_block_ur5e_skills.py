@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import os
+import json
 from collections import OrderedDict
 from typing import Any
 
@@ -15,6 +16,114 @@ from toolkits.factory_dual_franka_assembly.planner_primitives import (
     quat_multiply,
     quat_rotate,
 )
+
+def _quat_from_axes(x_axis: np.ndarray, y_axis: np.ndarray, z_axis: np.ndarray) -> np.ndarray:
+    matrix = np.column_stack((x_axis, y_axis, z_axis))
+    trace = float(matrix[0, 0] + matrix[1, 1] + matrix[2, 2])
+    if trace > 0.0:
+        scale = math.sqrt(trace + 1.0) * 2.0
+        quaternion = [
+            0.25 * scale,
+            (matrix[2, 1] - matrix[1, 2]) / scale,
+            (matrix[0, 2] - matrix[2, 0]) / scale,
+            (matrix[1, 0] - matrix[0, 1]) / scale,
+        ]
+    elif matrix[0, 0] > matrix[1, 1] and matrix[0, 0] > matrix[2, 2]:
+        scale = math.sqrt(1.0 + matrix[0, 0] - matrix[1, 1] - matrix[2, 2]) * 2.0
+        quaternion = [
+            (matrix[2, 1] - matrix[1, 2]) / scale,
+            0.25 * scale,
+            (matrix[0, 1] + matrix[1, 0]) / scale,
+            (matrix[0, 2] + matrix[2, 0]) / scale,
+        ]
+    elif matrix[1, 1] > matrix[2, 2]:
+        scale = math.sqrt(1.0 + matrix[1, 1] - matrix[0, 0] - matrix[2, 2]) * 2.0
+        quaternion = [
+            (matrix[0, 2] - matrix[2, 0]) / scale,
+            (matrix[0, 1] + matrix[1, 0]) / scale,
+            0.25 * scale,
+            (matrix[1, 2] + matrix[2, 1]) / scale,
+        ]
+    else:
+        scale = math.sqrt(1.0 + matrix[2, 2] - matrix[0, 0] - matrix[1, 1]) * 2.0
+        quaternion = [
+            (matrix[1, 0] - matrix[0, 1]) / scale,
+            (matrix[0, 2] + matrix[2, 0]) / scale,
+            (matrix[1, 2] + matrix[2, 1]) / scale,
+            0.25 * scale,
+        ]
+    return normalize_quat(quaternion)
+
+
+def _limit_finger_tilt(direction: np.ndarray, max_tilt_rad: float) -> np.ndarray:
+    """Lean from straight down toward `direction`, and stop at `max_tilt_rad`."""
+
+    direction = np.asarray(direction, dtype=float)
+    norm = float(np.linalg.norm(direction))
+    if norm < 1e-6 or max_tilt_rad <= 0.0:
+        return np.array([0.0, 0.0, -1.0], dtype=float)
+    direction = direction / norm
+    if float(direction[2]) > 0.0:
+        direction = -direction
+    vertical = np.array([0.0, 0.0, -1.0], dtype=float)
+    cosine = float(np.clip(np.dot(direction, vertical), -1.0, 1.0))
+    angle = math.acos(cosine)
+    if angle <= max_tilt_rad or angle < 1e-4:
+        return direction
+    horizontal = direction - vertical * cosine
+    horizontal_norm = float(np.linalg.norm(horizontal))
+    if horizontal_norm < 1e-6:
+        return vertical
+    horizontal = horizontal / horizontal_norm
+    return vertical * math.cos(max_tilt_rad) + horizontal * math.sin(max_tilt_rad)
+
+
+def _vertical_pad_pose(
+    position,
+    orientation,
+    pad_distance: float,
+    reach: float | None = None,
+    finger_direction=None,
+):
+    """Keep the pinch and closing axis, and aim the fingers along `finger_direction`.
+
+    With no direction, the fingers point straight down. The authored approach
+    leans along the beam and meets the fixture slot end-on (v76–v78). A caller
+    can instead pass the plate's long axis so the pad lies on the face.
+    """
+
+    orientation = normalize_quat(orientation)
+    finger = np.asarray(quat_rotate(orientation, [0.0, 0.0, 1.0]), dtype=float)
+    closing = np.asarray(quat_rotate(orientation, [0.0, 1.0, 0.0]), dtype=float)
+    if finger_direction is None:
+        down = np.array([0.0, 0.0, -1.0 if float(finger[2]) <= 0.0 else 1.0], dtype=float)
+    else:
+        down = np.asarray(finger_direction, dtype=float)
+        down_norm = float(np.linalg.norm(down))
+        if down_norm < 1e-6:
+            down = np.array([0.0, 0.0, -1.0], dtype=float)
+        else:
+            down = down / down_norm
+        if float(down[2]) > 0.0:
+            down = -down
+    pinch = np.asarray(position, dtype=float) + finger * float(pad_distance)
+    closing = closing - down * float(np.dot(closing, down))
+    closing_norm = float(np.linalg.norm(closing))
+    if closing_norm < 1e-6:
+        return np.asarray(position, dtype=float), orientation
+    closing = closing / closing_norm
+    lateral = np.cross(closing, down)
+    lateral_norm = float(np.linalg.norm(lateral))
+    if lateral_norm < 1e-6:
+        return np.asarray(position, dtype=float), orientation
+    lateral = lateral / lateral_norm
+    closing = np.cross(down, lateral)
+    new_orientation = _quat_from_axes(lateral, closing, down)
+    if reach is None:
+        reach = pad_distance
+    new_position = pinch - down * float(reach)
+    return new_position, new_orientation
+
 
 _ARM_JOINT_CONTROLLER = 'arm_joint_controller'
 _GRIPPER_CONTROLLER = 'gripper_controller'
@@ -94,6 +203,22 @@ class UR5eAssemblyAtomicSkillAdapter:
             skill_name,
         )
 
+        if (spec.get('trace_pregrasp') and os.environ.get('BEAM_CONTACT_TRACE_PATH')
+                and int(task.step_counter) % 8 == 0):
+            object_name = self._object_name_from_spec(spec)
+            metrics = task._gripper_contact_metrics(object_name, robot_name,
+                attach_spec={**spec, 'measure_force_contact': True})
+            task._write_physical_contact_trace(object_name, metrics, spec, {},
+                                                validation_stage='pregrasp')
+
+        if spec.get('beam_table_seat'):
+            return self._beam_table_seat_action(phase_key=phase_key, task=task, robot_name=robot_name,
+                spec=spec, tracked_robots=tracked_robots, tracked_objects=tracked_objects)
+
+        if spec.get('hold_previous_grasp_command'):
+            return self._hold_previous_grasp_command(task=task, robot_name=robot_name,
+                spec=spec, tracked_robots=tracked_robots)
+
         if skill_name in {'ur5e_preshape_gripper', 'preshape_gripper'}:
             return self._preshape_gripper_action(
                 phase_key=phase_key,
@@ -117,6 +242,11 @@ class UR5eAssemblyAtomicSkillAdapter:
                     tracked_objects=tracked_objects,
                 )
                 if not gate_ready:
+                    gate_state = self._close_gate_state.get(phase_key, {})
+                    if gate_state.get('close_arm_frozen') or (
+                        spec.get('close_force_regulation') and gate_state.get('contact_control_active')
+                    ):
+                        return self._failure_or_hold(task, robot_name, spec, 'contact_pose_gate_lost', diagnostics=gate_detail)
                     timeout_steps = spec.get('close_pose_gate_timeout_steps')
                     phase_step_counter = int(getattr(task, 'phase_step_counter', 0))
                     stable_progress = int(gate_detail.get('ready_steps', 0))
@@ -171,6 +301,24 @@ class UR5eAssemblyAtomicSkillAdapter:
                     spec=spec,
                     close_ready=close_ready,
                 )
+                if close_detail['recenter'].get('reason') == 'recenter_motion_timeout':
+                    return self._failure_or_hold(task, robot_name, spec, 'close_recenter_motion_timeout', diagnostics=close_detail)
+                if spec.get('close_force_regulation'):
+                    trace_path = os.environ.get('BEAM_CLOSE_CONTROL_TRACE_PATH')
+                    if trace_path:
+                        with open(trace_path, 'a', encoding='utf-8') as handle:
+                            handle.write(json.dumps({
+                                'step': int(task.step_counter), 'phase': task.phase, 'robot': robot_name,
+                                'close_elapsed_steps': close_elapsed_steps, 'ready': close_ready,
+                                'stable_steps': close_detail.get('stable_steps'),
+                                'required_stable_steps': close_detail.get('required_stable_steps'),
+                                'gripper_q': close_detail.get('gripper_joint_position'),
+                                'control': close_detail.get('control'), 'recenter': close_detail['recenter'],
+                                'motion_detail': close_detail.get('motion_detail'),
+                                'timing': 'observation at step; command for next physics interval',
+                            }) + '\n')
+                    if close_detail.get('control_error'):
+                        return self._failure_or_hold(task, robot_name, spec, 'contact_control_state_unavailable', diagnostics=close_detail)
                 self._debug_close_step(
                     task=task,
                     robot_name=robot_name,
@@ -184,6 +332,17 @@ class UR5eAssemblyAtomicSkillAdapter:
                 if hold_openness is not None:
                     action[_GRIPPER_CONTROLLER] = [float(hold_openness)]
                 if close_ready:
+                    if spec.get('continuous_physics') and state.get('hold_command_pose') is not None:
+                        cache = getattr(task, '_ur5e_contact_hold_commands', None)
+                        if cache is None:
+                            cache = {}
+                            task._ur5e_contact_hold_commands = cache
+                        cache[robot_name] = {
+                            'object': self._object_name_from_spec(spec),
+                            'arm_q': np.asarray(state['hold_q']).copy(),
+                            'pose': {k: np.asarray(v).copy() for k, v in state['hold_command_pose'].items()},
+                            'gripper_openness': float(hold_openness),
+                        }
                     if hold_openness is None:
                         self._remember_gripper_hold_openness(
                             task=task,
@@ -261,7 +420,19 @@ class UR5eAssemblyAtomicSkillAdapter:
         )
         if target_pose is None:
             return self._failure_or_hold(task, robot_name, spec, 'target_pose_unavailable')
+        if spec.get('no_descent_during_clearance'):
+            target_pose = self._raise_clearance_target(task=task, robot_name=robot_name,
+                phase_key=phase_key, spec=spec, target_pose=target_pose)
+            if target_pose is None:
+                return self._failure_or_hold(task, robot_name, spec, 'clearance_target_unavailable')
         target_pose = self._locked_target_pose(phase_key=phase_key, target_pose=target_pose, spec=spec)
+
+        if spec.get('inherit_grasp_drive_target'):
+            return self._grasp_drive_motion(
+                phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+                target_pose=target_pose, tracked_robots=tracked_robots,
+                tracked_objects=tracked_objects,
+            )
 
         prealign_action = self._prealign_action(
             task=task,
@@ -728,6 +899,16 @@ class UR5eAssemblyAtomicSkillAdapter:
             self._gripper_command_value(task=task, robot_name=robot_name, command=gripper_command)
         ]
 
+        if spec.get('track_published_grasp_command'):
+            if not self._record_published_grasp_command(task=task, robot_name=robot_name, spec=spec,
+                    command_q=command_q, gripper_openness=action[_GRIPPER_CONTROLLER][0]):
+                return self._failure_or_hold(task, robot_name, spec, 'grasp_command_cache_unavailable')
+            if spec.get('beam_coordinated'):
+                action = self._regulated_insertion_action(task=task, robot_name=robot_name,
+                    spec=spec, command_q=command_q, fallback_action=action)
+                if action.get('__local_skill_failure__'):
+                    return action
+
         self._maybe_mark_complete(
             phase_key=phase_key,
             task=task,
@@ -742,6 +923,43 @@ class UR5eAssemblyAtomicSkillAdapter:
             target_q=target_q,
         )
         return action
+
+    @staticmethod
+    def _raise_clearance_target(*, task, robot_name, phase_key, spec, target_pose):
+        """Raise the free-space waypoint and its TCP by the same amount, once.
+
+        Only the clearance target moves. The seating/assembled target and all
+        physical bodies remain unchanged. Completion still checks object pose.
+        """
+        saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
+        target_name = spec.get('target_object_target')
+        target = getattr(task, 'target_poses', {}).get(target_name)
+        if saved is None or target is None:
+            return None
+        cache = getattr(task, '_beam_raised_clearance_targets', None)
+        if cache is None:
+            cache = task._beam_raised_clearance_targets = set()
+        result = {k: np.asarray(v).copy() for k, v in target_pose.items()}
+        if phase_key not in cache:
+            dz = max(0., float(saved['pose']['position'][2] - result['position'][2]))
+            position = np.asarray(target['position'], dtype=float).copy()
+            position[2] += dz
+            target['position'] = position
+            result['position'][2] += dz
+            cache.add(phase_key)
+        return result
+
+    def _regulated_insertion_action(self, *, task, robot_name, spec, command_q, fallback_action):
+        if not spec.get('requires_held_object'):
+            return fallback_action
+        name = self._object_name_from_spec(spec)
+        attachment = task._attachment_for(name, robot_name)
+        saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
+        if (attachment is None or saved is None or saved.get('object') != name
+                or not task._physical_hold_valid(name, attachment, validation_stage='pre_insertion_action')):
+            return self._failure_or_hold(task, robot_name, spec, 'insertion_grasp_invalid')
+        return self._publish_loaded_action(task=task, robot_name=robot_name, spec=spec,
+                                            saved=saved, command_q=command_q)
 
     def _maybe_mark_complete(
         self,
@@ -758,6 +976,10 @@ class UR5eAssemblyAtomicSkillAdapter:
         current_q,
         target_q,
     ) -> None:
+        if spec.get('beam_table_seat'):
+            # Seating completion is based on sustained table load, not each
+            # small Cartesian increment being within a TCP tolerance.
+            return
         position_tolerance = float(spec.get('position_tolerance', 0.025))
         relaxed_position_tolerance = spec.get('relaxed_position_tolerance')
         relaxed_after_steps = spec.get('relaxed_position_tolerance_after_steps')
@@ -1277,6 +1499,21 @@ class UR5eAssemblyAtomicSkillAdapter:
         target_q,
         command_q,
     ) -> None:
+        trace_path = os.environ.get('BEAM_MOTION_TRACE_PATH')
+        if trace_path and (spec.get('requires_held_object') or spec.get('trace_pregrasp')):
+            def array(value):
+                return None if value is None else np.asarray(value, dtype=float).tolist()
+            def pose(value):
+                return None if value is None else {key: array(value[key]) for key in ('position', 'orientation')}
+            with open(trace_path, 'a', encoding='utf-8') as handle:
+                handle.write(json.dumps({
+                    'step': int(task.step_counter), 'phase': task.phase, 'robot': robot_name,
+                    'current_pose': pose(current_pose), 'target_pose': pose(target_pose),
+                    'command_target_pose': pose(command_target_pose), 'ik_target_pose': pose(ik_target_pose),
+                    'current_q': array(current_q), 'reference_q': array(reference_q),
+                    'target_q': array(target_q), 'command_q': array(command_q),
+                    'timing': 'observation at step; command for next physics interval',
+                }) + '\n')
         if not self._debug_grasp_enabled():
             return
         if not (
@@ -2677,6 +2914,497 @@ class UR5eAssemblyAtomicSkillAdapter:
             return False
         return ready
 
+    def _beam_table_seat_action(self, *, phase_key, task, robot_name, spec,
+                                tracked_robots, tracked_objects):
+        from toolkits.factory_dual_franka_assembly.beam_seating_control import seating_decision
+        sample = task._beam_table_observation()
+        saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
+        if saved is None:
+            return self._failure_or_hold(task, robot_name, spec, 'seat_grasp_unavailable')
+        state = saved.setdefault('beam_seat', {})
+        if state.get('phase_key') != phase_key:
+            state.clear(); state['phase_key'] = phase_key
+        command_z = float(saved['pose']['position'][2])
+        decision = seating_decision(state, sample, command_z, float(task._contact_physics_dt()), spec)
+        trace = os.environ.get('BEAM_MOTION_TRACE_PATH')
+        if trace:
+            with open(os.path.join(os.path.dirname(trace), 'seat_control_trace.jsonl'), 'a') as handle:
+                handle.write(json.dumps({'step':int(task.step_counter), 'phase':task.phase,
+                    'command_z':command_z, 'decision':decision, 'observation':sample})+'\n')
+        if decision['failure']:
+            return self._failure_or_hold(task, robot_name, spec, decision['failure'],
+                                         diagnostics={'decision':decision, **sample})
+        if decision['delta_z'] == 0:
+            return self._hold_previous_grasp_command(task=task, robot_name=robot_name,
+                                                    spec=spec, tracked_robots=tracked_robots)
+        target = {k: np.asarray(v, dtype=float).copy() for k, v in saved['pose'].items()}
+        target['position'][2] += decision['delta_z']
+        # Completion belongs to the measured table-load gate, never a TCP gate.
+        action = self._grasp_drive_motion(phase_key=phase_key, task=task, robot_name=robot_name,
+            spec=spec, target_pose=target, tracked_robots=tracked_robots, tracked_objects=tracked_objects)
+        return action
+
+    def _grasp_drive_motion(self, *, phase_key, task, robot_name, spec, target_pose,
+                            tracked_robots, tracked_objects):
+        """Advance a loaded drive without rebasing its preload onto measured FK.
+
+        A lagging robot pauses command advancement; it never pulls the existing
+        reference back to measured FK. Physical hold and joint tracking limits
+        remain prerequisites, and the cache only records commands actually sent.
+        """
+        object_name = self._object_name_from_spec(spec)
+        saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
+        attachment = (task._attachment_for(object_name, robot_name) if hasattr(task, '_attachment_for')
+                      else getattr(task, '_attachments', {}).get(object_name))
+        if (saved is None or saved.get('object') != object_name or attachment is None
+                or attachment.get('robot_name') != robot_name):
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_command_unavailable')
+        if not task._physical_hold_valid(object_name, attachment, validation_stage='pre_action'):
+            return self._failure_or_hold(task, robot_name, spec, 'held_object_not_grasped')
+        current_pose = self._current_tcp_pose(current_pose=self._current_robot_pose(
+            task=task, robot_name=robot_name, tracked_robots=tracked_robots), spec=spec)
+        current_q = self._current_arm_q(task, robot_name)
+        if current_pose is None or current_q is None:
+            return self._failure_or_hold(task, robot_name, spec, 'current_joint_state_unavailable')
+        reference_q = np.asarray(saved['arm_q'], dtype=float)
+        limited_reference = self._limit_command_to_measured_state(
+            current_q=current_q, command_q=reference_q, spec=spec)
+        if not np.allclose(limited_reference, reference_q, rtol=0, atol=1e-10):
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_command_tracking_limit',
+                diagnostics={'current_q': current_q.tolist(), 'reference_q': reference_q.tolist(),
+                    'limited_reference_q': limited_reference.tolist(), 'current_pose': {
+                        k: np.asarray(v).tolist() for k, v in current_pose.items()},
+                    'cached_command_step': saved.get('step'),
+                    'max_command_tracking_error': spec.get('max_command_tracking_error', .18),
+                    'max_wrist_command_tracking_error': spec.get('max_wrist_command_tracking_error', .12)})
+        if spec.get('grasp_drive_smooth_transport'):
+            return self._smooth_grasp_drive_motion(phase_key=phase_key, task=task, robot_name=robot_name,
+                spec=spec, target_pose=target_pose, tracked_objects=tracked_objects,
+                saved=saved, current_pose=current_pose, current_q=current_q)
+        joint_lookahead = spec.get('grasp_drive_joint_lookahead')
+        if joint_lookahead is not None and np.max(np.abs(reference_q - current_q)) > float(joint_lookahead):
+            self._debug_grasp_drive_guard(task, robot_name, 'joint_tracking_pause', spec,
+                                          current_pose, saved['pose'], current_q, reference_q)
+            return self._hold_previous_grasp_command(task=task, robot_name=robot_name, spec=spec,
+                tracked_robots=tracked_robots, target_pose=target_pose)
+        lookahead = float(spec.get('grasp_drive_position_lookahead', 0.001))
+        command_pose = self._cartesian_servo_target_pose(
+            current_pose=saved['pose'], target_pose=target_pose,
+            max_position_step=min(float(spec.get('cartesian_position_step', 0.0002)), lookahead / 4),
+            max_orientation_step=float(spec.get('cartesian_orientation_step', 0.004)),
+        )
+        # Pause, rather than radially clamping to measured FK: that clamp itself
+        # would introduce lateral and orientation changes at the handoff.
+        position_lead, orientation_lead = pose_error(
+            current_position=current_pose['position'], current_orientation=current_pose['orientation'],
+            target_position=command_pose['position'], target_orientation=command_pose['orientation'])
+        orientation_lookahead = spec.get('grasp_drive_orientation_lookahead')
+        if (position_lead > lookahead or
+                (orientation_lookahead is not None and orientation_lead > float(orientation_lookahead))):
+            self._debug_grasp_drive_guard(task, robot_name, 'pose_tracking_pause', spec,
+                                          current_pose, command_pose, current_q, reference_q)
+            return self._hold_previous_grasp_command(
+                task=task, robot_name=robot_name, spec=spec, tracked_robots=tracked_robots,
+                target_pose=target_pose)
+        ik_pose = self._ik_target_pose(target_pose=command_pose, spec=spec)
+        result = self._solve_ik(task=task, robot_name=robot_name, target_pose=ik_pose,
+                                warm_start=reference_q, spec=spec)
+        limits = self._command_joint_step_limits(spec=spec, joint_count=len(reference_q))
+        if limits is None:
+            limits = float(spec.get('max_joint_step', 0.035))
+
+        def nearby(candidate):
+            if candidate is None:
+                return None
+            q = self._unwrap_to_reference(target_q=candidate, reference_q=reference_q,
+                preferred_abs_limit=spec.get('preferred_joint_abs_limit', 3.05),
+                hard_preferred_abs_limit=bool(spec.get('hard_preferred_joint_abs_limit', True)))
+            if (not np.all(np.isfinite(q))
+                    or self._ik_branch_jump_detected(reference_q=reference_q, target_q=q, spec=spec)
+                    or np.any(np.abs(q - reference_q) > np.asarray(limits) + 1e-10)):
+                return None
+            return q
+
+        target_q = nearby(result)
+        if target_q is None:
+            full_command_pose = command_pose
+            # Lula may restart on another branch as an orientation residual
+            # reaches its convergence boundary. Refine the previous command
+            # locally; neither measured joints nor simulator state are written.
+            for ratio in (1.0, 0.5, 0.25, 0.125):
+                candidate_pose = self._cartesian_pose_fraction(
+                    current_pose=saved['pose'], target_pose=full_command_pose, ratio=ratio)
+                candidate_ik_pose = self._ik_target_pose(target_pose=candidate_pose, spec=spec)
+                refined = self._local_grasp_ik(task=task, robot_name=robot_name,
+                    target_pose=candidate_ik_pose, reference_q=reference_q, spec=spec,
+                    joint_radius=float(np.min(np.asarray(limits))))
+                target_q = nearby(refined)
+                if target_q is not None:
+                    command_pose, ik_pose = candidate_pose, candidate_ik_pose
+                    break
+            if target_q is None:
+                return self._failure_or_hold(task, robot_name, spec, 'grasp_local_ik_failed')
+        if joint_lookahead is not None and np.max(np.abs(target_q - current_q)) > float(joint_lookahead):
+            self._debug_grasp_drive_guard(task, robot_name, 'candidate_joint_tracking_pause', spec,
+                                          current_pose, command_pose, current_q, target_q)
+            return self._hold_previous_grasp_command(task=task, robot_name=robot_name, spec=spec,
+                tracked_robots=tracked_robots, target_pose=target_pose)
+        command_q = self._limited_joint_target(current_q=reference_q, target_q=target_q,
+            max_joint_step=limits)
+        command_q = self._continuous_command_q(task=task, robot_name=robot_name,
+                                               command_q=command_q, spec=spec)
+        command_q = self._limit_command_to_measured_state(current_q=current_q,
+                                                         command_q=command_q, spec=spec)
+        if not np.allclose(command_q, target_q, rtol=0, atol=1e-10):
+            # Do not associate a partial joint command with the full Cartesian
+            # target: the next step would then start from an unsent pose.
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_drive_joint_step_limit')
+        self._debug_joint_step(task=task, robot_name=robot_name, skill_name=spec['name'], spec=spec,
+            current_pose=current_pose, target_pose=target_pose, command_target_pose=command_pose,
+            ik_target_pose=ik_pose, current_q=current_q, reference_q=reference_q,
+            target_q=target_q, command_q=command_q)
+        self._remember_arm_command(task, robot_name, command_q)
+        saved['arm_q'] = command_q.copy()
+        saved['pose'] = {key: np.asarray(command_pose[key]).copy() for key in ('position', 'orientation')}
+        saved['step'] = int(getattr(task, 'step_counter', 0))
+        saved['pose_source'] = 'accepted_ik_target'
+        self._last_targets[phase_key] = {**saved['pose'], 'target_q': target_q.copy()}
+        self._maybe_mark_complete(phase_key=phase_key, task=task, robot_name=robot_name,
+            skill_name=spec['name'], spec=spec, target_pose=target_pose, ik_target_pose=ik_pose,
+            current_pose=current_pose, tracked_objects=tracked_objects, current_q=current_q,
+            target_q=target_q)
+        return self._publish_loaded_action(task=task, robot_name=robot_name, spec=spec,
+                                           saved=saved, command_q=command_q)
+
+    @staticmethod
+    def _debug_grasp_drive_guard(task, robot_name, reason, spec, current_pose, candidate_pose,
+                                 current_q, candidate_q):
+        trace = os.environ.get('BEAM_MOTION_TRACE_PATH')
+        if not trace or spec.get('grasp_drive_joint_lookahead') is None:
+            return
+        position_lead, orientation_lead = pose_error(
+            current_position=current_pose['position'], current_orientation=current_pose['orientation'],
+            target_position=candidate_pose['position'], target_orientation=candidate_pose['orientation'])
+        detail = {'step': int(task.step_counter), 'phase': task.phase, 'robot': robot_name,
+            'reason': reason, 'position_lead': position_lead, 'orientation_lead': orientation_lead,
+            'joint_lead': float(np.max(np.abs(np.asarray(candidate_q)-current_q)))}
+        with open(os.path.join(os.path.dirname(trace), 'drive_guard_trace.jsonl'), 'a', encoding='utf-8') as handle:
+            handle.write(json.dumps(detail)+'\n')
+
+    @staticmethod
+    def _grasp_tracking_scale(*, position_lead, orientation_lead, joint_lead, spec):
+        utilization = max(position_lead / float(spec['grasp_drive_position_lookahead']),
+                          orientation_lead / float(spec['grasp_drive_orientation_lookahead']),
+                          joint_lead / float(spec['grasp_drive_joint_lookahead']))
+        start, stop = float(spec['grasp_drive_slowdown_start']), float(spec['grasp_drive_slowdown_stop'])
+        if not 0 <= start < stop < 1:
+            raise ValueError('Invalid loaded transport slowdown interval')
+        x = float(np.clip((stop-utilization)/(stop-start), 0., 1.))
+        return x*x*(3.-2.*x), utilization
+
+    @staticmethod
+    def _rate_limited_grasp_command(*, reference_q, target_q, previous_velocity, dt, speed, acceleration):
+        if not all(np.isfinite(x) and x > 0 for x in (dt, speed, acceleration)):
+            raise ValueError('Loaded transport timestep and rates must be finite and positive')
+        desired_velocity = np.clip((np.asarray(target_q)-reference_q)/dt, -speed, speed)
+        velocity = np.clip(desired_velocity, previous_velocity-acceleration*dt,
+                           previous_velocity+acceleration*dt)
+        return reference_q + velocity*dt, velocity
+
+    def _smooth_grasp_drive_motion(self, *, phase_key, task, robot_name, spec, target_pose,
+                                   tracked_objects, saved, current_pose, current_q):
+        """Retain command preload while continuously governing loaded motion.
+
+        Limit the velocity of the *published* joints, then cache their FK rather
+        than the unexecuted IK target. All physical and tracking gates remain.
+        """
+        reference_q = np.asarray(saved['arm_q'], dtype=float)
+        dt = float(task._contact_physics_dt())
+        if not np.isfinite(dt) or dt <= 0:
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_invalid_control_dt')
+        previous_velocity = (np.asarray(saved['velocity_q']) if saved.get('smooth_step') == task.step_counter-1
+                             else np.zeros_like(reference_q))
+        position_lead, orientation_lead = pose_error(
+            current_position=current_pose['position'], current_orientation=current_pose['orientation'],
+            target_position=saved['pose']['position'], target_orientation=saved['pose']['orientation'])
+        scale, utilization = self._grasp_tracking_scale(position_lead=position_lead,
+            orientation_lead=orientation_lead, joint_lead=float(np.max(np.abs(reference_q-current_q))), spec=spec)
+        distance, angle = pose_error(current_position=saved['pose']['position'],
+            current_orientation=saved['pose']['orientation'], target_position=target_pose['position'],
+            target_orientation=target_pose['orientation'])
+        at_goal = distance <= 0.00001 and angle <= 0.0015
+        # A shared interpolation fraction couples translation and rotation.
+        # The minimum horizon also slows approach to the final pose.
+        horizon = max(distance/float(spec['grasp_drive_linear_speed']),
+                      angle/float(spec['grasp_drive_angular_speed']), 0.08)
+        ratio = 0. if at_goal else min(1., dt/horizon)*scale
+        desired_pose = self._cartesian_pose_fraction(current_pose=saved['pose'],
+                                                    target_pose=target_pose, ratio=ratio)
+        ik_pose = self._ik_target_pose(target_pose=desired_pose, spec=spec)
+        limits = self._command_joint_step_limits(spec=spec, joint_count=len(reference_q))
+        if limits is None:
+            limits = float(spec.get('max_joint_step', 0.008))
+
+        def nearby(q):
+            if q is None:
+                return None
+            q = self._unwrap_to_reference(target_q=q, reference_q=reference_q,
+                preferred_abs_limit=spec.get('preferred_joint_abs_limit', 3.05),
+                hard_preferred_abs_limit=bool(spec.get('hard_preferred_joint_abs_limit', True)))
+            if (not np.all(np.isfinite(q)) or self._ik_branch_jump_detected(
+                    reference_q=reference_q, target_q=q, spec=spec)
+                    or np.any(np.abs(q-reference_q) > np.asarray(limits)+1e-10)):
+                return None
+            return q
+
+        target_q = reference_q.copy() if ratio == 0 else nearby(self._solve_ik(
+            task=task, robot_name=robot_name, target_pose=ik_pose, warm_start=reference_q, spec=spec))
+        if target_q is None:
+            for fraction in (1., .5, .25, .125):
+                candidate = self._cartesian_pose_fraction(current_pose=saved['pose'],
+                    target_pose=desired_pose, ratio=fraction)
+                target_q = nearby(self._local_grasp_ik(task=task, robot_name=robot_name,
+                    target_pose=self._ik_target_pose(target_pose=candidate, spec=spec),
+                    reference_q=reference_q, spec=spec, joint_radius=float(np.min(np.asarray(limits)))))
+                if target_q is not None:
+                    break
+        if target_q is None:
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_local_ik_failed')
+        command_q, velocity = self._rate_limited_grasp_command(reference_q=reference_q,
+            target_q=target_q, previous_velocity=previous_velocity, dt=dt,
+            speed=float(spec['grasp_drive_joint_speed']), acceleration=float(spec['grasp_drive_joint_acceleration']))
+        command_pose = self._grasp_command_fk_pose(task=task, robot_name=robot_name, spec=spec, command_q=command_q)
+        if command_pose is None:
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_command_cache_unavailable')
+        p_lead, r_lead = pose_error(current_position=current_pose['position'],
+            current_orientation=current_pose['orientation'], target_position=command_pose['position'],
+            target_orientation=command_pose['orientation'])
+        joint_lead = float(np.max(np.abs(command_q-current_q)))
+        limited = self._limit_command_to_measured_state(current_q=current_q,
+            command_q=self._continuous_command_q(task=task, robot_name=robot_name, command_q=command_q, spec=spec),
+            spec=spec)
+        safe = (p_lead <= float(spec['grasp_drive_position_lookahead'])
+                and r_lead <= float(spec['grasp_drive_orientation_lookahead'])
+                and joint_lead <= float(spec['grasp_drive_joint_lookahead'])
+                and np.all(np.abs(command_q-reference_q) <= np.asarray(limits)+1e-10)
+                and np.allclose(limited, command_q, rtol=0, atol=1e-10))
+        trace = os.environ.get('BEAM_MOTION_TRACE_PATH')
+        if trace:
+            detail = {'step': int(task.step_counter), 'phase': task.phase, 'robot': robot_name,
+                'dt': dt, 'tracking_scale': scale, 'tracking_utilization': utilization,
+                'path_fraction': ratio, 'at_goal': at_goal, 'published': bool(safe),
+                'joint_velocity': velocity.tolist(), 'joint_acceleration': ((velocity-previous_velocity)/dt).tolist(),
+                'position_lead': p_lead, 'orientation_lead': r_lead, 'joint_lead': joint_lead}
+            with open(os.path.join(os.path.dirname(trace), 'smooth_drive_trace.jsonl'), 'a', encoding='utf-8') as f:
+                f.write(json.dumps(detail)+'\n')
+        if not safe:
+            # Do not hide an infeasible braking/tracking combination by silently
+            # clipping the final command or relaxing the physical gate.
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_smooth_tracking_boundary')
+        self._debug_joint_step(task=task, robot_name=robot_name, skill_name=spec['name'], spec=spec,
+            current_pose=current_pose, target_pose=target_pose, command_target_pose=command_pose,
+            ik_target_pose=ik_pose, current_q=current_q, reference_q=reference_q,
+            target_q=target_q, command_q=command_q)
+        self._remember_arm_command(task, robot_name, command_q)
+        saved.update(arm_q=command_q.copy(), pose=command_pose, velocity_q=velocity.copy(),
+            smooth_step=int(task.step_counter), step=int(task.step_counter), pose_source='published_joint_fk')
+        self._last_targets[phase_key] = {**command_pose, 'target_q': target_q.copy()}
+        # Finish at rest, so handing off to a hold cannot drop a moving command
+        # to zero velocity. The original object/static completion checks remain.
+        if np.max(np.abs(velocity)) <= 0.005:
+            # A stopped command can already satisfy the physical phase gates
+            # even when its tiny remaining IK request falls in the deadband.
+            self._maybe_mark_complete(phase_key=phase_key, task=task, robot_name=robot_name,
+                skill_name=spec['name'], spec=spec, target_pose=target_pose, ik_target_pose=ik_pose,
+                current_pose=current_pose, tracked_objects=tracked_objects, current_q=current_q,
+                target_q=target_q)
+        return self._publish_loaded_action(task=task, robot_name=robot_name, spec=spec,
+                                           saved=saved, command_q=command_q)
+
+    def _record_published_grasp_command(self, *, task, robot_name, spec, command_q, gripper_openness):
+        """Bridge the legacy insertion servo to later relative holds using FK.
+
+        Joint limiting may have changed the IK solution, so its requested pose
+        is not a valid cache entry. This is a read-only model calculation.
+        """
+        saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
+        if saved is None or saved.get('object') != self._object_name_from_spec(spec):
+            return False
+        pose = self._grasp_command_fk_pose(task=task, robot_name=robot_name, spec=spec, command_q=command_q)
+        if pose is None:
+            return False
+        saved.update(arm_q=np.asarray(command_q).copy(), pose=pose,
+            gripper_openness=float(gripper_openness), step=int(getattr(task, 'step_counter', 0)),
+            pose_source='published_joint_fk')
+        return True
+
+    def _grasp_command_fk_pose(self, *, task, robot_name, spec, command_q):
+        try:
+            controller = task.robots[robot_name].controllers[_ARM_IK_CONTROLLER]
+            wrapper = controller._kinematics_solver
+            position, rotation = wrapper.get_kinematics_solver().compute_forward_kinematics(
+                wrapper.get_end_effector_frame(), np.asarray(command_q))
+            orientation = _quat_from_axes(rotation[:, 0], rotation[:, 1], rotation[:, 2])
+            pose = self._current_tcp_pose(current_pose={
+                'position': np.asarray(position) * controller._robot_scale,
+                'orientation': orientation}, spec=spec)
+            if not all(np.all(np.isfinite(pose[k])) for k in ('position', 'orientation')):
+                return None
+        except Exception:
+            return None
+        return pose
+
+    def _local_grasp_ik(self, *, task, robot_name, target_pose, reference_q, spec, joint_radius):
+        controller = task.robots[robot_name].controllers[_ARM_IK_CONTROLLER]
+        wrapper = controller._kinematics_solver
+        raw = wrapper.get_kinematics_solver()
+        frame = wrapper.get_end_effector_frame()
+        target_position = np.asarray(target_pose['position']) / controller._robot_scale
+        target_orientation = np.asarray(target_pose['orientation'])
+        result = self._bounded_local_pose_ik(
+            forward=lambda q: raw.compute_forward_kinematics(frame, q), reference_q=reference_q,
+            target_position=target_position, target_orientation=target_orientation,
+            position_tolerance=float(spec['ik_position_tolerance']),
+            orientation_tolerance=float(spec['ik_orientation_tolerance']), joint_radius=joint_radius)
+        self._debug_loaded_ik(task=task, robot_name=robot_name, raw_solver=raw, frame=frame,
+            warm_start=reference_q, result=result, success=result is not None,
+            target_position=target_position, target_orientation=target_orientation, spec=spec,
+            path='bounded_local_fk_refinement')
+        return result
+
+    @staticmethod
+    def _bounded_local_pose_ik(*, forward, reference_q, target_position, target_orientation,
+                               position_tolerance, orientation_tolerance, joint_radius):
+        """Finite-difference local IK, constrained to a small joint-space box."""
+        def rotation_error(target, current):
+            conjugate = np.asarray(current).copy()
+            conjugate[1:] *= -1
+            delta = normalize_quat(quat_multiply(target, conjugate))
+            if delta[0] < 0:
+                delta = -delta
+            sine = float(np.linalg.norm(delta[1:]))
+            return (2.0 * delta[1:] if sine < 1e-12 else
+                    delta[1:] * (2.0 * math.atan2(sine, delta[0]) / sine))
+
+        def pose(q):
+            position, rotation = forward(q)
+            return np.asarray(position), _quat_from_axes(rotation[:, 0], rotation[:, 1], rotation[:, 2])
+
+        reference = np.asarray(reference_q, dtype=float)
+        q = reference.copy()
+        epsilon = 1e-5
+        weights = np.array([1., 1., 1., .1, .1, .1])
+        for _ in range(24):
+            position, orientation = pose(q)
+            translation = np.asarray(target_position) - position
+            rotation = rotation_error(target_orientation, orientation)
+            if (np.linalg.norm(translation) <= position_tolerance
+                    and np.linalg.norm(rotation) <= orientation_tolerance):
+                return q
+            error = np.r_[translation, rotation] * weights
+            jacobian = np.empty((6, len(q)))
+            for j in range(len(q)):
+                perturbed = q.copy()
+                perturbed[j] += epsilon
+                p, r = pose(perturbed)
+                jacobian[:, j] = np.r_[p - position, rotation_error(r, orientation)] / epsilon * weights
+            delta = jacobian.T @ np.linalg.solve(jacobian @ jacobian.T + np.eye(6) * 1e-10, error)
+            if not np.all(np.isfinite(delta)):
+                return None
+            magnitude = float(np.max(np.abs(delta)))
+            if magnitude > .002:
+                delta *= .002 / magnitude
+            candidate = np.clip(q + delta, reference - joint_radius, reference + joint_radius)
+            if np.max(np.abs(candidate - q)) < 1e-12:
+                return None
+            q = candidate
+        return None
+
+    def _hold_previous_grasp_command(self, *, task, robot_name, spec, tracked_robots, target_pose=None):
+        object_name = self._object_name_from_spec(spec)
+        saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
+        attachment = (task._attachment_for(object_name, robot_name) if hasattr(task, '_attachment_for')
+                      else getattr(task, '_attachments', {}).get(object_name))
+        if (saved is None or saved.get('object') != object_name or attachment is None
+                or attachment.get('robot_name') != robot_name):
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_command_unavailable')
+        if not task._physical_hold_valid(object_name, attachment, validation_stage='pre_action_hold'):
+            return self._failure_or_hold(task, robot_name, spec, 'held_object_not_grasped')
+        current_q = self._current_arm_q(task, robot_name)
+        command_q = np.asarray(saved['arm_q']).copy()
+        limited_command = self._limit_command_to_measured_state(
+            current_q=current_q, command_q=command_q, spec=spec)
+        if current_q is None or not np.allclose(limited_command, command_q, rtol=0, atol=1e-10):
+            return self._failure_or_hold(task, robot_name, spec, 'grasp_command_tracking_limit',
+                diagnostics={'current_q': None if current_q is None else current_q.tolist(),
+                    'reference_q': command_q.tolist(), 'limited_reference_q': limited_command.tolist(),
+                    'cached_command_step': saved.get('step'),
+                    'max_command_tracking_error': spec.get('max_command_tracking_error', .18),
+                    'max_wrist_command_tracking_error': spec.get('max_wrist_command_tracking_error', .12)})
+        current_pose = self._current_tcp_pose(current_pose=self._current_robot_pose(
+            task=task, robot_name=robot_name, tracked_robots=tracked_robots), spec=spec)
+        pose = saved['pose']
+        self._debug_joint_step(task=task, robot_name=robot_name, skill_name=spec['name'], spec=spec,
+            current_pose=current_pose, target_pose=pose if target_pose is None else target_pose, command_target_pose=pose,
+            ik_target_pose=self._ik_target_pose(target_pose=pose, spec=spec), current_q=current_q,
+            reference_q=command_q, target_q=command_q, command_q=command_q)
+        self._remember_arm_command(task, robot_name, command_q)
+        return self._publish_loaded_action(task=task, robot_name=robot_name, spec=spec,
+                                           saved=saved, command_q=command_q)
+
+    def _publish_loaded_action(self, *, task, robot_name, spec, saved, command_q):
+        attachment = (task._attachment_for(saved['object'], robot_name) if hasattr(task, '_attachment_for')
+                      else getattr(task, '_attachments', {}).get(saved['object'])) or {}
+        attach_spec = attachment.get('attach_spec') or {}
+        if attach_spec.get('hold_force_regulation'):
+            metrics = task._gripper_contact_metrics(saved['object'], robot_name, attach_spec=attach_spec)
+            threshold = float(attach_spec.get('contact_force_threshold', .1))
+            if not all(metrics.get(s, {}).get('force_probe_valid') and
+                       float(metrics[s].get('force', 0.0)) >= threshold
+                       for s in ('left_finger', 'right_finger')):
+                return self._failure_or_hold(task, robot_name, spec, 'loaded_force_contact_missing')
+            measured = self._current_gripper_q(task=task, robot_name=robot_name)
+            open_q, closed_q = self._gripper_open_closed_q(task=task, robot_name=robot_name)
+            if measured is None or open_q is None or closed_q is None:
+                return self._failure_or_hold(task, robot_name, spec, 'loaded_force_state_unavailable')
+            previous = abs(closed_q - open_q) * (1.0 - saved['gripper_openness'])
+            state = saved.setdefault('loaded_force_state', {
+                'contact_control_active': True, 'contact_capture_closure': previous,
+                'contact_command_closure': previous})
+            if state.get('step') != int(task.step_counter):
+                # Carrying stays at its original band. Only measured tabletop
+                # contact may select the explicitly configured Beam relief band.
+                control_spec, relief = attach_spec, None
+                phase_spec = (task.get_current_phase_spec() if hasattr(task, 'get_current_phase_spec') else {})
+                config = phase_spec.get('beam_table_contact_force_relief')
+                if saved['object'] == 'fabrica_beam_6' and config:
+                    from toolkits.factory_dual_franka_assembly.beam_contact_relief import contact_relief_spec
+                    control_spec, relief = contact_relief_spec(
+                        saved.setdefault('beam_contact_relief', {}), task._beam_table_observation(),
+                        attach_spec, config)
+                control = self._contact_close_control(state=state, spec=control_spec, metrics=metrics,
+                    gripper_q=measured, open_q=open_q, closed_q=closed_q,
+                    requested_openness=saved['gripper_openness'], min_openness=float(getattr(
+                        task.robots[robot_name].config, 'gripper_close_openness', .08)))
+                state['step'] = int(task.step_counter)
+                state['last_control'] = control
+                trace = os.environ.get('BEAM_HOLD_TRACE_PATH')
+                if trace:
+                    path = os.path.join(os.path.dirname(trace), 'loaded_force_trace.jsonl')
+                    with open(path, 'a', encoding='utf-8') as handle:
+                        handle.write(json.dumps({'step': int(task.step_counter), 'phase': task.phase,
+                            'robot': robot_name, 'gripper_q': measured, 'previous_command_closure': previous,
+                            'control': control, 'table_contact_relief': relief}) + '\n')
+                if not control['force_within_limit']:
+                    return self._failure_or_hold(task, robot_name, spec, 'loaded_gripper_force_limit')
+                saved['gripper_openness'] = control['command_openness']
+                self._remember_gripper_hold_openness(task=task, robot_name=robot_name,
+                                                     openness=saved['gripper_openness'])
+            if not state['last_control']['force_within_limit']:
+                return self._failure_or_hold(task, robot_name, spec, 'loaded_gripper_force_limit')
+        return OrderedDict([(_ARM_JOINT_CONTROLLER, [np.asarray(command_q).tolist()]),
+                            (_GRIPPER_CONTROLLER, [saved['gripper_openness']])])
+
     def _held_transport_action(self, *, task, robot_name: str, spec: dict) -> OrderedDict:
         action = self._hold_joint_action(task=task, robot_name=robot_name)
         gripper_command = spec.get('gripper_command', 'contact_hold')
@@ -3088,11 +3816,22 @@ class UR5eAssemblyAtomicSkillAdapter:
                 tracked_robots=tracked_robots,
             )
             current_pose = self._current_tcp_pose(current_pose=raw_current_pose, spec=spec)
+            if spec.get('inherit_grasp_drive_target'):
+                saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
+                if saved is None or saved.get('object') != self._object_name_from_spec(spec):
+                    return None
+                current_pose = saved['pose']
             if current_pose is None:
                 return None
             offset = np.asarray(spec.get('offset', [0.0, 0.0, 0.0]), dtype=float)
             offset_frame = str(spec.get('offset_frame', 'world')).lower()
-            if offset_frame in {'target', 'eef', 'tcp', 'gripper'}:
+            if spec.get('offset_reference_object'):
+                reference = self._object_pose(task=task, object_name=spec['offset_reference_object'],
+                                              tracked_objects=tracked_objects)
+                if reference is None:
+                    return None
+                offset = quat_rotate(reference['orientation'], offset)
+            elif offset_frame in {'target', 'eef', 'tcp', 'gripper'}:
                 offset = quat_rotate(current_pose['orientation'], offset)
             target_position = np.asarray(current_pose['position'], dtype=float) + offset
             minimum_planar_radius = spec.get('workspace_minimum_planar_radius')
@@ -3137,6 +3876,33 @@ class UR5eAssemblyAtomicSkillAdapter:
                 orientation,
                 relative_position,
             )
+            if bool(spec.get('align_grasp_axis_to_world_down', False)):
+                pad_distance = float(spec.get('grasp_pad_distance', 0.143))
+                reach = float(spec.get('grasp_pad_reach', pad_distance))
+                finger_axis = spec.get('align_finger_to_object_axis')
+                finger_direction = None
+                if finger_axis is not None:
+                    finger_direction = quat_rotate(
+                        object_pose['orientation'],
+                        np.asarray(finger_axis, dtype=float),
+                    )
+                    max_tilt = spec.get('align_finger_max_tilt_rad')
+                    if max_tilt is not None:
+                        finger_direction = _limit_finger_tilt(
+                            np.asarray(finger_direction, dtype=float),
+                            float(max_tilt),
+                        )
+                position, orientation = _vertical_pad_pose(
+                    position,
+                    orientation,
+                    pad_distance,
+                    reach,
+                    finger_direction,
+                )
+            grasp_offset = np.asarray(spec.get('grasp_object_frame_offset', [0.0, 0.0, 0.0]), dtype=float)
+            if grasp_offset.shape != (3,) or not np.all(np.isfinite(grasp_offset)):
+                return None
+            position = position + quat_rotate(object_pose['orientation'], grasp_offset)
             approach_clearance = float(spec.get('approach_clearance', 0.0))
             if approach_clearance < 0.0 or not np.isfinite(approach_clearance):
                 return None
@@ -3601,6 +4367,43 @@ class UR5eAssemblyAtomicSkillAdapter:
             result['orientation'] = locked['orientation'].copy()
         return result
 
+    @staticmethod
+    def _close_gate_stability(*, state, spec, ready, current_pose):
+        """Require a fixed-window stationary pose before starting closure."""
+        already_started = 'close_started_step' in state
+        stationary = bool(spec.get('close_gate_freeze_at_start')) and not already_started
+        motion = {}
+        if ready and stationary:
+            anchor = state.get('close_settle_anchor')
+            if anchor is not None:
+                dp, dq = pose_error(
+                    current_position=current_pose['position'], current_orientation=current_pose['orientation'],
+                    target_position=anchor['position'], target_orientation=anchor['orientation'],
+                )
+                motion = {'position_drift': dp, 'orientation_drift': dq}
+                if dp > float(spec.get('close_gate_stationary_position_tolerance', 0.0001)) or (
+                    dq is not None and dq > float(spec.get('close_gate_stationary_orientation_tolerance', 0.002))
+                ):
+                    state['ready_steps'] = 0
+                    state.pop('close_settle_anchor', None)
+            if 'close_settle_anchor' not in state:
+                state['close_settle_anchor'] = {key: np.asarray(current_pose[key], dtype=float).copy()
+                                               for key in ('position', 'orientation')}
+        if ready:
+            state['ready_steps'] = int(state.get('ready_steps', 0)) + 1
+        else:
+            state['ready_steps'] = 0
+            state.pop('close_settle_anchor', None)
+            # A lost pose gate after freezing must fail, never reopen/restart.
+            if not state.get('close_arm_frozen'):
+                state.pop('close_started_step', None)
+                state.pop('hold_q', None)
+        required = max(int(spec.get('close_ready_stable_steps', 4)), 1)
+        return bool(ready and state['ready_steps'] >= required), {
+            'ready_steps': state['ready_steps'], 'required_ready_steps': required,
+            'stationary_window': stationary, **motion,
+        }
+
     def _close_pose_gate_action(
         self,
         *,
@@ -3655,6 +4458,34 @@ class UR5eAssemblyAtomicSkillAdapter:
             ),
             spec=gate_spec,
         )
+        if current_pose is not None:
+            state['close_tcp_position_world'] = np.asarray(current_pose['position'], dtype=float).copy()
+        # Observe/cancel before constructing this tick's arm target. Cancelling
+        # later in the close controller would still publish a stale IK command.
+        recenter_stop = None
+        if (current_pose is not None and spec.get('close_force_recenter_stop_on_bilateral')
+                and state.get('force_recenter_pending') is not None):
+            observation = self._grasp_contact_ready(
+                task=task, robot_name=robot_name,
+                spec={**spec, 'require_dual_finger_contact': spec.get('require_dual_finger_contact', True)},
+            )
+            state['close_contact_observation'] = (int(task.step_counter), observation)
+            recenter_stop = self._stop_recenter_on_bilateral(
+                state=state, spec=spec, metrics=observation[1].get('contact_metrics') or {},
+                current_position=current_pose['position'],
+            )
+        regulated_contact = bool(spec.get('close_force_regulation', False) and state.get('contact_control_active'))
+        frozen_arm = bool(state.get('close_arm_frozen'))
+        if (frozen_arm or regulated_contact) and current_pose is not None:
+            if 'contact_arm_anchor' not in state:
+                state['contact_arm_anchor'] = {
+                    'position': np.asarray(current_pose['position'], dtype=float).copy(),
+                    'orientation': np.asarray(current_pose['orientation'], dtype=float).copy(),
+                }
+            anchor = state['contact_arm_anchor']
+            target_pose = {key: value.copy() for key, value in anchor.items()}
+            state['recenter_anchor_position_world'] = anchor['position'].copy()
+            gate_spec = {**gate_spec, 'lock_target_position': False, 'lock_target_orientation': False}
         recenter_offset = np.asarray(
             state.get('recenter_offset_world', np.zeros(3, dtype=float)),
             dtype=float,
@@ -3722,6 +4553,19 @@ class UR5eAssemblyAtomicSkillAdapter:
             warm_start=reference_q,
             spec=gate_spec,
         )
+        if gate_spec.get('close_gate_local_ik') and reference_q is not None:
+            candidate = None if ik_result is None else self._unwrap_to_reference(
+                target_q=ik_result, reference_q=reference_q,
+                preferred_abs_limit=gate_spec.get('preferred_joint_abs_limit', 3.05),
+                hard_preferred_abs_limit=bool(gate_spec.get('hard_preferred_joint_abs_limit', True)))
+            if candidate is None or self._ik_branch_jump_detected(
+                    reference_q=reference_q, target_q=candidate, spec=gate_spec):
+                # The global solver can return a different elbow branch even
+                # for a sub-mm request. Refine FK locally; keep the branch guard.
+                ik_result = self._local_grasp_ik(
+                    task=task, robot_name=robot_name, target_pose=ik_target_pose,
+                    reference_q=reference_q, spec=gate_spec,
+                    joint_radius=float(gate_spec.get('close_gate_local_ik_radius', .04)))
         if ik_result is None:
             action = self._hold_joint_action(task=task, robot_name=robot_name)
             action[_GRIPPER_CONTROLLER] = [
@@ -3816,6 +4660,7 @@ class UR5eAssemblyAtomicSkillAdapter:
             'ik_target_position': ik_target_pose['position'].tolist(),
             'ik_target_orientation': ik_target_pose['orientation'].tolist(),
             'recenter_offset_world': recenter_offset.tolist(),
+            'recenter_stop': recenter_stop,
         }
         ready = False
         if current_pose is not None:
@@ -3843,6 +4688,14 @@ class UR5eAssemblyAtomicSkillAdapter:
             )
             recenter_target_tolerance = float(gate_spec.get('close_gate_recenter_target_tolerance', 0.00035))
             state['recenter_target_ready'] = bool(position_error <= recenter_target_tolerance)
+            pending = state.get('force_recenter_pending')
+            if gate_spec.get('close_force_recenter_measure_progress') and pending is not None:
+                motion_ready, motion_detail = self._recenter_motion_ready(
+                    pending=pending, current_position=current_pose['position'],
+                    overall_pose_ready=ready, tolerance=recenter_target_tolerance,
+                )
+                state['recenter_target_ready'] = motion_ready
+                detail.update(motion_detail)
             detail.update(
                 {
                     'recenter_target_ready': state['recenter_target_ready'],
@@ -3861,30 +4714,47 @@ class UR5eAssemblyAtomicSkillAdapter:
                 }
             )
 
-        if ready:
-            state['ready_steps'] = int(state.get('ready_steps', 0)) + 1
-        else:
-            state['ready_steps'] = 0
-            state.pop('close_started_step', None)
-            state.pop('hold_q', None)
-
-        required_ready_steps = max(int(gate_spec.get('close_ready_stable_steps', 4)), 1)
-        gate_ready = int(state.get('ready_steps', 0)) >= required_ready_steps
-        detail['ready_steps'] = int(state.get('ready_steps', 0))
-        detail['required_ready_steps'] = required_ready_steps
+        gate_ready, stability_detail = self._close_gate_stability(
+            state=state, spec=gate_spec, ready=ready, current_pose=current_pose,
+        )
+        detail.update(stability_detail)
         detail['gate_ready'] = gate_ready
+        state['hold_command_pose'] = {k: np.asarray(command_target_pose[k]).copy()
+                                      for k in ('position', 'orientation')}
         if gate_ready:
             if 'close_started_step' not in state:
                 state['close_started_step'] = int(getattr(task, 'phase_step_counter', 0))
-                if bool(gate_spec.get('close_gate_hold_refined_command', False)):
+                if bool(gate_spec.get('close_gate_freeze_at_start')):
+                    state['close_arm_frozen'] = True
+                    state['contact_arm_anchor'] = {key: np.asarray(current_pose[key], dtype=float).copy()
+                                                   for key in ('position', 'orientation')}
+                    hold_q = current_q if current_q is not None else command_q
+                    self._remember_arm_command(task, robot_name, hold_q)
+                elif bool(gate_spec.get('close_gate_hold_refined_command', False)):
                     hold_q = command_q
                 else:
                     hold_q = current_q if current_q is not None else command_q
                 state['hold_q'] = np.asarray(hold_q, dtype=float).copy()
-            elif bool(gate_spec.get('close_gate_track_object_during_close', False)):
-                # Closing fingers can slide a free part. Keep servoing the planned
-                # object-in-TCP relation until contact instead of freezing the arm.
+            elif frozen_arm or regulated_contact or bool(gate_spec.get('close_gate_track_object_during_close', False)):
+                # Frozen closure tracks only its fixed world anchor plus bounded recentering.
                 state['hold_q'] = np.asarray(command_q, dtype=float).copy()
+        trace_path = os.environ.get('BEAM_CLOSE_GATE_TRACE_PATH')
+        if trace_path and spec.get('close_gate_freeze_at_start'):
+            object_pose = self._object_pose(
+                task=task, object_name=self._object_name_from_spec(spec), tracked_objects=tracked_objects,
+            )
+            with open(trace_path, 'a', encoding='utf-8') as handle:
+                handle.write(json.dumps({
+                    'step': int(task.step_counter), 'phase': task.phase, 'robot': robot_name,
+                    **detail, 'current_position': None if current_pose is None else np.asarray(current_pose['position']).tolist(),
+                    'current_orientation': None if current_pose is None else np.asarray(current_pose['orientation']).tolist(),
+                    'current_q': None if current_q is None else np.asarray(current_q).tolist(),
+                    'command_q': command_q.tolist(), 'close_started_step': state.get('close_started_step'),
+                    'arm_frozen': bool(state.get('close_arm_frozen')),
+                    'hold_q': None if state.get('hold_q') is None else np.asarray(state['hold_q']).tolist(),
+                    'object_position': None if object_pose is None else np.asarray(object_pose['position']).tolist(),
+                    'object_orientation': None if object_pose is None else np.asarray(object_pose['orientation']).tolist(),
+                }) + '\n')
         return gate_ready, action, detail
 
     def _prealign_action(self, *, task, robot_name: str, target_pose: dict, spec: dict):
@@ -4424,6 +5294,11 @@ class UR5eAssemblyAtomicSkillAdapter:
                         position_tolerance=position_tolerance,
                         orientation_tolerance=orientation_tolerance,
                     )
+                    if spec.get('inherit_grasp_drive_target'):
+                        self._debug_loaded_ik(task=task, robot_name=robot_name,
+                            raw_solver=raw_solver, frame=ee_frame, warm_start=warm_start,
+                            result=ik_result, success=success, target_position=target_position,
+                            target_orientation=target_orientation, spec=spec)
                     if success and ik_result is not None:
                         ik_result = np.asarray(ik_result, dtype=float)
                         if np.all(np.isfinite(ik_result)):
@@ -4442,6 +5317,36 @@ class UR5eAssemblyAtomicSkillAdapter:
         if not np.all(np.isfinite(joint_positions)):
             return None
         return joint_positions
+
+    @staticmethod
+    def _debug_loaded_ik(*, task, robot_name, raw_solver, frame, warm_start,
+                         result, success, target_position, target_orientation, spec,
+                         path='command_warm_start'):
+        trace = os.environ.get('BEAM_MOTION_TRACE_PATH')
+        if not trace:
+            return
+        detail = {'step': int(task.step_counter), 'phase': task.phase, 'robot': robot_name,
+            'path': path, 'success': bool(success), 'frame': frame,
+            'position_tolerance': spec.get('ik_position_tolerance'),
+            'orientation_tolerance': spec.get('ik_orientation_tolerance'),
+            'target_position': target_position.tolist(), 'target_orientation': target_orientation.tolist(),
+            'warm_start': warm_start.tolist(), 'result': None if result is None else np.asarray(result).tolist()}
+        for name, q in (('reference', warm_start), ('result', result)):
+            if q is None:
+                continue
+            try:
+                position, rotation = raw_solver.compute_forward_kinematics(frame, np.asarray(q))
+                orientation = _quat_from_axes(rotation[:, 0], rotation[:, 1], rotation[:, 2])
+                pos_error, rot_error = pose_error(current_position=position, current_orientation=orientation,
+                    target_position=target_position, target_orientation=target_orientation)
+                detail[name + '_fk'] = {'position': np.asarray(position).tolist(),
+                    'orientation': orientation.tolist(), 'position_error': float(pos_error),
+                    'orientation_error': float(rot_error)}
+            except Exception as exc:
+                detail[name + '_fk_error'] = f'{type(exc).__name__}: {exc}'
+        path = os.path.join(os.path.dirname(trace), 'ik_trace.jsonl')
+        with open(path, 'a', encoding='utf-8') as handle:
+            handle.write(json.dumps(detail) + '\n')
 
     @staticmethod
     def _ik_solver_tolerances(spec: dict) -> tuple[float | None, float | None]:
@@ -4901,6 +5806,266 @@ class UR5eAssemblyAtomicSkillAdapter:
         return bool(linear_abort or angular_abort)
 
     @staticmethod
+    def _contact_close_control(*, state: dict, spec: dict, metrics: dict,
+                               gripper_q: float, open_q: float, closed_q: float,
+                               requested_openness: float, min_openness: float) -> dict:
+        """Position-based force regulation; contact capture is separate from success."""
+        fingers = [metrics.get(side) or {} for side in ('left_finger', 'right_finger')]
+        valid = all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers)
+        forces = [float(f.get('force', 0.0)) for f in fingers]
+        threshold = float(spec.get('contact_force_threshold', 0.1))
+        dt = float((fingers[0].get('force_observation') or {}).get('physics_dt', 1.0 / 240.0))
+        if not np.isfinite(dt) or dt <= 0:
+            raise ValueError('Invalid contact control timestep')
+        span = abs(closed_q - open_q)
+        if span <= 1e-8 or not np.isfinite(gripper_q):
+            raise ValueError('Invalid gripper state for contact regulation')
+        direction = math.copysign(1.0, closed_q - open_q)
+        measured = (gripper_q - open_q) * direction
+        previous = float(state.get('contact_command_closure', measured))
+        requested = span * (1.0 - max(requested_openness, min_openness))
+        maximum = span * (1.0 - min_openness)
+        loaded = [valid and force >= threshold for force in forces]
+        first_contact = any(loaded) and not state.get('contact_control_active', False)
+        if first_contact:
+            state['contact_control_active'] = True
+            state['contact_capture_closure'] = measured
+            previous = measured  # Discard the advancing pre-contact trajectory.
+        peak = max(forces) if valid else 0.0
+        force_low = float(spec.get('close_force_low', 4.0))
+        force_high = float(spec.get('close_force_high', 12.0))
+        force_limit = float(spec.get('close_force_limit', 40.0))
+        rate = float(spec.get('close_force_joint_rate', 0.025))
+        if not valid:
+            command = min(previous, measured)
+            mode = 'invalid_probe_hold'
+        elif state.get('contact_control_active'):
+            maximum = min(maximum, float(state['contact_capture_closure']) + float(spec.get('close_force_max_seek', 0.03)))
+            if peak > force_high:
+                unload_rate = float(spec.get('close_force_unload_rate', 0.06)) if peak > force_limit else rate
+                command = min(previous, measured) - unload_rate * dt
+                mode = 'force_limit_unload' if peak > force_limit else 'unload'
+            elif peak < force_low:
+                command = min(previous, measured + float(spec.get('close_force_max_command_lead', 0.001))) + rate * dt
+                mode = 'gentle_seek' if not any(loaded) else 'preload'
+            else:
+                command = previous
+                mode = 'bilateral_hold' if all(loaded) else 'single_contact_hold'
+        else:
+            # Jaw width is only a speed cue, never a contact/success substitute.
+            expected = span * (1.0 - float(spec.get('jaw_width_thickness_m', 0.018)) /
+                               float(spec.get('jaw_width_stroke_m', 0.085)))
+            slow_start = max(expected - float(spec.get('close_approach_joint_margin', 0.06)), 0.0)
+            if max(previous, measured) >= slow_start:
+                command = min(requested, previous + float(spec.get('close_approach_joint_rate', 0.10)) * dt)
+                mode = 'slow_approach'
+            else:
+                command = min(requested, slow_start)
+                mode = 'approach'
+        command = float(np.clip(command, 0.0, maximum))
+        state['contact_command_closure'] = command
+        openness = float(np.clip(1.0 - command / span, min_openness, 1.0))
+        state['hold_gripper_openness'] = openness
+        return {'mode': mode, 'probe_valid': bool(valid), 'forces': forces,
+                'first_contact': bool(first_contact), 'contact_control_active': bool(state.get('contact_control_active')),
+                'physics_dt': dt, 'force_limit': force_limit,
+                'force_within_limit': bool(valid and peak <= force_limit),
+                'command_q': float(open_q + direction * command), 'command_openness': openness}
+
+    @staticmethod
+    def _stop_recenter_on_bilateral(*, state, spec, metrics, current_position):
+        """Cancel unexecuted translation; this event never declares a grasp."""
+        pending = state.get('force_recenter_pending')
+        if pending is None:
+            return None
+        fingers = [metrics.get(s) or {} for s in ('left_finger', 'right_finger')]
+        threshold = float(spec.get('contact_force_threshold', 0.1))
+        if not all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers):
+            return None
+        forces = [float(f['force']) for f in fingers]
+        stop_cause = 'bilateral_contact'
+        if pending.get('mode') == 'force_margin':
+            side = int(pending['loaded_side'])
+            margin_ready = min(forces) >= float(spec['close_force_balance_min'])
+            reversed_side = forces[1 - side] >= threshold and forces[1 - side] > forces[side]
+            if not margin_ready and not reversed_side:
+                return None
+            stop_cause = 'force_margin_reached' if margin_ready else 'force_balance_side_reversed'
+        elif not all(force >= threshold for force in forces):
+            return None
+        if not all(k in pending for k in ('motion_start_position_world', 'motion_delta_world', 'offset_before')):
+            return None
+        delta = np.asarray(pending['motion_delta_world'], dtype=float)
+        start = np.asarray(pending['motion_start_position_world'], dtype=float)
+        current = np.asarray(current_position, dtype=float)
+        before = np.asarray(pending['offset_before'], dtype=float)
+        if any(a.shape != (3,) or not np.all(np.isfinite(a)) for a in (delta, start, current, before)):
+            return None
+        length_squared = float(np.dot(delta, delta))
+        if length_squared <= 1e-16:
+            return None
+        measured_delta = current - start
+        progress = float(np.clip(np.dot(measured_delta, delta) / length_squared, 0.0, 1.0))
+        offset = before + progress * delta
+        state['recenter_offset_world'] = offset
+        # Preserve the original world anchor and conservative command-travel
+        # charge. Project only along the issued move, not arbitrary TCP drift.
+        state.pop('force_recenter_pending')
+        state['force_single_steps'] = 0
+        state.pop('force_single_side', None)
+        state['force_recenter_pause_steps'] = int(spec.get('close_force_recenter_settle_steps', 8))
+        if spec.get('close_force_recenter_adaptive_step'):
+            state['force_recenter_step'] = max(
+                float(spec.get('close_force_recenter_min_step', 0.000025)),
+                0.5 * float(state.get('force_recenter_step', spec.get('close_gate_recenter_step', 0.0002))),
+            )
+        event = {'reason': 'bilateral_motion_cancelled', 'progress_fraction': progress,
+                 'stop_cause': stop_cause, 'motion_mode': pending.get('mode', 'single_contact'),
+                 'offset_world': offset.tolist(), 'forces': [float(f['force']) for f in fingers],
+                 'motion_start_position_world': start.tolist(), 'stop_position_world': current.tolist(),
+                 'motion_delta_world': delta.tolist(), 'offset_before': before.tolist(),
+                 'cancelled_distance': (1.0 - progress) * float(np.sqrt(length_squared))}
+        state['force_recenter_stop_event'] = event
+        return event
+
+    @staticmethod
+    def _recenter_motion_ready(*, pending, current_position, overall_pose_ready, tolerance):
+        target = pending.get('motion_target_position_world')
+        if target is None:
+            return False, {'recenter_motion_error': None}
+        error = float(np.linalg.norm(np.asarray(current_position) - np.asarray(target)))
+        delta = pending.get('motion_delta_world')
+        if pending.get('adaptive_progress') and delta is not None:
+            delta = np.asarray(delta)
+            length = float(np.linalg.norm(delta))
+            if length <= 1e-8:
+                return False, {'recenter_motion_error': error}
+            axis = delta / length
+            residual = np.asarray(current_position) - np.asarray(target)
+            axial = abs(float(np.dot(residual, axis)))
+            lateral = float(np.linalg.norm(residual - np.dot(residual, axis) * axis))
+            axial_tolerance = min(tolerance, length * 0.25)
+            return bool(overall_pose_ready and axial <= axial_tolerance and lateral <= tolerance), {
+                'recenter_motion_error': error, 'recenter_motion_axial_error': axial,
+                'recenter_motion_lateral_error': lateral, 'recenter_motion_axial_tolerance': axial_tolerance,
+                'recenter_motion_target_position': np.asarray(target).tolist(),
+            }
+        # A fixed servo bias must not prevent acknowledging a measured small move.
+        # The original world anchor and full pose gate remain in force.
+        return bool(overall_pose_ready and error <= tolerance), {
+            'recenter_motion_error': error, 'recenter_motion_target_position': np.asarray(target).tolist(),
+        }
+
+    @staticmethod
+    def _update_force_recenter(*, state: dict, metrics: dict, spec: dict) -> dict:
+        offset = np.asarray(state.get('recenter_offset_world', np.zeros(3)), dtype=float)
+        result = {'enabled': True, 'updated': False, 'source': 'pair_force', 'offset_world': offset.tolist()}
+        fingers = [metrics.get(s) or {} for s in ('left_finger', 'right_finger')]
+        if not all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers):
+            state['force_single_steps'] = 0
+            return {**result, 'reason': 'invalid_probe'}
+        forces = [float(f['force']) for f in fingers]
+        threshold = float(spec.get('contact_force_threshold', 0.1))
+        loaded = [f >= threshold for f in forces]
+        result['forces'] = forces
+        stop_event = state.pop('force_recenter_stop_event', None)
+        if stop_event is not None:
+            return {**result, **stop_event}
+        if state.get('force_recenter_fault'):
+            return {**result, 'reason': state['force_recenter_fault']}
+        if state.get('force_recenter_pause_steps', 0) > 0:
+            state['force_recenter_pause_steps'] -= 1
+            state['force_single_steps'] = 0
+            state.pop('force_single_side', None)
+            return {**result, 'reason': 'contact_stop_settling'}
+        pending = state.get('force_recenter_pending')
+        if pending is not None:
+            pending['elapsed_steps'] = int(pending.get('elapsed_steps', 0)) + 1
+            if not state.get('recenter_target_ready', False):
+                pending['settle_steps'] = 0
+                if pending['elapsed_steps'] >= int(spec.get('close_force_recenter_timeout_steps', 240)):
+                    state['force_recenter_fault'] = 'recenter_motion_timeout'
+                    return {**result, 'reason': state['force_recenter_fault']}
+                return {**result, 'reason': 'servo_in_progress'}
+            pending['settle_steps'] += 1
+            if pending['settle_steps'] < int(spec.get('close_force_recenter_settle_steps', 8)):
+                return {**result, 'reason': 'settling'}
+            if abs(forces[0] - forces[1]) > 1.5 * pending['imbalance'] + 2.0:
+                state['force_recenter_fault'] = 'force_imbalance_increased'
+                return {**result, 'reason': state['force_recenter_fault']}
+            state.pop('force_recenter_pending')
+        balance_min = spec.get('close_force_balance_min')
+        balance_needed = bool(
+            balance_min is not None and all(loaded) and min(forces) < float(balance_min)
+            and max(forces) >= float(spec.get('close_force_balance_peak', 4.0))
+        )
+        if loaded[0] == loaded[1] and not balance_needed:
+            state['force_single_steps'] = 0
+            state.pop('force_single_side', None)
+            state.pop('force_recenter_confirmation_mode', None)
+            return {**result, 'reason': 'bilateral' if all(loaded) else 'no_contact'}
+        if max(forces) > float(spec.get('close_force_high', 12.0)):
+            # Preserve the established single-contact approach timing. A new
+            # force-margin candidate needs consecutive eligible observations.
+            if balance_needed or state.get('force_recenter_confirmation_mode') == 'force_margin':
+                state['force_single_steps'] = 0
+            return {**result, 'reason': 'unload_before_recenter'}
+        mode = 'force_margin' if balance_needed else 'single_contact'
+        side = int(np.argmax(forces)) if balance_needed else (0 if loaded[0] else 1)
+        same_candidate = state.get('force_single_side') == side and state.get('force_recenter_confirmation_mode') == mode
+        state['force_single_steps'] = int(state.get('force_single_steps', 0)) + 1 if same_candidate else 1
+        state['force_single_side'] = side
+        state['force_recenter_confirmation_mode'] = mode
+        if state['force_single_steps'] < int(spec.get('close_gate_recenter_stable_steps', 4)):
+            return {**result, 'reason': 'single_contact_confirmation'}
+        finger = fingers[side]
+        contacts = [c for c in (finger.get('force_observation') or {}).get('contacts', []) if abs(c['normal_force']) > 0.01]
+        if not contacts or metrics.get('contact_box_orientation') is None or metrics.get('contact_box_center') is None:
+            return {**result, 'reason': 'loaded_contact_frame_unavailable'}
+        axis = quat_rotate(normalize_quat(np.asarray(metrics['contact_box_orientation'])), np.asarray([0., 1., 0.]))
+        point = np.average(np.asarray([c['point_world'] for c in contacts]), axis=0,
+                           weights=[abs(c['normal_force']) for c in contacts])
+        signed = float(np.dot(point - np.asarray(metrics['contact_box_center']), axis))
+        if not np.isfinite(signed) or abs(signed) < 1e-6:
+            return {**result, 'reason': 'contact_side_unavailable'}
+        step = float(state.get('force_recenter_step', spec.get('close_gate_recenter_step', 0.0002)))
+        if spec.get('close_force_recenter_adaptive_step'):
+            previous_side = state.get('force_recenter_last_side')
+            if previous_side is not None and previous_side != side:
+                step = max(step * 0.5, float(spec.get('close_force_recenter_min_step', 0.000025)))
+        if balance_needed:
+            step = min(step, float(spec.get('close_force_balance_step', 0.000025)))
+        limit = float(spec.get('close_gate_recenter_max_offset', 0.002))
+        # Limit total travelled distance, not just net displacement.
+        remaining = max(limit - float(state.get('force_recenter_travel', 0.0)), 0.0)
+        if remaining < 1e-7:
+            return {**result, 'reason': 'travel_limit'}
+        delta = math.copysign(min(step, remaining), signed) * axis
+        motion_start = state.get('close_tcp_position_world')
+        if spec.get('close_force_recenter_measure_progress') and motion_start is None:
+            return {**result, 'reason': 'tcp_observation_unavailable'}
+        state['recenter_offset_world'] = offset + delta
+        state['force_recenter_last_side'] = side
+        state['force_recenter_step'] = step
+        state['force_recenter_travel'] = float(state.get('force_recenter_travel', 0.0)) + float(np.linalg.norm(delta))
+        state['force_recenter_pending'] = {
+            'imbalance': abs(forces[0] - forces[1]), 'settle_steps': 0,
+            'mode': mode, 'loaded_side': side,
+            'offset_before': offset.copy(), 'motion_delta_world': delta.copy(),
+            'adaptive_progress': bool(spec.get('close_force_recenter_adaptive_step')),
+        }
+        if motion_start is not None:
+            state['force_recenter_pending']['motion_start_position_world'] = np.asarray(motion_start).copy()
+            state['force_recenter_pending']['motion_target_position_world'] = np.asarray(motion_start) + delta
+        state['recenter_target_ready'] = False
+        state['force_single_steps'] = 0
+        return {**result, 'updated': True, 'offset_world': (offset + delta).tolist(),
+                'motion_mode': mode,
+                'motion_start_position_world': None if motion_start is None else np.asarray(motion_start).tolist(),
+                'motion_delta_world': delta.tolist(),
+                'travel': state['force_recenter_travel'], 'loaded_side': side}
+
+    @staticmethod
     def _update_close_recenter_offset(
         *,
         state: dict[str, Any],
@@ -4923,6 +6088,8 @@ class UR5eAssemblyAtomicSkillAdapter:
 
         contact_detail = close_detail.get('contact_detail') or {}
         metrics = contact_detail.get('contact_metrics') or {}
+        if bool(spec.get('close_force_regulation', False)):
+            return UR5eAssemblyAtomicSkillAdapter._update_force_recenter(state=state, metrics=metrics, spec=spec)
         left = metrics.get('left_finger') or {}
         right = metrics.get('right_finger') or {}
 
@@ -5043,6 +6210,14 @@ class UR5eAssemblyAtomicSkillAdapter:
         close_elapsed_steps: int,
         gripper_openness: float,
     ) -> tuple[bool, dict[str, Any]]:
+        if spec.get('continuous_physics'):
+            generation = getattr(task, '_continuous_grasp_loss_generation', {}).get(
+                self._object_name_from_spec(spec), 0)
+            if state.get('grasp_loss_generation', 0) != generation:
+                state['close_contact_stable_steps'] = 0
+                state.pop('contact_stability_pose', None)
+                state.pop('close_contact_observation', None)
+            state['grasp_loss_generation'] = generation
         min_steps = max(int(spec.get('close_until_contact_min_steps', spec.get('close_ramp_steps', 24))), 0)
         required_stable_steps = max(int(spec.get('close_contact_stable_steps', 8)), 1)
         stall_delta = float(spec.get('close_contact_stall_joint_delta', 0.0015))
@@ -5062,12 +6237,57 @@ class UR5eAssemblyAtomicSkillAdapter:
         contact_ready = False
         contact_detail: dict[str, Any] = {'contact_checked': False}
         if bool(spec.get('use_contact_for_close_until_contact', True)):
-            contact_ready, contact_detail = self._grasp_contact_ready(
-                task=task,
-                robot_name=robot_name,
-                spec={**spec, 'require_dual_finger_contact': spec.get('require_dual_finger_contact', True)},
-            )
+            observation = state.pop('close_contact_observation', None)
+            if observation is not None and observation[0] == int(getattr(task, 'step_counter', -1)):
+                contact_ready, contact_detail = observation[1]
+            else:
+                contact_ready, contact_detail = self._grasp_contact_ready(
+                    task=task,
+                    robot_name=robot_name,
+                    spec={**spec, 'require_dual_finger_contact': spec.get('require_dual_finger_contact', True)},
+                )
             contact_detail['contact_checked'] = True
+
+        if bool(spec.get('close_force_regulation', False)):
+            if any(value is None for value in (gripper_q, open_q, closed_q)):
+                return False, {'control_error': 'gripper_state_unavailable', 'contact_detail': contact_detail}
+            metrics = contact_detail.get('contact_metrics') or {}
+            config = getattr(task.robots.get(robot_name), 'config', None)
+            control = self._contact_close_control(
+                state=state, spec=spec, metrics=metrics, gripper_q=float(gripper_q),
+                open_q=float(open_q), closed_q=float(closed_q), requested_openness=gripper_openness,
+                min_openness=float(getattr(config, 'gripper_close_openness', 0.0) or 0.0),
+            )
+            candidate = bool(contact_ready and control['force_within_limit'] and
+                             min(control['forces']) >= float(spec.get('close_force_min_stable', 1.0)))
+            center = metrics.get('contact_box_center')
+            orientation = metrics.get('contact_box_orientation')
+            motion_detail = {'checked': True, 'method': 'fixed_pose_window', 'valid': False}
+            if candidate and center is not None and orientation is not None:
+                if state.get('close_contact_stable_steps', 0) == 0:
+                    state['contact_stability_pose'] = (np.asarray(center).copy(), np.asarray(orientation).copy())
+                reference_position, reference_orientation = state['contact_stability_pose']
+                position_error, orientation_error = pose_error(
+                    current_position=np.asarray(center), current_orientation=np.asarray(orientation),
+                    target_position=reference_position, target_orientation=reference_orientation)
+                motion_detail.update(valid=True, position_error=position_error, orientation_error=orientation_error)
+                candidate = bool(position_error <= float(spec.get('close_stable_position_tolerance', 0.001)) and
+                                 orientation_error <= float(spec.get('close_stable_orientation_tolerance', 0.02)))
+            else:
+                candidate = False
+            state['close_contact_stable_steps'] = int(state.get('close_contact_stable_steps', 0)) + 1 if candidate else 0
+            required = max(required_stable_steps, int(spec.get('close_force_validation_steps', 96)))
+            ready = bool(close_elapsed_steps >= min_steps and state['close_contact_stable_steps'] >= required)
+            if ready:
+                self._remember_gripper_hold_openness(task=task, robot_name=robot_name, openness=control['command_openness'])
+            return ready, {
+                'closed': ready, 'close_until_contact': True, 'completion_reason': control['mode'],
+                'stable_steps': state['close_contact_stable_steps'], 'required_stable_steps': required,
+                'contact_ready': contact_ready, 'contact_detail': contact_detail, 'control': control,
+                'gripper_joint_position': gripper_q, 'target_gripper_joint_position': control['command_q'],
+                'hold_gripper_openness': control['command_openness'], 'gripper_openness_command': control['command_openness'],
+                'motion_ready': candidate, 'motion_detail': motion_detail,
+            }
 
         blocked_before_full_close = False
         moved_from_open = False
@@ -5089,6 +6309,24 @@ class UR5eAssemblyAtomicSkillAdapter:
             and moved_from_open
         )
         detected_clamp = bool(contact_candidate or stall_contact)
+        if (
+            bool(spec.get('allow_jaw_width_completion', False))
+            and gripper_q is not None
+            and open_q is not None
+            and closed_q is not None
+            and spec.get('jaw_width_thickness_m') is not None
+        ):
+            stroke = float(spec.get('jaw_width_stroke_m', 0.085))
+            if stroke > 0.0:
+                ratio = min(max(float(spec['jaw_width_thickness_m']) / stroke, 0.0), 1.0)
+                expected_q = float(open_q) + (1.0 - ratio) * (float(closed_q) - float(open_q))
+                tolerance = float(spec.get('jaw_width_joint_tolerance', 0.08))
+                # A rim touch while the jaw is still wide is not the pinch.
+                # Latching it slams the command shut and spins the beam (v81).
+                if abs(float(gripper_q) - expected_q) > tolerance:
+                    detected_clamp = False
+                    contact_candidate = False
+                    stall_contact = False
 
         configured_latch_after_stable = spec.get('close_contact_latch_after_stable')
         use_transient_hold_candidate = bool(
@@ -5177,9 +6415,36 @@ class UR5eAssemblyAtomicSkillAdapter:
             and motion_ready
             and closed_target_stable_steps >= required_closed_target_stable_steps
         )
+        jaw_width_ready = False
+        jaw_width_lead = None
+        jaw_width_expected_q = None
+        jaw_width_stable_steps = 0
+        if (
+            bool(spec.get('allow_jaw_width_completion', False))
+            and gripper_q is not None
+            and target_q is not None
+            and open_q is not None
+            and closed_q is not None
+        ):
+            thickness = spec.get('jaw_width_thickness_m')
+            stroke = float(spec.get('jaw_width_stroke_m', 0.085))
+            if thickness is not None and stroke > 0.0:
+                ratio = min(max(float(thickness) / stroke, 0.0), 1.0)
+                jaw_width_expected_q = float(open_q) + (1.0 - ratio) * (float(closed_q) - float(open_q))
+                tolerance = float(spec.get('jaw_width_joint_tolerance', 0.08))
+                jaw_width_lead = float(target_q) - float(gripper_q)
+                in_band = abs(float(gripper_q) - jaw_width_expected_q) <= tolerance
+                blocked = jaw_width_lead >= float(spec.get('jaw_width_command_lead', 0.05))
+                if in_band and blocked and moved_from_open:
+                    state['jaw_width_stable_steps'] = int(state.get('jaw_width_stable_steps', 0)) + 1
+                else:
+                    state['jaw_width_stable_steps'] = 0
+                jaw_width_stable_steps = int(state.get('jaw_width_stable_steps', 0))
+                required_jaw_steps = max(int(spec.get('jaw_width_stable_steps', 8)), 1)
+                jaw_width_ready = jaw_width_stable_steps >= required_jaw_steps
         ready = bool(
             close_elapsed_steps >= min_steps
-            and (stable_steps >= required_stable_steps or closed_target_ready)
+            and (stable_steps >= required_stable_steps or closed_target_ready or jaw_width_ready)
             and motion_ready
             and motion_stable_ready
         )
@@ -5204,7 +6469,7 @@ class UR5eAssemblyAtomicSkillAdapter:
                 )
         elif (
             latch_ready
-            and detected_clamp
+            and (detected_clamp or jaw_width_ready)
             and close_elapsed_steps >= min_steps
             and state.get('hold_gripper_openness') is None
         ):
@@ -5231,6 +6496,8 @@ class UR5eAssemblyAtomicSkillAdapter:
             if stall_contact
             else 'closed_target'
             if closed_target_ready
+            else 'jaw_width'
+            if jaw_width_ready
             else 'closing'
         )
         return ready, {
@@ -5252,6 +6519,10 @@ class UR5eAssemblyAtomicSkillAdapter:
             'closed_target_stable_steps': closed_target_stable_steps,
             'required_closed_target_stable_steps': required_closed_target_stable_steps,
             'closed_target_ready': closed_target_ready,
+            'jaw_width_ready': jaw_width_ready,
+            'jaw_width_lead': jaw_width_lead,
+            'jaw_width_expected_q': jaw_width_expected_q,
+            'jaw_width_stable_steps': jaw_width_stable_steps,
             'gripper_openness_command': float(gripper_openness),
             'hold_gripper_openness': state.get('hold_gripper_openness'),
             'gripper_joint_position': None if gripper_q is None else float(gripper_q),
@@ -5334,6 +6605,10 @@ class UR5eAssemblyAtomicSkillAdapter:
         }
         for key in (
             'require_dual_force_contact',
+            'require_pair_force_contact',
+            'require_opposing_force_contact',
+            'contact_box_min_half_extent',
+            'continuous_physics',
             'measure_force_contact',
             'allow_cross_axis_dual_finger_contact',
             'contact_box_scale',

@@ -3,7 +3,7 @@ task_name: fabrica_plumbers_block
 prompt: 'Two Franka arms replay the official Fabrica plumbers-block assembly motion in Isaac Sim.'
 scene_profile: taoyuan_grscenes_tabletop
 scene_asset_path: ${ISAAC_ASSETS_ROOT}/Isaac/Environments/Simple_Warehouse/warehouse_with_forklifts.usd
-scene_asset_fallback_path: ${BENCHMARK_ROOT}/scenes/usd/factory_cell.usda
+scene_asset_fallback_path: ${BENCHMARK_ROOT}/scenes/usd/factory_cell_tabletop.usda
 max_steps: 7200
 phase_timeout_steps: 420
 phase_timeout_action: fail

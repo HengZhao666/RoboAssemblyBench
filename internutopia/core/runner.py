@@ -128,6 +128,19 @@ class SimulatorRunner:
         terminated_status = []
         reward = []
 
+        # Beam diagnostics observe the existing loop without calling task getters.
+        # Keep one cycle identifier even when observation processing changes phase.
+        diagnostic_tasks = []
+        if os.environ.get('BEAM_PHYSICS_DIAGNOSTICS') == '1':
+            from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import sample_boundary
+
+            diagnostic_tasks = [
+                (task, int(getattr(task, 'step_counter', 0)))
+                for task in self.current_tasks.values() if task.name not in self.finished_tasks
+            ]
+            for task, cycle_step in diagnostic_tasks:
+                sample_boundary(task, 'before_action', cycle_step=cycle_step)
+
         for env_id, action_dict in enumerate(actions):
             # terminated tasks will no longer apply action
             if env_id not in self.env_id_to_task_name_map:
@@ -158,10 +171,16 @@ class SimulatorRunner:
             self.render_trigger = 0
 
         # Step
+        for task, cycle_step in diagnostic_tasks:
+            sample_boundary(task, 'after_action', cycle_step=cycle_step)
         self._world.step(render=self._render)
+        for task, cycle_step in diagnostic_tasks:
+            sample_boundary(task, 'after_physics', cycle_step=cycle_step)
 
         # Get obs
         obs = self.get_obs()
+        for task, cycle_step in diagnostic_tasks:
+            sample_boundary(task, 'after_observation', cycle_step=cycle_step)
 
         # update metrics
         for task in self.current_tasks.values():
@@ -476,6 +495,17 @@ class SimulatorRunner:
             stage_units_in_meters=1.0,
             sim_params={'use_fabric': use_fabric},
         )
+        # Explicit, isolated Beam experiment; defaults leave every scene unchanged.
+        requested_solver = os.environ.get('BEAM_PHYSICS_SOLVER_TYPE')
+        if requested_solver is not None:
+            from toolkits.factory_dual_franka_assembly.beam_solver_control import apply_beam_solver_override
+
+            recipe_names = [getattr(task, 'recipe', None) for task in self.config.task_configs]
+            audit = apply_beam_solver_override(
+                self._world.get_physics_context(), recipe_names, requested_solver,
+                isolated_scene=self.env_num == 1,
+            )
+            log.info('Beam solver override: %s', json.dumps(audit, sort_keys=True))
 
     def setup_isaacsim(self):
         # Init Isaac Sim

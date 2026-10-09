@@ -2,10 +2,39 @@ extends: _fabrica_canonical_ur5e.yaml
 task_name: fabrica_beam_ur5e_staged
 prompt: Assemble the canonical Fabrica beam with staged UR5e pick, transport, insertion, release, and retreat skills.
 
+# Beam-only compliant-drive trial; retain the asset's native effort limit.
+robots:
+  - name: franka_right
+    preserve_continuous_arm_joints: true
+    arm_drive_kp: 80000.0
+    arm_drive_kd: 4000.0
+    gripper_drive_kp: 7500.0
+    gripper_drive_kd: 173.0
+    # Trial coefficients, not measured hardware calibration.
+    gripper_pad_static_friction: 1.0
+    gripper_pad_dynamic_friction: 0.8
+  - name: franka_left
+    preserve_continuous_arm_joints: true
+    arm_drive_kp: 80000.0
+    arm_drive_kd: 4000.0
+    gripper_drive_kp: 7500.0
+    gripper_drive_kd: 173.0
+    gripper_pad_static_friction: 1.0
+    gripper_pad_dynamic_friction: 0.8
+
 fabrica_canonical:
   assembly: beam
+  official_bimanual_hold: true
+  continuous_physics: true
+  beam_solver_velocity_iterations: 4
+  coordinated_support_plan: true
+  # Official Fabrica lists 2 then 3 while holding 6. For bimanual hold we finish
+  # branch 6→3→1 first, then return to hold 6 for branch 6→2→0.
+  assembly_step_order: [3, 2, 1, 0]
   pickup_origin: [0.35, -0.48, 0.0125]
   assembly_origin: [0.70, -0.22, 0.0125]
+  # The audited side-support route uses zero assembly yaw; robot bases stay fixed.
+  assembly_orientation: [1.0, 0.0, 0.0, 0.0]
   board_origin: [0.47, -0.14, 0.0125]
   base_robot: franka_right
   assembly_robot: franka_left

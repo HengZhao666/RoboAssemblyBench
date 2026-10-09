@@ -106,6 +106,11 @@ class IsaacsimArticulation(IArticulation):
         self, positions: np.ndarray, joint_indices: Optional[Union[List, np.ndarray]] = None
     ) -> None:
         """See `IArticulation.set_joint_positions` for documentation."""
+        if os.environ.get('BEAM_PHYSICS_DIAGNOSTICS') == '1':
+            from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import record_path_state_write
+
+            record_path_state_write(self._articulation.prim_path, 'set_joint_positions',
+                                    {'positions': positions, 'joint_indices': joint_indices})
         self._articulation.set_joint_positions(positions=positions, joint_indices=joint_indices)
 
     def get_joint_velocities(self, joint_indices: Optional[Union[List, np.ndarray]] = None) -> np.ndarray:
@@ -116,6 +121,11 @@ class IsaacsimArticulation(IArticulation):
         self, velocities: np.ndarray, joint_indices: Optional[Union[List, np.ndarray]] = None
     ) -> None:
         """See `IArticulation.set_joint_velocities` for documentation."""
+        if os.environ.get('BEAM_PHYSICS_DIAGNOSTICS') == '1':
+            from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import record_path_state_write
+
+            record_path_state_write(self._articulation.prim_path, 'set_joint_velocities',
+                                    {'velocities': velocities, 'joint_indices': joint_indices})
         self._articulation.set_joint_velocities(velocities=velocities, joint_indices=joint_indices)
 
     def set_enabled_self_collisions(self, flag: bool) -> None:

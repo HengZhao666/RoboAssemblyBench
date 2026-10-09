@@ -27,8 +27,11 @@ from toolkits.factory_dual_franka_assembly.planner_primitives import (
 )
 
 
+from toolkits.factory_dual_franka_assembly.beam_support_state import BeamSupportState
+
+
 @BaseTask.register('FactoryDualFrankaAssemblyTask')
-class FactoryDualFrankaAssemblyTask(BaseTask):
+class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
     _ARM_IK_CONTROLLER_NAME = 'arm_ik_controller'
     _GRIPPER_CONTROLLER_NAME = 'gripper_controller'
     _HAND_LINK_NAME = 'panda_hand'
@@ -134,12 +137,18 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         self._resolved_objects = {}
         self._object_prims = {}
         self._attachments = {}
+        self._beam_shared_grasps = {}
+        self._beam_table_sample = None
+        self._beam_support_stability = None
+        self._beam_support_missing_since = None
         self._attachment_joints = {}
         self._configured_joint_paths = {}
         self._configured_joint_specs = {}
         self._configured_joints_created = False
         self._locked_targets = {}
         self._frozen_lock_poses = {}
+        self._lock_pin_pose = {}
+        self._rebased_anchors = set()
         self._locked_collision_states = {}
         self._object_pose_history = {}
         self._object_collision_enabled = {}
@@ -480,7 +489,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         if payload_object is None or payload_target_like is None:
             return target_name, target_position, target_orientation
 
-        attachment_state = self._attachments.get(str(payload_object))
+        attachment_state = self._attachment_for(str(payload_object), robot_name)
         if attachment_state is None or attachment_state.get('robot_name') != robot_name:
             return target_name, target_position, target_orientation
 
@@ -611,6 +620,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         return entry
 
     def _apply_phase_actions(self, phase_spec: dict | None):
+        self._ensure_static_environment_locked()
         if not phase_spec:
             return
 
@@ -618,6 +628,149 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             object_name = self._extract_object_name(object_entry)
             if object_name is not None:
                 self._unlock_object(object_name)
+
+        for sibling_filter in self._as_list(phase_spec.get('gripper_sibling_filters')):
+            if not isinstance(sibling_filter, dict):
+                continue
+            robot_name = sibling_filter.get('robot') or sibling_filter.get('robot_name')
+            if not robot_name:
+                continue
+            self._filter_robot_gripper_from_other_parts(
+                str(robot_name),
+                exclude_object=self._extract_object_name(sibling_filter)
+                or sibling_filter.get('exclude_object'),
+                enabled=bool(sibling_filter.get('enabled', True)),
+            )
+
+        for object_entry in self._as_list(phase_spec.get('clear_gripper_collision_filters')):
+            object_name = self._extract_object_name(object_entry)
+            if object_name is None:
+                continue
+            pending = getattr(self, '_pending_gripper_collision_filters', {}).pop(object_name, None)
+            if not pending:
+                continue
+            self._set_attachment_gripper_collision_filter(
+                object_name,
+                str(pending.get('robot_name', '')),
+                enabled=False,
+                filtered_paths=list(pending.get('filtered_paths') or []),
+            )
+
+        for collision_entry in self._as_list(phase_spec.get('object_collisions')):
+            if not isinstance(collision_entry, dict):
+                continue
+            object_name = self._extract_object_name(collision_entry)
+            if object_name is None:
+                continue
+            enabled = bool(
+                collision_entry.get(
+                    'enabled',
+                    collision_entry.get('collision', collision_entry.get('collision_enabled', True)),
+                )
+            )
+            self._set_object_collision(object_name, enabled)
+
+        for filter_entry in self._as_list(phase_spec.get('collision_filters')):
+            if not isinstance(filter_entry, dict):
+                continue
+            object_name = self._extract_object_name(filter_entry)
+            if object_name is None:
+                continue
+            filter_objects = [
+                str(name)
+                for name in self._as_list(
+                    filter_entry.get('filter_objects')
+                    or filter_entry.get('objects')
+                    or filter_entry.get('against')
+                )
+                if name
+            ]
+            if not filter_objects:
+                continue
+            enabled = bool(filter_entry.get('enabled', True))
+            self._set_object_pair_collision_filter(
+                object_name,
+                filter_objects,
+                enabled=enabled,
+            )
+
+        for gravity_entry in self._as_list(phase_spec.get('object_gravity')):
+            if not isinstance(gravity_entry, dict):
+                continue
+            object_name = self._extract_object_name(gravity_entry)
+            if object_name is None:
+                continue
+            enabled = bool(gravity_entry.get('enabled', gravity_entry.get('gravity', True)))
+            self._set_object_gravity_enabled(object_name, enabled)
+
+        for carry_entry in self._as_list(phase_spec.get('kinematic_carry')):
+            if not isinstance(carry_entry, dict):
+                continue
+            object_name = self._extract_object_name(carry_entry)
+            if object_name is None:
+                continue
+            attachment_state = self._attachments.get(object_name)
+            if not isinstance(attachment_state, dict):
+                continue
+            carry_enabled = bool(carry_entry.get('enabled', True))
+            if (attachment_state.get('attach_spec') or {}).get('continuous_physics'):
+                if carry_enabled:
+                    raise ValueError('continuous_physics cannot enable kinematic carry')
+                # Already dynamic: preserve velocity, grasp anchor and hold policy.
+                continue
+            attachment_state['kinematic_peel_carry'] = carry_enabled
+            # Do not toggle RigidBodyEnabled — Isaac tensor views treat that as
+            # deleting the prim (v54 crash). Mute colliders and teleport pose.
+            self._set_object_collision(object_name, not carry_enabled)
+            self._set_object_kinematic_enabled(object_name, carry_enabled)
+            robot_name = attachment_state.get('robot_name')
+            if robot_name:
+                self._filter_robot_gripper_from_other_parts(
+                    str(robot_name),
+                    exclude_object=object_name,
+                    enabled=carry_enabled,
+                )
+            if carry_enabled:
+                self._set_object_gravity_enabled(object_name, False)
+            else:
+                self._remove_attachment_joint(object_name)
+                attachment_state.pop('carry_joint_path', None)
+            # Refresh relative pose so the carry tracks the current pinch.
+            try:
+                robot_name = attachment_state.get('robot_name')
+                if robot_name:
+                    rel_p, rel_o = self._current_relative_pose(object_name, str(robot_name))
+                    attachment_state['position'] = np.asarray(rel_p, dtype=float).tolist()
+                    attachment_state['orientation'] = np.asarray(rel_o, dtype=float).tolist()
+                    # Keep the original grasp-time world pose. Refreshing it on
+                    # every kinematic_carry phase (especially handoff disable)
+                    # made object_lifted compare against the placed z and stall
+                    # (v57 grip_handoff_dynamic timeout).
+                    if carry_enabled:
+                        robot_pose = self._get_robot_task_pose(str(robot_name))
+                        position, orientation = compose_pose(
+                            base_position=robot_pose[0],
+                            base_orientation=robot_pose[1],
+                            local_position=attachment_state['position'],
+                            local_orientation=attachment_state['orientation'],
+                        )
+                        self._set_object_pose(object_name, position, orientation)
+                    else:
+                        # v45→v46: dropping kinematic+gravity at once ejects the
+                        # part (no real finger force while kinematic). Re-arm hold
+                        # grace so friction contact can re-establish.
+                        attachment_state['kinematic_handoff_step'] = int(self.step_counter)
+                        attach_spec = attachment_state.get('attach_spec')
+                        if isinstance(attach_spec, dict):
+                            attach_spec = dict(attach_spec)
+                            attach_spec['hold_grace_allow_missing_contact'] = True
+                            attach_spec['hold_grace_steps'] = max(
+                                int(attach_spec.get('hold_grace_steps', 180)),
+                                240,
+                            )
+                            attachment_state['attach_spec'] = attach_spec
+            except Exception:
+                pass
 
         for fixture_lock in self._as_list(phase_spec.get('fixture_lock')):
             if not isinstance(fixture_lock, dict):
@@ -1254,6 +1407,64 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             cursor = cursor.GetParent()
         return False
 
+    def _object_kind(self, object_name: str) -> str:
+        metadata = self._object_metadata_map.get(object_name) or {}
+        return str(metadata.get('kind') or '')
+
+    def _is_static_environment_object(self, object_name: str) -> bool:
+        if self._object_kind(object_name) in {'static_cube', 'visual_cube'}:
+            return True
+        return object_name in {
+            'fabrica_fixture',
+            'fixture_support',
+            'assembly_support',
+            'factory_tabletop_visual',
+            'optical_board',
+        }
+
+    def _lock_static_environment_body(self, object_name: str) -> None:
+        """Keep pickup deck/table kinematic. Toggling CollisionEnabled can drop FixedCuboid."""
+        prim = self._object_prims.get(object_name)
+        if prim is None:
+            try:
+                self._resolve_object(object_name)
+            except Exception:
+                return
+            prim = self._object_prims.get(object_name)
+        if prim is None or not prim.IsValid():
+            return
+        try:
+            from pxr import PhysxSchema, UsdPhysics
+        except Exception:
+            return
+        try:
+            if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
+                return
+            rigid_body_api = UsdPhysics.RigidBodyAPI(prim)
+            kinematic_attr = rigid_body_api.GetKinematicEnabledAttr()
+            if kinematic_attr is None or not kinematic_attr.IsValid():
+                kinematic_attr = rigid_body_api.CreateKinematicEnabledAttr()
+            kinematic_attr.Set(True)
+        except Exception:
+            pass
+        try:
+            physx_api = (
+                PhysxSchema.PhysxRigidBodyAPI(prim)
+                if prim.HasAPI(PhysxSchema.PhysxRigidBodyAPI)
+                else PhysxSchema.PhysxRigidBodyAPI.Apply(prim)
+            )
+            gravity_attr = physx_api.GetDisableGravityAttr()
+            if gravity_attr is None or not gravity_attr.IsValid():
+                gravity_attr = physx_api.CreateDisableGravityAttr()
+            gravity_attr.Set(True)
+        except Exception:
+            return
+
+    def _ensure_static_environment_locked(self) -> None:
+        for object_name in list(self._object_metadata_map):
+            if self._is_static_environment_object(object_name):
+                self._lock_static_environment_body(object_name)
+
     def _set_dynamic_mesh_colliders_enabled(self, prim, enabled: bool) -> bool:
         if prim is None or not prim.IsValid():
             return False
@@ -1266,14 +1477,26 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         unsupported_approximations = {'', 'none', 'meshsimplification', 'trianglemesh'}
         handled = False
 
+        def _has_sdf_collision(current_prim) -> bool:
+            try:
+                from pxr import PhysxSchema
+
+                return bool(current_prim.HasAPI(PhysxSchema.PhysxSDFMeshCollisionAPI))
+            except Exception:
+                return False
+
         def _walk(current_prim):
             nonlocal handled
             if current_prim is None or not current_prim.IsValid():
                 return
-            if current_prim.IsA(UsdGeom.Mesh) and current_prim.HasAPI(UsdPhysics.CollisionAPI):
+            if current_prim.HasAPI(UsdPhysics.CollisionAPI):
                 try:
                     collision_enabled = bool(enabled)
-                    if dynamic_body and enabled:
+                    if (
+                        dynamic_body
+                        and enabled
+                        and current_prim.IsA(UsdGeom.Mesh)
+                    ):
                         mesh_collision_api = (
                             UsdPhysics.MeshCollisionAPI(current_prim)
                             if current_prim.HasAPI(UsdPhysics.MeshCollisionAPI)
@@ -1282,6 +1505,8 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                         approximation_attr = mesh_collision_api.GetApproximationAttr()
                         approximation = approximation_attr.Get()
                         approximation_name = '' if approximation is None else str(approximation).strip().lower()
+                        if _has_sdf_collision(current_prim):
+                            approximation_name = 'sdf'
                         if approximation_name in unsupported_approximations:
                             collision_enabled = False
                     collision_attr = UsdPhysics.CollisionAPI(current_prim).GetCollisionEnabledAttr()
@@ -1298,6 +1523,13 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         return handled
 
     def _set_object_collision(self, object_name: str, enabled: bool):
+        self._trace_beam_state_write('set_object_collision', object_name, {'enabled': enabled})
+        if self._is_static_environment_object(object_name):
+            # Never disable the pickup deck/table, and never run the dynamic
+            # collider path — it can clear kinematic on Isaac FixedCuboid (v48).
+            if enabled:
+                self._lock_static_environment_body(object_name)
+            return
         prim = self._object_prims.get(object_name)
         if prim is None:
             self._resolve_object(object_name)
@@ -1306,15 +1538,237 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             return
         self._object_collision_enabled[object_name] = bool(enabled)
         try:
-            handled = self._set_dynamic_mesh_colliders_enabled(prim, bool(enabled))
-            if handled:
-                return
-            if enabled:
-                activate_collider(prim)
-            else:
-                deactivate_collider(prim)
+            self._set_dynamic_mesh_colliders_enabled(prim, bool(enabled))
+            for collision_prim in list(self._iter_collision_prims(prim)) or [prim]:
+                try:
+                    if enabled:
+                        activate_collider(collision_prim)
+                    else:
+                        deactivate_collider(collision_prim)
+                except Exception:
+                    continue
         except Exception:
             return
+
+    def _set_object_pair_collision_filter(
+        self,
+        object_name: str,
+        filter_object_names: list[str],
+        *,
+        enabled: bool,
+    ) -> list[str]:
+        """Filter collisions between one dynamic part and static supports."""
+        try:
+            from pxr import Sdf, UsdPhysics
+        except Exception:
+            return []
+
+        object_prim = self._object_prims.get(object_name)
+        if object_prim is None:
+            try:
+                self._resolve_object(object_name)
+            except Exception:
+                return []
+            object_prim = self._object_prims.get(object_name)
+        if object_prim is None or not object_prim.IsValid():
+            return []
+
+        filtered_paths: list[str] = []
+        other_prims = []
+        for other_name in filter_object_names:
+            try:
+                other = self._resolve_object(str(other_name))
+            except Exception:
+                continue
+            try:
+                other_path = str(other.unwrap().prim_path)
+            except Exception:
+                continue
+            if other_path:
+                filtered_paths.append(other_path)
+            other_prim = self._object_prims.get(str(other_name))
+            if other_prim is not None and other_prim.IsValid():
+                other_prims.append(other_prim)
+        if not filtered_paths:
+            return []
+
+        def _apply_filter(prim, paths):
+            filtered_pairs_api = UsdPhysics.FilteredPairsAPI.Apply(prim)
+            relation = filtered_pairs_api.GetFilteredPairsRel()
+            existing = [str(path) for path in (relation.GetTargets() or [])]
+            if enabled:
+                merged = list(dict.fromkeys([*existing, *paths]))
+                relation.SetTargets([Sdf.Path(path) for path in merged])
+            else:
+                remove = set(paths)
+                kept = [path for path in existing if path not in remove]
+                relation.SetTargets([Sdf.Path(path) for path in kept])
+
+        object_col_paths = [str(p.GetPath()) for p in self._iter_collision_prims(object_prim)]
+        if not object_col_paths:
+            object_col_paths = [str(object_prim.GetPath())]
+        other_col_paths = list(filtered_paths)
+        for other_prim in other_prims:
+            other_col_paths.extend(str(p.GetPath()) for p in self._iter_collision_prims(other_prim))
+        other_col_paths = list(dict.fromkeys(other_col_paths))
+        for col_prim in list(self._iter_collision_prims(object_prim)) or [object_prim]:
+            _apply_filter(col_prim, other_col_paths)
+        for other_prim in other_prims:
+            for col_prim in list(self._iter_collision_prims(other_prim)) or [other_prim]:
+                _apply_filter(col_prim, object_col_paths)
+        return filtered_paths
+
+    def _iter_rigid_body_prims(self, prim):
+        """Yield every prim under root that has RigidBodyAPI (USD parts nest the body)."""
+        if prim is None or not prim.IsValid():
+            return
+        try:
+            from pxr import UsdPhysics
+        except Exception:
+            return
+        stack = [prim]
+        seen = set()
+        while stack:
+            current = stack.pop()
+            if current is None or not current.IsValid():
+                continue
+            path = str(current.GetPath())
+            if path in seen:
+                continue
+            seen.add(path)
+            try:
+                if current.HasAPI(UsdPhysics.RigidBodyAPI):
+                    yield current
+            except Exception:
+                pass
+            try:
+                stack.extend(list(current.GetChildren()))
+            except Exception:
+                continue
+
+    def _iter_collision_prims(self, prim):
+        """Yield every prim under root that has CollisionAPI."""
+        if prim is None or not prim.IsValid():
+            return
+        try:
+            from pxr import UsdPhysics
+        except Exception:
+            return
+        stack = [prim]
+        seen = set()
+        while stack:
+            current = stack.pop()
+            if current is None or not current.IsValid():
+                continue
+            path = str(current.GetPath())
+            if path in seen:
+                continue
+            seen.add(path)
+            try:
+                if current.HasAPI(UsdPhysics.CollisionAPI):
+                    yield current
+            except Exception:
+                pass
+            try:
+                stack.extend(list(current.GetChildren()))
+            except Exception:
+                continue
+
+    def _set_object_gravity_enabled(self, object_name: str, enabled: bool) -> None:
+        self._trace_beam_state_write('set_gravity_enabled', object_name, {'enabled': enabled})
+        """Toggle PhysX gravity for one rigid part (peel assist without welding)."""
+        if self._is_static_environment_object(object_name):
+            self._lock_static_environment_body(object_name)
+            return
+        prim = self._object_prims.get(object_name)
+        if prim is None:
+            try:
+                self._resolve_object(object_name)
+            except Exception:
+                return
+            prim = self._object_prims.get(object_name)
+        if prim is None or not prim.IsValid():
+            return
+        try:
+            from pxr import PhysxSchema, UsdPhysics
+        except Exception:
+            return
+        for rb_prim in self._iter_rigid_body_prims(prim):
+            try:
+                physx_api = (
+                    PhysxSchema.PhysxRigidBodyAPI(rb_prim)
+                    if rb_prim.HasAPI(PhysxSchema.PhysxRigidBodyAPI)
+                    else PhysxSchema.PhysxRigidBodyAPI.Apply(rb_prim)
+                )
+                attr = physx_api.GetDisableGravityAttr()
+                if attr is None or not attr.IsValid():
+                    attr = physx_api.CreateDisableGravityAttr()
+                attr.Set(not bool(enabled))
+            except Exception:
+                continue
+
+    def _set_object_kinematic_enabled(self, object_name: str, enabled: bool) -> None:
+        """Toggle RigidBody kinematic so teleported peel poses survive PhysX steps."""
+        self._trace_beam_state_write('set_kinematic_enabled', object_name, {'enabled': enabled})
+        if self._is_static_environment_object(object_name):
+            self._lock_static_environment_body(object_name)
+            return
+        prim = self._object_prims.get(object_name)
+        if prim is None:
+            try:
+                self._resolve_object(object_name)
+            except Exception:
+                return
+            prim = self._object_prims.get(object_name)
+        if prim is None or not prim.IsValid():
+            return
+        try:
+            from pxr import UsdPhysics
+        except Exception:
+            return
+        for rb_prim in self._iter_rigid_body_prims(prim):
+            try:
+                rigid_body_api = UsdPhysics.RigidBodyAPI(rb_prim)
+                attr = rigid_body_api.GetKinematicEnabledAttr()
+                if attr is None or not attr.IsValid():
+                    attr = rigid_body_api.CreateKinematicEnabledAttr()
+                attr.Set(bool(enabled))
+            except Exception:
+                continue
+        if not enabled:
+            try:
+                self._zero_object_velocity(object_name)
+            except Exception:
+                return
+
+    def _set_object_rigid_body_simulated(self, object_name: str, enabled: bool) -> None:
+        """Enable/disable PhysX integration so carry teleports are not overwritten."""
+        self._trace_beam_state_write('set_rigid_body_simulated', object_name, {'enabled': enabled})
+        if self._is_static_environment_object(object_name):
+            self._lock_static_environment_body(object_name)
+            return
+        prim = self._object_prims.get(object_name)
+        if prim is None:
+            try:
+                self._resolve_object(object_name)
+            except Exception:
+                return
+            prim = self._object_prims.get(object_name)
+        if prim is None or not prim.IsValid():
+            return
+        try:
+            from pxr import UsdPhysics
+        except Exception:
+            return
+        for rb_prim in self._iter_rigid_body_prims(prim):
+            try:
+                rigid_body_api = UsdPhysics.RigidBodyAPI(rb_prim)
+                attr = rigid_body_api.GetRigidBodyEnabledAttr()
+                if attr is None or not attr.IsValid():
+                    attr = rigid_body_api.CreateRigidBodyEnabledAttr()
+                attr.Set(bool(enabled))
+            except Exception:
+                continue
 
     def _set_attachment_gripper_collision_filter(
         self,
@@ -1366,6 +1820,74 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             except Exception:
                 continue
         return paths
+
+    def _filter_robot_gripper_from_other_parts(
+        self,
+        robot_name: str,
+        *,
+        exclude_object: str | None,
+        enabled: bool,
+    ) -> None:
+        """Keep packed deck neighbors from being knocked by the picking gripper.
+
+        The carried part already mutes its own collider; fingers still hit
+        adjacent free parts (v59/v60 part 3 tumbled). Filter gripper↔siblings
+        only — deck/table stay solid.
+        """
+        gripper_paths: list[str] = []
+        robot = self.robots.get(robot_name)
+        rigid_body_map = getattr(robot, '_rigid_body_map', {}) or {} if robot is not None else {}
+        rigid_bodies = list(rigid_body_map.values())
+        rigid_bodies.extend(
+            [
+                self._get_robot_hand_rigid_body(robot_name),
+                *self._get_robot_finger_rigid_bodies(robot_name).values(),
+            ]
+        )
+        for rigid_body in rigid_bodies:
+            if rigid_body is None:
+                continue
+            try:
+                prim_path = str(rigid_body.unwrap().prim_path)
+            except Exception:
+                continue
+            if prim_path:
+                gripper_paths.append(prim_path)
+        tracked = tuple(getattr(self.cfg, 'tracked_object_names', ()) or ())
+        if gripper_paths:
+            try:
+                from pxr import Sdf, UsdPhysics
+            except Exception:
+                UsdPhysics = None
+                Sdf = None
+            if UsdPhysics is not None:
+                for object_name in tracked:
+                    if object_name == exclude_object:
+                        continue
+                    if self._is_static_environment_object(object_name):
+                        continue
+                    if object_name not in self.objects:
+                        continue
+                    prim = self._object_prims.get(object_name)
+                    if prim is None:
+                        try:
+                            self._resolve_object(object_name)
+                        except Exception:
+                            continue
+                        prim = self._object_prims.get(object_name)
+                    if prim is None or not prim.IsValid():
+                        continue
+                    for col_prim in list(self._iter_collision_prims(prim)) or [prim]:
+                        filtered_pairs_api = UsdPhysics.FilteredPairsAPI.Apply(col_prim)
+                        relation = filtered_pairs_api.GetFilteredPairsRel()
+                        existing = [str(path) for path in (relation.GetTargets() or [])]
+                        if enabled:
+                            merged = list(dict.fromkeys([*existing, *gripper_paths]))
+                            relation.SetTargets([Sdf.Path(path) for path in merged])
+                        else:
+                            remove = set(gripper_paths)
+                            kept = [path for path in existing if path not in remove]
+                            relation.SetTargets([Sdf.Path(path) for path in kept])
 
     def _robot_rigid_body_by_suffix(self, robot_name: str, suffix: str):
         robot = self.robots.get(robot_name)
@@ -1490,7 +2012,8 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 track_contact_forces=True,
                 prepare_contact_sensors=True,
                 contact_filter_prim_paths_expr=[filter_prim_path],
-                max_contact_count=8,
+                max_contact_count=64,
+                disable_stablization=not bool((self.get_current_phase_spec() or {}).get('beam_coordinated')),
             )
         except Exception:
             return None
@@ -1554,6 +2077,81 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             or body_name.startswith(filter_prim_path + '/')
             or filter_prim_path.startswith(body_name + '/')
         )
+
+    @staticmethod
+    def _contact_physics_dt() -> float:
+        from isaacsim.core.api import SimulationContext
+
+        context = SimulationContext.instance()
+        if context is None:
+            raise RuntimeError('No simulation context for contact force conversion')
+        dt = float(context.get_physics_dt())
+        if not np.isfinite(dt) or dt <= 0:
+            raise ValueError(f'Invalid physics dt: {dt}')
+        return dt
+
+    def _pair_contact_observation(self, prim_path: str, filter_prim_path: str) -> dict:
+        """Read only this finger/object pair; sensor aggregate force is not sufficient."""
+        result = {'force': 0.0, 'valid': False, 'source': 'filtered_contact_probe',
+                  'body': prim_path, 'other_body': filter_prim_path, 'contacts': []}
+        try:
+            dt = self._contact_physics_dt()
+            result['physics_dt'] = dt
+            probe = self._get_contact_probe(prim_path, filter_prim_path)
+            if probe is None or not probe.is_physics_handle_valid():
+                result['error'] = 'contact_probe_unavailable'
+                return result
+            matrix = self._tensor_to_numpy(probe.get_contact_force_matrix(dt=dt))
+            if matrix is None or not np.all(np.isfinite(matrix)):
+                result['error'] = 'invalid_force_matrix'
+                return result
+            vectors = np.asarray(matrix, dtype=float).reshape(-1, 3)
+            result.update(force=float(np.linalg.norm(vectors.sum(axis=0))),
+                          force_world=vectors.sum(axis=0).tolist(), valid=True)
+        except Exception as exc:
+            result['error'] = f'{type(exc).__name__}: {exc}'
+            return result
+        try:
+            forces, points, normals, distances, counts, starts = [
+                self._tensor_to_numpy(value) for value in probe.get_contact_force_data(dt=dt)
+            ]
+            if any(value is None for value in (forces, points, normals, distances, counts, starts)):
+                raise ValueError('Contact detail buffers unavailable')
+            forces, distances = forces.reshape(-1), distances.reshape(-1)
+            for count, start in zip(counts.reshape(-1), starts.reshape(-1)):
+                for index in range(int(start), int(start) + int(count)):
+                    result['contacts'].append({
+                        'point_world': points[index].tolist(), 'normal_world': normals[index].tolist(),
+                        'normal_force': float(forces[index]), 'separation': float(distances[index]),
+                    })
+            result['details_valid'] = True
+            result['details_at_capacity'] = len(result['contacts']) >= len(forces)
+        except Exception as exc:
+            result['details_valid'] = False
+            result['details_error'] = f'{type(exc).__name__}: {exc}'
+        if os.environ.get('BEAM_SUPPORT_CONTACT_TRACE') == '1' and result.get('force', 0.0) > 0.0:
+            try:
+                forces, points, counts, starts = [self._tensor_to_numpy(v)
+                    for v in probe.get_friction_data(dt=dt)]
+                if any(v is None for v in (forces, points, counts, starts)):
+                    raise ValueError('Friction buffers unavailable')
+                forces, points = forces.reshape(-1, 3), points.reshape(-1, 3)
+                anchors = []
+                for count, start in zip(counts.reshape(-1), starts.reshape(-1)):
+                    start, count = int(start), int(count)
+                    if start < 0 or count < 0 or start + count > min(len(forces), len(points)):
+                        raise ValueError('Invalid friction buffer range')
+                    for i in range(start, start + count):
+                        if not np.all(np.isfinite(forces[i])):
+                            raise ValueError('Non-finite friction force')
+                        anchors.append({'force_world': forces[i].tolist(), 'point_world': points[i].tolist()})
+                result['friction_anchors'] = anchors
+                result['friction_force_world'] = np.sum([a['force_world'] for a in anchors], axis=0).tolist() if anchors else [0., 0., 0.]
+                result['friction_valid'] = True
+            except Exception as exc:
+                result['friction_valid'] = False
+                result['friction_error'] = f'{type(exc).__name__}: {exc}'
+        return result
 
     def _contact_observation_between(self, prim_path: str, filter_prim_path: str) -> dict:
         sensor = self._get_contact_sensor(prim_path)
@@ -1769,7 +2367,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         )
         half_extents = np.maximum(
             self._contact_box_scale(object_name, attach_spec=attach_spec) * 0.5,
-            np.array([0.01, 0.01, 0.01], dtype=float),
+            float(attach_spec.get('contact_box_min_half_extent', 0.01)),
         )
         contact_distance = float(attach_spec.get('finger_contact_distance', self._FINGER_CONTACT_DISTANCE))
         contact_force_threshold = float(
@@ -1797,7 +2395,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 finger_contacts.append(False)
                 continue
 
-            finger_position, _ = rigid_body.get_pose()
+            finger_position, finger_orientation = rigid_body.get_pose()
             finger_position = np.asarray(finger_position, dtype=float)
             fingertip_position = self._finger_contact_point(rigid_body, finger_name=finger_name)
             sample_positions = self._finger_contact_sample_points(rigid_body, finger_name=finger_name)
@@ -1846,8 +2444,12 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 'best_surface_gap': None,
                 'axes': {},
             }
+            observation_fn = (
+                self._pair_contact_observation if attach_spec.get('require_pair_force_contact')
+                else self._contact_observation_between
+            )
             contact_observation = (
-                self._contact_observation_between(
+                observation_fn(
                     rigid_body.unwrap().prim_path,
                     object_prim_path,
                 )
@@ -1856,7 +2458,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             )
             force = float(contact_observation.get('force', 0.0))
             probe_valid = bool(contact_observation.get('valid', False))
-            force_contact = force >= contact_force_threshold
+            force_contact = bool(probe_valid and np.isfinite(force) and force >= contact_force_threshold)
             has_contact = force_contact or geometric_contact
             contact_available = contact_available or probe_valid
             finger_metrics[finger_name] = {
@@ -1864,6 +2466,9 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 'force': force,
                 'force_probe_valid': probe_valid,
                 'force_source': contact_observation.get('source'),
+                'force_observation': contact_observation,
+                'finger_position_world': finger_position.tolist(),
+                'finger_orientation_world': np.asarray(finger_orientation).tolist(),
                 'surface_gap': surface_gap,
                 'origin_gap': origin_gap,
                 'fingertip_gap': None
@@ -2182,8 +2787,13 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             physical_contact_ready = bool(
                 dual_force_contact or (not require_dual_force_contact and force_supported_geometric_contact)
             )
+        if attach_spec.get('require_opposing_force_contact'):
+            # Positive pair force must not bypass opposing, in-patch geometry.
+            physical_contact_ready = bool(
+                dual_force_probe_valid and dual_force_contact and strict_sample_pair is not None
+            )
 
-        return {
+        result = {
             'pinch_axis': pinch_axis,
             'strict_surface_gap_limit': strict_surface_gap,
             'dual_force_contact': dual_force_contact,
@@ -2200,6 +2810,114 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             'interior_contact_ready': interior_contact_ready,
             'physical_contact_ready': physical_contact_ready,
         }
+        if attach_spec.get('continuous_physics'):
+            self._write_physical_contact_trace(object_name, contact_metrics, attach_spec, result)
+        return result
+
+    def _write_physical_contact_trace(self, object_name, metrics, attach_spec, strict_contact,
+                                      *, force_write=False, validation_stage='contact_check'):
+        path = os.environ.get('BEAM_CONTACT_TRACE_PATH')
+        if not path:
+            return
+        key = (int(self.step_counter), self.phase, object_name, metrics.get('robot'))
+        if not force_write and getattr(self, '_last_physical_trace_key', None) == key:
+            return
+        self._last_physical_trace_key = key
+        robot_name = metrics['robot']
+        attachment = (self._attachment_for(object_name, robot_name) if hasattr(self, '_attachment_for')
+                      else self._attachments.get(object_name))
+        object_position, object_orientation = self._resolve_object(object_name).get_pose()
+        tcp_position, tcp_orientation = self._get_robot_task_pose(robot_name)
+        relative_position, relative_orientation = self._current_relative_pose(object_name, robot_name)
+        slim_metrics = copy.deepcopy(metrics)
+        for side in ('left_finger', 'right_finger'):
+            slim_metrics[side].pop('sample_contacts', None)
+        record = {
+            'step': int(self.step_counter), 'phase': self.phase,
+            'validation_stage': validation_stage, 'failure_snapshot': bool(force_write),
+            'phase_step': int(self.phase_step_counter), 'object': object_name, 'robot': robot_name,
+            'gripper_q': self._get_robot_gripper_opening(robot_name),
+            'gripper_command': self._current_gripper_command(self.get_current_phase_spec(), robot_name),
+            'object_position': np.asarray(object_position).tolist(),
+            'object_orientation': np.asarray(object_orientation).tolist(),
+            'object_velocity': self._object_velocity_metrics(object_name),
+            'tcp_position': np.asarray(tcp_position).tolist(),
+            'tcp_orientation': np.asarray(tcp_orientation).tolist(),
+            'relative_position': np.asarray(relative_position).tolist(),
+            'relative_orientation': np.asarray(relative_orientation).tolist(),
+            'grasp_reference_position': None if attachment is None else attachment.get('position'),
+            'grasp_reference_orientation': None if attachment is None else attachment.get('orientation'),
+            'attach_step': None if attachment is None else attachment.get('attach_step'),
+            'contact_metrics': slim_metrics, 'strict_contact': strict_contact,
+            'collision_enabled': self._object_collision_enabled.get(object_name),
+            'rigid_body_state': [],
+        }
+        prim = self._object_prims.get(object_name)
+        robot = getattr(self, 'robots', {}).get(robot_name)
+        diagnostics = getattr(robot, 'get_gripper_diagnostics', None)
+        if callable(diagnostics):
+            record['gripper_diagnostics'] = diagnostics()
+        if os.environ.get('BEAM_SUPPORT_CONTACT_TRACE') == '1':
+            record['support_contacts'] = []
+            target_path = self._resolve_object(object_name).unwrap().prim_path
+            body_paths = [target_path] + [metrics[s].get('prim_path') for s in ('left_finger', 'right_finger')]
+            expanded = bool(force_write or int(self.step_counter) % 8 == 0)
+            record['full_gripper_environment_sample'] = expanded
+            if expanded:
+                record['gripper_bodies'] = []
+                for link in ('base_link', 'left_outer_knuckle', 'left_outer_finger',
+                             'left_inner_finger', 'left_inner_knuckle', 'right_outer_knuckle',
+                             'right_outer_finger', 'right_inner_finger', 'right_inner_knuckle'):
+                    body = self._robot_rigid_body_by_suffix(robot_name, 'Robotiq_2F_85/' + link)
+                    if body is None:
+                        record['gripper_bodies'].append({'link': link, 'valid': False})
+                        continue
+                    # USD prim paths are case sensitive. The classification
+                    # helper lowercases names and cannot be used for a probe.
+                    body_path = str(body.unwrap().prim_path)
+                    position, orientation = body.get_pose()
+                    record['gripper_bodies'].append({'link': link, 'valid': True,
+                        'path': body_path, 'position': np.asarray(position).tolist(),
+                        'orientation': np.asarray(orientation).tolist()})
+                    body_paths.append(body_path)
+                if robot is not None:
+                    record['last_applied_actions'] = robot.get_last_action()
+                    record['articulation_joint_positions'] = np.asarray(robot.articulation.get_joint_positions()).tolist()
+                    record['articulation_joint_velocities'] = np.asarray(robot.articulation.get_joint_velocities()).tolist()
+                from isaacsim.core.api import SimulationContext
+                context = SimulationContext.instance()
+                record['physics_time'] = float(context.current_time)
+                record['physics_step_index'] = int(context.current_time_step_index)
+            for support_name in ('fabrica_fixture', 'fixture_support', 'factory_tabletop_visual',
+                                 'optical_board', 'assembly_support'):
+                if support_name not in self._object_prims:
+                    continue
+                support_path = str(self._object_prims[support_name].GetPath())
+                for body_path in dict.fromkeys(body_paths):
+                    if body_path:
+                        observation = self._pair_contact_observation(body_path, support_path)
+                        observation['support_object'] = support_name
+                        record['support_contacts'].append(observation)
+            if validation_stage == 'pregrasp' and expanded:
+                record['neighbor_contacts'] = []
+                for name, other in self._object_prims.items():
+                    if not name.startswith('fabrica_beam_') or name == object_name:
+                        continue
+                    for body_path in dict.fromkeys(body_paths):
+                        if body_path:
+                            observation = self._pair_contact_observation(body_path, str(other.GetPath()))
+                            observation['other_object'] = name
+                            record['neighbor_contacts'].append(observation)
+        if prim is not None:
+            for body in self._iter_rigid_body_prims(prim):
+                record['rigid_body_state'].append({
+                    'path': str(body.GetPath()),
+                    'kinematic': body.GetAttribute('physics:kinematicEnabled').Get(),
+                    'disable_gravity': body.GetAttribute('physxRigidBody:disableGravity').Get(),
+                })
+        # Fail visibly if requested diagnostics cannot be written.
+        with open(path, 'a', encoding='utf-8') as handle:
+            handle.write(json.dumps(record) + '\n')
 
     def _strict_dual_finger_contact(
         self,
@@ -2376,6 +3094,8 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         *,
         attach_spec: dict,
     ) -> str | None:
+        self._trace_beam_state_write('create_compliant_attachment_joint', object_name,
+                                    {'robot': robot_name})
         object_rigid_body = self._resolve_object(object_name)
         hand_rigid_body = self._get_robot_hand_rigid_body(robot_name)
         if hand_rigid_body is None:
@@ -2609,6 +3329,8 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         }
 
     def _create_attachment_joint(self, object_name: str, robot_name: str) -> str | None:
+        self._trace_beam_state_write('create_fixed_attachment_joint', object_name,
+                                    {'robot': robot_name})
         object_rigid_body = self._resolve_object(object_name)
         hand_rigid_body = self._get_robot_hand_rigid_body(robot_name)
         if hand_rigid_body is None:
@@ -2630,13 +3352,18 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         except Exception:
             pass
         try:
+            object_prim = self._object_prims.get(object_name)
+            object_body_path = str(object_rigid_body.unwrap().prim_path)
+            rb_prims = list(self._iter_rigid_body_prims(object_prim)) if object_prim is not None else []
+            if rb_prims:
+                object_body_path = str(rb_prims[0].GetPath())
             # Pin the fixed-joint anchor to the object's current world pose so both bodies agree on
             # the same frame when the joint is created. Leaving these frames implicit allows PhysX
             # to infer slightly disjoint anchors, which shows up as snap / hover artifacts.
             create_joint(
                 prim_path=joint_path,
                 joint_type='FixedJoint',
-                body0=object_rigid_body.unwrap().prim_path,
+                body0=object_body_path,
                 body1=hand_rigid_body.unwrap().prim_path,
                 enabled=True,
                 joint_frame_in_parent_frame_pos=np.zeros(3, dtype=float),
@@ -2649,24 +3376,50 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         self._attachment_joints[object_name] = joint_path
         return joint_path
 
-    def _clear_attachment_state(self, object_name: str, *, enable_collision: bool = True):
+    def _clear_attachment_state(
+        self,
+        object_name: str,
+        *,
+        enable_collision: bool = True,
+        clear_gripper_collision_filter: bool = True,
+    ):
         attachment_state = self._attachments.pop(object_name, None)
         self._remove_attachment_joint(object_name)
         if attachment_state is not None:
+            if attachment_state.get('kinematic_peel_carry'):
+                self._set_object_kinematic_enabled(object_name, False)
             filtered_paths = attachment_state.get('filtered_gripper_collision_paths') or []
-            if filtered_paths:
+            if filtered_paths and clear_gripper_collision_filter:
+                # Clearing filters while fingers still overlap the part causes a
+                # PhysX penetration impulse that can tunnel thin board/support.
                 self._set_attachment_gripper_collision_filter(
                     object_name,
                     str(attachment_state.get('robot_name', '')),
                     enabled=False,
                     filtered_paths=filtered_paths,
                 )
+            elif filtered_paths and not clear_gripper_collision_filter:
+                # Keep filters; remember so a later phase can clear them.
+                self._pending_gripper_collision_filters = getattr(
+                    self, '_pending_gripper_collision_filters', {}
+                )
+                self._pending_gripper_collision_filters[object_name] = {
+                    'robot_name': str(attachment_state.get('robot_name', '')),
+                    'filtered_paths': list(filtered_paths),
+                }
         if enable_collision:
             self._set_object_collision(object_name, True)
         return attachment_state
 
     def _get_robot_eef_pose(self, robot_name: str):
-        return self.robots[robot_name].articulation.end_effector.get_pose()
+        try:
+            return self.robots[robot_name].articulation.end_effector.get_pose()
+        except Exception:
+            robot = self.robots[robot_name]
+            try:
+                return robot.articulation.get_pose()
+            except Exception:
+                return np.zeros(3, dtype=float), np.array([1.0, 0.0, 0.0, 0.0], dtype=float)
 
     def _get_robot_task_pose(self, robot_name: str):
         robot = self.robots[robot_name]
@@ -2758,15 +3511,26 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         return opening_limit
 
     def _physical_hold_within_grace(self, attachment_state: dict, attach_spec: dict) -> bool:
+        hold_grace_steps = max(int(attach_spec.get('hold_grace_steps', 12)), 0)
+        if hold_grace_steps <= 0:
+            return False
+        # Fresh grace window after kinematic→dynamic peel handoff (v46).
+        handoff_step = attachment_state.get('kinematic_handoff_step')
+        if handoff_step is not None:
+            try:
+                if int(self.step_counter) - int(handoff_step) <= max(
+                    hold_grace_steps,
+                    int(attach_spec.get('kinematic_handoff_grace_steps', 240)),
+                ):
+                    return True
+            except Exception:
+                pass
         attach_step = attachment_state.get('attach_step')
         if attach_step is None:
             return False
         try:
             attach_step = int(attach_step)
         except Exception:
-            return False
-        hold_grace_steps = max(int(attach_spec.get('hold_grace_steps', 12)), 0)
-        if hold_grace_steps <= 0:
             return False
         return int(self.step_counter) - attach_step <= hold_grace_steps
 
@@ -2927,6 +3691,12 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         }
 
     def _zero_object_velocity(self, object_name: str, *, rigid_body=None):
+        self._trace_beam_state_write('zero_object_velocity', object_name)
+        attach_state = self._attachments.get(object_name) or {}
+        # Kinematic bodies reject setLinearVelocity (v70: 46k PhysX errors) and
+        # the failed write leaves the rendered mesh behind the USD pose.
+        if self._is_static_environment_object(object_name) or attach_state.get('kinematic_peel_carry'):
+            return
         if rigid_body is None:
             rigid_body = self._resolve_object(object_name)
         zero_velocity = np.zeros(3, dtype=float)
@@ -2944,10 +3714,53 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 pass
 
     def _set_object_pose(self, object_name: str, position, orientation):
+        self._trace_beam_state_write('set_object_pose', object_name,
+                                    {'position': position, 'orientation': orientation})
         rigid_body = self._resolve_object(object_name)
+        position = np.asarray(position, dtype=float)
+        orientation = np.asarray(orientation, dtype=float)
         self._zero_object_velocity(object_name, rigid_body=rigid_body)
-        rigid_body.set_pose(np.asarray(position, dtype=float), np.asarray(orientation, dtype=float))
+        posed = False
+        for method_name in ('set_world_pose', 'set_pose'):
+            method = getattr(rigid_body, method_name, None)
+            if method is None:
+                continue
+            try:
+                method(position, orientation)
+                posed = True
+                break
+            except TypeError:
+                try:
+                    method(position=position, orientation=orientation)
+                    posed = True
+                    break
+                except Exception:
+                    continue
+            except Exception:
+                continue
+        if not posed:
+            try:
+                rigid_body.set_pose(position, orientation)
+            except Exception:
+                pass
+        inner = getattr(rigid_body, 'unwrap', lambda: None)()
+        if inner is not None:
+            for method_name in ('set_world_pose', 'set_pose'):
+                method = getattr(inner, method_name, None)
+                if method is None:
+                    continue
+                try:
+                    method(position, orientation)
+                    break
+                except Exception:
+                    continue
         self._zero_object_velocity(object_name, rigid_body=rigid_body)
+
+    def _trace_beam_state_write(self, event, object_name, arguments=None):
+        if os.environ.get('BEAM_PHYSICS_DIAGNOSTICS') == '1':
+            from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import record_state_write
+
+            record_state_write(self, event, object_name=object_name, arguments=arguments)
 
     def _object_state_sanity_config_float(self, field_name: str) -> float | None:
         value = getattr(self.cfg, field_name, None)
@@ -3295,6 +4108,13 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         for object_name in tracked_object_names:
             if object_name not in self.objects:
                 continue
+            if self._is_static_environment_object(object_name):
+                continue
+            attach_state = self._attachments.get(object_name) or {}
+            # Kinematic carry teleports create bogus PhysX speeds (v56 place 125 m/s
+            # with 2 mm pose drift). Do not fail the episode on that spike.
+            if attach_state.get('kinematic_peel_carry'):
+                continue
             violation = self._object_state_sanity_violation(object_name)
             if violation is None:
                 continue
@@ -3414,9 +4234,14 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         desired_object_position = object_position
         desired_object_orientation = object_orientation
         attach_spec = attach_spec or {}
+        continuous_grasp = bool(attach_spec.get('continuous_physics')) and self._attachment_mode(attach_spec) in {
+            'pure_physical_grasp', 'contact_pure_physical_grasp',
+        }
 
-        snap_local_offset = attach_spec.get('snap_object_local_offset_on_attach')
-        snap_world_offset = attach_spec.get('snap_object_world_offset_on_attach')
+        # A continuous friction grasp records observed state only. Even writing
+        # the same pose resets velocities and can rebuild the contact manifold.
+        snap_local_offset = None if continuous_grasp else attach_spec.get('snap_object_local_offset_on_attach')
+        snap_world_offset = None if continuous_grasp else attach_spec.get('snap_object_world_offset_on_attach')
         if snap_local_offset is not None:
             snap_offset = np.asarray(snap_local_offset, dtype=float)
             if snap_offset.shape == (3,) and np.all(np.isfinite(snap_offset)):
@@ -3446,7 +4271,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             attach_spec.get('attach_local_orientation', attach_spec.get('local_orientation')),
         )
         source_relative_pose = None
-        if local_position_override is None and local_orientation_override is None:
+        if not continuous_grasp and local_position_override is None and local_orientation_override is None:
             source_relative_pose = self._attachment_relative_pose_from_source(
                 object_name=object_name,
                 robot_name=robot_name,
@@ -3456,7 +4281,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             source_position, source_orientation = source_relative_pose
             local_position_override = np.asarray(source_position, dtype=float)
             local_orientation_override = normalize_quat(np.asarray(source_orientation, dtype=float))
-        if local_position_override is not None or local_orientation_override is not None:
+        if not continuous_grasp and (local_position_override is not None or local_orientation_override is not None):
             if local_position_override is not None:
                 relative_position = np.asarray(local_position_override, dtype=float)
             if local_orientation_override is not None:
@@ -3516,7 +4341,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             self._frozen_lock_poses.pop(object_name, None)
             return
         if attach_mode in {'pure_physical_grasp', 'contact_pure_physical_grasp'}:
-            self._attachments[object_name] = {
+            new_state = {
                 'robot_name': robot_name,
                 'position': relative_position.tolist(),
                 'orientation': relative_orientation.tolist(),
@@ -3527,12 +4352,38 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 'attach_spec': copy.deepcopy(attach_spec),
                 'phase': None if phase_spec is None else phase_spec.get('name'),
                 'attach_step': int(self.step_counter),
+                # World pose at attach — object_lifted must not use spawn z
+                # (settled parts sit below authored nests; v39–v42 peel timed out).
+                'attach_world_position': np.asarray(desired_object_position, dtype=float).tolist(),
+                'attach_world_orientation': np.asarray(desired_object_orientation, dtype=float).tolist(),
             }
-            locked_collision_state = self._locked_collision_states.pop(object_name, None)
-            if locked_collision_state is not None:
-                self._set_object_collision(object_name, bool(locked_collision_state))
-            self._locked_targets.pop(object_name, None)
-            self._frozen_lock_poses.pop(object_name, None)
+            if attach_spec.get('allow_shared_physical_grasp'):
+                self._store_physical_grasp(object_name, new_state)
+            else:
+                self._attachments[object_name] = new_state
+            # Friction grasps must not restore a fixture's collision-off state —
+            # that drops the free part through the thin table (beam v25/v26).
+            force_enable_collision = bool(attach_spec.get('force_enable_collision_on_attach', False))
+            if force_enable_collision:
+                if not continuous_grasp:
+                    self._set_object_collision(object_name, True)
+                self._locked_collision_states[object_name] = True
+            else:
+                locked_collision_state = self._locked_collision_states.pop(object_name, None)
+                if locked_collision_state is not None and not continuous_grasp:
+                    self._set_object_collision(object_name, bool(locked_collision_state))
+            # Keep fixture pin until an explicit unlock (e.g. lift handoff).
+            # Releasing the lock at attach leaves the part free before the
+            # fingers have a stable friction hold.
+            if bool(attach_spec.get('release_lock_on_attach', True)):
+                self._locked_targets.pop(object_name, None)
+                self._frozen_lock_poses.pop(object_name, None)
+            if not attach_spec.get('continuous_physics'):
+                self._filter_robot_gripper_from_other_parts(
+                    str(robot_name),
+                    exclude_object=object_name,
+                    enabled=True,
+                )
             return
         collision_disabled = bool(attach_spec.get('disable_collision_on_attach', requested_joint_attachment))
         if collision_disabled:
@@ -3567,10 +4418,16 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             'attach_step': int(self.step_counter),
         }
         locked_collision_state = self._locked_collision_states.pop(object_name, None)
-        if locked_collision_state is not None:
-            self._set_object_collision(object_name, bool(locked_collision_state))
         self._locked_targets.pop(object_name, None)
         self._frozen_lock_poses.pop(object_name, None)
+        # Fixture pins store collision=False. Only override that restored state when
+        # the attach recipe explicitly asks to enable world collision on pickup.
+        if collision_disabled:
+            self._set_object_collision(object_name, False)
+        elif bool(attach_spec.get('force_enable_collision_on_attach', False)):
+            self._set_object_collision(object_name, True)
+        elif locked_collision_state is not None:
+            self._set_object_collision(object_name, bool(locked_collision_state))
         if collision_disabled and joint_path is None:
             self._set_object_collision(object_name, False)
 
@@ -3632,10 +4489,29 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             world_orientation=object_pose[1],
         )
 
-    def _physical_hold_valid(self, object_name: str, attachment_state: dict) -> bool:
+    def _record_physical_hold_result(self, object_name, attachment_state, reasons, **detail) -> bool:
+        """Record the rejection before the attachment is removed, without changing its gate."""
+        valid = not reasons
+        if (attachment_state.get('attach_spec') or {}).get('continuous_physics'):
+            self._beam_hold_sample_index = getattr(self, '_beam_hold_sample_index', 0) + 1
+            result = {'step': int(self.step_counter), 'phase': self.phase, 'object': object_name,
+                      'robot': attachment_state.get('robot_name'), 'valid': valid,
+                      'sample_index': self._beam_hold_sample_index,
+                      'validation_stage': attachment_state.get('hold_validation_stage', 'unspecified'),
+                      'reasons': reasons, **detail}
+            attachment_state['last_hold_validation'] = result
+            trace_path = os.environ.get('BEAM_HOLD_TRACE_PATH')
+            if trace_path:
+                with open(trace_path, 'a', encoding='utf-8') as handle:
+                    handle.write(json.dumps(result) + '\n')
+        return valid
+
+    def _physical_hold_valid(self, object_name: str, attachment_state: dict,
+                             *, validation_stage='unspecified') -> bool:
+        attachment_state['hold_validation_stage'] = validation_stage
         robot_name = attachment_state.get('robot_name')
         if robot_name is None:
-            return False
+            return self._record_physical_hold_result(object_name, attachment_state, ['robot_unavailable'])
 
         attach_spec = attachment_state.get('attach_spec') or {}
         contact_metrics = self._gripper_contact_metrics(object_name, robot_name, attach_spec=attach_spec)
@@ -3644,6 +4520,8 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             contact_metrics,
             attach_spec=attach_spec,
         )
+        attachment_state['current_contact_metrics'] = copy.deepcopy(contact_metrics)
+        attachment_state['current_contact_step'] = int(self.step_counter)
         within_grace = self._physical_hold_within_grace(attachment_state, attach_spec)
         gripper_opening = self._get_robot_gripper_opening(robot_name)
         gripper_opening_limit = self._gripper_opening_limit(
@@ -3654,7 +4532,8 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             within_grace=within_grace,
         )
         if gripper_opening is not None and gripper_opening > gripper_opening_limit:
-            return False
+            return self._record_physical_hold_result(object_name, attachment_state, ['gripper_opening'],
+                gripper_opening=float(gripper_opening), gripper_opening_limit=float(gripper_opening_limit))
 
         relative_position, relative_orientation = self._current_relative_pose(object_name, robot_name)
         anchor_position = np.asarray(attachment_state.get('position', relative_position), dtype=float)
@@ -3687,25 +4566,150 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 attach_spec.get('allow_caging_contact_for_physical_grasp', False),
             )
         )
+        if not contact_ready and self._jaw_width_contact(str(robot_name), attach_spec):
+            contact_ready = True
         if not contact_ready and allow_caging_hold:
             # Broad parts can remain physically carried by the gripper jaws even
             # when the tighter surface-gap probe flickers during the initial lift.
             contact_ready = bool(
                 contact_metrics.get('contact_ready') and contact_metrics.get('caging_axis') in {'x', 'y'}
             )
-        return bool(
-            position_slip <= max_position_slip
-            and (orientation_slip is None or orientation_slip <= max_orientation_slip)
-            and contact_ready
-        )
+        # Right after fixture unlock the contact probes often flicker for a few
+        # frames even though the fingers are still closed around the part.
+        # Allow a closed-jaw provisional hold during grace so the handoff can
+        # re-establish friction contact without clearing the symbolic grasp.
+        if (
+            not contact_ready
+            and within_grace
+            and attachment_state.get('mode') == 'pure_physical_grasp'
+            and bool(attach_spec.get('hold_grace_allow_missing_contact', False))
+            and gripper_opening is not None
+            and float(gripper_opening)
+            <= float(attach_spec.get('gripper_closed_threshold', self._GRIPPER_CLOSED_THRESHOLD)) + 0.05
+        ):
+            contact_ready = True
+        reasons = []
+        if not position_slip <= max_position_slip:
+            reasons.append('position_slip')
+        if not (orientation_slip is None or orientation_slip <= max_orientation_slip):
+            reasons.append('orientation_slip')
+        if not contact_ready:
+            reasons.append('contact_missing')
+        if reasons and attach_spec.get('continuous_physics'):
+            # The ordinary trace is deduplicated per task step. A post-physics
+            # failure can occur after that step's valid pre-action sample.
+            self._write_physical_contact_trace(object_name, contact_metrics, attach_spec, strict_contact,
+                                               force_write=True, validation_stage=validation_stage)
+        return self._record_physical_hold_result(object_name, attachment_state, reasons,
+            position_slip=position_slip, max_position_slip=max_position_slip,
+            orientation_slip=orientation_slip, max_orientation_slip=max_orientation_slip,
+            gripper_opening=None if gripper_opening is None else float(gripper_opening),
+            gripper_opening_limit=float(gripper_opening_limit), contact_ready=contact_ready,
+            strict_contact_ready=bool(strict_contact.get('physical_contact_ready')),
+            within_grace=within_grace,
+            fingers={name: {key: contact_metrics.get(name, {}).get(key)
+                            for key in ('force', 'force_probe_valid', 'force_contact')}
+                     for name in ('left_finger', 'right_finger')})
 
-    def _detach_object(self, object_name: str):
-        self._clear_attachment_state(object_name, enable_collision=True)
+    def _detach_object(self, object_name: str, detach_spec=None):
+        detach_spec = detach_spec if isinstance(detach_spec, dict) else {}
+        state = self._attachment_for(object_name, detach_spec.get('robot'))
+        if state and state.get('attach_spec', {}).get('allow_shared_physical_grasp'):
+            self._remove_physical_grasp(object_name, state['robot_name'])
+            return
+        continuous_physics = bool(
+            ((self._attachments.get(object_name) or {}).get('attach_spec') or {}).get('continuous_physics')
+        )
+        # Closed-gripper physical set_down must break the carry weld without
+        # suddenly restoring finger↔part collision while still overlapped.
+        keep_filter = bool(detach_spec.get('keep_gripper_collision_filter', False))
+        # World collision must be on before the weld breaks so the next physics
+        # step can catch the part on the board/support.
+        self._set_object_collision(object_name, True)
+        self._clear_attachment_state(
+            object_name,
+            enable_collision=True,
+            clear_gripper_collision_filter=not keep_filter,
+        )
+        if not continuous_physics:
+            self._zero_object_velocity(object_name)
+
+    def _rebase_targets_from_object(self, spec: dict) -> None:
+        """Shift assembly targets onto the placed object without pinning it."""
+        if not isinstance(spec, dict):
+            return
+        object_name = spec.get('object')
+        anchor_name = spec.get('anchor_target') or spec.get('anchor')
+        if object_name is None or anchor_name is None or anchor_name not in self.target_poses:
+            return
+        if object_name in self._rebased_anchors:
+            return
+        current_position, current_orientation = self._resolve_object(object_name).get_pose()
+        anchor_target = self.target_poses[anchor_name]
+        if not pose_within_tolerance(
+            current_position=current_position,
+            current_orientation=current_orientation,
+            target_position=anchor_target['position'],
+            target_orientation=anchor_target['orientation'],
+            position_tolerance=float(spec.get('position_tolerance', 0.012)),
+            orientation_tolerance=spec.get('orientation_tolerance', 0.12),
+        ):
+            return
+        anchor_target_position = np.asarray(anchor_target['position'], dtype=float).copy()
+        anchor_target_orientation = normalize_quat(anchor_target['orientation'])
+        target_names = list(dict.fromkeys([*self._as_list(spec.get('targets')), anchor_name]))
+        for target_name in target_names:
+            if target_name not in self.target_poses:
+                raise KeyError(f'Unknown rebase target: {target_name}')
+            target_pose = self.target_poses[target_name]
+            local_position, local_orientation = relative_pose(
+                base_position=anchor_target_position,
+                base_orientation=anchor_target_orientation,
+                world_position=target_pose['position'],
+                world_orientation=target_pose['orientation'],
+            )
+            world_position, world_orientation = compose_pose(
+                base_position=current_position,
+                base_orientation=current_orientation,
+                local_position=local_position,
+                local_orientation=local_orientation,
+            )
+            world_position = np.asarray(world_position, dtype=float)
+            if bool(spec.get('preserve_z', False)):
+                world_position[2] = float(np.asarray(target_pose['position'], dtype=float)[2])
+            self.target_poses[target_name] = {
+                'position': world_position,
+                'orientation': normalize_quat(world_orientation),
+            }
+        self._rebased_anchors.add(object_name)
+        attachment_state = self._attachments.get(object_name)
+        continuous = bool(((attachment_state or {}).get('attach_spec') or {}).get('continuous_physics'))
+        if bool(spec.get('enable_collision', False)):
+            if not continuous or not self._object_collision_enabled.get(object_name, False):
+                self._set_object_collision(object_name, True)
+            self._locked_collision_states[object_name] = True
+            if (not continuous and attachment_state is not None
+                    and bool(spec.get('filter_gripper_collision', False))):
+                filtered_paths = self._set_attachment_gripper_collision_filter(
+                    object_name,
+                    str(attachment_state.get('robot_name', '')),
+                    enabled=True,
+                )
+                attachment_state['filtered_gripper_collision_paths'] = filtered_paths
+        self._maybe_write_attach_debug({'event': 'rebase_targets', 'step': int(self.step_counter),
+            'object': object_name, 'continuous_physics': continuous,
+            'requested_gripper_filter': bool(spec.get('filter_gripper_collision', False)),
+            'object_position': np.asarray(current_position).tolist(),
+            'old_anchor_position': anchor_target_position.tolist()})
 
     def _lock_object(self, object_name: str, target_name: str, *, lock_spec: dict | None = None):
         lock_spec = lock_spec or {}
         if not hasattr(self, '_locked_collision_states'):
             self._locked_collision_states = {}
+        # lock_ready stays true after the first lock; avoid re-running teleport /
+        # detach / pose writes every physics step.
+        if self._locked_targets.get(object_name) == target_name:
+            return
         current_position, current_orientation = self._resolve_object(object_name).get_pose()
         rebase_targets = self._as_list(lock_spec.get('rebase_targets'))
         if rebase_targets:
@@ -3735,8 +4739,16 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                     'position': np.asarray(world_position, dtype=float),
                     'orientation': normalize_quat(world_orientation),
                 }
-        self._clear_attachment_state(object_name, enable_collision=False)
+        collision_enabled = not bool(lock_spec.get('disable_collision_on_lock', False))
+        # Enable world collision before breaking the carry weld so the next
+        # physics step can catch the part on the support surface.
+        if collision_enabled:
+            self._set_object_collision(object_name, True)
+        self._clear_attachment_state(object_name, enable_collision=collision_enabled)
+        self._zero_object_velocity(object_name)
         self._locked_targets[object_name] = target_name
+        pin_pose = bool(lock_spec.get('pin_pose', True))
+        self._lock_pin_pose[object_name] = pin_pose
         lock_pose_source = str(lock_spec.get('lock_pose_source', '')).strip().lower()
         freeze_current_pose = bool(lock_spec.get('freeze_current_pose', False)) or lock_pose_source in {
             'current',
@@ -3744,7 +4756,14 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             'release',
             'release_pose',
         }
-        if freeze_current_pose:
+        teleport_once = bool(lock_spec.get('teleport_to_target_once', False))
+        if not pin_pose:
+            self._frozen_lock_poses.pop(object_name, None)
+            if teleport_once and target_name in self.target_poses:
+                target_pose = self.target_poses[target_name]
+                self._set_object_pose(object_name, target_pose['position'], target_pose['orientation'])
+                self._zero_object_velocity(object_name)
+        elif freeze_current_pose:
             frozen_pose = {
                 'position': np.asarray(current_position, dtype=float).copy(),
                 'orientation': normalize_quat(np.asarray(current_orientation, dtype=float)),
@@ -3755,16 +4774,40 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             self._frozen_lock_poses.pop(object_name, None)
             target_pose = self.target_poses[target_name]
             self._set_object_pose(object_name, target_pose['position'], target_pose['orientation'])
-        collision_enabled = not bool(lock_spec.get('disable_collision_on_lock', False))
         self._locked_collision_states[object_name] = collision_enabled
         self._set_object_collision(object_name, collision_enabled)
 
     def _unlock_object(self, object_name: str):
         self._locked_targets.pop(object_name, None)
         self._frozen_lock_poses.pop(object_name, None)
+        self._lock_pin_pose.pop(object_name, None)
         collision_enabled = self._locked_collision_states.pop(object_name, None)
+        attachment_state = self._attachments.get(object_name)
+        if bool(((attachment_state or {}).get('attach_spec') or {}).get('continuous_physics')):
+            # An already dynamic physical grasp has no pin to release. Preserve
+            # momentum, the original slip anchor, and the captured drive command.
+            if not self._object_collision_enabled.get(object_name, False):
+                self._set_object_collision(object_name, True)
+            return
         if collision_enabled is not None:
             self._set_object_collision(object_name, True)
+        else:
+            # Friction handoff: keep world collision on after releasing a pin.
+            self._set_object_collision(object_name, True)
+        if isinstance(attachment_state, dict) and attachment_state.get('mode') == 'pure_physical_grasp':
+            # Re-anchor the slip check to the post-unlock relative pose and
+            # restart hold grace so the first free physics steps are not
+            # treated as an immediate grasp failure.
+            robot_name = attachment_state.get('robot_name')
+            if robot_name is not None:
+                relative_position, relative_orientation = self._current_relative_pose(
+                    object_name,
+                    str(robot_name),
+                )
+                attachment_state['position'] = np.asarray(relative_position, dtype=float).tolist()
+                attachment_state['orientation'] = np.asarray(relative_orientation, dtype=float).tolist()
+            attachment_state['attach_step'] = int(self.step_counter)
+            self._zero_object_velocity(object_name)
 
     def _maybe_write_attach_debug(self, payload: dict):
         debug_path = os.environ.get('DUAL_FRANKA_ATTACH_DEBUG_PATH')
@@ -3886,10 +4929,33 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         )
         return detail
 
+    def _jaw_width_contact(self, robot_name: str, attach_spec: dict | None) -> bool:
+        """True when the driver joint is stopped on the part's pinch thickness.
+
+        v80 closed onto the 1.8 cm beam (joint 0.65 rad) but the surface probe
+        never latched, so the lift was never commanded.
+        """
+        attach_spec = attach_spec or {}
+        if not bool(attach_spec.get('allow_jaw_width_contact_for_physical_grasp', False)):
+            return False
+        thickness = attach_spec.get('jaw_width_thickness_m')
+        if thickness is None:
+            return False
+        gripper_opening = self._get_robot_gripper_opening(robot_name)
+        if gripper_opening is None:
+            return False
+        stroke = float(attach_spec.get('jaw_width_stroke_m', 0.085))
+        if stroke <= 0.0:
+            return False
+        ratio = min(max(float(thickness) / stroke, 0.0), 1.0)
+        expected_q = (1.0 - ratio) * 0.8
+        tolerance = float(attach_spec.get('jaw_width_joint_tolerance', 0.08))
+        return abs(float(gripper_opening) - expected_q) <= tolerance
+
     def _attach_ready(self, phase_spec: dict, attach_spec: dict) -> bool:  # noqa: C901
         object_name = attach_spec['object']
         robot_name = attach_spec['robot']
-        attachment_state = self._attachments.get(object_name)
+        attachment_state = self._attachment_for(object_name, robot_name)
         if attachment_state is not None and attachment_state.get('robot_name') == robot_name:
             return True
 
@@ -4141,6 +5207,9 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             contact_ready = bool(strict_contact['physical_contact_ready'])
             if bool(attach_spec.get('allow_caging_contact_for_physical_grasp', False)):
                 contact_ready = bool(contact_ready or contact_metrics.get('contact_ready'))
+            if self._jaw_width_contact(robot_name, attach_spec):
+                contact_ready = True
+                debug_payload['jaw_width_contact'] = True
             enclosure_ready = False
             top_contact_ready = False
         elif uses_physical_joint and (slender_attach or require_physical_contact):
@@ -4169,15 +5238,20 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         return attach_ready
 
     def _detach_ready(self, phase_spec: dict, object_name: str, detach_spec=None) -> bool:
-        attachment_state = self._attachments.get(object_name)
+        attachment_state = self._attachment_for(object_name,
+            detach_spec.get('robot') if isinstance(detach_spec, dict) else None)
         if attachment_state is None:
             return True
         robot_name = attachment_state.get('robot_name')
         if robot_name is None:
             return True
-        if self._current_gripper_command(phase_spec, robot_name) != 'open':
-            return False
         detach_spec = detach_spec if isinstance(detach_spec, dict) else {}
+        # Official hold set_down keeps fingers closed for contact while breaking
+        # the carry weld so PhysX (SDF) can seat the part. Default still requires
+        # an open gripper so ordinary releases do not drop under a closed jaw.
+        require_open_gripper = bool(detach_spec.get('require_open_gripper', True))
+        if require_open_gripper and self._current_gripper_command(phase_spec, robot_name) != 'open':
+            return False
         min_release_steps = int(detach_spec.get('release_min_steps', detach_spec.get('min_steps', 0)))
         if self.phase_step_counter < min_release_steps:
             return False
@@ -4188,6 +5262,9 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 return False
         if attachment_state.get('mode') == 'pure_physical_grasp':
             return self._pure_physical_release_ready(object_name, attachment_state)
+        if not require_open_gripper:
+            # Closed-gripper weld break: no TCP target gate — part must stay by contact/PhysX.
+            return True
         target_info = self._resolve_phase_robot_target(
             phase_spec=phase_spec,
             robot_name=robot_name,
@@ -4209,7 +5286,12 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         attachment_state = self._attachments.get(object_name)
         if attachment_state is not None:
             robot_name = attachment_state.get('robot_name')
-            if robot_name is not None and self._current_gripper_command(phase_spec, robot_name) != 'open':
+            allow_detach_on_lock = bool(lock_spec.get('detach_on_lock', False))
+            if (
+                robot_name is not None
+                and not allow_detach_on_lock
+                and self._current_gripper_command(phase_spec, robot_name) != 'open'
+            ):
                 return False
 
         object_position, object_orientation = self._resolve_object(object_name).get_pose()
@@ -4284,6 +5366,10 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         if not phase_spec:
             return
 
+        rebase_spec = phase_spec.get('rebase_from_object')
+        if isinstance(rebase_spec, dict):
+            self._rebase_targets_from_object(rebase_spec)
+
         lock_targets = {
             lock_spec['object']: lock_spec.get('target') or lock_spec.get('target_name')
             for lock_spec in self._as_list(phase_spec.get('lock'))
@@ -4307,7 +5393,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             attach_spec = self._normalized_attach_spec(attach_spec)
             if not attach_spec or 'object' not in attach_spec or 'robot' not in attach_spec:
                 continue
-            attachment_state = self._attachments.get(attach_spec['object'])
+            attachment_state = self._attachment_for(attach_spec['object'], attach_spec['robot'])
             if attachment_state is not None and attachment_state.get('robot_name') == attach_spec['robot']:
                 continue
             if self._attach_ready(phase_spec, attach_spec):
@@ -4339,7 +5425,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             if object_name is None or object_name in lock_targets:
                 continue
             if self._detach_ready(phase_spec, object_name, object_entry):
-                self._detach_object(object_name)
+                self._detach_object(object_name, object_entry)
 
     def _phase_interactions_complete(self, phase_spec: dict) -> bool:
         if not phase_spec:
@@ -4352,7 +5438,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             attach_spec = self._normalized_attach_spec(attach_spec)
             if not attach_spec or 'object' not in attach_spec or 'robot' not in attach_spec:
                 continue
-            attachment_state = self._attachments.get(attach_spec['object'])
+            attachment_state = self._attachment_for(attach_spec['object'], attach_spec['robot'])
             if attachment_state is None or attachment_state.get('robot_name') != attach_spec['robot']:
                 return False
             if attachment_state.get('mode') in {'physical_hold', 'pure_physical_grasp'}:
@@ -4413,10 +5499,10 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             object_name = self._extract_object_name(object_entry)
             if object_name is None or object_name in lock_objects:
                 continue
-            if object_name in self._attachments:
+            if self._attachment_for(object_name, object_entry.get('robot') if isinstance(object_entry, dict) else None) is not None:
                 return False
 
-        for attachment_state in self._attachments.values():
+        for _, attachment_state in self._all_physical_grasps():
             if attachment_state.get('mode') != 'pure_physical_grasp':
                 continue
             robot_name = attachment_state.get('robot_name')
@@ -4436,7 +5522,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 continue
 
             payload_object = str(payload_object)
-            attachment_state = self._attachments.get(payload_object)
+            attachment_state = self._attachment_for(payload_object, robot_name)
             if attachment_state is None or attachment_state.get('robot_name') != robot_name:
                 return False
 
@@ -4456,6 +5542,21 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
 
         self._phase_initialized = True
 
+    def _invalidate_continuous_grasp(self, object_name, attachment_state):
+        if not attachment_state.get('attach_spec', {}).get('continuous_physics'):
+            return
+        generations = getattr(self, '_continuous_grasp_loss_generation', None)
+        if generations is None:
+            generations = {}
+            self._continuous_grasp_loss_generation = generations
+        generations[object_name] = generations.get(object_name, 0) + 1
+        robot_name = attachment_state['robot_name']
+        for key in list(self._local_skill_completions):
+            if (key[:3] == (self.phase_index, self.phase_entry_step, robot_name)
+                    and key[3] in {'ur5e_close_gripper', 'close_gripper'}):
+                self._local_skill_completions.pop(key)
+        getattr(self, '_ur5e_contact_hold_commands', {}).pop(robot_name, None)
+
     def _sync_object_states(self):
         phase_spec = self.get_current_phase_spec()
         pending_detach_objects = {
@@ -4464,22 +5565,37 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             for object_name in [self._extract_object_name(object_entry)]
             if object_name is not None
         }
-        for object_name, attach_state in list(self._attachments.items()):
+        for object_name, attach_state in self._all_physical_grasps():
             if attach_state.get('mode') not in {'physical_hold', 'pure_physical_grasp'}:
                 continue
             if attach_state.get('mode') == 'pure_physical_grasp' and self._pure_physical_release_ready(
                 object_name,
                 attach_state,
             ):
+                if attach_state.get('attach_spec', {}).get('allow_shared_physical_grasp'):
+                    self._remove_physical_grasp(object_name, attach_state['robot_name'])
+                else:
+                    self._clear_attachment_state(object_name, enable_collision=True)
+                continue
+            if attach_state.get('kinematic_peel_carry'):
+                # Peel assist: keep the symbolic grasp while we servo the part.
+                continue
+            if self._physical_hold_valid(object_name, attach_state, validation_stage='state_sync'):
+                continue
+            if object_name in pending_detach_objects and any(
+                    self._extract_object_name(e) == object_name and
+                    (not isinstance(e, dict) or e.get('robot', attach_state['robot_name']) == attach_state['robot_name'])
+                    for e in self._as_list((phase_spec or {}).get('detach'))):
+                continue
+            self._invalidate_continuous_grasp(object_name, attach_state)
+            if attach_state.get('attach_spec', {}).get('allow_shared_physical_grasp'):
+                self._remove_physical_grasp(object_name, attach_state['robot_name'])
+            else:
                 self._clear_attachment_state(object_name, enable_collision=True)
-                continue
-            if self._physical_hold_valid(object_name, attach_state):
-                continue
-            if object_name in pending_detach_objects:
-                continue
-            self._clear_attachment_state(object_name, enable_collision=True)
 
         for object_name, target_name in self._locked_targets.items():
+            if not self._lock_pin_pose.get(object_name, True):
+                continue
             locked_pose = self._frozen_lock_poses.get(object_name)
             if locked_pose is None:
                 locked_pose = self.target_poses[target_name]
@@ -4490,9 +5606,15 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 'fixed_joint',
                 'compliant_joint',
                 'physical_hold',
-                'pure_physical_grasp',
             }:
                 continue
+            if attach_state.get('mode') == 'pure_physical_grasp' and not attach_state.get(
+                'kinematic_peel_carry'
+            ):
+                continue
+            if attach_state.get('kinematic_peel_carry'):
+                self._set_object_collision(object_name, False)
+                self._set_object_kinematic_enabled(object_name, True)
             robot_pose = self._get_robot_task_pose(attach_state['robot_name'])
             position, orientation = compose_pose(
                 base_position=robot_pose[0],
@@ -4501,6 +5623,10 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                 local_orientation=attach_state['orientation'],
             )
             self._set_object_pose(object_name, position, orientation)
+            try:
+                self._zero_object_velocity(object_name)
+            except Exception:
+                pass
 
         self._record_object_pose_history()
         self._check_object_state_sanity()
@@ -4601,8 +5727,15 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             sampled_position = self._sampled_object_position(object_name)
             object_position, _ = self._resolve_object(object_name).get_pose()
             object_position = np.asarray(object_position, dtype=float)
-            if sampled_position is None:
-                baseline_z = float(lift_spec.get('baseline_z', object_position[2]))
+            attach_world = None
+            if isinstance(attachment_state, dict):
+                attach_world = attachment_state.get('attach_world_position')
+            if attach_world is not None:
+                baseline_z = float(np.asarray(attach_world, dtype=float)[2])
+            elif lift_spec.get('baseline_z') is not None:
+                baseline_z = float(lift_spec.get('baseline_z'))
+            elif sampled_position is None:
+                baseline_z = float(object_position[2])
             else:
                 baseline_z = float(np.asarray(sampled_position, dtype=float)[2])
 
@@ -4781,6 +5914,8 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
             return False
 
         advance_type = advance.get('type', 'timer')
+        if advance_type == 'beam_table_supported':
+            return self._beam_table_supported(advance)
         if advance_type == 'all_of':
             return all(
                 self._evaluate_advance_condition(phase_spec=phase_spec, advance=condition)
@@ -4855,7 +5990,7 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                     required_robot = object_spec.get('robot', advance.get('robot'))
                 if object_name is None:
                     return False
-                attachment_state = self._attachments.get(object_name)
+                attachment_state = self._attachment_for(object_name, required_robot)
                 if attachment_state is None:
                     return False
                 if required_robot is not None and attachment_state.get('robot_name') != required_robot:
@@ -4937,6 +6072,12 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         return True
 
     def _check_success(self) -> bool:
+        if self.phase_specs and self.phase_specs[0].get('beam_coordinated'):
+            final = self.phase_specs[-1]
+            if (self.phase_index != len(self.phase_specs) - 1
+                    or final.get('name') != 'beam_final_unloaded_verification'
+                    or not self._evaluate_advance_condition(phase_spec=final, advance=final['advance'])):
+                return False
         for success_criterion in self.cfg.success_criteria:
             object_name = success_criterion['object']
             target_name = success_criterion.get('target') or success_criterion.get('target_name')
@@ -5166,10 +6307,17 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
                     )
                     attachment_snapshot['position'] = np.asarray(current_relative_position).tolist()
                     attachment_snapshot['orientation'] = np.asarray(current_relative_orientation).tolist()
+                    attachment_snapshot['grasp_reference_position'] = copy.deepcopy(attachment_state['position'])
+                    attachment_snapshot['grasp_reference_orientation'] = copy.deepcopy(attachment_state['orientation'])
+                    attachment_snapshot['attach_contact_snapshot'] = copy.deepcopy(attachment_state['contact_metrics'])
                     attachment_snapshot['physical_hold_valid'] = self._physical_hold_valid(
                         object_name,
                         attachment_state,
                     )
+                    attachment_snapshot['current_contact_metrics'] = copy.deepcopy(
+                        attachment_state.get('current_contact_metrics')
+                    )
+                    attachment_snapshot['current_contact_step'] = attachment_state.get('current_contact_step')
             if attachment_mode == 'pure_physical_grasp':
                 status = 'grasped_physical'
             elif attachment_state is not None:
@@ -5248,6 +6396,9 @@ class FactoryDualFrankaAssemblyTask(BaseTask):
         if self.success or self.failed:
             return
         phase_spec = self.get_current_phase_spec()
+        self._beam_support_watchdog(phase_spec)
+        if self.failed:
+            return
         self._process_phase_interactions(phase_spec)
         self._sync_object_states()
         if self.success or self.failed:
