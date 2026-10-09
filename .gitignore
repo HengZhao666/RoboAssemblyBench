@@ -157,3 +157,10 @@ checkpoints/
 recordings/
 ppt/
 /tests/*.png
+
+# Curated Beam review evidence; other experiment outputs stay ignored.
+!outputs/beam_repair_review/
+!outputs/beam_repair_review/**
+!docs/beam_repair/*.log
+.DS_Store
+._*

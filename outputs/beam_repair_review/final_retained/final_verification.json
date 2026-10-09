@@ -1,0 +1,8 @@
+{
+  "source_files_verified": 18,
+  "tests_passed": 201,
+  "configuration_pass": true,
+  "kp": 80000,
+  "kd": 4000,
+  "simulation_started_after_restore": false
+}

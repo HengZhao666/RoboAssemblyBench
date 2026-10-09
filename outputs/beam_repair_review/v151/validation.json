@@ -1,0 +1,43 @@
+{
+  "beam": {
+    "phases": 160,
+    "close_skills": 8,
+    "frozen_closes": 8,
+    "gains": [
+      [
+        7500.0,
+        173.0
+      ],
+      [
+        7500.0,
+        173.0
+      ]
+    ],
+    "preserve_continuous_arm_joints": [
+      true,
+      true
+    ],
+    "continuous_transport_phases": 16,
+    "preserved_insertion_phases": 40,
+    "smooth_transport_phases": 16
+  },
+  "car": {
+    "phases": 117,
+    "close_skills": 6,
+    "frozen_closes": 0,
+    "gains": [
+      [
+        6000000.0,
+        8000.0
+      ],
+      [
+        6000000.0,
+        8000.0
+      ]
+    ],
+    "preserve_continuous_arm_joints": [
+      false,
+      false
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-09",
+  "upstream_main": "4b5a89410c5cd571d218d58da5f65a16682a1a23",
+  "branch": "codex/beam-physical-repair-review",
+  "source_files_verified": 38,
+  "source_hash_mismatches": [],
+  "server_source_verification": {
+    "files_checked": 38,
+    "differences": {}
+  },
+  "python_syntax_files": 32,
+  "beam_unittest": {
+    "passed": 201,
+    "failed": 0,
+    "command": "python -m unittest discover -s tests/toolkits -p 'test_beam_*.py'",
+    "log": "offline_tests.log"
+  },
+  "canonical_pytest": {
+    "environment": "server Isaac Sim 5.1.0; existing internutopia311; temporary pytest",
+    "passed": 10,
+    "failed": 4,
+    "environment_blocked": 0,
+    "elapsed_seconds": 82.16,
+    "log": "canonical_tests.log",
+    "command": "ISAAC_SIM_ROOT=<ISAAC_SIM_ROOT> PYTHONPATH=<TEMP_PYTEST>:. python -m pytest --confcutdir=tests/toolkits tests/toolkits/test_fabrica_canonical_staged_tasks.py tests/toolkits/test_fabrica_canonical_validation.py -q",
+    "failure_categories": [
+      "Candidate clearance score below existing threshold",
+      "Preseat target missing from legacy expected randomization target set",
+      "Explicit fully-open preshape differs from legacy ratio expectation",
+      "Current pickup TCP reach differs from recorded selection reach"
+    ],
+    "original_log_sha256": "44bbe4fdf34fbaf8a8cd0add36b9bd0da26b8131d019e47599afd7b175835ba8",
+    "published_log_sha256": "d9374eedc67e31fdd55f112e77d73e1743a6f03fe4158ab55d445419851fcda9",
+    "machine_paths_redacted": true
+  },
+  "evidence_files_verified": 64,
+  "evidence_hash_mismatches": [],
+  "video_files": 8,
+  "evidence_json_files_parsed": 43,
+  "evidence_jsonl_records_parsed": 937,
+  "relative_links_checked": 75,
+  "broken_or_absolute_links": [],
+  "full_simulation_run_for_final_restored_code": false,
+  "full_assembly_success": false,
+  "test_only_asset_links_included": false,
+  "unrelated_mode_changes_included": false,
+  "notes": [
+    "No simulation behavior changed during packaging.",
+    "Shared object, background, and metadata changes need other-task physics regression.",
+    "All eight videos are original files; text machine paths were replaced and excerpts are explicitly labeled."
+  ],
+  "server_beam_unittest": {
+    "passed": 201,
+    "failed": 0,
+    "log": "server_beam_tests.log"
+  },
+  "source_yaml_json_parsed": 5,
+  "diff_whitespace_check": "passed excluding raw .log files; raw log trailing whitespace preserved",
+  "credential_pattern_matches": []
+}

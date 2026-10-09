@@ -1,0 +1,28 @@
+{
+  "first_active_step": 9610,
+  "last_active_step": 12881,
+  "active_control_samples": 3272,
+  "minimum_active_table_force": 0.21811485290527344,
+  "became_inactive_after_first": false,
+  "last_2s_finger_forces": {
+    "left": {
+      "min": 2.8401539314159523,
+      "mean": 2.932845847860701,
+      "max": 3.039803440651547
+    },
+    "right": {
+      "min": 3.279637696844148,
+      "mean": 3.349276284502333,
+      "max": 3.403100387405777
+    }
+  },
+  "last_2s_control_modes": {
+    "bilateral_hold": 480
+  },
+  "all_post_relief_hold_records_valid": true,
+  "max_post_relief_slip_mm": 1.1597808492097526,
+  "max_post_relief_orientation_slip_rad": 0.00727468242803172,
+  "last_2s_table_load_fraction_of_base_weight": 0.8219501203241859,
+  "last_2s_measured_load_above_1_962N_fraction": 0.5895833333333333,
+  "note": "Peak-finger band, not a guarantee of 3 N per finger. Load improvement does not prove seating or success."
+}

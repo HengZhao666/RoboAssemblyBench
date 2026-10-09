@@ -1,0 +1,454 @@
+{
+  "stable_window_resets": [
+    {
+      "step": 1581,
+      "previous_stable_steps": 3,
+      "forces": [
+        0.9866081902125033,
+        9.201282933315087
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": "contact_stop_settling"
+    },
+    {
+      "step": 1621,
+      "previous_stable_steps": 3,
+      "forces": [
+        0.9989253315333778,
+        7.728436501834287
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": "contact_stop_settling"
+    },
+    {
+      "step": 1657,
+      "previous_stable_steps": 6,
+      "forces": [
+        0.9866430725694639,
+        9.110621418082966
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": "contact_stop_settling"
+    },
+    {
+      "step": 1686,
+      "previous_stable_steps": 6,
+      "forces": [
+        0.993983960524858,
+        10.114142236621412
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": null
+    },
+    {
+      "step": 1713,
+      "previous_stable_steps": 8,
+      "forces": [
+        0.9656947011490128,
+        8.707837772506446
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": null
+    },
+    {
+      "step": 1716,
+      "previous_stable_steps": 1,
+      "forces": [
+        0.9640559570953502,
+        10.46635270488173
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": "servo_in_progress"
+    },
+    {
+      "step": 1719,
+      "previous_stable_steps": 1,
+      "forces": [
+        0.8166598595674784,
+        11.810546790436337
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": "servo_in_progress"
+    },
+    {
+      "step": 1756,
+      "previous_stable_steps": 18,
+      "forces": [
+        0.9687207580581338,
+        10.045675149128552
+      ],
+      "weak_force": true,
+      "overload": false,
+      "invalid_probe": false,
+      "motion_evaluated": false,
+      "motion_outside_window": null,
+      "strict_contact_ready": true,
+      "recenter_reason": "servo_in_progress"
+    }
+  ],
+  "balance_updates": [
+    {
+      "step": 1686,
+      "enabled": true,
+      "updated": true,
+      "source": "pair_force",
+      "offset_world": [
+        -0.001286358467748164,
+        2.8521875526539485e-06,
+        -9.13549014303721e-07
+      ],
+      "forces": [
+        0.993983960524858,
+        10.114142236621412
+      ],
+      "motion_mode": "force_margin",
+      "motion_start_position_world": [
+        0.28925503377273426,
+        -0.24618501458117492,
+        1.234956462705429
+      ],
+      "motion_delta_world": [
+        -2.499977594481856e-05,
+        3.786404389669492e-08,
+        -9.883836831604542e-08
+      ],
+      "travel": 0.0014000000000000002,
+      "loaded_side": 1
+    },
+    {
+      "step": 1713,
+      "enabled": true,
+      "updated": true,
+      "source": "pair_force",
+      "offset_world": [
+        -0.0013113582352482053,
+        2.8889940545771975e-06,
+        -1.0148911343538409e-06
+      ],
+      "forces": [
+        0.9656947011490128,
+        8.707837772506446
+      ],
+      "motion_mode": "force_margin",
+      "motion_start_position_world": [
+        0.2892330506721383,
+        -0.246184825076752,
+        1.234955543945514
+      ],
+      "motion_delta_world": [
+        -2.4999767500041283e-05,
+        3.680650192324914e-08,
+        -1.0134212005011995e-07
+      ],
+      "travel": 0.0014250000000000003,
+      "loaded_side": 1
+    },
+    {
+      "step": 1751,
+      "enabled": true,
+      "updated": true,
+      "source": "pair_force",
+      "offset_world": [
+        -0.0013363579964577345,
+        2.924935153255572e-06,
+        -1.1180788465272726e-06
+      ],
+      "forces": [
+        1.1684111398088,
+        8.921386760107247
+      ],
+      "motion_mode": "force_margin",
+      "motion_start_position_world": [
+        0.2892129792935809,
+        -0.24618333263052017,
+        1.2349539521684578
+      ],
+      "motion_delta_world": [
+        -2.4999761209529226e-05,
+        3.59410986783746e-08,
+        -1.0318771217343175e-07
+      ],
+      "travel": 0.0014500000000000003,
+      "loaded_side": 1
+    },
+    {
+      "step": 1821,
+      "enabled": true,
+      "updated": true,
+      "source": "pair_force",
+      "offset_world": [
+        -0.001350553910455129,
+        2.944014909819278e-06,
+        -1.175457026939213e-06
+      ],
+      "forces": [
+        1.8512865843904043,
+        5.828150207282152
+      ],
+      "motion_mode": "force_margin",
+      "motion_start_position_world": [
+        0.2891953438821518,
+        -0.2461834351349208,
+        1.234954438285694
+      ],
+      "motion_delta_world": [
+        -2.49997501032805e-05,
+        3.572563789433561e-08,
+        -1.0591719560060498e-07
+      ],
+      "travel": 0.0015000000000000005,
+      "loaded_side": 1
+    },
+    {
+      "step": 1836,
+      "enabled": true,
+      "updated": true,
+      "source": "pair_force",
+      "offset_world": [
+        -0.0013543477907193484,
+        2.9497105046964935e-06,
+        -1.1920815151744345e-06
+      ],
+      "forces": [
+        1.539756123997589,
+        5.330760415827091
+      ],
+      "motion_mode": "force_margin",
+      "motion_start_position_world": [
+        0.2891912084451996,
+        -0.24618376101323647,
+        1.234954297229491
+      ],
+      "motion_delta_world": [
+        -2.499974737045841e-05,
+        3.59996229712195e-08,
+        -1.0646802526630694e-07
+      ],
+      "travel": 0.0015250000000000005,
+      "loaded_side": 1
+    },
+    {
+      "step": 1864,
+      "enabled": true,
+      "updated": true,
+      "source": "pair_force",
+      "offset_world": [
+        -0.001355946756660427,
+        2.9522471119045463e-06,
+        -1.1992647488512617e-06
+      ],
+      "forces": [
+        1.779879530355689,
+        5.895903903817701
+      ],
+      "motion_mode": "force_margin",
+      "motion_start_position_world": [
+        0.28918951293097184,
+        -0.24618334895560923,
+        1.2349551819921643
+      ],
+      "motion_delta_world": [
+        -2.4999745438371802e-05,
+        3.6233717288879784e-08,
+        -1.0684163205380987e-07
+      ],
+      "travel": 0.0015500000000000006,
+      "loaded_side": 1
+    },
+    {
+      "step": 1878,
+      "enabled": true,
+      "updated": true,
+      "source": "pair_force",
+      "offset_world": [
+        -0.0013578065621401767,
+        2.954462009753399e-06,
+        -1.2072522274234755e-06
+      ],
+      "forces": [
+        1.7061285388260394,
+        5.816331795637582
+      ],
+      "motion_mode": "force_margin",
+      "motion_start_position_world": [
+        0.289187949518193,
+        -0.24618325223881365,
+        1.2349546493010086
+      ],
+      "motion_delta_world": [
+        -2.4999745962748043e-05,
+        3.5753081811940384e-08,
+        -1.0688084582374109e-07
+      ],
+      "travel": 0.0015750000000000007,
+      "loaded_side": 1
+    }
+  ],
+  "stop_causes": {
+    "bilateral_contact": 4,
+    "force_balance_side_reversed": 3,
+    "force_margin_reached": 4
+  },
+  "control_modes": {
+    "approach": 154,
+    "slow_approach": 222,
+    "single_contact_hold": 135,
+    "unload": 67,
+    "force_limit_unload": 10,
+    "preload": 78,
+    "gentle_seek": 161,
+    "bilateral_hold": 237
+  },
+  "by_phase": {
+    "base_6_close_and_attach": {
+      "maximum_stable_steps": 168,
+      "window_start": 1790,
+      "window_end": 1957,
+      "required_steps": 96,
+      "window_minimum_pair_force_N": [
+        1.1702171814786988,
+        1.4271029362610286
+      ],
+      "maximum_pair_force_N": [
+        7.2987586085379865,
+        58.64975966286114
+      ],
+      "overload_steps": 10,
+      "ready_steps": [
+        1885,
+        1886,
+        1887,
+        1888,
+        1889,
+        1890,
+        1891,
+        1892,
+        1893,
+        1894,
+        1895,
+        1896,
+        1897,
+        1898,
+        1899,
+        1900,
+        1901,
+        1902,
+        1903,
+        1904,
+        1905,
+        1906,
+        1907,
+        1908,
+        1909,
+        1910,
+        1911,
+        1912,
+        1913,
+        1914,
+        1915,
+        1916,
+        1917,
+        1918,
+        1919,
+        1920,
+        1921,
+        1922,
+        1923,
+        1924,
+        1925,
+        1926,
+        1927,
+        1928,
+        1929,
+        1930,
+        1931,
+        1932,
+        1933,
+        1934,
+        1935,
+        1936,
+        1937,
+        1938,
+        1939,
+        1940,
+        1941,
+        1942,
+        1943,
+        1944,
+        1945,
+        1946,
+        1947,
+        1948,
+        1949,
+        1950,
+        1951,
+        1952,
+        1953,
+        1954,
+        1955,
+        1956,
+        1957
+      ],
+      "window_current_position_delta_um": [
+        -15.134273218586625,
+        -4.895348709954561,
+        3.3723222467862968
+      ],
+      "window_object_position_delta_um": [
+        3.427267074584961,
+        -1.3113021850585938,
+        1.7881393432617188
+      ]
+    }
+  },
+  "outcome": {
+    "success": false,
+    "failed": true,
+    "steps": 1960,
+    "terminal_reason": "local-skill-failure:held_object_not_grasped",
+    "phase_attempts": {
+      "fixture_parts_settle": 1,
+      "base_6_move_above": 1,
+      "base_6_preshape": 1,
+      "base_6_descend": 1,
+      "base_6_close_and_attach": 1,
+      "base_6_grip_settle": 1,
+      "failed": 1
+    }
+  }
+}

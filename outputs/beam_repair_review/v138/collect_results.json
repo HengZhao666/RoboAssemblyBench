@@ -1,0 +1,4968 @@
+[
+  {
+    "recipe": "fabrica_beam_ur5e_staged",
+    "seed": 0,
+    "layout_seed": 505,
+    "episode_idx": 0,
+    "success": false,
+    "failed": true,
+    "phase_status": "failed",
+    "phase_history": [
+      "fixture_parts_settle",
+      "base_6_move_above",
+      "base_6_preshape",
+      "base_6_descend",
+      "base_6_close_and_attach",
+      "base_6_grip_settle",
+      "failed"
+    ],
+    "phase_transition_history": [
+      {
+        "event": "initialize",
+        "phase": "fixture_parts_settle",
+        "phase_index": 0,
+        "step_counter": 0,
+        "status": "running"
+      },
+      {
+        "from_phase": "fixture_parts_settle",
+        "from_phase_index": 0,
+        "to_phase": "base_6_move_above",
+        "to_phase_index": 1,
+        "transition_type": "advance",
+        "reason": "advance",
+        "status": "running",
+        "step_counter": 95,
+        "phase_step_counter": 0
+      },
+      {
+        "from_phase": "base_6_move_above",
+        "from_phase_index": 1,
+        "to_phase": "base_6_preshape",
+        "to_phase_index": 2,
+        "transition_type": "advance",
+        "reason": "advance",
+        "status": "running",
+        "step_counter": 542,
+        "phase_step_counter": 0
+      },
+      {
+        "from_phase": "base_6_preshape",
+        "from_phase_index": 2,
+        "to_phase": "base_6_descend",
+        "to_phase_index": 3,
+        "transition_type": "advance",
+        "reason": "advance",
+        "status": "running",
+        "step_counter": 554,
+        "phase_step_counter": 0
+      },
+      {
+        "from_phase": "base_6_descend",
+        "from_phase_index": 3,
+        "to_phase": "base_6_close_and_attach",
+        "to_phase_index": 4,
+        "transition_type": "advance",
+        "reason": "advance",
+        "status": "running",
+        "step_counter": 824,
+        "phase_step_counter": 0
+      },
+      {
+        "from_phase": "base_6_close_and_attach",
+        "from_phase_index": 4,
+        "to_phase": "base_6_grip_settle",
+        "to_phase_index": 5,
+        "transition_type": "advance",
+        "reason": "advance",
+        "status": "running",
+        "step_counter": 1957,
+        "phase_step_counter": 0
+      },
+      {
+        "from_phase": "base_6_grip_settle",
+        "from_phase_index": 5,
+        "to_phase": "failed",
+        "to_phase_index": 160,
+        "transition_type": "terminal",
+        "reason": "local-skill-failure:held_object_not_grasped",
+        "status": "failed",
+        "step_counter": 1959,
+        "phase_step_counter": 2,
+        "held_object": "fabrica_beam_6",
+        "required_robot": "franka_right",
+        "attached_to": null,
+        "grasped_by": null,
+        "object_status": "free",
+        "fallback": "native_phase_policy"
+      }
+    ],
+    "phase_attempts": {
+      "fixture_parts_settle": 1,
+      "base_6_move_above": 1,
+      "base_6_preshape": 1,
+      "base_6_descend": 1,
+      "base_6_close_and_attach": 1,
+      "base_6_grip_settle": 1,
+      "failed": 1
+    },
+    "steps": 1960,
+    "tracked_objects": {
+      "fabrica_fixture": {
+        "position": [
+          0.2801938056945801,
+          -0.4226747751235962,
+          1.002500057220459
+        ],
+        "orientation": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "linear_velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "angular_velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "linear_speed": 0.0,
+        "angular_speed": 0.0,
+        "is_static": true,
+        "pose_stable_override": true,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "attached_to": null,
+        "grasped_by": null,
+        "attachment": null,
+        "locked_target": null,
+        "target_position": null,
+        "target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "target_reached": null,
+        "collision_enabled": null,
+        "status": "free"
+      },
+      "fabrica_beam_0": {
+        "position": [
+          0.3698386549949646,
+          -0.26307377219200134,
+          0.949347734451294
+        ],
+        "orientation": [
+          0.9961836934089661,
+          0.0872807577252388,
+          0.00014350972196552902,
+          -0.0002686311781872064
+        ],
+        "linear_velocity": [
+          -0.0007261153659783304,
+          -0.000349844282027334,
+          -0.0019060686463490129
+        ],
+        "angular_velocity": [
+          0.061386484652757645,
+          -0.6239111423492432,
+          -0.35465243458747864
+        ],
+        "linear_speed": 0.0020694763180504924,
+        "angular_speed": 0.7202858900494904,
+        "is_static": true,
+        "pose_stable_override": true,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "attached_to": null,
+        "grasped_by": null,
+        "attachment": null,
+        "locked_target": null,
+        "target_position": null,
+        "target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "target_reached": null,
+        "collision_enabled": true,
+        "status": "free"
+      },
+      "fabrica_beam_1": {
+        "position": [
+          0.28886422514915466,
+          -0.3114996552467346,
+          0.9600952863693237
+        ],
+        "orientation": [
+          0.0003297305083833635,
+          0.0037815736141055822,
+          0.21424506604671478,
+          0.9767725467681885
+        ],
+        "linear_velocity": [
+          0.002159795491024852,
+          -0.0006810849299654365,
+          -0.0010506309336051345
+        ],
+        "angular_velocity": [
+          0.03219565004110336,
+          -0.011553972959518433,
+          -0.2881821095943451
+        ],
+        "linear_speed": 0.002496481244376833,
+        "angular_speed": 0.29020506967137155,
+        "is_static": true,
+        "pose_stable_override": true,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "attached_to": null,
+        "grasped_by": null,
+        "attachment": null,
+        "locked_target": null,
+        "target_position": null,
+        "target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "target_reached": null,
+        "collision_enabled": true,
+        "status": "free"
+      },
+      "fabrica_beam_2": {
+        "position": [
+          0.2345270812511444,
+          -0.16020892560482025,
+          1.019215703010559
+        ],
+        "orientation": [
+          0.7008405327796936,
+          0.08979562669992447,
+          -0.09001489728689194,
+          0.7018950581550598
+        ],
+        "linear_velocity": [
+          7.202275446616113e-05,
+          -0.00012160783080616966,
+          -5.7279983593616635e-05
+        ],
+        "angular_velocity": [
+          0.002126083942130208,
+          0.008581952191889286,
+          -0.02296629175543785
+        ],
+        "linear_speed": 0.00015250160063015703,
+        "angular_speed": 0.024609361904542545,
+        "is_static": true,
+        "pose_stable_override": true,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "attached_to": null,
+        "grasped_by": null,
+        "attachment": null,
+        "locked_target": null,
+        "target_position": null,
+        "target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "target_reached": null,
+        "collision_enabled": true,
+        "status": "free"
+      },
+      "fabrica_beam_3": {
+        "position": [
+          0.36929404735565186,
+          -0.21519464254379272,
+          1.0092744827270508
+        ],
+        "orientation": [
+          -0.0023289828095585108,
+          7.724729948677123e-05,
+          0.23916426301002502,
+          0.9709764122962952
+        ],
+        "linear_velocity": [
+          0.0022750364150851965,
+          0.0037950100377202034,
+          -0.0015055561671033502
+        ],
+        "angular_velocity": [
+          -0.10168631374835968,
+          0.40185046195983887,
+          0.763491690158844
+        ],
+        "linear_speed": 0.004673819770665503,
+        "angular_speed": 0.8687597257715588,
+        "is_static": true,
+        "pose_stable_override": true,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "attached_to": null,
+        "grasped_by": null,
+        "attachment": null,
+        "locked_target": null,
+        "target_position": null,
+        "target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "target_reached": null,
+        "collision_enabled": true,
+        "status": "free"
+      },
+      "fabrica_beam_6": {
+        "position": [
+          0.29002752900123596,
+          -0.2646276354789734,
+          1.0738368034362793
+        ],
+        "orientation": [
+          0.6149313449859619,
+          0.3504752218723297,
+          0.3475359380245209,
+          -0.6150166392326355
+        ],
+        "linear_velocity": [
+          0.004535284824669361,
+          -0.009419222362339497,
+          0.003692533355206251
+        ],
+        "angular_velocity": [
+          -0.20712772011756897,
+          0.06931889057159424,
+          -0.6166154146194458
+        ],
+        "linear_speed": 0.011087171006680802,
+        "angular_speed": 0.6541571451704015,
+        "is_static": true,
+        "pose_stable_override": true,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "attached_to": null,
+        "grasped_by": null,
+        "attachment": null,
+        "locked_target": null,
+        "target_position": null,
+        "target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "target_reached": null,
+        "collision_enabled": true,
+        "status": "free"
+      },
+      "fixture_support": {
+        "position": [
+          0.3022446930408478,
+          -0.2914581894874573,
+          0.8774999976158142
+        ],
+        "orientation": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "linear_velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "angular_velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "linear_speed": 0.0,
+        "angular_speed": 0.0,
+        "is_static": true,
+        "pose_stable_override": true,
+        "scale": [
+          0.6952784013484063,
+          0.8224330920733705,
+          0.25
+        ],
+        "attached_to": null,
+        "grasped_by": null,
+        "attachment": null,
+        "locked_target": null,
+        "target_position": null,
+        "target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "target_reached": null,
+        "collision_enabled": null,
+        "status": "free"
+      }
+    },
+    "tracked_robots": {
+      "franka_left": {
+        "position": [
+          1.001583700675058,
+          0.4330537122107146,
+          1.431280167449772
+        ],
+        "orientation": [
+          -0.03917162383339141,
+          -0.7058739026808996,
+          0.7061761341798054,
+          0.03902415809670409
+        ],
+        "gripper_opening": 8.667464499012567e-06,
+        "target_name": null,
+        "task_target": null,
+        "task_target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "position_tolerance": null,
+        "orientation_tolerance": null,
+        "target_reached": null
+      },
+      "franka_right": {
+        "position": [
+          0.2892617797431927,
+          -0.24616382955561433,
+          1.2349424078790858
+        ],
+        "orientation": [
+          0.0012073777648343657,
+          0.7082466677100985,
+          0.7059577379836383,
+          0.00297860663715223
+        ],
+        "gripper_opening": 0.6640680432319641,
+        "target_name": null,
+        "task_target": null,
+        "task_target_orientation": null,
+        "position_error": null,
+        "orientation_error": null,
+        "position_tolerance": null,
+        "orientation_tolerance": null,
+        "target_reached": null
+      }
+    },
+    "success_diagnostics": [
+      {
+        "object": "fabrica_beam_0",
+        "target": "part_0_assembled",
+        "object_position": [
+          0.3698386549949646,
+          -0.26307377219200134,
+          0.949347734451294
+        ],
+        "target_position": [
+          0.7844409166438082,
+          -0.12056654334103567,
+          1.0025
+        ],
+        "position_error": 0.44162032219099456,
+        "position_tolerance": 0.015,
+        "orientation_error": 1.5789495805976215,
+        "orientation_tolerance": 0.15,
+        "pose_passed": false,
+        "released_passed": true,
+        "attached_passed": true,
+        "static_metrics": {
+          "valid": true,
+          "linear_velocity": [
+            -0.0007261153659783304,
+            -0.000349844282027334,
+            -0.0019060686463490129
+          ],
+          "angular_velocity": [
+            0.061386484652757645,
+            -0.6239111423492432,
+            -0.35465243458747864
+          ],
+          "linear_speed": 0.0020694763180504924,
+          "angular_speed": 0.7202858900494904,
+          "linear_threshold": 0.05,
+          "angular_threshold": 2.0,
+          "pose_stable_override": true,
+          "pose_stability_position_drift": 0.0019166293387647782,
+          "pose_stability_orientation_drift": 0.022631825797202104,
+          "is_static": true
+        },
+        "static_passed": true,
+        "contact_passed": true,
+        "passed": false
+      },
+      {
+        "object": "fabrica_beam_1",
+        "target": "part_1_assembled",
+        "object_position": [
+          0.28886422514915466,
+          -0.3114996552467346,
+          0.9600952863693237
+        ],
+        "target_position": [
+          0.7844409166438082,
+          -0.12056654334103567,
+          1.0025
+        ],
+        "position_error": 0.5327756283022721,
+        "position_tolerance": 0.015,
+        "orientation_error": 1.616082911497408,
+        "orientation_tolerance": 0.15,
+        "pose_passed": false,
+        "released_passed": true,
+        "attached_passed": true,
+        "static_metrics": {
+          "valid": true,
+          "linear_velocity": [
+            0.002159795491024852,
+            -0.0006810849299654365,
+            -0.0010506309336051345
+          ],
+          "angular_velocity": [
+            0.03219565004110336,
+            -0.011553972959518433,
+            -0.2881821095943451
+          ],
+          "linear_speed": 0.002496481244376833,
+          "angular_speed": 0.29020506967137155,
+          "linear_threshold": 0.05,
+          "angular_threshold": 2.0,
+          "pose_stable_override": true,
+          "pose_stability_position_drift": 0.001589264616376485,
+          "pose_stability_orientation_drift": 0.018993406766504278,
+          "is_static": true
+        },
+        "static_passed": true,
+        "contact_passed": true,
+        "passed": false
+      },
+      {
+        "object": "fabrica_beam_2",
+        "target": "part_2_assembled",
+        "object_position": [
+          0.2345270812511444,
+          -0.16020892560482025,
+          1.019215703010559
+        ],
+        "target_position": [
+          0.7844409166438082,
+          -0.12056654334103567,
+          1.0025
+        ],
+        "position_error": 0.5515941982607822,
+        "position_tolerance": 0.015,
+        "orientation_error": 0.2549852454763378,
+        "orientation_tolerance": 0.15,
+        "pose_passed": false,
+        "released_passed": true,
+        "attached_passed": true,
+        "static_metrics": {
+          "valid": true,
+          "linear_velocity": [
+            7.202275446616113e-05,
+            -0.00012160783080616966,
+            -5.7279983593616635e-05
+          ],
+          "angular_velocity": [
+            0.002126083942130208,
+            0.008581952191889286,
+            -0.02296629175543785
+          ],
+          "linear_speed": 0.00015250160063015703,
+          "angular_speed": 0.024609361904542545,
+          "linear_threshold": 0.05,
+          "angular_threshold": 2.0,
+          "pose_stable_override": true,
+          "pose_stability_position_drift": 1.361561752738041e-06,
+          "pose_stability_orientation_drift": 2.773011212769461e-05,
+          "is_static": true
+        },
+        "static_passed": true,
+        "contact_passed": true,
+        "passed": false
+      },
+      {
+        "object": "fabrica_beam_3",
+        "target": "part_3_assembled",
+        "object_position": [
+          0.36929404735565186,
+          -0.21519464254379272,
+          1.0092744827270508
+        ],
+        "target_position": [
+          0.7844409166438082,
+          -0.12056654334103567,
+          1.0025
+        ],
+        "position_error": 0.42584890965541233,
+        "position_tolerance": 0.015,
+        "orientation_error": 1.6325578991826533,
+        "orientation_tolerance": 0.15,
+        "pose_passed": false,
+        "released_passed": true,
+        "attached_passed": true,
+        "static_metrics": {
+          "valid": true,
+          "linear_velocity": [
+            0.0022750364150851965,
+            0.0037950100377202034,
+            -0.0015055561671033502
+          ],
+          "angular_velocity": [
+            -0.10168631374835968,
+            0.40185046195983887,
+            0.763491690158844
+          ],
+          "linear_speed": 0.004673819770665503,
+          "angular_speed": 0.8687597257715588,
+          "linear_threshold": 0.05,
+          "angular_threshold": 2.0,
+          "pose_stable_override": true,
+          "pose_stability_position_drift": 0.0002489010356092657,
+          "pose_stability_orientation_drift": 0.005673005132868484,
+          "is_static": true
+        },
+        "static_passed": true,
+        "contact_passed": true,
+        "passed": false
+      },
+      {
+        "object": "fabrica_beam_6",
+        "target": "part_6_assembled",
+        "object_position": [
+          0.29002752900123596,
+          -0.2646276354789734,
+          1.0738368034362793
+        ],
+        "target_position": [
+          0.7844409166438082,
+          -0.12056654334103567,
+          1.0025
+        ],
+        "position_error": 0.5198914652816357,
+        "position_tolerance": 0.015,
+        "orientation_error": 3.1414720293174208,
+        "orientation_tolerance": 0.15,
+        "pose_passed": false,
+        "released_passed": true,
+        "attached_passed": true,
+        "static_metrics": {
+          "valid": true,
+          "linear_velocity": [
+            0.004535284824669361,
+            -0.009419222362339497,
+            0.003692533355206251
+          ],
+          "angular_velocity": [
+            -0.20712772011756897,
+            0.06931889057159424,
+            -0.6166154146194458
+          ],
+          "linear_speed": 0.011087171006680802,
+          "angular_speed": 0.6541571451704015,
+          "linear_threshold": 0.05,
+          "angular_threshold": 2.0,
+          "pose_stable_override": true,
+          "pose_stability_position_drift": 4.714003952309805e-05,
+          "pose_stability_orientation_drift": 0.0005479367788683266,
+          "is_static": true
+        },
+        "static_passed": true,
+        "contact_passed": true,
+        "passed": false
+      }
+    ],
+    "timeout_count": 0,
+    "recovery_count": 0,
+    "handoff_history": [],
+    "recovery_history": [],
+    "terminal_reason": "local-skill-failure:held_object_not_grasped",
+    "domain_randomization": {
+      "enabled": true,
+      "configured_enabled": false,
+      "seed": 505,
+      "derived_seed": 10008505523140156887,
+      "seed_namespace": "fabrica_beam_canonical_ur5e_domain_v1",
+      "groups": {
+        "start_parts": {
+          "translation": [
+            -0.06980618556094491,
+            0.057325267992290416,
+            0.0
+          ],
+          "objects": [
+            "fabrica_fixture",
+            "fixture_support",
+            "fabrica_beam_0",
+            "fabrica_beam_1",
+            "fabrica_beam_2",
+            "fabrica_beam_3",
+            "fabrica_beam_6"
+          ],
+          "targets": [
+            "part_0_fixture_pickup",
+            "part_1_fixture_pickup",
+            "part_2_fixture_pickup",
+            "part_3_fixture_pickup",
+            "part_6_fixture_pickup",
+            "part_6_pickup_clearance",
+            "part_3_pickup_clearance",
+            "part_1_pickup_clearance",
+            "part_2_pickup_clearance",
+            "part_0_pickup_clearance"
+          ]
+        },
+        "assembly_base": {
+          "translation": [
+            0.08444091664380823,
+            0.09943345665896433,
+            0.0
+          ],
+          "objects": [],
+          "targets": [
+            "part_0_assembled",
+            "part_1_assembled",
+            "part_2_assembled",
+            "part_3_assembled",
+            "part_6_assembled",
+            "part_6_assembly_hover",
+            "part_6_assembly_clearance",
+            "part_3_insert_00",
+            "part_3_insert_01",
+            "part_3_insert_02",
+            "part_3_insert_03",
+            "part_3_insert_04",
+            "part_3_insert_05",
+            "part_3_insert_06",
+            "part_3_insert_07",
+            "part_3_insert_08",
+            "part_3_preinsert_hover",
+            "part_3_assembly_clearance",
+            "part_1_insert_00",
+            "part_1_insert_01",
+            "part_1_insert_02",
+            "part_1_insert_03",
+            "part_1_insert_04",
+            "part_1_insert_05",
+            "part_1_insert_06",
+            "part_1_insert_07",
+            "part_1_insert_08",
+            "part_1_preinsert_hover",
+            "part_1_assembly_clearance",
+            "part_2_insert_00",
+            "part_2_insert_01",
+            "part_2_insert_02",
+            "part_2_insert_03",
+            "part_2_insert_04",
+            "part_2_insert_05",
+            "part_2_insert_06",
+            "part_2_insert_07",
+            "part_2_insert_08",
+            "part_2_preinsert_hover",
+            "part_2_assembly_clearance",
+            "part_0_insert_00",
+            "part_0_insert_01",
+            "part_0_insert_02",
+            "part_0_insert_03",
+            "part_0_insert_04",
+            "part_0_insert_05",
+            "part_0_insert_06",
+            "part_0_insert_07",
+            "part_0_insert_08",
+            "part_0_preinsert_hover",
+            "part_0_assembly_clearance"
+          ]
+        }
+      },
+      "appearance_groups": {
+        "table_surface": {
+          "color": [
+            0.14,
+            0.14,
+            0.14
+          ],
+          "objects": [
+            "factory_tabletop_visual"
+          ],
+          "lights": []
+        },
+        "background": {
+          "color": [
+            0.88,
+            0.88,
+            0.76
+          ],
+          "objects": [],
+          "lights": [
+            "warehouse_dome_fill"
+          ]
+        }
+      }
+    },
+    "success_detector": {
+      "policy_evaluation_mode": false,
+      "passed": false,
+      "criteria_passed": false,
+      "stable_steps": 0,
+      "required_stable_steps": 24,
+      "criteria": [
+        {
+          "object": "fabrica_beam_0",
+          "target": "part_0_assembled",
+          "object_position": [
+            0.3698386549949646,
+            -0.26307377219200134,
+            0.949347734451294
+          ],
+          "target_position": [
+            0.7844409166438082,
+            -0.12056654334103567,
+            1.0025
+          ],
+          "position_error": 0.44162032219099456,
+          "position_tolerance": 0.015,
+          "orientation_error": 1.5789495805976215,
+          "orientation_tolerance": 0.15,
+          "pose_passed": false,
+          "released_passed": true,
+          "attached_passed": true,
+          "static_metrics": {
+            "valid": true,
+            "linear_velocity": [
+              -0.0007261153659783304,
+              -0.000349844282027334,
+              -0.0019060686463490129
+            ],
+            "angular_velocity": [
+              0.061386484652757645,
+              -0.6239111423492432,
+              -0.35465243458747864
+            ],
+            "linear_speed": 0.0020694763180504924,
+            "angular_speed": 0.7202858900494904,
+            "linear_threshold": 0.05,
+            "angular_threshold": 2.0,
+            "pose_stable_override": true,
+            "pose_stability_position_drift": 0.0019166293387647782,
+            "pose_stability_orientation_drift": 0.022631825797202104,
+            "is_static": true
+          },
+          "static_passed": true,
+          "contact_passed": true,
+          "passed": false
+        },
+        {
+          "object": "fabrica_beam_1",
+          "target": "part_1_assembled",
+          "object_position": [
+            0.28886422514915466,
+            -0.3114996552467346,
+            0.9600952863693237
+          ],
+          "target_position": [
+            0.7844409166438082,
+            -0.12056654334103567,
+            1.0025
+          ],
+          "position_error": 0.5327756283022721,
+          "position_tolerance": 0.015,
+          "orientation_error": 1.616082911497408,
+          "orientation_tolerance": 0.15,
+          "pose_passed": false,
+          "released_passed": true,
+          "attached_passed": true,
+          "static_metrics": {
+            "valid": true,
+            "linear_velocity": [
+              0.002159795491024852,
+              -0.0006810849299654365,
+              -0.0010506309336051345
+            ],
+            "angular_velocity": [
+              0.03219565004110336,
+              -0.011553972959518433,
+              -0.2881821095943451
+            ],
+            "linear_speed": 0.002496481244376833,
+            "angular_speed": 0.29020506967137155,
+            "linear_threshold": 0.05,
+            "angular_threshold": 2.0,
+            "pose_stable_override": true,
+            "pose_stability_position_drift": 0.001589264616376485,
+            "pose_stability_orientation_drift": 0.018993406766504278,
+            "is_static": true
+          },
+          "static_passed": true,
+          "contact_passed": true,
+          "passed": false
+        },
+        {
+          "object": "fabrica_beam_2",
+          "target": "part_2_assembled",
+          "object_position": [
+            0.2345270812511444,
+            -0.16020892560482025,
+            1.019215703010559
+          ],
+          "target_position": [
+            0.7844409166438082,
+            -0.12056654334103567,
+            1.0025
+          ],
+          "position_error": 0.5515941982607822,
+          "position_tolerance": 0.015,
+          "orientation_error": 0.2549852454763378,
+          "orientation_tolerance": 0.15,
+          "pose_passed": false,
+          "released_passed": true,
+          "attached_passed": true,
+          "static_metrics": {
+            "valid": true,
+            "linear_velocity": [
+              7.202275446616113e-05,
+              -0.00012160783080616966,
+              -5.7279983593616635e-05
+            ],
+            "angular_velocity": [
+              0.002126083942130208,
+              0.008581952191889286,
+              -0.02296629175543785
+            ],
+            "linear_speed": 0.00015250160063015703,
+            "angular_speed": 0.024609361904542545,
+            "linear_threshold": 0.05,
+            "angular_threshold": 2.0,
+            "pose_stable_override": true,
+            "pose_stability_position_drift": 1.361561752738041e-06,
+            "pose_stability_orientation_drift": 2.773011212769461e-05,
+            "is_static": true
+          },
+          "static_passed": true,
+          "contact_passed": true,
+          "passed": false
+        },
+        {
+          "object": "fabrica_beam_3",
+          "target": "part_3_assembled",
+          "object_position": [
+            0.36929404735565186,
+            -0.21519464254379272,
+            1.0092744827270508
+          ],
+          "target_position": [
+            0.7844409166438082,
+            -0.12056654334103567,
+            1.0025
+          ],
+          "position_error": 0.42584890965541233,
+          "position_tolerance": 0.015,
+          "orientation_error": 1.6325578991826533,
+          "orientation_tolerance": 0.15,
+          "pose_passed": false,
+          "released_passed": true,
+          "attached_passed": true,
+          "static_metrics": {
+            "valid": true,
+            "linear_velocity": [
+              0.0022750364150851965,
+              0.0037950100377202034,
+              -0.0015055561671033502
+            ],
+            "angular_velocity": [
+              -0.10168631374835968,
+              0.40185046195983887,
+              0.763491690158844
+            ],
+            "linear_speed": 0.004673819770665503,
+            "angular_speed": 0.8687597257715588,
+            "linear_threshold": 0.05,
+            "angular_threshold": 2.0,
+            "pose_stable_override": true,
+            "pose_stability_position_drift": 0.0002489010356092657,
+            "pose_stability_orientation_drift": 0.005673005132868484,
+            "is_static": true
+          },
+          "static_passed": true,
+          "contact_passed": true,
+          "passed": false
+        },
+        {
+          "object": "fabrica_beam_6",
+          "target": "part_6_assembled",
+          "object_position": [
+            0.29002752900123596,
+            -0.2646276354789734,
+            1.0738368034362793
+          ],
+          "target_position": [
+            0.7844409166438082,
+            -0.12056654334103567,
+            1.0025
+          ],
+          "position_error": 0.5198914652816357,
+          "position_tolerance": 0.015,
+          "orientation_error": 3.1414720293174208,
+          "orientation_tolerance": 0.15,
+          "pose_passed": false,
+          "released_passed": true,
+          "attached_passed": true,
+          "static_metrics": {
+            "valid": true,
+            "linear_velocity": [
+              0.004535284824669361,
+              -0.009419222362339497,
+              0.003692533355206251
+            ],
+            "angular_velocity": [
+              -0.20712772011756897,
+              0.06931889057159424,
+              -0.6166154146194458
+            ],
+            "linear_speed": 0.011087171006680802,
+            "angular_speed": 0.6541571451704015,
+            "linear_threshold": 0.05,
+            "angular_threshold": 2.0,
+            "pose_stable_override": true,
+            "pose_stability_position_drift": 4.714003952309805e-05,
+            "pose_stability_orientation_drift": 0.0005479367788683266,
+            "is_static": true
+          },
+          "static_passed": true,
+          "contact_passed": true,
+          "passed": false
+        }
+      ]
+    },
+    "policy_interaction_history": [],
+    "local_skill_diagnostics": [
+      {
+        "phase": "base_6_move_above",
+        "phase_index": 1,
+        "robot": "franka_right",
+        "skill": "ur5e_move_above_part",
+        "status": "active",
+        "reason": "adapter_action",
+        "fallback": "native_phase_policy",
+        "held_object": "fabrica_beam_6",
+        "socket_object": null,
+        "adapter": "toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter",
+        "backend": "hardcoded"
+      },
+      {
+        "phase": "base_6_preshape",
+        "phase_index": 2,
+        "robot": "franka_right",
+        "skill": "ur5e_preshape_gripper",
+        "status": "active",
+        "reason": "adapter_action",
+        "fallback": "native_phase_policy",
+        "held_object": "fabrica_beam_6",
+        "socket_object": null,
+        "adapter": "toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter",
+        "backend": "hardcoded"
+      },
+      {
+        "phase": "base_6_descend",
+        "phase_index": 3,
+        "robot": "franka_right",
+        "skill": "ur5e_descend_to_grasp",
+        "status": "active",
+        "reason": "adapter_action",
+        "fallback": "native_phase_policy",
+        "held_object": "fabrica_beam_6",
+        "socket_object": null,
+        "adapter": "toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter",
+        "backend": "hardcoded"
+      },
+      {
+        "phase": "base_6_close_and_attach",
+        "phase_index": 4,
+        "robot": "franka_right",
+        "skill": "ur5e_close_gripper",
+        "status": "active",
+        "reason": "adapter_action",
+        "fallback": "native_phase_policy",
+        "held_object": "fabrica_beam_6",
+        "socket_object": null,
+        "adapter": "toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter",
+        "backend": "hardcoded"
+      },
+      {
+        "phase": "base_6_grip_settle",
+        "phase_index": 5,
+        "robot": "franka_right",
+        "skill": "ur5e_retreat_vertical",
+        "status": "failed",
+        "reason": "held_object_not_grasped",
+        "fallback": "native_phase_policy",
+        "held_object": "fabrica_beam_6",
+        "socket_object": null,
+        "required_robot": "franka_right",
+        "attached_to": null,
+        "grasped_by": null,
+        "object_status": "free"
+      }
+    ],
+    "runtime_constraint_monitor": {
+      "enabled": true,
+      "robot_model": "ur5e_robotiq_2f85",
+      "threshold": 0.03,
+      "collision_threshold": 0.0,
+      "check_stride": 32,
+      "include_ground": false,
+      "include_static_scene_objects": true,
+      "observed_steps": 1960,
+      "checks": 61,
+      "total_check_seconds": 3.902609744342044,
+      "average_check_seconds": 0.06397720892364006,
+      "max_check_seconds": 0.13943531014956534,
+      "candidate_total": 33,
+      "classifications": {
+        "proximity": 33
+      },
+      "violation_total": 0,
+      "violations_by_kind": {},
+      "minimum_distance": null,
+      "candidate_minimum_distance": 0.02121332435714854,
+      "events": [],
+      "proximity_events": [
+        {
+          "step": 832,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02401802913293967,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2901279032230377,
+            -0.24680370092391968,
+            1.2385265827178955
+          ],
+          "pos_b": [
+            0.28995230767048263,
+            -0.2343124922927001,
+            1.1433246878223247
+          ]
+        },
+        {
+          "step": 864,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02121332435714854,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.29002538323402405,
+            -0.24633069336414337,
+            1.2353556156158447
+          ],
+          "pos_b": [
+            0.28999707035536554,
+            -0.2335116273821023,
+            1.1430279676254407
+          ]
+        },
+        {
+          "step": 896,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021273453865793934,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900296449661255,
+            -0.24623864889144897,
+            1.2352772951126099
+          ],
+          "pos_b": [
+            0.2899575946122814,
+            -0.23304875064747843,
+            1.1429411776443374
+          ]
+        },
+        {
+          "step": 928,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02150533690014346,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900489568710327,
+            -0.24621808528900146,
+            1.2351255416870117
+          ],
+          "pos_b": [
+            0.28984639013153174,
+            -0.23212098284189359,
+            1.1426891922452411
+          ]
+        },
+        {
+          "step": 960,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021495058876342107,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900508940219879,
+            -0.24623191356658936,
+            1.2350660562515259
+          ],
+          "pos_b": [
+            0.2897659371059122,
+            -0.23198882938324955,
+            1.1426627046521767
+          ]
+        },
+        {
+          "step": 992,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021530778052823885,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900499403476715,
+            -0.2462703138589859,
+            1.23495352268219
+          ],
+          "pos_b": [
+            0.28983564901942593,
+            -0.23168344418624648,
+            1.142567464450746
+          ]
+        },
+        {
+          "step": 1024,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021508735794308093,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900503873825073,
+            -0.24627229571342468,
+            1.2349485158920288
+          ],
+          "pos_b": [
+            0.28980353857062546,
+            -0.2317132803223542,
+            1.1425804596910003
+          ]
+        },
+        {
+          "step": 1056,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021506584394130807,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900508940219879,
+            -0.2462738752378007,
+            1.2349474430084229
+          ],
+          "pos_b": [
+            0.2897934719347992,
+            -0.23171271122876785,
+            1.1425819323368103
+          ]
+        },
+        {
+          "step": 1088,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021504159286362817,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900513708591461,
+            -0.246274590493538,
+            1.2349451780319214
+          ],
+          "pos_b": [
+            0.2897743833902964,
+            -0.23170932432564387,
+            1.1425828258355313
+          ]
+        },
+        {
+          "step": 1120,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021527012562774325,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.29005128145217896,
+            -0.24627400934696198,
+            1.23494553565979
+          ],
+          "pos_b": [
+            0.2897494648640007,
+            -0.23165906856284532,
+            1.1425679707885443
+          ]
+        },
+        {
+          "step": 1152,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02152785956286009,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.290050745010376,
+            -0.24627391994128428,
+            1.2349462509155273
+          ],
+          "pos_b": [
+            0.2897457876249854,
+            -0.23165518646658062,
+            1.1425684389312702
+          ]
+        },
+        {
+          "step": 1184,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02150314844944322,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.29005011916418477,
+            -0.2462743371737977,
+            1.234945297241211
+          ],
+          "pos_b": [
+            0.28976286397390916,
+            -0.2317095150728687,
+            1.1425839297135343
+          ]
+        },
+        {
+          "step": 1216,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02150399392341905,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900500893618624,
+            -0.2462736368192216,
+            1.2349460124969482
+          ],
+          "pos_b": [
+            0.28976878819301655,
+            -0.23170897627027215,
+            1.1425837452425274
+          ]
+        },
+        {
+          "step": 1248,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021615486922164723,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2900494337081909,
+            -0.24627506732940674,
+            1.234946370124817
+          ],
+          "pos_b": [
+            0.2897465170511114,
+            -0.23147382825583554,
+            1.1425088725653316
+          ]
+        },
+        {
+          "step": 1280,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021731242064464043,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.29032638668756083,
+            -0.2462080270064851,
+            1.2350558042526245
+          ],
+          "pos_b": [
+            0.2901407195779622,
+            -0.23108393364104135,
+            1.1425529769091054
+          ]
+        },
+        {
+          "step": 1312,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02170499765253879,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.29011139273643494,
+            -0.24620212614536285,
+            1.2350329160690308
+          ],
+          "pos_b": [
+            0.29009487870870604,
+            -0.23110472166108112,
+            1.1425521359566897
+          ]
+        },
+        {
+          "step": 1344,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021697349947926506,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2899743616580963,
+            -0.2461983859539032,
+            1.2350151538848877
+          ],
+          "pos_b": [
+            0.2899933900119197,
+            -0.23108659758383426,
+            1.1425444727073155
+          ]
+        },
+        {
+          "step": 1376,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021694020854136048,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28993520140389994,
+            -0.24619778990745544,
+            1.2350151538848877
+          ],
+          "pos_b": [
+            0.28997825404672534,
+            -0.23109147323770304,
+            1.1425469599641758
+          ]
+        },
+        {
+          "step": 1408,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021693155986219015,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28980928659439087,
+            -0.24619556963443756,
+            1.2350008487804573
+          ],
+          "pos_b": [
+            0.28990517237934715,
+            -0.23107148526029636,
+            1.1425364753363136
+          ]
+        },
+        {
+          "step": 1440,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021691790474153302,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28976497054100037,
+            -0.24619576334953308,
+            1.234999656677246
+          ],
+          "pos_b": [
+            0.28988464300399536,
+            -0.23107178076660959,
+            1.142536677969086
+          ]
+        },
+        {
+          "step": 1472,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021684776602469105,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2896413803100586,
+            -0.2461959272623062,
+            1.2349889278411865
+          ],
+          "pos_b": [
+            0.2898147832313363,
+            -0.23106035358997665,
+            1.1425350382091601
+          ]
+        },
+        {
+          "step": 1504,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021676569058015807,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2895812690258026,
+            -0.2461942881345749,
+            1.2349810600280762
+          ],
+          "pos_b": [
+            0.2897923647138109,
+            -0.23106146837768649,
+            1.1425351147665492
+          ]
+        },
+        {
+          "step": 1536,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021674259226490328,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28947150707244873,
+            -0.24619191885123454,
+            1.2349774837493896
+          ],
+          "pos_b": [
+            0.2897343087543153,
+            -0.23105166108504088,
+            1.142535229494742
+          ]
+        },
+        {
+          "step": 1568,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021659685415756885,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2893417179584503,
+            -0.24619099497924052,
+            1.234964370727539
+          ],
+          "pos_b": [
+            0.28970110560998963,
+            -0.23105106087107002,
+            1.1425371566188431
+          ]
+        },
+        {
+          "step": 1600,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021660917519182823,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28927290439605713,
+            -0.24619093537330627,
+            1.2349625825881958
+          ],
+          "pos_b": [
+            0.2896641941908384,
+            -0.2310505916208324,
+            1.142534316598356
+          ]
+        },
+        {
+          "step": 1632,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021662579761713624,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2892864942550659,
+            -0.24618756771216593,
+            1.234960675239563
+          ],
+          "pos_b": [
+            0.2896481594325388,
+            -0.2310402799045136,
+            1.1425317419016146
+          ]
+        },
+        {
+          "step": 1664,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021661353444031528,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2892680764198303,
+            -0.24618609249591827,
+            1.234959363937378
+          ],
+          "pos_b": [
+            0.2896360905622892,
+            -0.2310387606822788,
+            1.1425317055580473
+          ]
+        },
+        {
+          "step": 1696,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02165708796113125,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28922900557518005,
+            -0.24618935585021973,
+            1.2349560260772705
+          ],
+          "pos_b": [
+            0.28962615629491467,
+            -0.23104328411793437,
+            1.1425326042203334
+          ]
+        },
+        {
+          "step": 1728,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021657304681939146,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28920090198516846,
+            -0.24618874490261078,
+            1.2349560260772705
+          ],
+          "pos_b": [
+            0.28961760784193286,
+            -0.23104209095840358,
+            1.1425325661181835
+          ]
+        },
+        {
+          "step": 1760,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021659037834834485,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28919902443885803,
+            -0.24618609249720774,
+            1.2349565029144287
+          ],
+          "pos_b": [
+            0.28960392466341045,
+            -0.23103620157499288,
+            1.1425317647270792
+          ]
+        },
+        {
+          "step": 1792,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021654474380429417,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.2892034649848938,
+            -0.24617865681648254,
+            1.2349506616592407
+          ],
+          "pos_b": [
+            0.2896202304688199,
+            -0.23103268468878962,
+            1.1425299583167912
+          ]
+        },
+        {
+          "step": 1824,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.02165717677728933,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28919127583503723,
+            -0.24618396162986755,
+            1.2349536419017952
+          ],
+          "pos_b": [
+            0.28960832091536937,
+            -0.2310329099054915,
+            1.142531033915769
+          ]
+        },
+        {
+          "step": 1856,
+          "kind": "agent_env",
+          "entity_a": "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.021658713362946808,
+          "threshold": 0.03,
+          "classification": "proximity",
+          "classification_reason": "positive_surface_clearance",
+          "phase": "base_6_close_and_attach",
+          "active_robot": "franka_right",
+          "active_object": "fabrica_beam_6",
+          "pos_a": [
+            0.28918948769569397,
+            -0.2461833953857422,
+            1.2349548339946907
+          ],
+          "pos_b": [
+            0.289606966747379,
+            -0.23103306367096588,
+            1.1425305528290994
+          ]
+        }
+      ],
+      "allowed_contacts": [],
+      "events_dropped": 0,
+      "registered_robots": {
+        "franka_left": "/World/env_0/robots/ur5e_left",
+        "franka_right": "/World/env_0/robots/ur5e_right"
+      },
+      "registered_links": {
+        "franka_left": [
+          "Gripper/Robotiq_2F_85/base_link",
+          "Gripper/Robotiq_2F_85/left_inner_finger",
+          "Gripper/Robotiq_2F_85/left_inner_knuckle",
+          "Gripper/Robotiq_2F_85/left_outer_finger",
+          "Gripper/Robotiq_2F_85/left_outer_knuckle",
+          "Gripper/Robotiq_2F_85/right_inner_finger",
+          "Gripper/Robotiq_2F_85/right_inner_knuckle",
+          "Gripper/Robotiq_2F_85/right_outer_finger",
+          "Gripper/Robotiq_2F_85/right_outer_knuckle",
+          "base_link",
+          "forearm_link",
+          "shoulder_link",
+          "upper_arm_link",
+          "wrist_1_link",
+          "wrist_2_link",
+          "wrist_3_link"
+        ],
+        "franka_right": [
+          "Gripper/Robotiq_2F_85/base_link",
+          "Gripper/Robotiq_2F_85/left_inner_finger",
+          "Gripper/Robotiq_2F_85/left_inner_knuckle",
+          "Gripper/Robotiq_2F_85/left_outer_finger",
+          "Gripper/Robotiq_2F_85/left_outer_knuckle",
+          "Gripper/Robotiq_2F_85/right_inner_finger",
+          "Gripper/Robotiq_2F_85/right_inner_knuckle",
+          "Gripper/Robotiq_2F_85/right_outer_finger",
+          "Gripper/Robotiq_2F_85/right_outer_knuckle",
+          "base_link",
+          "forearm_link",
+          "shoulder_link",
+          "upper_arm_link",
+          "wrist_1_link",
+          "wrist_2_link",
+          "wrist_3_link"
+        ]
+      },
+      "missing_prims": [],
+      "missing_object_geometry": [
+        "fabrica_fixture",
+        "fixture_support"
+      ],
+      "registered_static_obstacles": [
+        "static:optical_board:1"
+      ],
+      "missing_static_geometry": [],
+      "monitor_error": []
+    },
+    "assembly_sequence_precheck": {
+      "enabled": true,
+      "mode": "passive",
+      "feasible": true,
+      "phase_count": 160,
+      "normalized_action_count": 282,
+      "actions": [
+        {
+          "phase_index": 1,
+          "phase": "base_6_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 2,
+          "phase": "base_6_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 3,
+          "phase": "base_6_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 4,
+          "phase": "base_6_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 4,
+          "phase": "base_6_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 5,
+          "phase": "base_6_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 6,
+          "phase": "base_6_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 7,
+          "phase": "base_6_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 8,
+          "phase": "base_6_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 9,
+          "phase": "base_6_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 10,
+          "phase": "base_6_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 11,
+          "phase": "base_6_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 12,
+          "phase": "base_6_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 13,
+          "phase": "base_6_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 14,
+          "phase": "base_6_place",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 15,
+          "phase": "base_6_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 16,
+          "phase": "base_6_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 18,
+          "phase": "base_6_set_down",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 19,
+          "phase": "assemble_00_part_3_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 19,
+          "phase": "assemble_00_part_3_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 20,
+          "phase": "assemble_00_part_3_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 20,
+          "phase": "assemble_00_part_3_move_above",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 21,
+          "phase": "assemble_00_part_3_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 21,
+          "phase": "assemble_00_part_3_preshape",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 22,
+          "phase": "assemble_00_part_3_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 22,
+          "phase": "assemble_00_part_3_descend",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 23,
+          "phase": "assemble_00_part_3_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 23,
+          "phase": "assemble_00_part_3_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 23,
+          "phase": "assemble_00_part_3_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 24,
+          "phase": "assemble_00_part_3_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 24,
+          "phase": "assemble_00_part_3_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 25,
+          "phase": "assemble_00_part_3_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 25,
+          "phase": "assemble_00_part_3_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 26,
+          "phase": "assemble_00_part_3_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 26,
+          "phase": "assemble_00_part_3_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 27,
+          "phase": "assemble_00_part_3_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 27,
+          "phase": "assemble_00_part_3_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 28,
+          "phase": "assemble_00_part_3_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 28,
+          "phase": "assemble_00_part_3_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 29,
+          "phase": "assemble_00_part_3_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 29,
+          "phase": "assemble_00_part_3_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 30,
+          "phase": "assemble_00_part_3_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 30,
+          "phase": "assemble_00_part_3_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 31,
+          "phase": "assemble_00_part_3_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 31,
+          "phase": "assemble_00_part_3_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 32,
+          "phase": "assemble_00_part_3_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 32,
+          "phase": "assemble_00_part_3_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 33,
+          "phase": "assemble_00_part_3_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 33,
+          "phase": "assemble_00_part_3_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 34,
+          "phase": "assemble_00_part_3_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 34,
+          "phase": "assemble_00_part_3_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 35,
+          "phase": "assemble_00_part_3_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 35,
+          "phase": "assemble_00_part_3_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 36,
+          "phase": "assemble_00_part_3_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 36,
+          "phase": "assemble_00_part_3_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 37,
+          "phase": "assemble_00_part_3_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 37,
+          "phase": "assemble_00_part_3_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 38,
+          "phase": "assemble_00_part_3_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 38,
+          "phase": "assemble_00_part_3_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 39,
+          "phase": "assemble_00_part_3_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 39,
+          "phase": "assemble_00_part_3_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 40,
+          "phase": "assemble_00_part_3_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 40,
+          "phase": "assemble_00_part_3_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 41,
+          "phase": "assemble_00_part_3_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 41,
+          "phase": "assemble_00_part_3_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 42,
+          "phase": "assemble_00_part_3_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 42,
+          "phase": "assemble_00_part_3_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 43,
+          "phase": "assemble_00_part_3_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 43,
+          "phase": "assemble_00_part_3_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 44,
+          "phase": "assemble_00_part_3_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 44,
+          "phase": "assemble_00_part_3_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 45,
+          "phase": "assemble_00_part_3_clear_support_filters",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 46,
+          "phase": "assemble_00_part_3_release",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 46,
+          "phase": "assemble_00_part_3_release",
+          "kind": "detach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 47,
+          "phase": "assemble_00_part_3_retreat",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 47,
+          "phase": "assemble_00_part_3_retreat",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 48,
+          "phase": "assemble_00_part_3_park",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 48,
+          "phase": "assemble_00_part_3_park",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 49,
+          "phase": "hold_6_to_3_switch_release",
+          "kind": "detach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 50,
+          "phase": "hold_3_approach_clearance",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": null
+        },
+        {
+          "phase_index": 51,
+          "phase": "hold_3_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 52,
+          "phase": "hold_3_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 53,
+          "phase": "hold_3_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 54,
+          "phase": "hold_3_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 54,
+          "phase": "hold_3_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 55,
+          "phase": "assemble_01_part_1_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 55,
+          "phase": "assemble_01_part_1_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 56,
+          "phase": "assemble_01_part_1_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 56,
+          "phase": "assemble_01_part_1_move_above",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 57,
+          "phase": "assemble_01_part_1_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 57,
+          "phase": "assemble_01_part_1_preshape",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 58,
+          "phase": "assemble_01_part_1_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 58,
+          "phase": "assemble_01_part_1_descend",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 59,
+          "phase": "assemble_01_part_1_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 59,
+          "phase": "assemble_01_part_1_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 59,
+          "phase": "assemble_01_part_1_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 60,
+          "phase": "assemble_01_part_1_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 60,
+          "phase": "assemble_01_part_1_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 61,
+          "phase": "assemble_01_part_1_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 61,
+          "phase": "assemble_01_part_1_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 62,
+          "phase": "assemble_01_part_1_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 62,
+          "phase": "assemble_01_part_1_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 63,
+          "phase": "assemble_01_part_1_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 63,
+          "phase": "assemble_01_part_1_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 64,
+          "phase": "assemble_01_part_1_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 64,
+          "phase": "assemble_01_part_1_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 65,
+          "phase": "assemble_01_part_1_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 65,
+          "phase": "assemble_01_part_1_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 66,
+          "phase": "assemble_01_part_1_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 66,
+          "phase": "assemble_01_part_1_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 67,
+          "phase": "assemble_01_part_1_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 67,
+          "phase": "assemble_01_part_1_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 68,
+          "phase": "assemble_01_part_1_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 68,
+          "phase": "assemble_01_part_1_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 69,
+          "phase": "assemble_01_part_1_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 69,
+          "phase": "assemble_01_part_1_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 70,
+          "phase": "assemble_01_part_1_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 70,
+          "phase": "assemble_01_part_1_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 71,
+          "phase": "assemble_01_part_1_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 71,
+          "phase": "assemble_01_part_1_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 72,
+          "phase": "assemble_01_part_1_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 72,
+          "phase": "assemble_01_part_1_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 73,
+          "phase": "assemble_01_part_1_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 73,
+          "phase": "assemble_01_part_1_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 74,
+          "phase": "assemble_01_part_1_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 74,
+          "phase": "assemble_01_part_1_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 75,
+          "phase": "assemble_01_part_1_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 75,
+          "phase": "assemble_01_part_1_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 76,
+          "phase": "assemble_01_part_1_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 76,
+          "phase": "assemble_01_part_1_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 77,
+          "phase": "assemble_01_part_1_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 77,
+          "phase": "assemble_01_part_1_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 78,
+          "phase": "assemble_01_part_1_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 78,
+          "phase": "assemble_01_part_1_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 79,
+          "phase": "assemble_01_part_1_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 79,
+          "phase": "assemble_01_part_1_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 80,
+          "phase": "assemble_01_part_1_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 80,
+          "phase": "assemble_01_part_1_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 81,
+          "phase": "assemble_01_part_1_clear_support_filters",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 82,
+          "phase": "assemble_01_part_1_release",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 82,
+          "phase": "assemble_01_part_1_release",
+          "kind": "detach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_1"
+        },
+        {
+          "phase_index": 83,
+          "phase": "assemble_01_part_1_retreat",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 83,
+          "phase": "assemble_01_part_1_retreat",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 84,
+          "phase": "assemble_01_part_1_park",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 84,
+          "phase": "assemble_01_part_1_park",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 85,
+          "phase": "hold_3_to_6_switch_release",
+          "kind": "detach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_3"
+        },
+        {
+          "phase_index": 86,
+          "phase": "hold_6_approach_clearance",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": null
+        },
+        {
+          "phase_index": 87,
+          "phase": "hold_6_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 88,
+          "phase": "hold_6_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 89,
+          "phase": "hold_6_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 90,
+          "phase": "hold_6_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 90,
+          "phase": "hold_6_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 91,
+          "phase": "assemble_02_part_2_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 91,
+          "phase": "assemble_02_part_2_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 92,
+          "phase": "assemble_02_part_2_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 92,
+          "phase": "assemble_02_part_2_move_above",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 93,
+          "phase": "assemble_02_part_2_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 93,
+          "phase": "assemble_02_part_2_preshape",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 94,
+          "phase": "assemble_02_part_2_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 94,
+          "phase": "assemble_02_part_2_descend",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 95,
+          "phase": "assemble_02_part_2_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 95,
+          "phase": "assemble_02_part_2_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 95,
+          "phase": "assemble_02_part_2_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 96,
+          "phase": "assemble_02_part_2_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 96,
+          "phase": "assemble_02_part_2_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 97,
+          "phase": "assemble_02_part_2_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 97,
+          "phase": "assemble_02_part_2_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 98,
+          "phase": "assemble_02_part_2_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 98,
+          "phase": "assemble_02_part_2_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 99,
+          "phase": "assemble_02_part_2_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 99,
+          "phase": "assemble_02_part_2_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 100,
+          "phase": "assemble_02_part_2_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 100,
+          "phase": "assemble_02_part_2_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 101,
+          "phase": "assemble_02_part_2_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 101,
+          "phase": "assemble_02_part_2_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 102,
+          "phase": "assemble_02_part_2_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 102,
+          "phase": "assemble_02_part_2_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 103,
+          "phase": "assemble_02_part_2_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 103,
+          "phase": "assemble_02_part_2_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 104,
+          "phase": "assemble_02_part_2_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 104,
+          "phase": "assemble_02_part_2_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 105,
+          "phase": "assemble_02_part_2_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 105,
+          "phase": "assemble_02_part_2_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 106,
+          "phase": "assemble_02_part_2_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 106,
+          "phase": "assemble_02_part_2_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 107,
+          "phase": "assemble_02_part_2_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 107,
+          "phase": "assemble_02_part_2_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 108,
+          "phase": "assemble_02_part_2_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 108,
+          "phase": "assemble_02_part_2_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 109,
+          "phase": "assemble_02_part_2_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 109,
+          "phase": "assemble_02_part_2_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 110,
+          "phase": "assemble_02_part_2_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 110,
+          "phase": "assemble_02_part_2_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 111,
+          "phase": "assemble_02_part_2_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 111,
+          "phase": "assemble_02_part_2_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 112,
+          "phase": "assemble_02_part_2_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 112,
+          "phase": "assemble_02_part_2_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 113,
+          "phase": "assemble_02_part_2_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 113,
+          "phase": "assemble_02_part_2_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 114,
+          "phase": "assemble_02_part_2_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 114,
+          "phase": "assemble_02_part_2_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 115,
+          "phase": "assemble_02_part_2_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 115,
+          "phase": "assemble_02_part_2_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 116,
+          "phase": "assemble_02_part_2_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 116,
+          "phase": "assemble_02_part_2_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 117,
+          "phase": "assemble_02_part_2_clear_support_filters",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 118,
+          "phase": "assemble_02_part_2_release",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 118,
+          "phase": "assemble_02_part_2_release",
+          "kind": "detach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 119,
+          "phase": "assemble_02_part_2_retreat",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 119,
+          "phase": "assemble_02_part_2_retreat",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 120,
+          "phase": "assemble_02_part_2_park",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 120,
+          "phase": "assemble_02_part_2_park",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 121,
+          "phase": "hold_6_to_2_switch_release",
+          "kind": "detach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_6"
+        },
+        {
+          "phase_index": 122,
+          "phase": "hold_2_approach_clearance",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": null
+        },
+        {
+          "phase_index": 123,
+          "phase": "hold_2_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 124,
+          "phase": "hold_2_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 125,
+          "phase": "hold_2_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 126,
+          "phase": "hold_2_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 126,
+          "phase": "hold_2_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 127,
+          "phase": "assemble_03_part_0_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 127,
+          "phase": "assemble_03_part_0_transit_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 128,
+          "phase": "assemble_03_part_0_move_above",
+          "kind": "skill",
+          "skill": "ur5e_move_above_part",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 128,
+          "phase": "assemble_03_part_0_move_above",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 129,
+          "phase": "assemble_03_part_0_preshape",
+          "kind": "skill",
+          "skill": "ur5e_preshape_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 129,
+          "phase": "assemble_03_part_0_preshape",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 130,
+          "phase": "assemble_03_part_0_descend",
+          "kind": "skill",
+          "skill": "ur5e_descend_to_grasp",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 130,
+          "phase": "assemble_03_part_0_descend",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 131,
+          "phase": "assemble_03_part_0_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_close_gripper",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 131,
+          "phase": "assemble_03_part_0_close_and_attach",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 131,
+          "phase": "assemble_03_part_0_close_and_attach",
+          "kind": "attach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 132,
+          "phase": "assemble_03_part_0_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 132,
+          "phase": "assemble_03_part_0_grip_settle",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 133,
+          "phase": "assemble_03_part_0_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 133,
+          "phase": "assemble_03_part_0_peel_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 134,
+          "phase": "assemble_03_part_0_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 134,
+          "phase": "assemble_03_part_0_grip_contact_prime",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 135,
+          "phase": "assemble_03_part_0_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 135,
+          "phase": "assemble_03_part_0_peel_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 136,
+          "phase": "assemble_03_part_0_lift",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 136,
+          "phase": "assemble_03_part_0_lift",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 137,
+          "phase": "assemble_03_part_0_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 137,
+          "phase": "assemble_03_part_0_post_lift_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 138,
+          "phase": "assemble_03_part_0_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 138,
+          "phase": "assemble_03_part_0_pickup_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 139,
+          "phase": "assemble_03_part_0_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 139,
+          "phase": "assemble_03_part_0_assembly_clearance",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 140,
+          "phase": "assemble_03_part_0_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 140,
+          "phase": "assemble_03_part_0_transport_hover",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 141,
+          "phase": "assemble_03_part_0_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 141,
+          "phase": "assemble_03_part_0_insert_00",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 142,
+          "phase": "assemble_03_part_0_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 142,
+          "phase": "assemble_03_part_0_insert_01",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 143,
+          "phase": "assemble_03_part_0_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 143,
+          "phase": "assemble_03_part_0_insert_02",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 144,
+          "phase": "assemble_03_part_0_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 144,
+          "phase": "assemble_03_part_0_insert_03",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 145,
+          "phase": "assemble_03_part_0_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 145,
+          "phase": "assemble_03_part_0_insert_04",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 146,
+          "phase": "assemble_03_part_0_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 146,
+          "phase": "assemble_03_part_0_insert_05",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 147,
+          "phase": "assemble_03_part_0_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 147,
+          "phase": "assemble_03_part_0_insert_06",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 148,
+          "phase": "assemble_03_part_0_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 148,
+          "phase": "assemble_03_part_0_insert_07",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 149,
+          "phase": "assemble_03_part_0_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 149,
+          "phase": "assemble_03_part_0_insert_08",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 150,
+          "phase": "assemble_03_part_0_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_move_part_to_staging",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 150,
+          "phase": "assemble_03_part_0_insert_09",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 151,
+          "phase": "assemble_03_part_0_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 151,
+          "phase": "assemble_03_part_0_physical_hold_check",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 152,
+          "phase": "assemble_03_part_0_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 152,
+          "phase": "assemble_03_part_0_restore_gravity",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 153,
+          "phase": "assemble_03_part_0_clear_support_filters",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 154,
+          "phase": "assemble_03_part_0_release",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 154,
+          "phase": "assemble_03_part_0_release",
+          "kind": "detach",
+          "robot": "franka_left",
+          "object": "fabrica_beam_0"
+        },
+        {
+          "phase_index": 155,
+          "phase": "assemble_03_part_0_retreat",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 155,
+          "phase": "assemble_03_part_0_retreat",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 156,
+          "phase": "assemble_03_part_0_park",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_left",
+          "object": null
+        },
+        {
+          "phase_index": 156,
+          "phase": "assemble_03_part_0_park",
+          "kind": "skill",
+          "skill": "ur5e_hold_part_end",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 157,
+          "phase": "hold_2_final_release",
+          "kind": "detach",
+          "robot": "franka_right",
+          "object": "fabrica_beam_2"
+        },
+        {
+          "phase_index": 158,
+          "phase": "hold_2_final_retreat",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": null
+        },
+        {
+          "phase_index": 159,
+          "phase": "hold_2_final_park",
+          "kind": "skill",
+          "skill": "ur5e_retreat_vertical",
+          "robot": "franka_right",
+          "object": null
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "final_holding": {
+        "franka_left": null,
+        "franka_right": null
+      },
+      "check_seconds": 0.0012076471466571093
+    },
+    "stage_trajectory_precheck": {
+      "enabled": true,
+      "mode": "passive",
+      "check_stride": 128,
+      "num_waypoints": 4,
+      "observed_steps": 1960,
+      "checks": 16,
+      "segments_checked": 32,
+      "waypoints_checked": 64,
+      "violation_total": 32,
+      "violations_by_kind": {
+        "agent_env": 32
+      },
+      "minimum_distance": 0.01812172358495112,
+      "events": [
+        {
+          "step": 896,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01812172358495112,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3011241571501528,
+            -0.2674257537375069,
+            1.2261989735059409
+          ],
+          "pos_b": [
+            0.2987936386243345,
+            -0.23301082801505024,
+            1.1429396999513335
+          ]
+        },
+        {
+          "step": 896,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01812400775641776,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3011244521811276,
+            -0.26742940439316704,
+            1.2261999286463476
+          ],
+          "pos_b": [
+            0.2987936386243345,
+            -0.23301082801505024,
+            1.1429396999513335
+          ]
+        },
+        {
+          "step": 896,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01812629201619842,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30112474722638904,
+            -0.2674330550606751,
+            1.226200883767647
+          ],
+          "pos_b": [
+            0.2987936386243345,
+            -0.23301082801505024,
+            1.1429396999513335
+          ]
+        },
+        {
+          "step": 896,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01812857636428669,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3011250422859371,
+            -0.2674367057400314,
+            1.2262018388698381
+          ],
+          "pos_b": [
+            0.2987936386243345,
+            -0.23301082801505024,
+            1.1429396999513335
+          ]
+        },
+        {
+          "step": 1024,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018709807549658328,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30064952318917215,
+            -0.26651374208758943,
+            1.2262869199486182
+          ],
+          "pos_b": [
+            0.29876363861475447,
+            -0.2316471971184008,
+            1.142566930298717
+          ]
+        },
+        {
+          "step": 1024,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018805035149133037,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3006622474477162,
+            -0.2665429658416492,
+            1.226377639746545
+          ],
+          "pos_b": [
+            0.29876363861475447,
+            -0.2316471971184008,
+            1.142566930298717
+          ]
+        },
+        {
+          "step": 1024,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018900265803226027,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30068682447646844,
+            -0.26659483365554654,
+            1.226458660401904
+          ],
+          "pos_b": [
+            0.29876363861475447,
+            -0.2316471971184008,
+            1.142566930298717
+          ]
+        },
+        {
+          "step": 1024,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01899549637643115,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3007114079973016,
+            -0.26664672223474506,
+            1.2265396627590572
+          ],
+          "pos_b": [
+            0.29876363861475447,
+            -0.2316471971184008,
+            1.142566930298717
+          ]
+        },
+        {
+          "step": 1152,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018744413020902462,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30065001155902116,
+            -0.2665153084413825,
+            1.2262848085664066
+          ],
+          "pos_b": [
+            0.2988798738369474,
+            -0.23159264114872585,
+            1.1425481832694708
+          ]
+        },
+        {
+          "step": 1152,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018840062958811937,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3006625732897729,
+            -0.2665440221670374,
+            1.226376221454404
+          ],
+          "pos_b": [
+            0.2988798738369474,
+            -0.23159264114872585,
+            1.1425481832694708
+          ]
+        },
+        {
+          "step": 1152,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01893571295209985,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30068698788690645,
+            -0.26659538026510177,
+            1.2264579352847644
+          ],
+          "pos_b": [
+            0.2988798738369474,
+            -0.23159264114872585,
+            1.1425481832694708
+          ]
+        },
+        {
+          "step": 1152,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019031362703296584,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30071140909294697,
+            -0.26664675950742156,
+            1.2265396308121803
+          ],
+          "pos_b": [
+            0.2988798738369474,
+            -0.23159264114872585,
+            1.1425481832694708
+          ]
+        },
+        {
+          "step": 1280,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019012583225483215,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30088457433890414,
+            -0.2663925457833814,
+            1.2264156560704045
+          ],
+          "pos_b": [
+            0.2996299485623535,
+            -0.23111001578698098,
+            1.142529666199691
+          ]
+        },
+        {
+          "step": 1280,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01908263081697037,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3008204085062706,
+            -0.266464873697091,
+            1.2264621537347236
+          ],
+          "pos_b": [
+            0.2996299485623535,
+            -0.23111001578698098,
+            1.142529666199691
+          ]
+        },
+        {
+          "step": 1280,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019152887085498116,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3007444204853585,
+            -0.26651457119025695,
+            1.2265185001780883
+          ],
+          "pos_b": [
+            0.2996299485623535,
+            -0.23111001578698098,
+            1.142529666199691
+          ]
+        },
+        {
+          "step": 1280,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01922336384184796,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3006802926189554,
+            -0.26658688847236667,
+            1.2265653157327903
+          ],
+          "pos_b": [
+            0.2996299485623535,
+            -0.23111001578698098,
+            1.142529666199691
+          ]
+        },
+        {
+          "step": 1408,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018955544903066904,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3003552123087603,
+            -0.26632132898684713,
+            1.2263881889056254
+          ],
+          "pos_b": [
+            0.29907324071356767,
+            -0.23109005155784101,
+            1.1425429458195484
+          ]
+        },
+        {
+          "step": 1408,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019042977641930456,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30026450580885644,
+            -0.2663971927227378,
+            1.2264524831090833
+          ],
+          "pos_b": [
+            0.29907324071356767,
+            -0.23109005155784101,
+            1.1425429458195484
+          ]
+        },
+        {
+          "step": 1408,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01913065761021865,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.3001738303150298,
+            -0.26647306918538327,
+            1.2265169151348612
+          ],
+          "pos_b": [
+            0.29907324071356767,
+            -0.23109005155784101,
+            1.1425429458195484
+          ]
+        },
+        {
+          "step": 1408,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019218586476495672,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30010239471346783,
+            -0.2665855653474249,
+            1.2265657990300165
+          ],
+          "pos_b": [
+            0.29907324071356767,
+            -0.23109005155784101,
+            1.1425429458195484
+          ]
+        },
+        {
+          "step": 1536,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01892702107746222,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.30001059570764865,
+            -0.26628115985233025,
+            1.226381284322766
+          ],
+          "pos_b": [
+            0.2988134483378392,
+            -0.23106703514621524,
+            1.1425585223700696
+          ]
+        },
+        {
+          "step": 1536,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019021355256510886,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2999191200915179,
+            -0.2663945701264088,
+            1.2264371839886736
+          ],
+          "pos_b": [
+            0.2988134483378392,
+            -0.23106703514621524,
+            1.1425585223700696
+          ]
+        },
+        {
+          "step": 1536,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01911604733777912,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2998276995262165,
+            -0.26650799052385016,
+            1.2264932831006976
+          ],
+          "pos_b": [
+            0.2988134483378392,
+            -0.23106703514621524,
+            1.1425585223700696
+          ]
+        },
+        {
+          "step": 1536,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01921108717524901,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2997170992865063,
+            -0.26658481421447966,
+            1.2265652673892156
+          ],
+          "pos_b": [
+            0.2988134483378392,
+            -0.23106703514621524,
+            1.1425585223700696
+          ]
+        },
+        {
+          "step": 1664,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018907869680868925,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2998145228932351,
+            -0.2662756425530674,
+            1.2263637251343946
+          ],
+          "pos_b": [
+            0.2986480436998447,
+            -0.23105156106531305,
+            1.142565490191472
+          ]
+        },
+        {
+          "step": 1664,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019007929802755397,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.29971250507937713,
+            -0.266390736096553,
+            1.226425211852506
+          ],
+          "pos_b": [
+            0.2986480436998447,
+            -0.23105156106531305,
+            1.142565490191472
+          ]
+        },
+        {
+          "step": 1664,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01910841123428257,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2996105463175096,
+            -0.2665058397202861,
+            1.2264869434165064
+          ],
+          "pos_b": [
+            0.2986480436998447,
+            -0.23105156106531305,
+            1.142565490191472
+          ]
+        },
+        {
+          "step": 1664,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019209309242174705,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.29948939638087474,
+            -0.2665843466023906,
+            1.2265646054848893
+          ],
+          "pos_b": [
+            0.2986480436998447,
+            -0.23105156106531305,
+            1.142565490191472
+          ]
+        },
+        {
+          "step": 1792,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_0/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.018897344537781205,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2997521664708256,
+            -0.2662684999127095,
+            1.2263552627722003
+          ],
+          "pos_b": [
+            0.29857449946188863,
+            -0.23104515311891807,
+            1.1425682937073125
+          ]
+        },
+        {
+          "step": 1792,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_1/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01900070961163612,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.29964229624411826,
+            -0.2663859516950355,
+            1.2264194530067252
+          ],
+          "pos_b": [
+            0.29857449946188863,
+            -0.23104515311891807,
+            1.1425682937073125
+          ]
+        },
+        {
+          "step": 1792,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_2/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.01910451496222415,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2995324889295217,
+            -0.2665034188688513,
+            1.2264838839911754
+          ],
+          "pos_b": [
+            0.29857449946188863,
+            -0.23104515311891807,
+            1.1425682937073125
+          ]
+        },
+        {
+          "step": 1792,
+          "kind": "agent_env",
+          "entity_a": "franka_right@waypoint_3/wrist_3_link->Gripper/Robotiq_2F_85/base_link",
+          "entity_b": "fabrica_beam_6",
+          "distance": 0.019208755187004142,
+          "threshold": 0.03,
+          "classification": "candidate",
+          "classification_reason": "unclassified",
+          "phase": null,
+          "active_robot": null,
+          "active_object": null,
+          "pos_a": [
+            0.2994034883960562,
+            -0.266584294611145,
+            1.2265642413601925
+          ],
+          "pos_b": [
+            0.29857449946188863,
+            -0.23104515311891807,
+            1.1425682937073125
+          ]
+        }
+      ],
+      "skip_reasons": {},
+      "monitor_error": [],
+      "total_check_seconds": 0.9364072114694864
+    }
+  }
+]

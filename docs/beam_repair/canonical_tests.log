@@ -1,0 +1,426 @@
+F...FFF.......                                                           [100%]
+=================================== FAILURES ===================================
+___ test_canonical_metadata_covers_all_bundles_and_uses_runtime_safe_assets ____
+
+    def test_canonical_metadata_covers_all_bundles_and_uses_runtime_safe_assets():
+        metadata = load_fabrica_canonical_metadata()
+    
+        assert set(metadata['tasks']) == set(TASKS)
+        for task_name, part_count in TASKS.items():
+            task = metadata['tasks'][task_name]
+            assert len(task['parts']) == part_count
+            assert len(task['assembly_steps']) == part_count - 1
+            assert task['base_part'] not in {step['move_part'] for step in task['assembly_steps']}
+            assert [step['move_part'] for step in task['assembly_steps']] == [
+                step['move_part'] for step in reversed(task['disassembly_steps'])
+            ]
+            base_grasp_candidates = task['base_grasp_candidates']
+            assert base_grasp_candidates
+            assert [item['grasp_id'] for item in base_grasp_candidates] == sorted(
+                item['grasp_id'] for item in base_grasp_candidates
+            )
+            for base_grasp in base_grasp_candidates:
+                assert base_grasp['target_gripper'] == 'robotiq-85'
+                assert base_grasp['target_gripper_asset'] == 'isaac_official_robotiq_2f85'
+                assert base_grasp['gripper_frame_conversion'] == ('fabrica_minus_x_to_isaac_plus_y')
+                assert np.allclose(
+                    base_grasp['gripper_frame_rotation_wxyz'],
+                    [np.sqrt(0.5), 0.0, 0.0, np.sqrt(0.5)],
+                )
+                assert base_grasp['selection_method'] == ('compiler_joint_pickup_yaw_base_grasp_selection')
+                assert base_grasp['interior_clearance_minimum'] == 0.20
+>               assert base_grasp['interior_clearance_score'] >= 0.20
+E               assert 0.1852114475216994 >= 0.2
+
+tests/toolkits/test_fabrica_canonical_staged_tasks.py:95: AssertionError
+______ test_staged_recipes_compile_complete_contact_gated_skill_sequences ______
+
+    def test_staged_recipes_compile_complete_contact_gated_skill_sequences():
+        reference_recipe = load_task_recipe(
+            'fabrica_plumbers_block_ur5e_right_base_prepare',
+            scene_profile='taoyuan_grscenes_tabletop',
+        )
+        reference_robots = {entry['name']: entry for entry in reference_recipe['robots']}
+        reference_cameras = {entry['name']: entry for entry in reference_recipe['camera_specs']}
+        reference_workcell_objects = {
+            entry['name']: entry
+            for entry in reference_recipe['objects']
+            if entry['name'].startswith(('factory_', 'taoyuan_'))
+        }
+        for task_name in STAGED_TASKS:
+            recipe = load_task_recipe(
+                f'fabrica_{task_name}_ur5e_staged',
+                scene_profile='taoyuan_grscenes_tabletop',
+            )
+            resolved = recipe['fabrica_canonical_resolved']
+            objects = _object_map(recipe)
+            targets = _target_map(recipe)
+            robots = {entry['name']: entry for entry in recipe['robots']}
+            part_names = {f'fabrica_{task_name}_{part_id}' for part_id in range(20)}
+            actual_parts = set(objects).intersection(part_names)
+    
+            assert recipe['scene_asset_path'] == reference_recipe['scene_asset_path']
+            assert recipe['scene_asset_fallback_path'] == reference_recipe['scene_asset_fallback_path']
+            assert {
+                entry['name']: entry for entry in recipe['objects'] if entry['name'].startswith(('factory_', 'taoyuan_'))
+            } == reference_workcell_objects
+            assert not any(entry['name'] == 'factory_backdrop_visual' for entry in recipe['objects'])
+            assert ('assembly_support' in objects) is bool(recipe['fabrica_canonical'].get('official_bimanual_hold', False))
+            if recipe['fabrica_canonical'].get('official_bimanual_hold', False):
+                for part_name in actual_parts:
+                    assert objects[part_name].get('collision_approximation') == 'sdf'
+            for robot_name, robot in robots.items():
+                reference_robot = reference_robots[robot_name]
+                for field in (
+                    'type',
+                    'usd_path',
+                    'prim_path',
+                    'position',
+                    'orientation',
+                    'end_effector_prim_name',
+                    'gripper_xform_orient',
+                    'author_gripper_collision_pads',
+                    'initial_joint_positions',
+                ):
+                    assert robot[field] == reference_robot[field]
+            cameras = {entry['name']: entry for entry in recipe['camera_specs']}
+            for camera_name, camera in cameras.items():
+                reference_camera = reference_cameras[camera_name]
+                for field in (
+                    'prim_path',
+                    'translation',
+                    'orientation_euler',
+                    'resolution',
+                ):
+                    assert camera[field] == reference_camera[field]
+    
+            assert resolved['optical_board_position_randomized'] is False
+            assert np.isclose(
+                resolved['insertion_cartesian_position_step'],
+                0.00025,
+            )
+            assert np.isclose(
+                resolved['insertion_lateral_alignment_cartesian_position_step'],
+                0.00025,
+            )
+            assert np.isclose(
+                resolved['insertion_lateral_tolerance_object_extent_scale'],
+                0.04,
+            )
+            assert np.isclose(
+                resolved['insertion_lateral_alignment_entry_clearance'],
+                0.01,
+            )
+            assert np.isclose(
+                resolved['insertion_lateral_alignment_clearance_object_extent_scale'],
+                1.0,
+            )
+            assert np.isclose(
+                resolved['insertion_axial_recovery_cartesian_position_step'],
+                0.001,
+            )
+            assert np.isclose(resolved['insertion_axial_recovery_deadband'], 0.0005)
+            assert np.isclose(
+                resolved['insertion_compliance_capture_max_linear_speed'],
+                0.10,
+            )
+            assert np.isclose(
+                resolved['insertion_compliance_capture_max_angular_speed'],
+                2.0,
+            )
+            assert resolved['insertion_compliance_capture_stable_steps'] == 8
+            assert resolved['insertion_compliance_geometric_capture_after_steps'] == 1200
+            assert np.isclose(
+                resolved['insertion_compliance_minimum_gravity_alignment'],
+                0.70,
+            )
+            assert np.isclose(
+                resolved['insertion_compliant_alignment_retraction_limit'],
+                0.006,
+            )
+            assert resolved['insertion_compliant_track_object_orientation'] is True
+            assert np.isclose(
+                resolved['intermediate_insertion_lateral_position_tolerance'],
+                0.002,
+            )
+            assert np.isclose(
+                resolved['intermediate_insertion_lateral_alignment_cartesian_position_step'],
+                0.001,
+            )
+            assert np.isclose(resolved['base_support_release_position_tolerance'], 0.012)
+            assert np.isclose(resolved['base_support_lateral_position_tolerance'], 0.015)
+            assert np.isclose(
+                resolved['base_support_lateral_alignment_enter_tolerance'],
+                0.002,
+            )
+            assert np.isclose(
+                resolved['base_support_lateral_alignment_exit_tolerance'],
+                0.004,
+            )
+            assert np.isclose(
+                resolved['base_support_lateral_alignment_cartesian_position_step'],
+                0.002,
+            )
+            assert np.isclose(resolved['release_retreat_distance'], 0.06)
+            assert np.isclose(resolved['post_release_park_distance'], 0.35)
+            assert np.isclose(resolved['post_release_park_vertical_offset'], 0.02)
+            assert np.isclose(
+                resolved['post_release_park_minimum_planar_radius'],
+                0.28,
+            )
+            assert resolved['base_place_timeout_steps'] == 4800
+            selection = resolved['pickup_layout_selection']
+            assert np.isclose(selection['move_grasp_ik_position_tolerance'], 0.01)
+            assert np.isclose(selection['move_grasp_ik_orientation_tolerance'], 0.03)
+            assert selection['move_grasp_ik_max_iterations'] == 200
+            assert np.isclose(selection['move_grasp_ik_minimum_manipulability'], 0.08)
+            assert np.isclose(
+                selection['move_grasp_minimum_relative_orientation_continuity'],
+                0.90,
+            )
+            assert np.isclose(selection['move_grasp_fixture_footprint_margin'], 0.035)
+            assert np.isclose(selection['move_grasp_minimum_fixture_clearance'], 0.001)
+            selected_base_grasp = resolved['selected_base_grasp']
+            assert selection['pickup_yaw_degrees'] in {0.0, 90.0, -90.0, 180.0}
+            assert selection['base_grasp_id'] == selected_base_grasp['grasp_id']
+            assert selection['vertical_clearance_score'] >= 0.70
+            assert selection['interior_clearance_score'] >= 0.20
+            assert selection['support_clearance_ratio'] >= 0.70
+            assert np.isclose(
+                selected_base_grasp['support_clearance_ratio'],
+                selection['support_clearance_ratio'],
+            )
+            assert selection['orientation_continuity_score'] >= 0.50
+            assert selection['maximum_pickup_tcp_reach'] <= 0.82
+            assert selection['fixture_on_optical_board'] is True
+            assert len(selection['orientation_continuity_by_part']) == TASKS[task_name]
+            assert len(selection['pickup_tcp_reach_by_part']) == TASKS[task_name]
+            selected_move_grasps = resolved['selected_move_grasps']
+            move_grasp_selection = resolved['move_grasp_selection']
+            assert len(selected_move_grasps) == TASKS[task_name] - 1
+            assert set(selected_move_grasps) == set(move_grasp_selection)
+            for part_id, selected_move_grasp in selected_move_grasps.items():
+                diagnostics = move_grasp_selection[part_id]
+                assert selected_move_grasp['selection_method'] == ('runtime_physical_move_grasp_selection')
+                assert diagnostics['selected_grasp_id'] == selected_move_grasp['grasp_id']
+                assert diagnostics['feasible_candidate_count'] > 0
+                assert diagnostics['source_collision_feasible_candidate_count'] > 0
+                assert diagnostics['fixture_feasible_candidate_count'] > 0
+                assert diagnostics['ik_evaluated_candidate_count'] > 0
+                assert diagnostics['ik_feasible_candidate_count'] > 0
+                assert selected_move_grasp['ik_feasible'] is True
+                assert selected_move_grasp['ik_maximum_position_error'] <= 0.01
+                assert selected_move_grasp['ik_maximum_orientation_error'] <= 0.03
+                assert selected_move_grasp['ik_minimum_path_manipulability'] >= 0.08
+                assert (
+                    selected_move_grasp['pickup_orientation_continuity'] >= diagnostics['required_orientation_continuity']
+                )
+                assert set(selected_move_grasp['ik_errors_by_target']) >= {
+                    'pickup_approach',
+                    'pickup',
+                    'lift',
+                    'assembly_clearance',
+                    'insertion_final',
+                }
+                assert selected_move_grasp['pickup_orientation_continuity'] >= 0.50
+                assert selected_move_grasp['maximum_tcp_reach'] <= 0.82
+                assert selected_move_grasp['source_collision_count'] == diagnostics['minimum_source_collision_count']
+                assert selected_move_grasp['pickup_fixture_body_clearance'] >= diagnostics['required_fixture_clearance']
+                assert selected_move_grasp['insertion_body_clearance'] >= 0.0
+                assert selected_move_grasp['interior_clearance_score'] >= diagnostics['required_interior_clearance']
+            if task_name == 'car':
+                assert selected_move_grasps['0']['source_collision_count'] == 0
+                assert selected_move_grasps['0']['grasp_id'] == 2477
+                assert selected_move_grasps['3']['grasp_id'] == 1722
+                assert move_grasp_selection['3']['selected']['pickup_fixture_body_clearance'] > 0.035
+            assert selected_base_grasp['selection_method'] == ('joint_pickup_yaw_base_grasp_runtime_selection')
+            np.testing.assert_allclose(
+                objects['fabrica_fixture']['orientation'],
+                resolved['selected_pickup_orientation'],
+            )
+            np.testing.assert_allclose(
+                objects['fabrica_fixture']['position'],
+                resolved['selected_pickup_origin'],
+            )
+            configured_pickup_pivot = np.asarray(resolved['configured_pickup_origin'], dtype=float) + _quat_rotate(
+                resolved['configured_pickup_orientation'],
+                selection['pickup_rotation_pivot'],
+            )
+            selected_pickup_pivot = np.asarray(resolved['selected_pickup_origin'], dtype=float) + _quat_rotate(
+                resolved['selected_pickup_orientation'],
+                selection['pickup_rotation_pivot'],
+            )
+            np.testing.assert_allclose(selected_pickup_pivot, configured_pickup_pivot)
+            np.testing.assert_allclose(selection['pickup_layout_offset'], [0.0, 0.0, 0.0])
+            assert len(actual_parts) == TASKS[task_name]
+            assert set(recipe['domain_randomization']['fixed_objects']) >= {'optical_board'}
+            assert all(
+                'optical_board' not in (group.get('objects') or [])
+                for group in recipe['domain_randomization']['groups'].values()
+            )
+            assert len(recipe['success']) == TASKS[task_name]
+            assert recipe['max_steps'] >= len(recipe['phases']) * 360
+            assert recipe['max_steps'] >= TASKS[task_name] * 7000
+            base_part_id = recipe['fabrica_canonical_resolved']['base_part']
+            official_hold = bool(recipe['fabrica_canonical'].get('official_bimanual_hold', False))
+            if official_hold:
+                place_phase = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_place')
+                rebase_spec = place_phase['rebase_from_object']
+                rebased_targets = set(rebase_spec['targets'])
+                assert rebase_spec['enable_collision'] is True
+                assert rebase_spec['object'] == f'fabrica_{task_name}_{base_part_id}'
+            else:
+                base_release = next(
+                    phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_release_and_lock'
+                )
+                rebased_targets = set(base_release['lock'][0]['rebase_targets'])
+                base_retreat = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_retreat')
+                base_park = next(phase for phase in recipe['phases'] if phase['name'] == f'base_{base_part_id}_park')
+            assert {criterion['target'] for criterion in recipe['success']} <= rebased_targets
+>           assert rebased_targets == set(recipe['domain_randomization']['groups']['assembly_base']['targets'])
+E           AssertionError: assert {'part_0_asse...sert_03', ...} == {'part_0_asse...sert_03', ...}
+E             
+E             Extra items in the right set:
+E             'part_6_preseat'
+E             Use -v to get more diff
+
+tests/toolkits/test_fabrica_canonical_staged_tasks.py:403: AssertionError
+_________ test_staged_transport_uses_layout_aware_high_clearance_paths _________
+
+    def test_staged_transport_uses_layout_aware_high_clearance_paths():
+        metadata = load_fabrica_canonical_metadata()
+        for task_name in STAGED_TASKS:
+            recipe = load_task_recipe(
+                f'fabrica_{task_name}_ur5e_staged',
+                scene_profile='taoyuan_grscenes_tabletop',
+            )
+            task = metadata['tasks'][task_name]
+            targets = _target_map(recipe)
+            robots = {entry['name']: entry for entry in recipe['robots']}
+            phases = {phase['name']: phase for phase in recipe['phases']}
+            phase_order = {phase['name']: index for index, phase in enumerate(recipe['phases'])}
+            pickup_group = set(recipe['domain_randomization']['groups']['start_parts']['targets'])
+            assembly_group = set(recipe['domain_randomization']['groups']['assembly_base']['targets'])
+            transport_tcp_height = recipe['fabrica_canonical_resolved']['transport_tcp_height']
+            assert np.isclose(transport_tcp_height, 0.3525)
+            assert recipe['fabrica_canonical_resolved']['transport_timeout_steps'] == 4800
+            assert recipe['fabrica_canonical_resolved']['insertion_timeout_steps'] == 3600
+            grasp_by_part = {
+                str(task['base_part']): recipe['fabrica_canonical_resolved']['selected_base_grasp'],
+                **recipe['fabrica_canonical_resolved']['selected_move_grasps'],
+            }
+            preshape_by_part = {
+                phase['local_skill']['object'].rsplit('_', 1)[-1]: phase['local_skill']
+                for phase in recipe['phases']
+                if (phase.get('local_skill') or {}).get('name') == 'ur5e_preshape_gripper'
+                and not phase['name'].startswith('hold_')
+            }
+    
+            for part_id, grasp in grasp_by_part.items():
+                pickup_target = f'part_{part_id}_pickup_clearance'
+                assembly_target = f'part_{part_id}_assembly_clearance'
+                assert pickup_target in pickup_group
+                assert pickup_target not in assembly_group
+                assert assembly_target in assembly_group
+                assert assembly_target not in pickup_group
+                np.testing.assert_allclose(
+                    _target_tcp_position(targets[pickup_target], grasp)[2],
+                    transport_tcp_height,
+                    atol=1e-7,
+                )
+                np.testing.assert_allclose(
+                    _target_tcp_position(targets[assembly_target], grasp)[2],
+                    transport_tcp_height,
+                    atol=1e-7,
+                )
+>               np.testing.assert_allclose(
+                    preshape_by_part[part_id]['gripper_openness'],
+                    min(1.0, float(grasp['robotiq_open_ratio']) + 0.20),
+                )
+E               AssertionError: 
+E               Not equal to tolerance rtol=1e-07, atol=0
+E               
+E               Mismatched elements: 1 / 1 (100%)
+E               Max absolute difference among violations: 0.4584614
+E               Max relative difference among violations: 0.84659045
+E                ACTUAL: array(1.)
+E                DESIRED: array(0.541539)
+
+tests/toolkits/test_fabrica_canonical_staged_tasks.py:874: AssertionError
+_____ test_selected_pickup_layouts_fit_fixed_board_and_ur5e_reach_envelope _____
+
+    def test_selected_pickup_layouts_fit_fixed_board_and_ur5e_reach_envelope():
+        metadata = load_fabrica_canonical_metadata()
+        for task_name in STAGED_TASKS:
+            recipe = load_task_recipe(
+                f'fabrica_{task_name}_ur5e_staged',
+                scene_profile='taoyuan_grscenes_tabletop',
+            )
+            task = metadata['tasks'][task_name]
+            resolved = recipe['fabrica_canonical_resolved']
+            selection = resolved['pickup_layout_selection']
+            objects = _object_map(recipe)
+            robots = {entry['name']: entry for entry in recipe['robots']}
+    
+            board_position = np.asarray(objects['optical_board']['position'], dtype=float)
+            board_min = board_position + np.asarray(task['optical_board']['bbox_min'])
+            board_max = board_position + np.asarray(task['optical_board']['bbox_max'])
+            fixture_position = np.asarray(objects['fabrica_fixture']['position'], dtype=float)
+            fixture_orientation = np.asarray(
+                objects['fabrica_fixture']['orientation'],
+                dtype=float,
+            )
+            fixture_min = np.asarray(task['fixture']['bbox_min'], dtype=float)
+            fixture_max = np.asarray(task['fixture']['bbox_max'], dtype=float)
+            for x in (fixture_min[0], fixture_max[0]):
+                for y in (fixture_min[1], fixture_max[1]):
+                    for z in (fixture_min[2], fixture_max[2]):
+                        corner = fixture_position + _quat_rotate(
+                            fixture_orientation,
+                            [x, y, z],
+                        )
+                        assert np.all(corner[:2] >= board_min[:2] - 1e-9)
+                        assert np.all(corner[:2] <= board_max[:2] + 1e-9)
+    
+            grasp_by_part = {
+                str(task['base_part']): resolved['selected_base_grasp'],
+                **resolved['selected_move_grasps'],
+            }
+            workspace_offset = np.asarray(recipe['workspace_offset'], dtype=float)
+            for part_id, grasp in grasp_by_part.items():
+                object_pose = objects[f'fabrica_{task_name}_{part_id}']
+                tcp_position = _target_tcp_position(object_pose, grasp)
+                tcp_position += workspace_offset + np.asarray([0.0, 0.0, 0.10])
+                robot_name = 'franka_right' if part_id == str(task['base_part']) else 'franka_left'
+                robot_position = np.asarray(robots[robot_name]['position'], dtype=float)
+                if robots[robot_name].get('apply_workspace_offset', True):
+                    robot_position += workspace_offset
+                assert np.linalg.norm(tcp_position - robot_position) <= 0.82 + 1e-9
+>               assert np.isclose(
+                    np.linalg.norm(tcp_position - robot_position),
+                    selection['pickup_tcp_reach_by_part'][part_id],
+                )
+E               AssertionError: assert np.False_
+E                +  where np.False_ = <function isclose at 0x797102178bf0>(np.float64(0.5741805185889969), 0.5737215183575504)
+E                +    where <function isclose at 0x797102178bf0> = np.isclose
+E                +    and   np.float64(0.5741805185889969) = <function norm at 0x797101b5c2b0>((array([ 0.39464145, -0.16885188,  1.31226224]) - array([0.5  , 0.3  , 0.998])))
+E                +      where <function norm at 0x797101b5c2b0> = <module 'numpy.linalg' from '<PYTHON_ENV>/lib/python3.11/site-packages/numpy/linalg/__init__.py'>.norm
+E                +        where <module 'numpy.linalg' from '<PYTHON_ENV>/lib/python3.11/site-packages/numpy/linalg/__init__.py'> = np.linalg
+
+tests/toolkits/test_fabrica_canonical_staged_tasks.py:1098: AssertionError
+=============================== warnings summary ===============================
+tests/toolkits/test_fabrica_canonical_staged_tasks.py::test_move_grasp_selection_rejects_an_ill_conditioned_full_pose_ik_path
+  <PROJECT_ROOT>/internutopia/core/config/distribution/__init__.py:6: PydanticDeprecatedSince20: `pydantic.config.Extra` is deprecated, use literal values instead (e.g. `extra='allow'`). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class DistributionCfg(BaseModel, extra=Extra.allow):
+
+tests/toolkits/test_fabrica_canonical_staged_tasks.py::test_move_grasp_selection_rejects_an_ill_conditioned_full_pose_ik_path
+  <PROJECT_ROOT>/internutopia/core/config/task/__init__.py:10: PydanticDeprecatedSince20: `pydantic.config.Extra` is deprecated, use literal values instead (e.g. `extra='allow'`). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class TaskCfg(BaseModel, extra=Extra.allow):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/toolkits/test_fabrica_canonical_staged_tasks.py::test_canonical_metadata_covers_all_bundles_and_uses_runtime_safe_assets
+FAILED tests/toolkits/test_fabrica_canonical_staged_tasks.py::test_staged_recipes_compile_complete_contact_gated_skill_sequences
+FAILED tests/toolkits/test_fabrica_canonical_staged_tasks.py::test_staged_transport_uses_layout_aware_high_clearance_paths
+FAILED tests/toolkits/test_fabrica_canonical_staged_tasks.py::test_selected_pickup_layouts_fit_fixed_board_and_ur5e_reach_envelope
+4 failed, 10 passed, 2 warnings in 82.16s (0:01:22)

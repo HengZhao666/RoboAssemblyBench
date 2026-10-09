@@ -1,0 +1,20 @@
+{
+  "internutopia/core/runner.py": "b9a879dbf5db3d4fe024ef00ce602a899468b34c06aa79df6040d140e7fc518b",
+  "internutopia/core/util/pose_mixin.py": "3c2527b1a28fa60e33230e5acc0f5804f2ed9d310e3e65dc7cd6c1033b56e5d2",
+  "internutopia/core/robot/isaacsim/articulation.py": "ef9004b66c43c06c2230197cccbd056d5e3c6ed7317b087ffb8ccc3cd1b2c063",
+  "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "28a8f567a21d9ba41fafad454de6d6350174252267c4cc5ad29ec47ff12c9157",
+  "toolkits/factory_dual_franka_assembly/beam_physics_diagnostics.py": "bf9f3e0ce43c782011b20c261689030b63248db7ef1cb5337b80e46e4dc3762e",
+  "tests/toolkits/test_beam_physics_diagnostics.py": "7139424980ee37c1ac5cec23ed861e90aefbb0546ed46f594321086762a7e12c",
+  "toolkits/factory_dual_franka_assembly/beam_solver_control.py": "c782184740a63682ba2e72c275bbc812062536ca41edaf868b98440cc6c712b6",
+  "tests/toolkits/test_beam_solver_control.py": "540c39e4f591c16f8a7c4832b49e4f994589dd080b1f39abcf35324d5bb86a3d",
+  "toolkits/factory_dual_franka_assembly/demo_policy.py": "96b00e1563d2d85a1bb745ac96782137d8c38ee9c8195e5a38d092dc5df1f5ed",
+  "toolkits/factory_dual_franka_assembly/beam_idle_hold.py": "ad4675f1f014c0d729ad303fc2154631103787b78c0c827fec2a6f6d9eee75e4",
+  "tests/toolkits/test_beam_idle_hold.py": "0ee4d4cca538037192ba1a5eb69d18f95b2efbec875e6f1c68d8ff60b76ef745",
+  "internutopia_extension/configs/robots/ur5e.py": "f78e8070a74497ca72451e5f7c7052873ccfe7e50cda4587358b6bd0c97cb86b",
+  "internutopia_extension/robots/ur5e.py": "2ce86018c5e36717ca212e5acea6571c545a9515633ebf572bea018047427722",
+  "toolkits/factory_dual_franka_assembly/scene_builder.py": "c81ed6e4c1d2e88e9fcc4aded03079e722371459de898aba77955aed78ed36cb",
+  "toolkits/factory_dual_franka_assembly/beam_arm_drive.py": "09ed11d27112f0ca3bdc03ac869714864fc937363e91922567b8316e2166f90e",
+  "tests/toolkits/test_beam_arm_drive.py": "b0990c0687ad42fc6a7c6e8ad21dff0d20d6ffd1ed67c9649fb29a35008abdf4",
+  "roboassemblybench/tasks/fabrica_beam_ur5e_staged/recipe.yaml": "51c35028f8046c0c6c3f013e65dbd67829e9d21ad71f7a497dfb22e80c8e953d",
+  "roboassemblybench/core/fabrica_canonical.py": "7bbcd5285c4442bca1667e0d034e66546d61323129db17082e33aee9546fb248"
+}

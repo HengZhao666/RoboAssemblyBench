@@ -1,0 +1,26 @@
+{
+  "from_step": 11981,
+  "to_step": 12460,
+  "physics_duration": 1.9958333333333333,
+  "raw_mean_angular_velocity": [
+    -1.2950609732419252,
+    0.00351503780002768,
+    0.006094407578696822
+  ],
+  "raw_angular_std": [
+    0.27408469277085346,
+    0.014368519923493615,
+    0.019741628640108762
+  ],
+  "raw_mean_linear_velocity": [
+    -0.00019498161518261743,
+    0.005238220686563485,
+    0.010136393676899995
+  ],
+  "net_pose_angle_rad": 7.098863147063837e-05,
+  "mean_gyro_integrated_angle_estimate_rad": 2.584763999238317,
+  "net_translation_m": 8.256709079718611e-07,
+  "step_clock_offsets": [
+    3
+  ]
+}

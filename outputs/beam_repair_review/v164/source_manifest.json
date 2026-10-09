@@ -1,0 +1,5 @@
+{
+  "toolkits/factory_dual_franka_assembly/demo_policy.py": "75abe9dedd9d1a5f239c2a8f84617ad82c31a87ff220bd4fbd1a22c8def40580",
+  "toolkits/factory_dual_franka_assembly/beam_idle_hold.py": "ad4675f1f014c0d729ad303fc2154631103787b78c0c827fec2a6f6d9eee75e4",
+  "tests/toolkits/test_beam_idle_hold.py": "7623614572eb9b1bb823d59478d1e2db51b0633b5bedfd4058aeac9467ae4ee3"
+}

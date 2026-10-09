@@ -1,0 +1,178 @@
+{
+  "batch_started": "2026-10-09",
+  "stop_remaining_percent": 55,
+  "baseline": "v161",
+  "rounds": [
+    {
+      "version": "v162",
+      "status": "completed",
+      "change": "Four-boundary synchronized snapshots and setter-call audit",
+      "physics_parameters_changed": false,
+      "local_tests": 143,
+      "server_tests": 143,
+      "startup_network_delay_seconds": 280,
+      "video_download_pending": false,
+      "server_exit_code": 0,
+      "full_assembly_success": false,
+      "terminal_phase": "base_6_set_down",
+      "complete_boundary_cycles": 601,
+      "state_writes_in_capture": 0,
+      "conclusion": "Motion/velocity discrepancy appears within world.step, not action/observation or between cycles. Stabilization disabled."
+    },
+    {
+      "version": "v163",
+      "status": "completed",
+      "change": "Isolated TGS to PGS solver comparison",
+      "physics_parameters_changed": [
+        "solver_type"
+      ],
+      "local_tests": 158,
+      "server_tests": 158,
+      "solver_override_readback": "PGS",
+      "original_solver": "TGS",
+      "GPU_dynamics_enabled": false,
+      "video_download_pending": false,
+      "steps": 4525,
+      "terminal_phase": "base_6_assembly_clearance",
+      "terminal_reason": "held_object_not_grasped after position_slip",
+      "max_slip_at_failure_mm": 3.04356834072431,
+      "solver_retained": false,
+      "comparison_limit": "No same seating window reached; cannot claim PGS fixed velocity consistency",
+      "full_assembly_success": false
+    },
+    {
+      "version": "v164",
+      "status": "completed",
+      "comparison_baseline": "v162 TGS",
+      "solver": "TGS restored",
+      "change": "Persistent native target for genuinely idle Beam arm",
+      "server_tests": 178,
+      "video_download_pending": false,
+      "steps": 12838,
+      "full_assembly_success": false,
+      "terminal_phase": "base_6_set_down",
+      "terminal_reason": "timeout-failure",
+      "longest_seating_gate_streak": 0,
+      "last_2s_table_weight_fraction": 0.9747262616780109,
+      "last_2s_angular_speed_raw": 0.37551887737693596,
+      "last_2s_angular_speed_pose": 0.013511397938223873,
+      "idle_anchor_retained": true
+    },
+    {
+      "version": "v165",
+      "status": "completed",
+      "comparison_baseline": "v164",
+      "change": "Beam arm kp20000/kd1000, live verified; validated idle anchoring enabled by default phase flags",
+      "local_tests": 201,
+      "server_tests": 201,
+      "video_download_pending": false,
+      "deployment_script_repaired": "Only .py files are passed to py_compile; initial failed check started no sim",
+      "steps": 1466,
+      "full_assembly_success": false,
+      "terminal_phase": "base_6_close_and_attach",
+      "terminal_reason": "close_pose_gate_timeout",
+      "position_error_mm": 1.4171161798821634,
+      "position_tolerance_mm": 1.0,
+      "gains_retained": false
+    },
+    {
+      "version": "v166",
+      "status": "completed",
+      "change": "Beam arm midpoint kp40000/kd2000; all gates unchanged",
+      "local_tests": 201,
+      "server_tests": 201,
+      "video_download_pending": false,
+      "deployment_script_repaired": "Configuration-only upload has zero changed Python files; syntax now also checks verifier. No simulation had started during failed check.",
+      "steps": 13902,
+      "terminal_phase": "base_6_set_down",
+      "terminal_reason": "timeout-failure",
+      "full_assembly_success": false,
+      "table_gate_passed": false,
+      "all_seating_force_samples_N": 0,
+      "seating_samples": 4800,
+      "final_bottom_gap_mm": 2.9203535112995227,
+      "first_close_gate_error_mm": 0.7413891561796757,
+      "gains_retained": false,
+      "descent_command_z_m": 1.0954222869999375,
+      "descent_command_changed": false,
+      "max_hold_slip_mm": 0.6374943816244655,
+      "seating_guard": {
+        "seating_guard_samples": 4776,
+        "reasons": {
+          "pose_tracking_pause": 4776
+        },
+        "first": {
+          "step": 9126,
+          "phase": "base_6_set_down",
+          "robot": "franka_right",
+          "reason": "pose_tracking_pause",
+          "position_lead": 0.001038319367814968,
+          "orientation_lead": 0.0019464049729349352,
+          "joint_lead": 0.0012783077200801962
+        },
+        "last": {
+          "step": 13901,
+          "phase": "base_6_set_down",
+          "robot": "franka_right",
+          "reason": "pose_tracking_pause",
+          "position_lead": 0.0010380031441455434,
+          "orientation_lead": 0.0019464127467435418,
+          "joint_lead": 0.0012780693015010947
+        },
+        "position_lookahead_m": 0.001
+      }
+    }
+  ],
+  "max_rounds": 5,
+  "retained": [
+    "Beam default persistent idle arm targets",
+    "Four-boundary physics snapshots and state-write audit",
+    "Explicit arm gain configuration and live readback",
+    "Isolated opt-in solver comparison infrastructure"
+  ],
+  "rejected": [
+    "PGS solver",
+    "Arm kp20000/kd1000",
+    "Arm kp40000/kd2000"
+  ],
+  "final_gain_restore": {
+    "kp": 80000,
+    "kd": 4000,
+    "new_physics_run_after_restore": false,
+    "restores_previously_tested_gains": true,
+    "verification_pending": false,
+    "verification": {
+      "source_files_verified": 18,
+      "tests_passed": 201,
+      "configuration_pass": true,
+      "kp": 80000,
+      "kd": 4000,
+      "simulation_started_after_restore": false
+    }
+  },
+  "next_actions_zh": [
+    "核查下放请求未转成新关节命令的具体保护分支，记录目标TCP、命令关节FK、实测关节FK和物理TCP；不要直接放宽门槛。",
+    "已确认服务器PhysxSchema包含physxScene:enableExternalForcesEveryIteration，默认false；下批先读取场景实际值，再做外力按子步作用的独立对照。",
+    "原生板和补充支撑同高度且同时承重，后续只降低补充支撑顶面5mm作对照，保留原承托台。"
+  ],
+  "physics_interpretation": {
+    "known_numerical_mechanisms": [
+      "TGS steady-state nonzero reported velocity under gravity and drives",
+      "split impulse velocities need not exactly integrate pose"
+    ],
+    "source_urls": [
+      "https://nvidia-omniverse.github.io/PhysX/physx/5.7.0/docs/Simulation.html",
+      "https://nvidia-omniverse.github.io/PhysX/physx/5.8.0/docs/Simulation.html#solver-iterations"
+    ],
+    "not_proven_for_this_project": true,
+    "installed_schema_extension_version": "107.3.26+107.3.3",
+    "actual_scene_external_forces_flag_not_read": true,
+    "server_schema_file": "<SIM_HOME>/isaacsim-5.1.0/extscache/omni.usd.schema.physx-107.3.26+107.3.3.lx64.r.cp311.u353/plugins/PhysxSchema/resources/schema.usda:318"
+  },
+  "batch_status": "completed",
+  "stop_reason": "five_round_batch_cap",
+  "remaining_usage_percent": 63,
+  "quota_stop_threshold_reached": false,
+  "finished_at": "2026-10-09T20:32:10.638936",
+  "full_assembly_success": false
+}

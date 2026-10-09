@@ -1,0 +1,25 @@
+{
+  "seating_guard_samples": 4776,
+  "reasons": {
+    "pose_tracking_pause": 4776
+  },
+  "first": {
+    "step": 9126,
+    "phase": "base_6_set_down",
+    "robot": "franka_right",
+    "reason": "pose_tracking_pause",
+    "position_lead": 0.001038319367814968,
+    "orientation_lead": 0.0019464049729349352,
+    "joint_lead": 0.0012783077200801962
+  },
+  "last": {
+    "step": 13901,
+    "phase": "base_6_set_down",
+    "robot": "franka_right",
+    "reason": "pose_tracking_pause",
+    "position_lead": 0.0010380031441455434,
+    "orientation_lead": 0.0019464127467435418,
+    "joint_lead": 0.0012780693015010947
+  },
+  "position_lookahead_m": 0.001
+}

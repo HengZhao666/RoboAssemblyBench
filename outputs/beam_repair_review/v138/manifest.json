@@ -1,0 +1,34 @@
+{
+  "run": "v138_readonly_grasp",
+  "seed": 0,
+  "layout_seed": 505,
+  "source_before": {
+    "internutopia_extension/configs/robots/ur5e.py": "e1e63576ede98e270277746b9341b8a203a9c4167809f2f4b44556b2692f54b3",
+    "internutopia_extension/controllers/gripper_controller.py": "9b37c53e21b10fd4676b90d36b8cb9fd1ca3872babd31a5d2a3c362773c4bd59",
+    "internutopia_extension/robots/ur5e.py": "7596745de2832a75ed710cfb5fde006ade8c3a6cbb996b2ac5495acbbf664a88",
+    "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "cff1f1edc798877b84b2cce6b427e7b999b569d970a244a952379c2aec4566ce",
+    "roboassemblybench/core/fabrica_canonical.py": "ef3ab373927f53dec7f9544a9785fec8045ed150ec70469df8ea013fe7e68097",
+    "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "cf995462177ac2cf047cfd743f513dbefb2b09f9fd278a42b8fd015386407497",
+    "tests/toolkits/test_beam_physics_contract.py": "5590c04cefa00eeb56e0a9cd271a9c6a48a7c1925965b87142386824c11cea0b",
+    "roboassemblybench/tasks/fabrica_beam_ur5e_staged/recipe.yaml": "4bbb7f4c34cb935640fb7d7e492fa0718cb10d2ac222818564a25114f5e972c2",
+    "toolkits/factory_dual_franka_assembly/scene_builder.py": "1f711d66b2dc5a3f79b6e18436ff6e4e6fd73a06b146ca600bb98253cb9534e0"
+  },
+  "comparison": "v137 control unchanged; continuous pure-physical grasp registration must not rewrite object pose/velocity or collision state.",
+  "source_after": {
+    "internutopia_extension/configs/robots/ur5e.py": "e1e63576ede98e270277746b9341b8a203a9c4167809f2f4b44556b2692f54b3",
+    "internutopia_extension/controllers/gripper_controller.py": "9b37c53e21b10fd4676b90d36b8cb9fd1ca3872babd31a5d2a3c362773c4bd59",
+    "internutopia_extension/robots/ur5e.py": "7596745de2832a75ed710cfb5fde006ade8c3a6cbb996b2ac5495acbbf664a88",
+    "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "c3ebfba1895ca1771b50a1b0426c3b1ed061ab13e5c8273804c087cb3a933bbc",
+    "roboassemblybench/core/fabrica_canonical.py": "ef3ab373927f53dec7f9544a9785fec8045ed150ec70469df8ea013fe7e68097",
+    "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "cf995462177ac2cf047cfd743f513dbefb2b09f9fd278a42b8fd015386407497",
+    "tests/toolkits/test_beam_physics_contract.py": "a8703a3eb74af4e00eef2500bcb395b319a6b2f75cc51d961fe24334860a2fb2",
+    "roboassemblybench/tasks/fabrica_beam_ur5e_staged/recipe.yaml": "4bbb7f4c34cb935640fb7d7e492fa0718cb10d2ac222818564a25114f5e972c2",
+    "toolkits/factory_dual_franka_assembly/scene_builder.py": "1f711d66b2dc5a3f79b6e18436ff6e4e6fd73a06b146ca600bb98253cb9534e0"
+  },
+  "changed_files": [
+    "internutopia_extension/tasks/factory_dual_franka_assembly_task.py",
+    "tests/toolkits/test_beam_physics_contract.py"
+  ],
+  "launcher_pid": 2120655,
+  "launched_utc": "2026-09-29T17:58:35.763951+00:00"
+}

@@ -1,0 +1,928 @@
+{
+  "contact_threshold_N": 0.01,
+  "first_recorded_environment_contact": {
+    "step": 12384,
+    "phase": "assemble_00_part_3_close_and_attach",
+    "gripper_q": 0.20293547213077545,
+    "contact": {
+      "force": 1.4784516096117477,
+      "valid": true,
+      "source": "filtered_contact_probe",
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other_body": "/World/env_0/objects/fabrica_fixture",
+      "contacts": [
+        {
+          "point_world": [
+            0.31950268149375916,
+            -0.2210446447134018,
+            1.0195949077606201
+          ],
+          "normal_world": [
+            -5.612541258415149e-07,
+            -1.0,
+            -7.110308075652938e-08
+          ],
+          "normal_force": 0.0,
+          "separation": 0.000258153973845765
+        },
+        {
+          "point_world": [
+            0.3328365087509155,
+            -0.221044659614563,
+            1.0485950708389282
+          ],
+          "normal_world": [
+            -5.612541258415149e-07,
+            -1.0,
+            -7.110308075652938e-08
+          ],
+          "normal_force": 1.4784516096115112,
+          "separation": 0.00019282623543404043
+        },
+        {
+          "point_world": [
+            0.316834032535553,
+            -0.2210446447134018,
+            1.0485950708389282
+          ],
+          "normal_world": [
+            -5.612541258415149e-07,
+            -1.0,
+            -7.110308075652938e-08
+          ],
+          "normal_force": 0.0,
+          "separation": 0.0002698792377486825
+        },
+        {
+          "point_world": [
+            0.32154372334480286,
+            -0.2210446447134018,
+            1.019594669342041
+          ],
+          "normal_world": [
+            -5.612541258415149e-07,
+            -1.0,
+            -7.110308075652938e-08
+          ],
+          "normal_force": 0.0,
+          "separation": 0.0002483278512954712
+        },
+        {
+          "point_world": [
+            0.316834032535553,
+            -0.2210446447134018,
+            1.0211362838745117
+          ],
+          "normal_world": [
+            -5.612541258415149e-07,
+            -1.0,
+            -7.110308075652938e-08
+          ],
+          "normal_force": 0.0,
+          "separation": 0.000270940363407135
+        },
+        {
+          "point_world": [
+            0.3328365087509155,
+            -0.221044659614563,
+            1.0195931196212769
+          ],
+          "normal_world": [
+            -5.612541258415149e-07,
+            -1.0,
+            -7.110308075652938e-08
+          ],
+          "normal_force": 0.0,
+          "separation": 0.00019394978880882263
+        }
+      ],
+      "physics_dt": 0.004166666666666667,
+      "details_valid": true,
+      "details_at_capacity": false,
+      "friction_anchors": [
+        {
+          "force_world": [
+            -0.0006913491524755955,
+            -5.302907002402435e-09,
+            0.11088172346353531
+          ],
+          "point_world": [
+            0.31950268149375916,
+            -0.2210446447134018,
+            1.0195949077606201
+          ]
+        },
+        {
+          "force_world": [
+            -0.001506791915744543,
+            -4.845190471058913e-09,
+            0.11087363958358765
+          ],
+          "point_world": [
+            0.3328365087509155,
+            -0.221044659614563,
+            1.0485950708389282
+          ]
+        }
+      ],
+      "friction_force_world": [
+        -0.0021981410682201385,
+        -1.0148097473461348e-08,
+        0.22175536304712296
+      ],
+      "friction_valid": true,
+      "support_object": "fabrica_fixture"
+    },
+    "gate": {
+      "step": 12384,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "robot": "franka_left",
+      "target_position": [
+        0.3263180535178486,
+        -0.1871200584915103,
+        1.174789589520137
+      ],
+      "target_orientation": [
+        -1.8327170674008078e-05,
+        0.9999970654072737,
+        0.0024225629256722993,
+        -5.461386172358568e-06
+      ],
+      "command_target_position": [
+        0.3263180535178486,
+        -0.1871200584915103,
+        1.174789589520137
+      ],
+      "command_target_orientation": [
+        -1.8327170674008078e-05,
+        0.9999970654072737,
+        0.0024225629256722993,
+        -5.461386172358568e-06
+      ],
+      "ik_target_position": [
+        0.3263180535178486,
+        -0.1871200584915103,
+        1.174789589520137
+      ],
+      "ik_target_orientation": [
+        -1.8327170674008078e-05,
+        0.9999970654072737,
+        0.0024225629256722993,
+        -5.461386172358568e-06
+      ],
+      "recenter_offset_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "recenter_stop": null,
+      "position_error": 0.00030719154701503316,
+      "orientation_error": 0.0001883935441714478,
+      "position_tolerance": 0.001,
+      "orientation_tolerance": 0.02,
+      "recenter_target_ready": false,
+      "recenter_target_tolerance": 0.0001,
+      "ready_steps": 81,
+      "required_ready_steps": 24,
+      "stationary_window": false,
+      "gate_ready": true,
+      "current_position": [
+        0.3263591759736768,
+        -0.1870266168866473,
+        1.1744998581675623
+      ],
+      "current_orientation": [
+        4.600146658830004e-05,
+        0.9999971010670282,
+        0.0024063476935550525,
+        -7.233382810342915e-05
+      ],
+      "current_q": [
+        -2.1740164756774902,
+        -1.2472519874572754,
+        2.0770552158355713,
+        -2.4007575511932373,
+        -1.570862889289856,
+        2.533559799194336
+      ],
+      "command_q": [
+        -2.1739872452210807,
+        -1.2476250647547162,
+        2.07681932107701,
+        -2.400928871818145,
+        -1.570826128901784,
+        2.5335274092002087
+      ],
+      "close_started_step": 116,
+      "arm_frozen": true,
+      "hold_q": [
+        -2.1739872452210807,
+        -1.2476250647547162,
+        2.07681932107701,
+        -2.400928871818145,
+        -1.570826128901784,
+        2.5335274092002087
+      ],
+      "object_position": [
+        0.36929386854171753,
+        -0.21520490944385529,
+        1.0092824697494507
+      ],
+      "object_orientation": [
+        -0.0021849937578891127,
+        2.260209229513004e-05,
+        0.23909399720949148,
+        0.9709939679471808
+      ]
+    },
+    "control": {
+      "step": 12384,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "robot": "franka_left",
+      "close_elapsed_steps": 57,
+      "ready": false,
+      "stable_steps": 0,
+      "required_stable_steps": 96,
+      "gripper_q": 0.20293547213077545,
+      "control": {
+        "mode": "approach",
+        "probe_valid": true,
+        "forces": [
+          0.0,
+          0.0
+        ],
+        "first_contact": false,
+        "contact_control_active": false,
+        "physics_dt": 0.004166666666666667,
+        "force_limit": 40.0,
+        "force_within_limit": true,
+        "command_q": 0.22714448617906058,
+        "command_openness": 0.7160693922761743
+      },
+      "recenter": {
+        "enabled": true,
+        "updated": false,
+        "source": "pair_force",
+        "offset_world": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "forces": [
+          0.0,
+          0.0
+        ],
+        "reason": "no_contact"
+      },
+      "motion_detail": {
+        "checked": true,
+        "method": "fixed_pose_window",
+        "valid": false
+      },
+      "timing": "observation at step; command for next physics interval"
+    }
+  },
+  "peak_recorded_environment_contact": {
+    "step": 12404,
+    "phase": "assemble_00_part_3_close_and_attach",
+    "gripper_q": 0.2357856184244156,
+    "contact": {
+      "force": 158.6755065918098,
+      "valid": true,
+      "source": "filtered_contact_probe",
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other_body": "/World/env_0/objects/fabrica_fixture",
+      "contacts": [
+        {
+          "point_world": [
+            0.3194975256919861,
+            -0.2210446000099182,
+            1.0194728374481201
+          ],
+          "normal_world": [
+            -4.0392112055087637e-07,
+            -1.0,
+            -5.277493997368765e-09
+          ],
+          "normal_force": 0.0,
+          "separation": 0.0003306749276816845
+        },
+        {
+          "point_world": [
+            0.3328365385532379,
+            -0.2210446149110794,
+            1.0485949516296387
+          ],
+          "normal_world": [
+            -4.0392112055087637e-07,
+            -1.0,
+            -5.277493997368765e-09
+          ],
+          "normal_force": 158.67550659179688,
+          "separation": 3.1998479244066402e-06
+        },
+        {
+          "point_world": [
+            0.31683406233787537,
+            -0.2210446149110794,
+            1.0485950708389282
+          ],
+          "normal_world": [
+            -4.0392112055087637e-07,
+            -1.0,
+            -5.277493997368765e-09
+          ],
+          "normal_force": 0.0,
+          "separation": 3.957157605327666e-05
+        },
+        {
+          "point_world": [
+            0.32149654626846313,
+            -0.2210446000099182,
+            1.0194734334945679
+          ],
+          "normal_world": [
+            -4.0392112055087637e-07,
+            -1.0,
+            -5.277493997368765e-09
+          ],
+          "normal_force": 0.0,
+          "separation": 0.0003261268138885498
+        },
+        {
+          "point_world": [
+            0.31683406233787537,
+            -0.2210446000099182,
+            1.0210094451904297
+          ],
+          "normal_world": [
+            -4.0392112055087637e-07,
+            -1.0,
+            -5.277493997368765e-09
+          ],
+          "normal_force": 0.0,
+          "separation": 0.0003210492432117462
+        },
+        {
+          "point_world": [
+            0.3328365385532379,
+            -0.2210446000099182,
+            1.0194766521453857
+          ],
+          "normal_world": [
+            -4.0392112055087637e-07,
+            -1.0,
+            -5.277493997368765e-09
+          ],
+          "normal_force": 0.0,
+          "separation": 0.0003003142774105072
+        }
+      ],
+      "physics_dt": 0.004166666666666667,
+      "details_valid": true,
+      "details_at_capacity": false,
+      "friction_anchors": [
+        {
+          "force_world": [
+            -2.6612117290496826,
+            1.1573897609196138e-06,
+            -12.160933494567871
+          ],
+          "point_world": [
+            0.3194946348667145,
+            -0.22105538845062256,
+            1.0194675922393799
+          ]
+        },
+        {
+          "force_world": [
+            6.579250335693359,
+            -2.5825245302257827e-06,
+            -10.495588302612305
+          ],
+          "point_world": [
+            0.3328310549259186,
+            -0.22104482352733612,
+            1.0485999584197998
+          ]
+        }
+      ],
+      "friction_force_world": [
+        3.9180386066436768,
+        -1.4251347693061689e-06,
+        -22.656521797180176
+      ],
+      "friction_valid": true,
+      "support_object": "fabrica_fixture"
+    },
+    "gate": {
+      "step": 12404,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "robot": "franka_left",
+      "target_position": [
+        0.3263180535178486,
+        -0.1871200584915103,
+        1.174789589520137
+      ],
+      "target_orientation": [
+        -1.8327170674008078e-05,
+        0.9999970654072737,
+        0.0024225629256722993,
+        -5.461386172358568e-06
+      ],
+      "command_target_position": [
+        0.3263180535178486,
+        -0.1871200584915103,
+        1.174789589520137
+      ],
+      "command_target_orientation": [
+        -1.8327170674008078e-05,
+        0.9999970654072737,
+        0.0024225629256722993,
+        -5.461386172358568e-06
+      ],
+      "ik_target_position": [
+        0.3263180535178486,
+        -0.1871200584915103,
+        1.174789589520137
+      ],
+      "ik_target_orientation": [
+        -1.8327170674008078e-05,
+        0.9999970654072737,
+        0.0024225629256722993,
+        -5.461386172358568e-06
+      ],
+      "recenter_offset_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "recenter_stop": null,
+      "position_error": 0.0009598011553514419,
+      "orientation_error": 0.005950047058082237,
+      "position_tolerance": 0.001,
+      "orientation_tolerance": 0.02,
+      "recenter_target_ready": false,
+      "recenter_target_tolerance": 0.0001,
+      "ready_steps": 101,
+      "required_ready_steps": 24,
+      "stationary_window": false,
+      "gate_ready": true,
+      "current_position": [
+        0.3263778923385642,
+        -0.18790800524926443,
+        1.1753343623905097
+      ],
+      "current_orientation": [
+        0.002613957599619331,
+        0.9999960213029884,
+        0.0010471230072406263,
+        0.000167741671420356
+      ],
+      "current_q": [
+        -2.173645496368408,
+        -1.2474466562271118,
+        2.075692892074585,
+        -2.4031553268432617,
+        -1.5675514936447144,
+        2.536655902862549
+      ],
+      "command_q": [
+        -2.1739438686246593,
+        -1.24764432666108,
+        2.076222289766752,
+        -2.3986582367548204,
+        -1.5710309845559047,
+        2.5339048037947225
+      ],
+      "close_started_step": 116,
+      "arm_frozen": true,
+      "hold_q": [
+        -2.1739438686246593,
+        -1.24764432666108,
+        2.076222289766752,
+        -2.3986582367548204,
+        -1.5710309845559047,
+        2.5339048037947225
+      ],
+      "object_position": [
+        0.36929312348365784,
+        -0.21521617472171783,
+        1.0092871189117432
+      ],
+      "object_orientation": [
+        -0.0020570869697105884,
+        6.006840928214719e-06,
+        0.23909365618200376,
+        0.9709943315646279
+      ]
+    },
+    "control": {
+      "step": 12404,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "robot": "franka_left",
+      "close_elapsed_steps": 77,
+      "ready": false,
+      "stable_steps": 0,
+      "required_stable_steps": 96,
+      "gripper_q": 0.2357856184244156,
+      "control": {
+        "mode": "approach",
+        "probe_valid": true,
+        "forces": [
+          0.0,
+          0.0
+        ],
+        "first_contact": false,
+        "contact_control_active": false,
+        "physics_dt": 0.004166666666666667,
+        "force_limit": 40.0,
+        "force_within_limit": true,
+        "command_q": 0.3068443058910118,
+        "command_openness": 0.6164446176362353
+      },
+      "recenter": {
+        "enabled": true,
+        "updated": false,
+        "source": "pair_force",
+        "offset_world": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "forces": [
+          0.0,
+          0.0
+        ],
+        "reason": "no_contact"
+      },
+      "motion_detail": {
+        "checked": true,
+        "method": "fixed_pose_window",
+        "valid": false
+      },
+      "timing": "observation at step; command for next physics interval"
+    }
+  },
+  "environment_contact_records": 21,
+  "environment_sequence": [
+    {
+      "step": 12384,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.20293547213077545,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 1.4784516096117477
+    },
+    {
+      "step": 12385,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.2044122964143753,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 36.03472518921209
+    },
+    {
+      "step": 12386,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.20578087866306305,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 45.340675354007814
+    },
+    {
+      "step": 12387,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.20720387995243073,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 50.95806884766064
+    },
+    {
+      "step": 12388,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.20868133008480072,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 57.368324279808235
+    },
+    {
+      "step": 12389,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.21020914614200592,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 64.01864624026013
+    },
+    {
+      "step": 12390,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.21179738640785217,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 71.18908691409113
+    },
+    {
+      "step": 12391,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.21340349316596985,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 78.28433227542212
+    },
+    {
+      "step": 12392,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.21504703164100647,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 85.41385650635094
+    },
+    {
+      "step": 12393,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.21671301126480103,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 91.672599792484
+    },
+    {
+      "step": 12394,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.21844786405563354,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 98.57798767090223
+    },
+    {
+      "step": 12395,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.22016330063343048,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 106.01242828369548
+    },
+    {
+      "step": 12396,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.2219124585390091,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 112.96041870117402
+    },
+    {
+      "step": 12397,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.22366109490394592,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 120.16741943359602
+    },
+    {
+      "step": 12398,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.22551091015338898,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 126.35437774658443
+    },
+    {
+      "step": 12399,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.22734443843364716,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 133.47918701172128
+    },
+    {
+      "step": 12400,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.22914011776447296,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 140.68980407715446
+    },
+    {
+      "step": 12401,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.23093736171722412,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 147.11911010742818
+    },
+    {
+      "step": 12402,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.23263388872146606,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 151.6531219482487
+    },
+    {
+      "step": 12403,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.23428888618946075,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 154.85610961914728
+    },
+    {
+      "step": 12404,
+      "phase": "assemble_00_part_3_close_and_attach",
+      "gripper_q": 0.2357856184244156,
+      "body": "/World/env_0/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+      "other": "fabrica_fixture",
+      "force_N": 158.6755065918098
+    }
+  ],
+  "first_close_control": {
+    "step": 12327,
+    "phase": "assemble_00_part_3_close_and_attach",
+    "robot": "franka_left",
+    "close_elapsed_steps": 0,
+    "ready": false,
+    "stable_steps": 0,
+    "required_stable_steps": 96,
+    "gripper_q": -1.0250944981748944e-08,
+    "control": {
+      "mode": "approach",
+      "probe_valid": true,
+      "forces": [
+        0.0,
+        0.0
+      ],
+      "first_contact": false,
+      "contact_control_active": false,
+      "physics_dt": 0.004166666666666667,
+      "force_limit": 40.0,
+      "force_within_limit": true,
+      "command_q": 0.0,
+      "command_openness": 1.0
+    },
+    "recenter": {
+      "enabled": true,
+      "updated": false,
+      "source": "pair_force",
+      "offset_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "forces": [
+        0.0,
+        0.0
+      ],
+      "reason": "no_contact"
+    },
+    "motion_detail": {
+      "checked": true,
+      "method": "fixed_pose_window",
+      "valid": false
+    },
+    "timing": "observation at step; command for next physics interval"
+  },
+  "last_close_gate": {
+    "step": 12405,
+    "phase": "assemble_00_part_3_close_and_attach",
+    "robot": "franka_left",
+    "target_position": [
+      0.3263180535178486,
+      -0.1871200584915103,
+      1.174789589520137
+    ],
+    "target_orientation": [
+      -1.8327170674008078e-05,
+      0.9999970654072737,
+      0.0024225629256722993,
+      -5.461386172358568e-06
+    ],
+    "command_target_position": [
+      0.3263180535178486,
+      -0.1871200584915103,
+      1.174789589520137
+    ],
+    "command_target_orientation": [
+      -1.8327170674008078e-05,
+      0.9999970654072737,
+      0.0024225629256722993,
+      -5.461386172358568e-06
+    ],
+    "ik_target_position": [
+      0.3263180535178486,
+      -0.1871200584915103,
+      1.174789589520137
+    ],
+    "ik_target_orientation": [
+      -1.8327170674008078e-05,
+      0.9999970654072737,
+      0.0024225629256722993,
+      -5.461386172358568e-06
+    ],
+    "recenter_offset_world": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recenter_stop": null,
+    "position_error": 0.00101532473722273,
+    "orientation_error": 0.006217598885811643,
+    "position_tolerance": 0.001,
+    "orientation_tolerance": 0.02,
+    "recenter_target_ready": false,
+    "recenter_target_tolerance": 0.0001,
+    "ready_steps": 0,
+    "required_ready_steps": 24,
+    "stationary_window": false,
+    "gate_ready": false,
+    "current_position": [
+      0.32637921245652135,
+      -0.1879500003054722,
+      1.1753712599523187
+    ],
+    "current_orientation": [
+      0.002717134502352134,
+      0.9999958319971728,
+      0.000958114245220255,
+      0.00018757790777585971
+    ],
+    "current_q": [
+      -2.1736254692077637,
+      -1.247450590133667,
+      2.075615644454956,
+      -2.403221845626831,
+      -1.5674021244049072,
+      2.5368545055389404
+    ],
+    "command_q": [
+      -2.173942386399039,
+      -1.2476422296733625,
+      2.0761885724086806,
+      -2.3985380706191544,
+      -1.5710424132768281,
+      2.5339253008977005
+    ],
+    "close_started_step": 116,
+    "arm_frozen": true,
+    "hold_q": [
+      -2.1739438686246593,
+      -1.24764432666108,
+      2.076222289766752,
+      -2.3986582367548204,
+      -1.5710309845559047,
+      2.5339048037947225
+    ],
+    "object_position": [
+      0.36928221583366394,
+      -0.215381920337677,
+      1.0093759298324585
+    ],
+    "object_orientation": [
+      3.066523985125361e-05,
+      -0.0005435253225997432,
+      0.23893450048192919,
+      0.9710355339117708
+    ]
+  },
+  "max_target_pair_force_N": 0.0,
+  "target_max_linear_speed_m_s": 0.004970230579260044,
+  "target_max_angular_speed_rad_s": 0.9179488209247529,
+  "target_max_position_excursion_mm": 0.24026579816595758,
+  "target_first_pose": {
+    "step": 9712,
+    "object_position": [
+      0.3692936897277832,
+      -0.21520455181598663,
+      1.0092840194702148
+    ],
+    "object_orientation": [
+      -0.00218725623562932,
+      3.885113983415067e-06,
+      0.23909534513950348,
+      0.97099369764328
+    ]
+  },
+  "target_last_pose": {
+    "step": 12404,
+    "object_position": [
+      0.36929312348365784,
+      -0.21521617472171783,
+      1.0092871189117432
+    ],
+    "object_orientation": [
+      -0.002057087142020464,
+      6.006841431371868e-06,
+      0.23909367620944977,
+      0.9709944128990173
+    ]
+  },
+  "limitations": [
+    "First recorded contact is bounded by trace cadence, not exact first physics impact.",
+    "Zero force cannot rule out unvalidated filter coverage.",
+    "Pregrasp geometry fields use a default box; only measured poses/forces are used here."
+  ],
+  "tcp_delta_after_first_contact_mm": [
+    0.02003648284454318,
+    -0.923383418824919,
+    0.8714017847564204
+  ]
+}

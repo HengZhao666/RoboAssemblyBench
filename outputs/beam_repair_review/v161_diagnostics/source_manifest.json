@@ -1,0 +1,20 @@
+{
+  "roboassemblybench/core/fabrica_canonical.py": "834798c23c67f83cba1cc1efd630a72053121a5eee55796eb813441bd770008e",
+  "roboassemblybench/core/beam_coordinated.py": "8c929ff0d627ab1d93b312adf095d43ad4df64e427ecc8254711f11ad3855d23",
+  "roboassemblybench/core/beam_coordinated_poses.json": "3cf00c75eb1deb726bd9e756d5d1d816cf6e33203f717c1c3c38270a7a8f42d9",
+  "roboassemblybench/tasks/fabrica_beam_ur5e_staged/recipe.yaml": "813af4c34c00d1be1a8c40af49b1f9e638c09ce1b95594d55cc4c9e527905f85",
+  "toolkits/factory_dual_franka_assembly/beam_support_state.py": "0f4449bcca9ccaff581975bbb66089a101d9fc21137baf708fc61e4b190d0f73",
+  "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "2f0ea10ed60dc986d648ae0d604540156fa322f84aa910c10f3852b9a9c3ba55",
+  "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "36aa20fb0ba0a8b8782a2d9f4ca6fc4e090b307e2086a0a3ba0dfd6f1a82e78a",
+  "tests/toolkits/test_beam_coordinated.py": "9804fbf4ab707aa4b53cf1f91d7b4558066fa74391d366084e831f628671bf62",
+  "toolkits/factory_dual_franka_assembly/beam_seating_control.py": "0cf781d7c7c6359efb8724fabb348fef1d5a56b16ffc628ab5cc1f17b29edf79",
+  "tests/toolkits/test_beam_seating_control.py": "da515e9a6f3249f1e7500cd5b9dee491ced6c5055a8f70c2e8e0c59a1e885583",
+  "internutopia_extension/robots/ur5e.py": "30867eebc3fdf35e754b68fc9cc1f69331cb21eeae045adf7baf6a52cc7f4b8d",
+  "toolkits/factory_dual_franka_assembly/demo_policy.py": "34e5b7ea6eae3d2d99f4f77c24eecbf2888d20f352961b592731e979718c688d",
+  "tests/toolkits/test_beam_physics_contract.py": "1e659b3329e9746f04645139654fce21cda4b4a2f0862aa54fe1467f43b412e0",
+  "internutopia_extension/configs/robots/ur5e.py": "fd7c2d218e755605f1fce9923c5326333e8d15303bca2785a4e3e6b9cfb59623",
+  "toolkits/factory_dual_franka_assembly/scene_builder.py": "f987951ac70782efcf51d3c3d4fa50909102aa5b59a3b7baf57eed98f659b327",
+  "tests/toolkits/test_beam_material_binding.py": "88528d42d64cf723318f96ab3f31438d1009fb03eb29f37ce953dfa971c8b470",
+  "toolkits/factory_dual_franka_assembly/beam_contact_relief.py": "5b5e90bb3709af9414a54fbe993c8c44ec47f054565dd34c3056a6d375c7e33f",
+  "tests/toolkits/test_beam_contact_relief.py": "1e6fa9d00607f89b4a4985f5f47c50829fb5a09a9abaf060ec9c897bdb0de6e8"
+}

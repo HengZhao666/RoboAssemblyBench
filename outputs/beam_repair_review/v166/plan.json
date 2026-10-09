@@ -1,0 +1,22 @@
+{
+  "version": "v166",
+  "comparison_baseline": "v165",
+  "change": "Midpoint Beam arm gains kp40000/kd2000 to address 1.417mm static pose error exceeding unchanged1mm gate",
+  "seed": 0,
+  "layout_seed": 505,
+  "solver_type": "TGS",
+  "idle_anchor": "default phase flag",
+  "unchanged": [
+    "gripper",
+    "materials",
+    "geometry",
+    "maxeffort",
+    "drive type",
+    "dt",
+    "solver iterations",
+    "contact and slip gates",
+    "1mm close pose gate"
+  ],
+  "source_change_scope": "Beam recipe only",
+  "expected_server_tests": 201
+}
