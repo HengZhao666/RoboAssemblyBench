@@ -388,6 +388,56 @@ class PhysicsDiagnostics(unittest.TestCase):
         self.assertFalse(record['robots']['right']['metadata']['valid'])
         self.assertTrue(record['robots']['right']['valid'])
 
+    def test_external_forces_reads_existing_schema_once_without_writing(self):
+        reads = []
+        def forbidden(*args, **kwargs):
+            self.fail('Scene diagnostic must not apply a schema or write an attribute')
+        attribute = NS(Get=lambda: True, Set=forbidden)
+        api = NS(GetEnableExternalForcesEveryIterationAttr=lambda: reads.append('get') or attribute,
+                 CreateEnableExternalForcesEveryIterationAttr=forbidden, Apply=forbidden)
+        self.clock.get_physics_context()._physx_scene_api = api
+        first = self.sample()
+        readback = first['global_physics_settings']['external_forces_every_iteration']
+        self.assertTrue(readback['valid'])
+        self.assertIs(readback['value'], True)
+        self.assertEqual(readback['attribute'], 'physxScene:enableExternalForcesEveryIteration')
+        self.assertEqual(readback['scope'], 'existing_scene_attribute')
+        self.assertIn('existing_physx_scene_api', readback['source'])
+        second = self.sample('after_action')
+        self.assertNotIn('global_physics_settings', second)
+        self.assertEqual(reads, ['get'])
+
+    def test_external_forces_scene_attribute_fallback_preserves_false(self):
+        names = []
+        prim = NS(GetAttribute=lambda name: names.append(name) or NS(Get=lambda: False))
+        self.clock.get_physics_context()._physics_scene = NS(GetPrim=lambda: prim)
+        readback = self.sample()['global_physics_settings']['external_forces_every_iteration']
+        self.assertTrue(readback['valid'])
+        self.assertIs(readback['value'], False)
+        self.assertIn('physxScene:enableExternalForcesEveryIteration', names)
+        self.assertIn('existing_scene_attribute:', readback['source'])
+
+    def test_external_forces_missing_invalid_or_throwing_values_are_explicit(self):
+        for value in (None, 'false', 0, np.array([True])):
+            with self.subTest(value=str(value)):
+                self.task = task()
+                self.clock.get_physics_context()._physx_scene_api = NS(
+                    GetEnableExternalForcesEveryIterationAttr=lambda: NS(Get=lambda: value))
+                readback = self.sample()['global_physics_settings']['external_forces_every_iteration']
+                self.assertFalse(readback['valid'])
+                self.assertIn('boolean', readback['error'])
+        self.task = task()
+        self.clock.get_physics_context()._physx_scene_api = NS(
+            GetEnableExternalForcesEveryIterationAttr=lambda: (_ for _ in ()).throw(RuntimeError('read unavailable')))
+        readback = self.sample()['global_physics_settings']['external_forces_every_iteration']
+        self.assertFalse(readback['valid'])
+        self.assertIn('read unavailable', readback['error'])
+        self.task = task()
+        self.clock.get_physics_context = lambda: NS()
+        readback = self.sample()['global_physics_settings']['external_forces_every_iteration']
+        self.assertFalse(readback['valid'])
+        self.assertIn('No existing physics scene', readback['error'])
+
 
 if __name__ == '__main__':
     unittest.main()

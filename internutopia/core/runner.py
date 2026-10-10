@@ -506,6 +506,20 @@ class SimulatorRunner:
                 isolated_scene=self.env_num == 1,
             )
             log.info('Beam solver override: %s', json.dumps(audit, sort_keys=True))
+        requested_external_forces = os.environ.get('BEAM_EXTERNAL_FORCES_EVERY_ITERATION')
+        if requested_external_forces is not None:
+            from toolkits.factory_dual_franka_assembly.beam_external_force_control import (
+                apply_beam_external_force_override,
+            )
+
+            recipe_names = [getattr(task, 'recipe', None) for task in self.config.task_configs]
+            audit = apply_beam_external_force_override(
+                self._world.get_physics_context(), self._world.stage,
+                recipe_names, requested_external_forces,
+                isolated_scene=self.env_num == 1,
+            )
+            self._beam_external_force_override_audit = audit
+            log.info('Beam external-force iteration override: %s', json.dumps(audit, sort_keys=True))
 
     def setup_isaacsim(self):
         # Init Isaac Sim

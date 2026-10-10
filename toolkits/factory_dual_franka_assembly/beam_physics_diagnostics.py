@@ -198,7 +198,39 @@ def _global_physics_settings(context):
                              'value': bool(value) if field == 'gpu_dynamics_enabled' else str(value)}
         except Exception as exc:
             result[field] = {'valid': False, 'source': getter, 'error': _error(exc)}
+    result['external_forces_every_iteration'] = _external_forces_readback(context)
     return result
+
+
+def _external_forces_readback(context):
+    """Read an existing scene attribute, not a native active-solver flag.
+
+    No schema Apply/Create, simulation view, or state setter is used. The USD
+    scene value must be compared with startup configuration before inferring
+    that the running solver consumed it.
+    """
+    name = 'physxScene:enableExternalForcesEveryIteration'
+    result = {'attribute': name, 'scope': 'existing_scene_attribute'}
+    try:
+        physics = context.get_physics_context()
+        api = getattr(physics, '_physx_scene_api', None)
+        read = getattr(api, 'GetEnableExternalForcesEveryIterationAttr', None)
+        if callable(read):
+            result['source'] = 'existing_physx_scene_api.GetEnableExternalForcesEveryIterationAttr'
+            attribute = read()
+        else:
+            result['source'] = 'existing_scene_attribute:' + name
+            scene = getattr(physics, '_physics_scene', None)
+            if scene is None:
+                raise ValueError('No existing physics scene for external-forces readback')
+            prim = scene.GetPrim() if callable(getattr(scene, 'GetPrim', None)) else scene
+            attribute = prim.GetAttribute(name)
+        value = attribute.Get()
+        if not isinstance(value, (bool, np.bool_)):
+            raise ValueError('External-forces scene attribute has no valid boolean value')
+        return {**result, 'valid': True, 'value': bool(value)}
+    except Exception as exc:
+        return {**result, 'valid': False, 'error': _error(exc)}
 
 
 def _is_beam(task):

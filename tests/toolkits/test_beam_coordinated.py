@@ -122,17 +122,25 @@ class CoordinatedSupport(unittest.TestCase):
             self.assertFalse(table_support_ready({**valid,**changes},1.962),changes)
     def test_stability_counts_distinct_steps_and_resets_after_loss(self):
         self.task.phase_index=1;self.task.phase_entry_step=100
-        sample={'step':100,'valid':True,'motion_valid':True,'vertical_force':2.4,
+        self.task.step_counter=100
+        self.task.phase='seat'
+        sample={'step':100,'physics_stamp_valid':True,'physics_epoch':0,
+                'physics_step_index':100,'physics_time':100/240,'physics_dt':1/240,
+                'valid':True,'motion_valid':True,'vertical_force':2.4,
                 'bottom_gap':0.,'linear_speed':0.,'angular_speed':0.}
-        self.task._beam_table_observation=lambda:sample
+        self.task._beam_table_observation=lambda **kwargs:sample
         gate={'stable_steps':3}
         for _ in range(8):self.assertFalse(self.task._beam_table_supported(gate))
-        sample['step']=101;self.assertFalse(self.task._beam_table_supported(gate))
-        sample.update(step=102,vertical_force=0);self.assertFalse(self.task._beam_table_supported(gate))
+        sample.update(step=101,physics_step_index=101,physics_time=101/240)
+        self.assertFalse(self.task._beam_table_supported(gate))
+        sample.update(step=102,physics_step_index=102,physics_time=102/240,vertical_force=0)
+        self.assertFalse(self.task._beam_table_supported(gate))
         sample['vertical_force']=2.4
         for step in [103,104]:
-            sample['step']=step;self.assertFalse(self.task._beam_table_supported(gate))
-        sample['step']=105;self.assertTrue(self.task._beam_table_supported(gate))
+            sample.update(step=step,physics_step_index=step,physics_time=step/240)
+            self.assertFalse(self.task._beam_table_supported(gate))
+        sample.update(step=105,physics_step_index=105,physics_time=105/240)
+        self.assertTrue(self.task._beam_table_supported(gate))
     def test_real_phase_gate_accepts_valid_secondary_and_selective_release(self):
         import ast
         source=ast.parse((ROOT/'internutopia_extension/tasks/factory_dual_franka_assembly_task.py').read_text())

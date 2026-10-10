@@ -6378,8 +6378,46 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
             'recovery_events': copy.deepcopy(self._recovery_history[-16:]),
         }
 
+    def _beam_task_clock_event(self, event):
+        """Process Beam bookkeeping once per real tick, without stepping physics.
+
+        Initial scene observation may precede the live tensor view; it can
+        run initial phase bookkeeping once. The episode elapsed-step counter
+        remains zero until a later completed physics tick is observed.
+        Legacy tasks keep their existing scheduling behavior.
+        """
+        if not self.phase_specs or not self.phase_specs[0].get('beam_coordinated'):
+            return True
+        stamp = self._beam_physics_stamp()
+        if not stamp.get('valid'):
+            if not hasattr(self, '_beam_task_state_stamp') and int(self.step_counter) == 0:
+                if event == 'update' and not getattr(self, '_beam_clock_bootstrap_updated', False):
+                    self._beam_clock_bootstrap_updated = True
+                    return True
+                return False
+            self._set_terminal_state('failed', reason='beam-task-clock-unavailable', status='failed',
+                                     transition_type='failure', detail=stamp)
+            return False
+        token = (stamp['epoch'], stamp['index'])
+        if not hasattr(self, '_beam_task_done_stamp'):
+            # Prime from the first observed real state: a status query without
+            # an intervening physics step does not consume an episode step.
+            self._beam_task_done_stamp = token
+        attr = '_beam_task_state_stamp' if event == 'update' else '_beam_task_done_stamp'
+        previous = getattr(self, attr, None)
+        if previous == token:
+            return False
+        if previous is not None and (previous[0] != token[0] or token[1] < previous[1]):
+            self._set_terminal_state('failed', reason='beam-task-clock-reset', status='failed',
+                                     transition_type='failure', detail={'previous': previous, 'current': token})
+            return False
+        setattr(self, attr, token)
+        return True
+
     def _update_task_state(self):
         if self.success or self.failed or not self.phase_specs:
+            return
+        if not self._beam_task_clock_event('update'):
             return
 
         if self.policy_evaluation_mode:
@@ -6473,6 +6511,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         super().cleanup()
 
     def is_done(self) -> bool:
+        if not self._beam_task_clock_event('done'):
+            return self.success or self.failed or self.step_counter >= self.max_steps
         self.step_counter += 1
         if self.policy_evaluation_mode and not self.success and not self.failed:
             success_now = self._check_success()
