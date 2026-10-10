@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import os
 import random
 from typing import Iterable
 
@@ -21,12 +22,6 @@ from internutopia_extension.configs.robots.franka import (
 from internutopia_extension.configs.robots.franka import (
     gripper_cfg as franka_gripper_cfg,
 )
-from internutopia_extension.configs.robots.ur5e import UR5eRobotCfg
-from internutopia_extension.configs.robots.ur5e import arm_ik_cfg as ur5e_arm_ik_cfg
-from internutopia_extension.configs.robots.ur5e import (
-    arm_joint_cfg as ur5e_arm_joint_cfg,
-)
-from internutopia_extension.configs.robots.ur5e import gripper_cfg as ur5e_gripper_cfg
 from internutopia_extension.configs.sensors import RepCameraCfg
 from internutopia_extension.configs.tasks.factory_dual_franka_assembly_task import (
     FactoryDualFrankaAssemblyTaskCfg,
@@ -73,6 +68,27 @@ def _build_robot_cfgs(recipe_spec: dict) -> tuple[list, tuple[str, ...]]:
             common_kwargs['scale'] = tuple(float(value) for value in robot_spec['scale'])
 
         if robot_type in {'FrankaRobot', 'franka', 'Franka'}:
+            franka_kwargs = {}
+            for field_name in (
+                'end_effector_prim_name',
+                'gripper_open_position',
+                'gripper_closed_position',
+                'gripper_close_openness',
+                'gripper_dof_name',
+                'hand_link_name',
+                'left_finger_link_name',
+                'right_finger_link_name',
+                'initial_joint_positions',
+                'arm_joint_stiffness',
+                'arm_joint_damping',
+                'arm_joint_max_force',
+                'gripper_joint_stiffness',
+                'gripper_joint_damping',
+                'gripper_joint_max_force',
+                'gripper_joint_friction',
+            ):
+                if field_name in robot_spec:
+                    franka_kwargs[field_name] = copy.deepcopy(robot_spec[field_name])
             robots.append(
                 FrankaRobotCfg(
                     controllers=[
@@ -81,9 +97,21 @@ def _build_robot_cfgs(recipe_spec: dict) -> tuple[list, tuple[str, ...]]:
                         franka_gripper_cfg.update(),
                     ],
                     **common_kwargs,
+                    **franka_kwargs,
                 )
             )
         elif robot_type in {'UR5eRobot', 'ur5e', 'UR5e'}:
+            from internutopia_extension.configs.robots.ur5e import UR5eRobotCfg
+            from internutopia_extension.configs.robots.ur5e import (
+                arm_ik_cfg as ur5e_arm_ik_cfg,
+            )
+            from internutopia_extension.configs.robots.ur5e import (
+                arm_joint_cfg as ur5e_arm_joint_cfg,
+            )
+            from internutopia_extension.configs.robots.ur5e import (
+                gripper_cfg as ur5e_gripper_cfg,
+            )
+
             ur5e_kwargs = {}
             for field_name in (
                 'end_effector_prim_name',
@@ -139,10 +167,37 @@ def _normalize_camera_spec(camera_spec: dict, *, force_runtime_sensor: bool = Fa
     normalized = copy.deepcopy(camera_spec)
     normalized.setdefault('owner', normalized.get('robot', 'franka_left'))
     normalized.setdefault('video_key', f"observation.images.{normalized['name']}")
+
+    # Scene-profile inheritance is intentionally deep, so a world-mounted
+    # camera can inherit the legacy local ``translation`` and
+    # ``orientation_euler`` keys from the shared scaffold.  Passing both pose
+    # forms to Isaac Sim makes the local pose overwrite the world pose during
+    # sensor creation.  A camera with an explicit world eye/target must have a
+    # single authoritative pose.
+    if normalized.get('position') is not None and normalized.get('look_at') is not None:
+        normalized.pop('translation', None)
+        normalized.pop('orientation', None)
+        normalized.pop('orientation_euler', None)
+
     normalized.setdefault('attach_runtime_sensor', False)
     if force_runtime_sensor:
         normalized['attach_runtime_sensor'] = True
         normalized['rgba'] = True
+        is_front = str(normalized.get('view_type', '')).strip().lower() == 'front'
+        max_width = int(
+            os.environ.get(
+                'RAB_FRONT_RUNTIME_CAMERA_MAX_WIDTH' if is_front else 'RAB_RUNTIME_CAMERA_MAX_WIDTH',
+                os.environ.get(
+                    'RAB_FRONT_OUTPUT_WIDTH' if is_front else 'RAB_DATASET_OUTPUT_WIDTH',
+                    0,
+                ),
+            )
+        )
+        resolution = normalized.get('resolution') or [640, 360]
+        width, height = (int(resolution[0]), int(resolution[1]))
+        if max_width > 0 and width > max_width:
+            scaled_height = max(int(round((height * max_width / width) / 2.0) * 2), 64)
+            normalized['resolution'] = [max_width, scaled_height]
     return normalized
 
 
@@ -209,6 +264,7 @@ def _build_object_cfg(object_spec: dict, position: np.ndarray, orientation: np.n
             stabilization_threshold=object_spec.get('stabilization_threshold'),
             solver_position_iteration_count=object_spec.get('solver_position_iteration_count'),
             solver_velocity_iteration_count=object_spec.get('solver_velocity_iteration_count'),
+            force_renderable=bool(object_spec.get('force_renderable', False)),
             **common_kwargs,
         )
     if kind == 'dynamic_compound_cuboid':
@@ -224,11 +280,24 @@ def _build_object_cfg(object_spec: dict, position: np.ndarray, orientation: np.n
             **common_kwargs,
         )
     if kind == 'visual_cube':
-        return VisualCubeCfg(color=list(object_spec['color']), **common_kwargs)
+        return VisualCubeCfg(
+            color=list(object_spec['color']),
+            texture_path=object_spec.get('texture_path'),
+            texture_scale=None
+            if object_spec.get('texture_scale') is None
+            else tuple(float(value) for value in object_spec['texture_scale']),
+            texture_rotation_degrees=object_spec.get('texture_rotation_degrees'),
+            **common_kwargs,
+        )
     if kind == 'static_cube':
         return StaticCubeCfg(
             color=list(object_spec['color']),
             visible=object_spec.get('visible', True),
+            texture_path=object_spec.get('texture_path'),
+            texture_scale=None
+            if object_spec.get('texture_scale') is None
+            else tuple(float(value) for value in object_spec['texture_scale']),
+            texture_rotation_degrees=object_spec.get('texture_rotation_degrees'),
             static_friction=object_spec.get('static_friction'),
             dynamic_friction=object_spec.get('dynamic_friction'),
             restitution=object_spec.get('restitution'),
@@ -242,6 +311,7 @@ def _build_object_cfg(object_spec: dict, position: np.ndarray, orientation: np.n
             auto_collider=bool(object_spec.get('auto_collider', True)),
             rigid_body=bool(object_spec.get('rigid_body', True)),
             collision_approximation=object_spec.get('collision_approximation'),
+            force_renderable=bool(object_spec.get('force_renderable', False)),
             mass=object_spec.get('mass'),
             density=object_spec.get('density'),
             static_friction=object_spec.get('static_friction'),
@@ -365,6 +435,95 @@ def _normalize_success_criteria(success_criteria: Iterable[dict]) -> list[dict]:
     return [copy.deepcopy(criteria) for criteria in success_criteria]
 
 
+REFERENCE_CONTROL_FPS = 240
+
+
+def _scale_control_step_value(value, *, scale: float, minimum: int = 1):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return value
+    if int(value) == 0:
+        return value
+    return max(int(round(float(value) * scale)), minimum)
+
+
+def _scale_motion_step_value(value, *, scale: float):
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return float(value) * scale
+    if isinstance(value, list):
+        return [_scale_motion_step_value(item, scale=scale) for item in value]
+    if isinstance(value, tuple):
+        return tuple(_scale_motion_step_value(item, scale=scale) for item in value)
+    return value
+
+
+def _scale_phase_control_timing(value, *, count_scale: float, motion_scale: float):
+    if isinstance(value, list):
+        return [
+            _scale_phase_control_timing(item, count_scale=count_scale, motion_scale=motion_scale)
+            for item in value
+        ]
+    if not isinstance(value, dict):
+        return copy.deepcopy(value)
+
+    scaled = {}
+    for key, item in value.items():
+        normalized_key = str(key).lower()
+        if normalized_key == 'steps' or normalized_key.endswith('_steps'):
+            scaled[key] = _scale_control_step_value(item, scale=count_scale)
+        elif normalized_key.endswith(
+            (
+                '_position_step',
+                '_orientation_step',
+                '_joint_step',
+                '_position_command_accumulation_step',
+                '_max_lateral_step',
+            )
+        ):
+            scaled[key] = _scale_motion_step_value(item, scale=motion_scale)
+        else:
+            scaled[key] = _scale_phase_control_timing(
+                item,
+                count_scale=count_scale,
+                motion_scale=motion_scale,
+            )
+    return scaled
+
+
+def _apply_control_frequency(recipe_spec: dict, *, control_fps: int) -> dict:
+    control_fps = int(control_fps)
+    if control_fps <= 0:
+        raise ValueError('control_fps must be positive.')
+    resolved = copy.deepcopy(recipe_spec)
+    if control_fps == REFERENCE_CONTROL_FPS:
+        resolved['control_timing'] = {
+            'reference_fps': REFERENCE_CONTROL_FPS,
+            'control_fps': control_fps,
+            'step_count_scale': 1.0,
+            'motion_step_scale': 1.0,
+        }
+        return resolved
+
+    count_scale = control_fps / REFERENCE_CONTROL_FPS
+    motion_scale = REFERENCE_CONTROL_FPS / control_fps
+    for key in ('max_steps', 'phase_timeout_steps', 'policy_success_stable_steps'):
+        if resolved.get(key) is not None:
+            resolved[key] = _scale_control_step_value(resolved[key], scale=count_scale)
+    resolved['phases'] = _scale_phase_control_timing(
+        resolved.get('phases', []),
+        count_scale=count_scale,
+        motion_scale=motion_scale,
+    )
+    resolved['control_timing'] = {
+        'reference_fps': REFERENCE_CONTROL_FPS,
+        'control_fps': control_fps,
+        'step_count_scale': count_scale,
+        'motion_step_scale': motion_scale,
+    }
+    return resolved
+
+
 def build_dual_franka_assembly_episode(
     recipe: str,
     seed: int,
@@ -374,7 +533,9 @@ def build_dual_franka_assembly_episode(
     scene_profile: str | None = None,
     attach_runtime_cameras: bool = False,
     domain_randomization_enabled: bool | None = None,
+    randomization_profile: str | None = None,
     policy_evaluation_mode: bool = False,
+    control_fps: int = REFERENCE_CONTROL_FPS,
 ) -> FactoryDualFrankaAssemblyTaskCfg:
     recipe_spec = load_task_recipe(spec_path or recipe, scene_profile=scene_profile)
     resolved_layout_seed = int(seed if layout_seed is None else layout_seed)
@@ -382,7 +543,9 @@ def build_dual_franka_assembly_episode(
         recipe_spec,
         seed=resolved_layout_seed,
         enabled_override=domain_randomization_enabled,
+        profile=randomization_profile,
     )
+    recipe_spec = _apply_control_frequency(recipe_spec, control_fps=control_fps)
     rng = random.Random(seed)
     workspace_offset = np.asarray(recipe_spec.get('workspace_offset', [0.0, 0.0, 0.0]), dtype=float)
     robots, robot_names = _build_robot_cfgs(recipe_spec)
@@ -495,7 +658,9 @@ def build_dual_franka_assembly_batch(
     scene_profile: str | None = None,
     attach_runtime_cameras: bool = False,
     domain_randomization_enabled: bool | None = None,
+    randomization_profile: str | None = None,
     policy_evaluation_mode: bool = False,
+    control_fps: int = REFERENCE_CONTROL_FPS,
 ):
     seeds = [int(seed) for seed in seeds]
     if layout_seeds is None:
@@ -513,7 +678,9 @@ def build_dual_franka_assembly_batch(
             scene_profile=scene_profile,
             attach_runtime_cameras=attach_runtime_cameras,
             domain_randomization_enabled=domain_randomization_enabled,
+            randomization_profile=randomization_profile,
             policy_evaluation_mode=policy_evaluation_mode,
+            control_fps=control_fps,
         )
         for index, (seed, layout_seed) in enumerate(zip(seeds, resolved_layout_seeds))
     ]

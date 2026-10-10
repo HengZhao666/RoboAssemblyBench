@@ -43,8 +43,8 @@ camera_specs:
     resolution: [960, 540]
     rgba: true
     attach_runtime_sensor: true
-    translation: [5.0, 0.0, 3.2]
-    orientation_euler: [0.0, 1.1868238914, 1.5707963268]
+    position: [5.0, 0.0, 3.2]
+    look_at: [0.55, 0.0, 1.38]
   - name: left_wrist
     owner: franka_left
     robot: franka_left

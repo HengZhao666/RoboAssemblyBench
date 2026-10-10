@@ -1,4 +1,4 @@
-extends: _fabrica_canonical_ur5e.yaml
+extends: _fabrica_beam_v169.yaml
 task_name: fabrica_beam_ur5e_staged
 prompt: Assemble the canonical Fabrica beam with staged UR5e pick, transport, insertion, release, and retreat skills.
 

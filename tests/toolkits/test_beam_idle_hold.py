@@ -221,7 +221,10 @@ class BeamIdleHold(unittest.TestCase):
                           and n.name == '_apply_continuous_beam_physics')
         scope = {}
         definition = ast.Module(body=[ast.ImportFrom(module='__future__',
-            names=[ast.alias(name='annotations')], level=0), apply_node], type_ignores=[])
+            names=[ast.alias(name='annotations')], level=0), apply_node,
+            *[n for n in source.body if isinstance(n, ast.FunctionDef)
+              and n.name in {'_apply_idle_robot_home_policy', '_apply_ik_execution_policy'}]],
+            type_ignores=[])
         exec(compile(ast.fix_missing_locations(definition), str(path), 'exec'), scope)
         apply_physics = scope['_apply_continuous_beam_physics']
         region = ast.Module(body=compile_node.body[begin:end], type_ignores=[])
@@ -249,6 +252,8 @@ class BeamIdleHold(unittest.TestCase):
                     'task': {}, 'pickup_origin': [], 'pickup_orientation': [],
                     'assembly_origin': [], 'assembly_orientation': [], 'robots': [],
                     'generated_objects': [], '_apply_continuous_beam_physics': physics_pass,
+                    '_apply_idle_robot_home_policy': scope['_apply_idle_robot_home_policy'],
+                    '_apply_ik_execution_policy': scope['_apply_ik_execution_policy'],
                     '_compile_targets_and_phases': lambda **_kwargs: ([], phases, {}, [], [])}
                 with patch.dict('sys.modules', {'roboassemblybench.core.beam_coordinated': module}):
                     exec(compile(ast.fix_missing_locations(region), str(path), 'exec'), run_scope)

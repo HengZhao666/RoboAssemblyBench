@@ -4,6 +4,7 @@ from types import SimpleNamespace
 
 import cv2
 import numpy as np
+import pytest
 
 from internutopia_extension.tasks.factory_dual_franka_assembly_task import (
     FactoryDualFrankaAssemblyTask,
@@ -66,9 +67,162 @@ def test_position_randomization_is_deterministic_and_group_correlated():
     np.testing.assert_allclose(randomized_objects['factory_tabletop_visual']['color'], table_color)
     background_color = result_a['appearance_groups']['background']['color']
     assert result_a['appearance_groups']['background']['objects'] == []
-    assert 'factory_backdrop_visual' not in randomized_objects
     randomized_lights = {item['name']: item for item in randomized_a['scene_lights']}
     np.testing.assert_allclose(randomized_lights['warehouse_dome_fill']['color'], background_color)
+    assert 60.0 <= randomized_lights['warehouse_dome_fill']['intensity'] <= 160.0
+    assert -0.35 <= randomized_lights['warehouse_dome_fill']['exposure'] <= 0.0
+
+
+def test_appearance_randomization_rejects_members_outside_the_allowlist():
+    recipe = load_task_recipe(
+        'fabrica_plumbers_block_ur5e_staged',
+        scene_profile='taoyuan_grscenes_tabletop',
+    )
+    recipe['domain_randomization']['appearance']['groups']['table_surface']['objects'].append('optical_board')
+
+    with pytest.raises(ValueError, match='outside appearance.allowed_objects'):
+        apply_domain_randomization(recipe, seed=17, enabled_override=True)
+
+
+def test_visual_distractors_stay_outside_robot_base_keepouts():
+    recipe = load_task_recipe(
+        'fabrica_plumbers_block_ur5e_staged',
+        scene_profile='taoyuan_grscenes_tabletop',
+    )
+
+    randomized, result = apply_domain_randomization(recipe, seed=17, enabled_override=True)
+
+    keepout_radius = recipe['domain_randomization']['visual_distractors']['robot_keepout_radius']
+    workspace_offset = np.asarray(randomized['workspace_offset'], dtype=float)
+    robot_positions = []
+    for robot in randomized['robots']:
+        position = np.asarray(robot['position'], dtype=float)
+        if robot.get('apply_workspace_offset', True):
+            position = position + workspace_offset
+        robot_positions.append(position)
+    assert result['visual_distractors']
+    for distractor in result['visual_distractors']:
+        distractor_xy = np.asarray(distractor['position'][:2], dtype=float)
+        assert all(
+            np.linalg.norm(distractor_xy - robot_position[:2]) >= keepout_radius
+            for robot_position in robot_positions
+        )
+
+
+@pytest.mark.parametrize(
+    ('profile', 'appearance_groups'),
+    [
+        ('object_distractors', set()),
+        ('texture', set()),
+        ('lighting', set()),
+        ('table_color', {'table_surface'}),
+        ('scene', {'background'}),
+    ],
+)
+def test_randomization_profiles_keep_position_randomization_and_isolate_visual_domain(
+    profile,
+    appearance_groups,
+):
+    recipe = load_task_recipe(
+        'fabrica_plumbers_block_ur5e_staged',
+        scene_profile='taoyuan_grscenes_tabletop',
+    )
+
+    randomized, result = apply_domain_randomization(
+        recipe,
+        seed=17,
+        enabled_override=True,
+        profile=profile,
+    )
+
+    assert result['profile'] == profile
+    assert set(result['groups']) == {'start_parts', 'assembly_base'}
+    assert set(result['appearance_groups']) == appearance_groups
+    if profile != 'object_distractors':
+        assert not result['visual_distractors']
+    else:
+        assert 0 <= len(result['visual_distractors']) <= 8
+    assert bool(result['table_texture']) is (profile == 'texture')
+    assert bool(result['lighting']) is (profile == 'lighting')
+    assert bool(result['scene']) is (profile == 'scene')
+    if profile == 'texture':
+        texture_objects = {
+            item['name']: item
+            for item in randomized['objects']
+            if item['name'] in {'factory_tabletop_visual', 'factory_background_visual', 'factory_floor_visual'}
+        }
+        assert set(result['table_texture']['surface_map']) == {
+            'factory_tabletop_visual',
+            'factory_background_visual',
+            'factory_floor_visual',
+        }
+        for surface in result['table_texture']['surfaces']:
+            assert Path(surface['path']).is_file()
+            assert texture_objects[surface['object']]['texture_path'] == surface['path']
+    if profile == 'lighting':
+        assert 3 <= len(randomized['scene_lights']) <= 5
+        assert all(0.7 <= item['domain_randomization_intensity_multiplier'] <= 1.3 for item in result['lighting'])
+        assert result['lighting'][0]['name'] == 'warehouse_dome_fill'
+        area_lights = result['lighting'][1:]
+        assert 2 <= len(area_lights) <= 4
+        assert all(abs(value) <= 1.0 for item in area_lights for value in item['position'][:2])
+        assert all(3.2 <= item['position'][2] <= 3.8 for item in area_lights)
+    if profile == 'scene':
+        assert Path(result['scene']['asset_path']).name in {
+            'warehouse_with_forklifts.usd',
+            'warehouse.usd',
+            'warehouse_multiple_shelves.usd',
+            'full_warehouse.usd',
+        }
+        assert result['scene']['variant'] in set(result['scene']['available_variants'])
+        assert abs(result['scene']['position'][0]) <= 0.08
+        assert abs(result['scene']['position'][1]) <= 0.08
+        assert result['scene']['position'][2] == 0.0
+
+
+def test_table_color_profile_varies_only_the_table_surface_color():
+    recipe = load_task_recipe(
+        'fabrica_plumbers_block_ur5e_staged',
+        scene_profile='taoyuan_grscenes_tabletop',
+    )
+    original_table = next(item for item in recipe['objects'] if item['name'] == 'factory_tabletop_visual')
+    sampled_colors = set()
+
+    for seed in range(16):
+        randomized, result = apply_domain_randomization(
+            recipe,
+            seed=seed,
+            enabled_override=True,
+            profile='table_color',
+        )
+        randomized_table = next(
+            item for item in randomized['objects'] if item['name'] == 'factory_tabletop_visual'
+        )
+        sampled_colors.add(tuple(result['appearance_groups']['table_surface']['color']))
+        np.testing.assert_allclose(randomized_table['position'], original_table['position'])
+        np.testing.assert_allclose(randomized_table['scale'], original_table['scale'])
+
+    assert len(sampled_colors) > 1
+
+
+def test_object_distractor_profile_samples_zero_to_eight_objects():
+    recipe = load_task_recipe(
+        'fabrica_plumbers_block_ur5e_staged',
+        scene_profile='taoyuan_grscenes_tabletop',
+    )
+    counts = []
+    for seed in range(32):
+        _, result = apply_domain_randomization(
+            recipe,
+            seed=seed,
+            enabled_override=True,
+            profile='object_distractors',
+        )
+        counts.append(len(result['visual_distractors']))
+
+    assert min(counts) == 0
+    assert max(counts) <= 8
+    assert len(set(counts)) > 1
 
 
 def test_fixed_object_cannot_be_added_to_a_position_randomization_group():
@@ -324,6 +478,11 @@ def test_ur5e_atomic_skill_api_compiles_runtime_contract_and_keeps_old_import():
                 'target_object_target': 'part_0_target',
                 'timeout_steps': 720,
             },
+            {
+                'skill': 'move_arm_to_joint_positions',
+                'robot': 'franka_left',
+                'joint_positions': [0.0, -0.7, 0.0, -2.3, 0.0, 1.5, 0.7],
+            },
         ]
     )
 
@@ -331,11 +490,15 @@ def test_ur5e_atomic_skill_api_compiles_runtime_contract_and_keeps_old_import():
         'ur5e_move_above_part',
         'ur5e_preshape_gripper',
         'ur5e_move_part_to_staging',
+        'move_arm_to_joint_positions',
     ]
     assert phases[2]['timeout_steps'] == 720
     assert phases[2]['advance']['type'] == 'local_skill_complete'
     assert phases[0]['local_skill']['cartesian_servo'] is True
     assert phases[0]['local_skill']['guard_ik_branch_jump'] is True
+    assert phases[0]['local_skill']['ik_branch_jump_limit'] == 0.45
+    assert phases[0]['local_skill']['ik_branch_jump_reference_mode'] == 'reference'
+    assert phases[0]['local_skill']['allow_initial_ik_branch_jump'] is False
     assert phases[0]['local_skill']['max_command_tracking_error'] == 0.18
     assert phases[0]['local_skill']['cartesian_position_step'] == 0.015
     assert phases[0]['local_skill']['cartesian_orientation_step'] == 0.030
@@ -345,6 +508,33 @@ def test_ur5e_atomic_skill_api_compiles_runtime_contract_and_keeps_old_import():
     assert phases[2]['local_skill']['default_max_command_joint_step'] == 0.060
     assert phases[2]['local_skill']['default_max_command_wrist_joint_step'] == 0.040
     assert phases[2]['local_skill']['servo_target_object_pose'] is True
+    assert phases[3]['local_skill']['cartesian_servo'] is False
+    assert phases[3]['local_skill']['joint_target_stable_steps'] == 8
+
+
+def test_cartesian_skill_uses_kinematics_pose_instead_of_physical_gripper_frame():
+    adapter = UR5eAssemblyAtomicSkillAdapter({})
+    task = SimpleNamespace(
+        _get_robot_kinematics_pose=lambda _name: (
+            np.asarray([0.1, 0.2, 0.3]),
+            np.asarray([1.0, 0.0, 0.0, 0.0]),
+        )
+    )
+    tracked_robots = {
+        'franka_right': {
+            'position': [0.1, 0.2, 0.3],
+            'orientation': [0.0, 1.0, 0.0, 0.0],
+        }
+    }
+
+    pose = adapter._current_robot_pose(
+        task=task,
+        robot_name='franka_right',
+        tracked_robots=tracked_robots,
+    )
+
+    np.testing.assert_allclose(pose['position'], [0.1, 0.2, 0.3])
+    np.testing.assert_allclose(pose['orientation'], [1.0, 0.0, 0.0, 0.0])
 
 
 def test_preshape_gripper_requires_both_joint_and_object_stability(monkeypatch):
@@ -381,6 +571,41 @@ def test_preshape_gripper_requires_both_joint_and_object_stability(monkeypatch):
 
     assert action['gripper_controller'] == [0.65]
     assert completed[-1]['skill_name'] == 'ur5e_preshape_gripper'
+
+
+def test_preshape_accepts_a_static_safe_aperture_when_the_target_stalls(monkeypatch):
+    adapter = UR5eAssemblyAtomicSkillAdapter({})
+    completed = []
+    task = SimpleNamespace(
+        phase_index=1,
+        phase_entry_step=0,
+        phase_step_counter=0,
+        mark_local_skill_complete=lambda **payload: completed.append(payload),
+    )
+    monkeypatch.setattr(adapter, '_hold_joint_action', lambda **_kwargs: {})
+    # Requested openness is 0.564 (q=0.349), but a static q=0.394 still
+    # leaves openness 0.508, above the grasp-safe aperture 0.444.
+    monkeypatch.setattr(adapter, '_current_gripper_q', lambda **_kwargs: 0.394)
+    monkeypatch.setattr(adapter, '_gripper_open_closed_q', lambda **_kwargs: (0.0, 0.8))
+
+    adapter.act(
+        task=task,
+        robot_name='franka_left',
+        phase_spec={},
+        skill_spec={
+            'name': 'ur5e_preshape_gripper',
+            'object': 'part_6',
+            'gripper_openness': 0.564,
+            'minimum_gripper_openness': 0.444,
+            'stable_steps': 1,
+        },
+        tracked_robots={},
+        tracked_objects={'part_6': {'linear_speed': 0.0, 'angular_speed': 0.0}},
+    )
+
+    assert completed[-1]['skill_name'] == 'ur5e_preshape_gripper'
+    assert completed[-1]['detail']['target_gripper_ready'] is False
+    assert completed[-1]['detail']['minimum_opening_ready'] is True
 
 
 def test_object_relative_hover_retracts_along_the_grasp_axis():
@@ -1049,6 +1274,31 @@ def test_persistent_branch_jump_fails_after_tolerance(monkeypatch):
     assert second['diagnostics']['consecutive_failures'] == 2
 
 
+def test_previous_ik_target_keeps_wrist_continuous_across_pi_boundary():
+    previous_target_q = np.asarray([1.8, -1.6, 1.7, -1.7, -1.6, 2.99])
+    wrapped_ik_q = np.asarray([1.75, -1.59, 1.72, -1.73, -1.63, -2.91])
+    spec = {
+        'unwrap_revolute_joints': True,
+        'ik_branch_jump_limit': 0.45,
+    }
+
+    continuous_q = UR5eAssemblyAtomicSkillAdapter._joint_target_near_reference(
+        target_q=wrapped_ik_q,
+        reference_q=previous_target_q,
+        spec=spec,
+        preferred_abs_limit=3.05,
+        hard_preferred_abs_limit=True,
+    )
+
+    assert continuous_q[-1] > np.pi
+    assert abs(continuous_q[-1] - previous_target_q[-1]) < 0.45
+    assert not UR5eAssemblyAtomicSkillAdapter._ik_branch_jump_detected(
+        reference_q=previous_target_q,
+        target_q=continuous_q,
+        spec=spec,
+    )
+
+
 def test_attached_hold_defers_static_check_until_release():
     recipe = load_task_recipe(
         'fabrica_plumbers_block_ur5e_right_base_prepare',
@@ -1243,6 +1493,7 @@ def test_close_pose_gate_tracks_a_part_that_moves_while_closing():
         'close_gate_guard_ik_branch_jump': False,
         'close_gate_hold_refined_command': True,
         'close_gate_track_object_during_close': True,
+        'close_gate_lock_terminal_ik_target': False,
         'close_gate_max_joint_step': 3.0,
         'limit_command_to_measured_state': False,
     }
@@ -1465,6 +1716,52 @@ def test_transport_uses_observed_fixed_attachment_pose_and_invalidates_regrasp()
     np.testing.assert_allclose(second_orientation, [0.0, 1.0, 0.0, 0.0])
 
 
+def test_transport_converts_physical_attachment_pose_to_control_frame():
+    adapter = UR5eAssemblyAtomicSkillAdapter({})
+    conversions = []
+    task = SimpleNamespace(
+        _physical_relative_pose_to_control_frame=lambda robot, position, orientation: (
+            conversions.append((robot, np.asarray(position), np.asarray(orientation)))
+            or (
+                np.asarray([-0.1, -0.2, 0.3], dtype=float),
+                np.asarray([0.0, 0.0, 0.0, 1.0], dtype=float),
+            )
+        )
+    )
+    attachment = {
+        'robot_name': 'franka_right',
+        'mode': 'fixed_joint',
+        'attach_step': 10,
+        'joint_path': '/World/part/joint',
+        'position': [0.1, 0.2, 0.3],
+        'orientation': [1.0, 0.0, 0.0, 0.0],
+    }
+
+    position, orientation = adapter._object_tcp_relative_pose(
+        phase_key=('transport',),
+        task=task,
+        robot_name='franka_right',
+        object_name='part',
+        spec={},
+        tracked_robots={},
+        object_pose={
+            'position': np.asarray([1.0, 2.0, 3.0], dtype=float),
+            'orientation': np.asarray([1.0, 0.0, 0.0, 0.0], dtype=float),
+        },
+        tracked_objects={
+            'part': {
+                'attached_to': 'franka_right',
+                'attachment': attachment,
+            }
+        },
+    )
+
+    assert conversions[0][0] == 'franka_right'
+    np.testing.assert_allclose(conversions[0][1], attachment['position'])
+    np.testing.assert_allclose(position, [-0.1, -0.2, 0.3])
+    np.testing.assert_allclose(orientation, [0.0, 0.0, 0.0, 1.0])
+
+
 def test_close_pose_gate_timeout_allows_in_progress_stability_window(monkeypatch):
     adapter = UR5eAssemblyAtomicSkillAdapter({})
     task = SimpleNamespace(phase_step_counter=240)
@@ -1550,21 +1847,29 @@ def _fake_task():
         {'name': 'right_wrist', 'owner': 'franka_right', 'robot': 'franka_right', 'view_type': 'wrist'},
     ]
     robot_config = SimpleNamespace(gripper_open_position=0.0, gripper_closed_position=0.8)
+    articulation = SimpleNamespace(get_joint_positions=lambda: np.zeros(9, dtype=np.float32))
     return SimpleNamespace(
         step_counter=0,
         phase_index=0,
         phase_step_counter=0,
         phase='phase_0',
         robots={
-            'franka_left': SimpleNamespace(config=robot_config),
-            'franka_right': SimpleNamespace(config=robot_config),
+            'franka_left': SimpleNamespace(config=robot_config, articulation=articulation),
+            'franka_right': SimpleNamespace(config=robot_config, articulation=articulation),
         },
         config=SimpleNamespace(
             camera_metadata=camera_metadata,
             seed=3,
             recipe='test_recipe',
+            recipe_fingerprint='test-fingerprint',
             task_description='test task',
             prompt='test task',
+            scene_profile='taoyuan_grscenes_tabletop',
+            scene_asset_path='/Isaac/Environments/Simple_Warehouse/warehouse_with_forklifts.usd',
+            scene_asset_fallback_path='/benchmark/scenes/usd/factory_cell.usda',
+            scene_asset_source='primary',
+            resolved_scene_family='isaac_simple_warehouse_tabletop',
+            scene_profile_metadata={'scene_family': 'isaac_simple_warehouse_tabletop'},
             domain_randomization={'enabled': True},
         ),
     )
@@ -1626,6 +1931,11 @@ def test_compact_cartesian_recorder_aligns_next_sample_actions_and_three_videos(
     assert metadata['timing']['rendering_interval'] == 1
     assert metadata['timing']['camera_render_period_steps'] == 2
     assert metadata['timing']['camera_state_action_aligned']
+    assert metadata['scene_profile'] == 'taoyuan_grscenes_tabletop'
+    assert metadata['scene_asset_path'].endswith('/warehouse_with_forklifts.usd')
+    assert metadata['scene_asset_fallback_path'].endswith('/factory_cell.usda')
+    assert metadata['scene_asset_source'] == 'primary'
+    assert metadata['scene_family'] == 'isaac_simple_warehouse_tabletop'
     for video_path in output['videos'].values():
         capture = cv2.VideoCapture(video_path)
         assert int(capture.get(cv2.CAP_PROP_FRAME_COUNT)) == 2

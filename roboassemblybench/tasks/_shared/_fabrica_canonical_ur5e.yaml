@@ -40,6 +40,10 @@ fabrica_canonical:
   descend_relaxed_position_tolerance: 0.018
   descend_relaxed_after_steps: 600
   insertion_lateral_position_tolerance: 0.001
+  # Allow axial progress throughout the declared geometric capture band. At
+  # lower control rates, sub-millimetre contact jitter must not keep the
+  # controller permanently trapped in lateral-only alignment.
+  insertion_lateral_alignment_enter_tolerance_ratio: 1.0
   insertion_lateral_tolerance_object_extent_scale: 0.04
   intermediate_insertion_lateral_position_tolerance: 0.002
   insertion_cartesian_position_step: 0.00025
@@ -50,6 +54,7 @@ fabrica_canonical:
   insertion_compliance_capture_stable_steps: 8
   insertion_compliance_geometric_capture_after_steps: 1200
   insertion_compliance_minimum_gravity_alignment: 0.70
+  insertion_capture_keep_fixed_until_release_lock: true
   insertion_compliant_alignment_retraction_limit: 0.006
   insertion_compliant_track_object_orientation: true
   insertion_lateral_alignment_cartesian_position_step: 0.00025
@@ -61,10 +66,22 @@ fabrica_canonical:
   base_support_lateral_alignment_enter_tolerance: 0.002
   base_support_lateral_alignment_exit_tolerance: 0.004
   base_support_lateral_alignment_cartesian_position_step: 0.002
+  # Use the same geometry-derived placement envelope for the release lock as
+  # the final insertion stage. Otherwise a physically seated part can be
+  # detached at a strict 15 mm gate and be thrown out of the assembly.
+  release_lock_uses_placement_tolerance: true
   release_retreat_distance: 0.06
   post_release_park_distance: 0.35
   post_release_park_vertical_offset: 0.02
   post_release_park_minimum_planar_radius: 0.28
+  # The final retreat already leaves the completed assembly clear. A terminal
+  # park has no successor and can trap a successful rollout at an unreachable
+  # relative Cartesian target, so finish immediately after that retreat.
+  skip_terminal_park: true
+  # Release-and-lock already verifies that every part is released and static.
+  # The final retreat has no downstream safety role and can likewise turn a
+  # completed assembly into a timeout near a Cartesian singularity.
+  skip_terminal_retreat: true
   pickup_translation_range:
     x: [-0.08, 0.08]
     y: [-0.08, 0.08]
@@ -122,6 +139,11 @@ metadata:
       fallback: fail
     ur5e_hold_part_end:
       adapter: toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter
+      requires_held_object: false
+      require_success: true
+      fallback: fail
+    move_arm_to_joint_positions:
+      adapter: toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:AssemblyAtomicSkillAdapter
       requires_held_object: false
       require_success: true
       fallback: fail
@@ -210,9 +232,12 @@ camera_specs:
     video_key: observation.images.isaac_3d
     resolution: [960, 540]
     rgba: true
+    depth: true
     attach_runtime_sensor: true
-    translation: [5.0, 0.0, 3.2]
-    orientation_euler: [0.0, 1.1868238914, 1.5707963268]
+    # World-mounted pose is explicit so Isaac Sim and Replicator use the same
+    # forward direction across headless replay and interactive UI runs.
+    position: [5.0, 0.0, 3.2]
+    look_at: [0.55, 0.0, 1.38]
   - name: left_wrist
     owner: franka_left
     robot: franka_left
@@ -221,6 +246,7 @@ camera_specs:
     video_key: observation.images.left_wrist
     resolution: [640, 480]
     rgba: true
+    depth: true
     attach_runtime_sensor: true
     translation: [-0.1, 0.0, -0.03]
     orientation_euler: [3.1415926536, -0.0872664626, 0.0]
@@ -235,6 +261,7 @@ camera_specs:
     video_key: observation.images.right_wrist
     resolution: [640, 480]
     rgba: true
+    depth: true
     attach_runtime_sensor: true
     translation: [-0.1, 0.0, -0.03]
     orientation_euler: [3.1415926536, -0.0872664626, 0.0]

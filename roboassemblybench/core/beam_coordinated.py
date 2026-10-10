@@ -68,7 +68,7 @@ def add_preseat_target(place, targets, assembly_target_names):
 
 
 def coordinate_phases(phases, task, spec, targets, assembly_target_names):
-    from roboassemblybench.core.fabrica_canonical import _skill_phase
+    from roboassemblybench.core.beam_physical_compiler import _skill_phase
     left, right = spec.get('assembly_robot', 'franka_left'), spec.get('base_robot', 'franka_right')
     obj = lambda pid: 'fabrica_beam_' + str(pid)
     by_name = {p['name']: p for p in phases}

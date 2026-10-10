@@ -364,7 +364,13 @@ def load_task_recipe(recipe_or_path: str, scene_profile: str | None = None) -> d
             f'Supported profiles: {supported_scene_profiles}'
         )
 
-    scene_profile_payload = load_scene_profile(requested_scene_profile)
+    effective_scene_profile = requested_scene_profile
+    canonical_spec = payload.get('fabrica_canonical') or {}
+    if (requested_scene_profile == 'taoyuan_grscenes_tabletop'
+            and canonical_spec.get('assembly') == 'beam'
+            and bool(canonical_spec.get('continuous_physics', False))):
+        effective_scene_profile = 'taoyuan_grscenes_tabletop_beam_v169'
+    scene_profile_payload = load_scene_profile(effective_scene_profile)
     scene_profile_metadata = copy.deepcopy(scene_profile_payload.get('metadata', {}))
     if scene_profile_payload:
         payload = deep_merge(scene_profile_payload, payload)

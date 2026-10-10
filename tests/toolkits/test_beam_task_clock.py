@@ -2,16 +2,17 @@
 from __future__ import annotations
 
 import ast
+import copy
 from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / 'internutopia_extension/tasks/factory_dual_franka_assembly_task.py'
-NAMES = {'_beam_task_clock_event', '_update_task_state', 'is_done'}
+NAMES = {'_beam_task_clock_event', '_update_task_state', 'is_done', '_consume_phase_transition_request'}
 tree = ast.parse(SOURCE.read_text())
 nodes = [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name in NAMES]
 assert {n.name for n in nodes} == NAMES
-scope = {}
+scope = {'copy': copy}
 exec(compile(ast.fix_missing_locations(ast.Module(body=nodes, type_ignores=[])), str(SOURCE), 'exec'), scope)
 Task = type('Task', (), {name: scope[name] for name in NAMES})
 
