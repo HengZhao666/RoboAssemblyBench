@@ -173,6 +173,10 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         self._policy_release_cooldown_until = {name: 0 for name in config.robot_names}
         self._policy_interaction_history = []
         self._policy_attach_specs = self._collect_policy_attach_specs(config.phase_specs)
+        self._preserve_beam_v169_task_pose = (
+            getattr(config, 'recipe', '') == 'fabrica_beam_ur5e_staged'
+            and any(bool(spec.get('continuous_physics')) for spec in self._policy_attach_specs)
+        )
         self._preconfigured_attachment_collision_filters = {}
 
     @property
@@ -3755,6 +3759,14 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         producing visually plausible but physically detached grasps.
         """
 
+        if getattr(self, '_preserve_beam_v169_task_pose', False):
+            # v169's continuous Beam controller and captured relative grasps
+            # share the measured-joint Lula frame. Preserve that interface;
+            # physical-body poses remain available to contact probes and the
+            # explicit frame diagnostic without introducing any state writes.
+            kinematics_pose = self._get_robot_kinematics_pose(robot_name)
+            if kinematics_pose is not None:
+                return kinematics_pose
         return self._get_robot_eef_pose(robot_name)
 
     def _get_robot_attach_reference_position(self, robot_name: str) -> np.ndarray:
