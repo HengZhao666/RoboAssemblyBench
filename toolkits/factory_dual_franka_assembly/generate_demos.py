@@ -21,7 +21,6 @@ from internutopia.core.vec_env import Env
 from internutopia_extension import import_fabrica_assembly_extensions
 from roboassemblybench.datasets.cartesian_episode import CompactCartesianEpisodeRecorder
 from roboassemblybench.core.domain_randomization import RANDOMIZATION_PROFILE_CHOICES
-from roboassemblybench.robobrain.runtime_monitor import RuntimeRoboChecker
 from toolkits.constraint_checking.integration.pipeline import (
     RuntimeConstraintEpisodeHook,
 )
@@ -500,6 +499,10 @@ def _run_task_sequence(
     if initial_tasks:
         last_task = next(iter(initial_tasks.values()))
     if runtime_robochecker:
+        # RoboChecker is a Stage-1 live-rollout monitor. Keep it out of the
+        # import path for Stage-2 kinematic replay workers.
+        from roboassemblybench.robobrain.runtime_monitor import RuntimeRoboChecker
+
         runtime_checker = RuntimeRoboChecker(
             output_dir=runtime_observation_dir
             or ((output_dir / 'runtime_observations') if output_dir is not None else None),
@@ -1454,7 +1457,13 @@ def main():
     parser.add_argument('--worker-seeds', nargs='*', default=None)
     parser.add_argument('--worker-layout-seeds', nargs='*', default=None)
     parser.add_argument('--worker-replay-sources', nargs='*', default=None)
-    parser.add_argument('--worker-allow-replay-fingerprint-mismatch', action='store_true')
+    parser.add_argument(
+        '--worker-allow-replay-fingerprint-mismatch',
+        '--worker-allow-recipe-fingerprint-mismatch',
+        dest='worker_allow_replay_fingerprint_mismatch',
+        action='store_true',
+        help='Accept the deprecated worker flag spelling for old replay supervisors.',
+    )
     parser.add_argument(
         '--worker-rendering-interval',
         type=int,

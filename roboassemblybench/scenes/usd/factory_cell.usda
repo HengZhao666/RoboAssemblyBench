@@ -51,8 +51,11 @@ def Xform "World"
         def Cube "rear_wall"
         {
             double size = 1
-            color3f[] primvars:displayColor = [(0.42, 0.45, 0.46)]
-            double3 xformOp:translate = (1.70, 0, 0.72)
+            color3f[] primvars:displayColor = [(0.08, 0.22, 0.42)]
+            # The canonical Fabrica front camera is mounted at +X and looks
+            # toward -X.  Keep the rear wall behind the workcell so it cannot
+            # occlude either robot or the assembly fixture.
+            double3 xformOp:translate = (-1.15, 0, 0.72)
             double3 xformOp:scale = (0.045, 2.35, 0.72)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
@@ -60,7 +63,7 @@ def Xform "World"
         def Cube "left_wall"
         {
             double size = 1
-            color3f[] primvars:displayColor = [(0.35, 0.38, 0.39)]
+            color3f[] primvars:displayColor = [(0.06, 0.16, 0.28)]
             double3 xformOp:translate = (0.62, -1.17, 0.58)
             double3 xformOp:scale = (3.4, 0.035, 0.58)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
@@ -69,7 +72,7 @@ def Xform "World"
         def Cube "right_wall"
         {
             double size = 1
-            color3f[] primvars:displayColor = [(0.35, 0.38, 0.39)]
+            color3f[] primvars:displayColor = [(0.06, 0.16, 0.28)]
             double3 xformOp:translate = (0.62, 1.17, 0.58)
             double3 xformOp:scale = (3.4, 0.035, 0.58)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]

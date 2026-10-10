@@ -29,6 +29,7 @@ from toolkits.factory_dual_franka_assembly.task_specs import load_task_recipe
 REPO_ROOT = Path(os.environ.get('RAB_REPO_ROOT', Path(__file__).resolve().parents[2])).resolve()
 MANIFEST_NAME = 'replay_manifest.json'
 VISUAL_PROFILES = ('object_distractors', 'texture', 'lighting', 'table_color', 'scene')
+REPLAY_QUALITY_POLICY_VERSION = 'front-visibility-v3-base-anchor-960x540'
 
 
 def _load_json(path: Path) -> Any:
@@ -93,6 +94,8 @@ def _replay_command(args, *, sources: list[dict[str, Any]], batch_dir: Path, res
     environment = [
         'PYTHONNOUSERSITE=1',
         'PYTHONUNBUFFERED=1',
+        'RAB_FRONT_OUTPUT_WIDTH=960',
+        'RAB_FRONT_OUTPUT_HEIGHT=540',
         f'OMP_NUM_THREADS={thread_count}',
         f'MKL_NUM_THREADS={thread_count}',
         f'OPENBLAS_NUM_THREADS={thread_count}',
@@ -140,7 +143,10 @@ def _replay_command(args, *, sources: list[dict[str, Any]], batch_dir: Path, res
         ]
     )
     if args.allow_recipe_fingerprint_mismatch:
-        command.append('--worker-allow-recipe-fingerprint-mismatch')
+        # Keep the worker flag aligned with generate_demos.py.  The old name
+        # was silently rejected by argparse and made every legacy replay
+        # batch fail before Isaac Sim started.
+        command.append('--worker-allow-replay-fingerprint-mismatch')
     return command
 
 
@@ -166,8 +172,15 @@ def _initial_manifest(args, source_episodes: list[dict[str, Any]]) -> dict[str, 
             'filter': 'bitshuffle',
             'compression_level': int(args.depth_compression_level),
         },
+        'quality_policy_version': REPLAY_QUALITY_POLICY_VERSION,
         'successful_episodes': {},
+        # A source rollout can be physically successful while a particular
+        # visual replay is persistently unusable.  Record it explicitly after
+        # bounded retries so one bad seed cannot repeatedly block the shard.
+        'skipped_episodes': {},
         'failed_attempts': [],
+        'num_skipped': 0,
+        'complete_with_skips': False,
         'batches': [],
         'complete': False,
     }
@@ -214,24 +227,86 @@ def collect(args) -> dict[str, Any]:
         if target > previous_target:
             manifest['complete'] = False
             manifest['finished_at_unix'] = None
+        if manifest.get('quality_policy_version') != REPLAY_QUALITY_POLICY_VERSION:
+            # A complete manifest from an older detector is not evidence that
+            # the current visual contract is satisfied. Keep the old files on
+            # disk for audit, but invalidate its completion index so this
+            # invocation renders every source under the corrected policy.
+            old_quality_policy = manifest.get('quality_policy_version')
+            old_completed = dict(manifest.get('successful_episodes') or {})
+            if old_completed:
+                manifest.setdefault('quality_policy_history', []).append(
+                    {
+                        'quality_policy_version': old_quality_policy,
+                        'successful_count': len(old_completed),
+                        'recorded_at_unix': time.time(),
+                    }
+                )
+            manifest['successful_episodes'] = {}
+            old_failed_attempts = list(manifest.get('failed_attempts') or [])
+            if old_failed_attempts:
+                manifest.setdefault('failed_attempt_history', []).append(
+                    {
+                        'quality_policy_version': old_quality_policy,
+                        'attempts': old_failed_attempts,
+                    }
+                )
+            manifest['failed_attempts'] = []
+            old_skipped = dict(manifest.get('skipped_episodes') or {})
+            if old_skipped:
+                manifest.setdefault('skipped_episode_history', []).append(
+                    {
+                        'quality_policy_version': old_quality_policy,
+                        'episodes': old_skipped,
+                    }
+                )
+            manifest['skipped_episodes'] = {}
+            manifest['num_skipped'] = 0
+            manifest['complete_with_skips'] = False
+            manifest['quality_policy_version'] = REPLAY_QUALITY_POLICY_VERSION
+            manifest['complete'] = False
+            manifest['finished_at_unix'] = None
     else:
         manifest = _initial_manifest(args, source_episodes)
 
     completed = manifest.setdefault('successful_episodes', {})
-    for metadata_path in output_dir.rglob('episode_*_cartesian_raw/metadata.json'):
-        quality = _quality_check_episode(
-            metadata_path,
-            expected_recipe_fingerprint=recipe_fingerprint,
-            allowed_layout_seeds=None,
-            require_extended_observations=True,
-            require_visual_quality=bool(args.require_visual_quality),
-            expected_randomization_profile=args.randomization_profile,
-        )
-        if quality['valid']:
-            completed[str(quality['seed'])] = quality
+    if args.trust_manifest_successes:
+        # A large incremental replay directory can contain thousands of old
+        # videos.  The manifest already records episodes that passed the full
+        # quality check; only verify their metadata paths here.  Newly
+        # rendered batches still go through the full quality check below.
+        completed = {
+            str(seed): item
+            for seed, item in completed.items()
+            if isinstance(item, dict) and Path(str(item.get('metadata_path') or '')).is_file()
+        }
+        manifest['successful_episodes'] = completed
+    else:
+        for metadata_path in output_dir.rglob('episode_*_cartesian_raw/metadata.json'):
+            quality = _quality_check_episode(
+                metadata_path,
+                expected_recipe_fingerprint=recipe_fingerprint,
+                allowed_layout_seeds=None,
+                require_extended_observations=True,
+                require_visual_quality=bool(args.require_visual_quality),
+                expected_randomization_profile=args.randomization_profile,
+            )
+            if quality['valid']:
+                completed[str(quality['seed'])] = quality
+    skipped = manifest.get('skipped_episodes') or {}
+    if not isinstance(skipped, dict):
+        skipped = {}
+    source_seed_keys = {str(item['seed']) for item in source_episodes}
+    skipped = {str(seed): item for seed, item in skipped.items() if str(seed) in source_seed_keys}
+    manifest['skipped_episodes'] = skipped
+    manifest['num_skipped'] = len(skipped)
     _write_json_atomic(manifest_path, manifest)
 
-    pending = [item for item in source_episodes if str(item['seed']) not in completed]
+    pending = [
+        item
+        for item in source_episodes
+        if str(item['seed']) not in completed and str(item['seed']) not in skipped
+    ]
     while pending:
         _wait_for_resources(args, output_dir, len(pending))
         sources = pending[: int(args.batch_size)]
@@ -296,19 +371,41 @@ def collect(args) -> dict[str, Any]:
         _write_json_atomic(manifest_path, manifest)
         if returncode != 0 and not quality_records and resource_abort is None:
             raise RuntimeError(f'Replay worker failed; inspect {log_path}.')
-        pending = [item for item in source_episodes if str(item['seed']) not in completed]
+        pending = [
+            item
+            for item in source_episodes
+            if str(item['seed']) not in completed and str(item['seed']) not in skipped
+        ]
         failed_counts = {
             seed: sum(int(item.get('seed', -1)) == seed for item in manifest['failed_attempts'])
             for seed in {item['seed'] for item in pending}
         }
         exhausted = [seed for seed, count in failed_counts.items() if count >= int(args.max_replay_attempts)]
         if exhausted:
-            raise RuntimeError(
-                f'Replay quality failed {args.max_replay_attempts} times for seeds {sorted(exhausted)}; '
-                f'inspect {manifest_path}.'
-            )
+            sources_by_seed = {int(item['seed']): item for item in source_episodes}
+            for seed in sorted(exhausted):
+                source = sources_by_seed[seed]
+                skipped[str(seed)] = {
+                    'seed': seed,
+                    'attempts': failed_counts[seed],
+                    'reason': 'quality-retry-exhausted',
+                    'source_metadata': source['metadata_path'],
+                    'last_batch_dir': str(batch_dir),
+                    'recorded_at_unix': time.time(),
+                }
+            batch_record['exhausted_seeds'] = sorted(exhausted)
+            manifest['skipped_episodes'] = skipped
+            manifest['num_skipped'] = len(skipped)
+            _write_json_atomic(manifest_path, manifest)
+            pending = [
+                item
+                for item in source_episodes
+                if str(item['seed']) not in completed and str(item['seed']) not in skipped
+            ]
 
-    manifest['complete'] = len(completed) >= target
+    manifest['num_skipped'] = len(skipped)
+    manifest['complete'] = len(completed) + len(skipped) >= target
+    manifest['complete_with_skips'] = bool(skipped)
     manifest['num_successful'] = len(completed)
     manifest['finished_at_unix'] = time.time() if manifest['complete'] else None
     _write_json_atomic(manifest_path, manifest)
@@ -333,6 +430,11 @@ def main() -> None:
     parser.add_argument('--video-preset', default='veryfast')
     parser.add_argument('--depth-compression-level', type=int, default=5)
     parser.add_argument('--require-visual-quality', action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument(
+        '--trust-manifest-successes',
+        action='store_true',
+        help='Reuse manifest successes without rescanning historical replay videos; validate new batches normally.',
+    )
     parser.add_argument(
         '--allow-recipe-fingerprint-mismatch',
         action='store_true',

@@ -13,6 +13,11 @@ scene_lights:
 metadata:
   scene_family: isaac_simple_warehouse_tabletop
   fallback_scene_family: roboassemblybench_factory_cell_tabletop
+  # The mirrored warehouse USD is present but has unresolved nested references
+  # on machines without the complete Isaac asset tree.  Use the bundled,
+  # self-contained factory cell so every episode keeps a visible background.
+  scene_asset_preference: fallback
+  scene_asset_selection_reason: bundled_factory_cell_is_self_contained
   description: Isaac Simple Warehouse factory with a task-local tabletop aligned to the Fabrica workspace.
   asset_references:
     - name: isaac_simple_warehouse
@@ -31,15 +36,16 @@ objects:
     scale: [1.62, 2.12, 0.002]
     color: [0.14, 0.14, 0.14]
     tracked: false
-  # A task-local backdrop makes scene/background color randomization visible
-  # without depending on materials embedded in the external warehouse USD.
+  # The task front camera looks from +X toward -X.  This panel is behind the
+  # workcell and in front of the fallback cell's rear wall, so background
+  # randomization remains visible without occluding the robots.
   - name: factory_background_visual
     kind: visual_cube
     prim_path: /factory_background_visual
     position: [-0.55, 0.0, 1.75]
     apply_workspace_offset: false
     scale: [0.04, 3.0, 2.6]
-    color: [0.16, 0.24, 0.34]
+    color: [0.08, 0.25, 0.55]
     tracked: false
   - name: factory_floor_visual
     kind: visual_cube

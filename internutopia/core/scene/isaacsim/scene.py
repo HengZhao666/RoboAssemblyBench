@@ -62,6 +62,7 @@ class IsaacsimScene(IScene):
         """See `IScene.load` for documentation."""
         usd_path = self._resolve_scene_asset_path(task_config)
         fallback_path = getattr(task_config, 'scene_asset_fallback_path', None)
+        scene_asset_preference = self._scene_asset_preference(task_config)
         resolved_fallback_path = None
         if fallback_path:
             try:
@@ -71,6 +72,12 @@ class IsaacsimScene(IScene):
         using_fallback = bool(resolved_fallback_path and usd_path == resolved_fallback_path)
         profile_metadata = getattr(task_config, 'scene_profile_metadata', {}) or {}
         task_config.scene_asset_source = 'fallback' if using_fallback else 'primary'
+        task_config.scene_asset_selection_policy = scene_asset_preference or 'primary_first'
+        task_config.scene_asset_selection_reason = (
+            'fallback_preferred_by_scene_profile'
+            if using_fallback and scene_asset_preference in {'fallback', 'fallback_first'}
+            else 'first_existing_asset'
+        )
         task_config.resolved_scene_family = str(
             profile_metadata.get('fallback_scene_family' if using_fallback else 'scene_family', '')
         )
@@ -197,23 +204,48 @@ class IsaacsimScene(IScene):
         return os.path.exists(path)
 
     @classmethod
-    def _resolve_scene_asset_path(cls, task_config: TaskCfg) -> str:
-        candidates = [task_config.scene_asset_path]
-        fallback_path = getattr(task_config, 'scene_asset_fallback_path', None)
-        if fallback_path:
-            candidates.append(fallback_path)
+    def _scene_asset_preference(cls, task_config: TaskCfg) -> str:
+        """Return the optional profile policy used to order scene candidates.
 
+        A USD file can exist while its nested references are unavailable on an
+        offline asset mirror.  Profiles may therefore explicitly prefer their
+        known-good fallback without changing the task recipe itself.
+        """
+        preference = getattr(task_config, 'scene_asset_preference', None)
+        if preference is None:
+            metadata = getattr(task_config, 'scene_profile_metadata', {}) or {}
+            preference = metadata.get('scene_asset_preference')
+        normalized = str(preference or '').strip().lower().replace('-', '_')
+        if normalized in {'', 'auto', 'primary', 'primary_first'}:
+            return 'primary_first' if normalized in {'primary', 'primary_first'} else ''
+        if normalized in {'fallback', 'fallback_first', 'stable_fallback'}:
+            return 'fallback_first'
+        raise ValueError(
+            f'Unsupported scene_asset_preference {preference!r}; expected auto, primary, or fallback.'
+        )
+
+    @classmethod
+    def _scene_asset_candidates(cls, task_config: TaskCfg) -> list[tuple[str, str]]:
+        candidates = []
+        primary_path = getattr(task_config, 'scene_asset_path', None)
+        fallback_path = getattr(task_config, 'scene_asset_fallback_path', None)
+        if cls._scene_asset_preference(task_config) == 'fallback_first':
+            candidates.extend((('fallback', fallback_path), ('primary', primary_path)))
+        else:
+            candidates.extend((('primary', primary_path), ('fallback', fallback_path)))
+        return [(source, candidate) for source, candidate in candidates if candidate]
+
+    @classmethod
+    def _resolve_scene_asset_path(cls, task_config: TaskCfg) -> str:
         errors: list[str] = []
-        for candidate in candidates:
-            if not candidate:
-                continue
+        for source, candidate in cls._scene_asset_candidates(task_config):
             try:
                 resolved_path = cls._resolve_isaac_asset_path(candidate)
                 if cls._scene_asset_exists(resolved_path):
                     return resolved_path
-                errors.append(f'{candidate} -> {resolved_path} not found')
+                errors.append(f'{source}: {candidate} -> {resolved_path} not found')
             except Exception as exc:
-                errors.append(f'{candidate}: {exc}')
+                errors.append(f'{source}: {candidate}: {exc}')
 
         raise FileNotFoundError('No loadable scene asset found. Tried: ' + '; '.join(errors))
 

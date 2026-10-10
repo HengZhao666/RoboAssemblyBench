@@ -13,6 +13,8 @@ from roboassemblybench.datasets.cartesian_episode import (
     CompactCartesianEpisodeRecorder,
 )
 from roboassemblybench.scripts.export_fabrica_plumbers_block_lerobot_v3 import (
+    _discover_successful_episodes,
+    _prioritize_converted_sources,
     export_dataset,
 )
 
@@ -128,3 +130,55 @@ def test_compact_episode_exports_and_resumes_as_lerobot_v3(tmp_path):
 
     manifest = json.loads((dataset_dir / 'roboassemblybench_conversion_manifest.json').read_text(encoding='utf-8'))
     assert manifest['total_episodes'] == 1
+    assert (dataset_dir / '.roboassemblybench_export_complete').is_file()
+
+
+def test_authoritative_collection_keeps_distinct_paths_with_duplicate_seeds(tmp_path):
+    input_dir = tmp_path / 'sources'
+    metadata_paths = []
+    for index in range(2):
+        metadata_path = input_dir / f'episode_{index:06d}_cartesian_raw' / 'metadata.json'
+        metadata_path.parent.mkdir(parents=True)
+        metadata_path.write_text(
+            json.dumps(
+                {
+                    'schema_version': 'roboassemblybench_raw_cartesian_v1',
+                    'seed': 7,
+                    'metrics': {'success': True},
+                }
+            ),
+            encoding='utf-8',
+        )
+        metadata_paths.append(metadata_path)
+    (input_dir / 'collection_manifest.json').write_text(
+        json.dumps(
+            {
+                'successful_episodes': {
+                    f'{index:06d}': {'metadata_path': str(path)}
+                    for index, path in enumerate(metadata_paths)
+                }
+            }
+        ),
+        encoding='utf-8',
+    )
+
+    episodes = _discover_successful_episodes(input_dir)
+
+    assert len(episodes) == 2
+    assert [episode['seed'] for episode in episodes] == [7, 7]
+
+
+def test_existing_conversion_order_is_preserved_when_sources_expand(tmp_path):
+    episodes = [
+        {'metadata_path': str(tmp_path / f'episode_{index}' / 'metadata.json')}
+        for index in range(3)
+    ]
+    manifest = {'episodes': [{'source_metadata': episodes[1]['metadata_path']}]}
+
+    prioritized = _prioritize_converted_sources(episodes, manifest)
+
+    assert [item['metadata_path'] for item in prioritized] == [
+        episodes[1]['metadata_path'],
+        episodes[0]['metadata_path'],
+        episodes[2]['metadata_path'],
+    ]

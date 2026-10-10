@@ -731,10 +731,18 @@ class CompactCartesianEpisodeRecorder:
             int(os.environ.get('RAB_DATASET_OUTPUT_WIDTH', output_resolution[0])),
             int(os.environ.get('RAB_DATASET_OUTPUT_HEIGHT', output_resolution[1])),
         )
-        configured_front_resolution = (
-            int(os.environ.get('RAB_FRONT_OUTPUT_WIDTH', configured_resolution[0])),
-            int(os.environ.get('RAB_FRONT_OUTPUT_HEIGHT', configured_resolution[1])),
-        )
+        # Keep the front view at the canonical 16:9 camera resolution unless a
+        # deployment explicitly overrides it.  Older launchers used the
+        # unprefixed FRONT_OUTPUT_* names; accept both spellings so a worker
+        # cannot silently fall back to the wrist 4:3 resolution.
+        front_default_width, front_default_height = 960, 540
+        front_width = os.environ.get('RAB_FRONT_OUTPUT_WIDTH')
+        if front_width is None:
+            front_width = os.environ.get('FRONT_OUTPUT_WIDTH', front_default_width)
+        front_height = os.environ.get('RAB_FRONT_OUTPUT_HEIGHT')
+        if front_height is None:
+            front_height = os.environ.get('FRONT_OUTPUT_HEIGHT', front_default_height)
+        configured_front_resolution = (int(front_width), int(front_height))
         if self.rendering_interval < 0:
             raise ValueError('rendering_interval must be non-negative.')
         if self.simulation_fps != self.fps * self.frame_stride:
@@ -1321,6 +1329,13 @@ class CompactCartesianEpisodeRecorder:
                 getattr(task.config, 'scene_asset_fallback_path', '') or ''
             ),
             'scene_asset_source': str(getattr(task.config, 'scene_asset_source', '') or ''),
+            'scene_asset_selection_policy': str(
+                getattr(task.config, 'scene_asset_selection_policy', '') or ''
+            ),
+            'scene_asset_selection_reason': str(
+                getattr(task.config, 'scene_asset_selection_reason', '') or ''
+            ),
+            'scene_profile_metadata': _jsonable(getattr(task.config, 'scene_profile_metadata', {}) or {}),
             'scene_family': str(
                 getattr(task.config, 'resolved_scene_family', '')
                 or (getattr(task.config, 'scene_profile_metadata', {}) or {}).get('scene_family', '')

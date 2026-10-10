@@ -769,6 +769,21 @@ def _apply_scene_profile(resolved: dict[str, Any], *, rng: random.Random) -> dic
             'name': Path(str(resolved.get('scene_asset_path') or 'scene')).stem,
             'asset_path': str(resolved.get('scene_asset_path') or ''),
         }
+
+    # Some deployment images contain the top-level warehouse USD but not all
+    # of its nested references. A profile can therefore opt into its
+    # self-contained fallback so the recorded asset matches the rendered one.
+    preference = str(
+        resolved.get('scene_asset_preference')
+        or (resolved.get('scene_profile_metadata') or {}).get('scene_asset_preference', '')
+    ).strip().lower().replace('-', '_')
+    fallback_path = resolved.get('scene_asset_fallback_path')
+    if preference in {'fallback', 'fallback_first', 'stable_fallback'} and fallback_path:
+        selected_variant = {
+            'name': Path(str(fallback_path)).stem,
+            'asset_path': str(fallback_path),
+        }
+        resolved['scene_asset_path'] = str(fallback_path)
     position_ranges = {
         axis: _axis_range(
             (scene_spec.get('position_offset') or {}).get(axis, [-0.35, 0.35] if axis != 'z' else [0.0, 0.0]),
@@ -803,6 +818,7 @@ def apply_domain_randomization(
     recipe_spec: dict[str, Any],
     *,
     seed: int,
+    visual_seed: int | None = None,
     enabled_override: bool | None = None,
     profile: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -823,11 +839,14 @@ def apply_domain_randomization(
     configured_enabled = bool(randomization_spec.get('enabled', False))
     enabled = configured_enabled if enabled_override is None else bool(enabled_override)
     namespace = str(randomization_spec.get('seed_namespace', resolved.get('task_name', 'task')))
+    resolved_visual_seed = int(seed if visual_seed is None else visual_seed)
     result: dict[str, Any] = {
         'enabled': enabled,
         'configured_enabled': configured_enabled,
         'seed': int(seed),
         'derived_seed': _derived_seed(seed, namespace),
+        'visual_seed': resolved_visual_seed,
+        'derived_visual_seed': _derived_seed(resolved_visual_seed, f'{namespace}:visual'),
         'seed_namespace': namespace,
         'profile': requested_profile,
         'groups': {},
@@ -847,7 +866,14 @@ def apply_domain_randomization(
     if not groups and not appearance_groups:
         raise ValueError('Enabled domain randomization requires position or appearance groups.')
 
-    rng = random.Random(result['derived_seed'])
+    # Keep layout and visual sampling independent during Stage-2 replay. With
+    # no explicit visual seed, retain the legacy single-stream behavior.
+    layout_rng = random.Random(result['derived_seed'])
+    visual_rng = (
+        layout_rng
+        if visual_seed is None
+        else random.Random(result['derived_visual_seed'])
+    )
     fixed_objects = {str(value) for value in (randomization_spec.get('fixed_objects') or [])}
     assigned_members: dict[tuple[str, str], str] = {}
     for group_name, raw_group_spec in groups.items():
@@ -855,7 +881,7 @@ def apply_domain_randomization(
             raise ValueError(f'Domain-randomization group {group_name!r} must be a mapping.')
         group_name = str(group_name)
         group_spec = copy.deepcopy(raw_group_spec)
-        translation = _sample_translation(group_name, group_spec, rng)
+        translation = _sample_translation(group_name, group_spec, layout_rng)
         group_result = {
             'translation': translation,
             'objects': [],
@@ -898,10 +924,10 @@ def apply_domain_randomization(
             raise ValueError(f'Domain-randomization appearance group {group_name!r} must be a mapping.')
         group_name = str(group_name)
         group_spec = copy.deepcopy(raw_group_spec)
-        color = _sample_color(group_name, group_spec, rng)
-        intensity = _sample_scalar(group_name, group_spec, 'intensity', rng)
-        exposure = _sample_scalar(group_name, group_spec, 'exposure', rng)
-        rotation_euler = _sample_vector(group_name, group_spec, 'rotation_euler', rng)
+        color = _sample_color(group_name, group_spec, visual_rng)
+        intensity = _sample_scalar(group_name, group_spec, 'intensity', visual_rng)
+        exposure = _sample_scalar(group_name, group_spec, 'exposure', visual_rng)
+        rotation_euler = _sample_vector(group_name, group_spec, 'rotation_euler', visual_rng)
         group_result = {
             'color': color,
             'objects': [],
@@ -941,7 +967,11 @@ def apply_domain_randomization(
             )
         result['appearance_groups'][group_name] = group_result
 
-    visual_distractors = _append_visual_distractors(resolved, seed=seed, rng=rng)
+    visual_distractors = _append_visual_distractors(
+        resolved,
+        seed=resolved_visual_seed,
+        rng=visual_rng,
+    )
     result['visual_distractors'] = [
         {
             'name': entry['name'],
@@ -960,9 +990,15 @@ def apply_domain_randomization(
         }
         for entry in visual_distractors
     ]
-    result['table_texture'] = _apply_table_texture(resolved, rng=rng) if requested_profile == 'texture' else {}
-    result['lighting'] = _apply_lighting_profile(resolved, rng=rng) if requested_profile == 'lighting' else []
-    result['scene'] = _apply_scene_profile(resolved, rng=rng) if requested_profile == 'scene' else {}
+    result['table_texture'] = (
+        _apply_table_texture(resolved, rng=visual_rng) if requested_profile == 'texture' else {}
+    )
+    result['lighting'] = (
+        _apply_lighting_profile(resolved, rng=visual_rng) if requested_profile == 'lighting' else []
+    )
+    result['scene'] = (
+        _apply_scene_profile(resolved, rng=visual_rng) if requested_profile == 'scene' else {}
+    )
 
     resolved['resolved_domain_randomization'] = result
     return resolved, result

@@ -48,6 +48,7 @@ VIDEO_CODEC="${VIDEO_CODEC:-h265}"
 VIDEO_CRF="${VIDEO_CRF:-30}"
 VIDEO_PRESET="${VIDEO_PRESET:-veryfast}"
 DEPTH_ZSTD_LEVEL="${DEPTH_ZSTD_LEVEL:-8}"
+ALLOW_RECIPE_FINGERPRINT_MISMATCH="${ALLOW_RECIPE_FINGERPRINT_MISMATCH:-0}"
 FFMPEG_THREADS="${FFMPEG_THREADS:-1}"
 ISAACSIM_OMP_NUM_THREADS="${ISAACSIM_OMP_NUM_THREADS:-1}"
 ISAACSIM_THREAD_COUNT="${ISAACSIM_THREAD_COUNT:-}"
@@ -363,6 +364,10 @@ run_stage1_shard() {
   if [[ -n "$ISAAC_PYTHON" ]]; then
     worker_runtime_args+=(--isaac-python "$ISAAC_PYTHON")
   fi
+  local compatibility_args=()
+  if [[ "$ALLOW_RECIPE_FINGERPRINT_MISMATCH" == "1" ]]; then
+    compatibility_args+=(--allow-recipe-fingerprint-mismatch)
+  fi
   mapfile -t runtime < <(isaac_runtime)
   run_with_restarts "$gpu" "$worker_id" "$log" "${runtime[@]}" \
     "$REPO_ROOT/roboassemblybench/scripts/collect_fabrica_plumbers_block_2k.py" \
@@ -387,6 +392,7 @@ run_stage1_shard() {
       --require-extended-observations \
       --require-visual-quality \
       --prune-failed-raw \
+      "${compatibility_args[@]}" \
       --min-available-memory-gib 48 \
       --abort-available-memory-gib 32 \
       --worker-timeout-seconds "$WORKER_TIMEOUT_SECONDS" \

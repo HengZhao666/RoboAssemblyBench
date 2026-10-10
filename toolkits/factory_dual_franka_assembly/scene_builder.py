@@ -158,6 +158,18 @@ def _normalize_camera_spec(camera_spec: dict, *, force_runtime_sensor: bool = Fa
     normalized = copy.deepcopy(camera_spec)
     normalized.setdefault('owner', normalized.get('robot', 'franka_left'))
     normalized.setdefault('video_key', f"observation.images.{normalized['name']}")
+
+    # Scene-profile inheritance is intentionally deep, so a world-mounted
+    # camera can inherit the legacy local ``translation`` and
+    # ``orientation_euler`` keys from the shared scaffold.  Passing both pose
+    # forms to Isaac Sim makes the local pose overwrite the world pose during
+    # sensor creation.  A camera with an explicit world eye/target must have a
+    # single authoritative pose.
+    if normalized.get('position') is not None and normalized.get('look_at') is not None:
+        normalized.pop('translation', None)
+        normalized.pop('orientation', None)
+        normalized.pop('orientation_euler', None)
+
     normalized.setdefault('attach_runtime_sensor', False)
     if force_runtime_sensor:
         normalized['attach_runtime_sensor'] = True

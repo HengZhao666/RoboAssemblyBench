@@ -12,6 +12,30 @@ from typing import Any
 OWNER_FILE = 'owner.json'
 
 
+def _process_start_ticks(pid: int) -> int | None:
+    """Return Linux process start ticks, or ``None`` when the process is gone."""
+    try:
+        fields = (Path(f'/proc/{int(pid)}/stat').read_text(encoding='utf-8')).split()
+        return int(fields[21])
+    except (FileNotFoundError, OSError, IndexError, ValueError):
+        return None
+
+
+def _process_start_unix(pid: int) -> float | None:
+    start_ticks = _process_start_ticks(pid)
+    if start_ticks is None:
+        return None
+    try:
+        boot_time = next(
+            float(line.split()[1])
+            for line in Path('/proc/stat').read_text(encoding='utf-8').splitlines()
+            if line.startswith('btime ')
+        )
+        return boot_time + start_ticks / float(os.sysconf('SC_CLK_TCK'))
+    except (OSError, StopIteration, IndexError, ValueError, TypeError):
+        return None
+
+
 def _load_owner(lock_dir: Path) -> dict[str, Any] | None:
     try:
         return json.loads((lock_dir / OWNER_FILE).read_text(encoding='utf-8'))
@@ -29,6 +53,34 @@ def _pid_is_alive(pid: int) -> bool:
     return True
 
 
+def _owner_process_is_same(owner: dict[str, Any]) -> bool:
+    """Reject a lock whose PID was recycled after the lock was created."""
+    try:
+        pid = int(owner['pid'])
+    except (KeyError, TypeError, ValueError):
+        return False
+    if not _pid_is_alive(pid):
+        return False
+
+    recorded_ticks = owner.get('proc_start_ticks')
+    if recorded_ticks is not None:
+        try:
+            return _process_start_ticks(pid) == int(recorded_ticks)
+        except (TypeError, ValueError):
+            return False
+
+    # Legacy locks did not record start ticks.  Compare the live process start
+    # time with the lock creation time so a recycled PID is still reclaimable.
+    created_at = owner.get('created_at_unix')
+    process_started_at = _process_start_unix(pid)
+    if created_at is not None and process_started_at is not None:
+        try:
+            return process_started_at <= float(created_at) + 2.0
+        except (TypeError, ValueError):
+            return False
+    return True
+
+
 def process_lock_is_held(lock_dir: Path) -> bool:
     if not lock_dir.is_dir():
         return False
@@ -37,10 +89,7 @@ def process_lock_is_held(lock_dir: Path) -> bool:
         return True
     if str(owner.get('hostname') or '') != socket.gethostname():
         return True
-    try:
-        return _pid_is_alive(int(owner['pid']))
-    except (KeyError, TypeError, ValueError):
-        return True
+    return _owner_process_is_same(owner)
 
 
 def _remove_owned_lock(lock_dir: Path, token: str) -> None:
@@ -88,6 +137,7 @@ def exclusive_process_lock(lock_dir: Path, *, description: str):
             'pid': os.getpid(),
             'hostname': socket.gethostname(),
             'token': token,
+            'proc_start_ticks': _process_start_ticks(os.getpid()),
             'created_at_unix': time.time(),
         }
         (lock_dir / OWNER_FILE).write_text(json.dumps(owner, indent=2), encoding='utf-8')

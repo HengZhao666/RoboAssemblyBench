@@ -229,8 +229,10 @@ camera_specs:
     rgba: true
     depth: true
     attach_runtime_sensor: true
-    translation: [5.0, 0.0, 3.2]
-    orientation_euler: [0.0, 1.1868238914, 1.5707963268]
+    # World-mounted pose is explicit so Isaac Sim and Replicator use the same
+    # forward direction across headless replay and interactive UI runs.
+    position: [5.0, 0.0, 3.2]
+    look_at: [0.55, 0.0, 1.38]
   - name: left_wrist
     owner: franka_left
     robot: franka_left

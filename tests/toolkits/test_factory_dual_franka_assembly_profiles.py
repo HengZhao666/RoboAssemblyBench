@@ -1,4 +1,5 @@
 import json
+from types import SimpleNamespace
 
 import pytest
 
@@ -9,6 +10,7 @@ from toolkits.factory_dual_franka_assembly.convert_dataset import (
     load_episode_payloads,
 )
 from toolkits.factory_dual_franka_assembly.scene_builder import (
+    _normalize_camera_spec,
     build_dual_franka_assembly_episode,
 )
 from toolkits.factory_dual_franka_assembly.scene_profiles import list_scene_profiles
@@ -38,6 +40,38 @@ def test_isaac_scene_asset_root_can_be_overridden_with_a_local_directory(tmp_pat
     )
 
     assert resolved == str(warehouse_asset)
+
+
+def test_scene_asset_preference_can_select_a_self_contained_fallback():
+    task_config = SimpleNamespace(
+        scene_asset_path='/assets/warehouse_with_forklifts.usd',
+        scene_asset_fallback_path='/assets/factory_cell.usda',
+        scene_profile_metadata={'scene_asset_preference': 'fallback'},
+    )
+
+    assert IsaacsimScene._scene_asset_preference(task_config) == 'fallback_first'
+    assert IsaacsimScene._scene_asset_candidates(task_config) == [
+        ('fallback', '/assets/factory_cell.usda'),
+        ('primary', '/assets/warehouse_with_forklifts.usd'),
+    ]
+
+
+def test_world_camera_pose_drops_inherited_local_pose_keys():
+    normalized = _normalize_camera_spec(
+        {
+            'name': 'third_person_front',
+            'prim_path': '/World/env_0/cameras/third_person_front',
+            'position': [5.0, 0.0, 3.2],
+            'look_at': [0.55, 0.0, 1.38],
+            'translation': [4.5, 0.0, 0.4],
+            'orientation_euler': [1.5707963268, 1.5707963268, 0.0],
+        }
+    )
+
+    assert normalized['position'] == [5.0, 0.0, 3.2]
+    assert normalized['look_at'] == [0.55, 0.0, 1.38]
+    assert 'translation' not in normalized
+    assert 'orientation_euler' not in normalized
 
 
 def test_usd_object_rejects_a_missing_local_asset(tmp_path):
@@ -87,6 +121,7 @@ def test_taoyuan_grscenes_scene_profile_omits_isaac_factory_table_xform():
     recipe_spec = load_task_recipe(recipe, scene_profile='taoyuan_grscenes_tabletop')
     assert recipe_spec['scene_profile'] == 'taoyuan_grscenes_tabletop'
     assert recipe_spec['metadata']['scene_family'] == 'isaac_simple_warehouse_tabletop'
+    assert recipe_spec['scene_profile_metadata']['scene_asset_preference'] == 'fallback'
     assert recipe_spec['scene_asset_path'].endswith('/warehouse_with_forklifts.usd')
     assert {light['name'] for light in recipe_spec['scene_lights']} == {'warehouse_dome_fill'}
     assert not any(ISAAC_PACKING_TABLE_MARKER in reference['path'] for reference in recipe_spec['asset_references'])

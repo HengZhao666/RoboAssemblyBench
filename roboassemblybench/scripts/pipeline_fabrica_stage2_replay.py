@@ -23,6 +23,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from roboassemblybench.core.process_lock import process_lock_is_held
+
 
 REPO_ROOT = Path(os.environ.get('RAB_REPO_ROOT', Path(__file__).resolve().parents[2])).resolve()
 REPLAY_SCRIPT = Path(
@@ -32,6 +34,11 @@ REPLAY_SCRIPT = Path(
     )
 ).resolve()
 VISUAL_PROFILES = ('object_distractors', 'texture', 'lighting', 'table_color', 'scene')
+# A replay manifest is only reusable when it was produced by the same visual
+# quality contract as the current renderer.  Older manifests did not record a
+# policy at all, so treating them as complete can silently preserve broken
+# camera/scene samples.
+REPLAY_QUALITY_POLICY_VERSION = 'front-visibility-v3-base-anchor-960x540'
 PAUSE_MARKER_NAME = 'STAGE2_PAUSED_BY_OPERATOR.json'
 
 
@@ -97,9 +104,47 @@ def _stage1_replay_target(payload: dict[str, Any]) -> int:
     return len(successful) if isinstance(successful, dict) else 0
 
 
-def _replay_complete(path: Path, target: int) -> bool:
+def _replay_complete(
+    path: Path,
+    target: int,
+    *,
+    required_quality_policy: str = REPLAY_QUALITY_POLICY_VERSION,
+) -> bool:
     payload = _load_json(path)
-    return bool(payload and payload.get('complete') and _manifest_success_count(payload) >= target)
+    if not payload or not payload.get('complete'):
+        return False
+    if required_quality_policy and payload.get('quality_policy_version') != required_quality_policy:
+        return False
+    skipped = payload.get('skipped_episodes') or {}
+    skipped_count = len(skipped) if isinstance(skipped, dict) else 0
+    return _manifest_success_count(payload) + skipped_count >= target
+
+
+def _lock_owner_is_active(lock_dir: Path) -> bool:
+    """Return whether another replay currently owns an output lock.
+
+    A previous supervisor can die while its replay child keeps running.  The
+    next supervisor must wait for that child instead of repeatedly starting a
+    second writer against the same manifest.  Dead or PID-recycled owners are
+    left available for the normal lock reclamation path.
+    """
+    return process_lock_is_held(lock_dir)
+
+
+def _job_has_external_lock(job: ReplayJob) -> bool:
+    return _lock_owner_is_active(job.output_dir / '.collection.lock.d')
+
+
+def _parse_profiles(value: str) -> tuple[str, ...]:
+    profiles = tuple(profile.strip() for profile in value.split(',') if profile.strip())
+    invalid = sorted(set(profiles) - set(VISUAL_PROFILES))
+    if not profiles:
+        raise ValueError('profiles must contain at least one visual group.')
+    if invalid:
+        raise ValueError(f'unknown visual profile(s): {", ".join(invalid)}.')
+    if len(set(profiles)) != len(profiles):
+        raise ValueError('profiles must not contain duplicates.')
+    return profiles
 
 
 def _read_source_contract(source_dir: Path, payload: dict[str, Any]) -> tuple[str, str] | None:
@@ -122,7 +167,11 @@ def _read_source_contract(source_dir: Path, payload: dict[str, Any]) -> tuple[st
     return None
 
 
-def _discover_jobs(output_root: Path) -> list[ReplayJob]:
+def _discover_jobs(
+    output_root: Path,
+    *,
+    profiles: tuple[str, ...] = VISUAL_PROFILES,
+) -> list[ReplayJob]:
     jobs: list[ReplayJob] = []
     for manifest_path in sorted(output_root.glob('stage1/*/shards/shard_*/collection_manifest.json')):
         stage1 = _load_json(manifest_path)
@@ -137,7 +186,7 @@ def _discover_jobs(output_root: Path) -> list[ReplayJob]:
         recipe, scene_profile = contract
         task = manifest_path.parents[2].name
         shard_name = manifest_path.parent.name
-        for profile in VISUAL_PROFILES:
+        for profile in profiles:
             output_dir = output_root / 'rendered' / task / profile / 'shards' / shard_name
             if _replay_complete(output_dir / 'replay_manifest.json', target):
                 continue
@@ -255,6 +304,9 @@ def _command_for_job(args: argparse.Namespace, job: ReplayJob, gpu: int) -> list
             '--depth-compression-level',
             str(args.depth_compression_level),
             '--require-visual-quality',
+            '--max-replay-attempts',
+            str(args.max_replay_attempts),
+            '--trust-manifest-successes',
             '--min-available-memory-gib',
             str(args.min_available_memory_gib),
             '--abort-available-memory-gib',
@@ -279,6 +331,8 @@ def _job_environment(args: argparse.Namespace, job: ReplayJob, gpu: int, slot: i
         {
             'PYTHONNOUSERSITE': '1',
             'PYTHONUNBUFFERED': '1',
+            'RAB_FRONT_OUTPUT_WIDTH': '960',
+            'RAB_FRONT_OUTPUT_HEIGHT': '540',
             'OMP_NUM_THREADS': '1',
             'MKL_NUM_THREADS': '1',
             'OPENBLAS_NUM_THREADS': '1',
@@ -334,9 +388,11 @@ def _select_job(
     now: float,
     *,
     active_job_keys: set[str],
+    externally_locked_job_keys: set[str] | None = None,
 ) -> ReplayJob | None:
+    externally_locked_job_keys = externally_locked_job_keys or set()
     for job in jobs:
-        if job.key in active_job_keys:
+        if job.key in active_job_keys or job.key in externally_locked_job_keys:
             continue
         record = state['jobs'].get(job.key, {})
         if float(record.get('retry_after_unix', 0.0)) <= now:
@@ -464,7 +520,12 @@ def _run(args: argparse.Namespace) -> None:
                 time.sleep(1)
                 continue
             now = time.time()
-            jobs = _discover_jobs(args.output_root)
+            jobs = _discover_jobs(args.output_root, profiles=args.profiles)
+            externally_locked_job_keys = {
+                job.key for job in jobs if _job_has_external_lock(job) and job.key not in _active_children
+            }
+            for job_key in sorted(externally_locked_job_keys):
+                _log(event_log, 'job_wait_external_lock', job=job_key)
             resource_state = 'ready'
             while len(_active_children) < args.max_concurrent_replays:
                 gpu, slot, resource_state = _resource_ready(
@@ -472,7 +533,15 @@ def _run(args: argparse.Namespace) -> None:
                     occupied_slots={(active.gpu, active.slot) for active in _active_children.values()},
                 )
                 job = (
-                    _select_job(jobs, state, now, active_job_keys=set(_active_children)) if gpu is not None else None
+                    _select_job(
+                        jobs,
+                        state,
+                        now,
+                        active_job_keys=set(_active_children),
+                        externally_locked_job_keys=externally_locked_job_keys,
+                    )
+                    if gpu is not None
+                    else None
                 )
                 if job is None or slot is None:
                     break
@@ -558,11 +627,17 @@ def main() -> None:
     parser.add_argument('--failure-backoff-seconds', type=int, default=1800)
     parser.add_argument('--worker-timeout-seconds', type=int, default=7200)
     parser.add_argument('--worker-stall-timeout-seconds', type=int, default=900)
+    parser.add_argument('--max-replay-attempts', type=int, default=5)
     parser.add_argument('--video-codec', choices=['h264', 'h265'], default='h265')
     parser.add_argument('--video-crf', type=int, default=30)
     parser.add_argument('--video-preset', default='veryfast')
     parser.add_argument('--depth-compression-level', type=int, default=8)
     parser.add_argument('--nice-increment', type=int, default=15)
+    parser.add_argument(
+        '--profiles',
+        default=','.join(VISUAL_PROFILES),
+        help='Comma-separated visual groups to dispatch (default: all groups).',
+    )
     parser.add_argument(
         '--allow-recipe-fingerprint-mismatch',
         action='store_true',
@@ -576,6 +651,10 @@ def main() -> None:
     args.assets_root = args.assets_root.resolve()
     args.portable_base = args.portable_base.resolve()
     args.runtime_dir = (args.runtime_dir or args.portable_base / 'pipeline_runtime').resolve()
+    try:
+        args.profiles = _parse_profiles(args.profiles)
+    except ValueError as error:
+        parser.error(str(error))
     if not args.isaac_python.is_file():
         parser.error(f'--isaac-python does not exist: {args.isaac_python}')
     if not REPLAY_SCRIPT.is_file():
@@ -585,6 +664,7 @@ def main() -> None:
         or args.batch_size < 1
         or args.max_concurrent_replays < 1
         or args.max_replays_per_gpu < 1
+        or args.max_replay_attempts < 1
         or args.max_concurrent_replays > len(args.gpu_ids) * args.max_replays_per_gpu
         or args.max_load_per_cpu <= 0
         or args.nice_increment < 0

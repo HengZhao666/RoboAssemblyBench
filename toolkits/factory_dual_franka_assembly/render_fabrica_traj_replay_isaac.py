@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -273,6 +274,9 @@ def _resolve_placeholder_path(value: str) -> Path:
         "${BENCHMARK_ROOT}": str(REPO_ROOT / "roboassemblybench"),
         "${ASSET_PATH}": str(REPO_ROOT / "roboassemblybench/assets"),
     }
+    isaac_assets_root = os.environ.get("ISAAC_ASSETS_ROOT", "").strip()
+    if isaac_assets_root:
+        replacements["${ISAAC_ASSETS_ROOT}"] = isaac_assets_root
     resolved = value
     for token, replacement in replacements.items():
         resolved = resolved.replace(token, replacement)
@@ -316,15 +320,30 @@ def _add_factory_scene(stage, *, scene_profile: str | None, include_profile_obje
     profile = _load_scene_profile(scene_profile)
     UsdGeom.Xform.Define(stage, "/World/factory_scene")
 
+    metadata = profile.get("metadata") or {}
+    preference = str(
+        profile.get("scene_asset_preference", metadata.get("scene_asset_preference", ""))
+    ).strip().lower().replace("-", "_")
+    if preference in {"fallback", "fallback_first", "stable_fallback"}:
+        scene_candidates = (
+            ("fallback", profile.get("scene_asset_fallback_path")),
+            ("primary", profile.get("scene_asset_path")),
+        )
+    else:
+        scene_candidates = (
+            ("primary", profile.get("scene_asset_path")),
+            ("fallback", profile.get("scene_asset_fallback_path")),
+        )
     referenced_scene_path = None
-    for key in ("scene_asset_path", "scene_asset_fallback_path"):
-        path_value = profile.get(key)
+    referenced_scene_source = None
+    for source, path_value in scene_candidates:
         if not path_value:
             continue
         scene_path = _resolve_placeholder_path(str(path_value))
         if scene_path.exists():
             stage.GetPrimAtPath("/World/factory_scene").GetReferences().AddReference(str(scene_path))
             referenced_scene_path = str(scene_path)
+            referenced_scene_source = source
             break
 
     added_profile_object_count = 0
@@ -345,6 +364,8 @@ def _add_factory_scene(stage, *, scene_profile: str | None, include_profile_obje
         "scene_profile": profile.get("profile_name", scene_profile),
         "scene_profile_path": profile.get("scene_profile_path"),
         "referenced_scene_path": referenced_scene_path,
+        "referenced_scene_source": referenced_scene_source,
+        "scene_asset_preference": preference or "primary_first",
         "include_profile_objects": include_profile_objects,
         "added_profile_object_count": added_profile_object_count,
     }
