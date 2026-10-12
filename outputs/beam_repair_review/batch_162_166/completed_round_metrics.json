@@ -1,0 +1,159 @@
+{
+  "v162": {
+    "full_assembly_success": false,
+    "terminal_reason": "timeout-failure",
+    "steps": 12882,
+    "table_gate_passed": false,
+    "longest_seating_gate_streak": 0,
+    "last_2s": {
+      "vertical_force": {
+        "min": 1.5227820575237274,
+        "max": 2.447055220603943,
+        "mean": 2.015832670095066
+      },
+      "bottom_gap": {
+        "min": -9.652453472064337e-07,
+        "max": 7.205163667922676e-07,
+        "mean": -1.7436195718552778e-07
+      },
+      "linear_speed": {
+        "min": 0.004652992847256444,
+        "max": 0.015946165938094104,
+        "mean": 0.011525265076048279
+      },
+      "angular_speed": {
+        "min": 0.5964370007405065,
+        "max": 1.8599969634000644,
+        "mean": 1.2919541201688196
+      }
+    },
+    "last_2s_pose_difference": {
+      "linear_speed": {
+        "min": 0.0001920564877810128,
+        "max": 0.0011512729330012204,
+        "mean": 0.0006488708318895999
+      },
+      "angular_speed": {
+        "min": 0.0022464951870440546,
+        "max": 0.08416956090669339,
+        "mean": 0.03694826151148116
+      }
+    }
+  },
+  "v163": {
+    "full_assembly_success": false,
+    "terminal_reason": "local-skill-failure:held_object_not_grasped",
+    "steps": 4525,
+    "table_gate_passed": false,
+    "longest_seating_gate_streak": 0,
+    "last_2s": {
+      "vertical_force": null,
+      "bottom_gap": null,
+      "linear_speed": null,
+      "angular_speed": null
+    },
+    "last_2s_pose_difference": {
+      "linear_speed": null,
+      "angular_speed": null
+    }
+  },
+  "v164": {
+    "full_assembly_success": false,
+    "terminal_reason": "timeout-failure",
+    "steps": 12838,
+    "table_gate_passed": false,
+    "longest_seating_gate_streak": 0,
+    "last_2s": {
+      "vertical_force": {
+        "min": 1.365217387676239,
+        "max": 4.731030225753784,
+        "mean": 2.390516156765322
+      },
+      "bottom_gap": {
+        "min": -4.310517853989282e-06,
+        "max": -3.194380417959053e-07,
+        "mean": -2.2306064768079505e-06
+      },
+      "linear_speed": {
+        "min": 0.002754466159074738,
+        "max": 0.009934044174701458,
+        "mean": 0.0061239176793331145
+      },
+      "angular_speed": {
+        "min": 0.09376755889349228,
+        "max": 0.9913455218339983,
+        "mean": 0.37551887737693596
+      }
+    },
+    "last_2s_pose_difference": {
+      "linear_speed": {
+        "min": 3.5762786865234375e-06,
+        "max": 0.0005293164294582254,
+        "mean": 0.00021286286865903288
+      },
+      "angular_speed": {
+        "min": 0.00020606317936260285,
+        "max": 0.04100414296698407,
+        "mean": 0.013511397938223873
+      }
+    }
+  },
+  "v165": {
+    "full_assembly_success": false,
+    "terminal_reason": "local-skill-failure:close_pose_gate_timeout",
+    "steps": 1466,
+    "table_gate_passed": false,
+    "longest_seating_gate_streak": 0,
+    "last_2s": {
+      "vertical_force": null,
+      "bottom_gap": null,
+      "linear_speed": null,
+      "angular_speed": null
+    },
+    "last_2s_pose_difference": {
+      "linear_speed": null,
+      "angular_speed": null
+    }
+  },
+  "v166": {
+    "full_assembly_success": false,
+    "terminal_reason": "timeout-failure",
+    "steps": 13902,
+    "table_gate_passed": false,
+    "longest_seating_gate_streak": 0,
+    "last_2s": {
+      "vertical_force": {
+        "min": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "bottom_gap": {
+        "min": 0.002918276351846494,
+        "max": 0.0029220741305333586,
+        "mean": 0.002920353511299523
+      },
+      "linear_speed": {
+        "min": 0.02627378483936564,
+        "max": 0.028222044265460086,
+        "mean": 0.027231756691153824
+      },
+      "angular_speed": {
+        "min": 0.2734454262654464,
+        "max": 0.42008908172288084,
+        "mean": 0.35569420897991566
+      }
+    },
+    "last_2s_pose_difference": {
+      "linear_speed": {
+        "min": 0.0,
+        "max": 0.00029417473743518835,
+        "mean": 8.350567942930433e-05
+      },
+      "angular_speed": {
+        "min": 0.00021588404092006726,
+        "max": 0.007878638536276005,
+        "mean": 0.0021684506638479724
+      }
+    }
+  }
+}

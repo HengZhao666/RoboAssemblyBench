@@ -1,0 +1,15 @@
+{
+  "version": "v164",
+  "comparison_baseline": "v162_TGS",
+  "previous_round": "v163_PGS_rejected",
+  "change": "Explicit Beam-only native idle joint target anchor",
+  "solver_type": "TGS_restored",
+  "gains_unchanged": true,
+  "gates_unchanged": true,
+  "native_fixture_preserved": true,
+  "seed": 0,
+  "layout_seed": 505,
+  "scope": "Only unloaded genuinely idle arm; active motion/skills/loaded/support unchanged",
+  "server_expected_tests": 178,
+  "validation": "Anchor targets fixed; measured joints/body drift compared with TGS v162, carry/seating must retain strict physical guards"
+}

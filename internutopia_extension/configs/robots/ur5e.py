@@ -81,10 +81,25 @@ class UR5eRobotCfg(RobotCfg):
     gripper_open_position: float = 0.0
     gripper_closed_position: float = 0.80
     gripper_close_openness: float = 0.08
+    # Defaults preserve every existing recipe. Beam may explicitly opt into a
+    # different pair; nondefault gains require verified native readbacks.
+    arm_drive_kp: float = 8.0e4
+    arm_drive_kd: float = 4.0e3
+    gripper_drive_kp: float = 6.0e6
+    gripper_drive_kd: float = 8.0e3
+    # None preserves the asset's effort limit; explicit values use the native view.
+    gripper_drive_max_effort: Optional[float] = None
+    # None keeps the legacy material for existing recipes. Beam opts in to a
+    # bounded friction trial and records the material actually authored.
+    gripper_pad_static_friction: Optional[float] = None
+    gripper_pad_dynamic_friction: Optional[float] = None
     hand_link_name: Optional[str] = 'wrist_3_link'
     left_finger_link_name: Optional[str] = 'left_inner_finger'
     right_finger_link_name: Optional[str] = 'right_inner_finger'
     initial_joint_positions: Optional[Dict[str, float]] = None
+    # Continuous skills own the joint branch and validate every published step.
+    # Never wrap their runtime state or rewrite their position-drive targets.
+    preserve_continuous_arm_joints: bool = False
     gripper_xform_orient: Optional[list[float]] = None
     gripper_mount_local_pos0: Optional[list[float]] = None
     gripper_mount_local_pos1: Optional[list[float]] = None

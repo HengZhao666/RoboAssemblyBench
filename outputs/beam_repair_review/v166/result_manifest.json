@@ -1,0 +1,20 @@
+{
+  "episode_0000.json": "53c19ab997b4599c0e252a8e206b8c0b329a127eb699706ad9aa46cd1762ef9b",
+  "collect_results.json": "3a27dd4db8eff990b5a54da3afd17b501925f2c798012050bae84e363b41a757",
+  "exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+  "run.log": "395f005fd5ea8c256f1d35329bbb8d0ea476df3a0574ee4d3f57223f398a04bd",
+  "round_summary.json": "749295be2f13a0cf057bdfd36d984a635e65d5b3d6919b43642dd4b609271675",
+  "contact_relief_summary.json": "ce2f7015a68e433b03e27e7b706916e621911517de9307659dc8740f18d9ad09",
+  "gain_trial_summary.json": "376f94b8fa75eb3cf6e4211f581ce00595108ebffc253e370e4275a3d0766bf4",
+  "idle_hold_summary.json": "c2c916a04af0c369a3018a2bcf64672cb082ed4ede7959f0452c24439b64e307",
+  "configuration_verification.log": "669b242268cebe63805398cd6d7785e8792183136f31e4884d746efed21ed975",
+  "tests.log": "1eae7612549b3ff8a352f89779e204576ede386ec641aeb1561f80061177ae3a",
+  "deployment_verification.json": "2a7f60f0048cf0470e7afa4609559a8244785b3feef06bbcb2d0b55dd66d5418",
+  "plan.json": "23b9413ebfa5911a1265af91a34d0b8f6f3707e4fa5d11d722dd8290b5c0de19",
+  "compiled_recipe.json": "7c5d7c1587dd1d16fd6be47f90661a38b4bb4cd71e08acfc23280ce2c6102a84",
+  "idle_hold_trace.jsonl": "6a9886661f5716bfc420a7380e805a999d1068ff44b229cbb9a0db413f101993",
+  "syntax.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "episode_0000_live_videos/observation_images_front.mp4": "fc1c11e6e8c8b990944d0095a18446c633f8c7e378361b490bc338f1a63c4b11",
+  "episode_0000_live_videos/observation_images_left_wrist.mp4": "51c574e7c89e33f3480c41981d5d5f5ea255e845780452e744e39ae625072df7",
+  "episode_0000_live_videos/observation_images_right_wrist.mp4": "a2085f6a09f44476b303a3884aa718cee770aff3c39b40973be54927add766af"
+}

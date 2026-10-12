@@ -1,0 +1,134 @@
+{
+  "source": "<PROJECT_ROOT>/outputs/fabrica_beam_support_v166_arm_midpoint/idle_hold_trace.jsonl",
+  "parsed_record_count": 439,
+  "event_counts": {
+    "anchor_captured": 2,
+    "anchor_command": 436,
+    "anchor_released": 1
+  },
+  "source_counts": {
+    "articulation_applied_target": 439
+  },
+  "clear_reason_counts": {
+    "local_skill_takeover": 1
+  },
+  "malformed_line_examples": [],
+  "robots": {
+    "franka_left": {
+      "anchor_segments": [
+        {
+          "captured_step": 0,
+          "source": "articulation_applied_target",
+          "logged_samples": 435,
+          "phases": [
+            "fixture_parts_settle",
+            "base_6_move_above",
+            "base_6_descend",
+            "base_6_close_and_attach",
+            "base_6_grip_settle",
+            "base_6_peel_lift",
+            "base_6_grip_contact_prime",
+            "base_6_peel_physical_hold_check",
+            "base_6_lift",
+            "base_6_post_lift_restore_gravity",
+            "base_6_assembly_clearance",
+            "base_6_transport_hover",
+            "base_6_place",
+            "base_6_physical_hold_check",
+            "base_6_restore_gravity",
+            "base_6_clear_support_filters",
+            "base_6_set_down"
+          ],
+          "target_native_q": [
+            0.0,
+            -1.5707963705062866,
+            1.5707963705062866,
+            -1.5707963705062866,
+            -1.5707963705062866,
+            0.0
+          ],
+          "target_max_abs_change_rad": 0.0,
+          "fixed_in_all_logged_samples": true,
+          "crossed_multiple_phases": true,
+          "release_reason": null,
+          "rejected_published_target_branch": false,
+          "logged_endpoint_native_q_change_rad": [
+            -2.046798272203887e-06,
+            0.0005929470062255859,
+            0.0006030797958374023,
+            2.7060508728027344e-05,
+            -1.1920928955078125e-05,
+            -4.006974663184337e-08
+          ],
+          "logged_endpoint_max_abs_q_change_rad": 0.0006030797958374023,
+          "endpoint_task_steps": [
+            0,
+            13888
+          ]
+        }
+      ],
+      "tracking_error_rad": {
+        "count": 435,
+        "mean": 0.000601594475494034,
+        "p95": 0.0006030797958374023,
+        "max": 0.0006030797958374023
+      },
+      "all_segments_fixed_in_logged_samples": true
+    },
+    "franka_right": {
+      "anchor_segments": [
+        {
+          "captured_step": 0,
+          "source": "articulation_applied_target",
+          "logged_samples": 3,
+          "phases": [
+            "fixture_parts_settle"
+          ],
+          "target_native_q": [
+            0.0,
+            -1.5707963705062866,
+            1.5707963705062866,
+            -1.5707963705062866,
+            -1.5707963705062866,
+            0.0
+          ],
+          "target_max_abs_change_rad": 0.0,
+          "fixed_in_all_logged_samples": true,
+          "crossed_multiple_phases": false,
+          "release_reason": "local_skill_takeover",
+          "rejected_published_target_branch": false,
+          "logged_endpoint_native_q_change_rad": [
+            -2.1114963146828813e-06,
+            0.0005916357040405273,
+            0.0005998611450195312,
+            2.7060508728027344e-05,
+            -7.62939453125e-06,
+            -3.97778094907153e-08
+          ],
+          "logged_endpoint_max_abs_q_change_rad": 0.0005998611450195312,
+          "endpoint_task_steps": [
+            0,
+            64
+          ]
+        }
+      ],
+      "tracking_error_rad": {
+        "count": 3,
+        "mean": 0.0003877083460489909,
+        "p95": 0.0005962014198303223,
+        "max": 0.0005998611450195312
+      },
+      "all_segments_fixed_in_logged_samples": true
+    }
+  },
+  "rearm_evidence": {
+    "explicit_rearm_event_count": 0,
+    "note": "A later capture after release documents recapture; absent explicit rearm events do not prove guard state."
+  },
+  "interpretation_limits": [
+    "A fixed controller target is a control change, not stable support or complete assembly success.",
+    "Measured endpoint drift uses only logged samples and cannot bound between-sample peaks.",
+    "No wrap is applied to native joint endpoints; a 2 pi jump remains visible.",
+    "Different anchor segments can intentionally use different targets after active work or reset."
+  ]
+}

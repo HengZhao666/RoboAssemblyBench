@@ -1,0 +1,1415 @@
+{
+  "schema": "beam_late_idle_comparison_v1",
+  "matched_window": {
+    "inclusive_cycle_steps": [
+      11880,
+      12480
+    ],
+    "cycles_per_run": 601,
+    "boundary_records_per_run": 2404,
+    "phase": "base_6_set_down",
+    "pair": "same-cycle after_action to after_physics",
+    "clock_start_s": 49.5125025822781,
+    "clock_end_s": 52.01666937954724,
+    "comparison_basis": "same absolute cycle steps; phase age differs because set_down was entered 44 task steps earlier in v164"
+  },
+  "method": {
+    "com_linear": "world COM from native origin pose and complete-file first COM metadata, compared to same-view raw COM velocity",
+    "angular": "world quaternion incremental rotation vector / actual dt, full per-step vector errors",
+    "joint_drift": "native-coordinate endpoint difference and sum of absolute per-step changes; no endpoint cancellation, no joint wrap needed in this small-change window",
+    "rates_are_not_exact_integrators": true
+  },
+  "runs": {
+    "v162": {
+      "source": "<PROJECT_ROOT>/outputs/beam_major_rounds_2026-10-09/v162/physics_boundary_trace.jsonl",
+      "analysis_source": "<PROJECT_ROOT>/outputs/beam_major_rounds_2026-10-09/v162/boundary_analysis_steps_11880_12480.json",
+      "full_file_counts": {
+        "line_count": 2404,
+        "parsed_record_count": 2404,
+        "record_kind_counts": {
+          "boundary": 2404
+        },
+        "boundary_counts": {
+          "before_action": 601,
+          "after_action": 601,
+          "after_physics": 601,
+          "after_observation": 601
+        },
+        "cycle_count": 601,
+        "invalid_counts": {
+          "invalid_boundary_records": 2404,
+          "body:franka_left/Robotiq_2F_85/base_link:Expected one cached body; found 0": 2404,
+          "body:franka_left/left_inner_finger:Expected one cached body; found 0": 2404,
+          "body:franka_left/right_inner_finger:Expected one cached body; found 0": 2404
+        },
+        "state_writer_event_counts": {},
+        "phase_boundary_record_counts": {
+          "base_6_set_down": 2404
+        }
+      },
+      "window": {
+        "start_step": 11880,
+        "end_step": 12480,
+        "inclusive": true,
+        "selected_record_count": 2404,
+        "actual_cycle_step_min": 11880,
+        "actual_cycle_step_max": 12480,
+        "phase_boundary_record_counts": {
+          "base_6_set_down": 2404
+        },
+        "cycle_phase_counts": {
+          "base_6_set_down": 601
+        }
+      },
+      "invalid_counts": {
+        "invalid_boundary_records": 2404,
+        "body:franka_left/Robotiq_2F_85/base_link:Expected one cached body; found 0": 2404,
+        "body:franka_left/left_inner_finger:Expected one cached body; found 0": 2404,
+        "body:franka_left/right_inner_finger:Expected one cached body; found 0": 2404
+      },
+      "global_stabilization": [
+        {
+          "valid": true,
+          "enabled": false,
+          "source": "is_stablization_enabled"
+        }
+      ],
+      "global_physics_readbacks": [],
+      "window_writer_events": {},
+      "within_cycle": {
+        "before_action_to_after_action": {
+          "pairs": 601,
+          "clock_changed_pairs": 0,
+          "constraints_changed_pairs": 0,
+          "body_field_maxima": {
+            "franka_right/left_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "fabrica_beam_6": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/right_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            }
+          },
+          "robot_field_maxima": {
+            "franka_right": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            },
+            "franka_left": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            }
+          }
+        },
+        "after_action_to_after_physics": {
+          "pairs": 601,
+          "clock_changed_pairs": 601,
+          "constraints_changed_pairs": 0,
+          "body_field_maxima": {
+            "franka_right/left_inner_finger": {
+              "origin_position_delta_m": 1.5727609159897281e-06,
+              "angle_delta_rad": 7.68352324710046e-06,
+              "linear_velocity_delta_m_s": 0.005034605226055622,
+              "angular_velocity_delta_rad_s": 0.05543635804110153,
+              "com_position_delta_m": 1.1976308215365595e-06
+            },
+            "fabrica_beam_6": {
+              "origin_position_delta_m": 5.332950513291654e-06,
+              "angle_delta_rad": 0.0003423135272409081,
+              "linear_velocity_delta_m_s": 0.010634965344626256,
+              "angular_velocity_delta_rad_s": 1.0856365184932792,
+              "com_position_delta_m": 5.677908279931197e-06
+            },
+            "franka_right/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 8.583702641008047e-07,
+              "angle_delta_rad": 2.8239398755706517e-06,
+              "linear_velocity_delta_m_s": 0.0031871095196723443,
+              "angular_velocity_delta_rad_s": 0.05543634920574596,
+              "com_position_delta_m": 8.718316217783786e-07
+            },
+            "franka_right/right_inner_finger": {
+              "origin_position_delta_m": 2.6875949302978116e-06,
+              "angle_delta_rad": 3.15504512737272e-05,
+              "linear_velocity_delta_m_s": 0.005775274285933056,
+              "angular_velocity_delta_rad_s": 0.05589319354332362,
+              "com_position_delta_m": 2.1319121827067467e-06
+            }
+          },
+          "robot_field_maxima": {
+            "franka_right": {
+              "max_abs_q_delta_rad": 7.539987564086914e-05,
+              "max_abs_qdot_delta_rad_s": 0.1732316017150879
+            },
+            "franka_left": {
+              "max_abs_q_delta_rad": 3.421306610107422e-05,
+              "max_abs_qdot_delta_rad_s": 1.2724194675683975e-07
+            }
+          }
+        },
+        "after_physics_to_after_observation": {
+          "pairs": 601,
+          "clock_changed_pairs": 0,
+          "constraints_changed_pairs": 0,
+          "body_field_maxima": {
+            "franka_right/left_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "fabrica_beam_6": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/right_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            }
+          },
+          "robot_field_maxima": {
+            "franka_right": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            },
+            "franka_left": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            }
+          }
+        }
+      },
+      "between_cycles_after_obs_before_action": {
+        "pairs": 600,
+        "clock_changed_pairs": 0,
+        "constraints_changed_pairs": 0,
+        "body_field_maxima": {
+          "franka_right/left_inner_finger": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          },
+          "fabrica_beam_6": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          },
+          "franka_right/Robotiq_2F_85/base_link": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          },
+          "franka_right/right_inner_finger": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          }
+        },
+        "robot_field_maxima": {
+          "franka_right": {
+            "max_abs_q_delta_rad": 0.0,
+            "max_abs_qdot_delta_rad_s": 0.0
+          },
+          "franka_left": {
+            "max_abs_q_delta_rad": 0.0,
+            "max_abs_qdot_delta_rad_s": 0.0
+          }
+        }
+      },
+      "last_2_seconds": {
+        "vertical_force": {
+          "min": 1.5227820575237274,
+          "max": 2.447055220603943,
+          "mean": 2.015832670095066
+        },
+        "bottom_gap": {
+          "min": -9.652453472064337e-07,
+          "max": 7.205163667922676e-07,
+          "mean": -1.7436195718552778e-07
+        },
+        "linear_speed": {
+          "min": 0.004652992847256444,
+          "max": 0.015946165938094104,
+          "mean": 0.011525265076048279
+        },
+        "angular_speed": {
+          "min": 0.5964370007405065,
+          "max": 1.8599969634000644,
+          "mean": 1.2919541201688196
+        }
+      },
+      "last_2_seconds_pose_fd": {
+        "linear_speed": {
+          "min": 0.0001920564877810128,
+          "max": 0.0011512729330012204,
+          "mean": 0.0006488708318895999
+        },
+        "angular_speed": {
+          "min": 0.0022464951870440546,
+          "max": 0.08416956090669339,
+          "mean": 0.03694826151148116
+        }
+      },
+      "success": false,
+      "terminal_reason": "timeout-failure"
+    },
+    "v164": {
+      "source": "<PROJECT_ROOT>/outputs/beam_major_rounds_2026-10-09/v164/physics_boundary_trace.jsonl",
+      "analysis_source": "<PROJECT_ROOT>/outputs/beam_major_rounds_2026-10-09/v164/boundary_analysis_steps_11880_12480.json",
+      "full_file_counts": {
+        "line_count": 20664,
+        "parsed_record_count": 20664,
+        "record_kind_counts": {
+          "boundary": 20656,
+          "state_write_call_site": 8
+        },
+        "boundary_counts": {
+          "before_action": 5164,
+          "after_action": 5164,
+          "after_physics": 5164,
+          "after_observation": 5164
+        },
+        "cycle_count": 5164,
+        "invalid_counts": {
+          "invalid_boundary_records": 20656,
+          "body:franka_left/left_inner_finger:Expected one cached body; found 0": 20656,
+          "body:franka_left/right_inner_finger:Expected one cached body; found 0": 20656,
+          "body:franka_right/left_inner_finger:Expected one cached body; found 0": 332,
+          "body:franka_right/right_inner_finger:Expected one cached body; found 0": 332
+        },
+        "state_writer_event_counts": {
+          "set_object_collision": 7,
+          "set_gravity_enabled": 1
+        },
+        "phase_boundary_record_counts": {
+          "base_6_close_and_attach": 2595,
+          "base_6_grip_settle": 1,
+          "base_6_grip_contact_prime": 287,
+          "base_6_peel_physical_hold_check": 1,
+          "base_6_set_down": 17772
+        }
+      },
+      "window": {
+        "start_step": 11880,
+        "end_step": 12480,
+        "inclusive": true,
+        "selected_record_count": 2404,
+        "actual_cycle_step_min": 11880,
+        "actual_cycle_step_max": 12480,
+        "phase_boundary_record_counts": {
+          "base_6_set_down": 2404
+        },
+        "cycle_phase_counts": {
+          "base_6_set_down": 601
+        }
+      },
+      "invalid_counts": {
+        "invalid_boundary_records": 2404,
+        "body:franka_left/left_inner_finger:Expected one cached body; found 0": 2404,
+        "body:franka_left/right_inner_finger:Expected one cached body; found 0": 2404
+      },
+      "global_stabilization": [
+        {
+          "valid": true,
+          "enabled": false,
+          "source": "is_stablization_enabled"
+        }
+      ],
+      "global_physics_readbacks": [
+        {
+          "solver_type": {
+            "valid": true,
+            "source": "get_solver_type",
+            "value": "TGS"
+          },
+          "gpu_dynamics_enabled": {
+            "valid": true,
+            "source": "is_gpu_dynamics_enabled",
+            "value": false
+          }
+        }
+      ],
+      "window_writer_events": {},
+      "within_cycle": {
+        "before_action_to_after_action": {
+          "pairs": 601,
+          "clock_changed_pairs": 0,
+          "constraints_changed_pairs": 0,
+          "body_field_maxima": {
+            "franka_right/left_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_left/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/right_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "fabrica_beam_6": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            }
+          },
+          "robot_field_maxima": {
+            "franka_right": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            },
+            "franka_left": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            }
+          }
+        },
+        "after_action_to_after_physics": {
+          "pairs": 601,
+          "clock_changed_pairs": 601,
+          "constraints_changed_pairs": 0,
+          "body_field_maxima": {
+            "franka_right/left_inner_finger": {
+              "origin_position_delta_m": 1.7174517553119551e-06,
+              "angle_delta_rad": 8.014170549468945e-06,
+              "linear_velocity_delta_m_s": 0.012097606850425924,
+              "angular_velocity_delta_rad_s": 0.053297983746222785,
+              "com_position_delta_m": 1.984752259504339e-06
+            },
+            "franka_left/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 1.1573147078223212e-08,
+              "angular_velocity_delta_rad_s": 3.260459468920487e-08,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/right_inner_finger": {
+              "origin_position_delta_m": 1.7862135729435535e-06,
+              "angle_delta_rad": 1.1850983048845418e-05,
+              "linear_velocity_delta_m_s": 0.011695692529134842,
+              "angular_velocity_delta_rad_s": 0.0820873915838767,
+              "com_position_delta_m": 1.7272275924840434e-06
+            },
+            "franka_right/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 1.7055321268358276e-06,
+              "angle_delta_rad": 4.223264780231683e-06,
+              "linear_velocity_delta_m_s": 0.007074754299590139,
+              "angular_velocity_delta_rad_s": 0.05329797067382362,
+              "com_position_delta_m": 1.7434977795611312e-06
+            },
+            "fabrica_beam_6": {
+              "origin_position_delta_m": 2.43588411956684e-06,
+              "angle_delta_rad": 0.00016822867478272612,
+              "linear_velocity_delta_m_s": 0.009431193780223536,
+              "angular_velocity_delta_rad_s": 1.1020635806699035,
+              "com_position_delta_m": 2.131363005891512e-06
+            }
+          },
+          "robot_field_maxima": {
+            "franka_right": {
+              "max_abs_q_delta_rad": 0.00015372037887573242,
+              "max_abs_qdot_delta_rad_s": 0.5664207506924868
+            },
+            "franka_left": {
+              "max_abs_q_delta_rad": 2.319211489520967e-10,
+              "max_abs_qdot_delta_rad_s": 2.0151492208242416e-07
+            }
+          }
+        },
+        "after_physics_to_after_observation": {
+          "pairs": 601,
+          "clock_changed_pairs": 0,
+          "constraints_changed_pairs": 0,
+          "body_field_maxima": {
+            "franka_right/left_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_left/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/right_inner_finger": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "franka_right/Robotiq_2F_85/base_link": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            },
+            "fabrica_beam_6": {
+              "origin_position_delta_m": 0.0,
+              "angle_delta_rad": 0.0,
+              "linear_velocity_delta_m_s": 0.0,
+              "angular_velocity_delta_rad_s": 0.0,
+              "com_position_delta_m": 0.0
+            }
+          },
+          "robot_field_maxima": {
+            "franka_right": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            },
+            "franka_left": {
+              "max_abs_q_delta_rad": 0.0,
+              "max_abs_qdot_delta_rad_s": 0.0
+            }
+          }
+        }
+      },
+      "between_cycles_after_obs_before_action": {
+        "pairs": 600,
+        "clock_changed_pairs": 0,
+        "constraints_changed_pairs": 0,
+        "body_field_maxima": {
+          "franka_right/left_inner_finger": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          },
+          "franka_left/Robotiq_2F_85/base_link": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          },
+          "franka_right/right_inner_finger": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          },
+          "franka_right/Robotiq_2F_85/base_link": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          },
+          "fabrica_beam_6": {
+            "origin_position_delta_m": 0.0,
+            "angle_delta_rad": 0.0,
+            "linear_velocity_delta_m_s": 0.0,
+            "angular_velocity_delta_rad_s": 0.0,
+            "com_position_delta_m": 0.0
+          }
+        },
+        "robot_field_maxima": {
+          "franka_right": {
+            "max_abs_q_delta_rad": 0.0,
+            "max_abs_qdot_delta_rad_s": 0.0
+          },
+          "franka_left": {
+            "max_abs_q_delta_rad": 0.0,
+            "max_abs_qdot_delta_rad_s": 0.0
+          }
+        }
+      },
+      "last_2_seconds": {
+        "vertical_force": {
+          "min": 1.365217387676239,
+          "max": 4.731030225753784,
+          "mean": 2.390516156765322
+        },
+        "bottom_gap": {
+          "min": -4.310517853989282e-06,
+          "max": -3.194380417959053e-07,
+          "mean": -2.2306064768079505e-06
+        },
+        "linear_speed": {
+          "min": 0.002754466159074738,
+          "max": 0.009934044174701458,
+          "mean": 0.0061239176793331145
+        },
+        "angular_speed": {
+          "min": 0.09376755889349228,
+          "max": 0.9913455218339983,
+          "mean": 0.37551887737693596
+        }
+      },
+      "last_2_seconds_pose_fd": {
+        "linear_speed": {
+          "min": 3.5762786865234375e-06,
+          "max": 0.0005293164294582254,
+          "mean": 0.00021286286865903288
+        },
+        "angular_speed": {
+          "min": 0.00020606317936260285,
+          "max": 0.04100414296698407,
+          "mean": 0.013511397938223873
+        }
+      },
+      "success": false,
+      "terminal_reason": "timeout-failure"
+    }
+  },
+  "per_body": {
+    "franka_right/left_inner_finger": {
+      "v162": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.0008835411582123416,
+            "median": 0.0009040509754930191,
+            "p95": 0.0014082496409656665,
+            "max": 0.0018440454831296438,
+            "min": 7.701315613291994e-05
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.06354578206184587,
+            "median": 0.06193835862497883,
+            "p95": 0.07895870861165448,
+            "max": 0.08275055366236816,
+            "min": 0.04963627494054363
+          },
+          "vector_rms_residual": 0.06408730290652835,
+          "pose_fd_mean_vector": [
+            1.0400524582282573e-06,
+            -6.391340215449738e-08,
+            2.146096209543409e-06
+          ],
+          "raw_mean_vector": [
+            -0.02829438977922854,
+            0.04341363567183299,
+            0.034468769181067255
+          ],
+          "observed_to_raw_path_ratio": 0.013904009511637389
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.00010530054110597558,
+            "median": 9.031430011206752e-05,
+            "p95": 0.0002168379589363298,
+            "max": 0.0002874313821780596,
+            "min": 4.1144153769708995e-06
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.005178191631669253,
+            "median": 0.005099402783183562,
+            "p95": 0.006447448400945642,
+            "max": 0.007856411677949763,
+            "min": 0.0037101704523556595
+          },
+          "vector_rms_residual": 0.005237978789181622,
+          "pose_fd_mean_vector": [
+            -1.744755290773019e-08,
+            -4.415286897318028e-08,
+            -1.2774435431708233e-07
+          ],
+          "raw_mean_vector": [
+            -0.0048008538265797785,
+            0.001028702836855626,
+            -0.0013205763138520738
+          ],
+          "observed_to_raw_path_ratio": 0.02033538899216649
+        }
+      },
+      "v164": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.00047494223362937285,
+            "median": 0.00045363467389523845,
+            "p95": 0.0008122075689533145,
+            "max": 0.0019234008315593765,
+            "min": 3.607021534400481e-05
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.040351483610892795,
+            "median": 0.03970742018152367,
+            "p95": 0.04970377251725947,
+            "max": 0.05439832815965352,
+            "min": 0.021634133689644928
+          },
+          "vector_rms_residual": 0.04082161399122568,
+          "pose_fd_mean_vector": [
+            -4.178426671146981e-06,
+            -1.5603151989299666e-06,
+            -2.1576599237102986e-06
+          ],
+          "raw_mean_vector": [
+            -0.001419108929716906,
+            0.03520090963626389,
+            0.018322915574861147
+          ],
+          "observed_to_raw_path_ratio": 0.011770130640281174
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.00011551201673843121,
+            "median": 0.00010808295515648269,
+            "p95": 0.00020970607636861273,
+            "max": 0.00047634051743794737,
+            "min": 3.945441710271705e-06
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.004279841953767526,
+            "median": 0.004241155242929223,
+            "p95": 0.004864485053835435,
+            "max": 0.010162657848931281,
+            "min": 0.003477937875991762
+          },
+          "vector_rms_residual": 0.004286647959331806,
+          "pose_fd_mean_vector": [
+            1.0703956190989778e-07,
+            -1.0810526397376936e-06,
+            1.9290585478966267e-06
+          ],
+          "raw_mean_vector": [
+            -0.003178057892693744,
+            0.0013922747300500779,
+            0.0018566450841737269
+          ],
+          "observed_to_raw_path_ratio": 0.026989785601018862
+        }
+      }
+    },
+    "fabrica_beam_6": {
+      "v162": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.03629304899360016,
+            "median": 0.03617543738302943,
+            "p95": 0.06695938251860042,
+            "max": 0.08215524225308816,
+            "min": 0.002162900638483687
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 1.295570686936859,
+            "median": 1.3223637410829827,
+            "p95": 1.684757692553572,
+            "max": 1.880357730814183,
+            "min": 0.7047905835122795
+          },
+          "vector_rms_residual": 1.3327760598857934,
+          "pose_fd_mean_vector": [
+            -8.499998065080353e-05,
+            3.0657206497101804e-06,
+            -1.3291865123552957e-06
+          ],
+          "raw_mean_vector": [
+            -1.2953440561865808,
+            0.00399555952141476,
+            0.006152722803113487
+          ],
+          "observed_to_raw_path_ratio": 0.028013175475132483
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.0008236436273173442,
+            "median": 0.0008666401874118675,
+            "p95": 0.0011517203939408341,
+            "max": 0.0013626979161132527,
+            "min": 0.00017423109322482332
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.011649435921890324,
+            "median": 0.01220435622177318,
+            "p95": 0.015459452156358244,
+            "max": 0.01614930886472418,
+            "min": 0.005696897890698086
+          },
+          "vector_rms_residual": 0.012248199935394544,
+          "pose_fd_mean_vector": [
+            -7.572133544365455e-08,
+            1.8077230254789237e-06,
+            9.489356683111187e-08
+          ],
+          "raw_mean_vector": [
+            -0.00019144836045531326,
+            0.005246416857960431,
+            0.010101935317191278
+          ],
+          "observed_to_raw_path_ratio": 0.07070244712618615
+        }
+      },
+      "v164": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.011702263954568765,
+            "median": 0.009760289307479462,
+            "p95": 0.028790002981399145,
+            "max": 0.040374879842140186,
+            "min": 0.0009882470805725363
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.3733072826178008,
+            "median": 0.3705601415458994,
+            "p95": 0.6565906222724907,
+            "max": 0.9838450659293178,
+            "min": 0.0807460853353545
+          },
+          "vector_rms_residual": 0.41374023280944633,
+          "pose_fd_mean_vector": [
+            -6.68837230246432e-05,
+            -1.1961903229549138e-07,
+            1.6984035324338685e-05
+          ],
+          "raw_mean_vector": [
+            -0.3187740584710472,
+            0.0022719211854552385,
+            -0.06739766619352433
+          ],
+          "observed_to_raw_path_ratio": 0.031347537268780715
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.00021119104669466238,
+            "median": 0.0002136212431633053,
+            "p95": 0.00033138171324808115,
+            "max": 0.000511527094735746,
+            "min": 2.660995587614408e-06
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.006106820798253806,
+            "median": 0.005987548568609364,
+            "p95": 0.008387311298262071,
+            "max": 0.009839863894223366,
+            "min": 0.0031112305105661497
+          },
+          "vector_rms_residual": 0.0062295822606474646,
+          "pose_fd_mean_vector": [
+            1.070044775680887e-06,
+            -1.317769155268847e-06,
+            7.608758754469919e-07
+          ],
+          "raw_mean_vector": [
+            -0.0024480778043719704,
+            0.003504672746753983,
+            0.0034744919796076026
+          ],
+          "observed_to_raw_path_ratio": 0.03458281381943461
+        }
+      }
+    },
+    "franka_right/Robotiq_2F_85/base_link": {
+      "v162": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.00023602731448006401,
+            "median": 0.00020970505731826277,
+            "p95": 0.0004640876651151956,
+            "max": 0.0006777455347897724,
+            "min": 2.861022172562064e-05
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.06354578553282907,
+            "median": 0.06193834120885344,
+            "p95": 0.07895873677582896,
+            "max": 0.08275057583700275,
+            "min": 0.04963626817643038
+          },
+          "vector_rms_residual": 0.06406894650620723,
+          "pose_fd_mean_vector": [
+            -2.815611666968325e-07,
+            -6.523368779713445e-08,
+            -2.1986482733584557e-07
+          ],
+          "raw_mean_vector": [
+            -0.028294394177054604,
+            0.04341364095914185,
+            0.03446876568202171
+          ],
+          "observed_to_raw_path_ratio": 0.0037142874621972754
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 8.328302544589652e-05,
+            "median": 7.42485692037837e-05,
+            "p95": 0.0001642494926564063,
+            "max": 0.00020923957831411644,
+            "min": 8.029367920741489e-07
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.004966759191668903,
+            "median": 0.004958581989183158,
+            "p95": 0.005423337351944097,
+            "max": 0.005648910367644653,
+            "min": 0.004421601345897162
+          },
+          "vector_rms_residual": 0.004979646330925836,
+          "pose_fd_mean_vector": [
+            -4.657826848377752e-08,
+            -5.8254926438860314e-08,
+            -1.4096701231368895e-07
+          ],
+          "raw_mean_vector": [
+            -0.00224356050118835,
+            0.0032791693612759603,
+            0.0029103230032604963
+          ],
+          "observed_to_raw_path_ratio": 0.016768082009208953
+        }
+      },
+      "v164": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.00029857035990913045,
+            "median": 0.0002749794122754453,
+            "p95": 0.0005868567988526671,
+            "max": 0.0010135834943931054,
+            "min": 4.5024036504969215e-05
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.04035148686296945,
+            "median": 0.03970743452322472,
+            "p95": 0.04970374787215701,
+            "max": 0.0543983459303254,
+            "min": 0.021634133123371698
+          },
+          "vector_rms_residual": 0.04081569541012009,
+          "pose_fd_mean_vector": [
+            -3.7125911915460637e-06,
+            -1.5355198063170506e-06,
+            -1.3419414128861175e-06
+          ],
+          "raw_mean_vector": [
+            -0.0014191110317785906,
+            0.03520091471592345,
+            0.018322913132270118
+          ],
+          "observed_to_raw_path_ratio": 0.0073992406010478
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.000102458767735189,
+            "median": 9.8602929705451e-05,
+            "p95": 0.00018133160047696117,
+            "max": 0.0004184394452713538,
+            "min": 4.323711754446185e-06
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.006171972525214143,
+            "median": 0.006170201221591102,
+            "p95": 0.007135706119211406,
+            "max": 0.0103054387272154,
+            "min": 0.005236663189819428
+          },
+          "vector_rms_residual": 0.006196313591457813,
+          "pose_fd_mean_vector": [
+            -4.8249676831786466e-11,
+            -5.2104934141281e-07,
+            1.9002292828831671e-06
+          ],
+          "raw_mean_vector": [
+            -0.0013419737047713387,
+            0.003418851927381486,
+            0.004893167239587487
+          ],
+          "observed_to_raw_path_ratio": 0.016600651949861697
+        }
+      }
+    },
+    "franka_right/right_inner_finger": {
+      "v162": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.0037024562341559336,
+            "median": 0.0037980463213386256,
+            "p95": 0.006118864051038314,
+            "max": 0.007572107910778327,
+            "min": 5.157782032279631e-05
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.0629217553889189,
+            "median": 0.06159755689125182,
+            "p95": 0.07859610121324126,
+            "max": 0.0829356833086551,
+            "min": 0.04847510316772174
+          },
+          "vector_rms_residual": 0.06376947832835941,
+          "pose_fd_mean_vector": [
+            5.48904259364225e-06,
+            -1.8414381165554546e-08,
+            1.0071933458754533e-05
+          ],
+          "raw_mean_vector": [
+            -0.04223112265475578,
+            0.04338074623050785,
+            0.00967642253484831
+          ],
+          "observed_to_raw_path_ratio": 0.05884222732298358
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.00026014051460461593,
+            "median": 0.00026698747340453795,
+            "p95": 0.00041914788306170967,
+            "max": 0.0005116588971645282,
+            "min": 2.943208991301264e-05
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.008880717804506619,
+            "median": 0.008836361248240145,
+            "p95": 0.009564272189377564,
+            "max": 0.010262167600400676,
+            "min": 0.007882026939930828
+          },
+          "vector_rms_residual": 0.008902980441568604,
+          "pose_fd_mean_vector": [
+            -1.6570021149203634e-07,
+            6.84027534252309e-07,
+            -5.845014736183133e-08
+          ],
+          "raw_mean_vector": [
+            -0.0031122781067835586,
+            0.008211064528202801,
+            -0.0004131402285729292
+          ],
+          "observed_to_raw_path_ratio": 0.029292735151724418
+        }
+      },
+      "v164": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.001031418405819751,
+            "median": 0.0009294058962768531,
+            "p95": 0.002041106582078126,
+            "max": 0.002844235783384445,
+            "min": 0.00010761258368748613
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.06011023505602067,
+            "median": 0.05923610278104753,
+            "p95": 0.08412481205604705,
+            "max": 0.09911745755963255,
+            "min": 0.03139900500094353
+          },
+          "vector_rms_residual": 0.06165101739773591,
+          "pose_fd_mean_vector": [
+            -5.005944102279749e-06,
+            -1.5533709347510553e-06,
+            -3.67892314338819e-06
+          ],
+          "raw_mean_vector": [
+            -0.030506223117848997,
+            0.035131497588318565,
+            -0.03482922431261289
+          ],
+          "observed_to_raw_path_ratio": 0.017158781775824108
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.0001243390466674033,
+            "median": 0.00011752257510933811,
+            "p95": 0.00021485841018021036,
+            "max": 0.0004145346005765062,
+            "min": 1.2602962888938171e-05
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.00693073844099298,
+            "median": 0.00680340739309452,
+            "p95": 0.009166783748312127,
+            "max": 0.010805035430743766,
+            "min": 0.00464316105791141
+          },
+          "vector_rms_residual": 0.0070202981273824756,
+          "pose_fd_mean_vector": [
+            7.529322205880677e-08,
+            -8.848040565514416e-07,
+            2.0934284668210408e-06
+          ],
+          "raw_mean_vector": [
+            -0.0017828848772273925,
+            0.006291981737676406,
+            0.0015357084480887542
+          ],
+          "observed_to_raw_path_ratio": 0.017940230716539492
+        }
+      }
+    },
+    "franka_left/Robotiq_2F_85/base_link": {
+      "v164": {
+        "angular_velocity_rad_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "min": 0.0
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.013299035275439203,
+            "median": 0.013299036811199158,
+            "p95": 0.013299048919670204,
+            "max": 0.013299053593312142,
+            "min": 0.013299010741178455
+          },
+          "vector_rms_residual": 0.013299035275442347,
+          "pose_fd_mean_vector": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "raw_mean_vector": [
+            0.00022293019972678845,
+            -0.013296705055455002,
+            -0.00011079734501561782
+          ],
+          "observed_to_raw_path_ratio": 0.0
+        },
+        "com_linear_velocity_m_s": {
+          "pose_fd_norm": {
+            "count": 601,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "min": 0.0
+          },
+          "raw_norm": {
+            "count": 601,
+            "mean": 0.006702339254889255,
+            "median": 0.006702339045592757,
+            "p95": 0.006702343398494473,
+            "max": 0.006702347469407972,
+            "min": 0.0067023318603205715
+          },
+          "vector_rms_residual": 0.006702339254889693,
+          "pose_fd_mean_vector": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "raw_mean_vector": [
+            -0.0010237903436862812,
+            -2.4610690666795955e-05,
+            0.006623639417548792
+          ],
+          "observed_to_raw_path_ratio": 0.0
+        }
+      }
+    }
+  },
+  "left_joint_drift": {
+    "v162": {
+      "native_coordinate_count": 12,
+      "endpoint_delta_rad": [
+        -0.0007771523669362068,
+        0.020464777946472168,
+        0.010846495628356934,
+        -0.0006428956985473633,
+        -7.164478302001953e-05,
+        1.8760038074105978e-06,
+        -1.468465598009061e-07,
+        -1.7193087842315435e-07,
+        1.5657406038371846e-07,
+        -2.1334335542633198e-07,
+        1.2096961654606275e-07,
+        1.8671744328457862e-07
+      ],
+      "endpoint_max_abs_delta_rad": 0.020464777946472168,
+      "per_axis_accumulated_abs_delta_rad": [
+        0.0007771523669362068,
+        0.020464777946472168,
+        0.010846495628356934,
+        0.0006428956985473633,
+        7.164478302001953e-05,
+        1.8760038074105978e-06,
+        1.468465598009061e-07,
+        1.7193087842315435e-07,
+        1.5657406038371846e-07,
+        2.1334335542633198e-07,
+        1.2096961654606275e-07,
+        1.8671744328457862e-07
+      ],
+      "accumulated_vector_norm_path_rad": 0.02318381333906984,
+      "max_single_step_abs_delta_rad": 3.421306610107422e-05,
+      "q_fd_vs_raw": {
+        "pose_fd_norm": {
+          "count": 601,
+          "mean": 0.009258094694152338,
+          "median": 0.009248561383788228,
+          "p95": 0.009339996911160393,
+          "max": 0.009340771207121982,
+          "min": 0.009210034436937459
+        },
+        "raw_norm": {
+          "count": 601,
+          "mean": 0.0010149401108762138,
+          "median": 0.0010123304421977323,
+          "p95": 0.0010283727769499283,
+          "max": 0.0010304371044141702,
+          "min": 0.0010068610767745207
+        },
+        "vector_rms_residual": 0.009891127012322231,
+        "pose_fd_mean_vector": [
+          -0.0003103436910766932,
+          0.00817229026788053,
+          0.004331379059967297,
+          -0.0002567303820370342,
+          -2.861022800004776e-05,
+          7.491528956683029e-07,
+          -5.864088604682645e-08,
+          -6.86579179193053e-08,
+          6.252541186731909e-08,
+          -8.51953454773813e-08,
+          4.830733187501057e-08,
+          7.456270224818842e-08
+        ],
+        "raw_mean_vector": [
+          -9.565968344719967e-06,
+          -0.0005358802007446174,
+          -0.00026872157168221316,
+          1.9654331644870124e-05,
+          -3.7370835169768026e-07,
+          -5.4130787691018516e-08,
+          -0.00034746927517766873,
+          -0.00033817915777604524,
+          0.00034746927425758094,
+          -0.0003771252116419301,
+          0.00023194075711307807,
+          0.0003439682779311452
+        ],
+        "observed_to_raw_path_ratio": 9.121813784815027
+      }
+    },
+    "v164": {
+      "native_coordinate_count": 12,
+      "endpoint_delta_rad": [
+        6.821210263296962e-13,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.6841640849161195e-12,
+        1.4279066817834973e-10,
+        1.4915713109076023e-10,
+        -1.4370016288012266e-10,
+        1.5370460459962487e-10,
+        -1.418811734765768e-10,
+        -1.4642864698544145e-10
+      ],
+      "endpoint_max_abs_delta_rad": 1.5370460459962487e-10,
+      "per_axis_accumulated_abs_delta_rad": [
+        3.346940502524376e-10,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.458318407316256e-10,
+        8.233746484620497e-08,
+        8.20946297608316e-08,
+        8.184360922314227e-08,
+        8.182996680261567e-08,
+        8.203278412111104e-08,
+        8.275765139842406e-08
+      ],
+      "accumulated_vector_norm_path_rad": 2.020331415206291e-07,
+      "max_single_step_abs_delta_rad": 2.319211489520967e-10,
+      "q_fd_vs_raw": {
+        "pose_fd_norm": {
+          "count": 601,
+          "mean": 8.067878774726664e-08,
+          "median": 8.113851434924336e-08,
+          "p95": 1.0516817380889785e-07,
+          "max": 1.199690535410805e-07,
+          "min": 4.022892415655767e-08
+        },
+        "raw_norm": {
+          "count": 601,
+          "mean": 0.009652912031114869,
+          "median": 0.009652913476455761,
+          "p95": 0.009652942228095178,
+          "max": 0.00965295821068433,
+          "min": 0.009652878724088348
+        },
+        "vector_rms_residual": 0.009652912050014697,
+        "pose_fd_mean_vector": [
+          2.723944056256826e-13,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.471213534551215e-12,
+          5.702122891097632e-11,
+          5.956357669681605e-11,
+          -5.738442145181056e-11,
+          6.137953940098733e-11,
+          -5.665803637014203e-11,
+          -5.847399907431334e-11
+        ],
+        "raw_mean_vector": [
+          -0.00010981651908929572,
+          -0.006580762015795103,
+          -0.0069281180968783955,
+          0.00021219048663116092,
+          0.0002229495815703794,
+          8.396919067154416e-07,
+          -0.0005611570637414353,
+          -0.0005353646583974473,
+          0.0005611570708115838,
+          -0.0006549607086058911,
+          0.0003375529987426063,
+          0.0005543866144809345
+        ],
+        "observed_to_raw_path_ratio": 8.357973996573197e-06
+      }
+    }
+  },
+  "episode_end_left_robot": {
+    "v162": {
+      "episode_source": "<PROJECT_ROOT>/outputs/beam_major_rounds_2026-10-09/v162/episode_0000.json",
+      "task_steps": 12882,
+      "position": [
+        0.9775201922376067,
+        0.4282200025303127,
+        1.1536855367858823
+      ],
+      "height_m": 1.1536855367858823,
+      "workspace_offset": [
+        0.0,
+        0.0,
+        0.99
+      ],
+      "seed": 0,
+      "layout_seed": 505
+    },
+    "v164": {
+      "episode_source": "<PROJECT_ROOT>/outputs/beam_major_rounds_2026-10-09/v164/episode_0000.json",
+      "task_steps": 12838,
+      "position": [
+        0.9919783953969052,
+        0.4332982163018574,
+        1.4855563954817859
+      ],
+      "height_m": 1.4855563954817859,
+      "workspace_offset": [
+        0.0,
+        0.0,
+        0.99
+      ],
+      "seed": 0,
+      "layout_seed": 505
+    },
+    "difference_v164_minus_v162_m": [
+      0.014458203159298577,
+      0.00507821377154466,
+      0.3318708586959036
+    ],
+    "height_difference_m": 0.3318708586959036,
+    "endpoint_task_step_difference": -44,
+    "no_velocity_inference": "Different simulations end at different task steps (12882 versus 12838); endpoint height difference is not a fall speed or trajectory estimate."
+  },
+  "idle_summary_source": "<PROJECT_ROOT>/outputs/beam_major_rounds_2026-10-09/v164/idle_hold_summary.json",
+  "interpretation_limits": [
+    "Same seed, layout seed and workspace frame; same absolute physics-time window 49.51250258..52.01666938 s. This does not match the exact elapsed age within set_down (v164 enters it 44 steps earlier).",
+    "v164 all left-arm target logs are fixed across 17 phases, but that control result alone does not prove support stability or full assembly success.",
+    "The v164 left gripper base physical view is present; v162 did not have that cached fallback. Cross-run physical left-base pose statistics are therefore unavailable; left q/qdot is available in both.",
+    "Record-level invalid indicates missing cached idle-left gripper bodies/fingers; the object, right-gripper bodies and both robot joint views used in the comparison are valid.",
+    "Native solver readback was added after v162. v164 logs TGS; v162 TGS is the declared baseline, not an actual solver readback in this trace.",
+    "No copied pose/q/qdot/velocity changes across action or observation boundaries and no instrumented writers inside this window; sampled changes occur in physics. This does not rule out uninstrumented engine operations inside a physics step.",
+    "Right-base raw COM linear speed increases while object raw speeds and most angular statistics decrease; the change is not a uniform improvement of every physical quantity.",
+    "Terminal last-two-second statistics and matched 601-cycle statistics use different time windows and must not be substituted for one another.",
+    "Both simulations time out before insertion. Existing stability/slip gates should remain unchanged."
+  ]
+}

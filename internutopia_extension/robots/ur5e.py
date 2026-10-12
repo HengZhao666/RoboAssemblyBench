@@ -934,30 +934,179 @@ class UR5eRobot(BaseRobot):
             except Exception:
                 continue
 
+    def _arm_drive_type_readbacks(self, joint_names, indices):
+        """Read actual Joint prims; never infer a type from a name or a gain."""
+        from isaacsim.core.utils.stage import get_current_stage
+        from pxr import Usd, UsdPhysics
+
+        stage = get_current_stage()
+        root = stage.GetPrimAtPath(self.config.prim_path)
+        if root is None or not root.IsValid():
+            raise ValueError(f'Robot subtree unavailable: {self.config.prim_path}')
+        joint_prims = {}
+        for prim in Usd.PrimRange(root, Usd.TraverseInstanceProxies()):
+            if prim.IsA(UsdPhysics.Joint):
+                joint_prims.setdefault(str(prim.GetName()), []).append(prim)
+        actual_names = tuple(self.articulation.dof_names)
+        results = []
+        for requested_name, index in zip(joint_names, indices):
+            index = int(index)
+            metadata = {'joint_name': requested_name, 'dof_index': index, 'valid': False,
+                        'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr'}
+            try:
+                dof_name = str(actual_names[index])
+                metadata['native_dof_name'] = dof_name
+                matches = joint_prims.get(dof_name, [])
+                if len(matches) != 1:
+                    raise ValueError(f'Expected one actual Joint prim for native DOF {dof_name}; found {len(matches)}')
+                prim = matches[0]
+                metadata['joint_prim_path'] = str(prim.GetPath())
+                metadata['has_angular_drive_api'] = bool(prim.HasAPI(UsdPhysics.DriveAPI, 'angular'))
+                if not metadata['has_angular_drive_api']:
+                    raise ValueError('Actual joint has no angular DriveAPI')
+                value = UsdPhysics.DriveAPI(prim, 'angular').GetTypeAttr().Get()
+                metadata['type'] = None if value is None else str(value)
+                if metadata['type'] not in ('force', 'acceleration'):
+                    raise ValueError(f'Unknown actual drive type: {value!r}')
+                metadata['valid'] = True
+            except Exception as exc:
+                metadata['error'] = f'{type(exc).__name__}: {exc}'
+            results.append(metadata)
+        return results
+
     def _configure_drive_gains(self) -> None:
+        from toolkits.factory_dual_franka_assembly.beam_arm_drive import (
+            ArmDriveReadbackError, configure_arm_drive,
+        )
+
+        self.gripper_drive_diagnostics = {'configured': False}
         try:
-            arm_indices = np.asarray([self.articulation.get_dof_index(name) for name in _UR5E_ARM_JOINT_NAMES], dtype=np.int64)
-            self.articulation.set_gains(
-                kps=np.full(arm_indices.shape, 8.0e4, dtype=float),
-                kds=np.full(arm_indices.shape, 4.0e3, dtype=float),
-                joint_indices=arm_indices,
+            self.arm_drive_diagnostics = configure_arm_drive(
+                self.articulation, _UR5E_ARM_JOINT_NAMES,
+                self.config.arm_drive_kp, self.config.arm_drive_kd,
+                self._arm_drive_type_readbacks,
             )
-        except Exception:
-            pass
+        except ArmDriveReadbackError as exc:
+            self.arm_drive_diagnostics = exc.audit
+            log.error(f'Arm drive experiment failed native verification: {self.arm_drive_diagnostics}')
+            raise
+        if self.arm_drive_diagnostics['errors']:
+            log.warn(f'Arm drive configuration/readback failed: {self.arm_drive_diagnostics}')
+        if os.environ.get('BEAM_CONTACT_TRACE_PATH') or self.arm_drive_diagnostics['strict_request']:
+            print(f'[arm-drive-readback] robot={self.config.name} {self.arm_drive_diagnostics}', flush=True)
         try:
             gripper_dof_name = self._resolved_articulation_dof_name(self.config.gripper_dof_name or "finger_joint")
             if gripper_dof_name is None:
                 return
             gripper_index = np.asarray([self.articulation.get_dof_index(gripper_dof_name)], dtype=np.int64)
             self.articulation.set_gains(
-                kps=np.asarray([7.5e3], dtype=float),
-                kds=np.asarray([1.73e2], dtype=float),
+                kps=np.asarray([self.config.gripper_drive_kp], dtype=float),
+                kds=np.asarray([self.config.gripper_drive_kd], dtype=float),
                 joint_indices=gripper_index,
             )
-        except Exception:
-            pass
+            set_max_efforts = getattr(self.articulation, "set_max_efforts", None)
+            if callable(set_max_efforts):
+                set_max_efforts(
+                    np.asarray([25000.0], dtype=float),
+                    joint_indices=gripper_index,
+                )
+            view = self.articulation.unwrap()._articulation_view
+            if self.config.gripper_drive_max_effort is not None:
+                view.set_max_efforts(np.asarray([[self.config.gripper_drive_max_effort]], dtype=float), joint_indices=gripper_index)
+            kps, kds = view.get_gains(joint_indices=gripper_index)
+            self.gripper_drive_diagnostics = {
+                'configured': True, 'joint': gripper_dof_name,
+                'kp_requested': self.config.gripper_drive_kp, 'kd_requested': self.config.gripper_drive_kd,
+                'kp_readback': np.asarray(kps).tolist(), 'kd_readback': np.asarray(kds).tolist(),
+                'max_effort_readback': np.asarray(view.get_max_efforts(joint_indices=gripper_index)).tolist(),
+                'legacy_effort_setter_available': callable(set_max_efforts),
+            }
+        except Exception as exc:
+            self.gripper_drive_diagnostics['error'] = f'{type(exc).__name__}: {exc}'
+            log.warn(f'Gripper drive configuration/readback failed: {self.gripper_drive_diagnostics}')
+        if os.environ.get('BEAM_CONTACT_TRACE_PATH'):
+            print(f'[gripper-drive-readback] robot={self.config.name} {self.gripper_drive_diagnostics}', flush=True)
+
+    def get_gripper_diagnostics(self) -> dict:
+        result = {'drive': getattr(self, 'gripper_drive_diagnostics', None)}
+        result['arm_drive'] = getattr(self, 'arm_drive_diagnostics', None)
+        result['contact_material'] = getattr(self, 'gripper_contact_material_diagnostics', None)
+        controller = self.controllers.get('gripper_controller')
+        result['last_applied_command'] = getattr(controller, 'last_numeric_command', None)
+        try:
+            name = self._resolved_articulation_dof_name(self.config.gripper_dof_name or 'finger_joint')
+            indices = np.asarray([self.articulation.get_dof_index(name)], dtype=np.int64)
+            result['joint_velocity'] = np.asarray(self.articulation.get_joint_velocities(joint_indices=indices)).tolist()
+            # Solver-projected joint effort includes reactions; it is not a motor-only torque sensor.
+            value = self.articulation.unwrap().get_measured_joint_efforts(joint_indices=indices)
+            result['measured_joint_effort'] = None if value is None else np.asarray(value).tolist()
+        except Exception as exc:
+            result['readback_error'] = f'{type(exc).__name__}: {exc}'
+        return result
+
+    def _gripper_contact_friction(self):
+        static = getattr(self.config, 'gripper_pad_static_friction', None)
+        dynamic = getattr(self.config, 'gripper_pad_dynamic_friction', None)
+        if static is None and dynamic is None:
+            return 80.0, 70.0  # Preserve recipes that do not opt in.
+        if (static is None or dynamic is None or not np.isfinite(static)
+                or not np.isfinite(dynamic) or not 0.0 <= dynamic <= static):
+            raise ValueError('Pad friction requires finite 0 <= dynamic <= static coefficients')
+        return float(static), float(dynamic)
+
+    def _bind_explicit_gripper_material(self, stage, material_prim):
+        """Bind physics purpose on actual colliders, independent of body cache.
+
+        Robot body caches may omit the nested gripper at post_reset. Binding a
+        material that is merely created does nothing. Require unique finger
+        links and verify every enabled collision shape's resolved binding.
+        """
+        from pxr import Usd, UsdPhysics, UsdShade
+        root = stage.GetPrimAtPath(self.config.prim_path)
+        if root is None or not root.IsValid():
+            raise RuntimeError('Robot root unavailable for explicit pad material')
+        material = UsdShade.Material(material_prim)
+        expected = str(material_prim.GetPath())
+        diagnostics = self.gripper_contact_material_diagnostics
+        diagnostics['collider_bindings'] = []
+        for name in (self.config.left_finger_link_name, self.config.right_finger_link_name):
+            links = [p for p in Usd.PrimRange(root, Usd.TraverseInstanceProxies())
+                     if name and str(p.GetPath()).endswith('/' + str(name))]
+            if len(links) != 1:
+                raise RuntimeError(f'Explicit pad material needs one {name} link; found {len(links)}')
+            colliders = [p for p in Usd.PrimRange(links[0], Usd.TraverseInstanceProxies()) if p.HasAPI(UsdPhysics.CollisionAPI)
+                         and p.GetAttribute('physics:collisionEnabled').Get() is not False]
+            if not colliders:
+                raise RuntimeError(f'No enabled collision shapes under {name}')
+            for collider in colliders:
+                api = UsdShade.MaterialBindingAPI(collider)  # Read instance proxies without authoring on them.
+                before, _ = api.ComputeBoundMaterial(materialPurpose='physics')
+                old = before.GetPrim() if before else None
+                record = {'collider': str(collider.GetPath()),
+                          'previous_material': str(before.GetPath()) if before else None,
+                          'previous_static_friction': None if old is None else old.GetAttribute('physics:staticFriction').Get(),
+                          'previous_dynamic_friction': None if old is None else old.GetAttribute('physics:dynamicFriction').Get()}
+                bind_prim = collider
+                while bind_prim.IsInstanceProxy():
+                    bind_prim = bind_prim.GetParent()
+                if not str(bind_prim.GetPath()).startswith(str(links[0].GetPath()) + '/') and bind_prim != links[0]:
+                    raise RuntimeError(f'Cannot isolate instance material under {name}')
+                UsdShade.MaterialBindingAPI.Apply(bind_prim).Bind(
+                    material, bindingStrength=UsdShade.Tokens.strongerThanDescendants,
+                    materialPurpose='physics')
+                resolved, _ = api.ComputeBoundMaterial(materialPurpose='physics')
+                if not resolved or str(resolved.GetPath()) != expected:
+                    raise RuntimeError(f'Physics material binding did not resolve on {collider.GetPath()}')
+                record['material'] = str(resolved.GetPath())
+                record['binding_prim'] = str(bind_prim.GetPath())
+                diagnostics['collider_bindings'].append(record)
+            diagnostics['bound_finger_paths'].append(str(links[0].GetPath()))
 
     def _apply_gripper_contact_material(self):
+        static, dynamic = self._gripper_contact_friction()
+        self.gripper_contact_material_diagnostics = {
+            'requested_static_friction': static, 'requested_dynamic_friction': dynamic,
+            'bound_finger_paths': [], 'binding_errors': [], 'combine_mode': 'max'}
         try:
             from isaacsim.core.api.materials import PhysicsMaterial
         except Exception:
@@ -968,26 +1117,51 @@ class UR5eRobot(BaseRobot):
 
         try:
             material_name = f"{self.config.name}_robotiq_high_friction"
+            material_path = f"/World/Physics_Materials/{material_name}"
             physics_material = PhysicsMaterial(
-                prim_path=f"/World/Physics_Materials/{material_name}",
+                prim_path=material_path,
                 name=material_name,
-                static_friction=3.0,
-                dynamic_friction=2.5,
+                static_friction=static,
+                dynamic_friction=dynamic,
                 restitution=0.0,
             )
+            try:
+                from pxr import PhysxSchema
+                import omni.usd
+
+                stage = omni.usd.get_context().get_stage()
+                material_prim = stage.GetPrimAtPath(material_path) if stage is not None else None
+                if material_prim is not None and material_prim.IsValid():
+                    # Keep the combine rule fixed during the coefficient trial.
+                    physx_material = PhysxSchema.PhysxMaterialAPI.Apply(material_prim)
+                    physx_material.CreateFrictionCombineModeAttr().Set("max")
+                    self.gripper_contact_material_diagnostics.update(
+                        material_path=material_path,
+                        static_friction_readback=material_prim.GetAttribute('physics:staticFriction').Get(),
+                        dynamic_friction_readback=material_prim.GetAttribute('physics:dynamicFriction').Get())
+            except Exception:
+                pass
         except Exception:
             return
 
-        for link_name in (self.config.left_finger_link_name, self.config.right_finger_link_name):
-            if not link_name:
-                continue
-            rigid_body = self._robot_rigid_body_by_suffix(str(link_name))
-            if rigid_body is None:
-                continue
-            try:
-                rigid_body.unwrap().apply_physics_material(physics_material)
-            except Exception:
-                pass
+        if getattr(self.config, 'gripper_pad_static_friction', None) is not None:
+            # Opt-in only: do not newly activate the legacy 80/70 material on
+            # other recipes as a side effect of fixing the Beam binding path.
+            self._bind_explicit_gripper_material(stage, material_prim)
+        else:
+            for link_name in (self.config.left_finger_link_name, self.config.right_finger_link_name):
+                if not link_name:
+                    continue
+                rigid_body = self._robot_rigid_body_by_suffix(str(link_name))
+                if rigid_body is None:
+                    continue
+                try:
+                    rigid_body.unwrap().apply_physics_material(physics_material)
+                    self.gripper_contact_material_diagnostics['bound_finger_paths'].append(str(rigid_body.unwrap().prim_path))
+                except Exception as exc:
+                    self.gripper_contact_material_diagnostics['binding_errors'].append(f'{link_name}: {exc}')
+        if os.environ.get('BEAM_CONTACT_TRACE_PATH'):
+            print(f'[gripper-material-readback] robot={self.config.name} {self.gripper_contact_material_diagnostics}', flush=True)
 
     @staticmethod
     def action_to_dict(action):
@@ -1021,6 +1195,8 @@ class UR5eRobot(BaseRobot):
         return current
 
     def _renormalize_arm_joint_state_if_needed(self) -> None:
+        if self.config.preserve_continuous_arm_joints:
+            return
         try:
             indices = np.asarray(
                 [self.articulation.get_dof_index(name) for name in _UR5E_ARM_JOINT_NAMES],
@@ -1044,6 +1220,8 @@ class UR5eRobot(BaseRobot):
             pass
 
     def _normalize_arm_joint_controller_action(self, controller_name: str, controller_action):
+        if self.config.preserve_continuous_arm_joints:
+            return controller_action
         if controller_name != "arm_joint_controller" or not isinstance(controller_action, (list, tuple)):
             return controller_action
         if not controller_action:
@@ -1075,6 +1253,8 @@ class UR5eRobot(BaseRobot):
         return normalized_action
 
     def _normalize_arm_control(self, controller_name: str, control):
+        if self.config.preserve_continuous_arm_joints:
+            return control
         if controller_name not in {"arm_joint_controller", "arm_ik_controller"}:
             return control
         joint_positions = getattr(control, "joint_positions", None)

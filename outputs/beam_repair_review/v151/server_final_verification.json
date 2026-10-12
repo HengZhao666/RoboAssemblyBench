@@ -1,0 +1,20 @@
+{
+  "server_source_matches_manifest": true,
+  "source_hashes": {
+    "internutopia_extension/configs/robots/ur5e.py": "3499174786aa840a9c74032cf8b332c5db0e5cd8783e47b63ebfff821450f9f5",
+    "internutopia_extension/controllers/gripper_controller.py": "9b37c53e21b10fd4676b90d36b8cb9fd1ca3872babd31a5d2a3c362773c4bd59",
+    "internutopia_extension/robots/ur5e.py": "c79590f173cb5b5f86a9de306c8fd208b46ca71ad556ebadc10da01ace458276",
+    "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "cab7a3e216f78b2e9a9f9e66d75263a664fa70de79dc482e3b745a6e48c43e0e",
+    "roboassemblybench/core/fabrica_canonical.py": "eab2f712c949ec8fb0224040342e510bb5c9956fb84680820eaa25a8732fa3ca",
+    "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "8c608578bfc463ae2a8ddca9e469595a0aab30fad062fc21e956890d14ced328",
+    "tests/toolkits/test_beam_physics_contract.py": "468fdd9d3009b0715e340e3df5e8865668aaf45a906195e2b84542320be8eca6",
+    "roboassemblybench/tasks/fabrica_beam_ur5e_staged/recipe.yaml": "261d144b565c2349e9200b519352de8a77b1c289b6695b60139fa439803e36e4",
+    "toolkits/factory_dual_franka_assembly/scene_builder.py": "0c2f21a4671923e176f99756f0cc9db0cc4201a4d67ff629655ce22f8577b8f0"
+  },
+  "native_exit_code": 0,
+  "active_v151_simulation_processes": [],
+  "test_logs": [
+    "local_tests.log",
+    "regression_tests.log"
+  ]
+}

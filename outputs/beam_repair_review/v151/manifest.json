@@ -1,0 +1,38 @@
+{
+  "seed": 0,
+  "layout_seed": 505,
+  "run": "v151_pick_frame",
+  "baseline": "v150_loaded_force",
+  "created_utc": "2026-09-30T06:28:36.695031+00:00",
+  "source_before": {
+    "internutopia_extension/configs/robots/ur5e.py": "3499174786aa840a9c74032cf8b332c5db0e5cd8783e47b63ebfff821450f9f5",
+    "internutopia_extension/controllers/gripper_controller.py": "9b37c53e21b10fd4676b90d36b8cb9fd1ca3872babd31a5d2a3c362773c4bd59",
+    "internutopia_extension/robots/ur5e.py": "c79590f173cb5b5f86a9de306c8fd208b46ca71ad556ebadc10da01ace458276",
+    "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "26cde0e8a753e44b7ef6b9c7e5b2400d8a03de9a4ba20dc6d21653a6ac2f9369",
+    "roboassemblybench/core/fabrica_canonical.py": "4c552b9f23a11af82f5c62e92dc9501634c1bba4599ab3979e7655393e012cb1",
+    "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "6e4fa58b8aaa6b42d97cf1d342dd7401b8ae55533d791c3a1ecaa40b7c08945f",
+    "tests/toolkits/test_beam_physics_contract.py": "516a0db862b3023a3c49e9b8b4a539f71cef5784a8059161557f38a99e6b1ddb",
+    "roboassemblybench/tasks/fabrica_beam_ur5e_staged/recipe.yaml": "261d144b565c2349e9200b519352de8a77b1c289b6695b60139fa439803e36e4",
+    "toolkits/factory_dual_franka_assembly/scene_builder.py": "0c2f21a4671923e176f99756f0cc9db0cc4201a4d67ff629655ce22f8577b8f0"
+  },
+  "source_after": {
+    "internutopia_extension/configs/robots/ur5e.py": "3499174786aa840a9c74032cf8b332c5db0e5cd8783e47b63ebfff821450f9f5",
+    "internutopia_extension/controllers/gripper_controller.py": "9b37c53e21b10fd4676b90d36b8cb9fd1ca3872babd31a5d2a3c362773c4bd59",
+    "internutopia_extension/robots/ur5e.py": "c79590f173cb5b5f86a9de306c8fd208b46ca71ad556ebadc10da01ace458276",
+    "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "cab7a3e216f78b2e9a9f9e66d75263a664fa70de79dc482e3b745a6e48c43e0e",
+    "roboassemblybench/core/fabrica_canonical.py": "eab2f712c949ec8fb0224040342e510bb5c9956fb84680820eaa25a8732fa3ca",
+    "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "8c608578bfc463ae2a8ddca9e469595a0aab30fad062fc21e956890d14ced328",
+    "tests/toolkits/test_beam_physics_contract.py": "468fdd9d3009b0715e340e3df5e8865668aaf45a906195e2b84542320be8eca6",
+    "roboassemblybench/tasks/fabrica_beam_ur5e_staged/recipe.yaml": "261d144b565c2349e9200b519352de8a77b1c289b6695b60139fa439803e36e4",
+    "toolkits/factory_dual_franka_assembly/scene_builder.py": "0c2f21a4671923e176f99756f0cc9db0cc4201a4d67ff629655ce22f8577b8f0"
+  },
+  "changed_files": [
+    "internutopia_extension/tasks/factory_dual_franka_assembly_task.py",
+    "roboassemblybench/core/fabrica_canonical.py",
+    "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py",
+    "tests/toolkits/test_beam_physics_contract.py"
+  ],
+  "comparison": "Restore Beam later pickup grasp frames, fully open approach and close pose gate; bound descent and trace pregrasp motion/environment/neighbor contacts.",
+  "launcher_pid": 2323687,
+  "launched_utc": "2026-09-30T06:32:17.366337+00:00"
+}

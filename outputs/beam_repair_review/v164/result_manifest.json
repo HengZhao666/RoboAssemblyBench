@@ -1,0 +1,18 @@
+{
+  "episode_0000.json": "6d11341488d59c71315736480b206ab51b74165f0a85db6ea6e23ceb4366315c",
+  "collect_results.json": "a4024272a0be3afa6bc471bd03cc55461451f105a2d3fe7037199e35f77ceaff",
+  "exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+  "run.log": "ff99132e4e942508b408156c974b39997750d27de78b1122cb2946d71079fcfb",
+  "round_summary.json": "ad700355e7e783ea59516d2d6ab94e24babeea46eae188158be7937dae8df7d8",
+  "contact_relief_summary.json": "da0c83de1056e4e37a1d9ef1ea6a43cebbd33dd0ca6fe8308157f9e29b270462",
+  "configuration_verification.log": "d52b5ba7db371844ebb92222789aedf7eeb70d7425820648b1463f19595182bc",
+  "tests.log": "f19c0539ef32e5ff635f02eeb96ef8072bde41fbae4f932f4cc684734f1f9200",
+  "deployment_verification.json": "7b36041e48788322847f0c255c4f92d28a751c9ab4fe0a6571ef1c1e158b9bcb",
+  "plan.json": "75382889c60cb16d470e1adccbec77aa515302bc06eb9c44fad45719352fda7f",
+  "compiled_recipe.json": "f18040dd610f0771ffd6d3a685639c59e40985e97e394ee73e5ce2ab2dbb411f",
+  "idle_hold_trace.jsonl": "d506f939dc1c7d6e9649eeb4030f4e90b2edc37c24537b02b50e89cad78a2c01",
+  "syntax.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "episode_0000_live_videos/observation_images_front.mp4": "89282b01fa724efc88b5b924c0e2f07f2c9632c13ea27fadd154808d0d1b629f",
+  "episode_0000_live_videos/observation_images_left_wrist.mp4": "d86c25820cb7cf4461a70d788a86e909ee85838065350b6ddb102171f2c23578",
+  "episode_0000_live_videos/observation_images_right_wrist.mp4": "a3ca38f7f801cc35d9f8f5d8526bb8fc987f4b4a35162d06473f622e7f4dbbd8"
+}

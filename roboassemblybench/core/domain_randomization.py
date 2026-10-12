@@ -829,6 +829,11 @@ def apply_domain_randomization(
     rigid layout, while the assembly targets move as a second rigid layout.
     """
 
+    canonical_spec = recipe_spec.get('fabrica_canonical') or {}
+    if canonical_spec.get('assembly') == 'beam' and bool(canonical_spec.get('continuous_physics', False)):
+        from roboassemblybench.core.beam_physical_compiler import _apply_domain_randomization as beam_randomization
+        return beam_randomization(recipe_spec, seed=seed, enabled_override=enabled_override)
+
     resolved = copy.deepcopy(recipe_spec)
     requested_profile = normalize_randomization_profile(profile)
     randomization_spec = _profiled_randomization_spec(

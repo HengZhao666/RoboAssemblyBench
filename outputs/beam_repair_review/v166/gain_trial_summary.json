@@ -1,0 +1,545 @@
+{
+  "arm_drive_readbacks": {
+    "franka_left_0": {
+      "configured": true,
+      "physics_handle_valid": true,
+      "kp_requested": 40000.0,
+      "kd_requested": 2000.0,
+      "kp_readback": [
+        40000.0,
+        40000.0,
+        40000.0,
+        40000.0,
+        40000.0,
+        40000.0
+      ],
+      "kd_readback": [
+        2000.0,
+        2000.0,
+        2000.0,
+        2000.0,
+        2000.0,
+        2000.0
+      ],
+      "gains_match": true,
+      "max_effort_readback": [
+        150.0,
+        150.0,
+        150.0,
+        28.0,
+        28.0,
+        28.0
+      ],
+      "errors": {},
+      "drive_types": [
+        "force",
+        "force",
+        "force",
+        "force",
+        "force",
+        "force"
+      ]
+    },
+    "franka_right_0": {
+      "configured": true,
+      "physics_handle_valid": true,
+      "kp_requested": 40000.0,
+      "kd_requested": 2000.0,
+      "kp_readback": [
+        40000.0,
+        40000.0,
+        40000.0,
+        40000.0,
+        40000.0,
+        40000.0
+      ],
+      "kd_readback": [
+        2000.0,
+        2000.0,
+        2000.0,
+        2000.0,
+        2000.0,
+        2000.0
+      ],
+      "gains_match": true,
+      "max_effort_readback": [
+        150.0,
+        150.0,
+        150.0,
+        28.0,
+        28.0,
+        28.0
+      ],
+      "errors": {},
+      "drive_types": [
+        "force",
+        "force",
+        "force",
+        "force",
+        "force",
+        "force"
+      ]
+    }
+  },
+  "first_close_gate_pass": {
+    "step": 868,
+    "phase": "base_6_close_and_attach",
+    "robot": "franka_right",
+    "target_position": [
+      0.2902610062255829,
+      -0.2710544978209662,
+      1.2482081064311246
+    ],
+    "target_orientation": [
+      0.0,
+      0.7054451245541763,
+      0.708764542173734,
+      0.0
+    ],
+    "command_target_position": [
+      0.2902610062255829,
+      -0.2710544978209662,
+      1.2482081064311246
+    ],
+    "command_target_orientation": [
+      0.0,
+      0.7054451245541763,
+      0.708764542173734,
+      0.0
+    ],
+    "ik_target_position": [
+      0.2902610062255829,
+      -0.2710544978209662,
+      1.2482081064311246
+    ],
+    "ik_target_orientation": [
+      0.0,
+      0.7054451245541763,
+      0.708764542173734,
+      0.0
+    ],
+    "recenter_offset_world": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recenter_stop": null,
+    "position_error": 0.0007413891561796757,
+    "orientation_error": 0.0014412947960063599,
+    "position_tolerance": 0.001,
+    "orientation_tolerance": 0.02,
+    "recenter_target_ready": false,
+    "recenter_target_tolerance": 0.0001,
+    "ready_steps": 24,
+    "required_ready_steps": 24,
+    "stationary_window": true,
+    "position_drift": 3.767321657112471e-05,
+    "orientation_drift": 7.67139160293304e-05,
+    "gate_ready": true,
+    "current_position": [
+      0.29029011547040695,
+      -0.2711407656050505,
+      1.2474723290176388
+    ],
+    "current_orientation": [
+      0.0006163906630583939,
+      0.7054573530282098,
+      0.7087520046056365,
+      -0.0003729456719142693
+    ],
+    "current_q": [
+      1.849043607711792,
+      -1.1940927505493164,
+      1.754553198814392,
+      -2.129816770553589,
+      -1.5707464218139648,
+      -1.2972084283828735
+    ],
+    "command_q": [
+      1.8490593623405287,
+      -1.1949489635439823,
+      1.7540290382798824,
+      -2.129876401651156,
+      -1.570796329085022,
+      -1.2972276252601618
+    ],
+    "close_started_step": 85,
+    "arm_frozen": true,
+    "hold_q": [
+      1.849043607711792,
+      -1.1940927505493164,
+      1.754553198814392,
+      -2.129816770553589,
+      -1.5707464218139648,
+      -1.2972084283828735
+    ],
+    "object_position": [
+      0.2901204824447632,
+      -0.2661862075328827,
+      1.0738152265548706
+    ],
+    "object_orientation": [
+      0.6116393527382719,
+      0.3556208151360081,
+      0.35808484123704176,
+      -0.6092670879837117
+    ]
+  },
+  "first_frozen_command": {
+    "step": 868,
+    "phase": "base_6_close_and_attach",
+    "robot": "franka_right",
+    "target_position": [
+      0.2902610062255829,
+      -0.2710544978209662,
+      1.2482081064311246
+    ],
+    "target_orientation": [
+      0.0,
+      0.7054451245541763,
+      0.708764542173734,
+      0.0
+    ],
+    "command_target_position": [
+      0.2902610062255829,
+      -0.2710544978209662,
+      1.2482081064311246
+    ],
+    "command_target_orientation": [
+      0.0,
+      0.7054451245541763,
+      0.708764542173734,
+      0.0
+    ],
+    "ik_target_position": [
+      0.2902610062255829,
+      -0.2710544978209662,
+      1.2482081064311246
+    ],
+    "ik_target_orientation": [
+      0.0,
+      0.7054451245541763,
+      0.708764542173734,
+      0.0
+    ],
+    "recenter_offset_world": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recenter_stop": null,
+    "position_error": 0.0007413891561796757,
+    "orientation_error": 0.0014412947960063599,
+    "position_tolerance": 0.001,
+    "orientation_tolerance": 0.02,
+    "recenter_target_ready": false,
+    "recenter_target_tolerance": 0.0001,
+    "ready_steps": 24,
+    "required_ready_steps": 24,
+    "stationary_window": true,
+    "position_drift": 3.767321657112471e-05,
+    "orientation_drift": 7.67139160293304e-05,
+    "gate_ready": true,
+    "current_position": [
+      0.29029011547040695,
+      -0.2711407656050505,
+      1.2474723290176388
+    ],
+    "current_orientation": [
+      0.0006163906630583939,
+      0.7054573530282098,
+      0.7087520046056365,
+      -0.0003729456719142693
+    ],
+    "current_q": [
+      1.849043607711792,
+      -1.1940927505493164,
+      1.754553198814392,
+      -2.129816770553589,
+      -1.5707464218139648,
+      -1.2972084283828735
+    ],
+    "command_q": [
+      1.8490593623405287,
+      -1.1949489635439823,
+      1.7540290382798824,
+      -2.129876401651156,
+      -1.570796329085022,
+      -1.2972276252601618
+    ],
+    "close_started_step": 85,
+    "arm_frozen": true,
+    "hold_q": [
+      1.849043607711792,
+      -1.1940927505493164,
+      1.754553198814392,
+      -2.129816770553589,
+      -1.5707464218139648,
+      -1.2972084283828735
+    ],
+    "object_position": [
+      0.2901204824447632,
+      -0.2661862075328827,
+      1.0738152265548706
+    ],
+    "object_orientation": [
+      0.6116393527382719,
+      0.3556208151360081,
+      0.35808484123704176,
+      -0.6092670879837117
+    ]
+  },
+  "last_close_gate": {
+    "step": 1444,
+    "phase": "base_6_close_and_attach",
+    "robot": "franka_right",
+    "target_position": [
+      0.29029011547040695,
+      -0.2711407656050505,
+      1.2474723290176388
+    ],
+    "target_orientation": [
+      0.0006163906630583939,
+      0.7054573530282098,
+      0.7087520046056365,
+      -0.0003729456719142693
+    ],
+    "command_target_position": [
+      0.29029011547040695,
+      -0.2711407656050505,
+      1.2474723290176388
+    ],
+    "command_target_orientation": [
+      0.0006163906630583939,
+      0.7054573530282098,
+      0.7087520046056365,
+      -0.0003729456719142693
+    ],
+    "ik_target_position": [
+      0.29029011547040695,
+      -0.2711407656050505,
+      1.2474723290176388
+    ],
+    "ik_target_orientation": [
+      0.0006163906630583939,
+      0.7054573530282098,
+      0.7087520046056365,
+      -0.0003729456719142693
+    ],
+    "recenter_offset_world": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recenter_stop": null,
+    "position_error": 0.0006670307467260787,
+    "orientation_error": 0.0015523153293885295,
+    "position_tolerance": 0.001,
+    "orientation_tolerance": 0.02,
+    "recenter_target_ready": false,
+    "recenter_target_tolerance": 0.0001,
+    "ready_steps": 600,
+    "required_ready_steps": 24,
+    "stationary_window": false,
+    "gate_ready": true,
+    "current_position": [
+      0.29035221278546347,
+      -0.2712154126658356,
+      1.2468124034484593
+    ],
+    "current_orientation": [
+      0.0013917745519569107,
+      0.7054387517813777,
+      0.7087694076988873,
+      -0.0003964327140630011
+    ],
+    "current_q": [
+      1.8490980863571167,
+      -1.1933135986328125,
+      1.7549817562103271,
+      -2.129647731781006,
+      -1.5714616775512695,
+      -1.2972038984298706
+    ],
+    "command_q": [
+      1.8490436066754163,
+      -1.1940937252060768,
+      1.754554180569194,
+      -2.1298167990230388,
+      -1.5707464625572323,
+      -1.2972089216882499
+    ],
+    "close_started_step": 85,
+    "arm_frozen": true,
+    "hold_q": [
+      1.8490436066754163,
+      -1.1940937252060768,
+      1.754554180569194,
+      -2.1298167990230388,
+      -1.5707464625572323,
+      -1.2972089216882499
+    ],
+    "object_position": [
+      0.2904374599456787,
+      -0.2661801278591156,
+      1.073898196220398
+    ],
+    "object_orientation": [
+      0.609359049266709,
+      0.35606021548565103,
+      0.3578375364800296,
+      -0.611436807455184
+    ]
+  },
+  "last_close_control": {
+    "step": 1444,
+    "phase": "base_6_close_and_attach",
+    "robot": "franka_right",
+    "close_elapsed_steps": 576,
+    "ready": true,
+    "stable_steps": 168,
+    "required_stable_steps": 96,
+    "gripper_q": 0.6628449559211731,
+    "control": {
+      "mode": "bilateral_hold",
+      "probe_valid": true,
+      "forces": [
+        5.226824008786714,
+        8.144095134174627
+      ],
+      "first_contact": false,
+      "contact_control_active": true,
+      "physics_dt": 0.004166666666666667,
+      "force_limit": 40.0,
+      "force_within_limit": true,
+      "command_q": 0.6629454191525777,
+      "command_openness": 0.17131822605927793
+    },
+    "recenter": {
+      "enabled": true,
+      "updated": false,
+      "offset_world": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "motion_detail": {
+      "checked": true,
+      "method": "fixed_pose_window",
+      "valid": true,
+      "position_error": 0.00010387481683229237,
+      "orientation_error": 0.003463806825418993
+    },
+    "timing": "observation at step; command for next physics interval"
+  },
+  "close_summary": {
+    "base_6_close_and_attach": {
+      "samples": 577,
+      "ready_samples": 73,
+      "modes": {
+        "approach": 154,
+        "slow_approach": 212,
+        "preload": 23,
+        "gentle_seek": 22,
+        "bilateral_hold": 162,
+        "unload": 4
+      },
+      "peak_finger_force_N": 12.475849137051389
+    }
+  },
+  "hold_by_phase": {
+    "base_6_close_and_attach": {
+      "samples": 303,
+      "invalid_samples": 0,
+      "max_slip_m": 1.5677278640350586e-06,
+      "max_orientation_slip_rad": 4.4807818966028775e-05
+    },
+    "base_6_grip_settle": {
+      "samples": 372,
+      "invalid_samples": 0,
+      "max_slip_m": 1.9978411784610894e-06,
+      "max_orientation_slip_rad": 5.404129167941304e-05
+    },
+    "base_6_peel_lift": {
+      "samples": 3185,
+      "invalid_samples": 0,
+      "max_slip_m": 0.00014914082582082066,
+      "max_orientation_slip_rad": 0.0036194047188005743
+    },
+    "base_6_grip_contact_prime": {
+      "samples": 372,
+      "invalid_samples": 0,
+      "max_slip_m": 0.00015497269427377453,
+      "max_orientation_slip_rad": 0.0034618044635742777
+    },
+    "base_6_peel_physical_hold_check": {
+      "samples": 497,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0001645252428005226,
+      "max_orientation_slip_rad": 0.003539512030746804
+    },
+    "base_6_lift": {
+      "samples": 8009,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006374943816244655,
+      "max_orientation_slip_rad": 0.010127828160301904
+    },
+    "base_6_post_lift_restore_gravity": {
+      "samples": 270,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006349624294246682,
+      "max_orientation_slip_rad": 0.009534736587474066
+    },
+    "base_6_assembly_clearance": {
+      "samples": 18922,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006368716477467252,
+      "max_orientation_slip_rad": 0.009660962611052183
+    },
+    "base_6_transport_hover": {
+      "samples": 5032,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006368387123174388,
+      "max_orientation_slip_rad": 0.009643509758037822
+    },
+    "base_6_place": {
+      "samples": 3811,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006367198275563963,
+      "max_orientation_slip_rad": 0.009630827979399131
+    },
+    "base_6_physical_hold_check": {
+      "samples": 575,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006362522907431977,
+      "max_orientation_slip_rad": 0.009604269637920436
+    },
+    "base_6_restore_gravity": {
+      "samples": 296,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006361846791706754,
+      "max_orientation_slip_rad": 0.009600185183573518
+    },
+    "base_6_clear_support_filters": {
+      "samples": 126,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006361042650333042,
+      "max_orientation_slip_rad": 0.009599098696738246
+    },
+    "base_6_set_down": {
+      "samples": 29564,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006364805447516544,
+      "max_orientation_slip_rad": 0.009606489899857722
+    },
+    "failed": {
+      "samples": 3,
+      "invalid_samples": 0,
+      "max_slip_m": 0.0006359197137797733,
+      "max_orientation_slip_rad": 0.00958664826728327
+    }
+  },
+  "first_non_grace_invalid_holds": [],
+  "limits": "Trace sample counts may repeat a physics step at different validation stages; no success criteria are replaced."
+}

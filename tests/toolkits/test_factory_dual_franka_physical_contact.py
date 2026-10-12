@@ -313,6 +313,23 @@ def test_enabled_rigid_body_lookup_ignores_disabled_nested_api(monkeypatch):
     assert FactoryDualFrankaAssemblyTask._prim_has_enabled_rigid_body(nested_mesh) is True
 
 
+@pytest.mark.parametrize('kinematics_available', [True, False])
+def test_continuous_beam_preserves_v169_task_pose_with_physical_fallback(monkeypatch, kinematics_available):
+    task = _task()
+    task._preserve_beam_v169_task_pose = True
+    physical_pose = (np.asarray([0.4, -0.2, 1.1]), np.asarray([1.0, 0.0, 0.0, 0.0]))
+    kinematics_pose = (physical_pose[0] + [0.001, 0.0, 0.0], physical_pose[1].copy())
+    monkeypatch.setattr(task, '_get_robot_eef_pose', lambda _: physical_pose)
+    monkeypatch.setattr(task, '_get_robot_kinematics_pose', lambda _: kinematics_pose if kinematics_available else None)
+
+    position, orientation = task._get_robot_task_pose('franka_right')
+    expected = kinematics_pose if kinematics_available else physical_pose
+    np.testing.assert_allclose(position, expected[0])
+    np.testing.assert_allclose(orientation, expected[1])
+    diagnostic = task._get_robot_pose_frame_diagnostic('franka_right')
+    np.testing.assert_allclose(diagnostic['physical_position'], physical_pose[0])
+
+
 def test_release_detaches_lock_target_when_lock_pose_is_not_ready(monkeypatch):
     task = _task()
     task._attachments = {'part': {'robot_name': 'franka_right', 'mode': 'fixed_joint'}}
@@ -320,7 +337,7 @@ def test_release_detaches_lock_target_when_lock_pose_is_not_ready(monkeypatch):
     detached = []
     monkeypatch.setattr(task, '_lock_ready', lambda *_args, **_kwargs: False)
     monkeypatch.setattr(task, '_detach_ready', lambda *_args, **_kwargs: True)
-    monkeypatch.setattr(task, '_detach_object', lambda object_name: detached.append(object_name))
+    monkeypatch.setattr(task, '_detach_object', lambda object_name, object_entry=None: detached.append(object_name))
 
     task._process_phase_interactions(
         {
@@ -1742,6 +1759,7 @@ def test_lock_rebases_assembly_targets_to_the_observed_base_pose(monkeypatch):
     task._attachments = {}
     task._locked_targets = {}
     task._frozen_lock_poses = {}
+    task._lock_pin_pose = {}
     monkeypatch.setattr(task, '_resolve_object', lambda _: _Body())
     monkeypatch.setattr(task, '_clear_attachment_state', lambda *_, **__: None)
     monkeypatch.setattr(task, '_set_object_pose', lambda *_, **__: None)

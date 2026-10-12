@@ -382,10 +382,10 @@ def test_franka_canonical_task_compiles_with_panda_grasps(assembly):
     assert resolved['post_release_park_joint_position_tolerance'] == pytest.approx(0.05)
     assert resolved['post_release_park_timeout_steps'] == 3000
     assert resolved['skip_terminal_park'] is True
-    assert resolved['skip_terminal_retreat'] is (assembly in {'car', 'duct'})
-    assert recipe['phases'][-1]['name'].endswith(
-        '_release_and_lock' if assembly in {'car', 'duct'} else '_retreat'
-    )
+    # The upstream shared scaffold now trims the terminal retreat for every
+    # demonstration task, so all Panda episodes end at release and lock.
+    assert resolved['skip_terminal_retreat'] is True
+    assert recipe['phases'][-1]['name'].endswith('_release_and_lock')
     assert resolved['pickup_departure_interpolation_waypoint_count'] == 2
     assert resolved['transport_interpolation_waypoint_count'] == 4
     assert resolved['assembly_approach_interpolation_waypoint_count'] == 4

@@ -47,12 +47,14 @@ class VisualCubeCfg(ObjectCfg):
 class StaticCubeCfg(ObjectCfg):
     type: Optional[str] = 'StaticCube'
     color: Optional[List[float]] = None
+    visible: Optional[bool] = True
     texture_path: Optional[str] = None
     texture_scale: Optional[Tuple[float, float]] = None
     texture_rotation_degrees: Optional[float] = None
     static_friction: Optional[float] = None
     dynamic_friction: Optional[float] = None
     restitution: Optional[float] = None
+    friction_combine_mode: Optional[str] = None
 
 
 class UsdObjCfg(ObjectCfg):
@@ -61,11 +63,14 @@ class UsdObjCfg(ObjectCfg):
     collider: Optional[bool] = True
     auto_collider: Optional[bool] = True
     rigid_body: Optional[bool] = True
+    collision_approximation: Optional[str] = None
     mass: Optional[float] = None
     density: Optional[float] = None
     static_friction: Optional[float] = None
     dynamic_friction: Optional[float] = None
     restitution: Optional[float] = None
+    friction_combine_mode: Optional[str] = None
+    kinematic_anchor: Optional[bool] = None
     linear_damping: Optional[float] = None
     angular_damping: Optional[float] = None
     sleep_threshold: Optional[float] = None

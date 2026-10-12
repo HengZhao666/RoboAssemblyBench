@@ -2695,6 +2695,129 @@ def _part_object(
     }
 
 
+def _assembly_support_cube(*, board_origin: list[float], board: dict[str, Any]) -> dict[str, Any]:
+    """Invisible box under the optical board.
+
+    The authored board is a 1 cm SDF, and the visible table cube is 2 mm thick.
+    A released part tunnels both. This box keeps the same top surface and is
+    thick enough for a discrete physics step to catch the part.
+    """
+    bbox_min = _vector(board['bbox_min'], size=3, name='optical_board bbox_min')
+    bbox_max = _vector(board['bbox_max'], size=3, name='optical_board bbox_max')
+    # Thick enough that a discrete PhysX step cannot tunnel the top face
+    # after a weld break; top surface stays flush with the board.
+    thickness = 0.12
+    top_z = float(board_origin[2]) + float(bbox_max[2])
+    return {
+        'name': 'assembly_support',
+        'kind': 'static_cube',
+        'prim_path': '/assembly_support',
+        'position': [
+            float(board_origin[0]) + 0.5 * (bbox_min[0] + bbox_max[0]),
+            float(board_origin[1]) + 0.5 * (bbox_min[1] + bbox_max[1]),
+            top_z - 0.5 * thickness,
+        ],
+        'orientation': [1.0, 0.0, 0.0, 0.0],
+        'scale': [
+            max(float(bbox_max[0] - bbox_min[0]), 0.05),
+            max(float(bbox_max[1] - bbox_min[1]), 0.05),
+            thickness,
+        ],
+        'color': [0.14, 0.14, 0.14],
+        'visible': False,
+        'tracked': False,
+        'static_friction': 1.5,
+        'dynamic_friction': 1.2,
+        'restitution': 0.0,
+    }
+
+
+def _fixture_support_cube(
+    *,
+    pickup_origin: list[float],
+    part_positions: list[list[float]],
+    part_bottom_zs: list[float] | None = None,
+) -> dict[str, Any]:
+    """Invisible thick deck under the fixture tray.
+
+    When parts start unlocked the authored nest bottoms can sit below
+    pickup_origin.z; place the deck under the lowest nest bottom so freefall
+    is a few millimetres (v36 tunnelled thin deck → parts at table height).
+    """
+    thickness = 0.25
+    margin = 0.28
+    xs = [float(pickup_origin[0])] + [float(p[0]) for p in part_positions]
+    ys = [float(pickup_origin[1])] + [float(p[1]) for p in part_positions]
+    min_x, max_x = min(xs) - margin, max(xs) + margin
+    min_y, max_y = min(ys) - margin, max(ys) + margin
+    if part_bottom_zs:
+        # Tiny clearance under the lowest authored nest bottom.
+        top_z = min(float(z) for z in part_bottom_zs) - 0.002
+    else:
+        top_z = float(pickup_origin[2])
+    # Never place the deck above the pickup plane — that launches the nest.
+    top_z = min(top_z, float(pickup_origin[2]))
+    return {
+        'name': 'fixture_support',
+        'kind': 'static_cube',
+        'prim_path': '/fixture_support',
+        'position': [
+            0.5 * (min_x + max_x),
+            0.5 * (min_y + max_y),
+            top_z - 0.5 * thickness,
+        ],
+        'orientation': [1.0, 0.0, 0.0, 0.0],
+        'scale': [
+            max(max_x - min_x, 0.30),
+            max(max_y - min_y, 0.30),
+            thickness,
+        ],
+        'color': [0.14, 0.14, 0.14],
+        # Collision only. A visible 0.7 m slab z-fights the table and reads as
+        # a wall in the front camera (v70).
+        'visible': False,
+        # Track world pose so a dropped/misplaced deck shows up in diagnostics.
+        'tracked': True,
+        # Smooth floor under the nest. Combine mode min so the part's 2.2
+        # finger-grip friction does not glue the beam to this deck (v80).
+        'static_friction': 0.35,
+        'dynamic_friction': 0.25,
+        'friction_combine_mode': 'min',
+        'restitution': 0.0,
+    }
+
+
+def _deck_collision_actions(
+    object_name: str,
+    *,
+    filter_held_from_deck: bool = True,
+    held_collision: bool = True,
+) -> dict[str, Any]:
+    """Keep the fixture nest, pickup deck and table solid for remaining parts.
+
+    Never globally disable fabrica_fixture/fixture_support/table: the nest walls
+    are what hold the tall unlocked parts upright. While a part is kinematically
+    carried, only that part's collision is muted so SDF contact cannot pin it
+    to the deck (v49–v50 peel).
+    """
+    actions: dict[str, Any] = {
+        'object_collisions': [
+            {'object': object_name, 'enabled': bool(held_collision)},
+            {'object': 'fabrica_fixture', 'enabled': True},
+            {'object': 'fixture_support', 'enabled': True},
+            {'object': 'factory_tabletop_visual', 'enabled': True},
+        ],
+    }
+    actions['collision_filters'] = [
+        {
+            'object': object_name,
+            'filter_objects': ['fixture_support', 'factory_tabletop_visual'],
+            'enabled': bool(filter_held_from_deck),
+        }
+    ]
+    return actions
+
+
 def _static_asset_object(
     *,
     name: str,
@@ -2800,6 +2923,48 @@ def _skill_phase(
     )
 
 
+# Pad-center distance in front of base_link along +Z.
+# Open-mesh faces sit at 0.110–0.148 m. Commanding the Fabrica TCP (pinch
+# 17 cm ahead) closed above the beam (v74). Moving the center to 0.143 m
+# reached the near end (v76). Commanding 0.114 m did not go deeper: the
+# partly closed fingers hit the end and tipped the beam (v77).
+_ISAAC_ROBOTIQ_PAD_CENTER_M = 0.143
+_ISAAC_ROBOTIQ_PAD_SHIFT_LIMIT_M = 0.08
+
+
+def _grasp_aligned_to_isaac_pads(grasp: dict[str, Any]) -> dict[str, Any]:
+    """Move the commanded base_link forward until the pad center meets the pinch."""
+
+    if grasp.get('target_gripper') == 'panda' or grasp.get('preserve_audited_tcp') or 'grasp_center_m' not in grasp:
+        return grasp
+    relative_position = _vector(
+        grasp['object_in_tcp_position'],
+        size=3,
+        name='grasp object_in_tcp_position',
+    )
+    relative_orientation = _vector(
+        grasp['object_in_tcp_orientation'],
+        size=4,
+        name='grasp object_in_tcp_orientation',
+    )
+    tcp_orientation = _quat_conjugate(relative_orientation)
+    tcp_position = [-value for value in _quat_rotate(tcp_orientation, relative_position)]
+    grasp_center = _vector(grasp['grasp_center_m'], size=3, name='grasp grasp_center_m')
+    pinch_in_gripper = _quat_rotate(
+        _quat_conjugate(tcp_orientation),
+        [center - tcp for center, tcp in zip(grasp_center, tcp_position)],
+    )
+    shortfall = float(pinch_in_gripper[2]) - _ISAAC_ROBOTIQ_PAD_CENTER_M
+    if not math.isfinite(shortfall) or shortfall <= 0.001:
+        return grasp
+    shortfall = min(shortfall, _ISAAC_ROBOTIQ_PAD_SHIFT_LIMIT_M)
+    corrected = copy.deepcopy(grasp)
+    corrected_position = list(relative_position)
+    corrected_position[2] = float(corrected_position[2]) - shortfall
+    corrected['object_in_tcp_position'] = corrected_position
+    return corrected
+
+
 def _phase_active_robot_names(phase: dict[str, Any]) -> set[str]:
     active = {
         str(robot_name)
@@ -2839,7 +3004,7 @@ def _apply_idle_robot_home_policy(
     spec: dict[str, Any],
     robots: list[dict[str, Any]],
 ) -> None:
-    if not bool(spec.get('idle_robot_home', False)):
+    if bool(spec.get('continuous_physics', False)) or not bool(spec.get('idle_robot_home', False)):
         return
 
     tolerance = float(spec.get('idle_robot_home_joint_position_tolerance', 0.05))
@@ -3231,6 +3396,130 @@ def _append_pick_and_attach_phases(
     )
 
 
+def _append_kinematic_to_friction_handoff(
+    phases: list[dict[str, Any]],
+    *,
+    prefix: str,
+    robot: str,
+    object_name: str,
+    clear_deck_filters: bool = True,
+    restore_gravity: bool = True,
+    skip_dynamic_handoff: bool = False,
+    gripper_command: Any = 'contact_hold',
+    position_tolerance: float = 0.02,
+    static_linear_threshold: float = 0.08,
+    static_angular_threshold: float = 2.5,
+) -> None:
+    """Stagger kinematic→dynamic handoff before friction seating."""
+    if not skip_dynamic_handoff:
+        handoff = _skill_phase(
+            skill='retreat_vertical',
+            robot=robot,
+            phase_name=f'{prefix}_grip_handoff_dynamic',
+            timeout_steps=720,
+            parameters={
+                'object': object_name,
+                'requires_held_object': True,
+                'relative_to_current_tcp': True,
+                'offset': [0.0, 0.0, 0.0],
+                'offset_frame': 'world',
+                'gripper_command': gripper_command,
+                'position_tolerance': float(position_tolerance),
+                'cartesian_position_step': 0.0005,
+            },
+            phase_actions={
+                **_deck_collision_actions(object_name),
+                'gripper_commands': {robot: gripper_command},
+                'object_gravity': [{'object': object_name, 'enabled': False}],
+                'kinematic_carry': [{'object': object_name, 'enabled': False}],
+            },
+        )
+        # Place already put the part at assembly height (COM ≈ grasp z). Requiring
+        # object_lifted vs attach_world_position can never pass (v58 dz≈5 mm).
+        handoff['advance'] = {
+            'type': 'all_of',
+            'min_steps': 96,
+            'conditions': [
+                {'type': 'object_attached', 'object': object_name, 'robot': robot},
+                {
+                    'type': 'objects_static',
+                    'objects': [object_name],
+                    'min_steps': 24,
+                    'linear_velocity_threshold': float(static_linear_threshold),
+                    'angular_velocity_threshold': float(static_angular_threshold),
+                },
+            ],
+        }
+        phases.append(handoff)
+    if not restore_gravity:
+        return
+    restore_gravity_phase = _skill_phase(
+        skill='retreat_vertical',
+        robot=robot,
+        phase_name=f'{prefix}_restore_gravity',
+        timeout_steps=360,
+        parameters={
+            'object': object_name,
+            'requires_held_object': True,
+            'relative_to_current_tcp': True,
+            'offset': [0.0, 0.0, 0.0],
+            'offset_frame': 'world',
+            'gripper_command': gripper_command,
+            'position_tolerance': float(position_tolerance),
+            'cartesian_position_step': 0.0005,
+        },
+        phase_actions={
+            **_deck_collision_actions(object_name),
+            'gripper_commands': {robot: gripper_command},
+            'object_gravity': [{'object': object_name, 'enabled': True}],
+            'kinematic_carry': [{'object': object_name, 'enabled': False}],
+        },
+    )
+    restore_gravity_phase['advance'] = {
+        'type': 'all_of',
+        'min_steps': 48,
+        'conditions': [
+            {'type': 'object_attached', 'object': object_name, 'robot': robot},
+            {
+                'type': 'objects_static',
+                'objects': [object_name],
+                'min_steps': 16,
+                'linear_velocity_threshold': float(static_linear_threshold),
+                'angular_velocity_threshold': float(static_angular_threshold),
+            },
+        ],
+    }
+    phases.append(restore_gravity_phase)
+    if not clear_deck_filters:
+        return
+    clear_filters = {
+        'name': f'{prefix}_clear_support_filters',
+        'timeout_steps': 240,
+        'robot_targets': {},
+        'collision_filters': [
+            {
+                'object': object_name,
+                'filter_objects': ['fixture_support', 'factory_tabletop_visual'],
+                'enabled': False,
+            }
+        ],
+        'object_collisions': [
+            {'object': 'fixture_support', 'enabled': True},
+            {'object': 'factory_tabletop_visual', 'enabled': True},
+        ],
+        'object_gravity': [{'object': object_name, 'enabled': True}],
+        'kinematic_carry': [{'object': object_name, 'enabled': False}],
+        'advance': {
+            'type': 'all_of',
+            'min_steps': 24,
+            'conditions': [
+                {'type': 'object_attached', 'object': object_name, 'robot': robot},
+            ],
+        },
+    }
+    phases.append(clear_filters)
+
+
 def _append_transport_phase(
     phases: list[dict[str, Any]],
     *,
@@ -3495,6 +3784,50 @@ def _append_transport_phase(
     )
 
 
+def _hold_companion_spec(*, robot: str, object_name: str, target_name: str) -> dict[str, Any]:
+    phase = _skill_phase(
+        skill='hold_part_end',
+        robot=robot,
+        phase_name='hold_companion',
+        timeout_steps=1200,
+        parameters={
+            'object': object_name,
+            'target_object_target': target_name,
+            'gripper_command': 'contact_hold',
+            'relative_to_current_tcp': True,
+            'offset': [0.0, 0.0, 0.0],
+            'offset_frame': 'world',
+            'lock_target_position': True,
+            'lock_target_orientation': True,
+            'position_tolerance': 0.018,
+        },
+    )
+    return phase['local_skill']
+
+
+def _install_hold_companion(
+    phase: dict[str, Any],
+    *,
+    robot: str,
+    object_name: str,
+    target_name: str,
+) -> None:
+    primary = phase.get('local_skill') or {}
+    if primary.get('robot') == robot:
+        return
+    companions = phase.get('local_skills')
+    if companions is None:
+        companions = {}
+        phase['local_skills'] = companions
+    if not isinstance(companions, dict):
+        return
+    companions[robot] = _hold_companion_spec(
+        robot=robot,
+        object_name=object_name,
+        target_name=target_name,
+    )
+
+
 def _append_release_and_retreat(
     phases: list[dict[str, Any]],
     *,
@@ -3617,6 +3950,13 @@ def _compile_targets_and_phases(
     assembly_orientation: list[float],
     robots: list[dict[str, Any]],
 ) -> tuple[list[dict], list[dict], list[dict], list[str], list[str]]:
+    if bool(spec.get('continuous_physics', False)):
+        from roboassemblybench.core.beam_physical_compiler import _compile_targets_and_phases as compile_beam
+        return compile_beam(
+            assembly=assembly, task=task, spec=spec, pickup_origin=pickup_origin,
+            pickup_orientation=pickup_orientation, assembly_origin=assembly_origin,
+            assembly_orientation=assembly_orientation, robots=robots,
+        )
     targets: list[dict] = []
     phases: list[dict] = []
     success: list[dict] = []
@@ -4955,7 +5295,7 @@ def _compile_targets_and_phases(
     return targets, phases, success, pickup_target_names, assembly_target_names
 
 
-def _default_domain_randomization(
+def _default_demonstration_domain_randomization(
     *,
     spec: dict[str, Any],
     assembly: str,
@@ -5226,6 +5566,27 @@ def _default_domain_randomization(
     }
 
 
+def _default_domain_randomization(
+    *, spec: dict[str, Any], assembly: str, part_names: list[str],
+    pickup_target_names: list[str], assembly_target_names: list[str],
+    translation_constraints: dict[str, list[dict[str, Any]]],
+    robot_platform: str, include_fixture_support: bool = False,
+) -> dict[str, Any]:
+    if bool(spec.get('continuous_physics', False)):
+        from roboassemblybench.core.beam_physical_compiler import _default_domain_randomization as beam_domain
+        return beam_domain(
+            spec=spec, assembly=assembly, part_names=part_names,
+            pickup_target_names=pickup_target_names, assembly_target_names=assembly_target_names,
+            translation_constraints=translation_constraints,
+            include_fixture_support=include_fixture_support,
+        )
+    return _default_demonstration_domain_randomization(
+        spec=spec, assembly=assembly, part_names=part_names,
+        pickup_target_names=pickup_target_names, assembly_target_names=assembly_target_names,
+        translation_constraints=translation_constraints, robot_platform=robot_platform,
+    )
+
+
 def _bbox_corners(
     *,
     position: list[float],
@@ -5397,6 +5758,200 @@ def _canonical_translation_constraints(
     return constraints
 
 
+def _apply_continuous_beam_physics(phases: list[dict[str, Any]]) -> None:
+    """Keep Beam dynamic and use the same force/contact gate throughout a grasp."""
+    contact_policy = {
+        'continuous_physics': True,
+        'hold_force_regulation': True,
+        'require_force_contact': True,
+        'require_dual_force_contact': True,
+        'require_pair_force_contact': True,
+        'require_opposing_force_contact': True,
+        'measure_force_contact': True,
+        'require_strict_physical_contact': True,
+        'allow_cross_axis_dual_finger_contact': False,
+        'physical_contact_axes': 'y',
+        'contact_box_min_half_extent': 1e-6,
+        'physical_contact_interior_scale': 1.0,
+        'physical_contact_interior_margin': 0.0,
+        'finger_contact_distance': 0.0035,
+        'physical_attach_surface_gap': 0.0035,
+        'contact_force_threshold': 0.10,
+        'allow_jaw_width_completion': False,
+        'allow_jaw_width_contact_for_physical_grasp': False,
+        'allow_closed_gripper_completion': False,
+        'use_joint_stall_for_close_until_contact': False,
+        'close_contact_latch_after_stable': True,
+        'allow_caging_contact_for_physical_grasp': False,
+        'allow_caging_hold_for_physical_grasp': False,
+        'hold_grace_allow_missing_contact': False,
+        'hold_grace_steps': 0,
+        'hold_position_slip_tolerance': 0.003,
+        'hold_orientation_slip_tolerance': 0.0872664626,
+    }
+    for phase in phases:
+        # Keep an unloaded arm's native command fixed across idle stages.
+        # The policy still gives active work and physical support priority.
+        phase['beam_idle_hold_anchor'] = True
+        # There is no kinematic-to-dynamic transition in a friction grasp.
+        phase.pop('kinematic_carry', None)
+        phase.pop('gripper_sibling_filters', None)
+        for entry in phase.get('object_gravity', []):
+            entry['enabled'] = True
+        for entry in phase.get('collision_filters', []):
+            entry['enabled'] = False
+        for entry in phase.get('object_collisions', []):
+            entry['enabled'] = True
+        rebase = phase.get('rebase_from_object')
+        if isinstance(rebase, dict):
+            rebase['filter_gripper_collision'] = False
+        if phase['name'].endswith('_grip_handoff_dynamic'):
+            phase['name'] = phase['name'].replace('_grip_handoff_dynamic', '_physical_hold_check')
+        for entry in phase.get('attach', []):
+            if entry.get('attachment_mode') in {'pure_physical_grasp', 'contact_pure_physical_grasp'}:
+                entry.update(contact_policy)
+        local_skill = phase.get('local_skill', {})
+        if (phase['name'].startswith('assemble_') and local_skill.get('name') in
+                {'ur5e_move_above_part', 'ur5e_descend_to_grasp'}):
+            local_skill.update(trace_pregrasp=True, use_arm_ik_controller=False,
+                               lock_target_orientation=True)
+            if local_skill['name'] == 'ur5e_descend_to_grasp':
+                # Contact approach must not accumulate a large tracking error
+                # against the fixture while the arm continues to push.
+                local_skill.update(cartesian_position_step=0.001, max_command_joint_step=0.004,
+                    max_joint_step=0.004, max_command_tracking_error=0.04,
+                    max_wrist_command_tracking_error=0.03)
+        if (phase['name'].startswith('base_6_') and local_skill.get('object') == 'fabrica_beam_6'
+                and local_skill.get('grasp_relative_position') is not None):
+            # Shift the pickup relation along the part's thickness axis. This
+            # raises the fingers at the final board pose, without changing the
+            # assembled part target or moving an already grasped rigid body.
+            local_skill['grasp_object_frame_offset'] = [0.0, 0.0, 0.028]
+        if local_skill.get('name') == 'ur5e_close_gripper':
+            local_skill.update(contact_policy)
+            local_skill.update({
+                'close_force_regulation': True,
+                'require_close_pose_gate': True,
+                'close_gate_local_ik': True,
+                'close_gate_local_ik_radius': 0.04,
+                'close_gate_freeze_at_start': True,
+                'close_gate_track_object_during_close': False,
+                'close_position_tolerance': 0.001,
+                'close_orientation_tolerance': 0.02,
+                'close_ready_stable_steps': 24,
+                'close_gate_stationary_position_tolerance': 0.0001,
+                'close_gate_stationary_orientation_tolerance': 0.002,
+                'close_pose_gate_timeout_steps': 720,
+                'ik_position_tolerance': 0.000005,
+                'ik_orientation_tolerance': 0.001,
+                'close_contact_hold_squeeze_margin': 0.0,
+                'close_until_contact_timeout_steps': 1200,
+                'close_force_low': 4.0, 'close_force_high': 12.0, 'close_force_limit': 40.0,
+                'close_force_min_stable': 1.0, 'close_force_validation_steps': 96,
+                'close_force_joint_rate': 0.025, 'close_force_unload_rate': 0.06,
+                'close_force_max_command_lead': 0.001, 'close_force_max_seek': 0.03,
+                'close_approach_joint_rate': 0.10, 'close_approach_joint_margin': 0.06,
+                'close_gate_recenter_stable_steps': 4, 'close_force_recenter_settle_steps': 8,
+                'close_gate_recenter_step': 0.0002, 'close_gate_recenter_max_offset': 0.002,
+                'close_gate_recenter_target_tolerance': 0.0001,
+                'close_force_recenter_measure_progress': True,
+                'close_force_recenter_timeout_steps': 240,
+                'close_force_recenter_stop_on_bilateral': True,
+                'close_force_recenter_adaptive_step': True,
+                'close_force_recenter_min_step': 0.000025,
+                'close_force_balance_min': 2.0,
+                'close_force_balance_peak': 4.0,
+                'close_force_balance_step': 0.000025,
+            })
+            phase['timeout_steps'] = max(int(phase.get('timeout_steps', 0)), 2000)
+        elif local_skill.get('requires_held_object'):
+            # Preserve the captured command through all physical carry phases.
+            local_skill['gripper_command'] = 'contact_hold'
+            robot_name = local_skill.get('robot')
+            if robot_name in phase.get('gripper_commands', {}):
+                phase['gripper_commands'][robot_name] = 'contact_hold'
+            # The existing insertion servo keeps its alignment/settling logic,
+            # but must hand subsequent holds the command it actually published.
+            local_skill['track_published_grasp_command'] = True
+            local_skill['use_arm_ik_controller'] = False
+            if phase['name'].endswith('_grip_settle'):
+                local_skill['hold_previous_grasp_command'] = True
+            elif local_skill.get('relative_to_current_tcp'):
+                local_skill.update(
+                    inherit_grasp_drive_target=True,
+                    lock_target_position=True,
+                    grasp_drive_position_lookahead=0.001,
+                    use_command_warm_start=True,
+                    require_warm_start_ik=True,
+                    ik_position_tolerance=0.000005,
+                    ik_orientation_tolerance=0.001,
+                )
+            elif (phase['name'].endswith(('_pickup_clearance', '_assembly_clearance', '_transport_hover'))
+                  or phase['name'] == 'base_6_place'):
+                local_skill.update(
+                    inherit_grasp_drive_target=True,
+                    lock_target_position=True,
+                    lock_target_orientation=True,
+                    ik_reference_mode='command',
+                    use_command_warm_start=True,
+                    require_warm_start_ik=True,
+                    # FK-based command integration cannot accumulate ignored
+                    # sub-tolerance increments. Resolve the slow servo steps.
+                    ik_position_tolerance=0.0000001,
+                    ik_orientation_tolerance=0.00001,
+                    cartesian_position_step=0.00025,
+                    cartesian_orientation_step=0.001,
+                    grasp_drive_position_lookahead=0.002,
+                    grasp_drive_orientation_lookahead=0.02,
+                    grasp_drive_joint_lookahead=0.04,
+                    grasp_drive_smooth_transport=True,
+                    grasp_drive_linear_speed=0.04,
+                    grasp_drive_angular_speed=0.20,
+                    grasp_drive_joint_speed=0.5,
+                    grasp_drive_joint_acceleration=4.0,
+                    grasp_drive_slowdown_start=0.55,
+                    grasp_drive_slowdown_stop=0.95,
+                    max_command_joint_step=0.008,
+                    max_joint_step=0.008,
+                )
+                phase['timeout_steps'] = max(int(phase.get('timeout_steps', 0)), 12000)
+        if phase['name'] == 'base_6_peel_lift':
+            local_skill.update(offset=[0.0, 0.0, 0.005], cartesian_position_step=0.0002,
+                               position_tolerance=0.001)
+            for condition in phase.get('advance', {}).get('conditions', []):
+                if condition.get('type') == 'object_lifted':
+                    condition['min_lift'] = 0.003
+        if phase['name'] == 'base_6_lift':
+            # v141 held real contact throughout the lift but only advanced
+            # 27 mm in 1200 steps. Keep small increments while allowing a
+            # modestly larger tracking lead and enough time for 140 mm.
+            local_skill.update(grasp_drive_position_lookahead=0.002,
+                               cartesian_position_step=0.00025)
+            phase['timeout_steps'] = max(int(phase.get('timeout_steps', 0)), 4000)
+        # Companion holds are stored separately from the primary moving skill.
+        # Re-solving a zero-offset pose discards the loaded drive's preload.
+        companions = phase.get('local_skills', {})
+        for companion in companions.values():
+            if companion.get('name') == 'ur5e_hold_part_end':
+                companion.update(requires_held_object=True, hold_previous_grasp_command=True,
+                                 use_arm_ik_controller=False, gripper_command='contact_hold')
+                robot_name = companion.get('robot')
+                if robot_name in phase.get('gripper_commands', {}):
+                    phase['gripper_commands'][robot_name] = 'contact_hold'
+        if phase['name'] == 'base_6_clear_support_filters':
+            # This bookkeeping phase otherwise falls back to the generic policy,
+            # which folds angles and holds the unloaded measured joint state.
+            condition = next(c for c in phase['advance']['conditions'] if c.get('type') == 'object_attached')
+            phase['local_skill'] = {
+                'name': 'ur5e_hold_part_end', 'robot': condition['robot'], 'object': condition['object'],
+                'requires_held_object': True, 'hold_previous_grasp_command': True,
+                'gripper_command': 'contact_hold', 'relative_to_current_tcp': True,
+                'offset': [0.0, 0.0, 0.0], 'lock_target_position': True, 'lock_target_orientation': True,
+                'use_arm_ik_controller': False, 'max_command_tracking_error': 0.18,
+                'max_wrist_command_tracking_error': 0.12,
+            }
+
+
 def _apply_ik_execution_policy(phases: list[dict[str, Any]], spec: dict[str, Any]) -> None:
     """Apply platform-level IK fallback policy to generated Cartesian skills."""
 
@@ -5477,6 +6032,11 @@ def _apply_ik_execution_policy(phases: list[dict[str, Any]], spec: dict[str, Any
 
 
 def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
+    beam_spec = payload.get('fabrica_canonical') or {}
+    if (isinstance(beam_spec, dict) and beam_spec.get('assembly') == 'beam'
+            and bool(beam_spec.get('continuous_physics', False))):
+        from roboassemblybench.core.beam_physical_compiler import compile_continuous_beam_recipe
+        return compile_continuous_beam_recipe(payload)
     spec = payload.get('fabrica_canonical')
     if spec is None:
         return payload
@@ -5532,6 +6092,26 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
     _apply_robot_home_joint_overrides(robots=robots, spec=spec)
     _normalize_initial_joint_positions(robots=robots)
     task = copy.deepcopy(task)
+    assembly_step_order = spec.get('assembly_step_order')
+    if assembly_step_order is not None:
+        if not isinstance(assembly_step_order, (list, tuple)) or not assembly_step_order:
+            raise ValueError('fabrica_canonical.assembly_step_order must be a non-empty list of move_part ids.')
+        steps_by_part = {str(step['move_part']): step for step in task['assembly_steps']}
+        ordered_steps = []
+        for part_id in assembly_step_order:
+            key = str(part_id)
+            if key not in steps_by_part:
+                raise ValueError(
+                    f'fabrica_canonical.assembly_step_order refers to unknown move_part {key!r}; '
+                    f'available: {sorted(steps_by_part)}.'
+                )
+            ordered_steps.append(steps_by_part.pop(key))
+        if steps_by_part:
+            raise ValueError(
+                'fabrica_canonical.assembly_step_order must include every assembly move_part; '
+                f'missing: {sorted(steps_by_part)}.'
+            )
+        task['assembly_steps'] = ordered_steps
     _activate_gripper_profile(task, robot_platform=robot_platform)
     (
         pickup_origin,
@@ -5555,6 +6135,13 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
     for step in task['assembly_steps']:
         part_id = str(step['move_part'])
         step['move_grasp'] = copy.deepcopy(selected_move_grasps[part_id])
+
+    if spec.get('coordinated_support_plan'):
+        from roboassemblybench.core.beam_coordinated import select_grasps
+        select_grasps(task, spec)
+        selected_move_grasps = {str(step['move_part']): copy.deepcopy(step['move_grasp'])
+                                for step in task['assembly_steps']}
+        grasp_selection['coordinated_override'] = 'native_mesh_audit_2026_09_30'
 
     generated_objects = [
         _static_asset_object(
@@ -5580,6 +6167,60 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
         )
         for part in task['parts']
     )
+    if bool(spec.get('official_bimanual_hold', False)):
+        # Keep authored SDF (or force SDF) so holes remain collidable and seated
+        # parts can physically support each other. Never change approximation
+        # mid-episode — only CollisionEnabled is toggled, which is safe for PhysX.
+        for entry in generated_objects:
+            name = str(entry.get('name', ''))
+            if name.startswith(f'fabrica_{assembly}_'):
+                entry['collision_approximation'] = 'sdf'
+                # Finger pads are already ~5. Grip friction is the average, so the
+                # part itself stays near 0.8. 2.2 glued the beam to the tray and
+                # the tray came up with it (v81–v82).
+                entry['static_friction'] = 0.8
+                entry['dynamic_friction'] = 0.6
+                # Heavier damping so unlocked settle does not tumble/tunnel.
+                entry['linear_damping'] = max(float(entry.get('linear_damping', 0.0) or 0.0), 4.0)
+                entry['angular_damping'] = max(float(entry.get('angular_damping', 0.0) or 0.0), 16.0)
+                # Sit slightly above the deck so SDF does not sink into it.
+                entry['spawn_clearance'] = max(float(entry.get('spawn_clearance', 0.0) or 0.0), 0.004)
+                # Lighter parts so finger friction can accelerate them (default mass=1kg).
+                entry['mass'] = min(float(entry.get('mass') or 1.0), 0.25)
+            elif name == 'fabrica_fixture':
+                # Bolted nest. min combine keeps this low coefficient, and the
+                # kinematic anchor stops the thin tray from being carried away.
+                entry['static_friction'] = 0.20
+                entry['tracked'] = True
+                entry['dynamic_friction'] = 0.15
+                entry['friction_combine_mode'] = 'min'
+                entry['kinematic_anchor'] = True
+            elif name == 'optical_board':
+                entry['static_friction'] = max(float(entry.get('static_friction', 0.5) or 0.5), 1.5)
+                entry['dynamic_friction'] = max(float(entry.get('dynamic_friction', 0.5) or 0.5), 1.2)
+        generated_objects.append(
+            _assembly_support_cube(
+                board_origin=board_origin,
+                board=task['optical_board'],
+            )
+        )
+        part_entries = [
+            entry
+            for entry in generated_objects
+            if str(entry.get('name', '')).startswith(f'fabrica_{assembly}_')
+        ]
+        part_positions = [list(entry['position']) for entry in part_entries]
+        part_bottom_zs = []
+        for entry in part_entries:
+            bbox_min = entry.get('fabrica_bbox_min') or [0.0, 0.0, 0.0]
+            part_bottom_zs.append(float(entry['position'][2]) + float(bbox_min[2]))
+        generated_objects.append(
+            _fixture_support_cube(
+                pickup_origin=pickup_origin,
+                part_positions=part_positions,
+                part_bottom_zs=part_bottom_zs,
+            )
+        )
 
     (targets, phases, success, pickup_target_names, assembly_target_names,) = _compile_targets_and_phases(
         assembly=assembly,
@@ -5591,18 +6232,34 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
         assembly_orientation=assembly_orientation,
         robots=robots,
     )
-    if bool(spec.get('skip_terminal_park', False)):
-        if not phases or not str(phases[-1].get('name', '')).endswith('_park'):
-            raise ValueError('skip_terminal_park requires the canonical phase graph to end in a park phase.')
-        phases = phases[:-1]
-    if bool(spec.get('skip_terminal_retreat', False)):
-        if not phases or not str(phases[-1].get('name', '')).endswith('_retreat'):
-            raise ValueError(
-                'skip_terminal_retreat requires the canonical phase graph to end in a retreat phase.'
-            )
-        phases = phases[:-1]
-    _apply_idle_robot_home_policy(phases, spec=spec, robots=robots)
-    _apply_ik_execution_policy(phases, spec)
+    if bool(spec.get('continuous_physics', False)):
+        if assembly != 'beam' or not bool(spec.get('official_bimanual_hold', False)):
+            raise ValueError('continuous_physics currently requires Beam official_bimanual_hold.')
+        _apply_continuous_beam_physics(phases)
+        from roboassemblybench.core.beam_coordinated import configure_beam_velocity_solver
+        configure_beam_velocity_solver(generated_objects, spec.get('beam_solver_velocity_iterations', 4))
+    if spec.get('coordinated_support_plan'):
+        from roboassemblybench.core.beam_coordinated import coordinate_phases
+        coordinate_phases(phases, task, spec, targets, assembly_target_names)
+    if assembly == 'beam' and bool(spec.get('continuous_physics', False)):
+        # Coordination can insert new stages after the physical policy pass.
+        # Apply only this idle switch to the final list, preserving the
+        # coordinated grasp poses, support commands and contact parameters.
+        for phase in phases:
+            phase['beam_idle_hold_anchor'] = True
+    if not bool(spec.get('continuous_physics', False)):
+        if bool(spec.get('skip_terminal_park', False)):
+            if not phases or not str(phases[-1].get('name', '')).endswith('_park'):
+                raise ValueError('skip_terminal_park requires the canonical phase graph to end in a park phase.')
+            phases = phases[:-1]
+        if bool(spec.get('skip_terminal_retreat', False)):
+            if not phases or not str(phases[-1].get('name', '')).endswith('_retreat'):
+                raise ValueError(
+                    'skip_terminal_retreat requires the canonical phase graph to end in a retreat phase.'
+                )
+            phases = phases[:-1]
+        _apply_idle_robot_home_policy(phases, spec=spec, robots=robots)
+        _apply_ik_execution_policy(phases, spec)
     part_names = [f'fabrica_{assembly}_{part["part_id"]}' for part in task['parts']]
     translation_constraints = _canonical_translation_constraints(
         assembly=assembly,
@@ -5622,6 +6279,9 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
         pickup_target_names=pickup_target_names,
         assembly_target_names=assembly_target_names,
         translation_constraints=translation_constraints,
+        include_fixture_support=any(
+            entry.get('name') == 'fixture_support' for entry in generated_objects
+        ),
         robot_platform=robot_platform,
     )
 
@@ -5636,6 +6296,10 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
     )
     fixed_objects = {str(name) for name in resolved['domain_randomization'].get('fixed_objects', [])}
     fixed_objects.add('optical_board')
+    if any(entry.get('name') == 'assembly_support' for entry in resolved['objects']):
+        fixed_objects.add('assembly_support')
+    # fixture_support must translate with start_parts — do not mark it fixed.
+    fixed_objects.discard('fixture_support')
     resolved['domain_randomization']['fixed_objects'] = sorted(fixed_objects)
     for group_name, group in resolved['domain_randomization'].get('groups', {}).items():
         if 'optical_board' in (group.get('objects') or []):

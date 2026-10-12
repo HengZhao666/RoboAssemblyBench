@@ -1,0 +1,2231 @@
+{
+  "source_checkpoint": "901667d86d2dcb07819088b646625ddd94b2b74d",
+  "phase_order": [
+    "fixture_parts_settle",
+    "base_6_move_above",
+    "base_6_preshape",
+    "base_6_descend",
+    "base_6_close_and_attach",
+    "base_6_grip_settle",
+    "base_6_peel_lift",
+    "base_6_grip_contact_prime",
+    "base_6_peel_physical_hold_check",
+    "base_6_lift",
+    "base_6_post_lift_restore_gravity",
+    "base_6_assembly_clearance",
+    "base_6_transport_hover",
+    "base_6_place",
+    "base_6_physical_hold_check",
+    "base_6_restore_gravity",
+    "base_6_clear_support_filters",
+    "base_6_set_down",
+    "assemble_00_part_3_transit_clearance",
+    "assemble_00_part_3_move_above",
+    "assemble_00_part_3_preshape",
+    "assemble_00_part_3_descend",
+    "assemble_00_part_3_close_and_attach",
+    "assemble_00_part_3_grip_settle",
+    "assemble_00_part_3_peel_lift",
+    "assemble_00_part_3_grip_contact_prime",
+    "assemble_00_part_3_peel_physical_hold_check",
+    "assemble_00_part_3_lift",
+    "assemble_00_part_3_post_lift_restore_gravity",
+    "assemble_00_part_3_pickup_clearance",
+    "assemble_00_part_3_assembly_clearance",
+    "assemble_00_part_3_transport_hover",
+    "assemble_00_part_3_insert_00",
+    "assemble_00_part_3_insert_01",
+    "assemble_00_part_3_insert_02",
+    "assemble_00_part_3_insert_03",
+    "assemble_00_part_3_insert_04",
+    "assemble_00_part_3_insert_05",
+    "assemble_00_part_3_insert_06",
+    "assemble_00_part_3_insert_07",
+    "assemble_00_part_3_insert_08",
+    "assemble_00_part_3_insert_09",
+    "assemble_00_part_3_physical_hold_check",
+    "assemble_00_part_3_restore_gravity",
+    "assemble_00_part_3_clear_support_filters",
+    "hold_6_to_3_switch_release",
+    "hold_3_approach_clearance",
+    "hold_3_move_above",
+    "hold_3_preshape",
+    "hold_3_descend",
+    "hold_3_close_and_attach",
+    "assemble_00_part_3_release",
+    "assemble_00_part_3_retreat",
+    "assemble_00_part_3_park",
+    "assemble_01_part_2_transit_clearance",
+    "assemble_01_part_2_move_above",
+    "assemble_01_part_2_preshape",
+    "assemble_01_part_2_descend",
+    "assemble_01_part_2_close_and_attach",
+    "assemble_01_part_2_grip_settle",
+    "assemble_01_part_2_peel_lift",
+    "assemble_01_part_2_grip_contact_prime",
+    "assemble_01_part_2_peel_physical_hold_check",
+    "assemble_01_part_2_lift",
+    "assemble_01_part_2_post_lift_restore_gravity",
+    "assemble_01_part_2_pickup_clearance",
+    "assemble_01_part_2_assembly_clearance",
+    "assemble_01_part_2_transport_hover",
+    "assemble_01_part_2_insert_00",
+    "assemble_01_part_2_insert_01",
+    "assemble_01_part_2_insert_02",
+    "assemble_01_part_2_insert_03",
+    "assemble_01_part_2_insert_04",
+    "assemble_01_part_2_insert_05",
+    "assemble_01_part_2_insert_06",
+    "assemble_01_part_2_insert_07",
+    "assemble_01_part_2_insert_08",
+    "assemble_01_part_2_insert_09",
+    "assemble_01_part_2_physical_hold_check",
+    "assemble_01_part_2_restore_gravity",
+    "assemble_01_part_2_clear_support_filters",
+    "assemble_01_part_2_release",
+    "assemble_01_part_2_retreat",
+    "assemble_01_part_2_park",
+    "assemble_02_part_1_transit_clearance",
+    "assemble_02_part_1_move_above",
+    "assemble_02_part_1_preshape",
+    "assemble_02_part_1_descend",
+    "assemble_02_part_1_close_and_attach",
+    "assemble_02_part_1_grip_settle",
+    "assemble_02_part_1_peel_lift",
+    "assemble_02_part_1_grip_contact_prime",
+    "assemble_02_part_1_peel_physical_hold_check",
+    "assemble_02_part_1_lift",
+    "assemble_02_part_1_post_lift_restore_gravity",
+    "assemble_02_part_1_pickup_clearance",
+    "assemble_02_part_1_assembly_clearance",
+    "assemble_02_part_1_transport_hover",
+    "assemble_02_part_1_insert_00",
+    "assemble_02_part_1_insert_01",
+    "assemble_02_part_1_insert_02",
+    "assemble_02_part_1_insert_03",
+    "assemble_02_part_1_insert_04",
+    "assemble_02_part_1_insert_05",
+    "assemble_02_part_1_insert_06",
+    "assemble_02_part_1_insert_07",
+    "assemble_02_part_1_insert_08",
+    "assemble_02_part_1_insert_09",
+    "assemble_02_part_1_physical_hold_check",
+    "assemble_02_part_1_restore_gravity",
+    "assemble_02_part_1_clear_support_filters",
+    "assemble_02_part_1_release",
+    "assemble_02_part_1_retreat",
+    "assemble_02_part_1_park",
+    "handover_left_2_move_above",
+    "handover_left_2_preshape",
+    "handover_left_2_descend",
+    "handover_left_2_close_and_attach",
+    "hold_3_to_2_switch_release",
+    "hold_2_approach_clearance",
+    "hold_2_move_above",
+    "hold_2_preshape",
+    "hold_2_descend",
+    "hold_2_close_and_attach",
+    "handover_left_2_release",
+    "handover_left_2_retreat",
+    "handover_left_2_park",
+    "assemble_03_part_0_transit_clearance",
+    "assemble_03_part_0_move_above",
+    "assemble_03_part_0_preshape",
+    "assemble_03_part_0_descend",
+    "assemble_03_part_0_close_and_attach",
+    "assemble_03_part_0_grip_settle",
+    "assemble_03_part_0_peel_lift",
+    "assemble_03_part_0_grip_contact_prime",
+    "assemble_03_part_0_peel_physical_hold_check",
+    "assemble_03_part_0_lift",
+    "assemble_03_part_0_post_lift_restore_gravity",
+    "assemble_03_part_0_pickup_clearance",
+    "assemble_03_part_0_assembly_clearance",
+    "assemble_03_part_0_transport_hover",
+    "assemble_03_part_0_insert_00",
+    "assemble_03_part_0_insert_01",
+    "assemble_03_part_0_insert_02",
+    "assemble_03_part_0_insert_03",
+    "assemble_03_part_0_insert_04",
+    "assemble_03_part_0_insert_05",
+    "assemble_03_part_0_insert_06",
+    "assemble_03_part_0_insert_07",
+    "assemble_03_part_0_insert_08",
+    "assemble_03_part_0_insert_09",
+    "assemble_03_part_0_physical_hold_check",
+    "assemble_03_part_0_restore_gravity",
+    "assemble_03_part_0_clear_support_filters",
+    "assemble_03_part_0_release",
+    "assemble_03_part_0_retreat",
+    "assemble_03_part_0_park",
+    "hold_2_final_release",
+    "hold_2_final_retreat",
+    "hold_2_final_park",
+    "beam_final_unloaded_verification"
+  ],
+  "phase_digests": {
+    "fixture_parts_settle": "40da2436139b9cd4e7af277475aaafd23d8de4274da8243509cf54de0d982894",
+    "base_6_move_above": "44250eb463dd7af7f152cea102fc9b1dd7ba6c02b720b9c8b2c9492069a4ab2f",
+    "base_6_preshape": "2838ccee8230417a79752c35665e7892af620707d1361b72b68025962c60635a",
+    "base_6_descend": "2b10b4373090d9835c62466abc20d712011607462276fb7d6dabf6539ca0b283",
+    "base_6_close_and_attach": "1bb2f4a2efa95e1843f7e9fe52b33150f513c307337437b85f746b40e88871ca",
+    "base_6_grip_settle": "8db9d7709c9408358b36960043935f8c447ec43e20b34855afb75f40d5cd8f25",
+    "base_6_peel_lift": "12d73af4102c16184c5983d41d14569a090ade5d32329e7a6b6941fc66dd504a",
+    "base_6_grip_contact_prime": "e8ad5b7ff5678b31ec638d6098b663080f5757838a71189803be947aad86bff9",
+    "base_6_peel_physical_hold_check": "d652fd80efcb6023fed5f465d6ce5f212e5916ad295d8d76d7cd1604f7ceade4",
+    "base_6_lift": "8146556d21ce9fd1c044a8aafede931034b66c21df0248b7cac8495d231a6fa9",
+    "base_6_post_lift_restore_gravity": "22b53764fc8a13b7056b902cae67529114880a983887343f13bc02f76dfe10e5",
+    "base_6_assembly_clearance": "962eb3031783338d968f6102c7cab7bb066adc088d5c2f3133f062488ffb6e06",
+    "base_6_transport_hover": "9cc6ee3b5d6956e592da1de9f1bd056f1838c94dae8acc9be364177308ea3277",
+    "base_6_place": "46464e8d05b81c2116e26fee851ce3d568f6d2e6166a05dd5311adde1dc381ae",
+    "base_6_physical_hold_check": "1848a7642ec97d30d6229bc989916bd0ef9d9384c0baae31acc18ad930c9a1cb",
+    "base_6_restore_gravity": "3762c3e39740598a5322b984b899d5e04ea73c0c3423cb8dddb032609735db07",
+    "base_6_clear_support_filters": "4cafa2efdb93da4269002557a9eb4f4d840eeef292ecaa3a78ab7318fe6b064b",
+    "base_6_set_down": "81dc58c2bead3cde34e07a14deda644e76b4ca441dac23e9efb604c529a06957",
+    "assemble_00_part_3_transit_clearance": "6eb6f9e0a07d0c2ac61787080195724394da429688d88228bd9c00a8b087dcb3",
+    "assemble_00_part_3_move_above": "f2889a4e6b0c8e5e8c5c9476b3c0e81ecce48146b7e3b1c621d893ac1d7a0b34",
+    "assemble_00_part_3_preshape": "4614552defb83fc63bf3c303c9bb29cc2c0fb9d761822013dd443a83b2df6993",
+    "assemble_00_part_3_descend": "eb707e2d06d70aaf6e5c61554a051cac0b37c81cc55dbc5732ca9bf720a9aaf1",
+    "assemble_00_part_3_close_and_attach": "770d485daa5b4fd90940b8b41104e71be159e58c5d9824b414e4e0787ab402fe",
+    "assemble_00_part_3_grip_settle": "388c86c7065beedbb80d8f91a813d94b1485683e77bfc8b83f273c1ec176dd99",
+    "assemble_00_part_3_peel_lift": "7855caae32ae9daeec7a4662d69e024a3dd2fc6ad0ed6eaa4fd0398978c704f9",
+    "assemble_00_part_3_grip_contact_prime": "7bcc442eb2f455f21bf3e39129ce5414d090ffe407c0a24efbc2ce1e6aac7971",
+    "assemble_00_part_3_peel_physical_hold_check": "622bea3a7aa85a95649613128148627b1610853fb41348b58317591164d2edbd",
+    "assemble_00_part_3_lift": "eeb1d542f1f34ea01dc332536f5a3deeb29e9573a474a7f61155a91750225787",
+    "assemble_00_part_3_post_lift_restore_gravity": "439efb23a62e496c927de59bb04c097be5734cd892e22b7e336ab4054b0e3c34",
+    "assemble_00_part_3_pickup_clearance": "bc83011e0375aa4fa785c427757f3ec55ebf5c0b974c8817704b6b6a6ccef450",
+    "assemble_00_part_3_assembly_clearance": "e6f4fbf0314b1a90cd9bfc9a6186f1733344aa655faa7c831857268db39d565e",
+    "assemble_00_part_3_transport_hover": "c2c29b7e50aafe151970b2c1973993d6693696ab71fd9cb75ee3120c53dd9a57",
+    "assemble_00_part_3_insert_00": "94d94da284552cd1dc3250e66ac6c8f63f8844e402ca653ced378b37e0d98d48",
+    "assemble_00_part_3_insert_01": "0f87af88f2b036e51e7d4926d67d06ef3eca43da03246a818dc9add2ebb31a33",
+    "assemble_00_part_3_insert_02": "3b8bd3ccc6e1e748f3473929286d9563a91b1a947c107cd868fcfa8ba9540cb6",
+    "assemble_00_part_3_insert_03": "4fc615a6905dc7f12989c798490ecb8c77a6e0ff6e53cdc885b17cdd3be5b71f",
+    "assemble_00_part_3_insert_04": "916b60179929f0ff670bc9267547d517460269def54625b0740832055e67a716",
+    "assemble_00_part_3_insert_05": "237b286fb30dc3aaa82958d9adcb80e09fdd5629eaecbbd7e09105d11ae53082",
+    "assemble_00_part_3_insert_06": "051cc00eb315206ecaf60eee07bdb47e267e32ab9987c5384d21e072bb7b062c",
+    "assemble_00_part_3_insert_07": "889dd7ab954ee0bce89315c272c8fb1913080487bc84c45ac57b3ed40123c003",
+    "assemble_00_part_3_insert_08": "ad49673428a1a1afbbbf1874080d86f19fbb88b2d1a29d41610449547ce9b086",
+    "assemble_00_part_3_insert_09": "5033e264c31baba7bd482d77ccc5e61dbc53482f62249e566f961825a034d4c2",
+    "assemble_00_part_3_physical_hold_check": "0d820d2a267800a7d4ac70b880271df3d893f638d23a3b2e948a2f701a4a3d34",
+    "assemble_00_part_3_restore_gravity": "3578c7bed3ce5ecd03e06c16a5bab7ad64f354caddd1c384bf338ff0aa75f2de",
+    "assemble_00_part_3_clear_support_filters": "24b87cf853c59d58015c04b9e989d173998a1b27383dfa561be144b347b359a6",
+    "hold_6_to_3_switch_release": "7457ca3098d6adc0406dff90c16e865df4c056424879f0594abbcf9c9d80c104",
+    "hold_3_approach_clearance": "6ec39e88744e701c3eba0a07b10c48a2f1ffd9e71f13da06921b980d9c6bd069",
+    "hold_3_move_above": "30039b44fe6d12531add7d9890051ca869a24b391adc2f31bcac2ae82e023ab6",
+    "hold_3_preshape": "4c0a663494083b488bacca4560db301fd84b9e41f34cc241fde69893a61040fb",
+    "hold_3_descend": "4a971cfabd817a31ce5e99a942c530044378891f30e55a56b451faf8f1db505d",
+    "hold_3_close_and_attach": "fe9501368bbe151a23acc5a57ca2584caec54b2e8e6fb7fab748e8b5d55b97f3",
+    "assemble_00_part_3_release": "f10c55c7a14cdb41d117de506bdef505c254dc6f6f1ef645cf64c69e6fdcf311",
+    "assemble_00_part_3_retreat": "a7000dbb96835031f56784b3e3e26029a8ecb3fb6d7c7d7f1f0c7fd5b15473c5",
+    "assemble_00_part_3_park": "cc00b7b4ca871da0f2d1b36e921ce70dc8136ac04cf4895a89b20e66b538f361",
+    "assemble_01_part_2_transit_clearance": "bd7cbd5afede05b181d432ce8372ec8c66cf3ac905308ee71d1b05932a3a5d04",
+    "assemble_01_part_2_move_above": "fd0b68650348aa76478a8baac707b38f5ed0fad21ac212eaf93c87e782b1bd5e",
+    "assemble_01_part_2_preshape": "ebe62bcf2c0c408344c3043e99689403da6a90246ae43fd3d8e8d6082074cb92",
+    "assemble_01_part_2_descend": "2531937133c98c5d82d6b04164dbf44bf6950cee21a7bf6bc9fff56ee3b6766c",
+    "assemble_01_part_2_close_and_attach": "814b158527866646ce543185c02a49d62c663c10f599559d48ad22d2a6022e36",
+    "assemble_01_part_2_grip_settle": "11cb9cf817d43187cd18c598aed5ac486202af386a1219c9b8317bd965bb454d",
+    "assemble_01_part_2_peel_lift": "02b2fd4057933982592f0ba2acf3b7617ac7f9fa4f51f9a04e4be1886f1b3efe",
+    "assemble_01_part_2_grip_contact_prime": "b2805f3cfa3e7920cf3ca6ab567f52739950159a20d217db9bc968426adc258e",
+    "assemble_01_part_2_peel_physical_hold_check": "46dfd7228e5a58a70da58e1601e3001f1da27dc9a335deb32a18f9eba48bb735",
+    "assemble_01_part_2_lift": "0da5495f8341e219b9eae35783e3917a5ecd257c1b645d75fa05cdcb164fd9b1",
+    "assemble_01_part_2_post_lift_restore_gravity": "fdfaf41a0a52fc63ca232f37d15471ec9b363e890501662ff5ccf8e810f9eda3",
+    "assemble_01_part_2_pickup_clearance": "5e66d82ccacef31b5d34aefce24163f3760c6d030b7a64f19716d063836acc50",
+    "assemble_01_part_2_assembly_clearance": "903a3d320df38528a224c1bb0c42536acb34e426732356be7057883aab9ff1e7",
+    "assemble_01_part_2_transport_hover": "c627a6503ff65b26eb4130c144919ee2d04762bb48fe7a228f622f1aa7c4af00",
+    "assemble_01_part_2_insert_00": "ce009ec4dde049e9fb50805d3887d4569f7cb2d0e4e5fb4344035b9755ab5e68",
+    "assemble_01_part_2_insert_01": "eec4f6f6298c42acc7151d496b92c70a4039b847663fb042f4a9bc6a9a195574",
+    "assemble_01_part_2_insert_02": "fa080fc511725bf3091e5b5b999b013a0efe4d5855746deb2561ac399544e3eb",
+    "assemble_01_part_2_insert_03": "1cb78761d538a3686029791fc512fcdebf19a73c6ffb3820f0fa3a991abd0d8c",
+    "assemble_01_part_2_insert_04": "17c7a25c4b06a3b8e10cecbc342a6706b0a379bb2b24e4e8816fb32a6176ddf4",
+    "assemble_01_part_2_insert_05": "f76ebec67217d2c7b4fa795510ce6137f993cd185903664b40984bf0d23ef101",
+    "assemble_01_part_2_insert_06": "892afde7b0e6e5d26671bfd810d5d49b005afeb299b50a4c8c63a690aaf20d97",
+    "assemble_01_part_2_insert_07": "84fa04b7d822ab0cb167c78f3c7faa4023caff17b8809b2c5e660a0cc372d6d6",
+    "assemble_01_part_2_insert_08": "10448242f1ebd11f9e81d8f4d1b03d8fcf66074fba08ddedddb11d814268f784",
+    "assemble_01_part_2_insert_09": "02e5bc2094be3cc2e2123bea66629c5d208b66e4234d35f83f050b0d9c4c15b4",
+    "assemble_01_part_2_physical_hold_check": "748a5f79ece2731e0022f0a028e59817ba93d8af30841b7f7ca8729cb82a89b7",
+    "assemble_01_part_2_restore_gravity": "c0084ee58f71f4c91d05bc9db08f7811410682cff0cfb280bc3b2a062855b0e9",
+    "assemble_01_part_2_clear_support_filters": "709d5751218429a66e84c2a1603c7209d5be4ed3f03358e6c90628e7316ab791",
+    "assemble_01_part_2_release": "52475cf4af7357f7d10e21351bb918ae0915757c6584f105e2149ae25891eb16",
+    "assemble_01_part_2_retreat": "6486d047dd00231ccde9ca9877c0e80ef2d76c00bac94b6d09dc4063002b3a4c",
+    "assemble_01_part_2_park": "bd6069bf7375125cae47425c38db31f094ad687113550461f146240f9f6b13ba",
+    "assemble_02_part_1_transit_clearance": "507548e04ead580d28362094d2839a25a562c4d4dd796756585f2dd71100b9c3",
+    "assemble_02_part_1_move_above": "0a9116347ff8ae4098acc06b3a2ff4b965b22c3cc82d7e44c1160700b4b0fdd7",
+    "assemble_02_part_1_preshape": "c5f1dd64af428c31dc811e6903ebbd87b4b5e32ca3c47ed8593a58e46fca0d6f",
+    "assemble_02_part_1_descend": "9a48f080c243395573a51dbb365382fbaa52793fd14efe8765bed830d34adb9c",
+    "assemble_02_part_1_close_and_attach": "a22a153e61402987227ea9d2acca4d869cdf2c7f57b0d9ba7fe67ab14c09ad8e",
+    "assemble_02_part_1_grip_settle": "19f990e14ec54ca8280dbe7829e2ed23b7acc010f3c88149aea515ddc17b242f",
+    "assemble_02_part_1_peel_lift": "9035c356a26f3129681a476532bb9ee736029269e0069481ae1c4c1df74978bc",
+    "assemble_02_part_1_grip_contact_prime": "e50fa697e995d6bdc548389550613e89809be2e005b87a6c783f0f50a2b375f5",
+    "assemble_02_part_1_peel_physical_hold_check": "107405560a790e2686109363914eb1969135778b45b9d9b6c307d11114e3a970",
+    "assemble_02_part_1_lift": "d0ff3a32b5ea0df8b3d249cd5b29b02ca2866b348d917e1c0671b9ccfbfb8d35",
+    "assemble_02_part_1_post_lift_restore_gravity": "fc4c224a2f16ef0dad3ddbabd57e9a03eaa5ebacfae85994a8c80620faf1bf62",
+    "assemble_02_part_1_pickup_clearance": "a99a7e8659491a32019febc0326c7825d6445d3814c5ac4e4ca26df9176132b8",
+    "assemble_02_part_1_assembly_clearance": "ac2f6b74c4d5ced2adffce1be0e8788c71342656657aa1e7c76f8e993d136fef",
+    "assemble_02_part_1_transport_hover": "8fa9dd1ef2dfcfaf92c1822a8dc0298def739a3e5013305be1b654c0f28fd14d",
+    "assemble_02_part_1_insert_00": "e8ca1282b0bcb3e09ba7c6d92424b972404388efb7ae7aa8e6ef9fcbd885d6ef",
+    "assemble_02_part_1_insert_01": "3a7f2eb4cf276d77a0f745957d4d075ae7893d4b7e00a30229e9b68b50abe3cb",
+    "assemble_02_part_1_insert_02": "ba245259fe9b2b2355bf552e75ce0767f04196a7e34a045e22a3ad21a7c0d3b0",
+    "assemble_02_part_1_insert_03": "46eb9d80b58a9f38d33680b80f3a0ccb67c92c0513d87aea31be108ac77252ec",
+    "assemble_02_part_1_insert_04": "c53bd1b2f766f4157e7b2144b2b664d27063e4883bdd19aad8a20ef627ee463f",
+    "assemble_02_part_1_insert_05": "24fb70b9baea027c0d2d7fc2b49276777959107c2df394f9b1cda53f9935512b",
+    "assemble_02_part_1_insert_06": "e49167e974cdca20231dbc8ebceb4d527c81327db2da403815f8ca6ca0c5fb68",
+    "assemble_02_part_1_insert_07": "d1e24ac188440e50bbf0df7d11f902ad8bf57e2a75e26f4664853b8afb2a0dad",
+    "assemble_02_part_1_insert_08": "3fdae41caad888cd1403d19afd8ad0946328298b854eb978e0ab700102cd8556",
+    "assemble_02_part_1_insert_09": "6b54a636c60f0f944d0559de47663aa03f57cf889608b62b06c5ac2c0478f8b6",
+    "assemble_02_part_1_physical_hold_check": "644e3dd34f712ea6121a623bb717d6c5ba0b92e22ad472b4fc42a7c85b767b59",
+    "assemble_02_part_1_restore_gravity": "69b0941fd30769441b0057981ced171075de061a4c6ebf3cbf432e331e0162d7",
+    "assemble_02_part_1_clear_support_filters": "2c33fb5f6935d97b6d6f2fed0e8e6925ee545b2b40934773ce2ef3927bec449e",
+    "assemble_02_part_1_release": "3a74d579323f45484c91b34b0c26a7824715e5791a8055fa30688629b645f9e3",
+    "assemble_02_part_1_retreat": "9f4726f4e772c2dc30d1a65ee9fc8ade2335b547c383d9f874228757f308b0a0",
+    "assemble_02_part_1_park": "3ca02d55277be07278628c2836438c509063e8217fe990d877f66305773f63d2",
+    "handover_left_2_move_above": "4de4135da3abbd6606098e240ed09466962a06b488d9066e3089f7920ab6149a",
+    "handover_left_2_preshape": "7edd1dcd3d302b4c33746e4ec51ad8aa3cc5c7b51e12666984794c7fef93adfb",
+    "handover_left_2_descend": "4b9a433cd9bc718ed21ba02202fb4c1b65bbdcd3d25b6c3c524ed82b1a54f915",
+    "handover_left_2_close_and_attach": "1c5e850aa2b092d427bf5c8ef1c6511ae769e3dc36b0075f3c8cc0a21c09f46c",
+    "hold_3_to_2_switch_release": "07befedf36b8b28d6b0c39e049576e1cfc149399d81c9b2de58007059c0091b8",
+    "hold_2_approach_clearance": "b6fc244d80a31f30e2366843c19f9f012a9d2eeef9debaae65987c0d6f9e80a1",
+    "hold_2_move_above": "0de2a5f2e81202f6668510b2ed5a61774d0b95e86d33bfedb7f75bbed89ec836",
+    "hold_2_preshape": "1253edbef416d9e5a45f564fe0b77013b746de16037059d6dd4d088ecde2f518",
+    "hold_2_descend": "8acf6c63e925acb1c99a40d44f9eb85728173fbff23888aac5a98a2e285c90bc",
+    "hold_2_close_and_attach": "5db41b285b22e79b1bfedbfdfa45d8d7d9f4cab0300837ef22a03df05a0bb8b0",
+    "handover_left_2_release": "b7b19c32ad05517c17ebfc0f06488a30bbbc1c1bc00f89656925c669083cc3f7",
+    "handover_left_2_retreat": "8fba30cb12c83917bdc113f143e4f10f8cb0b6ed8f6105c8f9a08074daf27783",
+    "handover_left_2_park": "f8b36daefff7743da502b7e4db6cade3162490fd4e6902f958cd745b552a669e",
+    "assemble_03_part_0_transit_clearance": "ebbf591e1c66469338786cf17298fe44ba4fc51aa38ddf6e73d461a9424f4dd9",
+    "assemble_03_part_0_move_above": "c163ef2254e323f08e9f8b7e40e055e9591e04d7080fae520fe3809b59bd30ea",
+    "assemble_03_part_0_preshape": "9c530463cc4324dce8679909c2053fc391928888da93ec6b5e4aca441d39159b",
+    "assemble_03_part_0_descend": "30591a07f5b4d2fafceba910737970e7847b710124d17693cb1904512b92fae3",
+    "assemble_03_part_0_close_and_attach": "bc75c380f74d7eac47ce9d9ef6f8558f59271f36f61a847b263698f10389b5cd",
+    "assemble_03_part_0_grip_settle": "048f3265242bf03a9d4bd4ff8f76a44e0b67f08ef6ba05d0ddb97bbdf120ccaa",
+    "assemble_03_part_0_peel_lift": "bc53325f5434cf367c2c0aa510da290e188aca5c0d3417999010355a07fc3dac",
+    "assemble_03_part_0_grip_contact_prime": "84debb281a65af3a6fad883d1a3513c4b79ed09e1617d7a6002018c2d1e6781d",
+    "assemble_03_part_0_peel_physical_hold_check": "68ec2a83910ec8489be88cc8bc6e928d07ea268b5369bff1384d95c46ca40d9a",
+    "assemble_03_part_0_lift": "1baeec12a2b505fc07e765aee5d23bca1c0c045c3e91b084caa092c4061a34d4",
+    "assemble_03_part_0_post_lift_restore_gravity": "6b5ca997bc24e4ec78e50aa912ea59bda0af6ea3c4ed80f6a380e62596638e17",
+    "assemble_03_part_0_pickup_clearance": "b60bda76497e99d4929c32dc5938b549081a6d9f4ac44914c015ebbab685c57a",
+    "assemble_03_part_0_assembly_clearance": "151c09c3d7fb9c1063bffbd3e2f556aca22be77cd93d37605b27af8b76768cb8",
+    "assemble_03_part_0_transport_hover": "f82ddedca0526b659ddd5c8396131557caee4d6822a57b4730d61583bfe063b6",
+    "assemble_03_part_0_insert_00": "af7077e68bfe47e0bc022bff304aab3c2eb80c4ed6561f5a92488332afb74c31",
+    "assemble_03_part_0_insert_01": "9b8e5b447d6f2e7fab0d2e190dbeb8c3caff66c9a288cd64651c91ffcfa1445e",
+    "assemble_03_part_0_insert_02": "8ddc292b47d534745657748bc8225162ee1bc8126c17d0b3e4694013f92af0e5",
+    "assemble_03_part_0_insert_03": "d87bd64122e54108b7f9e1074f8ea5d6da2b8d359a074da1c9eb7a3cf8c93872",
+    "assemble_03_part_0_insert_04": "14d09dc06bedaa630cbca65113d43597aa57a5a9f5f122ced618f11eeca13294",
+    "assemble_03_part_0_insert_05": "9df63aeb49da0808ba444b110585ceaa562bc4d7f7cee39de1f7aa48970c29fe",
+    "assemble_03_part_0_insert_06": "02d356e8cc124820170ddf147edb8ce1a419a77a80edbeacd90163cc082b7b4e",
+    "assemble_03_part_0_insert_07": "dc13bc38ac0efcea4c7737dcf29f55ffbbe3043ee1133a09f9f5f73e6e9d8a4b",
+    "assemble_03_part_0_insert_08": "87a654a5ba4d282df23e1ec514dc255d0da93044ce6e7940956bf91ef23c16f8",
+    "assemble_03_part_0_insert_09": "b73d4b471d3daf4f8900b2eb0761692aeedda16e7dc5a73ac71d450739d037b5",
+    "assemble_03_part_0_physical_hold_check": "4e4fc1afe6b20c12340b41f42c11cce153848ac93d654f567da346b80daa48d0",
+    "assemble_03_part_0_restore_gravity": "44eadf514a59b801e4ab08ba224cada39cca2802390c8eeceabe43ae87223e0c",
+    "assemble_03_part_0_clear_support_filters": "5562da89f934f24086adc23283a7fb6a5da6a35d4a05476c8f822d7b57ac90d3",
+    "assemble_03_part_0_release": "952c6ffe94e494dc3cdbc83c39c3e261418ea36f585b3ea7644f9d5be78db42c",
+    "assemble_03_part_0_retreat": "731b2d73c99ad3d56a64d26a70d2a166911ea85b269fb157cab16aeb3acced0c",
+    "assemble_03_part_0_park": "416ceedbcb4f8cc6fe524dd8c62dae7c5d619cf83995a5b9d5c8f0f8918ce646",
+    "hold_2_final_release": "896f215f3ce1c36beb99349b7f30df975906d56ee7f4336797ae21f0f4e9d2ea",
+    "hold_2_final_retreat": "808b2b769edd73955f21cd076bc786ed26a2c7fcbd2308a64a45b21b0c5a06a2",
+    "hold_2_final_park": "4191fabc38a79b9ed200132e4d5322f088f129d148114f3488504882c1378685",
+    "beam_final_unloaded_verification": "b74c05680ef2debfd1afff2265b9d28de0f3bcd3062b28d71131e23a747d7e9e"
+  },
+  "targets": [
+    {
+      "name": "part_0_fixture_pickup",
+      "reference": "world",
+      "position": [
+        0.439690078266,
+        -0.320236544881,
+        -0.040610879326
+      ],
+      "orientation": [
+        0.9961251836,
+        0.08794668043,
+        -2.5841e-08,
+        1.64775e-07
+      ]
+    },
+    {
+      "name": "part_1_fixture_pickup",
+      "reference": "world",
+      "position": [
+        0.359209925104,
+        -0.36905516684,
+        -0.029438251876
+      ],
+      "orientation": [
+        1.57077e-07,
+        -2.8202e-08,
+        -0.215854190985,
+        -0.976425608141
+      ]
+    },
+    {
+      "name": "part_2_fixture_pickup",
+      "reference": "world",
+      "position": [
+        0.304411676918,
+        -0.217566907927,
+        0.028766831913
+      ],
+      "orientation": [
+        0.701758163557,
+        0.0868081661,
+        -0.086808129531,
+        0.701757914688
+      ]
+    },
+    {
+      "name": "part_3_fixture_pickup",
+      "reference": "world",
+      "position": [
+        0.439092750557,
+        -0.272543176567,
+        0.019205317633
+      ],
+      "orientation": [
+        1.22206e-07,
+        -2.9397e-08,
+        0.233879695965,
+        0.97226554388
+      ]
+    },
+    {
+      "name": "part_6_fixture_pickup",
+      "reference": "world",
+      "position": [
+        0.359999999685,
+        -0.324995086669,
+        0.084682845503
+      ],
+      "orientation": [
+        0.605238700021,
+        0.365631337645,
+        0.365631221323,
+        -0.605238507469
+      ]
+    },
+    {
+      "name": "part_0_assembled",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0125
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_assembled",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0125
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_assembled",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0125
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_assembled",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0125
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_6_assembled",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0125
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_6_assembly_hover",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.1325
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_6_pickup_clearance",
+      "reference": "world",
+      "position": [
+        0.359999999685,
+        -0.324995086669,
+        0.154345241219
+      ],
+      "orientation": [
+        0.605238700021,
+        0.365631337645,
+        0.365631221323,
+        -0.605238507469
+      ]
+    },
+    {
+      "name": "part_6_assembly_clearance",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.220948740724
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_00",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.032700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_01",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.027860001459
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_02",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.025840001267
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_03",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.023420001037
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_04",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.022600000959
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_05",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.019380000654
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_06",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0177600005
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_07",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.015740000308
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_insert_08",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.013320000078
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_preinsert_hover",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.152700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_3_pickup_clearance",
+      "reference": "world",
+      "position": [
+        0.439092750557,
+        -0.272543176567,
+        0.149443073838
+      ],
+      "orientation": [
+        1.22206e-07,
+        -2.9397e-08,
+        0.233879695965,
+        0.97226554388
+      ]
+    },
+    {
+      "name": "part_3_assembly_clearance",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.1245
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_00",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.032700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_01",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.027860001459
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_02",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.025840001267
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_03",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.023420001037
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_04",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.022600000959
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_05",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.019380000654
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_06",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0177600005
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_07",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.015740000308
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_insert_08",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.013320000078
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_preinsert_hover",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.152700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_2_pickup_clearance",
+      "reference": "world",
+      "position": [
+        0.304411676918,
+        -0.217566907927,
+        0.142204147901
+      ],
+      "orientation": [
+        0.701758163557,
+        0.0868081661,
+        -0.086808129531,
+        0.701757914688
+      ]
+    },
+    {
+      "name": "part_2_assembly_clearance",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.1245
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_00",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.032700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_01",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.027860001459
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_02",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.025840001267
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_03",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.023420001037
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_04",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.022600000959
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_05",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.019380000654
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_06",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0177600005
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_07",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.015740000308
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_insert_08",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.013320000078
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_preinsert_hover",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.152700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_1_pickup_clearance",
+      "reference": "world",
+      "position": [
+        0.359209925104,
+        -0.36905516684,
+        0.1293457243
+      ],
+      "orientation": [
+        1.57077e-07,
+        -2.8202e-08,
+        -0.215854190985,
+        -0.976425608141
+      ]
+    },
+    {
+      "name": "part_1_assembly_clearance",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.1185
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_00",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.032700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_01",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.027860001459
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_02",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.025840001267
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_03",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.023420001037
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_04",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.022600000959
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_05",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.019380000654
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_06",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0177600005
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_07",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.015740000308
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_insert_08",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.013320000078
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_preinsert_hover",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.152700001919
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_0_pickup_clearance",
+      "reference": "world",
+      "position": [
+        0.439690078266,
+        -0.320236544881,
+        0.113626175064
+      ],
+      "orientation": [
+        0.9961251836,
+        0.08794668043,
+        -2.5841e-08,
+        1.64775e-07
+      ]
+    },
+    {
+      "name": "part_0_assembly_clearance",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.1145
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "part_6_preseat",
+      "reference": "world",
+      "position": [
+        0.7,
+        -0.22,
+        0.0165
+      ],
+      "orientation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "left_wait",
+      "reference": "world",
+      "position": [
+        0.34,
+        -0.28,
+        0.42
+      ],
+      "orientation_euler": [
+        3.1415926536,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "right_wait",
+      "reference": "world",
+      "position": [
+        0.34,
+        0.28,
+        0.42
+      ],
+      "orientation_euler": [
+        3.1415926536,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "left_retreat",
+      "reference": "world",
+      "position": [
+        0.2,
+        -0.52,
+        0.48
+      ],
+      "orientation_euler": [
+        3.1415926536,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "right_retreat",
+      "reference": "world",
+      "position": [
+        0.2,
+        0.52,
+        0.48
+      ],
+      "orientation_euler": [
+        3.1415926536,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "success": [
+    {
+      "object": "fabrica_beam_0",
+      "target": "part_0_assembled",
+      "position_tolerance": 0.015,
+      "orientation_tolerance": 0.15,
+      "require_released": true,
+      "require_static": true,
+      "linear_velocity_threshold": 0.05,
+      "angular_velocity_threshold": 2.0
+    },
+    {
+      "object": "fabrica_beam_1",
+      "target": "part_1_assembled",
+      "position_tolerance": 0.015,
+      "orientation_tolerance": 0.15,
+      "require_released": true,
+      "require_static": true,
+      "linear_velocity_threshold": 0.05,
+      "angular_velocity_threshold": 2.0
+    },
+    {
+      "object": "fabrica_beam_2",
+      "target": "part_2_assembled",
+      "position_tolerance": 0.015,
+      "orientation_tolerance": 0.15,
+      "require_released": true,
+      "require_static": true,
+      "linear_velocity_threshold": 0.05,
+      "angular_velocity_threshold": 2.0
+    },
+    {
+      "object": "fabrica_beam_3",
+      "target": "part_3_assembled",
+      "position_tolerance": 0.015,
+      "orientation_tolerance": 0.15,
+      "require_released": true,
+      "require_static": true,
+      "linear_velocity_threshold": 0.05,
+      "angular_velocity_threshold": 2.0
+    },
+    {
+      "object": "fabrica_beam_6",
+      "target": "part_6_assembled",
+      "position_tolerance": 0.015,
+      "orientation_tolerance": 0.15,
+      "require_released": true,
+      "require_static": true,
+      "linear_velocity_threshold": 0.05,
+      "angular_velocity_threshold": 2.0
+    }
+  ],
+  "domain_randomization": {
+    "enabled": false,
+    "seed_namespace": "fabrica_beam_canonical_ur5e_domain_v1",
+    "fixed_objects": [
+      "assembly_support",
+      "optical_board"
+    ],
+    "groups": {
+      "start_parts": {
+        "translation": {
+          "x": [
+            -0.08,
+            0.08
+          ],
+          "y": [
+            -0.08,
+            0.08
+          ],
+          "z": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_planar_distance": 0.05,
+        "maximum_planar_distance": 0.12,
+        "translation_constraints": [
+          {
+            "type": "points_inside_bounds",
+            "points": [
+              [
+                0.25,
+                -0.38,
+                0.0125
+              ],
+              [
+                0.25,
+                -0.38,
+                0.0775
+              ],
+              [
+                0.25,
+                -0.23,
+                0.0125
+              ],
+              [
+                0.25,
+                -0.23,
+                0.0775
+              ],
+              [
+                0.45,
+                -0.38,
+                0.0125
+              ],
+              [
+                0.45,
+                -0.38,
+                0.0775
+              ],
+              [
+                0.45,
+                -0.23,
+                0.0125
+              ],
+              [
+                0.45,
+                -0.23,
+                0.0775
+              ]
+            ],
+            "lower": [
+              0.0075,
+              -0.4525,
+              0.0025
+            ],
+            "upper": [
+              0.9325,
+              0.1725,
+              0.0125
+            ],
+            "axes": [
+              0,
+              1
+            ]
+          },
+          {
+            "type": "points_within_distance",
+            "points": [
+              [
+                0.395239986099,
+                -0.336339169356,
+                1.188262945611
+              ],
+              [
+                0.314760004992,
+                -0.293994060341,
+                1.183716023824
+              ],
+              [
+                0.30441166296,
+                -0.316235983178,
+                1.229062684012
+              ],
+              [
+                0.394641452365,
+                -0.168851881187,
+                1.212262243795
+              ],
+              [
+                0.394641452365,
+                -0.168851881187,
+                1.3425
+              ],
+              [
+                0.30441166296,
+                -0.316235983178,
+                1.3425
+              ],
+              [
+                0.314760004992,
+                -0.293994060341,
+                1.3425
+              ],
+              [
+                0.395239986099,
+                -0.336339169356,
+                1.3425
+              ],
+              [
+                0.394641452365,
+                -0.168851881187,
+                1.312262243795
+              ],
+              [
+                0.30441166296,
+                -0.316235983178,
+                1.329062684012
+              ],
+              [
+                0.314760004992,
+                -0.293994060341,
+                1.283716023824
+              ],
+              [
+                0.395239986099,
+                -0.336339169356,
+                1.288262945611
+              ]
+            ],
+            "origin": [
+              0.5,
+              0.3,
+              0.998
+            ],
+            "maximum_distance": 0.82
+          },
+          {
+            "type": "points_within_distance",
+            "points": [
+              [
+                0.360000000285,
+                -0.369459378265,
+                1.272837604284
+              ],
+              [
+                0.360000000285,
+                -0.369459378265,
+                1.3425
+              ],
+              [
+                0.360000000285,
+                -0.369459378265,
+                1.372837604284
+              ]
+            ],
+            "origin": [
+              0.58,
+              -0.8,
+              0.998
+            ],
+            "maximum_distance": 0.82
+          }
+        ],
+        "objects": [
+          "fabrica_fixture",
+          "fixture_support",
+          "fabrica_beam_0",
+          "fabrica_beam_1",
+          "fabrica_beam_2",
+          "fabrica_beam_3",
+          "fabrica_beam_6"
+        ],
+        "targets": [
+          "part_0_fixture_pickup",
+          "part_1_fixture_pickup",
+          "part_2_fixture_pickup",
+          "part_3_fixture_pickup",
+          "part_6_fixture_pickup",
+          "part_6_pickup_clearance",
+          "part_3_pickup_clearance",
+          "part_2_pickup_clearance",
+          "part_1_pickup_clearance",
+          "part_0_pickup_clearance"
+        ]
+      },
+      "assembly_base": {
+        "translation": {
+          "x": [
+            -0.1,
+            0.1
+          ],
+          "y": [
+            -0.1,
+            0.1
+          ],
+          "z": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_planar_distance": 0.05,
+        "maximum_planar_distance": 0.15,
+        "translation_constraints": [
+          {
+            "type": "points_inside_bounds",
+            "points": [
+              [
+                0.6491999122,
+                -0.2581000033,
+                0.0759999069
+              ],
+              [
+                0.6491999122,
+                -0.2581000033,
+                0.0912399049
+              ],
+              [
+                0.6491999122,
+                -0.1818999967,
+                0.0759999069
+              ],
+              [
+                0.6491999122,
+                -0.1818999967,
+                0.0912399049
+              ],
+              [
+                0.6618999336,
+                -0.2581000033,
+                0.0759999069
+              ],
+              [
+                0.6618999336,
+                -0.2581000033,
+                0.0912399049
+              ],
+              [
+                0.6618999336,
+                -0.1818999967,
+                0.0759999069
+              ],
+              [
+                0.6618999336,
+                -0.1818999967,
+                0.0912399049
+              ],
+              [
+                0.738099913,
+                -0.2581000033,
+                0.0759999069
+              ],
+              [
+                0.738099913,
+                -0.2581000033,
+                0.0912399049
+              ],
+              [
+                0.738099913,
+                -0.1818999967,
+                0.0759999069
+              ],
+              [
+                0.738099913,
+                -0.1818999967,
+                0.0912399049
+              ],
+              [
+                0.7507999344,
+                -0.2581000033,
+                0.0759999069
+              ],
+              [
+                0.7507999344,
+                -0.2581000033,
+                0.0912399049
+              ],
+              [
+                0.7507999344,
+                -0.1818999967,
+                0.0759999069
+              ],
+              [
+                0.7507999344,
+                -0.1818999967,
+                0.0912399049
+              ],
+              [
+                0.649797093,
+                -0.2260016625,
+                0.0124999466
+              ],
+              [
+                0.649797093,
+                -0.2260016625,
+                0.0886999446
+              ],
+              [
+                0.649797093,
+                -0.2139983388,
+                0.0124999466
+              ],
+              [
+                0.649797093,
+                -0.2139983388,
+                0.0886999446
+              ],
+              [
+                0.6612999967,
+                -0.2260016625,
+                0.0124999466
+              ],
+              [
+                0.6612999967,
+                -0.2260016625,
+                0.0886999446
+              ],
+              [
+                0.6612999967,
+                -0.2139983388,
+                0.0124999466
+              ],
+              [
+                0.6612999967,
+                -0.2139983388,
+                0.0886999446
+              ],
+              [
+                0.7386998474,
+                -0.2260016624,
+                0.0124999467
+              ],
+              [
+                0.7386998474,
+                -0.2260016624,
+                0.0886999447
+              ],
+              [
+                0.7386998474,
+                -0.2139983387,
+                0.0124999467
+              ],
+              [
+                0.7386998474,
+                -0.2139983387,
+                0.0886999447
+              ],
+              [
+                0.7502027512,
+                -0.2260016624,
+                0.0124999467
+              ],
+              [
+                0.7502027512,
+                -0.2260016624,
+                0.0886999447
+              ],
+              [
+                0.7502027512,
+                -0.2139983387,
+                0.0124999467
+              ],
+              [
+                0.7502027512,
+                -0.2139983387,
+                0.0886999447
+              ],
+              [
+                0.6237999958,
+                -0.2288900244,
+                0.0124999771
+              ],
+              [
+                0.6237999958,
+                -0.2288900244,
+                0.0251999771
+              ],
+              [
+                0.6237999958,
+                -0.211109975,
+                0.0124999771
+              ],
+              [
+                0.6237999958,
+                -0.211109975,
+                0.0251999771
+              ],
+              [
+                0.7762000042,
+                -0.2288900244,
+                0.0124999771
+              ],
+              [
+                0.7762000042,
+                -0.2288900244,
+                0.0251999771
+              ],
+              [
+                0.7762000042,
+                -0.211109975,
+                0.0124999771
+              ],
+              [
+                0.7762000042,
+                -0.211109975,
+                0.0251999771
+              ]
+            ],
+            "lower": [
+              0.0075,
+              -0.4525,
+              0.0025
+            ],
+            "upper": [
+              0.9325,
+              0.1725,
+              0.0125
+            ],
+            "axes": [
+              0,
+              1
+            ]
+          },
+          {
+            "type": "points_within_distance",
+            "points": [
+              [
+                0.65554992184,
+                -0.194,
+                1.2405
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.2365
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.2305
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.2305
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.250700001919
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.245860001459
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.243840001267
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.241420001037
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.240600000959
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.237380000654
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.2357600005
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.233740000308
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.231320000078
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.370700001919
+              ],
+              [
+                0.744451298192,
+                -0.22,
+                1.3425
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.250700001919
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.245860001459
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.243840001267
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.241420001037
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.240600000959
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.237380000654
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.2357600005
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.233740000308
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.231320000078
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.370700001919
+              ],
+              [
+                0.655548545346,
+                -0.22,
+                1.3425
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.256700001919
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.251860001459
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.249840001267
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.247420001037
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.246600000959
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.243380000654
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.2417600005
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.239740000308
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.237320000078
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.376700001919
+              ],
+              [
+                0.744449925423,
+                -0.194,
+                1.3425
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.260700001919
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.255860001459
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.253840001267
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.251420001037
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.250600000959
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.247380000654
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.2457600005
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.243740000308
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.241320000078
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.380700001919
+              ],
+              [
+                0.65554992184,
+                -0.194,
+                1.3425
+              ]
+            ],
+            "origin": [
+              0.5,
+              0.3,
+              0.998
+            ],
+            "maximum_distance": 0.82
+          },
+          {
+            "type": "points_within_distance",
+            "points": [
+              [
+                0.545285269488,
+                -0.219999950179,
+                1.134051259276
+              ],
+              [
+                0.545285269488,
+                -0.219999950179,
+                1.254051259276
+              ],
+              [
+                0.545285269488,
+                -0.219999950179,
+                1.3425
+              ],
+              [
+                0.545285269488,
+                -0.219999950179,
+                1.138051259276
+              ]
+            ],
+            "origin": [
+              0.58,
+              -0.8,
+              0.998
+            ],
+            "maximum_distance": 0.82
+          }
+        ],
+        "objects": [],
+        "targets": [
+          "part_0_assembled",
+          "part_1_assembled",
+          "part_2_assembled",
+          "part_3_assembled",
+          "part_6_assembled",
+          "part_6_assembly_hover",
+          "part_6_assembly_clearance",
+          "part_3_insert_00",
+          "part_3_insert_01",
+          "part_3_insert_02",
+          "part_3_insert_03",
+          "part_3_insert_04",
+          "part_3_insert_05",
+          "part_3_insert_06",
+          "part_3_insert_07",
+          "part_3_insert_08",
+          "part_3_preinsert_hover",
+          "part_3_assembly_clearance",
+          "part_2_insert_00",
+          "part_2_insert_01",
+          "part_2_insert_02",
+          "part_2_insert_03",
+          "part_2_insert_04",
+          "part_2_insert_05",
+          "part_2_insert_06",
+          "part_2_insert_07",
+          "part_2_insert_08",
+          "part_2_preinsert_hover",
+          "part_2_assembly_clearance",
+          "part_1_insert_00",
+          "part_1_insert_01",
+          "part_1_insert_02",
+          "part_1_insert_03",
+          "part_1_insert_04",
+          "part_1_insert_05",
+          "part_1_insert_06",
+          "part_1_insert_07",
+          "part_1_insert_08",
+          "part_1_preinsert_hover",
+          "part_1_assembly_clearance",
+          "part_0_insert_00",
+          "part_0_insert_01",
+          "part_0_insert_02",
+          "part_0_insert_03",
+          "part_0_insert_04",
+          "part_0_insert_05",
+          "part_0_insert_06",
+          "part_0_insert_07",
+          "part_0_insert_08",
+          "part_0_preinsert_hover",
+          "part_0_assembly_clearance",
+          "part_6_preseat"
+        ]
+      }
+    },
+    "appearance": {
+      "groups": {
+        "table_surface": {
+          "objects": [
+            "factory_tabletop_visual"
+          ],
+          "palette": [
+            [
+              0.14,
+              0.14,
+              0.14
+            ],
+            [
+              0.28,
+              0.31,
+              0.32
+            ],
+            [
+              0.22,
+              0.3,
+              0.25
+            ],
+            [
+              0.33,
+              0.24,
+              0.25
+            ],
+            [
+              0.25,
+              0.27,
+              0.36
+            ],
+            [
+              0.4,
+              0.36,
+              0.25
+            ]
+          ]
+        },
+        "background": {
+          "objects": [],
+          "lights": [
+            "warehouse_dome_fill"
+          ],
+          "palette": [
+            [
+              0.78,
+              0.84,
+              1.0
+            ],
+            [
+              0.92,
+              0.82,
+              0.72
+            ],
+            [
+              0.72,
+              0.88,
+              0.8
+            ],
+            [
+              0.86,
+              0.76,
+              0.82
+            ],
+            [
+              0.72,
+              0.82,
+              0.88
+            ],
+            [
+              0.88,
+              0.88,
+              0.76
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

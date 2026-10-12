@@ -113,6 +113,7 @@ class PoseMixin:
 
             This method belongs to the methods used to set the prim state
         """
+        self._trace_beam_pose_write(position, orientation)
         self.unwrap().set_world_pose(position, orientation)
 
     def get_pose(self) -> Tuple[np.ndarray, np.ndarray]:
@@ -151,4 +152,14 @@ class PoseMixin:
         for idx, i in enumerate(position):
             _position[idx] = i - self.offset[idx]
 
+        self._trace_beam_pose_write(position, orientation)
         self.unwrap().set_world_pose(position, orientation)
+
+    def _trace_beam_pose_write(self, position, orientation):
+        import os
+
+        if os.environ.get('BEAM_PHYSICS_DIAGNOSTICS') == '1':
+            from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import record_path_state_write
+
+            record_path_state_write(getattr(self.unwrap(), 'prim_path', None), 'set_world_pose',
+                                    {'position': position, 'orientation': orientation})

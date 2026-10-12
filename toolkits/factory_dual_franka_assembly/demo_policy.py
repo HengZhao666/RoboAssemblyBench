@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 import math
+import json
+import os
 from collections import OrderedDict
 
 import numpy as np
 
 from internutopia_extension.configs.robots.franka import arm_ik_cfg, arm_joint_cfg, gripper_cfg
 from toolkits.factory_dual_franka_assembly.local_skills import LocalSkillExecutor
+from toolkits.factory_dual_franka_assembly.beam_idle_hold import (
+    native_joint_vector, published_arm_target, target_in_native_branch,
+)
 from toolkits.factory_dual_franka_assembly.robofactory_planner import (
     FrankaRobofactoryPlanner,
     PlannerWaypoint,
@@ -184,11 +189,17 @@ class DualFrankaAssemblyDemoPolicy:
         self._robot_execution_state: dict[str, dict] = {}
         self._planner_bridge = FrankaRobofactoryPlanner()
         self._local_skill_executor = LocalSkillExecutor()
+        self._beam_idle_anchors = {}
+        self._beam_idle_guard = {}
+        self._last_task_step = None
 
     def _reset_policy_state(self):
         self._policy_step = 0
         self._robot_execution_state = {}
         self._local_skill_executor.reset()
+        self._beam_idle_anchors = {}
+        self._beam_idle_guard = {}
+        self._last_task_step = None
 
     @property
     def local_skill_diagnostics(self):
@@ -205,10 +216,168 @@ class DualFrankaAssemblyDemoPolicy:
 
     def _ensure_task_context(self, task):
         task_signature = self._task_signature_for(task)
-        if task_signature != self._task_signature:
+        task_step = getattr(task, 'step_counter', None)
+        step_restarted = (self._beam_idle_enabled(task) and task_step is not None
+                          and self._last_task_step is not None and task_step < self._last_task_step)
+        if task_signature != self._task_signature or step_restarted:
+            for robot_name in list(self._beam_idle_anchors):
+                self._clear_beam_idle_anchor(task, robot_name, 'episode_or_step_reset')
             self._reset_policy_state()
             self._task_signature = task_signature
+        self._last_task_step = task_step
         self._policy_step += 1
+
+    @staticmethod
+    def _beam_idle_enabled(task):
+        cfg = getattr(task, 'cfg', getattr(task, 'config', None))
+        recipe = getattr(cfg, 'recipe', '')
+        if not isinstance(recipe, str) or not (recipe == 'fabrica_beam' or recipe.startswith('fabrica_beam_')):
+            return False
+        override = os.environ.get('BEAM_IDLE_HOLD_ANCHOR')
+        if override is not None:
+            return override == '1'
+        # Read the generated stage directly: checking this switch must not
+        # refresh observations or advance/update the task state.
+        phases = getattr(task, 'phase_specs', ())
+        index = getattr(task, 'phase_index', None)
+        if not isinstance(phases, (list, tuple)) or not isinstance(index, int):
+            return False
+        if index < 0 or index >= len(phases):
+            return False
+        phase = phases[index]
+        return isinstance(phase, dict) and phase.get('beam_idle_hold_anchor') is True
+
+    def _beam_robot_loaded(self, task, robot_name, tracked_objects):
+        if self._attached_object_names(tracked_objects, robot_name):
+            return True
+        if any(state.get('robot_name') == robot_name for state in getattr(task, '_attachments', {}).values()):
+            return True
+        return any(key[1] == robot_name for key in getattr(task, '_beam_shared_grasps', {}))
+
+    def _beam_idle_load_guard(self, task, robot_name, phase_spec, tracked_objects):
+        guard = self._beam_idle_guard.setdefault(robot_name, {'was_loaded': False, 'blocked': False})
+        loaded = self._beam_robot_loaded(task, robot_name, tracked_objects)
+        if loaded:
+            self._clear_beam_idle_anchor(task, robot_name, 'owns_physical_support')
+            guard['blocked'] = False
+        elif guard['was_loaded']:
+            self._clear_beam_idle_anchor(task, robot_name, 'support_registration_disappeared')
+            guard.update(blocked=True, loss_phase=(getattr(task, 'phase_index', None),
+                         getattr(task, 'phase_entry_step', None), phase_spec.get('name')))
+        guard['was_loaded'] = loaded
+
+    def _clear_beam_idle_anchor(self, task, robot_name, reason, *, rearm=False):
+        anchor = self._beam_idle_anchors.pop(robot_name, None)
+        if anchor is not None:
+            self._trace_beam_idle(task, robot_name, 'anchor_released', anchor, reason=reason)
+        if rearm:
+            guard = self._beam_idle_guard.get(robot_name)
+            if guard:
+                current_phase = (getattr(task, 'phase_index', None), getattr(task, 'phase_entry_step', None),
+                                 getattr(task, 'phase', None))
+                if reason == 'clearance_takeover' or current_phase != guard.get('loss_phase'):
+                    guard['blocked'] = False
+
+    def _beam_idle_eligible(self, task, robot_name, phase_spec, tracked_robots, tracked_objects):
+        if not self._beam_idle_enabled(task) or getattr(task, 'failed', False) or getattr(task, 'success', False):
+            return False
+        if self._beam_robot_loaded(task, robot_name, tracked_objects):
+            return False
+        if self._beam_idle_guard.get(robot_name, {}).get('blocked'):
+            return False
+        if self._robot_has_active_phase_work(task=task, phase_spec=phase_spec,
+                robot_name=robot_name, tracked_robots=tracked_robots):
+            return False
+        if self._phase_attach_spec_for_robot(phase_spec, robot_name) is not None:
+            return False
+        command = phase_spec.get('gripper_commands', {}).get(robot_name)
+        normalized = self._gripper_controller_action(command)
+        return not (isinstance(normalized, (float, int)) and normalized <= 0.)
+
+    def _native_arm_measurement(self, task, robot_name):
+        robot = task.robots.get(robot_name)
+        if robot is None:
+            return None, None
+        for controller_name in (arm_joint_cfg.name, arm_ik_cfg.name):
+            controller = robot.controllers.get(controller_name)
+            if controller is None:
+                continue
+            try:
+                subset = controller.get_joint_subset()
+                if subset is None:
+                    continue
+                measured = native_joint_vector(subset.get_joint_positions())
+                indices = getattr(subset, 'joint_indices', None)
+                if measured is not None:
+                    return measured, indices
+            except Exception:
+                continue
+        return None, None
+
+    def _published_native_arm_target(self, task, robot_name, measured, indices):
+        robot = task.robots[robot_name]
+        candidates = []
+        try:
+            articulation = robot.articulation
+            raw = articulation.unwrap() if callable(getattr(articulation, 'unwrap', None)) else articulation
+            getter = getattr(raw, 'get_applied_action', None)
+            if callable(getter):
+                candidates.append(('articulation_applied_target', getter()))
+        except Exception:
+            pass
+        try:
+            getter = getattr(robot, 'get_last_action', None)
+            if callable(getter):
+                candidates.extend(('robot_published_target', item) for item in reversed(getter() or []))
+        except Exception:
+            pass
+        rejected = False
+        for source, command in candidates:
+            target = published_arm_target(command, indices)
+            if target is not None:
+                if target_in_native_branch(target, measured):
+                    return target, source, rejected
+                rejected = True
+        return measured.copy(), 'native_measured_once', rejected
+
+    def _beam_idle_joint_action(self, task, robot_name):
+        anchor = self._beam_idle_anchors.get(robot_name)
+        measured = None
+        if anchor is None:
+            measured, indices = self._native_arm_measurement(task, robot_name)
+            if measured is None:
+                return None
+            target, source, rejected = self._published_native_arm_target(task, robot_name, measured, indices)
+            anchor = {'target': target.copy(), 'source': source,
+                      'captured_step': int(getattr(task, 'step_counter', self._policy_step)),
+                      'last_log_step': self._policy_step, 'rejected_published_target_branch': rejected}
+            self._beam_idle_anchors[robot_name] = anchor
+            self._trace_beam_idle(task, robot_name, 'anchor_captured', anchor, measured=measured)
+        elif self._policy_step - anchor['last_log_step'] >= 32:
+            measured, _ = self._native_arm_measurement(task, robot_name)
+            self._trace_beam_idle(task, robot_name, 'anchor_command', anchor, measured=measured)
+            anchor['last_log_step'] = self._policy_step
+        return [anchor['target'].copy().tolist()]
+
+    def _trace_beam_idle(self, task, robot_name, event, anchor, *, measured=None, reason=None):
+        trace = os.environ.get('BEAM_IDLE_HOLD_TRACE_PATH')
+        if not trace:
+            motion = os.environ.get('BEAM_MOTION_TRACE_PATH')
+            trace = os.path.join(os.path.dirname(motion), 'idle_hold_trace.jsonl') if motion else None
+        if not trace:
+            return
+        record = {'event': event, 'robot': robot_name, 'phase': getattr(task, 'phase', None),
+                  'task_step': getattr(task, 'step_counter', None), 'policy_step': self._policy_step,
+                  'target_native_q': anchor['target'].tolist(), 'source': anchor['source'],
+                  'captured_step': anchor['captured_step'],
+                  'rejected_published_target_branch': anchor['rejected_published_target_branch']}
+        if measured is not None:
+            record['measured_native_q'] = measured.tolist()
+            record['max_abs_tracking_error_rad'] = float(np.max(np.abs(anchor['target'] - measured)))
+        if reason:
+            record['reason'] = reason
+        with open(trace, 'a', encoding='utf-8') as handle:
+            handle.write(json.dumps(record, allow_nan=False, separators=(',', ':')) + '\n')
 
     def _robot_state(self, robot_name: str) -> dict:
         return self._robot_execution_state.setdefault(
@@ -2137,7 +2306,11 @@ class DualFrankaAssemblyDemoPolicy:
         trajectory_target = self._trajectory_target(state)
         current_joint_positions = self._current_arm_joint_positions(task, robot_name)
 
-        def _joint_hold_action():
+        def _joint_hold_action(*, idle=False):
+            if idle and self._beam_idle_eligible(task, robot_name, phase_spec, tracked_robots, tracked_objects):
+                return self._beam_idle_joint_action(task, robot_name)
+            if idle:
+                self._clear_beam_idle_anchor(task, robot_name, 'not_eligible_for_idle_hold')
             if current_joint_positions is None:
                 return None
             return self._normalized_joint_action(current_joint_positions, reference=current_joint_positions)
@@ -2308,6 +2481,7 @@ class DualFrankaAssemblyDemoPolicy:
                 and state.get('last_action') is not None
                 and self._policy_step - int(state['last_update_step']) < self._ACTION_UPDATE_INTERVAL_STEPS
             ):
+                self._clear_beam_idle_anchor(task, robot_name, 'clearance_takeover', rearm=True)
                 action[arm_ik_cfg.name] = state['last_action']
                 cached_joint_action = self._normalized_joint_action(
                     state.get('last_joint_action'),
@@ -2321,10 +2495,11 @@ class DualFrankaAssemblyDemoPolicy:
                 return action
             if clearance_pose is None:
                 action[arm_ik_cfg.name] = self._hold_pose()
-                joint_hold = _joint_hold_action()
+                joint_hold = _joint_hold_action(idle=True)
                 if joint_hold is not None:
                     action[arm_joint_cfg.name] = joint_hold
             else:
+                self._clear_beam_idle_anchor(task, robot_name, 'clearance_takeover', rearm=True)
                 arm_action = [clearance_pose['position'].tolist(), clearance_pose['orientation'].tolist()]
                 action[arm_ik_cfg.name] = arm_action
                 joint_action = self._joint_trajectory_action_for_pose(
@@ -2345,6 +2520,7 @@ class DualFrankaAssemblyDemoPolicy:
                 }
                 state['active_target_name'] = 'idle_clearance'
         else:
+            self._clear_beam_idle_anchor(task, robot_name, 'active_target_takeover', rearm=True)
             robot_tracking = tracked_robots.get(robot_name, {})
             current_position = self._as_array(robot_tracking.get('position'), default=trajectory_target['pose']['position'])
             current_orientation = self._as_array(robot_tracking.get('orientation'), default=trajectory_target['pose']['orientation'])
@@ -2458,6 +2634,7 @@ class DualFrankaAssemblyDemoPolicy:
                     and state.get('last_action') is not None
                     and self._policy_step - int(state['last_update_step']) < self._ACTION_UPDATE_INTERVAL_STEPS
                 ):
+                    self._clear_beam_idle_anchor(task, robot_name, 'clearance_takeover', rearm=True)
                     action[arm_ik_cfg.name] = state['last_action']
                     cached_joint_action = self._normalized_joint_action(
                         state.get('last_joint_action'),
@@ -2471,10 +2648,11 @@ class DualFrankaAssemblyDemoPolicy:
                     return action
                 if clearance_pose is None:
                     action[arm_ik_cfg.name] = self._hold_pose()
-                    joint_hold = _joint_hold_action()
+                    joint_hold = _joint_hold_action(idle=True)
                     if joint_hold is not None:
                         action[arm_joint_cfg.name] = joint_hold
                 else:
+                    self._clear_beam_idle_anchor(task, robot_name, 'clearance_takeover', rearm=True)
                     arm_action = [clearance_pose['position'].tolist(), clearance_pose['orientation'].tolist()]
                     action[arm_ik_cfg.name] = arm_action
                     joint_action = self._joint_trajectory_action_for_pose(
@@ -2611,6 +2789,8 @@ class DualFrankaAssemblyDemoPolicy:
         tracked_objects = task.get_tracked_object_states()
         actions = {}
         for robot_name in task.config.robot_names:
+            if self._beam_idle_enabled(task):
+                self._beam_idle_load_guard(task, robot_name, phase_spec, tracked_objects)
             action = self._local_skill_executor.action_for(
                 task=task,
                 robot_name=robot_name,
@@ -2630,6 +2810,8 @@ class DualFrankaAssemblyDemoPolicy:
                     task.failed = True
                     task.terminal_reason = f"local-skill-failure:{action.get('reason', 'unknown')}"
                 action = OrderedDict()
+            if action is not None:
+                self._clear_beam_idle_anchor(task, robot_name, 'local_skill_takeover', rearm=True)
             if action is None:
                 action = self._compose_robot_action(
                     task=task,

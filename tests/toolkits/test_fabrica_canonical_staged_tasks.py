@@ -9,6 +9,7 @@ from roboassemblybench.core.fabrica_canonical import (
     load_fabrica_canonical_metadata,
 )
 from toolkits.factory_dual_franka_assembly.task_specs import load_task_recipe
+from toolkits.factory_dual_franka_assembly.scene_builder import _normalize_camera_spec
 
 TASKS = {
     'beam': 5,
@@ -19,7 +20,8 @@ TASKS = {
     'plumbers_block': 5,
     'stool_circular': 9,
 }
-STAGED_TASKS = tuple(TASKS)
+# Beam uses the retained continuous-physics contract and is checked separately.
+STAGED_TASKS = tuple(name for name in TASKS if name != 'beam')
 
 
 def _object_map(recipe):
@@ -228,14 +230,17 @@ def test_staged_recipes_compile_complete_contact_gated_skill_sequences():
                 assert robot[field] == reference_robot[field]
         cameras = {entry['name']: entry for entry in recipe['camera_specs']}
         for camera_name, camera in cameras.items():
-            reference_camera = reference_cameras[camera_name]
+            camera = _normalize_camera_spec(camera)
+            reference_camera = _normalize_camera_spec(reference_cameras[camera_name])
             for field in (
                 'prim_path',
+                'position',
+                'look_at',
                 'translation',
                 'orientation_euler',
                 'resolution',
             ):
-                assert camera[field] == reference_camera[field]
+                assert camera.get(field) == reference_camera.get(field)
 
         assert resolved['optical_board_position_randomized'] is False
         assert np.isclose(

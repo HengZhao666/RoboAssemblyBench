@@ -1,0 +1,454 @@
+[
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/collect_results.json",
+    "published": "outputs/beam_repair_review/v138/collect_results.json",
+    "original_sha256": "ecef5da9acdb93cc7ef3939c899d4a692169742eb2559319874a25551de75211",
+    "published_sha256": "ecef5da9acdb93cc7ef3939c899d4a692169742eb2559319874a25551de75211",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/registration_analysis.json",
+    "published": "outputs/beam_repair_review/v138/registration_analysis.json",
+    "original_sha256": "927a2bbc88a7edc9a43184ebabb38f002a8f7f58168f62e3c6fbd2df637b16aa",
+    "published_sha256": "927a2bbc88a7edc9a43184ebabb38f002a8f7f58168f62e3c6fbd2df637b16aa",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/registration_baseline_comparison.json",
+    "published": "outputs/beam_repair_review/v138/registration_baseline_comparison.json",
+    "original_sha256": "b09fad0964c847571d9e1920be4eddf47e3c80e963d6824abbd86d84a4e46df9",
+    "published_sha256": "b09fad0964c847571d9e1920be4eddf47e3c80e963d6824abbd86d84a4e46df9",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/force_margin_analysis.json",
+    "published": "outputs/beam_repair_review/v138/force_margin_analysis.json",
+    "original_sha256": "1591b6aa68067278ec2e2875eb1603f9dc9f1dfea73ec4486d8d2e35ea6cea04",
+    "published_sha256": "1591b6aa68067278ec2e2875eb1603f9dc9f1dfea73ec4486d8d2e35ea6cea04",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/regression_tests.log",
+    "published": "outputs/beam_repair_review/v138/regression_tests.log",
+    "original_sha256": "80af1f28231de7a335fee4ae86c7839af7e3c981e996ffe0836be2df040d5d69",
+    "published_sha256": "80af1f28231de7a335fee4ae86c7839af7e3c981e996ffe0836be2df040d5d69",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/runner.log",
+    "published": "outputs/beam_repair_review/v138/runner.log",
+    "original_sha256": "4bef180017f373e5f2be3d1f82e0b128fe613eab71d60a962fb7164d63c9b907",
+    "published_sha256": "d8b6059fbcc3ad69e43274b25724df9fdc8f191260034b9134f74ab2f7fd9135",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/manifest.json",
+    "published": "outputs/beam_repair_review/v138/manifest.json",
+    "original_sha256": "6c130b3430cf99a84124769018c580e21c19cf56ee9e88aec29dfb461506de1a",
+    "published_sha256": "6c130b3430cf99a84124769018c580e21c19cf56ee9e88aec29dfb461506de1a",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/episode_0000_live_videos/observation_images_front.mp4",
+    "published": "outputs/beam_repair_review/v138/videos/observation_images_front.mp4",
+    "original_sha256": "0ba1a7ab5f5139fb5eff05c92a6c57d5d2fabbdbd4b0966d87f11b01d7bb02b5",
+    "published_sha256": "0ba1a7ab5f5139fb5eff05c92a6c57d5d2fabbdbd4b0966d87f11b01d7bb02b5",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/episode_0000_live_videos/observation_images_right_wrist.mp4",
+    "published": "outputs/beam_repair_review/v138/videos/observation_images_right_wrist.mp4",
+    "original_sha256": "b69d0e0887f4b05c739332720136159dcc5055cc795046e0a7871595bf4a20b3",
+    "published_sha256": "b69d0e0887f4b05c739332720136159dcc5055cc795046e0a7871595bf4a20b3",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/collect_results.json",
+    "published": "outputs/beam_repair_review/v151/collect_results.json",
+    "original_sha256": "758590720dbc22579adedf832eef968670a7c012c7904b061481b143a54c8d43",
+    "published_sha256": "758590720dbc22579adedf832eef968670a7c012c7904b061481b143a54c8d43",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/round_summary.json",
+    "published": "outputs/beam_repair_review/v151/round_summary.json",
+    "original_sha256": "9ee7ffd18734b2318007903b1508af5cadde5518b643a26e1ee4ab45c42a5c3b",
+    "published_sha256": "9ee7ffd18734b2318007903b1508af5cadde5518b643a26e1ee4ab45c42a5c3b",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/precision_summary.json",
+    "published": "outputs/beam_repair_review/v151/precision_summary.json",
+    "original_sha256": "906e3f72868c01517e0f6467b171938520cffb43c82947268e689a352a7d7503",
+    "published_sha256": "906e3f72868c01517e0f6467b171938520cffb43c82947268e689a352a7d7503",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/pick_collision_audit.json",
+    "published": "outputs/beam_repair_review/v151/pick_collision_audit.json",
+    "original_sha256": "7ce0335b16cc31e15c0b0e966d9e9510db0099ec51e6d2ed914269b3701c7f56",
+    "published_sha256": "7ce0335b16cc31e15c0b0e966d9e9510db0099ec51e6d2ed914269b3701c7f56",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/validation.json",
+    "published": "outputs/beam_repair_review/v151/validation.json",
+    "original_sha256": "979e03f9b80cfe4519862359a989d49488c4dcc33aebe42845e787f4d2abf05c",
+    "published_sha256": "979e03f9b80cfe4519862359a989d49488c4dcc33aebe42845e787f4d2abf05c",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/server_final_verification.json",
+    "published": "outputs/beam_repair_review/v151/server_final_verification.json",
+    "original_sha256": "f248f70dbae9e55052d924ca7d876fbc9a582e7eb7e073e83af18a67fe7ff27f",
+    "published_sha256": "f248f70dbae9e55052d924ca7d876fbc9a582e7eb7e073e83af18a67fe7ff27f",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/runner.log",
+    "published": "outputs/beam_repair_review/v151/runner.log",
+    "original_sha256": "4ead85042283f568a8f806b60b946535e3f84a43ac15c5a603dc3ec3faf3be59",
+    "published_sha256": "bc30227d9adc9aae7b1696260dec8b86eb0b2b360b0743d19cc435536c6c3830",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/manifest.json",
+    "published": "outputs/beam_repair_review/v151/manifest.json",
+    "original_sha256": "f1aeec5119f2f883f7233b77e821c5cc36ace492940c0de7035c8ddbed1c1282",
+    "published_sha256": "f1aeec5119f2f883f7233b77e821c5cc36ace492940c0de7035c8ddbed1c1282",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/episode_0000_live_videos/observation_images_front.mp4",
+    "published": "outputs/beam_repair_review/v151/videos/observation_images_front.mp4",
+    "original_sha256": "35aa531020bbc372cd369d5caa92765ac5d66b147b94cdeb2e8f92521163aa00",
+    "published_sha256": "35aa531020bbc372cd369d5caa92765ac5d66b147b94cdeb2e8f92521163aa00",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v151_pick_frame/episode_0000_live_videos/observation_images_right_wrist.mp4",
+    "published": "outputs/beam_repair_review/v151/videos/observation_images_right_wrist.mp4",
+    "original_sha256": "f9a56cbd98a9f590a64e59fb80093f65089c276271b63b3c5d387324f877ea53",
+    "published_sha256": "f9a56cbd98a9f590a64e59fb80093f65089c276271b63b3c5d387324f877ea53",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/collect_results.json",
+    "published": "outputs/beam_repair_review/v164/collect_results.json",
+    "original_sha256": "a4024272a0be3afa6bc471bd03cc55461451f105a2d3fe7037199e35f77ceaff",
+    "published_sha256": "a4024272a0be3afa6bc471bd03cc55461451f105a2d3fe7037199e35f77ceaff",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/round_summary.json",
+    "published": "outputs/beam_repair_review/v164/round_summary.json",
+    "original_sha256": "ad700355e7e783ea59516d2d6ab94e24babeea46eae188158be7937dae8df7d8",
+    "published_sha256": "ad700355e7e783ea59516d2d6ab94e24babeea46eae188158be7937dae8df7d8",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/idle_hold_summary.json",
+    "published": "outputs/beam_repair_review/v164/idle_hold_summary.json",
+    "original_sha256": "888d63644dd0f8ef95b782e71539ba4f0ed5d6abe23e27bf652fbf9ccb2382fe",
+    "published_sha256": "b4b7ef2acb24b3aec6a34a91b6465b732c5b82d2bfad5fb684025c7d2cf3ee47",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/late_idle_comparison.json",
+    "published": "outputs/beam_repair_review/v164/late_idle_comparison.json",
+    "original_sha256": "2c59115e72f516b5ef54a4b322b6054d32ffd26d74d78c3bd52c95c79f3f48b4",
+    "published_sha256": "fa686f41451c7e68578a787f0fc9f0e271d3be1b98235bf1965440b5197b8869",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/boundary_analysis_steps_11880_12480.json",
+    "published": "outputs/beam_repair_review/v164/boundary_analysis_steps_11880_12480.json",
+    "original_sha256": "6467f88fd76a2fd95bdc3f2873e4b3f3fbbe8ffcec6254e9cf0e0195617cbc40",
+    "published_sha256": "f2b2ca54415ecc67742c61bc4d198a085e0fd148faa0052879aed4dee109866a",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/plan.json",
+    "published": "outputs/beam_repair_review/v164/plan.json",
+    "original_sha256": "75382889c60cb16d470e1adccbec77aa515302bc06eb9c44fad45719352fda7f",
+    "published_sha256": "75382889c60cb16d470e1adccbec77aa515302bc06eb9c44fad45719352fda7f",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/source_manifest.json",
+    "published": "outputs/beam_repair_review/v164/source_manifest.json",
+    "original_sha256": "05e90b9a0d5120919eb75ce56c32ea22d4e0f26b6c0531185a36e328639faa6f",
+    "published_sha256": "05e90b9a0d5120919eb75ce56c32ea22d4e0f26b6c0531185a36e328639faa6f",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/source_before_manifest.json",
+    "published": "outputs/beam_repair_review/v164/source_before_manifest.json",
+    "original_sha256": "119a37315b5159a880ab67366819739fe0606fb9c8eb43b7a3c90fe6e5404bca",
+    "published_sha256": "119a37315b5159a880ab67366819739fe0606fb9c8eb43b7a3c90fe6e5404bca",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/tests.log",
+    "published": "outputs/beam_repair_review/v164/tests.log",
+    "original_sha256": "f19c0539ef32e5ff635f02eeb96ef8072bde41fbae4f932f4cc684734f1f9200",
+    "published_sha256": "f19c0539ef32e5ff635f02eeb96ef8072bde41fbae4f932f4cc684734f1f9200",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/run.log",
+    "published": "outputs/beam_repair_review/v164/run.log",
+    "original_sha256": "ff99132e4e942508b408156c974b39997750d27de78b1122cb2946d71079fcfb",
+    "published_sha256": "9ca1123bbef82aede23fb37fba4f79d6eefaf0fda1965f2f806fe75c8f5d4dc7",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/compiled_recipe.json",
+    "published": "outputs/beam_repair_review/v164/compiled_recipe.json",
+    "original_sha256": "f18040dd610f0771ffd6d3a685639c59e40985e97e394ee73e5ce2ab2dbb411f",
+    "published_sha256": "2a1d781a48e7e7d2f32af99da7a11d2f2fa47bd1980ed0c14afc76fee75abaf7",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/result_manifest.json",
+    "published": "outputs/beam_repair_review/v164/result_manifest.json",
+    "original_sha256": "85f1b4ed240c648256223504259cbf212fb81d76c5b20fd904d68137aa80c52a",
+    "published_sha256": "85f1b4ed240c648256223504259cbf212fb81d76c5b20fd904d68137aa80c52a",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/episode_0000_live_videos/observation_images_front.mp4",
+    "published": "outputs/beam_repair_review/v164/videos/observation_images_front.mp4",
+    "original_sha256": "89282b01fa724efc88b5b924c0e2f07f2c9632c13ea27fadd154808d0d1b629f",
+    "published_sha256": "89282b01fa724efc88b5b924c0e2f07f2c9632c13ea27fadd154808d0d1b629f",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/episode_0000_live_videos/observation_images_right_wrist.mp4",
+    "published": "outputs/beam_repair_review/v164/videos/observation_images_right_wrist.mp4",
+    "original_sha256": "a3ca38f7f801cc35d9f8f5d8526bb8fc987f4b4a35162d06473f622e7f4dbbd8",
+    "published_sha256": "a3ca38f7f801cc35d9f8f5d8526bb8fc987f4b4a35162d06473f622e7f4dbbd8",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/collect_results.json",
+    "published": "outputs/beam_repair_review/v166/collect_results.json",
+    "original_sha256": "3a27dd4db8eff990b5a54da3afd17b501925f2c798012050bae84e363b41a757",
+    "published_sha256": "3a27dd4db8eff990b5a54da3afd17b501925f2c798012050bae84e363b41a757",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/round_summary.json",
+    "published": "outputs/beam_repair_review/v166/round_summary.json",
+    "original_sha256": "749295be2f13a0cf057bdfd36d984a635e65d5b3d6919b43642dd4b609271675",
+    "published_sha256": "749295be2f13a0cf057bdfd36d984a635e65d5b3d6919b43642dd4b609271675",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/gain_trial_summary.json",
+    "published": "outputs/beam_repair_review/v166/gain_trial_summary.json",
+    "original_sha256": "376f94b8fa75eb3cf6e4211f581ce00595108ebffc253e370e4275a3d0766bf4",
+    "published_sha256": "376f94b8fa75eb3cf6e4211f581ce00595108ebffc253e370e4275a3d0766bf4",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/seating_guard_summary.json",
+    "published": "outputs/beam_repair_review/v166/seating_guard_summary.json",
+    "original_sha256": "ec5898ba869760d6a6edd43576be7f6ffcf1671f7b569689184dc22083b1a8ab",
+    "published_sha256": "ec5898ba869760d6a6edd43576be7f6ffcf1671f7b569689184dc22083b1a8ab",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/idle_hold_summary.json",
+    "published": "outputs/beam_repair_review/v166/idle_hold_summary.json",
+    "original_sha256": "c2c916a04af0c369a3018a2bcf64672cb082ed4ede7959f0452c24439b64e307",
+    "published_sha256": "7dc97af3554ae73df24a11f73720140a553ac9507673ee0b6866aa62e802b3fb",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/plan.json",
+    "published": "outputs/beam_repair_review/v166/plan.json",
+    "original_sha256": "23b9413ebfa5911a1265af91a34d0b8f6f3707e4fa5d11d722dd8290b5c0de19",
+    "published_sha256": "23b9413ebfa5911a1265af91a34d0b8f6f3707e4fa5d11d722dd8290b5c0de19",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/source_manifest.json",
+    "published": "outputs/beam_repair_review/v166/source_manifest.json",
+    "original_sha256": "25d9e52a81628df8a021ba719088ffdde3662fe27149c691ae73cad817e83de6",
+    "published_sha256": "25d9e52a81628df8a021ba719088ffdde3662fe27149c691ae73cad817e83de6",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/tests.log",
+    "published": "outputs/beam_repair_review/v166/tests.log",
+    "original_sha256": "1eae7612549b3ff8a352f89779e204576ede386ec641aeb1561f80061177ae3a",
+    "published_sha256": "1eae7612549b3ff8a352f89779e204576ede386ec641aeb1561f80061177ae3a",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/run.log",
+    "published": "outputs/beam_repair_review/v166/run.log",
+    "original_sha256": "395f005fd5ea8c256f1d35329bbb8d0ea476df3a0574ee4d3f57223f398a04bd",
+    "published_sha256": "b8bfb4547ddd41750ec2bc6db1e14436560cd14618713bf0e63865a99d80ac5e",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/compiled_recipe.json",
+    "published": "outputs/beam_repair_review/v166/compiled_recipe.json",
+    "original_sha256": "7c5d7c1587dd1d16fd6be47f90661a38b4bb4cd71e08acfc23280ce2c6102a84",
+    "published_sha256": "1c75e1ccb520347afd78f686c46da33a37165787713b161c5ee0ae4b2168ddc6",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/result_manifest.json",
+    "published": "outputs/beam_repair_review/v166/result_manifest.json",
+    "original_sha256": "d45f0ffe51687eab163f05c3e76678753b7db712aa370031294645e365aebc45",
+    "published_sha256": "d45f0ffe51687eab163f05c3e76678753b7db712aa370031294645e365aebc45",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/episode_0000_live_videos/observation_images_front.mp4",
+    "published": "outputs/beam_repair_review/v166/videos/observation_images_front.mp4",
+    "original_sha256": "fc1c11e6e8c8b990944d0095a18446c633f8c7e378361b490bc338f1a63c4b11",
+    "published_sha256": "fc1c11e6e8c8b990944d0095a18446c633f8c7e378361b490bc338f1a63c4b11",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/episode_0000_live_videos/observation_images_right_wrist.mp4",
+    "published": "outputs/beam_repair_review/v166/videos/observation_images_right_wrist.mp4",
+    "original_sha256": "a2085f6a09f44476b303a3884aa718cee770aff3c39b40973be54927add766af",
+    "published_sha256": "a2085f6a09f44476b303a3884aa718cee770aff3c39b40973be54927add766af",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_followup_rounds_2026-10-08/v161/gripper_pose_consistency_diagnosis.json",
+    "published": "outputs/beam_repair_review/v161_diagnostics/gripper_pose_consistency_diagnosis.json",
+    "original_sha256": "bc8adb4ab4219ed1e0e9d656bd72a4e596fc992e5750f21df6e2118f88e9c1f8",
+    "published_sha256": "bc8adb4ab4219ed1e0e9d656bd72a4e596fc992e5750f21df6e2118f88e9c1f8",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_followup_rounds_2026-10-08/v161/velocity_pose_consistency_diagnosis.json",
+    "published": "outputs/beam_repair_review/v161_diagnostics/velocity_pose_consistency_diagnosis.json",
+    "original_sha256": "48302622c5a464e380183b85d98a47a446f8d6fbad7dc63f2df716345c3ea816",
+    "published_sha256": "48302622c5a464e380183b85d98a47a446f8d6fbad7dc63f2df716345c3ea816",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_followup_rounds_2026-10-08/v161/contact_relief_summary.json",
+    "published": "outputs/beam_repair_review/v161_diagnostics/contact_relief_summary.json",
+    "original_sha256": "be82249227797698a52bff96b08cc06ddaa45a1eb0e642aae65c6aa24c397944",
+    "published_sha256": "be82249227797698a52bff96b08cc06ddaa45a1eb0e642aae65c6aa24c397944",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_followup_rounds_2026-10-08/v161/round_summary.json",
+    "published": "outputs/beam_repair_review/v161_diagnostics/round_summary.json",
+    "original_sha256": "4d0da42411afdb50d78d2a61ab1ca9801301bac6cfe07a151ea122ba9bcc6990",
+    "published_sha256": "4d0da42411afdb50d78d2a61ab1ca9801301bac6cfe07a151ea122ba9bcc6990",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_followup_rounds_2026-10-08/v161/source_manifest.json",
+    "published": "outputs/beam_repair_review/v161_diagnostics/source_manifest.json",
+    "original_sha256": "ac18d07d6f583502023d2003edfdc2dff69b414a59ea6353114e1e41685d49ad",
+    "published_sha256": "ac18d07d6f583502023d2003edfdc2dff69b414a59ea6353114e1e41685d49ad",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/review.json",
+    "published": "outputs/beam_repair_review/batch_162_166/review.json",
+    "original_sha256": "4990e7b7c129a64b47ad3f933f19ba0d96d845292b227eaa71fcc5db1a099cb6",
+    "published_sha256": "f95ef16de6b4d8b9d5121e386fc47c9fe893d3afe2bc477fb81c82ab5f9ded9e",
+    "machine_paths_redacted": true
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/completed_round_metrics.json",
+    "published": "outputs/beam_repair_review/batch_162_166/completed_round_metrics.json",
+    "original_sha256": "4fbcf7d1b2d1b640de9709cfde40467464ce2cd02ca6e87b181b67c4aada7f19",
+    "published_sha256": "4fbcf7d1b2d1b640de9709cfde40467464ce2cd02ca6e87b181b67c4aada7f19",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/source_change_history.json",
+    "published": "outputs/beam_repair_review/batch_162_166/source_change_history.json",
+    "original_sha256": "38b866eb8b875586fb954401b56fe90a0420b72fc89818d728afd119828fc339",
+    "published_sha256": "38b866eb8b875586fb954401b56fe90a0420b72fc89818d728afd119828fc339",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/final_retained/final_verification.json",
+    "published": "outputs/beam_repair_review/final_retained/final_verification.json",
+    "original_sha256": "3f508991b70466f38a89aa37aaed78e344290ac234406bcb1591350d38c02a83",
+    "published_sha256": "3f508991b70466f38a89aa37aaed78e344290ac234406bcb1591350d38c02a83",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/final_retained/final_source_manifest.json",
+    "published": "outputs/beam_repair_review/final_retained/final_source_manifest.json",
+    "original_sha256": "5ce2a227e92e2e1512115f05256b00b14d5db1094ef5fe9de29b5ceffdd46457",
+    "published_sha256": "5ce2a227e92e2e1512115f05256b00b14d5db1094ef5fe9de29b5ceffdd46457",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/final_retained/final_source_verification.json",
+    "published": "outputs/beam_repair_review/final_retained/final_source_verification.json",
+    "original_sha256": "6401e77ddcb068f5051deaa7ba05c45e697bbeae205664778775af1e4436eefe",
+    "published_sha256": "6401e77ddcb068f5051deaa7ba05c45e697bbeae205664778775af1e4436eefe",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/final_retained/tests.log",
+    "published": "outputs/beam_repair_review/final_retained/tests.log",
+    "original_sha256": "6d6697eb03f8fca4ae1cd348cb3c6f59f2213bbd2482fcb169231be00f7a5a0b",
+    "published_sha256": "6d6697eb03f8fca4ae1cd348cb3c6f59f2213bbd2482fcb169231be00f7a5a0b",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/final_retained/configuration_verification.log",
+    "published": "outputs/beam_repair_review/final_retained/configuration_verification.log",
+    "original_sha256": "669b242268cebe63805398cd6d7785e8792183136f31e4884d746efed21ed975",
+    "published_sha256": "669b242268cebe63805398cd6d7785e8792183136f31e4884d746efed21ed975",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/final_retained/recipe.yaml",
+    "published": "outputs/beam_repair_review/final_retained/recipe.yaml",
+    "original_sha256": "51c35028f8046c0c6c3f013e65dbd67829e9d21ad71f7a497dfb22e80c8e953d",
+    "published_sha256": "51c35028f8046c0c6c3f013e65dbd67829e9d21ad71f7a497dfb22e80c8e953d",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/physics_boundary_trace.jsonl",
+    "published": "outputs/beam_repair_review/v164/physics_boundary_excerpt.jsonl",
+    "excerpt": true,
+    "original_records": 20664,
+    "published_records": 84,
+    "published_sha256": "71cdfaf664ca766cd27aa88b79f7d9288f816a544eaacdd735276322206e68b4",
+    "selection": "selected physical-step windows; no numerical fields changed"
+  },
+  {
+    "source": "outputs/fabrica_beam_support_v138_readonly_grasp/contact_trace.jsonl",
+    "published": "outputs/beam_repair_review/v138/contact_failure_excerpt.jsonl",
+    "excerpt": true,
+    "original_records": 1066,
+    "published_records": 8,
+    "published_sha256": "625c7cf8cca806de46e05e1cdb21605a3d3e7582ab520453add194063414c6cd",
+    "selection": "selected physical-step windows; no numerical fields changed"
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v164/idle_hold_trace.jsonl",
+    "published": "outputs/beam_repair_review/v164/idle_hold_trace.jsonl",
+    "original_sha256": "d506f939dc1c7d6e9649eeb4030f4e90b2edc37c24537b02b50e89cad78a2c01",
+    "published_sha256": "d506f939dc1c7d6e9649eeb4030f4e90b2edc37c24537b02b50e89cad78a2c01",
+    "machine_paths_redacted": false
+  },
+  {
+    "source": "outputs/beam_major_rounds_2026-10-09/v166/idle_hold_trace.jsonl",
+    "published": "outputs/beam_repair_review/v166/idle_hold_trace.jsonl",
+    "original_sha256": "6a9886661f5716bfc420a7380e805a999d1068ff44b229cbb9a0db413f101993",
+    "published_sha256": "6a9886661f5716bfc420a7380e805a999d1068ff44b229cbb9a0db413f101993",
+    "machine_paths_redacted": false
+  }
+]

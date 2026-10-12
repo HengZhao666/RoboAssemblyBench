@@ -18,6 +18,8 @@ def _controller() -> GripperController:
     controller = GripperController.__new__(GripperController)
     controller._gripper = _FakeGripper()
     controller._robot_config = SimpleNamespace(gripper_close_openness=0.0)
+    controller._command_index = 0
+    controller.last_numeric_command = None
     return controller
 
 
