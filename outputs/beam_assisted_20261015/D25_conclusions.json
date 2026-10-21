@@ -1,0 +1,87 @@
+{
+  "cycle": "D25",
+  "run": "A41_part0_release_screen",
+  "source_manifest_sha256": "476bee3ba19a5c3daa107e6058080e6be9e5715dc6dede48ee34c401477e22e7",
+  "same_candidate_as_D24": true,
+  "boundary": {
+    "completed_phase": "assemble_03_part_0_park",
+    "completed_substage": "release_and_park",
+    "step": 12527,
+    "physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 12530,
+      "time": 52.2083360562101,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "reason": "isolated-release_and_park-screen-complete",
+    "success": false
+  },
+  "new_native_progress": [
+    "ten original fifth insert phase completions",
+    "world support capture and native full left gripper opening",
+    "fifth retreat and park"
+  ],
+  "all_held_native_anchor": {
+    "samples": 4084,
+    "missing": 0,
+    "max_position_m": 7.958524425512682e-05,
+    "max_angle_rad": 0.0011385973118724219,
+    "release_step_excluded": 12122,
+    "path": "D25_work/A41_part0_all_held_anchor_audit.json"
+  },
+  "insertion": {
+    "original_completed_phases": 10,
+    "stored_ready_phases": [
+      "assemble_03_part_0_insert_00",
+      "assemble_03_part_0_insert_01",
+      "assemble_03_part_0_insert_02",
+      "assemble_03_part_0_insert_03",
+      "assemble_03_part_0_insert_04",
+      "assemble_03_part_0_insert_05",
+      "assemble_03_part_0_insert_07",
+      "assemble_03_part_0_insert_09"
+    ],
+    "no_stored_ready_sample_phases": [
+      "assemble_03_part_0_insert_06",
+      "assemble_03_part_0_insert_08"
+    ],
+    "missing_sample_scope": "Stride8 original records missed readiness in06/08; phase08 lasted13ticks. Native data also stride8 there. Do not infer unrecorded gate counts or failure; original unmodified producer advanced all ten.",
+    "cold_height_violations": 0,
+    "SDK_matches": 1144,
+    "maximum_SDK_delta_rad": 0.0,
+    "path": "D25_alignment_native_analysis_reviewed.json"
+  },
+  "geometry": {
+    "original_finite_candidates_passed": true,
+    "candidate_count": 255,
+    "right_clearance": {
+      "step": 7080,
+      "physics_stamp": {
+        "valid": true,
+        "epoch": 0,
+        "index": 7083,
+        "time": 29.51250153919682,
+        "dt": 0.004166666666666667,
+        "identity_source": "simulation_context_and_physics_view"
+      },
+      "minimum_gap_m": 0.033436656009059304,
+      "right_body": "/World/env_0/episode_000000/robots/ur5e_right/wrist_2_link"
+    }
+  },
+  "execution_evidence_passed": true,
+  "media_review": "D25_local_media_review.json",
+  "media_sha256": "742e84e49afbc08ab5fa90ee0f9556edabcc69522d4c59a5565c93213d82c372",
+  "full_assembly_accepted": false,
+  "unvisited": [
+    "from-head prefix/fourth changed common turn",
+    "right opening/withdrawal",
+    "five-part final240ticks"
+  ],
+  "next": "Ordinary from-head v33 A42/D26 after exact deployed configuration and six scoped launch checks.",
+  "limits": [
+    "First four are initial installed diagnostic conditions.",
+    "Missing gate ticks/finite CAD samples/cooked force gaps retained."
+  ]
+}

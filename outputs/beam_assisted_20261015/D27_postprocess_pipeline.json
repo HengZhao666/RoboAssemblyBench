@@ -1,0 +1,258 @@
+{
+  "schema": "W05.3-startup-failure",
+  "run": "A43_beam_full",
+  "cycle": "D27",
+  "startup_failure_review_completed": true,
+  "all_required_stages_passed": false,
+  "evidence_checks_passed": false,
+  "source_after_sha256": "b4a1c26e76a490eb96022d44f28ff14c6ee4d1e3951c12ffd5aad72f5ecdc71e",
+  "source_files_verified": 889,
+  "source_differences": [],
+  "tool_differences": [],
+  "failure_kind": "assisted_final_home_logical_name_configuration",
+  "reason": "New final-home runtime preflight rejected the framework logical-name mapping before environment construction; both saved home6q targets exactly match the saved initial configuration.",
+  "source_version": "v34",
+  "sealed_version": {
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A43_beam_full_sealed_version.json": {
+      "bytes": 1706,
+      "sha256": "159b6b07a298706e9ef2de4b64b3738361b4f7c2966fd2bc7fb032d4109b4031"
+    }
+  },
+  "configuration_home_numeric_check": {
+    "franka_left": {
+      "saved_config_name": "franka_left",
+      "home_target_logical_name": "franka_left",
+      "initial_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "declared_home_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "all_six_values_exact": true
+    },
+    "franka_right": {
+      "saved_config_name": "franka_right",
+      "home_target_logical_name": "franka_right",
+      "initial_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "declared_home_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "all_six_values_exact": true
+    }
+  },
+  "logical_name_diagnosis_evidence_class": "Original snapshot and exact source/failed stack inference; actual framework offline reproduction to be recorded separately.",
+  "original_run_file_count": 16,
+  "external_evidence_file_count": 6,
+  "original_native_wrapper_timing_event": {
+    "utc": "2026-10-21T02:47:04.532326+00:00",
+    "wall_unix_s": 1792550824.5323467,
+    "monotonic_s": 3431902.870913056,
+    "pid": 2729713,
+    "phase": "D27_native",
+    "category": "native",
+    "action": "end",
+    "elapsed_s": 10.509608914609998,
+    "returncode": 1,
+    "log": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/batch_D_20261016/D27_native.log"
+  },
+  "environment_constructed": false,
+  "first_action_executed": false,
+  "first_action_receipt_present": false,
+  "observed_native_motion_samples": 0,
+  "task_result_available": false,
+  "full_assembly_accepted": false,
+  "candidate_dynamic_tested": false,
+  "startup_images": 0,
+  "complete_original_videos": 0,
+  "post_failure_tail_available": false,
+  "worker_exit_file": 1,
+  "native_wrapper_returncode": 1,
+  "native_wrapper_elapsed_s": 10.509608914609998,
+  "missing_data": [
+    "collect_results.json",
+    "startup_images_ready.json",
+    "startup_image_review_ack.json",
+    "assisted_trace.jsonl",
+    "physics_boundary_trace.jsonl",
+    "entity_geometry_trace.jsonl",
+    "video_frame_clock.jsonl"
+  ],
+  "original_files": {
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/execution_route": {
+      "bytes": 9,
+      "sha256": "7dca356d7339040f6f40110e49b6475fe1ac5eea4d2a5c7917cd83ba4f8231d3"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/exit_code": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/finished_at": {
+      "bytes": 26,
+      "sha256": "2a57a47e525cbeecfec7528a4f352bc16f81f9962801df2a50abd1aa61f79c52"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/geometry_export_snapshot.py": {
+      "bytes": 4016,
+      "sha256": "d14b0e7702b1e515bd0786ace2a46dfd578054fe6fb8731b5f2e135db6cbea95"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/launch_gate.json": {
+      "bytes": 6754,
+      "sha256": "16a9a28071effd0c8f02985e93d7a96753e2097cb8c47cab1970d4ad4fa9557e"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/launcher_snapshot.sh": {
+      "bytes": 5972,
+      "sha256": "df563ae34878b4f210cdfcc2a8ad21cd7c0d3ef1e1a5b7aef35920f4307bbefe"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/route_source_manifest.json": {
+      "bytes": 116675,
+      "sha256": "75c627bd7ea35f392d39ec58e8ef5ced2cc627d6e06c4465465a11340e9c88d6"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/runner.pid": {
+      "bytes": 8,
+      "sha256": "1b057da1f7aab326889f81c9898507531ace64e767c95c55531cbae2cb744efc"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/source_after.json": {
+      "bytes": 155177,
+      "sha256": "b4a1c26e76a490eb96022d44f28ff14c6ee4d1e3951c12ffd5aad72f5ecdc71e"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/source_before.json": {
+      "bytes": 155177,
+      "sha256": "b4a1c26e76a490eb96022d44f28ff14c6ee4d1e3951c12ffd5aad72f5ecdc71e"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/source_verifier_snapshot.py": {
+      "bytes": 1275,
+      "sha256": "348f1a8e7d0f8213b7e79ea43664ba77cc65625371adde073bd16c060ef0b80d"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/started_at": {
+      "bytes": 26,
+      "sha256": "daf029da7d79b9103e47eb368924e950b81fb5b21447edc5ce3c74e84d212315"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/task_config_snapshot.json": {
+      "bytes": 673194,
+      "sha256": "f5e50359f05860807f871b0134918c902200ee2df605be013591fe9c00c9631f"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/visible_mesh_guard.log": {
+      "bytes": 50,
+      "sha256": "30f3c1a66bcecaf88bcd24d28d9f28ec2824abc71c61251c4bdb53a66e4dae91"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/visible_mesh_guard_exit_code": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/worker_snapshot.py": {
+      "bytes": 28726,
+      "sha256": "336ee130e0173ae2639d88afb0761237eefff912d14afd31859dc105ff7e59cd"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/batch_D_20261016/D27_native.log": {
+      "bytes": 6764,
+      "sha256": "1398247b2fba9c6c9abbd7db1037f1fb2c88b09dd25db98e2b6bd99f7bba6811"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A43_launch.log": {
+      "bytes": 359,
+      "sha256": "25b74a9cb91e4322a5892be56a5cd086300f00dcd5acdb996c1ebf282acf6e8c"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_launch_receipt.json": {
+      "bytes": 930,
+      "sha256": "d040decaece2a9ee88c57461564f8092e3bb960e49cb05c6b156cb9582bee392"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/batch_D_20261016/timing_events.jsonl": {
+      "bytes": 193131,
+      "sha256": "26c2a60dea021a7f3804cefb1289a84b923130733051165014d5bbe74d62039c"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/runtime_name_mapping_counterexample.json": {
+      "bytes": 3117,
+      "sha256": "1eabd0bc366b84250699d15a7bd2dbbb1678b067347995161cde306be145fc69"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A43_beam_full_sealed_version.json": {
+      "bytes": 1706,
+      "sha256": "159b6b07a298706e9ef2de4b64b3738361b4f7c2966fd2bc7fb032d4109b4031"
+    }
+  },
+  "postreview_auxiliary_versions": {
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/tools/review_run.py": {
+      "bytes": 16524,
+      "sha256": "3d8f7f087a08c42717eafcb030a1be53f8fb6e2aed93ed6498b4032772c038c3"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/before_startup_failure_postreview/review_run.py.24e64eb12b977917d97abeb6db20d67a10a5fcdf2632fabbd02ddde5a8fe8117": {
+      "bytes": 11233,
+      "sha256": "24e64eb12b977917d97abeb6db20d67a10a5fcdf2632fabbd02ddde5a8fe8117"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/before_startup_failure_postreview/review_run.py.ad66f9b40cdf3b9d8b4b8b217c1360ecb97c71e4a3c0119bf272604b7ed238e4": {
+      "bytes": 16504,
+      "sha256": "ad66f9b40cdf3b9d8b4b8b217c1360ecb97c71e4a3c0119bf272604b7ed238e4"
+    }
+  },
+  "review_tool_in_native_critical_manifest": false,
+  "stages": [
+    {
+      "name": "native_initialization",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    },
+    {
+      "name": "actual_three_camera_review",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    },
+    {
+      "name": "first_action_and_SDK",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    },
+    {
+      "name": "native_model_and_motion",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    },
+    {
+      "name": "full54_self_sweep",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    },
+    {
+      "name": "original_task_reports",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    },
+    {
+      "name": "five_second_physical_tail",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    },
+    {
+      "name": "three_complete_videos",
+      "status": "unavailable_before_environment_start",
+      "passed": false
+    }
+  ],
+  "limits": [
+    "No original task result or video was generated; absent success/phase/physics fields are unknown, not a task-level measured failure.",
+    "Startup attempt counts against explicit native cap. Never automatically retry it.",
+    "Worker exit file0 does not certify success; wrapper returned1 and traceback is retained.",
+    "v34 wrist-view roll, empty-arm return and native-home qualification have no native dynamic result; the earlier v33/A42 assisted success remains separate.",
+    "Postreview auxiliary versions are preserved separately and are not represented as part of the native critical20 seal.",
+    "Saved configuration names are logical names; framework suffixed names are source/failed-stack inference until the separately recorded offline reproduction."
+  ],
+  "tool_sha256": "3d8f7f087a08c42717eafcb030a1be53f8fb6e2aed93ed6498b4032772c038c3"
+}

@@ -1,0 +1,8 @@
+# Generated verification data and runtime assets remain committed and can be expanded in GitHub.
+/artifacts/beam_assisted/** linguist-generated=true
+/outputs/beam_*/**/*.json linguist-generated=true
+/outputs/beam_*/**/*.json.gz linguist-generated=true
+/outputs/beam_*/**/*.png linguist-generated=true
+/outputs/beam_*/**/*.mp4 linguist-generated=true
+/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/** linguist-generated=true
+**/._* linguist-generated=true

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "run": "A43_beam_full",
+  "archive_sha256": "63b72b28b745c1db6386f8e6c9ada98e22bbb0d01610a28f10abce962ee1037b",
+  "all_original_files_verified": 22,
+  "original_run_files": 16,
+  "external_evidence_files": 6,
+  "complete_original_videos_generated": 0,
+  "images_generated": 0,
+  "new_video_download_not_applicable": true,
+  "scope": "All actual startup-failure evidence downloaded and individually verified. No new video was generated; no old video substituted.",
+  "local_archive": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/A43_beam_full_startup_failure_evidence.tar.gz",
+  "local_extraction": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/A43_startup_failure_evidence"
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import OrderedDict, defaultdict
+import os
 
 import numpy as np
 
@@ -130,6 +131,9 @@ class RepCamera(BaseSensor):
 
         if self.config.rgba:
             output_data['rgba'] = self._camera.get_rgba()
+            if os.environ.get('BEAM_VIDEO_CLOCK_TRACE') == '1':
+                getter = getattr(self._camera, 'get_render_reference_time', None)
+                output_data['render_reference_time'] = getter() if callable(getter) else None
 
         if (self.config.depth) or self.config.pointcloud:
             output_data['depth'] = self._camera.get_distance_to_image_plane()

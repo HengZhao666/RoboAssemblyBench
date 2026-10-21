@@ -1,0 +1,231 @@
+{
+  "review_kind": "independent_read_only_A44_final_home_evidence_summary",
+  "run": "A44_beam_full",
+  "original_success": true,
+  "original_assisted_success": true,
+  "steps": 59567,
+  "terminal_reason": "success-criteria-met",
+  "source_after_differences": [],
+  "source_after_tool_differences": [],
+  "certificate": {
+    "stable_physics_steps": 240,
+    "required_stable_physics_steps": 240,
+    "physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 59570,
+      "time": 248.20834627840668,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "current_native_recheck": {
+      "ready": true,
+      "reason": null
+    },
+    "same_clock_five_home_current": true,
+    "home": {
+      "franka_left": {
+        "ready": true,
+        "joint_names": [
+          "shoulder_pan_joint",
+          "shoulder_lift_joint",
+          "elbow_joint",
+          "wrist_1_joint",
+          "wrist_2_joint",
+          "wrist_3_joint"
+        ],
+        "target_joint_positions": [
+          0,
+          -1.5707963268,
+          1.5707963268,
+          -1.5707963268,
+          -1.5707963268,
+          0
+        ],
+        "joint_positions": [
+          -0.005089199636131525,
+          -1.5720312595367432,
+          1.5745503902435303,
+          -1.5718871355056763,
+          -1.5707601308822632,
+          -0.005131359212100506
+        ],
+        "maximum_error_rad": 0.005131359212100506,
+        "tolerance_rad": 0.01
+      },
+      "franka_right": {
+        "ready": true,
+        "joint_names": [
+          "shoulder_pan_joint",
+          "shoulder_lift_joint",
+          "elbow_joint",
+          "wrist_1_joint",
+          "wrist_2_joint",
+          "wrist_3_joint"
+        ],
+        "target_joint_positions": [
+          0,
+          -1.5707963268,
+          1.5707963268,
+          -1.5707963268,
+          -1.5707963268,
+          0
+        ],
+        "joint_positions": [
+          0.0019636808428913355,
+          -1.5692514181137085,
+          1.571567416191101,
+          -1.5722631216049194,
+          -1.5722870826721191,
+          -0.0048094759695231915
+        ],
+        "maximum_error_rad": 0.0048094759695231915,
+        "tolerance_rad": 0.01
+      }
+    }
+  },
+  "phase_durations_native_ticks": {
+    "left_home": 589,
+    "right_shoulder_clearance": 112,
+    "right_home": 1450,
+    "final_common_window": 240
+  },
+  "phase_transition_task_steps": {
+    "start_left_home": 57175,
+    "start_right_clearance": 57764,
+    "start_right_home": 57876,
+    "start_final_window": 59326,
+    "terminal": 59566
+  },
+  "final_home_review": {
+    "passed": false,
+    "phase_coverage": {
+      "beam_assisted_return_home_franka_left": {
+        "reached": true,
+        "guard_events": 74,
+        "checked_samples": 74
+      },
+      "beam_assisted_return_clearance_franka_right": {
+        "reached": true,
+        "guard_events": 14,
+        "checked_samples": 14
+      },
+      "beam_assisted_return_home_franka_right": {
+        "reached": true,
+        "guard_events": 181,
+        "checked_samples": 181
+      },
+      "beam_assisted_final_verification": {
+        "reached": true,
+        "guard_events": 30,
+        "checked_samples": 30
+      }
+    },
+    "stored_guard_events": 299,
+    "independently_replayed_stored_batches": 299,
+    "independently_replayed_CAD_samples": 1495,
+    "common_window": {
+      "original_certificate_stable_physics_steps": 240,
+      "required_stable_physics_steps": 240,
+      "independently_observed_native_ticks": null,
+      "scope": "Original production certificate only until independently joined to raw samples."
+    },
+    "errors": [
+      {
+        "scope": "terminal_native_home_and_common_window",
+        "error": "ValueError: no complete independent raw native sample at the terminal certificate clock"
+      }
+    ],
+    "limits": [
+      "Stored samples only. The live guard runs every SDK batch; its full unrecorded call history is not reconstructed here.",
+      "Five fractions per stored final-command batch are finite checks, not continuous CCD.",
+      "The common240 certificate is original production evidence; independent stored native samples do not fill missing ticks.",
+      "Visible CAD differs from PhysX cooked geometry and excludes unexported warehouse geometry.",
+      "Original execution-evidence errors and missing terminal raw native data remain failures; no tolerance is widened."
+    ]
+  },
+  "independent_terminal": {
+    "passed": false,
+    "original_five_part_common240_qualified": true,
+    "original_native_home_certificate_ready": true,
+    "original_current_native_home_ready": true,
+    "physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 59570,
+      "time": 248.20834627840668,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "independent_terminal_raw_native_available": false,
+    "home": null,
+    "entity_task_step": null,
+    "raw_boundaries": null
+  },
+  "terminal_gap": {
+    "certificate_native_index": 59570,
+    "latest_complete_raw_boundary": {
+      "native_index": 59564,
+      "boundaries": [
+        "after_physics",
+        "after_observation"
+      ],
+      "certificate_gap_ticks": 6
+    },
+    "latest_same_clock_control_and_three_views": {
+      "native_index": 59563,
+      "task_step": 59560,
+      "certificate_gap_ticks": 7,
+      "camera_native_index": 59563
+    },
+    "common240_raw_index_only": {
+      "observed_indices": 60,
+      "missing_indices": 180,
+      "first_index": 59331,
+      "last_index": 59564,
+      "scope": "Clock coverage only; this read does not revalidate body/joint values at missing ticks or repair the original false terminal report."
+    }
+  },
+  "original_execution_evidence": {
+    "analysis_complete": true,
+    "evidence_checks_passed": true,
+    "errors": [],
+    "SDK": {
+      "stored_submissions": 17022,
+      "maximum_delta_rad": 0,
+      "unmatched_publications": []
+    },
+    "native": {
+      "samples": 34044,
+      "valid": 34044
+    },
+    "three_views": {
+      "entity_samples": 7445,
+      "aligned": 7445,
+      "body_counts": [
+        44
+      ],
+      "required_dynamic_body_count": 37,
+      "static_visual_meshes_without_per_tick_reader": 8
+    }
+  },
+  "original_recorded_empty_return_or_native_limit_rejections": 0,
+  "production_guard_progress_checkpoint": {
+    "calls": 18496,
+    "samples": 92480,
+    "last_task_step": 59552,
+    "last_native_index": 59555,
+    "scope": "Whole-run guard cumulative checkpoint, including held-carry and empty-return modes; not a complete per-return command history."
+  },
+  "evidence_sha256": {
+    "collect_results.json": "e5b111da61170eeeaa2935b37c823af657eee03264b4a2fb197d6fcc16e0e29a",
+    "source_after.json": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+    "D28_original_candidates_review.json": "0db931e33bfec7641948f76b6a0f1facffba3280d3f0746a7dd02fb8f9b4a101",
+    "D28_execution_evidence.json": "547e9d1a6e46db60352d543dca5be21849d3a1857281de1a50d6cba78671f641",
+    "postreview_summary.json": "834e4c2a06b05868af0381ed39ee05e8c8068f63c46ede87f1e2c521b7fb83ad",
+    "physics_boundary_trace.jsonl": "0309d2e7229d549b5796dcd2e9b894150f6f40657e898c6f7e52b34e94f2a8e6",
+    "video_frame_clock.jsonl": "199778255057573a245aa8097b297c7dae884ce3be77d6e5ebfa805c496192ff",
+    "entity_geometry_trace.jsonl": "0595b881ecf2750932b8f5e2a126238b3f56dba73e20fe2439fa13a3d4513d4c"
+  },
+  "scope": "Read original collect_results/source_after/assisted_trace and existing final_home_review/execution_evidence only. No geometry replay, simulation, source/report/ledger modification. Original final_home_review false is preserved.299 stored batches/1495 finite full54-self samples passed; unrecorded live guard calls are not independently reconstructed. No continuous CCD, cooked-contact, unsupported-stability or pure-friction claim."
+}

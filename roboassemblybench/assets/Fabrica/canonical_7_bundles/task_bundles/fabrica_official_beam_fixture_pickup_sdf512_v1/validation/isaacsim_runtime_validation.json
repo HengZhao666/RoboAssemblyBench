@@ -1,0 +1,9 @@
+{
+  "assembly": "beam",
+  "scene_usda": "/data/hjj/src/fabrica_isaaclab/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/scene/scene.usda",
+  "status": "pass",
+  "errors": [],
+  "runtime_steps": 12,
+  "dynamic_pickup_parts_with_rigidbody_api": 5,
+  "dynamic_assembled_parts_with_gravity": 5
+}

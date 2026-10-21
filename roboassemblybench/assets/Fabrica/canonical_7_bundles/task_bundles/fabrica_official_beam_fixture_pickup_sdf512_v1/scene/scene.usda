@@ -1,0 +1,262 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def PhysicsScene "PhysicsScene"
+    {
+        vector3f physics:gravityDirection = (0, 0, -1)
+        float physics:gravityMagnitude = 9.81
+        custom token physxScene:solverType = "TGS"
+    }
+
+    def DomeLight "DomeLight"
+    {
+        float inputs:intensity = 500
+    }
+
+    def RectLight "IndustrialTopLight"
+    {
+        float inputs:height = 1.8
+        float inputs:intensity = 23000
+        float inputs:width = 2.4
+        double3 xformOp:rotateXYZ = (-90, 0, 0)
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, -0.02, 2.1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+
+    def Xform "FabricaOfficialFrame"
+    {
+        double3 xformOp:rotateXYZ = (0, 0, 0)
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+        def Xform "OpticalBoard" (
+            prepend references = @../assets/fabrica_official_support/optical_board_raw_sdf512.usda@
+        )
+        {
+            double3 xformOp:rotateXYZ = (0, 0, 0)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def Xform "PickupFixture" (
+            prepend references = @../assets/fabrica_official_fixture/beam/fixture_raw_sdf512.usda@
+        )
+        {
+            double3 xformOp:rotateXYZ = (0, 0, 0)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+        }
+
+        def Xform "PickupParts"
+        {
+            def Xform "part_0" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_0.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (10.09098416186654, -0.000004610249645716019, 0.00001854829386159493)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0.08969007826612992, 0.1597634551190935, -0.053110879325674806)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_1" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_1.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (24.931291253901264, -0.000007040817561682617, -179.99998312216277)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0.009209925103516776, 0.11094483315957751, -0.04193825187596075)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_2" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_2.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (0.000005584687394368791, -14.10344121419352, 89.99997898995282)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (-0.0455883230822763, 0.2624330920733704, 0.016266831912937915)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_3" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_3.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (27.051187786696374, 0.0000065504025810714234, 179.99998717245487)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0.08909275055728738, 0.20745682343279662, 0.006705317633224208)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_6" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_6.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (0.000034680277659310115, 62.27326902062309, -89.99996082106632)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0.009999999684962999, 0.15500491333051122, 0.07218284550309895)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+
+        def Xform "AssembledReference"
+        {
+            double3 xformOp:rotateXYZ = (0, 0, 0)
+            double3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, -0.16, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+            def Xform "part_0" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_0.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_1" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_1.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_2" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_2.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_3" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_3.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+
+            def Xform "part_6" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                prepend references = @../assets/fabrica_parts/beam/fabrica_beam_6.usd@
+            )
+            {
+                float physics:density = 1250
+                bool physics:kinematicEnabled = 0
+                bool physics:rigidBodyEnabled = 1
+                uniform bool physics:startsAsleep = 0
+                custom float physxRigidBody:angularDamping = 0.5
+                custom bool physxRigidBody:disableGravity = 0
+                custom float physxRigidBody:linearDamping = 0.5
+                double3 xformOp:rotateXYZ = (0, 0, 0)
+                double3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            }
+        }
+    }
+
+    def Camera "PreviewCamera"
+    {
+        float focalLength = 24
+        float focusDistance = 1
+        double3 xformOp:rotateXYZ = (62, 0, 39)
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0.72, -0.95, 0.92)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+    }
+}
+

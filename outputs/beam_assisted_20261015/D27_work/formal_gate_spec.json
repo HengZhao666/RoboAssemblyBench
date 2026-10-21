@@ -1,0 +1,282 @@
+{
+  "run_name": "A43_beam_full",
+  "cycle": "D27",
+  "workflow_version": "W05.6",
+  "source_manifest_sha256": "75c627bd7ea35f392d39ec58e8ef5ced2cc627d6e06c4465465a11340e9c88d6",
+  "tools_manifest_sha256": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+  "actual_configuration_signature": "b38c34c0b0bb61b8b9b66315778566fc74595fffff0839f1b2d164e6baf7eeb8",
+  "changed_factors": [
+    "Actual wrist camera optical-axis roll180 degrees for fingertips-down recordings",
+    "Final sequential left home, measured-entry right shoulder-.24 then right home under final full54/self guard",
+    "Original five-part240 native window additionally requires both raw configured initial joint branches; one new fail-closed skill interface registration"
+  ],
+  "bounded_primary_scene_probe": {
+    "url": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/warehouse_with_forklifts.usd",
+    "sha256": "8613993787bdd58914a9e801f534a17cb76c216bea05000bf9313f0f7222b7e3",
+    "helper_sha256": "cc7a9055bd922c96eed0e9777ccb415c41f18b2096d16b2aca48f119315ec485"
+  },
+  "checks": {
+    "actual_configuration_and_targets": {
+      "scope": "Actual four production layouts exact after only three appended returns, registered interface, derived annotations and final native-home requirement; original target/solver/assembly fields unchanged.",
+      "reports": [
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/configuration_delta.json",
+          "sha256": "ad2b506b4c73da3d56174f922a92d575441207c22fd3f36adc921de3b0fe40f4",
+          "assertions": [
+            {
+              "pointer": "/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/actual_layouts",
+              "equals": 4
+            },
+            {
+              "pointer": "/unchanged_prefix_and_original_final_gates",
+              "equals": true
+            }
+          ]
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/authority_configuration_binding.json",
+          "sha256": "80f42dd5fe802375f72b893d9c8bd855857f767032ef8fa514d64dabb23406ef",
+          "assertions": [
+            {
+              "pointer": "/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/all_four_authority_layouts_passed",
+              "equals": true
+            },
+            {
+              "pointer": "/full_task_model_exact",
+              "equals": true
+            }
+          ]
+        }
+      ]
+    },
+    "full_phase_release_completion_interfaces": {
+      "scope": "Existing original five-part release/common240 plus same-clock raw initial-joint home qualification; three empty-return registered skills and native8 gate; related tests48 fresh plus368 exact-domain reused.",
+      "reports": [
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/source_qualification.json",
+          "sha256": "6b0b040ed9659983c5b08b92283e72172bb3f2037c276d95939e280640ff5b08",
+          "assertions": [
+            {
+              "pointer": "/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/unique_related_tests",
+              "equals": 416
+            },
+            {
+              "pointer": "/new_affected_tests",
+              "equals": 48
+            },
+            {
+              "pointer": "/original_success_criteria_exact",
+              "equals": true
+            },
+            {
+              "pointer": "/physical_attachment_functions_exact",
+              "equals": true
+            }
+          ]
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/prefix_and_tool_review.json",
+          "sha256": "802ba2956039681900fa9de52a1b03b211443d006de9b28014979fbc8c6b651e",
+          "assertions": [
+            {
+              "pointer": "/scope_results/full_interfaces/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/scope_results/full_interfaces/new_return_phases",
+              "equals": 3
+            }
+          ]
+        }
+      ]
+    },
+    "full_entities_and_camera_visibility": {
+      "scope": "Original complete entity graph and native camera placement retained; both optical axes roll180 with unchanged eye/ray. Actual startup three originals and native render parameter readback are mandatory before ACK; finite offline geometry is not render proof.",
+      "reports": [
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/prefix_and_tool_review.json",
+          "sha256": "802ba2956039681900fa9de52a1b03b211443d006de9b28014979fbc8c6b651e",
+          "assertions": [
+            {
+              "pointer": "/scope_results/entity/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/scope_results/entity/exact_wrapper_entity_bodies",
+              "equals": 44
+            },
+            {
+              "pointer": "/scope_results/entity/independent_raw_native_bodies",
+              "equals": 13
+            },
+            {
+              "pointer": "/scope_results/camera/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/scope_results/camera/wrist_views",
+              "equals": 2
+            },
+            {
+              "pointer": "/native_render_verified",
+              "equals": false
+            }
+          ]
+        }
+      ]
+    },
+    "production_controller_object_space_replay": {
+      "scope": "A42 task57408 actual nonzero tracking-bias input through production adapter, final bounded dual batch and actual check_empty; declared .08 kinematic response only. Three native8 phase completions and fixed entry delta, no native-dynamics claim.",
+      "reports": [
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/final_home_control_replay.json",
+          "sha256": "d7272020c6dd5b4326f75f74c0ef55b1b29dad270e8176d14a287da97bb051aa",
+          "assertions": [
+            {
+              "pointer": "/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/production_entry_chain_verified",
+              "equals": true
+            },
+            {
+              "pointer": "/all_three_return_phases_completed",
+              "equals": true
+            },
+            {
+              "pointer": "/native_completion_gate_checked",
+              "equals": true
+            },
+            {
+              "pointer": "/phase_entry_delta_frozen",
+              "equals": true
+            },
+            {
+              "pointer": "/native_physics",
+              "equals": false
+            }
+          ]
+        }
+      ]
+    },
+    "admitted_error_and_final_command_geometry": {
+      "scope": "Every replayed final bounded dual-arm batch, complete grippers/all five stationary parts, full54/self with no intended grasp exemption; unsafe measured elbow+.03 rejected before publication. Nominal512 path and finite samples do not certify entire error box, dynamics or continuous/cooked contact.",
+      "reports": [
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/final_home_control_replay.json",
+          "sha256": "d7272020c6dd5b4326f75f74c0ef55b1b29dad270e8176d14a287da97bb051aa",
+          "assertions": [
+            {
+              "pointer": "/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/full54",
+              "equals": true
+            },
+            {
+              "pointer": "/self_checked",
+              "equals": true
+            },
+            {
+              "pointer": "/unsafe_counterexample_rejected_before_publication",
+              "equals": true
+            },
+            {
+              "pointer": "/unsafe_counterexample/published_batches",
+              "equals": 0
+            },
+            {
+              "pointer": "/positive/guard_calls",
+              "minimum": 2000
+            }
+          ]
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/return_geometry_delta024.json",
+          "sha256": "9722632f061551e834150c5ff0fcbb46b8d6cedba5bcd6e7cd92666445ffafdf",
+          "assertions": [
+            {
+              "pointer": "/complete_visible_meshes",
+              "equals": 54
+            },
+            {
+              "pointer": "/self_checked",
+              "equals": true
+            },
+            {
+              "pointer": "/delta_shoulder_lift_rad",
+              "equals": -0.24
+            },
+            {
+              "pointer": "/segments/1/passed",
+              "equals": true
+            }
+          ]
+        }
+      ]
+    },
+    "bimanual_support_lifecycle": {
+      "scope": "Original nonattached right support/installation support/open/retreat sequence and attachment functions unchanged; appended empty returns require no attachments and actual both-open. Full native same-clock five-part/home240 remains to be validated in the single full run.",
+      "reports": [
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/prefix_and_tool_review.json",
+          "sha256": "802ba2956039681900fa9de52a1b03b211443d006de9b28014979fbc8c6b651e",
+          "assertions": [
+            {
+              "pointer": "/scope_results/bimanual/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/scope_results/bimanual/visible_meshes",
+              "equals": 54
+            },
+            {
+              "pointer": "/scope_results/bimanual/segments",
+              "equals": 3
+            }
+          ]
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/formal_reuse_certificate.json",
+          "sha256": "5ea4abf11853e90913cc4a01bc1bb2c48469337267a5ac037728e41af26106c5",
+          "assertions": [
+            {
+              "pointer": "/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/source_files",
+              "equals": 889
+            },
+            {
+              "pointer": "/old_bound_reports_SHA_and_assertions_verified",
+              "equals": true
+            },
+            {
+              "pointer": "/checkpoint_used",
+              "equals": false
+            },
+            {
+              "pointer": "/new_full_native_result_pending",
+              "equals": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

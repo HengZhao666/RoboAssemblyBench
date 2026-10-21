@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "unique_related_tests": 416,
+  "newly_rerun_tests": 48,
+  "unchanged_other_module_tests_reused": 368,
+  "original_415_pass_1_fail_preserved": true,
+  "only_private_phase_count_expectation_changed": true,
+  "production_sources_exact": true,
+  "prior_result_sha256": "1251d26ee3ae4449b4c29befc2209c06509b07da5bfa6e46cee512ab3985b847",
+  "old_test_sha256": "9042d3890a1e93be362cacc6fe57d441b1ee44a7cc95735d8c28bfea70189ec0",
+  "current_result_sha256": "884883123f65de2ee66cbfde5a4c9f1ef72e9844f2ed94abc0024c2330462bd3"
+}

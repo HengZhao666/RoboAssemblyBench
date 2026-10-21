@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "scope": "Pre-W06.0 documentation and installed common skill only; source/tools/ledger untouched",
+  "previous_receipt": "outputs/beam_assisted_D28_closed_20261021/sync_verification.json",
+  "documents": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "e3261e9c29e20848cfa2c2c5129cc633022b68598c31756be4df53d940375ce1",
+      "bytes": 1978
+    },
+    {
+      "path": "BEAM_ASSISTED_HANDOFF.md",
+      "sha256": "79bacef5b7eee4fe1626deeef5190ab1a94e349715606befcce6dd1cbc114343",
+      "bytes": 29577
+    },
+    {
+      "path": "BEAM_FINDINGS_INDEX.md",
+      "sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e",
+      "bytes": 814
+    },
+    {
+      "path": "BEAM_PHYSICAL_HANDOFF.md",
+      "sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172",
+      "bytes": 4897
+    },
+    {
+      "path": "BEAM_REPAIR_HANDOFF.md",
+      "sha256": "8d350699060524a7ebab44c5e98d3970de41e07a4269a5323c99cff62a8b5987",
+      "bytes": 2120
+    },
+    {
+      "path": "BEAM_REVIEW_CHECKLIST.md",
+      "sha256": "ed169c6870d3742a0e6c45a596ec31bc09eff0613d2fdfe68aab42285a016a63",
+      "bytes": 5290
+    },
+    {
+      "path": "BEAM_WORKFLOW_LOG.md",
+      "sha256": "9bfdf86100a5bb7b584ce18ef7288cc4959ca38259ca02093fe45fe9ac42afe6",
+      "bytes": 6035
+    },
+    {
+      "path": "beam_routes/assisted/CHECKLIST.md",
+      "sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622",
+      "bytes": 5146
+    },
+    {
+      "path": "beam_routes/assisted/FINDINGS.md",
+      "sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb",
+      "bytes": 53643
+    },
+    {
+      "path": "beam_routes/docs_manifest.json",
+      "sha256": "8d11c25f074e8ada2e73ac2c97c273968153b1a6c412d5f934f4fa6a14a17b89",
+      "bytes": 2429
+    },
+    {
+      "path": "beam_routes/physical/CHECKLIST.md",
+      "sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7",
+      "bytes": 1210
+    },
+    {
+      "path": "beam_routes/physical/FINDINGS.md",
+      "sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0",
+      "bytes": 124770
+    },
+    {
+      "path": "beam_routes/registry.json",
+      "sha256": "f5f0ff186635af62f780131aa0c8e30b50a49081b85c23f5eccf323c9c857e0c",
+      "bytes": 4285
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+      "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b",
+      "bytes": 10589
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+      "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825",
+      "bytes": 3276
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+      "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9",
+      "bytes": 157679
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+      "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b",
+      "bytes": 7728
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+      "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee",
+      "bytes": 22481
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+      "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61",
+      "bytes": 43193
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/before_manifest.json",
+      "sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3",
+      "bytes": 994
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/source_verification.json",
+      "sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5",
+      "bytes": 1531
+    },
+    {
+      "path": "outputs/beam_context_reorganization_20261016/validation.json",
+      "sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35",
+      "bytes": 2940
+    },
+    {
+      "path": "skills/simulation-repair-loop/SKILL.md",
+      "sha256": "48648da995a46744c47e5c7bb84c9937ebea8a14702e7564e736508904340f76",
+      "bytes": 8957
+    },
+    {
+      "path": "skills/simulation-repair-loop/agents/openai.yaml",
+      "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3",
+      "bytes": 303
+    },
+    {
+      "path": "skills/simulation-repair-loop/references/process-retrospective.md",
+      "sha256": "f2fc11c453ab3892c51351c773c7564edf33df324dd6dac07f0e4e96be3d720f",
+      "bytes": 2448
+    },
+    {
+      "path": "skills/simulation-repair-loop/references/review-and-reuse.md",
+      "sha256": "3cfa72d70597855a70a8a7d21e678131d3ebc11cfc59e826c058160188d04f6b",
+      "bytes": 2345
+    },
+    {
+      "path": "skills/simulation-repair-loop/scripts/sync_documents.py",
+      "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77",
+      "bytes": 6736
+    }
+  ],
+  "installed_skill": [
+    {
+      "path": "SKILL.md",
+      "sha256": "48648da995a46744c47e5c7bb84c9937ebea8a14702e7564e736508904340f76"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3"
+    },
+    {
+      "path": "references/process-retrospective.md",
+      "sha256": "f2fc11c453ab3892c51351c773c7564edf33df324dd6dac07f0e4e96be3d720f"
+    },
+    {
+      "path": "references/review-and-reuse.md",
+      "sha256": "3cfa72d70597855a70a8a7d21e678131d3ebc11cfc59e826c058160188d04f6b"
+    },
+    {
+      "path": "scripts/sync_documents.py",
+      "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77"
+    }
+  ],
+  "archives": {
+    "before_documents.tar.gz": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034",
+    "before_installed_skill.tar.gz": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572"
+  }
+}

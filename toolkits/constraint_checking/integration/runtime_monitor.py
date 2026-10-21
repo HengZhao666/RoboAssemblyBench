@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import time
+import os
 from collections import Counter
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
@@ -77,6 +78,29 @@ def _load_static_scene_boxes(prim_path: str, object_name: str) -> list[dict]:
     return boxes
 
 
+def collision_object_states(task) -> dict:
+    """Minimal pose/holder state, bypassing Beam's qualification getter."""
+    if all(hasattr(task, name) for name in ('_attachments', '_resolved_objects', '_object_prims')):
+        names = getattr(getattr(task, 'cfg', None), 'tracked_object_names', None)
+        names = names if names is not None else tuple(task._object_prims)
+        states = {}
+        for name in names:
+            body = task._resolved_objects.get(name)
+            if body is None:
+                states[str(name)] = {'position': None, 'read_error': 'existing_body_unavailable'}
+                continue
+            position, orientation = body.get_pose()
+            attachment = task._attachments.get(name) or {}
+            holder = attachment.get('robot_name')
+            states[str(name)] = {'position': np.asarray(position).tolist(),
+                'orientation': np.asarray(orientation).tolist(), 'attached_to': holder,
+                'grasped_by': holder if attachment.get('mode') == 'pure_physical_grasp' else None,
+                'collision_enabled': (getattr(task, '_object_collision_enabled', {}) or {}).get(name)}
+        return states
+    getter = getattr(task, 'get_tracked_object_states', None)
+    return (getter() or {}) if callable(getter) else {}
+
+
 @dataclass(frozen=True)
 class PairFilter:
     """Symmetric substring filter for intentionally allowed contact pairs."""
@@ -113,6 +137,7 @@ class RuntimeConstraintConfig:
     ignore_pairs: List[PairFilter] = field(default_factory=list)
     collision_threshold: float = 0.0
     max_recorded_events: int = 5000
+    full_entity_geometry: bool = field(default_factory=lambda: os.environ.get('BEAM_ENTITY_GEOMETRY_CHECK') == '1')
 
     def __post_init__(self) -> None:
         self.check_stride = max(int(self.check_stride), 1)
@@ -153,6 +178,7 @@ class RuntimeConstraintMonitor:
         self._allowed_contacts: List[dict] = []
         self._events_dropped = 0
         self._object_collision_sizes: Dict[str, np.ndarray] | None = None
+        self._last_object_states: dict = {}
         self._static_scene_boxes: List[dict] | None = None
         self._total_check_seconds = 0.0
         self._max_check_seconds = 0.0
@@ -160,6 +186,8 @@ class RuntimeConstraintMonitor:
             collision_threshold=self.config.collision_threshold,
             ignore_pairs=self.config.ignore_pairs,
         )
+        self._entity_geometry = None
+        self._entity_geometry_attempted = False
 
         try:
             detector_cls = _load_collision_detector_cls()
@@ -193,11 +221,19 @@ class RuntimeConstraintMonitor:
                 self.register_task_robots(task)
             self.refresh_environment_from_task(task)
             candidates = self.detector.check_all(step=step)
-            classified = [
-                self._event_to_dict(event, self._contact_policy.classify(event, task)) for event in candidates
-            ]
+            snapshot = self._contact_policy.snapshot_from_task(task, states=self._last_object_states)
+            classified = [self._event_to_dict(event, self._contact_policy.classify(event, task, snapshot=snapshot))
+                          for event in candidates]
             collisions = [event for event in classified if event['classification'] == 'collision']
             self._accumulate(classified)
+            geometry_result = None
+            self.initialize_entity_geometry(task)
+            if self._entity_geometry is not None:
+                try:
+                    geometry_result = self._entity_geometry.observe(step, self._contact_policy)
+                except Exception as exc:
+                    error = self._record_error('entity_geometry_observe', exc, step=step)
+                    self._entity_geometry.errors.append(error)
             return {
                 'checked': True,
                 'step': step,
@@ -206,6 +242,7 @@ class RuntimeConstraintMonitor:
                 'proximity_count': sum(item['classification'] == 'proximity' for item in classified),
                 'allowed_contact_count': sum(item['classification'] == 'allowed_contact' for item in classified),
                 'violations': collisions,
+                'entity_geometry': geometry_result,
             }
         except Exception as exc:
             error = self._record_error('observe', exc, step=step)
@@ -250,7 +287,24 @@ class RuntimeConstraintMonitor:
             ),
             'missing_static_geometry': sorted(self._missing_static_geometry),
             'monitor_error': list(self._monitor_errors),
+            'geometry_mode': 'link_origin_capsules_and_object_boxes',
+            'full_entity_sweep_verified': False,
+            'entity_geometry': self._entity_geometry.finalize() if self._entity_geometry is not None else {
+                'enabled': bool(self.config.full_entity_geometry),
+                'available': False,
+                'full_entity_sweep_verified': False,
+            },
         }
+
+    def initialize_entity_geometry(self, task):
+        if not self.config.full_entity_geometry or self._entity_geometry_attempted:
+            return
+        self._entity_geometry_attempted = True
+        try:
+            from .entity_geometry import TaskEntityGeometryMonitor
+            self._entity_geometry = TaskEntityGeometryMonitor(task)
+        except Exception as exc:
+            self._record_error('entity_geometry_initialize', exc)
 
     def register_task_robots(self, task) -> None:
         """Register all available robot links and retain missing-prim diagnostics."""
@@ -276,7 +330,7 @@ class RuntimeConstraintMonitor:
                         continue
                     try:
                         try:
-                            reader = xform_cls(prim_path=prim_path)
+                            reader = xform_cls(prim_path=prim_path, reset_xform_properties=False)
                         except TypeError:
                             reader = xform_cls(prim_path)
                         reader.get_world_pose()
@@ -301,7 +355,7 @@ class RuntimeConstraintMonitor:
         self._registered = True
 
     def refresh_environment_from_task(self, task) -> None:
-        """Refresh box obstacles from ungrasped tracked objects."""
+        """Refresh every tracked object, including carried objects."""
 
         if hasattr(self.detector, '_boxes'):
             self.detector._boxes.clear()
@@ -314,14 +368,9 @@ class RuntimeConstraintMonitor:
         if not self.config.include_tracked_objects_as_boxes:
             return
 
-        get_states = getattr(task, 'get_tracked_object_states', None)
-        if not callable(get_states):
-            return
-
-        for object_name, state in (get_states() or {}).items():
+        self._last_object_states = collision_object_states(task)
+        for object_name, state in self._last_object_states.items():
             if not isinstance(state, dict):
-                continue
-            if state.get('attached_to') is not None or state.get('grasped_by') is not None:
                 continue
             if state.get('collision_enabled') is False:
                 continue
@@ -330,8 +379,7 @@ class RuntimeConstraintMonitor:
             if size is None:
                 size = self._collision_size_from_task(task, str(object_name))
             if position is None or size is None:
-                if size is None:
-                    self._missing_object_geometry.add(str(object_name))
+                self._missing_object_geometry.add(str(object_name))
                 continue
             half_extents = np.maximum(np.asarray(size, dtype=float) * 0.5, 1e-4)
             self.detector.add_box(
@@ -346,7 +394,8 @@ class RuntimeConstraintMonitor:
             return
         if self._static_scene_boxes is None:
             self._static_scene_boxes = []
-            tracked_names = set((getattr(task, 'get_tracked_object_states', lambda: {})() or {}))
+            names = getattr(getattr(task, 'cfg', None), 'tracked_object_names', None)
+            tracked_names = set(names) if names is not None else set(collision_object_states(task))
             for object_name, scene_object in (getattr(task, 'objects', {}) or {}).items():
                 object_name = str(object_name)
                 if object_name in tracked_names:

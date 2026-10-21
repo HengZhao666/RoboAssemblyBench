@@ -10,7 +10,8 @@ from unittest.mock import patch
 import numpy as np
 
 from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import (
-    record_path_state_write, record_state_write, sample_boundary,
+    record_path_state_write, record_state_write, sample_boundary, _joint_command_targets,
+    _body_com_snapshot, _native_scene_gravity, _pair_load_snapshot,
 )
 
 
@@ -106,6 +107,10 @@ def clock():
 
 class PhysicsDiagnostics(unittest.TestCase):
     def setUp(self):
+        self.paths_patch = patch.dict(
+            'toolkits.factory_dual_franka_assembly.beam_physics_diagnostics._PATH_TASKS', {}, clear=True)
+        self.paths_patch.start()
+        self.addCleanup(self.paths_patch.stop)
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.path = Path(self.tmp.name) / 'boundaries.jsonl'
@@ -120,6 +125,69 @@ class PhysicsDiagnostics(unittest.TestCase):
     def sample(self, boundary='before_action', **kwargs):
         return sample_boundary(self.task, boundary, self.clock, **kwargs)
 
+    def test_continuation_net_loads_cover_release_and_later_parts_without_new_views(self):
+        self.task.phase = 'hold_6_to_3_switch_release'
+        self.task._beam_exploration_state = {'continue_after_first_insertion': True, 'anchor': {'valid': True}}
+        path = '/World/fabrica_beam_2'
+        self.task._resolved_objects = {'fabrica_beam_2': wrapper(BodyView(), path)}
+        existing = object()
+        self.task._contact_probes = {(path, '/World/table'): existing}
+        module = 'toolkits.factory_dual_franka_assembly.beam_physics_diagnostics'
+        settings = {'BEAM_PHYSICS_DIAGNOSTICS_PHASES': '*', 'BEAM_PHYSICS_DIAGNOSTICS_UNFILTERED': '1',
+                    'BEAM_PHYSICS_DIAGNOSTICS_OBJECTS': 'fabrica_beam_2'}
+        with patch.dict(os.environ, settings), patch(module + '._pair_load_snapshot', return_value={'valid': True}), \
+                patch(module + '._unfiltered_contact_snapshot', return_value={'valid': True, 'sensor_body': path}) as reader:
+            for boundary in ('before_action', 'after_action', 'after_physics', 'after_observation'):
+                record = self.sample(boundary, cycle_step=9000)
+                self.assertEqual(record['contact_loads']['unfiltered_sensors'][0]['sensor_body'], path)
+            self.assertEqual(reader.call_count, 4)
+        self.assertEqual(self.task._contact_probes, {(path, '/World/table'): existing})
+
+    def test_continuation_net_scope_requires_optin_anchor_and_postseat_phase(self):
+        from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import _unfiltered_phase_selected
+        self.task._beam_exploration_state = {'continue_after_first_insertion': True, 'anchor': {'valid': True}}
+        with patch.dict(os.environ, {'BEAM_PHYSICS_DIAGNOSTICS_UNFILTERED': '1'}):
+            for phase in ['hold_3_close_and_attach', 'assemble_01_part_2_lift', 'handover_left_2_release', 'beam_final_unloaded_verification']:
+                self.assertTrue(_unfiltered_phase_selected(self.task, phase))
+            self.assertFalse(_unfiltered_phase_selected(self.task, 'base_6_set_down'))
+            self.task._beam_exploration_state.pop('anchor')
+            self.assertFalse(_unfiltered_phase_selected(self.task, 'hold_3_close_and_attach'))
+            self.assertTrue(_unfiltered_phase_selected(self.task, 'assemble_00_part_3_assembly_clearance'))
+        with patch.dict(os.environ, {'BEAM_PHYSICS_DIAGNOSTICS_UNFILTERED': '0'}):
+            self.assertFalse(_unfiltered_phase_selected(self.task, 'assemble_00_part_3_assembly_clearance'))
+
+    def test_unfiltered_turn_loads_exist_at_image_clock_and_following_clock(self):
+        self.task.phase = 'assemble_00_part_3_assembly_clearance'
+        path = '/World/fabrica_beam_6'
+        self.task._resolved_objects = {'fabrica_beam_6': wrapper(BodyView(), path)}
+        self.task._contact_probes[(path, '/World/table')] = object()
+        settings = {'BEAM_PHYSICS_DIAGNOSTICS_PHASES': '*',
+                    'BEAM_PHYSICS_DIAGNOSTICS_UNFILTERED': '1'}
+        module = 'toolkits.factory_dual_franka_assembly.beam_physics_diagnostics'
+        with patch.dict(os.environ, settings), \
+                patch(module + '._pair_load_snapshot', return_value={'valid': True}), \
+                patch(module + '._unfiltered_contact_snapshot',
+                      return_value={'valid': True, 'sensor_body': path}) as reader:
+            for boundary in ('before_action', 'after_action', 'after_physics', 'after_observation'):
+                with self.subTest(boundary=boundary):
+                    record = self.sample(boundary, cycle_step=9000)
+                    self.assertEqual(record['contact_loads']['unfiltered_sensors'][0]['sensor_body'], path)
+            self.assertEqual(reader.call_count, 4)
+
+    def test_joint_names_match_native_buffers_and_bad_mapping_stays_unknown(self):
+        articulation = self.task.robots['right'].articulation
+        articulation.dof_names = ['joint_' + str(i) for i in range(12)]
+        record = self.sample()
+        joints = record['robots']['right']
+        self.assertEqual(joints['joint_names'], articulation.dof_names)
+        self.assertTrue(joints['valid'])
+        articulation.dof_names = ['same'] * 12
+        record = self.sample('after_action')
+        joints = record['robots']['right']
+        self.assertIn('joint_names_error', joints)
+        self.assertNotIn('joint_names', joints)
+        self.assertTrue(joints['valid'])
+
     def test_copies_every_component_with_units_and_live_source(self):
         record = self.sample()
         self.assertTrue(record['valid'])
@@ -129,6 +197,7 @@ class PhysicsDiagnostics(unittest.TestCase):
         self.assertEqual(body['linear_velocities'], [[.1, .2, .3]])
         self.assertEqual(body['angular_velocities'], [[.4, .5, .6]])
         self.assertEqual(body['velocity_reference'], 'center_of_mass')
+        self.assertEqual(body['center_of_mass']['world_positions'], [[1.01, 2.02, 3.03]])
         self.assertEqual(body['metadata']['masses'], [.25])
         self.assertEqual(len(record['robots']['right']['joint_positions'][0]), 12)
         self.assertEqual(len(record['bodies']), 4)
@@ -222,6 +291,79 @@ class PhysicsDiagnostics(unittest.TestCase):
         self.task.step_counter = 9002
         self.assertIsNone(self.sample())
 
+    def _set_handoff_phase(self):
+        name='assemble_00_part_3_assembly_clearance'
+        self.task.phase=name
+        self.task._beam_assisted_enabled=True
+        self.task.phase_index=0
+        self.task.phase_entry_step=9000
+        self.task.phase_specs=[dict(name=name,local_skill=dict(beam_assisted_phase_handoff_ticks=24))]
+        path='/World/right/wrist_3_link'
+        self.task.robots['right']._rigid_body_map[path]=wrapper(BodyView(),path)
+        os.environ.update(BEAM_PHYSICS_DIAGNOSTICS_PHASES='*',BEAM_PHYSICS_DIAGNOSTICS_STRIDE='8')
+
+    def test_off_stride_handoff_captures_all_four_boundaries_through_failure(self):
+        self._set_handoff_phase();self.task.step_counter=9001
+        before=self.task._resolved_objects['fabrica_beam_6'].unwrap()._rigid_prim_view.positions.copy()
+        records=[self.sample('before_action',cycle_step=9001)]
+        self.task.phase='failed';self.task.phase_index=1
+        for boundary in ('after_action','after_physics','after_observation'):
+            records.append(self.sample(boundary,cycle_step=9001))
+        self.assertTrue(all(r is not None for r in records))
+        self.assertTrue(all(r['cycle_step']==9001 for r in records))
+        self.assertEqual(records[-1]['cycle_phase'],'assemble_00_part_3_assembly_clearance')
+        self.assertEqual(records[-1]['phase'],'failed')
+        np.testing.assert_array_equal(before,self.task._resolved_objects['fabrica_beam_6'].unwrap()._rigid_prim_view.positions)
+
+    def test_handoff_burst_keeps_native_wrist_and_all_boundaries_through_twenty_four_ticks(self):
+        self._set_handoff_phase()
+        for step,expected in ((8999,False),(9001,True),(9007,True),(9008,True),
+                              (9009,True),(9010,True),(9016,True),(9017,True),
+                              (9024,True),(9025,False),(9032,True)):
+            self.task.step_counter=step
+            record=self.sample('before_action',cycle_step=step)
+            self.assertEqual(record is not None,expected)
+            if record is not None:
+                wrist=next(b for b in record['bodies'] if b.get('path')=='/World/right/wrist_3_link')
+                self.assertTrue(wrist['valid'])
+                self.assertEqual(wrist['angular_velocities'],[[.4,.5,.6]])
+
+    def test_handoff_burst_does_not_bypass_configured_phase_or_step_window(self):
+        from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import BeamPhysicsDiagnostics
+        self._set_handoff_phase()
+        mon=BeamPhysicsDiagnostics()
+        for start,end,phases in ((9002,-1,{'*'}),(0,9000,{'*'}),(0,-1,{'other_phase'})):
+            mon.start,mon.end,mon.phases=start,end,phases
+            self.assertFalse(mon.selected(self.task,9001,self.task.phase,handoff_cycle=True))
+
+    def test_settled_transition_keeps_four_native_boundaries_during_the_complete_hold(self):
+        self._set_handoff_phase()
+        self.task.phase_specs[0]['local_skill']['beam_assisted_transition_settle'] = {'stable_native_ticks':24}
+        for step in (9001, 9047, 9101, 9479):
+            self.task.step_counter = step
+            for boundary in ('before_action','after_action','after_physics','after_observation'):
+                record = self.sample(boundary, cycle_step=step)
+                self.assertIsNotNone(record)
+                self.assertTrue(next(b for b in record['bodies'] if b.get('path')=='/World/right/wrist_3_link')['valid'])
+
+    def test_ordinary_nonhandoff_sampling_keeps_original_stride(self):
+        self._set_handoff_phase();self.task.phase_specs[0]['local_skill']={}
+        for step,expected in ((9001,False),(9007,False),(9008,True),(9009,False)):
+            self.task.step_counter=step
+            self.assertEqual(self.sample('before_action',cycle_step=step) is not None,expected)
+
+    def test_first_strict_insert_records_96_entry_ticks_then_resumes_stride(self):
+        self._set_handoff_phase()
+        self.task.phase='assemble_00_part_3_insert_00'
+        self.task.phase_specs=[dict(name=self.task.phase,local_skill=dict(beam_assisted_alignment_hold={'enabled':True}))]
+        for step,expected in ((9001,True),(9095,True),(9096,True),(9097,False),(9104,True)):
+            self.task.step_counter=step
+            self.assertEqual(self.sample('before_action',cycle_step=step) is not None,expected)
+        self.task.phase='assemble_00_part_3_insert_01'
+        self.task.phase_specs[0]['name']=self.task.phase
+        self.task.step_counter=9001
+        self.assertIsNone(self.sample('before_action',cycle_step=9001))
+
     def test_metadata_getters_only_run_once_per_live_view(self):
         first = self.sample()
         second = self.sample('after_action')
@@ -276,6 +418,7 @@ class PhysicsDiagnostics(unittest.TestCase):
         record = self.sample()
         self.assertTrue(record['bodies'][0]['valid'])
         self.assertFalse(record['bodies'][0]['metadata']['valid'])
+        self.assertFalse(record['bodies'][0]['center_of_mass']['valid'])
         self.assertIn('COM unavailable', record['bodies'][0]['metadata']['errors']['center_of_mass'])
         self.assertFalse(record['global_stabilization']['valid'])
 
@@ -388,6 +531,36 @@ class PhysicsDiagnostics(unittest.TestCase):
         self.assertFalse(record['robots']['right']['metadata']['valid'])
         self.assertTrue(record['robots']['right']['valid'])
 
+    def test_native_targets_copy_backend_buffers_not_proposed_actions(self):
+        values = np.arange(12.).reshape(1, 12)
+        def velocity():
+            values[:] = 9.
+            return np.zeros((1, 12))
+        native = NS(get_dof_position_targets=lambda: values,
+                    get_dof_velocity_targets=velocity,
+                    get_dof_actuation_forces=lambda: np.ones((1, 12)))
+        joint_view = self.task.robots['right'].articulation._articulation_view
+        joint_view._physics_view = native
+        self.task.robots['right'].last_action = [{'joint_positions': [-123.]}]
+        record = self.sample('after_action')
+        target = record['robots']['right']['native_command_targets']
+        self.assertTrue(target['valid'])
+        self.assertEqual(target['position_targets'], [list(np.arange(12.))])
+        self.assertEqual(record['robots']['right']['sdk_submission']['actions'],
+                         [{'joint_positions': [-123.]}])
+
+    def test_missing_nonfinite_or_wrong_shape_native_targets_are_unavailable(self):
+        for value in (np.zeros((12,)), np.full((1, 12), np.nan)):
+            view = NS(_physics_view=NS(get_dof_position_targets=lambda: value,
+                get_dof_velocity_targets=lambda: np.zeros((1, 12)),
+                get_dof_actuation_forces=lambda: np.zeros((1, 12))))
+            result = _joint_command_targets(view, (1, 12))
+            self.assertFalse(result['valid'])
+            self.assertNotIn('position_targets', result)
+        result = _joint_command_targets(NS(), (1, 12))
+        self.assertFalse(result['valid'])
+        self.assertEqual(len(result['errors']), 3)
+
     def test_external_forces_reads_existing_schema_once_without_writing(self):
         reads = []
         def forbidden(*args, **kwargs):
@@ -437,6 +610,95 @@ class PhysicsDiagnostics(unittest.TestCase):
         readback = self.sample()['global_physics_settings']['external_forces_every_iteration']
         self.assertFalse(readback['valid'])
         self.assertIn('No existing physics scene', readback['error'])
+
+    def test_contact_loads_only_read_cached_pairs_and_reverse_sensor_direction(self):
+        calls = []
+        probe = BodyView()
+        probe.get_contact_force_matrix = lambda **kw: calls.append(('normal', kw['dt'])) or np.array([[[0., 0., -2.]]])
+        probe.get_friction_data = lambda **kw: calls.append(('friction', kw['dt'])) or (
+            np.array([[0., 0., -.45]]), np.zeros((1, 3)), np.array([[1]]), np.array([[0]]))
+        self.task._contact_probes[('/World/finger', '/World/beam_6')] = probe
+        self.task._get_contact_probe = lambda *_: self.fail('Must not create a probe')
+        self.task.get_observations = lambda: self.fail('Must not sample the task')
+        record = self.sample()
+        ledger = record['contact_loads']
+        self.assertTrue(ledger['valid'])
+        self.assertEqual(ledger['pairs'][0]['normal_force_world'], [0., 0., -2.])
+        self.assertEqual(ledger['pairs'][0]['total_force_on_selected_world'], [0., 0., 2.45])
+        self.assertEqual(calls, [('normal', 1/240), ('friction', 1/240)])
+
+
+class IndependentReadbacks(unittest.TestCase):
+    def test_com_world_position_rotates_local_offset_with_actor_and_combines_frames(self):
+        q = np.array([[2 ** -.5, 0., 0., 2 ** -.5]])
+        view = NS(get_coms=lambda **kw: (np.array([[[1., 0., 0.]]]),
+                                         np.array([[[1., 0., 0., 0.]]])))
+        result = _body_com_snapshot(view, np.array([[2., 3., 4.]]), q)
+        self.assertTrue(result['valid'])
+        np.testing.assert_allclose(result['world_positions'], [[2., 4., 4.]], atol=1e-12)
+        np.testing.assert_allclose(result['world_orientations'], q, atol=1e-12)
+
+    def test_bad_com_is_unavailable_without_substituting_actor_origin(self):
+        for position in (np.zeros((3,)), np.full((1, 1, 3), np.nan)):
+            view = NS(get_coms=lambda **kw: (position, np.array([[[1., 0., 0., 0.]]])))
+            result = _body_com_snapshot(view, np.zeros((1, 3)), np.array([[1., 0., 0., 0.]]))
+            self.assertFalse(result['valid'])
+            self.assertNotIn('world_positions', result)
+
+    def test_native_gravity_uses_existing_view_and_detaches_its_buffer(self):
+        gravity = np.array([0., 0., -9.81])
+        existing = NS(get_gravity=lambda: gravity)
+        manager = NS(get_physics_sim_view=lambda: existing)
+        with patch.dict('sys.modules', {'isaacsim.core.simulation_manager': NS(SimulationManager=manager)}):
+            result = _native_scene_gravity()
+        gravity[:] = 0.
+        self.assertTrue(result['valid'])
+        self.assertEqual(result['value'], [0., 0., -9.81])
+        self.assertEqual(result['frame'], 'world')
+
+    def test_missing_nonfinite_or_wrong_shape_native_gravity_never_uses_context_fallback(self):
+        for existing in (None, NS(get_gravity=lambda: np.array([0., 0., -np.inf])),
+                         NS(get_gravity=lambda: np.zeros((1, 3)))):
+            manager = NS(get_physics_sim_view=lambda: existing)
+            with patch.dict('sys.modules', {'isaacsim.core.simulation_manager': NS(SimulationManager=manager)}):
+                result = _native_scene_gravity()
+            self.assertFalse(result['valid'])
+            self.assertNotIn('value', result)
+
+    def test_friction_at_zero_normal_and_unused_padding_remain_visible(self):
+        probe = NS(is_physics_handle_valid=lambda: True,
+            get_contact_force_matrix=lambda **kw: np.zeros((1, 1, 3)),
+            get_friction_data=lambda **kw: (np.array([[np.nan, np.nan, np.nan], [0., 0., 2.45]]),
+                                           np.array([[np.nan, np.nan, np.nan], [0., 0., 0.]]),
+                                           np.array([[1]]), np.array([[1]])))
+        result = _pair_load_snapshot(probe, '/beam', '/table', '/beam', 1/240)
+        self.assertTrue(result['valid'])
+        self.assertEqual(result['normal_force_world'], [0., 0., 0.])
+        self.assertEqual(result['total_force_on_selected_world'], [0., 0., 2.45])
+        self.assertEqual(result['friction_anchor_count'], 1)
+
+    def test_bad_friction_ranges_or_active_data_do_not_erase_valid_normal_evidence(self):
+        for count, force in ((2, [0., 0., 0.]), (1, [0., 0., np.nan])):
+            probe = NS(is_physics_handle_valid=lambda: True,
+                get_contact_force_matrix=lambda **kw: np.array([[[0., 0., 2.]]]),
+                get_friction_data=lambda **kw: (np.array([force]), np.zeros((1, 3)),
+                                               np.array([[count]]), np.array([[0]])))
+            result = _pair_load_snapshot(probe, '/beam', '/table', '/beam', 1/240)
+            self.assertFalse(result['valid'])
+            self.assertTrue(result['normal_valid'])
+            self.assertEqual(result['normal_force_world'], [0., 0., 2.])
+            self.assertNotIn('total_force_on_selected_world', result)
+
+    def test_zero_count_friction_ranges_ignore_unused_start_sentinels(self):
+        probe = NS(is_physics_handle_valid=lambda: True,
+            get_contact_force_matrix=lambda **kw: np.zeros((1, 1, 3)),
+            get_friction_data=lambda **kw: (np.full((2, 3), np.nan), np.full((2, 3), np.nan),
+                                           np.array([[0]], dtype=np.uint32),
+                                           np.array([[2 ** 32 - 1]], dtype=np.uint32)))
+        result = _pair_load_snapshot(probe, '/beam', '/table', '/beam', 1/240)
+        self.assertTrue(result['valid'])
+        self.assertEqual(result['friction_force_world'], [0., 0., 0.])
+        self.assertEqual(result['friction_anchor_count'], 0)
 
 
 if __name__ == '__main__':

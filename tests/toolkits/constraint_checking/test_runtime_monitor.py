@@ -160,7 +160,7 @@ def test_unknown_object_scale_is_not_treated_as_metric_size(monkeypatch):
     report = monitor.finalize()
 
     assert monitor.detector._boxes == {}
-    assert report['missing_object_geometry'] == ['free_part']
+    assert report['missing_object_geometry'] == ['free_part', 'held_part']
 
 
 def test_detailed_events_are_capped_while_totals_are_preserved(monkeypatch):

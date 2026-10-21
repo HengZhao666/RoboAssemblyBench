@@ -6033,6 +6033,9 @@ def _apply_ik_execution_policy(phases: list[dict[str, Any]], spec: dict[str, Any
 
 def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
     beam_spec = payload.get('fabrica_canonical') or {}
+    if beam_spec.get('beam_execution_route') == 'assisted':
+        from roboassemblybench.core.beam_assisted_compiler import compile_assisted_beam_recipe
+        return compile_assisted_beam_recipe(payload)
     if (isinstance(beam_spec, dict) and beam_spec.get('assembly') == 'beam'
             and bool(beam_spec.get('continuous_physics', False))):
         from roboassemblybench.core.beam_physical_compiler import compile_continuous_beam_recipe
@@ -6136,9 +6139,9 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
         part_id = str(step['move_part'])
         step['move_grasp'] = copy.deepcopy(selected_move_grasps[part_id])
 
-    if spec.get('coordinated_support_plan'):
+    if spec.get('coordinated_support_plan') or spec.get('beam_assisted_audited_grasps'):
         from roboassemblybench.core.beam_coordinated import select_grasps
-        select_grasps(task, spec)
+        select_grasps(task, {**spec, 'continuous_physics': True})
         selected_move_grasps = {str(step['move_part']): copy.deepcopy(step['move_grasp'])
                                 for step in task['assembly_steps']}
         grasp_selection['coordinated_override'] = 'native_mesh_audit_2026_09_30'

@@ -176,6 +176,7 @@ class UR5eAssemblyAtomicSkillAdapter:
         self._pickup_terminal_ik_seeds: dict[tuple[int, str, str], np.ndarray] = {}
         self._continuous_transport_ik_fallbacks: set[tuple[Any, ...]] = set()
         self._last_arm_command_q: dict[str, np.ndarray] = {}
+        self._arm_measurement_status: dict[str, dict] = {}
         self._cartesian_command_positions: dict[tuple[Any, ...], np.ndarray] = {}
         self._cartesian_command_orientations: dict[tuple[Any, ...], np.ndarray] = {}
         self._insertion_axial_anchors: dict[tuple[Any, ...], float] = {}
@@ -211,6 +212,20 @@ class UR5eAssemblyAtomicSkillAdapter:
             robot_name,
             skill_name,
         )
+        if spec.get('beam_assisted') and spec.get('beam_assisted_absolute_object_servo'):
+            contexts = getattr(task, '_beam_assisted_command_contexts', None)
+            if contexts is None:
+                contexts = task._beam_assisted_command_contexts = {}
+            contexts[robot_name] = {'adapter': self, 'spec': spec, 'phase_key': phase_key,
+                'phase_index': getattr(task, 'phase_index', None),
+                'phase_entry_step': getattr(task, 'phase_entry_step', None),
+                'tracked_robots': tracked_robots, 'tracked_objects': tracked_objects}
+
+        if spec.get('continuous_physics') and self._current_arm_q(task, robot_name) is None:
+            return self._failure_or_hold(
+                task, robot_name, spec, 'current_joint_state_unavailable',
+                diagnostics=self._arm_measurement_status.get(robot_name, {}),
+            )
 
         if (spec.get('trace_pregrasp') and os.environ.get('BEAM_CONTACT_TRACE_PATH')
                 and int(task.step_counter) % 8 == 0):
@@ -241,7 +256,12 @@ class UR5eAssemblyAtomicSkillAdapter:
         if skill_name in {'ur5e_close_gripper', 'close_gripper'}:
             action = self._hold_joint_action(task=task, robot_name=robot_name)
             close_started_step = 0
-            if bool(spec.get('require_close_pose_gate', False)):
+            # A plan created later in this act call is absent from the arm
+            # command already constructed by the pose gate.
+            gate_pending = self._close_gate_state.get(phase_key, {}).get('force_recenter_pending')
+            if bool(spec.get('require_close_pose_gate', False)) and not (
+                spec.get('beam_assisted_visual_pinch') and
+                self._close_gate_state.get(phase_key, {}).get('assisted_visual_close_started')):
                 gate_ready, gate_action, gate_detail = self._close_pose_gate_action(
                     phase_key=phase_key,
                     task=task,
@@ -285,6 +305,21 @@ class UR5eAssemblyAtomicSkillAdapter:
                 if hold_q is not None:
                     action[_ARM_JOINT_CONTROLLER] = [np.asarray(hold_q, dtype=float).tolist()]
 
+            if spec.get('beam_assisted_visual_pinch'):
+                from .beam_assisted_visual_grasp import close_action
+                self._close_gate_state.setdefault(phase_key, {})['assisted_visual_close_started'] = True
+                try:
+                    action, ready, detail = close_action(task, self, robot_name,
+                                                        spec['object'], action)
+                except Exception as exc:
+                    return self._failure_or_hold(task, robot_name, spec,
+                        'assisted_visible_pinch',
+                        diagnostics={'error': f'{type(exc).__name__}: {exc}'})
+                if ready:
+                    self._mark_complete(task=task, robot_name=robot_name,
+                                        skill_name=skill_name, detail=detail)
+                return action
+
             hold_steps = max(int(spec.get('hold_steps', spec.get('close_steps', 36))), 0)
             close_elapsed_steps = max(int(getattr(task, 'phase_step_counter', 0)) - int(close_started_step), 0)
             ramp_steps = max(int(spec.get('close_ramp_steps', hold_steps)), 1)
@@ -304,6 +339,10 @@ class UR5eAssemblyAtomicSkillAdapter:
                     close_elapsed_steps=close_elapsed_steps,
                     gripper_openness=gripper_openness,
                 )
+                if spec.get('close_force_recenter_track_weak_side'):
+                    # The task counter is guarded by Beam's real physics tick.
+                    # Contact observations expose dt, not a native clock token.
+                    state['force_recenter_observation_step'] = int(task.step_counter)
                 close_detail['recenter'] = self._update_close_recenter_offset(
                     state=state,
                     close_detail=close_detail,
@@ -341,16 +380,55 @@ class UR5eAssemblyAtomicSkillAdapter:
                 if hold_openness is not None:
                     action[_GRIPPER_CONTROLLER] = [float(hold_openness)]
                 if close_ready:
-                    if spec.get('continuous_physics') and state.get('hold_command_pose') is not None:
+                    if spec.get('continuous_physics') and (
+                        spec.get('beam_coordinated') or state.get('hold_command_pose') is not None
+                    ):
+                        cached_pose = state.get('hold_command_pose')
+                        cache_metadata = {}
+                        if spec.get('beam_coordinated'):
+                            # Joint limiting/freezing can change the requested
+                            # pose. Retain FK of the arm target in this action.
+                            cached_q = self._coerce_arm_q(
+                                (action.get(_ARM_JOINT_CONTROLLER) or [None])[0],
+                                bound_revolute=False,
+                            )
+                            cached_pose = None if cached_q is None else self._grasp_command_fk_pose(
+                                task=task, robot_name=robot_name, spec=spec, command_q=cached_q,
+                            )
+                            try:
+                                position = np.asarray(cached_pose['position'], dtype=float)
+                                orientation = np.asarray(cached_pose['orientation'], dtype=float)
+                                pose_valid = bool(
+                                    position.shape == (3,) and orientation.shape == (4,)
+                                    and np.all(np.isfinite(position)) and np.all(np.isfinite(orientation))
+                                    and np.linalg.norm(orientation) > 1e-9
+                                )
+                            except (TypeError, KeyError, ValueError):
+                                pose_valid = False
+                            if not pose_valid:
+                                return self._failure_or_hold(
+                                    task, robot_name, spec, 'close_grasp_command_cache_unavailable',
+                                    diagnostics=close_detail,
+                                )
+                            cache_metadata = {
+                                'step': int(task.step_counter), 'pose_source': 'published_joint_fk',
+                            }
+                            close_detail.update(
+                                grasp_command_cache_step=cache_metadata['step'],
+                                grasp_command_cache_pose_source=cache_metadata['pose_source'],
+                            )
+                        else:
+                            cached_q = np.asarray(state['hold_q']).copy()
                         cache = getattr(task, '_ur5e_contact_hold_commands', None)
                         if cache is None:
                             cache = {}
                             task._ur5e_contact_hold_commands = cache
                         cache[robot_name] = {
                             'object': self._object_name_from_spec(spec),
-                            'arm_q': np.asarray(state['hold_q']).copy(),
-                            'pose': {k: np.asarray(v).copy() for k, v in state['hold_command_pose'].items()},
+                            'arm_q': cached_q.copy(),
+                            'pose': {k: np.asarray(v).copy() for k, v in cached_pose.items()},
                             'gripper_openness': float(hold_openness),
+                            **cache_metadata,
                         }
                     if hold_openness is None:
                         self._remember_gripper_hold_openness(
@@ -384,6 +462,17 @@ class UR5eAssemblyAtomicSkillAdapter:
                             robot_name,
                             spec,
                             'close_until_contact_timeout',
+                            diagnostics=close_detail,
+                        )
+                pending = state.get('force_recenter_pending')
+                if (pending is gate_pending and pending is not None
+                        and pending.get('lifecycle') == 'planned'):
+                    if not self._record_recenter_final_action(
+                        state=state, pending=pending, action=action,
+                        task=task, robot_name=robot_name, spec=spec,
+                    ):
+                        return self._failure_or_hold(
+                            task, robot_name, spec, 'recenter_final_action_unavailable',
                             diagnostics=close_detail,
                         )
                 return action
@@ -552,19 +641,51 @@ class UR5eAssemblyAtomicSkillAdapter:
             tracked_objects=tracked_objects,
         ):
             current_q = self._current_arm_q(task, robot_name)
-            action = self._hold_joint_action(task=task, robot_name=robot_name)
-            gripper_command = spec.get('gripper_command')
-            if gripper_command is None:
-                gripper_command = (
-                    'close' if skill_name in {'ur5e_move_part_to_staging', 'ur5e_hold_part_end'} else 'open'
+            if spec.get('beam_coordinated') and spec.get('requires_held_object'):
+                # Settling keeps the published preload and the loaded grasp's
+                # force/measurement protections while the completion gate runs.
+                action = self._hold_previous_grasp_command(
+                    task=task, robot_name=robot_name, spec=spec,
+                    tracked_robots=tracked_robots, target_pose=target_pose,
                 )
-            action[_GRIPPER_CONTROLLER] = [
-                self._gripper_command_value(
-                    task=task,
-                    robot_name=robot_name,
-                    command=gripper_command,
-                )
-            ]
+                if action.get('__local_skill_failure__'):
+                    return action
+                hold_target_q = np.asarray(action[_ARM_JOINT_CONTROLLER][0], dtype=float)
+            elif spec.get('beam_assisted_transition_settle'):
+                # Retain the target that really reached the native backend,
+                # rather than an earlier pre-clamp adapter command.
+                hold_target_q = self._assisted_transition_hold_target(task, robot_name, current_q)
+                from .beam_assisted_servo import object_pose_from_tcp
+                _, stamp, _, native_object, relative, servo_state = self._assisted_object_servo_context(
+                    phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+                    tracked_robots=tracked_robots, tracked_objects=tracked_objects)
+                tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                                 spec=spec, command_q=current_q)
+                if tcp is None:
+                    raise ValueError('assisted transition hold lacks measured-joint FK')
+                self._assisted_phase_handoff(task=task, robot_name=robot_name, spec=spec,
+                    stamp=stamp, state=servo_state, current_object=native_object,
+                    measured_model_object=object_pose_from_tcp(tcp, relative[0], relative[1]),
+                    relative=relative, actual_q=current_q)
+                action = OrderedDict([(_ARM_JOINT_CONTROLLER, [hold_target_q.tolist()]),
+                    (_GRIPPER_CONTROLLER, [self._gripper_command_value(
+                        task=task, robot_name=robot_name,
+                        command=spec.get('gripper_command', 'contact_hold'))])])
+            else:
+                action = self._hold_joint_action(task=task, robot_name=robot_name)
+                gripper_command = spec.get('gripper_command')
+                if gripper_command is None:
+                    gripper_command = (
+                        'close' if skill_name in {'ur5e_move_part_to_staging', 'ur5e_hold_part_end'} else 'open'
+                    )
+                action[_GRIPPER_CONTROLLER] = [
+                    self._gripper_command_value(
+                        task=task,
+                        robot_name=robot_name,
+                        command=gripper_command,
+                    )
+                ]
+                hold_target_q = current_q
             ik_target_pose = self._ik_target_pose(target_pose=target_pose, spec=spec)
             self._maybe_mark_complete(
                 phase_key=phase_key,
@@ -577,7 +698,7 @@ class UR5eAssemblyAtomicSkillAdapter:
                 current_pose=current_pose,
                 tracked_objects=tracked_objects,
                 current_q=current_q,
-                target_q=current_q,
+                target_q=hold_target_q,
             )
             return action
         if recovery_allows_settle:
@@ -1549,6 +1670,40 @@ class UR5eAssemblyAtomicSkillAdapter:
             complete = True
             completion_detail['force_complete'] = True
 
+        if spec.get('beam_assisted_staged_clearance'):
+            _, _, _, _, _, servo_state = self._assisted_object_servo_context(
+                phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+                tracked_robots={}, tracked_objects=tracked_objects)
+            stage = servo_state.get('clearance_path', {}).get('stage')
+            completion_detail['assisted_clearance_stage'] = stage
+            complete = bool(complete and stage == 'lower')
+
+        if spec.get('beam_assisted_absolute_object_servo') and spec.get('beam_assisted_descent_admission'):
+            from .beam_assisted_servo import descent_admission
+            _, stamp, native, actual_object, _, servo_state = self._assisted_object_servo_context(
+                phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+                tracked_robots={}, tracked_objects=tracked_objects)
+            ready, detail = descent_admission(servo_state.setdefault('admission', {}), stamp,
+                actual_object, self._target_object_pose(task=task, spec=spec),
+                spec.get('target_object_convergence_axis', [0., 0., -1.]),
+                spec['beam_assisted_descent_admission'], native)
+            servo_state.update(descent_ready=ready, admission_detail=detail, stamp=dict(stamp))
+            completion_detail['assisted_descent_admission'] = detail
+            complete = bool(complete and ready)
+
+        if spec.get('beam_assisted_transition_settle'):
+            from .beam_assisted_servo import settled_transition_ready
+            _, stamp, native, _, _, servo_state = self._assisted_object_servo_context(
+                phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+                tracked_robots={}, tracked_objects=tracked_objects)
+            ready, settle_detail = settled_transition_ready(
+                servo_state.setdefault('transition_settle', {}), stamp, native, complete,
+                spec['beam_assisted_transition_settle'])
+            completion_detail['assisted_transition_settle'] = settle_detail
+            complete = bool(complete and ready)
+            task._assisted_event('transition_settle', robot=robot_name, object=object_name,
+                                 **settle_detail)
+
         if complete:
             self._mark_complete(
                 task=task,
@@ -2109,6 +2264,547 @@ class UR5eAssemblyAtomicSkillAdapter:
             'orientation': command_orientation,
         }
 
+    def _assisted_object_servo_context(self, *, phase_key, task, robot_name, spec,
+                                       tracked_robots, tracked_objects):
+        name = self._object_name_from_spec(spec)
+        attachment = tracked_objects.get(name, {}).get('attachment') or {}
+        if attachment.get('mode') != 'fixed_joint' or attachment.get('robot_name') != robot_name:
+            raise ValueError('absolute assisted object servo requires its live fixed grasp')
+        stamp = task._beam_physics_stamp()
+        if stamp.get('valid') is not True:
+            raise ValueError('absolute assisted object servo lacks native physical time')
+        motion_options = {}
+        if any((spec.get(key) or {}).get('motion_metric') == 'native_com_pose_difference'
+               for key in ('beam_assisted_transition_settle', 'beam_assisted_descent_admission')):
+            motion_options['include_center_of_mass'] = True
+        native = task._assisted_native_body_motion(name, stamp['epoch'], **motion_options)
+        if not native.get('motion_valid') or not native.get('physics_handle_valid'):
+            raise ValueError('absolute assisted object servo lacks a live native body')
+        object_pose = {key: np.asarray(native[key], float) for key in ('position', 'orientation')}
+        relative = self._object_tcp_relative_pose(phase_key=phase_key, task=task,
+            robot_name=robot_name, object_name=name, spec=spec,
+            tracked_robots=tracked_robots, tracked_objects=tracked_objects, object_pose=object_pose)
+        if relative is None:
+            raise ValueError('absolute assisted object servo lacks its captured grasp transform')
+        # Grasp identity is authoritative attachment/view lifecycle data.
+        # Derived control-frame floats vary at roundoff level across ticks.
+        identity = (attachment.get('joint_path'), attachment.get('attach_step'),
+                    stamp['epoch'], native.get('body_path'), native.get('motion_view_id'))
+        states = getattr(task, '_beam_assisted_object_servo_states', None)
+        if states is None:
+            states = task._beam_assisted_object_servo_states = {}
+        state = states.setdefault((robot_name, phase_key), {})
+        if state.get('identity') != identity:
+            if (spec.get('beam_assisted_lift_command_rotation_hold')
+                    and 'identity' in state):
+                raise ValueError('loaded lift captured grasp identity changed within its phase')
+            state.clear()
+            state['identity'] = identity
+        return name, stamp, native, object_pose, relative, state
+
+    def _assisted_lift_hold_publication(self, *, task, robot_name, spec, stamp, state, actual_q):
+        """Read the fresh final drive target; never substitute measured hold."""
+        publication = getattr(task, '_assisted_published_q_stamps', {}).get(robot_name)
+        previous = np.asarray(getattr(task, '_assisted_published_q', {}).get(robot_name), float)
+        if (stamp.get('valid') is not True or not isinstance(publication, dict)
+                or publication.get('epoch') != stamp.get('epoch')
+                or type(stamp.get('index')) is not int
+                or type(publication.get('index')) is not int
+                or stamp['index']-publication['index'] not in (0, 1)
+                or previous.shape != (6,) or not np.all(np.isfinite(previous))
+                or np.max(np.abs(previous-np.asarray(actual_q, float))) > .12+1e-12):
+            raise ValueError('loaded lift lacks a fresh final published target')
+        previous_tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+            spec=spec, command_q=previous)
+        if previous_tcp is None:
+            raise ValueError('loaded lift lacks final publication FK')
+        if 'lift_command_orientation' not in state:
+            state['lift_command_orientation'] = normalize_quat(previous_tcp['orientation']).copy()
+        return previous.copy(), previous_tcp
+
+    def _assisted_check_model_residual(self, *, task, robot_name, spec, stamp, state,
+                                       current_object, model_object, actual_q, relative):
+        """Keep the original guard and retain its exact exceptional input."""
+        from .beam_assisted_servo import validate_model_native_residual
+        position_limit = float(spec.get('beam_assisted_fk_native_position_limit_m', .0001))
+        angle_limit = float(spec.get('beam_assisted_fk_native_orientation_limit_rad', .0015))
+        if spec.get('beam_assisted_lift_command_rotation_hold'):
+            dp, da = pose_error(current_object['position'], current_object['orientation'],
+                                model_object['position'], model_object['orientation'])
+            if dp > position_limit or da > angle_limit:
+                task._assisted_event('object_model_residual_rejected', robot=robot_name,
+                    physics_stamp=dict(stamp), clearance_stage=state.get('clearance_path', {}).get('stage'),
+                    native_object_pose=current_object, measured_model_object_pose=model_object,
+                    actual_q=actual_q,
+                    previous_final_q=getattr(task, '_assisted_published_q', {}).get(robot_name),
+                    phase_cached_final_q=state.get('published_q'),
+                    captured_object_in_tcp_position=relative[0],
+                    captured_object_in_tcp_orientation=relative[1],
+                    position_residual_m=dp, orientation_residual_rad=da,
+                    position_limit_m=position_limit, orientation_limit_rad=angle_limit,
+                    captured_grasp_reference_changed=False)
+        return validate_model_native_residual(current_object, model_object, position_limit, angle_limit)
+
+    def _assisted_phase_handoff(self, *, task, robot_name, spec, stamp, state,
+                                current_object, measured_model_object, relative, actual_q):
+        """Carry final publication through a native-clock-bounded mode change."""
+        ticks = spec.get('beam_assisted_phase_handoff_ticks')
+        full = (float(spec.get('cartesian_position_step', .001)),
+                float(spec.get('cartesian_orientation_step', .004)), .02)
+        if ticks is None:
+            return full
+        if type(ticks) is not int or ticks < 2:
+            raise ValueError('assisted phase handoff needs multiple native ticks')
+        if 'phase_handoff_start' not in state:
+            publication = getattr(task, '_assisted_published_q_stamps', {}).get(robot_name)
+            previous = np.asarray(getattr(task, '_assisted_published_q', {}).get(robot_name), float)
+            if (stamp.get('valid') is not True or not isinstance(publication, dict)
+                    or publication.get('epoch') != stamp.get('epoch')
+                    or type(stamp.get('index')) is not int
+                    or type(publication.get('index')) is not int
+                    or stamp['index']-publication['index'] not in (0, 1)
+                    or previous.shape != (6,) or not np.all(np.isfinite(previous))
+                    or np.max(np.abs(previous-np.asarray(actual_q, float))) > .12+1e-12):
+                raise ValueError('assisted phase handoff lacks a fresh final published target')
+            from .beam_assisted_servo import anchored_object_prediction, object_pose_from_tcp
+            previous_tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                                     spec=spec, command_q=previous)
+            if previous_tcp is None:
+                raise ValueError('assisted phase handoff lacks publication FK')
+            previous_model = object_pose_from_tcp(previous_tcp, relative[0], relative[1])
+            seed = anchored_object_prediction(current_object, measured_model_object, previous_model)
+            state.update(phase_handoff_start=dict(stamp), object_command=seed,
+                         phase_handoff_seed_q=previous.copy())
+            task._assisted_event('phase_handoff_seed', robot=robot_name,
+                previous_final_q=previous, current_q=actual_q, object_seed=seed,
+                native_warm_ticks=ticks, captured_grasp_reference_changed=False)
+        start = state['phase_handoff_start']
+        age = stamp['index']-start['index']
+        if stamp['epoch'] != start['epoch'] or age < 0:
+            raise ValueError('assisted phase handoff clock changed')
+        ratio = min(1., age/ticks)
+        steps = tuple(min(top, low)+(top-min(top, low))*ratio
+                      for low, top in zip((.0002, .0005, .004), full))
+        if spec.get('beam_assisted_descent_admission') is not None:
+            # The original final guard must be able to unwind an incoming
+            # downward lead while admission is cold. Do not narrow its joint
+            # backtracking radius merely to preserve an unsafe old target.
+            steps = steps[:2] + (.02,)
+        state.update(phase_handoff_age=age, phase_handoff_joint_step=steps[2])
+        return steps
+
+    def _assisted_alignment_reference(self, *, task, spec, state, stamp,
+                                      current_object, model_object, target_object,
+                                      descent_ready):
+        """Hold a world plane and compensate bounded persistent tracking bias.
+
+        Only controller references change. Admission, final-q guards and the
+        captured grasp still use the unmodified native pose and original goal.
+        """
+        settings = spec.get('beam_assisted_alignment_hold')
+        if settings is None:
+            return current_object, target_object, model_object
+        contract = spec.get('beam_assisted_descent_admission')
+        if not isinstance(settings, dict) or not isinstance(contract, dict):
+            raise ValueError('assisted alignment hold lacks its admission contract')
+        keys = ('maximum_lateral_compensation_m', 'maximum_integral_step_m',
+                'integral_gain_per_native_tick', 'cold_actual_axial_limit_m')
+        limits = [float(settings[k]) for k in keys]
+        if not all(math.isfinite(v) and v > 0 for v in limits):
+            raise ValueError('invalid assisted alignment hold limits')
+        cap, step, gain, axial_limit = limits
+        tolerance = float(contract['lateral_tolerance_m'])
+        if cap > .8*tolerance+1e-12 or step > cap or gain > 1.:
+            raise ValueError('assisted alignment compensation exceeds its corridor')
+        axis = np.asarray(spec.get('target_object_convergence_axis', [0., 0., -1.]), float)
+        if axis.shape != (3,) or not np.all(np.isfinite(axis)) or np.linalg.norm(axis) < 1e-12:
+            raise ValueError('invalid assisted alignment hold axis')
+        axis = axis/np.linalg.norm(axis)
+        current = np.asarray(current_object['position'], float)
+        goal = np.asarray(target_object['position'], float)
+        if (current.shape != (3,) or goal.shape != (3,)
+                or not np.all(np.isfinite([current, goal]))
+                or stamp.get('valid') is not True
+                or type(stamp.get('epoch')) is not int or type(stamp.get('index')) is not int):
+            raise ValueError('assisted alignment reference lacks a native sample')
+        alignment = state.setdefault('alignment_reference', {})
+        clock = (stamp['epoch'], stamp['index'])
+        previous = alignment.get('clock')
+        if previous is not None:
+            if clock[0] != previous[0] or clock[1] < previous[1]:
+                raise ValueError('assisted alignment reference clock changed')
+            if clock == previous and np.max(abs(current-alignment['position'])) > 1e-12:
+                raise ValueError('assisted alignment reference changed at the same native tick')
+            if np.max(abs(axis-alignment['axis'])) > 1e-12:
+                raise ValueError('assisted alignment reference axis changed')
+        bias = np.asarray(alignment.get('lateral_bias', np.zeros(3)), float).copy()
+        error = goal-current
+        lateral = error-np.dot(error, axis)*axis
+        if previous is not None and clock != previous and .5*tolerance < np.linalg.norm(lateral) <= 4*tolerance:
+            increment = gain*lateral
+            increment *= min(1., step/max(float(np.linalg.norm(increment)), 1e-15))
+            bias += increment
+            bias -= np.dot(bias, axis)*axis
+            bias *= min(1., cap/max(float(np.linalg.norm(bias)), 1e-15))
+        coordinate = float(np.dot(current, axis))
+        anchor = alignment.get('cold_axis_anchor')
+        displacement = 0.
+        if descent_ready:
+            anchor = None
+        else:
+            anchor = coordinate if anchor is None else min(float(anchor), coordinate)
+            displacement = coordinate-anchor
+            if displacement > axial_limit+1e-12:
+                task._assisted_event('cold_actual_height_violation',
+                    actual_axial_displacement_m=displacement, limit_m=axial_limit,
+                    world_axis_reference=anchor, current_object_pose=current_object)
+                raise ValueError('actual cold insertion drift exceeds its fixed world-height envelope')
+        alignment.update(clock=clock, position=current.copy(), axis=axis.copy(),
+                         lateral_bias=bias, cold_axis_anchor=anchor)
+        target = {**target_object, 'position': goal+bias}
+        if anchor is None:
+            reference, model_reference = current_object, model_object
+        else:
+            shift = (anchor-coordinate)*axis
+            reference = {**current_object, 'position': current+shift}
+            model_reference = {**model_object,
+                'position': np.asarray(model_object['position'], float)+shift}
+        if int(task.step_counter) % 8 == 0:
+            task._assisted_event('alignment_reference', lateral_bias_m=bias,
+                original_target_object_pose=target_object, descent_ready=descent_ready,
+                cold_world_axis_reference=anchor, actual_cold_axial_displacement_m=displacement,
+                cold_actual_axial_limit_m=axial_limit, captured_grasp_reference_changed=False)
+        return reference, target, model_reference
+
+    def _assisted_absolute_object_servo_pose(self, *, phase_key, task, robot_name, spec,
+                                            tracked_robots, tracked_objects,
+                                            object_pose, target_object_pose):
+        from .beam_assisted_servo import (
+            absolute_object_servo, descent_admission, object_pose_from_tcp,
+            staged_clearance_target,
+        )
+        name, stamp, native, object_pose, relative, state = self._assisted_object_servo_context(
+            phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+            tracked_robots=tracked_robots, tracked_objects=tracked_objects)
+        contract = spec.get('beam_assisted_descent_admission')
+        axis = spec.get('target_object_convergence_axis', [0., 0., -1.])
+        ready, detail = True, None
+        if contract is not None:
+            ready, detail = descent_admission(state.setdefault('admission', {}), stamp,
+                object_pose, target_object_pose, axis, contract, native)
+            # Completion must not bypass a still-cold measured alignment gate.
+            self._insertion_lateral_alignment_active[phase_key] = not ready
+        actual_q = self._current_arm_q(task, robot_name)
+        model_tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                                spec=spec, command_q=actual_q)
+        if model_tcp is None:
+            raise ValueError('assisted object servo lacks measured-joint model FK')
+        model_object = object_pose_from_tcp(model_tcp, relative[0], relative[1])
+        baseline_position, baseline_angle = self._assisted_check_model_residual(
+            task=task, robot_name=robot_name, spec=spec, stamp=stamp, state=state,
+            current_object=object_pose, model_object=model_object, actual_q=actual_q, relative=relative)
+        position_step, orientation_step, _ = self._assisted_phase_handoff(
+            task=task, robot_name=robot_name, spec=spec, stamp=stamp, state=state,
+            current_object=object_pose, measured_model_object=model_object,
+            relative=relative, actual_q=actual_q)
+        servo_object, servo_target, servo_model = self._assisted_alignment_reference(
+            task=task, spec=spec, state=state, stamp=stamp,
+            current_object=object_pose, model_object=model_object,
+            target_object=target_object_pose, descent_ready=ready)
+        if spec.get('beam_assisted_staged_clearance'):
+            servo_target = staged_clearance_target(state, stamp, object_pose,
+                target_object_pose, spec['beam_assisted_staged_clearance'])
+        incremental = bool(spec.get('beam_assisted_incremental_clearance'))
+        if incremental:
+            from .beam_assisted_servo import incremental_clearance_command, object_pose_from_tcp
+            stage = state.get('clearance_path', {}).get('stage')
+            previous_q, previous_tcp = self._assisted_lift_hold_publication(
+                task=task, robot_name=robot_name, spec=spec, stamp=stamp, state=state, actual_q=actual_q)
+            if 'incremental_drive_reference' not in state:
+                from .planner_primitives import quat_conjugate as _entry_conjugate,quat_multiply as _entry_multiply,normalize_quat as _entry_normalize
+                initial_model=object_pose_from_tcp(previous_tcp,*relative)
+                state['incremental_drive_reference']=dict(
+                    position=np.asarray(initial_model['position'])-np.asarray(object_pose['position']),
+                    orientation=_entry_normalize(_entry_multiply(initial_model['orientation'],_entry_conjugate(np.asarray(object_pose['orientation'])))))
+                task._assisted_event('incremental_drive_reference',robot=robot_name,
+                    retained_entry_bias=state['incremental_drive_reference'],
+                    previous_final_model_pose=initial_model,native_entry_pose=object_pose,
+                    captured_grasp_reference_changed=False)
+            old_request = state.get('incremental_request')
+            same_tick = bool(old_request and old_request['stamp'] == stamp)
+            if same_tick and (not np.array_equal(old_request['actual_q'], actual_q)
+                    or not np.array_equal(old_request['native_position'], object_pose['position'])
+                    or not np.array_equal(old_request['native_orientation'], object_pose['orientation'])):
+                raise ValueError('incremental clearance observations changed within a native tick')
+            if same_tick and np.array_equal(old_request['previous_q'], previous_q):
+                command, requested_model, increment_detail = (
+                    old_request['tcp'], old_request['model'], old_request['detail'])
+            else:
+                accepted_repeat = bool(same_tick and state.get('incremental_accepted_stamp') == stamp
+                    and np.array_equal(state.get('published_q'), previous_q))
+                if same_tick and not accepted_repeat:
+                    raise ValueError('unowned final publication changed within incremental tick')
+                command, requested_model, increment_detail = incremental_clearance_command(
+                    object_pose, model_object, previous_tcp, relative, servo_target, stage,
+                    position_step, orientation_step,
+                    position_lookahead=float(spec.get('target_object_servo_position_command_lookahead', .003)),
+                    orientation_lookahead=float(spec.get('cartesian_orientation_command_lookahead', .02)),
+                    hold=bool(accepted_repeat or state.get('phase_handoff_age') == 0),
+                    drive_reference=state['incremental_drive_reference'])
+            state['incremental_request'] = dict(stamp=dict(stamp), previous_q=previous_q.copy(),
+                actual_q=actual_q.copy(), native_position=np.asarray(object_pose['position']).copy(),
+                native_orientation=np.asarray(object_pose['orientation']).copy(),
+                tcp=command, model=requested_model, detail=increment_detail,
+                previous_model=object_pose_from_tcp(previous_tcp, *relative))
+            object_command = increment_detail['predicted_native_pose']
+        else:
+            command, object_command = absolute_object_servo(
+            servo_object, servo_target, relative[0], relative[1],
+            position_step, orientation_step,
+            previous_object_command=state.get('object_command'),
+            position_lookahead=float(spec.get('target_object_servo_position_command_lookahead', .003)),
+            orientation_lookahead=float(spec.get('cartesian_orientation_command_lookahead', .02)),
+            convergence_axis=axis if contract is not None else None,
+            allow_axial_motion=ready, measured_fk_object_pose=servo_model)
+        hold_lift = bool(not incremental and spec.get('beam_assisted_lift_command_rotation_hold')
+                         and state.get('clearance_path', {}).get('stage') == 'lift')
+        state['lift_command_hold_active'] = hold_lift
+        state['lift_command_zero_motion'] = False
+        if hold_lift:
+            _, previous_tcp = self._assisted_lift_hold_publication(
+                task=task, robot_name=robot_name, spec=spec, stamp=stamp, state=state, actual_q=actual_q)
+            dp, da = pose_error(servo_object['position'], servo_object['orientation'],
+                                servo_target['position'], servo_target['orientation'])
+            state['lift_command_zero_motion'] = dp <= 1e-12 and da <= 1e-12
+            if state['lift_command_zero_motion']:
+                command = {k: np.asarray(previous_tcp[k], float).copy() for k in ('position', 'orientation')}
+            else:
+                # Retain the model-object translation, but invert the SAME
+                # frozen grasp with the loaded drive rotation. Replacing only
+                # the quaternion would move the long grasp's lever arm.
+                model_position = (np.asarray(command['position'], float)
+                                  + quat_rotate(command['orientation'], relative[0]))
+                orientation = state['lift_command_orientation'].copy()
+                command = {'position': model_position-quat_rotate(orientation, relative[0]),
+                           'orientation': orientation}
+        state.update(requested_object_command=object_command, descent_ready=ready,
+                     admission_detail=detail, stamp=dict(stamp))
+        if int(task.step_counter) % 8 == 0:
+            task._assisted_event('absolute_object_servo', robot=robot_name, object=name,
+                current_object_pose=object_pose, command_object_pose=object_command,
+                command_tcp_pose=command, descent_admission=detail,
+                fk_native_position_residual_m=baseline_position,
+                fk_native_orientation_residual_rad=baseline_angle,
+                clearance_stage=state.get('clearance_path', {}).get('stage'))
+        return command
+
+    def _assisted_verify_published_held_command(self, *, task, robot_name, context,
+                                               command_q, current_q, previous_q=None):
+        """Validate the final explicit joints, including the outer native clamp."""
+        from .beam_assisted_servo import (
+            anchored_object_prediction, object_pose_from_tcp, published_object_command_safe,
+        )
+        spec, phase_key = context['spec'], context['phase_key']
+        if (context['phase_index'] != getattr(task, 'phase_index', None)
+                or context['phase_entry_step'] != getattr(task, 'phase_entry_step', None)):
+            raise ValueError('stale assisted object command context')
+        name, stamp, native, current_object, relative, state = self._assisted_object_servo_context(
+            phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+            tracked_robots=context['tracked_robots'], tracked_objects=context['tracked_objects'])
+        target = self._target_object_pose(task=task, spec=spec)
+        contract = spec.get('beam_assisted_descent_admission')
+        ready = bool(state.get('descent_ready') and state.get('stamp') == stamp)
+        actual = np.asarray(current_q, float)
+        requested = np.asarray(command_q, float)
+        if actual.shape != (6,) or requested.shape != (6,) or not np.all(np.isfinite([actual, requested])):
+            raise ValueError('assisted final object command requires six native joints')
+        actual_tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                                 spec=spec, command_q=actual)
+        if actual_tcp is None:
+            raise ValueError('assisted final object command lacks measured-joint FK')
+        actual_fk_object = object_pose_from_tcp(actual_tcp, relative[0], relative[1])
+        baseline_position, baseline_angle = self._assisted_check_model_residual(
+            task=task, robot_name=robot_name, spec=spec, stamp=stamp, state=state,
+            current_object=current_object, model_object=actual_fk_object, actual_q=actual, relative=relative)
+        joint_cap = min(.02, float(state.get('phase_handoff_joint_step', .02)))
+        incremental = bool(spec.get('beam_assisted_incremental_clearance'))
+        increment_request = state.get('incremental_request') if incremental else None
+        if incremental:
+            fresh_previous, _ = self._assisted_lift_hold_publication(
+                task=task, robot_name=robot_name, spec=spec, stamp=stamp, state=state, actual_q=actual)
+            if (increment_request is None or increment_request['stamp'] != stamp
+                    or previous_q is None or not np.array_equal(previous_q, fresh_previous)
+                    or not np.array_equal(increment_request['previous_q'], fresh_previous)):
+                raise ValueError('incremental clearance lacks its current final publication')
+        hold_lift = bool(spec.get('beam_assisted_lift_command_rotation_hold')
+                         and state.get('lift_command_hold_active') and not incremental)
+        if hold_lift:
+            if state.get('stamp') != stamp or state.get('clearance_path', {}).get('stage') != 'lift':
+                raise ValueError('loaded lift lacks a current stage reference')
+            fresh_previous, previous_tcp = self._assisted_lift_hold_publication(
+                task=task, robot_name=robot_name, spec=spec, stamp=stamp, state=state, actual_q=actual)
+            if previous_q is None or not np.array_equal(np.asarray(previous_q, float), fresh_previous):
+                raise ValueError('loaded lift final publication changed before its guard')
+            if state.get('lift_command_zero_motion'):
+                requested = fresh_previous.copy()
+        if spec.get('beam_assisted_phase_handoff_ticks') is not None:
+            if previous_q is None or 'phase_handoff_age' not in state:
+                raise ValueError('assisted final handoff lacks its current entry state')
+            if state['phase_handoff_age'] == 0:
+                requested = np.asarray(previous_q, float).copy()
+        last_detail = None
+        for ratio in (1., .5, .25, .125, .0625, 0.):
+            # A measured-state backtrack releases the existing loaded drive
+            # bias. Only this explicit lift mode backtracks from publication.
+            origin = np.asarray(previous_q, float) if (hold_lift or incremental) else actual
+            candidate = origin + ratio*(requested-origin)
+            if previous_q is not None:
+                # Re-check after the safety backtrack as well: moving toward
+                # measured hold must not bypass the last-publication step cap.
+                candidate = np.asarray(previous_q, float) + np.clip(
+                    candidate-np.asarray(previous_q, float), -joint_cap, joint_cap)
+                candidate = np.clip(candidate, actual-.12, actual+.12)
+            tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                               spec=spec, command_q=candidate)
+            if tcp is None:
+                raise ValueError('assisted final object command lacks calibrated FK')
+            lift_detail = None
+            incremental_detail = None
+            if incremental:
+                from .beam_assisted_servo import interpolate_object_pose
+                from .planner_primitives import quat_conjugate
+                intended = interpolate_object_pose(increment_request['previous_model'],
+                                                   increment_request['model'], ratio)
+                desired_tcp_q = normalize_quat(quat_multiply(intended['orientation'],
+                                                    quat_conjugate(relative[1])))
+                desired_tcp = dict(position=intended['position']-quat_rotate(desired_tcp_q, relative[0]),
+                                   orientation=desired_tcp_q)
+                # Numerical publication consistency, not a changed physical
+                # budget. Refine the complete intended pose after outer clamps.
+                dp, da = pose_error(tcp['position'], tcp['orientation'],
+                                    desired_tcp['position'], desired_tcp['orientation'])
+                refined = False
+                if ratio == 0.:
+                    candidate = fresh_previous.copy()
+                    tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                                     spec=spec, command_q=candidate)
+                elif dp > 1e-6 or da > 1e-6:
+                    refined_q = self._local_grasp_ik(task=task, robot_name=robot_name,
+                        target_pose=desired_tcp, reference_q=fresh_previous, joint_radius=joint_cap,
+                        spec={**spec, 'ik_position_tolerance': min(float(spec.get('ik_position_tolerance', .00005)), 1e-6),
+                              'ik_orientation_tolerance': min(float(spec.get('ik_orientation_tolerance', .0005)), 1e-6)})
+                    if refined_q is None:
+                        continue
+                    candidate = np.asarray(refined_q, float)
+                    if (candidate.shape != (6,) or not np.all(np.isfinite(candidate))
+                            or np.max(abs(candidate-fresh_previous)) > joint_cap+1e-12
+                            or np.max(abs(candidate-actual)) > .12+1e-12):
+                        continue
+                    tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                                     spec=spec, command_q=candidate)
+                    refined = True
+                dp, da = pose_error(tcp['position'], tcp['orientation'],
+                                    desired_tcp['position'], desired_tcp['orientation'])
+                if dp > 1e-6 or da > 1e-6:
+                    continue
+                incremental_detail = dict(stage=increment_request['detail']['stage'],
+                    position_consistency_m=dp, orientation_consistency_rad=da,
+                    refined=refined, hold_fallback=bool(ratio == 0.),
+                    previous_final_q=fresh_previous, intended_model=intended)
+            if hold_lift:
+                _, rotation_error = pose_error(tcp['position'], tcp['orientation'],
+                    tcp['position'], state['lift_command_orientation'])
+                refined = False
+                # This is numerical command consistency, not a relaxed
+                # physical success/model threshold. Refine inside the ORIGINAL
+                # publication joint box after outer clamps have run.
+                if rotation_error > 1e-6 and ratio != 0.:
+                    refined_q = self._local_grasp_ik(task=task, robot_name=robot_name,
+                        target_pose={'position': tcp['position'],
+                                     'orientation': state['lift_command_orientation']},
+                        reference_q=fresh_previous,
+                        spec={**spec, 'ik_orientation_tolerance': min(
+                            float(spec.get('ik_orientation_tolerance', .0005)), 1e-6)},
+                        joint_radius=joint_cap)
+                    if refined_q is None:
+                        continue
+                    candidate = np.asarray(refined_q, float)
+                    if (candidate.shape != (6,) or not np.all(np.isfinite(candidate))
+                            or np.max(abs(candidate-fresh_previous)) > joint_cap+1e-12
+                            or np.max(abs(candidate-actual)) > .12+1e-12):
+                        continue
+                    tcp = self._grasp_command_fk_pose(task=task, robot_name=robot_name,
+                                                    spec=spec, command_q=candidate)
+                    if tcp is None:
+                        raise ValueError('loaded lift refined command lacks FK')
+                    _, rotation_error = pose_error(tcp['position'], tcp['orientation'],
+                        tcp['position'], state['lift_command_orientation'])
+                    refined = True
+                if rotation_error > 1e-6:
+                    continue
+                lift_detail = dict(orientation_error_rad=rotation_error, refined=refined,
+                    hold_fallback=bool(ratio == 0. and not np.array_equal(requested, fresh_previous)),
+                    zero_motion=bool(state.get('lift_command_zero_motion')),
+                    translation_step_m=float(np.linalg.norm(np.asarray(tcp['position'])
+                                                           - np.asarray(previous_tcp['position']))))
+            predicted = object_pose_from_tcp(tcp, relative[0], relative[1])
+            if incremental:
+                native_candidate = anchored_object_prediction(current_object, actual_fk_object, predicted)
+                lead_p, lead_a = pose_error(current_object['position'], current_object['orientation'],
+                                           native_candidate['position'], native_candidate['orientation'])
+                if (lead_p > float(spec.get('target_object_servo_position_command_lookahead', .003))+1e-12
+                        or lead_a > float(spec.get('cartesian_orientation_command_lookahead', .02))+1e-12):
+                    continue
+            allowed, detail = True, {}
+            if contract is not None:
+                # Sweep the complete bounded joint increment. This cheap FK
+                # check supplements, rather than replaces, the CAD certificate.
+                for fraction in (.25, .5, .75, 1.):
+                    sample_tcp = (tcp if fraction == 1. else self._grasp_command_fk_pose(
+                        task=task, robot_name=robot_name, spec=spec,
+                        command_q=actual+fraction*(candidate-actual)))
+                    if sample_tcp is None:
+                        raise ValueError('assisted final object sweep lacks FK')
+                    sample_model = object_pose_from_tcp(sample_tcp, relative[0], relative[1])
+                    sample = anchored_object_prediction(current_object, actual_fk_object, sample_model)
+                    allowed, detail = published_object_command_safe(current_object, sample, target,
+                        spec.get('target_object_convergence_axis', [0., 0., -1.]), contract, ready)
+                    if not allowed:
+                        break
+                detail['checked_joint_fraction'] = fraction
+            if allowed and spec.get('beam_assisted_production_cad_guard'):
+                guard = getattr(task, '_assisted_production_cad_guard', None)
+                if not callable(guard):
+                    raise ValueError('loaded free motion lacks its production CAD guard')
+                allowed, cad_detail = guard(robot_name=robot_name, object_name=name,
+                    command_q=candidate, current_q=actual, relative=relative,
+                    physics_stamp=stamp)
+                detail['production_cad'] = cad_detail
+            last_detail = dict(detail, accepted_ratio=ratio, object=name,
+                fk_native_position_residual_m=baseline_position,
+                fk_native_orientation_residual_rad=baseline_angle)
+            if lift_detail is not None:
+                last_detail['lift_command_rotation_hold'] = lift_detail
+            if allowed:
+                # Only the FK of the target that will actually be published
+                # becomes the next object-space lead. Never cache rejected IK.
+                state['object_command'] = anchored_object_prediction(current_object, actual_fk_object, predicted)
+                state['published_model_object_pose'] = predicted
+                state['published_q'] = candidate.copy()
+                if incremental_detail is not None:
+                    state['incremental_accepted_stamp'] = dict(stamp)
+                    task._assisted_event('incremental_clearance_command', robot=robot_name,
+                        physics_stamp=dict(stamp), accepted_ratio=ratio,
+                        published_q=candidate, **incremental_detail)
+                if lift_detail is not None:
+                    task._assisted_event('lift_command_rotation_hold', robot=robot_name,
+                        physics_stamp=dict(stamp), accepted_ratio=ratio,
+                        previous_final_q=fresh_previous, published_q=candidate,
+                        **lift_detail)
+                return candidate, last_detail
+        raise ValueError('no safe assisted explicit-joint command, including measured hold: '
+                         + repr(last_detail))
+
     def _target_object_servo_pose(  # noqa: C901
         self,
         *,
@@ -2160,6 +2856,12 @@ class UR5eAssemblyAtomicSkillAdapter:
 
         current_object_position = np.asarray(object_pose['position'], dtype=float)
         target_object_position = np.asarray(target_object_pose['position'], dtype=float)
+        if (spec.get('beam_assisted') and spec.get('requires_held_object')
+                and spec.get('beam_assisted_absolute_object_servo')):
+            return self._assisted_absolute_object_servo_pose(
+                phase_key=phase_key, task=task, robot_name=robot_name, spec=spec,
+                tracked_robots=tracked_robots, tracked_objects=tracked_objects,
+                object_pose=object_pose, target_object_pose=target_object_pose)
         object_delta = target_object_position - current_object_position
         _, _, attachment_mode = self._compliant_attachment_allowance(
             object_name=object_name,
@@ -2745,6 +3447,11 @@ class UR5eAssemblyAtomicSkillAdapter:
         if phase_key is None or not bool(detail['configured']):
             return bool(detail['capture_ready'])
 
+        if spec.get('beam_assisted_transition_settle'):
+            # The completion gate counts physical samples. A fixed number of
+            # policy calls must not resume motion while the load is settling.
+            return bool(detail['capture_ready'])
+
         hold_steps = int(spec.get('target_object_settle_hold_steps', 48))
         retry_servo_steps = int(spec.get('target_object_settle_retry_servo_steps', 8))
         if hold_steps <= 0 or retry_servo_steps < 0:
@@ -2752,6 +3459,13 @@ class UR5eAssemblyAtomicSkillAdapter:
                 'target-object settle hold steps must be positive and retry servo ' 'steps must be non-negative.'
             )
         state = self._target_object_settle_state.setdefault(phase_key, {})
+        if (spec.get('beam_assisted_absolute_object_servo')
+                and spec.get('beam_assisted_descent_admission')
+                and not detail.get('assisted_descent_admission', {}).get('ready')):
+            # A lost corridor must resume alignment now, not retain a 48-call
+            # settle hold whose looser legacy capture remains true.
+            state.update(hold_active=False, remaining_steps=0, retry_servo_steps=0)
+            return False
         event = 'idle'
         hold_active = False
         if bool(state.get('hold_active', False)):
@@ -2812,6 +3526,15 @@ class UR5eAssemblyAtomicSkillAdapter:
         if object_name is None:
             return False
         relaxation_key = (id(task), object_name)
+        attachment_for = getattr(task, '_attachment_for', None)
+        attachment = (attachment_for(object_name, spec.get('robot')) if callable(attachment_for)
+                      else getattr(task, '_attachments', {}).get(object_name))
+        if isinstance(attachment, dict) and attachment.get('mode') == 'pure_physical_grasp':
+            # There is no fixed joint to convert. Continue through the ordinary
+            # insertion servo, completion gates and loaded-force protection.
+            self._insertion_compliance_transition_state.pop(relaxation_key, None)
+            self._completed_insertion_compliance_transitions.pop(relaxation_key, None)
+            return False
         locked_linear_world_direction = None
         compliance_mode = 'isotropic'
         minimum_gravity_alignment = float(spec.get('relax_fixed_attachment_minimum_gravity_alignment', 0.0))
@@ -3336,6 +4059,36 @@ class UR5eAssemblyAtomicSkillAdapter:
         if decision['failure']:
             return self._failure_or_hold(task, robot_name, spec, decision['failure'],
                                          diagnostics={'decision':decision, **sample})
+        # This bounded diagnostic freezes existing drive targets, never bodies.
+        # Production seating and all physical success/safety gates stay active.
+        from toolkits.factory_dual_franka_assembly.beam_loaded_target_hold import (
+            capture_loaded_native_targets, loaded_target_hold_decision)
+        hold_state = state.setdefault('loaded_target_hold', {})
+        hold = loaded_target_hold_decision(
+            hold_state, sample, os.environ.get('BEAM_LOADED_TARGET_HOLD_SECONDS', '0'))
+        if hold['mode'] == 'capture':
+            open_q, closed_q = self._gripper_open_closed_q(task=task, robot_name=robot_name)
+            captured = capture_loaded_native_targets(
+                task.robots[robot_name], saved, open_q, closed_q,
+                float(getattr(task.robots[robot_name].config, 'gripper_close_openness', .08)))
+            hold_state['captured'] = captured
+            if not captured['valid']:
+                hold_state['failure'] = 'native_capture_' + captured['reason']
+                hold = dict(hold, mode='failure', reason=hold_state['failure'])
+        if trace and hold['mode'] != 'disabled':
+            with open(os.path.join(os.path.dirname(trace), 'loaded_target_hold_trace.jsonl'), 'a') as handle:
+                handle.write(json.dumps({'step': int(task.step_counter), 'phase': task.phase,
+                    'robot': robot_name, 'hold': hold, 'captured': hold_state.get('captured'),
+                    'seating_decision': decision, 'observation': sample}) + '\n')
+        if hold['mode'] == 'failure':
+            return self._failure_or_hold(task, robot_name, spec, 'loaded_target_hold_' + hold['reason'],
+                                         diagnostics={'hold': hold})
+        if hold['mode'] in ('capture', 'holding'):
+            captured = hold_state.get('captured') or {}
+            if not captured.get('valid'):
+                return self._failure_or_hold(task, robot_name, spec, 'loaded_target_hold_capture_missing')
+            return self._hold_previous_grasp_command(task=task, robot_name=robot_name,
+                spec=spec, tracked_robots=tracked_robots, diagnostic_hold=captured)
         if decision['delta_z'] == 0:
             return self._hold_previous_grasp_command(task=task, robot_name=robot_name,
                                                     spec=spec, tracked_robots=tracked_robots)
@@ -3722,7 +4475,8 @@ class UR5eAssemblyAtomicSkillAdapter:
             q = candidate
         return None
 
-    def _hold_previous_grasp_command(self, *, task, robot_name, spec, tracked_robots, target_pose=None):
+    def _hold_previous_grasp_command(self, *, task, robot_name, spec, tracked_robots, target_pose=None,
+                                     diagnostic_hold=None):
         object_name = self._object_name_from_spec(spec)
         saved = getattr(task, '_ur5e_contact_hold_commands', {}).get(robot_name)
         attachment = (task._attachment_for(object_name, robot_name) if hasattr(task, '_attachment_for')
@@ -3734,6 +4488,11 @@ class UR5eAssemblyAtomicSkillAdapter:
             return self._failure_or_hold(task, robot_name, spec, 'held_object_not_grasped')
         current_q = self._current_arm_q(task, robot_name)
         command_q = np.asarray(saved['arm_q']).copy()
+        if diagnostic_hold is not None:
+            if (not diagnostic_hold.get('valid') or not np.allclose(command_q,
+                    diagnostic_hold.get('arm_q'), rtol=0, atol=1e-6)):
+                return self._failure_or_hold(task, robot_name, spec, 'loaded_target_hold_target_changed')
+            command_q = np.asarray(diagnostic_hold['arm_q'], dtype=float).copy()
         limited_command = self._limit_command_to_measured_state(
             current_q=current_q, command_q=command_q, spec=spec)
         if current_q is None or not np.allclose(limited_command, command_q, rtol=0, atol=1e-10):
@@ -3752,9 +4511,10 @@ class UR5eAssemblyAtomicSkillAdapter:
             reference_q=command_q, target_q=command_q, command_q=command_q)
         self._remember_arm_command(task, robot_name, command_q)
         return self._publish_loaded_action(task=task, robot_name=robot_name, spec=spec,
-                                           saved=saved, command_q=command_q)
+                                           saved=saved, command_q=command_q, diagnostic_hold=diagnostic_hold)
 
-    def _publish_loaded_action(self, *, task, robot_name, spec, saved, command_q):
+    def _publish_loaded_action(self, *, task, robot_name, spec, saved, command_q,
+                               diagnostic_hold=None):
         attachment = (task._attachment_for(saved['object'], robot_name) if hasattr(task, '_attachment_for')
                       else getattr(task, '_attachments', {}).get(saved['object'])) or {}
         attach_spec = attachment.get('attach_spec') or {}
@@ -3762,6 +4522,7 @@ class UR5eAssemblyAtomicSkillAdapter:
             metrics = task._gripper_contact_metrics(saved['object'], robot_name, attach_spec=attach_spec)
             threshold = float(attach_spec.get('contact_force_threshold', .1))
             if not all(metrics.get(s, {}).get('force_probe_valid') and
+                       np.isfinite(float(metrics[s].get('force', float('nan')))) and
                        float(metrics[s].get('force', 0.0)) >= threshold
                        for s in ('left_finger', 'right_finger')):
                 return self._failure_or_hold(task, robot_name, spec, 'loaded_force_contact_missing')
@@ -3773,17 +4534,64 @@ class UR5eAssemblyAtomicSkillAdapter:
             state = saved.setdefault('loaded_force_state', {
                 'contact_control_active': True, 'contact_capture_closure': previous,
                 'contact_command_closure': previous})
+            # Consume real relief samples even while diagnostic targets are
+            # fixed, so expiry does not introduce an artificial clock gap/band reset.
+            control_spec, relief = attach_spec, None
             if state.get('step') != int(task.step_counter):
-                # Carrying stays at its original band. Only measured tabletop
-                # contact may select the explicitly configured Beam relief band.
-                control_spec, relief = attach_spec, None
                 phase_spec = (task.get_current_phase_spec() if hasattr(task, 'get_current_phase_spec') else {})
+                force_band = None
+                band_kind = 'turn'
+                if getattr(task, 'phase', None) == 'assemble_00_part_3_assembly_clearance':
+                    force_band = (phase_spec.get('local_skill') or {}).get('beam_turn_peak_force_band_N')
+                elif getattr(task, 'phase', None) in {
+                        'assemble_00_part_3_lift', 'assemble_00_part_3_post_lift_restore_gravity',
+                        'assemble_00_part_3_pickup_clearance'}:
+                    force_band = (phase_spec.get('local_skill') or {}).get('beam_carry_peak_force_band_N')
+                    band_kind = 'carry'
+                if (saved['object'] == 'fabrica_beam_3'
+                        and force_band is not None):
+                    try:
+                        low, high = map(float, force_band)
+                        if not (np.isfinite(low) and np.isfinite(high)
+                                and 4.0 <= low < high <= 24.0
+                                and high < float(attach_spec.get('close_force_limit', 40.0))):
+                            raise ValueError('Invalid loaded force band')
+                    except (TypeError, ValueError):
+                        return self._failure_or_hold(task, robot_name, spec,
+                                                     f'loaded_{band_kind}_force_band_invalid')
+                    # Preserve the captured grasp, accumulated seek budget and
+                    # original hard limits. This band regulates the larger force,
+                    # never declares bilateral contact or a successful hold.
+                    control_spec = dict(attach_spec, close_force_low=low, close_force_high=high)
                 config = phase_spec.get('beam_table_contact_force_relief')
                 if saved['object'] == 'fabrica_beam_6' and config:
                     from toolkits.factory_dual_franka_assembly.beam_contact_relief import contact_relief_spec
                     control_spec, relief = contact_relief_spec(
                         saved.setdefault('beam_contact_relief', {}), task._beam_table_observation(),
                         attach_spec, config)
+            if diagnostic_hold is not None:
+                if (not diagnostic_hold.get('valid') or not np.allclose(command_q,
+                        diagnostic_hold.get('arm_q'), rtol=0, atol=1e-6)):
+                    return self._failure_or_hold(task, robot_name, spec, 'loaded_target_hold_target_changed')
+                forces = [float(metrics[s]['force']) for s in ('left_finger', 'right_finger')]
+                force_limit = float(attach_spec.get('close_force_limit', 40.))
+                if max(forces) > force_limit:
+                    return self._failure_or_hold(task, robot_name, spec, 'loaded_gripper_force_limit')
+                openness = float(diagnostic_hold['gripper_openness'])
+                # Keep the regulation cache at the published target, so expiry
+                # resumes a rate-limited update without a hidden accumulated seek.
+                state['contact_command_closure'] = abs(closed_q - open_q) * (1. - openness)
+                state['hold_gripper_openness'] = openness
+                state['step'] = int(task.step_counter)
+                state['last_control'] = {'mode': 'diagnostic_native_target_hold',
+                    'force_within_limit': True, 'forces': forces, 'force_limit': force_limit,
+                    'command_q': diagnostic_hold['gripper_q'], 'command_openness': openness,
+                    'table_contact_relief': relief}
+                saved['gripper_openness'] = openness
+                self._remember_gripper_hold_openness(task=task, robot_name=robot_name, openness=openness)
+                return OrderedDict([(_ARM_JOINT_CONTROLLER, [diagnostic_hold['arm_q']]),
+                                    (_GRIPPER_CONTROLLER, [openness])])
+            if state.get('step') != int(task.step_counter):
                 control = self._contact_close_control(state=state, spec=control_spec, metrics=metrics,
                     gripper_q=measured, open_q=open_q, closed_q=closed_q,
                     requested_openness=saved['gripper_openness'], min_openness=float(getattr(
@@ -3804,8 +4612,25 @@ class UR5eAssemblyAtomicSkillAdapter:
                                                      openness=saved['gripper_openness'])
             if not state['last_control']['force_within_limit']:
                 return self._failure_or_hold(task, robot_name, spec, 'loaded_gripper_force_limit')
+        elif diagnostic_hold is not None:
+            return self._failure_or_hold(task, robot_name, spec, 'loaded_target_hold_regulation_unavailable')
         return OrderedDict([(_ARM_JOINT_CONTROLLER, [np.asarray(command_q).tolist()]),
                             (_GRIPPER_CONTROLLER, [saved['gripper_openness']])])
+
+    @staticmethod
+    def _assisted_transition_hold_target(task, robot_name, current_q):
+        stamp = task._beam_physics_stamp()
+        published = getattr(task, '_assisted_published_q_stamps', {}).get(robot_name)
+        q = np.asarray(getattr(task, '_assisted_published_q', {}).get(robot_name), float)
+        actual = np.asarray(current_q, float)
+        if (stamp.get('valid') is not True or not isinstance(published, dict)
+                or published.get('epoch') != stamp.get('epoch')
+                or type(stamp.get('index')) is not int or type(published.get('index')) is not int
+                or stamp['index']-published['index'] not in (0, 1)
+                or q.shape != (6,) or actual.shape != (6,)
+                or not np.all(np.isfinite([q, actual])) or np.max(np.abs(q-actual)) > .12+1e-12):
+            raise ValueError('assisted transition hold lacks a fresh final published target')
+        return q.copy()
 
     def _held_transport_action(self, *, task, robot_name: str, spec: dict) -> OrderedDict:
         action = self._hold_joint_action(task=task, robot_name=robot_name)
@@ -3830,7 +4655,9 @@ class UR5eAssemblyAtomicSkillAdapter:
     ) -> dict[str, Any]:
         detail: dict[str, Any] = {
             'configured': bool(
-                spec.get('hold_for_target_object_settle', False) and spec.get('require_target_object_static', False)
+                spec.get('beam_assisted_transition_settle')
+                or (spec.get('hold_for_target_object_settle', False)
+                    and spec.get('require_target_object_static', False))
             ),
             'capture_ready': False,
             'tcp_position_ready': False,
@@ -3979,6 +4806,23 @@ class UR5eAssemblyAtomicSkillAdapter:
             and object_orientation_ready
             and lateral_ready
         )
+        if spec.get('beam_assisted_absolute_object_servo') and spec.get('beam_assisted_descent_admission'):
+            from .beam_assisted_servo import descent_admission
+            robot_name = spec.get('robot')
+            context = getattr(task, '_beam_assisted_command_contexts', {}).get(robot_name)
+            if (context is None or context['phase_index'] != getattr(task, 'phase_index', None)
+                    or context['phase_entry_step'] != getattr(task, 'phase_entry_step', None)):
+                raise ValueError('assisted capture lacks a current servo context')
+            _, stamp, native, actual_object, _, state = self._assisted_object_servo_context(
+                phase_key=context['phase_key'], task=task, robot_name=robot_name, spec=spec,
+                tracked_robots=context['tracked_robots'], tracked_objects=tracked_objects)
+            ready, admission = descent_admission(state.setdefault('admission', {}), stamp,
+                actual_object, target_object_pose,
+                spec.get('target_object_convergence_axis', [0., 0., -1.]),
+                spec['beam_assisted_descent_admission'], native)
+            state.update(descent_ready=ready, admission_detail=admission, stamp=dict(stamp))
+            detail['assisted_descent_admission'] = admission
+            detail['capture_ready'] = bool(detail['capture_ready'] and ready)
         return detail
 
     @staticmethod
@@ -4074,6 +4918,19 @@ class UR5eAssemblyAtomicSkillAdapter:
             max_position_step=max_position_step,
             max_orientation_step=max_orientation_step,
         )
+        if (spec.get('beam_assisted') and spec.get('requires_held_object')
+                and max_position_step > 0.0):
+            # Preserve only this phase's accepted Cartesian progress, bounded
+            # against the live TCP. Restarting a tiny step from the sagging TCP
+            # can command less than the gravity compensation error indefinitely.
+            command_pose['position'] = self._accumulated_cartesian_command_position(
+                phase_key=phase_key,
+                current_position=np.asarray(current_pose['position'], float),
+                one_step_position=np.asarray(command_pose['position'], float),
+                gate_position=np.asarray(target_pose['position'], float),
+                enabled=True, lookahead=.003, allow_gate_overdrive=False,
+                accumulation_step=max_position_step,
+            )
         if not bool(spec.get('cartesian_orientation_command_warm_start', False)) or max_orientation_step <= 0.0:
             return command_pose
 
@@ -5800,26 +6657,33 @@ class UR5eAssemblyAtomicSkillAdapter:
         }
 
     def _current_arm_q(self, task, robot_name: str) -> np.ndarray | None:
+        """Read measured joint state; cached commands are not measurements."""
         robot = task.robots.get(robot_name)
         if robot is None:
+            self._arm_measurement_status[robot_name] = {'valid': False, 'reason': 'robot_unavailable'}
             return None
         controller = robot.controllers.get(_ARM_JOINT_CONTROLLER)
         arm_joint_names = self._arm_joint_names(robot=robot, controller=controller)
         arm_joint_count = len(arm_joint_names)
-        if controller is not None and hasattr(controller, 'get_joint_subset'):
-            subset = controller.get_joint_subset()
-        else:
-            subset = getattr(controller, 'joint_subset', None) if controller is not None else None
+        errors = []
+        try:
+            subset = (controller.get_joint_subset() if controller is not None and hasattr(controller, 'get_joint_subset')
+                      else getattr(controller, 'joint_subset', None))
+        except Exception as exc:
+            subset = None
+            errors.append(f'joint_subset:{type(exc).__name__}')
         if subset is not None:
             try:
                 joint_positions = self._coerce_arm_q(
                     subset.get_joint_positions(),
                     joint_count=arm_joint_count,
+                    bound_revolute=False,
                 )
                 if joint_positions is not None:
+                    self._arm_measurement_status[robot_name] = {'valid': True, 'source': 'joint_subset'}
                     return joint_positions
-            except Exception:
-                pass
+            except Exception as exc:
+                errors.append(f'joint_subset_positions:{type(exc).__name__}')
         articulation = getattr(robot, 'articulation', None)
         if articulation is not None:
             try:
@@ -5827,11 +6691,13 @@ class UR5eAssemblyAtomicSkillAdapter:
                 joint_positions = self._coerce_arm_q(
                     articulation.get_joint_positions(joint_indices=indices),
                     joint_count=arm_joint_count,
+                    bound_revolute=False,
                 )
                 if joint_positions is not None:
+                    self._arm_measurement_status[robot_name] = {'valid': True, 'source': 'articulation_named_indices'}
                     return joint_positions
-            except Exception:
-                pass
+            except Exception as exc:
+                errors.append(f'articulation_named_indices:{type(exc).__name__}')
             try:
                 all_joint_positions = np.asarray(articulation.get_joint_positions(), dtype=float)
                 dof_names = list(getattr(articulation, 'dof_names', []) or [])
@@ -5841,28 +6707,24 @@ class UR5eAssemblyAtomicSkillAdapter:
                         joint_positions = self._coerce_arm_q(
                             all_joint_positions[np.asarray(indices, dtype=np.int64)],
                             joint_count=arm_joint_count,
+                            bound_revolute=False,
                         )
                         if joint_positions is not None:
+                            self._arm_measurement_status[robot_name] = {'valid': True, 'source': 'articulation_dof_names'}
                             return joint_positions
-                joint_positions = self._coerce_arm_q(
-                    all_joint_positions[:arm_joint_count],
-                    joint_count=arm_joint_count,
-                )
-                if joint_positions is not None:
-                    return joint_positions
-            except Exception:
-                pass
-        last_q = self._last_arm_command_q.get(robot_name)
-        if last_q is not None:
-            return np.asarray(last_q, dtype=float).copy()
-        try:
-            obs = robot.get_obs()
-            for control in obs.get('joint_action', []) or []:
-                joint_positions = self._coerce_arm_q(control.get('joint_positions'))
-                if joint_positions is not None:
-                    return joint_positions
-        except Exception:
-            pass
+                # A nameless buffer is safe only if it contains exactly the arm.
+                # Never assume a mixed arm/gripper buffer starts with arm joints.
+                if not dof_names and all_joint_positions.shape == (arm_joint_count,):
+                    joint_positions = self._coerce_arm_q(
+                        all_joint_positions, joint_count=arm_joint_count, bound_revolute=False,
+                    )
+                    if joint_positions is not None:
+                        self._arm_measurement_status[robot_name] = {'valid': True, 'source': 'articulation_arm_only'}
+                        return joint_positions
+            except Exception as exc:
+                errors.append(f'articulation_all_positions:{type(exc).__name__}')
+        self._arm_measurement_status[robot_name] = {'valid': False, 'source': None, 'errors': errors,
+                                                   'reason': 'measured_joint_state_unavailable'}
         return None
 
     def _current_arm_dynamics(self, *, task, robot_name: str) -> dict[str, list[float]]:
@@ -6413,13 +7275,16 @@ class UR5eAssemblyAtomicSkillAdapter:
         target_orientation = np.asarray(target_pose['orientation'], dtype=float)
         warm_start = self._coerce_arm_q(warm_start)
         position_tolerance, orientation_tolerance = self._ik_solver_tolerances(spec)
+        assisted_local = bool(spec.get('beam_assisted') and spec.get('requires_held_object'))
+        if assisted_local and warm_start is None:
+            warm_start = self._current_arm_q(task, robot_name)
         try:
             ik_base_pose = ik_controller.get_ik_base_world_pose()
             ik_controller._kinematics_solver.set_robot_base_pose(  # noqa: SLF001
                 robot_position=ik_base_pose[0] / ik_controller._robot_scale,  # noqa: SLF001
                 robot_orientation=ik_base_pose[1],
             )
-            used_warm_start = warm_start is not None and bool(spec.get('use_command_warm_start', True))
+            used_warm_start = warm_start is not None and (assisted_local or bool(spec.get('use_command_warm_start', True)))
             if used_warm_start:
                 solver_wrapper = ik_controller._kinematics_solver  # noqa: SLF001
                 raw_solver = None
@@ -6433,6 +7298,18 @@ class UR5eAssemblyAtomicSkillAdapter:
                 get_ee_frame = getattr(solver_wrapper, 'get_end_effector_frame', None)
                 ee_frame = get_ee_frame() if callable(get_ee_frame) else getattr(solver_wrapper, '_ee_frame', None)
                 if raw_solver is not None and ee_frame is not None:
+                    if spec.get('beam_assisted') and spec.get('requires_held_object'):
+                        from .beam_assisted_ik import bounded_local_ik
+                        result, detail = bounded_local_ik(
+                            lambda q: raw_solver.compute_forward_kinematics(ee_frame, q),
+                            warm_start, target_position, target_orientation,
+                            position_tolerance=float(position_tolerance or 1e-5),
+                            orientation_tolerance=float(orientation_tolerance or 1e-4))
+                        if int(task.step_counter) % 8 == 0 or result is None:
+                            task._assisted_event('local_cartesian_inverse', robot=robot_name,
+                                target_position=target_position,
+                                target_orientation=target_orientation, **detail)
+                        return result
                     restore_default_seeds = None
                     set_default_seeds = getattr(raw_solver, 'set_default_cspace_seeds', None)
                     if bool(spec.get('warm_start_ik_only', False)) and callable(set_default_seeds):
@@ -6701,11 +7578,39 @@ class UR5eAssemblyAtomicSkillAdapter:
         if current_q is None:
             return self._failure_or_hold(task, robot_name, spec, 'current_joint_state_unavailable')
 
-        target_q = self._coerce_arm_q(
-            spec.get('joint_positions'),
-            bound_revolute=False,
-            joint_count=current_q.shape[0],
-        )
+        delta_state = None
+        if 'beam_assisted_joint_target_delta' in spec:
+            try:
+                delta = np.asarray(spec['beam_assisted_joint_target_delta'], dtype=float)
+                if (not spec.get('beam_assisted_native_joint_target')
+                        or current_q.shape != (6,) or delta.shape != (6,)
+                        or not np.all(np.isfinite([current_q, delta]))):
+                    raise ValueError('native delta target needs six finite measured joints and deltas')
+                delta_state = self._completion_state.setdefault(phase_key, {}).get('native_delta_target')
+                if delta_state is None:
+                    delta_state = {'entry_joint_positions': current_q.tolist(),
+                        'delta_joint_positions': delta.tolist(),
+                        'target_joint_positions': (current_q + delta).tolist()}
+                    self._completion_state[phase_key]['native_delta_target'] = delta_state
+                    event = getattr(task, '_assisted_event', None)
+                    if callable(event):
+                        event('native_joint_target_entry', robot=robot_name,
+                              **copy.deepcopy(delta_state))
+                if delta_state['delta_joint_positions'] != delta.tolist():
+                    raise ValueError('native joint delta changed within the same phase entry')
+                target_q = np.asarray(delta_state['target_joint_positions'], dtype=float)
+                if target_q.shape != (6,) or not np.all(np.isfinite(target_q)):
+                    raise ValueError('captured native delta target is invalid')
+            except (TypeError, ValueError, KeyError) as exc:
+                return self._failure_or_hold(task, robot_name,
+                    {**spec, 'require_success': True}, 'invalid_native_joint_target_delta',
+                    diagnostics={'error': str(exc)})
+        else:
+            target_q = self._coerce_arm_q(
+                spec.get('joint_positions'),
+                bound_revolute=False,
+                joint_count=current_q.shape[0],
+            )
         if target_q is None or target_q.shape != current_q.shape:
             return self._failure_or_hold(
                 task,
@@ -6778,24 +7683,39 @@ class UR5eAssemblyAtomicSkillAdapter:
                 flush=True,
             )
         state = self._completion_state.setdefault(phase_key, {})
-        if joint_error <= tolerance:
+        if spec.get('beam_assisted_native_joint_target'):
+            from .beam_assisted_state import consecutive_native_gate
+            native_gate = state.setdefault('joint_target_native_gate', {})
+            reader = getattr(task, '_beam_physics_stamp', None)
+            native_stamp = reader() if callable(reader) else {'valid': False}
+            if not isinstance(native_stamp, dict):
+                native_stamp = {'valid': False}
+            qualified = consecutive_native_gate(native_gate, native_stamp, joint_error <= tolerance,
+                max(int(spec.get('joint_target_stable_steps', 8)), 1))
+            state['joint_target_stable_steps'] = native_gate.get('count', 0)
+            state['joint_target_native_qualified'] = qualified
+        elif joint_error <= tolerance:
             state['joint_target_stable_steps'] = int(state.get('joint_target_stable_steps', 0)) + 1
         else:
             state['joint_target_stable_steps'] = 0
         stable_steps = int(state['joint_target_stable_steps'])
         required_stable_steps = max(int(spec.get('joint_target_stable_steps', 8)), 1)
-        if stable_steps >= required_stable_steps:
+        if (state.get('joint_target_native_qualified') if spec.get('beam_assisted_native_joint_target')
+                else stable_steps >= required_stable_steps):
+            detail = {
+                'target_joint_positions': target_q.tolist(),
+                'joint_error': joint_error,
+                'joint_position_tolerance': tolerance,
+                'stable_steps': stable_steps,
+                'required_stable_steps': required_stable_steps,
+            }
+            if delta_state is not None:
+                detail['native_delta_target'] = copy.deepcopy(delta_state)
             self._mark_complete(
                 task=task,
                 robot_name=robot_name,
                 skill_name=skill_name,
-                detail={
-                    'target_joint_positions': target_q.tolist(),
-                    'joint_error': joint_error,
-                    'joint_position_tolerance': tolerance,
-                    'stable_steps': stable_steps,
-                    'required_stable_steps': required_stable_steps,
-                },
+                detail=detail,
             )
         return action
 
@@ -7195,13 +8115,29 @@ class UR5eAssemblyAtomicSkillAdapter:
         return bool(linear_abort or angular_abort)
 
     @staticmethod
+    def _known_probe_force(finger):
+        """Return a reliable force; an unavailable observation stays unknown."""
+        if not finger.get('force_probe_valid'):
+            return None
+        try:
+            force = float(finger['force'])
+        except (KeyError, TypeError, ValueError):
+            return None
+        return force if np.isfinite(force) else None
+
+    @staticmethod
     def _contact_close_control(*, state: dict, spec: dict, metrics: dict,
                                gripper_q: float, open_q: float, closed_q: float,
                                requested_openness: float, min_openness: float) -> dict:
         """Position-based force regulation; contact capture is separate from success."""
         fingers = [metrics.get(side) or {} for side in ('left_finger', 'right_finger')]
-        valid = all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers)
-        forces = [float(f.get('force', 0.0)) for f in fingers]
+        track_weak_side = bool(spec.get('close_force_recenter_track_weak_side', False))
+        if track_weak_side:
+            forces = [UR5eAssemblyAtomicSkillAdapter._known_probe_force(f) for f in fingers]
+            valid = all(force is not None for force in forces)
+        else:
+            valid = all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers)
+            forces = [float(f.get('force', 0.0)) for f in fingers]
         threshold = float(spec.get('contact_force_threshold', 0.1))
         dt = float((fingers[0].get('force_observation') or {}).get('physics_dt', 1.0 / 240.0))
         if not np.isfinite(dt) or dt <= 0:
@@ -7228,14 +8164,24 @@ class UR5eAssemblyAtomicSkillAdapter:
         if not valid:
             command = min(previous, measured)
             mode = 'invalid_probe_hold'
+            if track_weak_side and any(force is not None and force >= force_limit for force in forces):
+                command -= float(spec.get('close_force_unload_rate', 0.06)) * dt
+                mode = 'force_limit_unload'
         elif state.get('contact_control_active'):
             maximum = min(maximum, float(state['contact_capture_closure']) + float(spec.get('close_force_max_seek', 0.03)))
             if peak > force_high:
                 unload_rate = float(spec.get('close_force_unload_rate', 0.06)) if peak > force_limit else rate
-                command = min(previous, measured) - unload_rate * dt
+                # Ordinary regulation changes the last published target at its
+                # configured rate. Tracking lag is not another target increment.
+                # Hard overload retains its separate emergency unwind path.
+                reference = min(previous, measured) if peak > force_limit else previous
+                command = reference - unload_rate * dt
                 mode = 'force_limit_unload' if peak > force_limit else 'unload'
             elif peak < force_low:
-                command = min(previous, measured + float(spec.get('close_force_max_command_lead', 0.001))) + rate * dt
+                lead_limit = measured + float(spec.get('close_force_max_command_lead', 0.001))
+                # Pause an already leading target rather than rebasing it down
+                # to a lagging measurement while nominally seeking more closure.
+                command = min(previous + rate * dt, max(previous, lead_limit))
                 mode = 'gentle_seek' if not any(loaded) else 'preload'
             else:
                 command = previous
@@ -7258,8 +8204,48 @@ class UR5eAssemblyAtomicSkillAdapter:
         return {'mode': mode, 'probe_valid': bool(valid), 'forces': forces,
                 'first_contact': bool(first_contact), 'contact_control_active': bool(state.get('contact_control_active')),
                 'physics_dt': dt, 'force_limit': force_limit,
+                'force_low': force_low, 'force_high': force_high, 'peak_force': peak,
                 'force_within_limit': bool(valid and peak <= force_limit),
                 'command_q': float(open_q + direction * command), 'command_openness': openness}
+
+    def _record_recenter_final_action(self, *, state, pending, action, task, robot_name, spec):
+        """Record the final returned action, without claiming SDK execution."""
+        q = self._coerce_arm_q((action.get(_ARM_JOINT_CONTROLLER) or [None])[0], bound_revolute=False)
+        pose = None if q is None else self._grasp_command_fk_pose(
+            task=task, robot_name=robot_name, spec=spec, command_q=q,
+        )
+        start = state.get('close_tcp_position_world')
+        if pose is None or start is None:
+            return False
+        start = np.asarray(start, dtype=float)
+        delta = np.asarray(pending['motion_delta_world'], dtype=float)
+        if start.shape != (3,) or not np.all(np.isfinite(start)):
+            return False
+        # The measured increment starts at issuance, not at planning. Keep
+        # its nominal displacement and fixed anchor separate from model FK.
+        pending.update(
+            lifecycle='final_action_issued', issued_step=int(task.step_counter),
+            motion_start_position_world=start.copy(),
+            motion_target_position_world=start + delta,
+            issued_command_q=q.copy(),
+            issued_command_tcp_position_world=np.asarray(pose['position']).copy(),
+            elapsed_steps=0, settle_steps=0,
+        )
+        state['recenter_target_ready'] = False
+        path = os.environ.get('BEAM_RECENTER_LIFECYCLE_TRACE_PATH')
+        if path:
+            with open(path, 'a', encoding='utf-8') as handle:
+                handle.write(json.dumps({
+                    'step': int(task.step_counter), 'phase': task.phase, 'robot': robot_name,
+                    'lifecycle': pending['lifecycle'], 'planned_step': pending.get('planned_step'),
+                    'issued_command_q': q.tolist(),
+                    'issued_command_tcp_position_world': np.asarray(pose['position']).tolist(),
+                    'motion_start_position_world': start.tolist(),
+                    'motion_target_position_world': (start + delta).tolist(),
+                    'motion_delta_world': delta.tolist(),
+                    'evidence_level': 'final returned action; SDK/native execution requires separate feedback',
+                }) + '\n')
+        return True
 
     @staticmethod
     def _stop_recenter_on_bilateral(*, state, spec, metrics, current_position):
@@ -7269,11 +8255,22 @@ class UR5eAssemblyAtomicSkillAdapter:
             return None
         fingers = [metrics.get(s) or {} for s in ('left_finger', 'right_finger')]
         threshold = float(spec.get('contact_force_threshold', 0.1))
-        if not all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers):
-            return None
-        forces = [float(f['force']) for f in fingers]
+        track_weak_side = bool(spec.get('close_force_recenter_track_weak_side', False))
+        if track_weak_side:
+            forces = [UR5eAssemblyAtomicSkillAdapter._known_probe_force(f) for f in fingers]
+        else:
+            if not all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers):
+                return None
+            forces = [float(f['force']) for f in fingers]
         stop_cause = 'bilateral_contact'
-        if pending.get('mode') == 'force_margin':
+        if (track_weak_side and any(force is not None and force >= float(spec.get('close_force_limit', 40.0))
+                                    for force in forces)):
+            # This hook runs before the next arm target is constructed. Stop
+            # the unexecuted move as well as unwinding the overloaded gripper.
+            stop_cause = 'hard_force_limit'
+        elif track_weak_side and any(force is None for force in forces):
+            stop_cause = 'contact_probe_unavailable'
+        elif pending.get('mode') == 'force_margin':
             side = int(pending['loaded_side'])
             margin_ready = min(forces) >= float(spec['close_force_balance_min'])
             reversed_side = forces[1 - side] >= threshold and forces[1 - side] > forces[side]
@@ -7294,7 +8291,9 @@ class UR5eAssemblyAtomicSkillAdapter:
         if length_squared <= 1e-16:
             return None
         measured_delta = current - start
-        progress = float(np.clip(np.dot(measured_delta, delta) / length_squared, 0.0, 1.0))
+        issued = pending.get('lifecycle') != 'planned'
+        progress = (float(np.clip(np.dot(measured_delta, delta) / length_squared, 0.0, 1.0))
+                    if issued else 0.0)
         offset = before + progress * delta
         state['recenter_offset_world'] = offset
         # Preserve the original world anchor and conservative command-travel
@@ -7309,8 +8308,10 @@ class UR5eAssemblyAtomicSkillAdapter:
                 0.5 * float(state.get('force_recenter_step', spec.get('close_gate_recenter_step', 0.0002))),
             )
         event = {'reason': 'bilateral_motion_cancelled', 'progress_fraction': progress,
+                 'lifecycle': pending.get('lifecycle', 'legacy_issued'),
+                 'issued_step': pending.get('issued_step'),
                  'stop_cause': stop_cause, 'motion_mode': pending.get('mode', 'single_contact'),
-                 'offset_world': offset.tolist(), 'forces': [float(f['force']) for f in fingers],
+                 'offset_world': offset.tolist(), 'forces': forces,
                  'motion_start_position_world': start.tolist(), 'stop_position_world': current.tolist(),
                  'motion_delta_world': delta.tolist(), 'offset_before': before.tolist(),
                  'cancelled_distance': (1.0 - progress) * float(np.sqrt(length_squared))}
@@ -7319,6 +8320,8 @@ class UR5eAssemblyAtomicSkillAdapter:
 
     @staticmethod
     def _recenter_motion_ready(*, pending, current_position, overall_pose_ready, tolerance):
+        if pending.get('lifecycle') == 'planned':
+            return False, {'recenter_motion_error': None, 'recenter_lifecycle': 'planned'}
         target = pending.get('motion_target_position_world')
         if target is None:
             return False, {'recenter_motion_error': None}
@@ -7349,14 +8352,79 @@ class UR5eAssemblyAtomicSkillAdapter:
     def _update_force_recenter(*, state: dict, metrics: dict, spec: dict) -> dict:
         offset = np.asarray(state.get('recenter_offset_world', np.zeros(3)), dtype=float)
         result = {'enabled': True, 'updated': False, 'source': 'pair_force', 'offset_world': offset.tolist()}
-        fingers = [metrics.get(s) or {} for s in ('left_finger', 'right_finger')]
-        if not all(f.get('force_probe_valid') and np.isfinite(f.get('force', float('nan'))) for f in fingers):
+        track_weak_side = bool(spec.get('close_force_recenter_track_weak_side', False))
+
+        def clear_confirmation():
             state['force_single_steps'] = 0
+            state.pop('force_single_side', None)
+            state.pop('force_recenter_confirmation_mode', None)
+            state.pop('force_recenter_confirmation_direction', None)
+            state.pop('force_recenter_confirmation_peak_imbalance', None)
+
+        if track_weak_side:
+            observation_step = state.get('force_recenter_observation_step')
+            result['confirmation_clock_guarded'] = observation_step is not None
+            result['observation_task_step'] = observation_step
+            if observation_step is not None:
+                previous_step = state.get('force_recenter_last_observation_step')
+                if previous_step == observation_step:
+                    return {**result, 'reason': 'repeat_observation'}
+                if previous_step is not None and observation_step != previous_step + 1:
+                    clear_confirmation()
+                state['force_recenter_last_observation_step'] = observation_step
+
+        def contact_direction(side):
+            configured = spec.get('physical_contact_axes')
+            if configured is None:
+                configured = 'y'
+            try:
+                axes = ([axis.strip().lower() for axis in configured.split(',') if axis.strip()]
+                        if isinstance(configured, str) else [str(axis).strip().lower() for axis in configured])
+            except TypeError:
+                return None, None, 'recenter_axis_unavailable'
+            if len(axes) > 1 and 'y' in axes and all(axis in {'x', 'y', 'z'} for axis in axes):
+                # Legacy multi-axis recipes have always recentered along Y.
+                # A clearly configured single axis can now choose X or Z.
+                axes = ['y']
+            if len(axes) != 1 or axes[0] not in {'x', 'y', 'z'}:
+                return None, None, 'recenter_axis_unavailable'
+            finger = fingers[side]
+            contacts = [c for c in (finger.get('force_observation') or {}).get('contacts', [])
+                        if abs(c['normal_force']) > 0.01]
+            if not contacts or metrics.get('contact_box_orientation') is None or metrics.get('contact_box_center') is None:
+                return None, None, 'loaded_contact_frame_unavailable'
+            orientation = np.asarray(metrics['contact_box_orientation'], dtype=float)
+            center = np.asarray(metrics['contact_box_center'], dtype=float)
+            points = np.asarray([c['point_world'] for c in contacts], dtype=float)
+            weights = np.asarray([abs(c['normal_force']) for c in contacts], dtype=float)
+            if (orientation.shape != (4,) or center.shape != (3,) or points.shape != (len(contacts), 3)
+                    or not all(np.all(np.isfinite(v)) for v in (orientation, center, points, weights))
+                    or np.linalg.norm(orientation) <= 1e-9):
+                return None, None, 'loaded_contact_frame_unavailable'
+            local_axis = np.eye(3)[{'x': 0, 'y': 1, 'z': 2}[axes[0]]]
+            axis = quat_rotate(normalize_quat(orientation), local_axis)
+            point = np.average(points, axis=0, weights=weights)
+            signed = float(np.dot(point - center, axis))
+            if not np.isfinite(signed) or abs(signed) < 1e-6:
+                return None, None, 'contact_side_unavailable'
+            return axis, signed, None
+
+        fingers = [metrics.get(s) or {} for s in ('left_finger', 'right_finger')]
+        probes_valid = (all(UR5eAssemblyAtomicSkillAdapter._known_probe_force(f) is not None for f in fingers)
+                        if track_weak_side else all(f.get('force_probe_valid')
+                            and np.isfinite(f.get('force', float('nan'))) for f in fingers))
+        if not probes_valid:
+            state['force_single_steps'] = 0
+            if track_weak_side:
+                clear_confirmation()
             return {**result, 'reason': 'invalid_probe'}
         forces = [float(f['force']) for f in fingers]
         threshold = float(spec.get('contact_force_threshold', 0.1))
         loaded = [f >= threshold for f in forces]
         result['forces'] = forces
+        hard_limit = max(forces) >= float(spec.get('close_force_limit', 40.0))
+        if track_weak_side and hard_limit:
+            clear_confirmation()
         stop_event = state.pop('force_recenter_stop_event', None)
         if stop_event is not None:
             return {**result, **stop_event}
@@ -7369,6 +8437,8 @@ class UR5eAssemblyAtomicSkillAdapter:
             return {**result, 'reason': 'contact_stop_settling'}
         pending = state.get('force_recenter_pending')
         if pending is not None:
+            if pending.get('lifecycle') == 'planned':
+                return {**result, 'reason': 'awaiting_final_action', 'lifecycle': 'planned'}
             pending['elapsed_steps'] = int(pending.get('elapsed_steps', 0)) + 1
             if not state.get('recenter_target_ready', False):
                 pending['settle_steps'] = 0
@@ -7384,39 +8454,65 @@ class UR5eAssemblyAtomicSkillAdapter:
                 return {**result, 'reason': state['force_recenter_fault']}
             state.pop('force_recenter_pending')
         balance_min = spec.get('close_force_balance_min')
-        balance_needed = bool(
-            balance_min is not None and all(loaded) and min(forces) < float(balance_min)
-            and max(forces) >= float(spec.get('close_force_balance_peak', 4.0))
-        )
-        if loaded[0] == loaded[1] and not balance_needed:
-            state['force_single_steps'] = 0
-            state.pop('force_single_side', None)
-            state.pop('force_recenter_confirmation_mode', None)
-            return {**result, 'reason': 'bilateral' if all(loaded) else 'no_contact'}
-        if max(forces) > float(spec.get('close_force_high', 12.0)):
-            # Preserve the established single-contact approach timing. A new
-            # force-margin candidate needs consecutive eligible observations.
-            if balance_needed or state.get('force_recenter_confirmation_mode') == 'force_margin':
-                state['force_single_steps'] = 0
-            return {**result, 'reason': 'unload_before_recenter'}
-        mode = 'force_margin' if balance_needed else 'single_contact'
-        side = int(np.argmax(forces)) if balance_needed else (0 if loaded[0] else 1)
-        same_candidate = state.get('force_single_side') == side and state.get('force_recenter_confirmation_mode') == mode
+        if track_weak_side:
+            # A force-band or single/bilateral label change does not change
+            # the observed strong side. Qualify that side, but issue no move
+            # during unloading or at the hard force limit.
+            if hard_limit:
+                clear_confirmation()
+                return {**result, 'reason': 'force_limit_before_recenter'}
+            balance_needed = bool(balance_min is not None and min(forces) < float(balance_min)
+                                  and any(loaded) and forces[0] != forces[1])
+            if not balance_needed:
+                clear_confirmation()
+                return {**result, 'reason': 'bilateral' if all(loaded) else 'no_contact'}
+            mode, side = 'force_margin', int(np.argmax(forces))
+            axis, signed, direction_error = contact_direction(side)
+            if direction_error:
+                clear_confirmation()
+                return {**result, 'reason': direction_error}
+            direction = math.copysign(1.0, signed) * axis
+            previous_direction = state.get('force_recenter_confirmation_direction')
+            same_candidate = (state.get('force_single_side') == side and previous_direction is not None
+                              and float(np.dot(previous_direction, direction)) > 0.0)
+            state['force_recenter_confirmation_direction'] = direction.copy()
+        else:
+            balance_needed = bool(
+                balance_min is not None and all(loaded) and min(forces) < float(balance_min)
+                and max(forces) >= float(spec.get('close_force_balance_peak', 4.0))
+            )
+            if loaded[0] == loaded[1] and not balance_needed:
+                clear_confirmation()
+                return {**result, 'reason': 'bilateral' if all(loaded) else 'no_contact'}
+            if max(forces) > float(spec.get('close_force_high', 12.0)):
+                # Preserve the established single-contact approach timing.
+                if balance_needed or state.get('force_recenter_confirmation_mode') == 'force_margin':
+                    state['force_single_steps'] = 0
+                return {**result, 'reason': 'unload_before_recenter'}
+            mode = 'force_margin' if balance_needed else 'single_contact'
+            side = int(np.argmax(forces)) if balance_needed else (0 if loaded[0] else 1)
+            same_candidate = (state.get('force_single_side') == side
+                              and state.get('force_recenter_confirmation_mode') == mode)
+        previous_confirmation_steps = int(state.get('force_single_steps', 0))
         state['force_single_steps'] = int(state.get('force_single_steps', 0)) + 1 if same_candidate else 1
         state['force_single_side'] = side
         state['force_recenter_confirmation_mode'] = mode
+        if track_weak_side:
+            imbalance = abs(forces[0] - forces[1])
+            previous_peak = state.get('force_recenter_confirmation_peak_imbalance', imbalance)
+            state['force_recenter_confirmation_peak_imbalance'] = (
+                max(previous_peak, imbalance) if same_candidate and previous_confirmation_steps > 0 else imbalance
+            )
+            result.update(confirmation_steps=state['force_single_steps'], strong_side=side,
+                          confirmation_peak_imbalance=state['force_recenter_confirmation_peak_imbalance'])
+        if track_weak_side and max(forces) > float(spec.get('close_force_high', 12.0)):
+            return {**result, 'reason': 'unload_before_recenter'}
         if state['force_single_steps'] < int(spec.get('close_gate_recenter_stable_steps', 4)):
             return {**result, 'reason': 'single_contact_confirmation'}
-        finger = fingers[side]
-        contacts = [c for c in (finger.get('force_observation') or {}).get('contacts', []) if abs(c['normal_force']) > 0.01]
-        if not contacts or metrics.get('contact_box_orientation') is None or metrics.get('contact_box_center') is None:
-            return {**result, 'reason': 'loaded_contact_frame_unavailable'}
-        axis = quat_rotate(normalize_quat(np.asarray(metrics['contact_box_orientation'])), np.asarray([0., 1., 0.]))
-        point = np.average(np.asarray([c['point_world'] for c in contacts]), axis=0,
-                           weights=[abs(c['normal_force']) for c in contacts])
-        signed = float(np.dot(point - np.asarray(metrics['contact_box_center']), axis))
-        if not np.isfinite(signed) or abs(signed) < 1e-6:
-            return {**result, 'reason': 'contact_side_unavailable'}
+        if not track_weak_side:
+            axis, signed, direction_error = contact_direction(side)
+            if direction_error:
+                return {**result, 'reason': direction_error}
         step = float(state.get('force_recenter_step', spec.get('close_gate_recenter_step', 0.0002)))
         if spec.get('close_force_recenter_adaptive_step'):
             previous_side = state.get('force_recenter_last_side')
@@ -7438,7 +8534,10 @@ class UR5eAssemblyAtomicSkillAdapter:
         state['force_recenter_step'] = step
         state['force_recenter_travel'] = float(state.get('force_recenter_travel', 0.0)) + float(np.linalg.norm(delta))
         state['force_recenter_pending'] = {
-            'imbalance': abs(forces[0] - forces[1]), 'settle_steps': 0,
+            'lifecycle': 'planned' if track_weak_side else 'legacy_issued',
+            'planned_step': state.get('force_recenter_observation_step'),
+            'imbalance': (state.pop('force_recenter_confirmation_peak_imbalance', abs(forces[0] - forces[1]))
+                          if track_weak_side else abs(forces[0] - forces[1])), 'settle_steps': 0,
             'mode': mode, 'loaded_side': side,
             'offset_before': offset.copy(), 'motion_delta_world': delta.copy(),
             'adaptive_progress': bool(spec.get('close_force_recenter_adaptive_step')),

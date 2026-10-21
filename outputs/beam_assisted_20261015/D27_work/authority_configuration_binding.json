@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "current_source_manifest_sha256": "75c627bd7ea35f392d39ec58e8ef5ced2cc627d6e06c4465465a11340e9c88d6",
+  "candidate_and_authority_sources_exact": true,
+  "full_task_model_exact": true,
+  "all_four_authority_layouts_passed": true,
+  "recipe_fingerprint_independently_rederived": true,
+  "authority_configuration_signature": "b38c34c0b0bb61b8b9b66315778566fc74595fffff0839f1b2d164e6baf7eeb8",
+  "layout_checks": [
+    {
+      "layout_seed": 0,
+      "full_task_model_exact": true,
+      "signature": "161232a482718ed1731e774e3cbdc2c1a68a8cd5550f586367bea52a922d9138"
+    },
+    {
+      "layout_seed": 1,
+      "full_task_model_exact": true,
+      "signature": "c90e281e3d94b835229fe7e85c7b1c08076284743542c317d052907153e1ce15"
+    },
+    {
+      "layout_seed": 505,
+      "full_task_model_exact": true,
+      "signature": "b38c34c0b0bb61b8b9b66315778566fc74595fffff0839f1b2d164e6baf7eeb8"
+    },
+    {
+      "layout_seed": 777,
+      "full_task_model_exact": true,
+      "signature": "ef59d9605cc7a47b5291e9b1c2b736ace7d6578ab63e67287aa07c35d04386aa"
+    }
+  ],
+  "input_sha256": {
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/actual_configuration_layout0_config.json": "c20eb737f3899267bc30be0ac60d9136d47f3598f0a140ff47e2e1d67899b186",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/authority_configuration_layout0_config.json": "ef1fe8c34b47891716faa7625f655464c6399815e82c750963dcb1ba29fe1db2",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/actual_configuration_layout1_config.json": "731a97e67a9848689183d87d6a3878d8fbb9e4de3f6fdc2e92f1ab1818f1b434",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/authority_configuration_layout1_config.json": "c264960a847af9e210579e8b940a4fe28f52acf663d9a2496767202e791ba658",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/actual_configuration_layout505_config.json": "1107956a3b9d82d1ebc0a2aaddc4895f44d85e718cbaa5c93e52e557a91e13bc",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/authority_configuration_layout505_config.json": "4ce0460713eb7918a5dfdba6ffddd50923225dc8fbacbd168bc90a6d73824002",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/actual_configuration_layout777_config.json": "f5693d28d4f2fb89560b63c947998c9588d7b7588ceb2a41f1701baa3a611ca9",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/authority_configuration_layout777_config.json": "9dead8cc36c37ebe180675b05ec24b3241c07c319435a7c15cde34c7b425404e"
+  },
+  "tool_sha256": "5287696359d79f0cec8b1f686075eae4ded020a47e7d5cb0cd209783741ba929",
+  "native_started": false
+}

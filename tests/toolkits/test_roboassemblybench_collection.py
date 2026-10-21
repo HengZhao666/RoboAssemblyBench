@@ -32,6 +32,200 @@ from roboassemblybench.scripts import collect_fabrica_plumbers_block_2k as colle
 from toolkits.factory_dual_franka_assembly import generate_demos
 
 
+@pytest.mark.parametrize('enabled', [False, True])
+def test_live_video_records_actual_frame_clock_only_when_enabled(tmp_path, monkeypatch, enabled):
+    monkeypatch.setenv('BEAM_VIDEO_CLOCK_TRACE', '1' if enabled else '0')
+    recorder = generate_demos.LiveRolloutVideoRecorder.__new__(generate_demos.LiveRolloutVideoRecorder)
+    recorder.output_dir = tmp_path
+    recorder.frames_root_dir = tmp_path / 'frames'
+    recorder.frames_root_dir.mkdir()
+    recorder.frame_stride = 8
+    recorder.camera_specs = [{'video_key': 'front'}]
+    recorder._camera_bindings = {'front': {'robot_name': 'left', 'sensor_name': 'camera'}}
+    recorder._frame_dirs = {}
+    recorder._image_stats = {}
+    recorder._written_png_counts = {}
+    recorder._frame_shapes = {}
+    recorder._sampled_steps = []
+    recorder._running_image_stats_cls = lambda: SimpleNamespace(update=lambda image: None)
+    task = SimpleNamespace(get_tracked_object_states=lambda: {},
+        _beam_physics_stamp=lambda: {'valid': True, 'epoch': 0, 'index': 11,
+                                    'time': 11 / 240, 'dt': 1 / 240})
+    obs = {'left': {'sensors': {'camera': {
+        'rgba': np.zeros((4, 4, 4), dtype=np.uint8),
+        'render_reference_time': {'referenceTimeNumerator': 10,
+                                  'referenceTimeDenominator': 240},
+    }}}}
+    recorder.record(task, obs, step_index=8)
+    image = recorder.frames_root_dir / 'front' / 'frame_00000.png'
+    assert image.is_file()
+    assert recorder._written_png_counts['front'] == 1
+    path = tmp_path / 'video_frame_clock.jsonl'
+    assert path.exists() is enabled
+    if enabled:
+        record = json.loads(path.read_text())
+        assert record['image_path'] == str(image.relative_to(tmp_path))
+        assert record['frame_index'] == 0
+        assert record['task_step_label'] == 8
+        assert record['physics_stamp']['index'] == 11
+        assert record['render_reference_time']['numerator'] == 10
+        assert record['physics_time_minus_render_time_s'] == pytest.approx(1 / 240)
+
+
+@pytest.mark.parametrize('frame_stride', [1, 8, 24])
+def test_live_video_rendering_refreshes_each_sample_at_physics_cadence(monkeypatch, frame_stride):
+    class EnvironmentCaptured(Exception):
+        pass
+
+    captured = {}
+
+    def capture_environment(**kwargs):
+        captured.update(kwargs)
+        raise EnvironmentCaptured
+
+    monkeypatch.setattr(generate_demos, '_build_env', capture_environment)
+    with pytest.raises(EnvironmentCaptured):
+        generate_demos._run_task_sequence(
+            task_configs=[], headless=True, record_live_video=True,
+            live_video_frame_stride=frame_stride,
+        )
+
+    # The runner renders after interval + 1 physical steps; each recorded frame
+    # must therefore be refreshed on that same step, rather than use old RGB.
+    render_steps = set(range(captured['rendering_interval'] + 1, 241, captured['rendering_interval'] + 1))
+    sampled_steps = set(range(frame_stride, 241, frame_stride))
+    assert render_steps == sampled_steps
+    assert captured['rendering_fps'] is None  # The default physics rate remains 240 Hz.
+
+
+@pytest.mark.parametrize('options, expected_interval', [
+    ({}, 239),
+    ({'record_lerobot_raw': True, 'dataset_frame_stride': 12}, 11),
+    ({'record_live_video': True, 'record_lerobot_raw': True, 'dataset_frame_stride': 12}, 11),
+    ({'record_live_video': True, 'record_lerobot_raw': True, 'record_trajectory_only': True}, 7),
+])
+def test_live_video_alignment_preserves_other_recording_modes(monkeypatch, options, expected_interval):
+    class EnvironmentCaptured(Exception):
+        pass
+
+    captured = {}
+
+    def capture_environment(**kwargs):
+        captured.update(kwargs)
+        raise EnvironmentCaptured
+
+    monkeypatch.setattr(generate_demos, '_build_env', capture_environment)
+    with pytest.raises(EnvironmentCaptured):
+        generate_demos._run_task_sequence(task_configs=[], headless=True, **options)
+    assert captured['rendering_interval'] == expected_interval
+
+
+@pytest.mark.parametrize('option, value', [
+    ('live_video_fps', 0), ('live_video_fps', -1),
+    ('live_video_frame_stride', 0), ('live_video_frame_stride', -1),
+])
+def test_live_video_rejects_nonpositive_parameters_before_creating_environment(monkeypatch, option, value):
+    def unexpected_environment(**kwargs):
+        pytest.fail('Invalid recording parameters must not start a simulator.')
+
+    monkeypatch.setattr(generate_demos, '_build_env', unexpected_environment)
+    with pytest.raises(ValueError, match='must be positive'):
+        generate_demos._run_task_sequence(
+            task_configs=[], headless=True, record_live_video=True, **{option: value},
+        )
+
+
+def test_live_video_still_rejects_explicit_render_override_before_creating_environment(monkeypatch):
+    def unexpected_environment(**kwargs):
+        pytest.fail('A conflicting render override must not start a simulator.')
+
+    monkeypatch.setattr(generate_demos, '_build_env', unexpected_environment)
+    with pytest.raises(ValueError, match='rendering interval override'):
+        generate_demos._run_task_sequence(
+            task_configs=[], headless=True, record_live_video=True, rendering_interval_override=239,
+        )
+
+
+@pytest.mark.parametrize('option', ['--live-video-fps', '--live-video-frame-stride'])
+def test_live_video_cli_rejects_zero_before_worker_parameters_are_clamped(monkeypatch, option):
+    monkeypatch.setattr(generate_demos.sys, 'argv', ['generate_demos.py', '--record-live-video', option, '0'])
+    with pytest.raises(SystemExit) as exc:
+        generate_demos.main()
+    assert exc.value.code == 2
+
+
+def test_live_video_new_episode_refreshes_samples_after_nondivisible_terminal_step(monkeypatch):
+    captured_frames = []
+
+    class FakeTask(SimpleNamespace):
+        pass
+
+    class FakeEnv:
+        def __init__(self, *, rendering_interval, **kwargs):
+            self.runner = SimpleNamespace(current_tasks={}, last_finished_task_metrics=[],
+                                          render_trigger=0, render_interval=rendering_interval)
+            self.episode = -1
+            self.frame_step = 0
+
+        def reset(self, env_ids=None):
+            self.episode += 1
+            if self.episode >= 2:
+                self.runner.current_tasks = {}
+                return [None], [None]
+            task = FakeTask(name='task', step_counter=0, phase='move', phase_index=0,
+                            phase_step_counter=0, cfg=SimpleNamespace(robot_metadata=[]),
+                            get_current_phase_spec=lambda: {}, calculate_metrics=lambda: {})
+            self.runner.current_tasks = {'task': task}
+            return self.get_observations(), [SimpleNamespace()]
+
+        def get_observations(self):
+            return [{'frame_step': self.frame_step}]
+
+        def warm_up(self, **kwargs):
+            assert kwargs['physics'] is False
+
+        def finished(self):
+            return not self.runner.current_tasks
+
+        def step(self, actions):
+            task = self.runner.current_tasks['task']
+            task.step_counter += 1
+            task.phase_step_counter += 1
+            # The same render-trigger rule as SimulatorRunner.step. Its phase
+            # deliberately survives reset, exposing a stale frame in episode 2.
+            self.runner.render_trigger += 1
+            if self.runner.render_trigger > self.runner.render_interval:
+                self.runner.render_trigger = 0
+                self.frame_step = task.step_counter
+            terminal = task.step_counter >= (13 if self.episode == 0 else 17)
+            return self.get_observations(), [], [terminal], [], []
+
+        def close(self):
+            pass
+
+    class FakeLiveRecorder:
+        def __init__(self, *, episode_idx, frame_stride, **kwargs):
+            self.episode_idx = episode_idx
+            self.frame_stride = frame_stride
+
+        def record(self, task, obs, *, step_index):
+            if step_index % self.frame_stride == 0:
+                captured_frames.append((self.episode_idx, step_index, obs['frame_step']))
+
+        def finalize(self):
+            return {}
+
+    monkeypatch.setattr(generate_demos, '_build_env', lambda **kwargs: FakeEnv(**kwargs))
+    monkeypatch.setattr(generate_demos, 'DualFrankaAssemblyDemoPolicy',
+                        lambda: SimpleNamespace(act=lambda task: {}))
+    monkeypatch.setattr(generate_demos, 'LiveRolloutVideoRecorder', FakeLiveRecorder)
+
+    results = generate_demos._run_task_sequence(task_configs=[], headless=True, record_live_video=True)
+
+    assert len(results) == 2
+    assert captured_frames == [(0, 8, 8), (1, 8, 8), (1, 16, 16)]
+
+
 def test_batch_command_keeps_simulation_cadence_independent_from_dataset_fps(monkeypatch, tmp_path: Path):
     monkeypatch.setattr(collector.shutil, 'which', lambda executable: f'/usr/bin/{executable}')
     args = SimpleNamespace(

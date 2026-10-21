@@ -87,6 +87,26 @@ class CoordinatedSupport(unittest.TestCase):
         self.assertAlmostEqual(result['bottom_gap'],0)
         surfaces[1]['contact']['valid']=False
         with self.assertRaises(ValueError):combine_support_surfaces(surfaces,[[-.07,-.008,1.0025],[.07,.008,1.0152]])
+    def test_downward_net_load_invalidates_sampler_and_cannot_qualify(self):
+        from toolkits.factory_dual_franka_assembly.beam_support_state import combine_support_surfaces
+        surface={'object':'table','lower':[-1.,-1.,-.02],'upper':[1.,1.,0.],
+                 'contact':{'valid':True,'force_world':[0.,0.,-2.4525]}}
+        result=combine_support_surfaces([surface],[[-.03,-.03,0.],[.03,.03,.06]])
+        sample={'valid':True,**result,'motion_valid':True,'linear_speed':0.,'angular_speed':0.}
+        self.assertLess(sample['vertical_force'],0.)
+        self.assertFalse(sample['valid'])
+        self.assertFalse(table_support_ready(sample,1.962))
+
+    def test_mixed_support_loads_preserve_signed_net_and_positive_control(self):
+        from toolkits.factory_dual_franka_assembly.beam_support_state import combine_support_surfaces
+        def combine(forces):
+            surfaces=[{'object':'table'+str(i),'lower':[-1.,-1.,-.02],'upper':[1.,1.,0.],
+                       'contact':{'valid':True,'force_world':[0.,0.,f]}} for i,f in enumerate(forces)]
+            return combine_support_surfaces(surfaces,[[-.03,-.03,0.],[.03,.03,.06]])
+        upward=combine([3.,-.5]);downward=combine([.5,-3.])
+        self.assertTrue(upward.get('valid',True));self.assertAlmostEqual(upward['vertical_force'],2.5)
+        self.assertFalse(downward.get('valid',True));self.assertAlmostEqual(downward['vertical_force'],-2.5)
+
     def test_cube_bounds_apply_nonuniform_scale_once(self):
         from toolkits.factory_dual_franka_assembly.beam_support_state import cube_world_bounds
         transform=np.diag([.925,.625,.12,1.]);transform[3,:3]=[.47,-.14,.9425]

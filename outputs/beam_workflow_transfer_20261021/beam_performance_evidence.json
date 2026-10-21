@@ -1,0 +1,3706 @@
+{
+  "status": "existing_artifact_analysis_no_new_simulation",
+  "route": "assisted",
+  "run": "A44_beam_full",
+  "source_version": "v35",
+  "authority_manifest_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+  "analysis_limits": [
+    "Performance analysis executed no simulation, probe, geometry replay or control/ledger/seal changes; workflow documentation and skills were updated separately under the user request.",
+    "Existing phase-counter durations separate business phases but do not isolate motion, settling, sensing, computation and host wait inside a phase.",
+    "Source and run facts refer only to selected assisted route; no physical-route history was loaded."
+  ],
+  "run_outcome": {
+    "original_success": true,
+    "original_assisted_success": true,
+    "accepted_full_assembly": false,
+    "independent_final_home_review": false,
+    "terminal_native_raw_gap_ticks": 6,
+    "terminal_control_entity_camera_gap_ticks": 7,
+    "reason": "Original five-part/home240 success qualified; independent terminal raw sample absent. No successful new performance result is claimed."
+  },
+  "steps": {
+    "reported": 59567,
+    "phase_count": 101,
+    "sum_transition_counter_intervals": 59566,
+    "unassigned_boundary_count_difference": 1,
+    "accounting": "For each phase use the next transition step_counter minus its entry counter. These101 intervals sum59566; the original steps field59567 differs by one terminal/loop boundary count, retained explicitly rather than assigned to an arbitrary motion phase. Percentages use59567.",
+    "simulation_dt_s": 0.004166666666666667,
+    "simulation_certificate_clock_s": 248.20834627840668,
+    "by_category": [
+      {
+        "name": "loaded_insert",
+        "ticks": 15260,
+        "share_reported_steps_pct": 25.618211425789447
+      },
+      {
+        "name": "assembly_clearance",
+        "ticks": 14665,
+        "share_reported_steps_pct": 24.61933620964628
+      },
+      {
+        "name": "descend",
+        "ticks": 7887,
+        "share_reported_steps_pct": 13.240552654993536
+      },
+      {
+        "name": "move_above",
+        "ticks": 6177,
+        "share_reported_steps_pct": 10.369835647254352
+      },
+      {
+        "name": "close_and_attach",
+        "ticks": 4285,
+        "share_reported_steps_pct": 7.19358033810667
+      },
+      {
+        "name": "pickup_clearance",
+        "ticks": 2776,
+        "share_reported_steps_pct": 4.6602984874175295
+      },
+      {
+        "name": "return_home",
+        "ticks": 2151,
+        "share_reported_steps_pct": 3.6110598149982374
+      },
+      {
+        "name": "lift",
+        "ticks": 1349,
+        "share_reported_steps_pct": 2.264676750549801
+      },
+      {
+        "name": "transport_hover",
+        "ticks": 1187,
+        "share_reported_steps_pct": 1.9927140866587205
+      },
+      {
+        "name": "park",
+        "ticks": 1081,
+        "share_reported_steps_pct": 1.8147632078164084
+      },
+      {
+        "name": "visual_support_close",
+        "ticks": 772,
+        "share_reported_steps_pct": 1.29601960817231
+      },
+      {
+        "name": "release_and_install",
+        "ticks": 529,
+        "share_reported_steps_pct": 0.8880756123356892
+      },
+      {
+        "name": "place",
+        "ticks": 506,
+        "share_reported_steps_pct": 0.8494636291906592
+      },
+      {
+        "name": "retreat",
+        "ticks": 456,
+        "share_reported_steps_pct": 0.7655245353971158
+      },
+      {
+        "name": "final_stability_window",
+        "ticks": 240,
+        "share_reported_steps_pct": 0.4029076502090083
+      },
+      {
+        "name": "preshape",
+        "ticks": 162,
+        "share_reported_steps_pct": 0.27196266389108065
+      },
+      {
+        "name": "visual_support_open",
+        "ticks": 83,
+        "share_reported_steps_pct": 0.13933889569728206
+      }
+    ],
+    "by_part": [
+      {
+        "name": "1",
+        "ticks": 13544,
+        "share_reported_steps_pct": 22.737421726795038
+      },
+      {
+        "name": "2",
+        "ticks": 12516,
+        "share_reported_steps_pct": 21.011633958399784
+      },
+      {
+        "name": "0",
+        "ticks": 12448,
+        "share_reported_steps_pct": 20.897476790840567
+      },
+      {
+        "name": "3",
+        "ticks": 11963,
+        "share_reported_steps_pct": 20.083267581043195
+      },
+      {
+        "name": "6",
+        "ticks": 6704,
+        "share_reported_steps_pct": 11.2545536958383
+      },
+      {
+        "name": "postassembly",
+        "ticks": 2391,
+        "share_reported_steps_pct": 4.013967465207245
+      }
+    ],
+    "part_accounting": "Part6 includes its final support-open and retreat stages; postassembly covers three new return phases and final240. This is stage-name ownership, not force attribution.",
+    "longest_10_phases": [
+      {
+        "phase": "assemble_02_part_1_assembly_clearance",
+        "phase_index": 59,
+        "start_task_counter": 35576,
+        "end_task_counter": 40182,
+        "ticks": 4606,
+        "share_reported_steps_pct": 7.7324693202612185,
+        "category": "assembly_clearance",
+        "part": "1",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_assembly_clearance",
+        "phase_index": 38,
+        "start_task_counter": 22924,
+        "end_task_counter": 26583,
+        "ticks": 3659,
+        "share_reported_steps_pct": 6.142662883811506,
+        "category": "assembly_clearance",
+        "part": "2",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_00",
+        "phase_index": 82,
+        "start_task_counter": 52581,
+        "end_task_counter": 55593,
+        "ticks": 3012,
+        "share_reported_steps_pct": 5.056491010123055,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_00",
+        "phase_index": 61,
+        "start_task_counter": 40209,
+        "end_task_counter": 43108,
+        "ticks": 2899,
+        "share_reported_steps_pct": 4.8667886581496465,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_00",
+        "phase_index": 40,
+        "start_task_counter": 26802,
+        "end_task_counter": 29650,
+        "ticks": 2848,
+        "share_reported_steps_pct": 4.781170782480232,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_00",
+        "phase_index": 19,
+        "start_task_counter": 14264,
+        "end_task_counter": 17008,
+        "ticks": 2744,
+        "share_reported_steps_pct": 4.606577467389662,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_assembly_clearance",
+        "phase_index": 80,
+        "start_task_counter": 50166,
+        "end_task_counter": 52487,
+        "ticks": 2321,
+        "share_reported_steps_pct": 3.8964527338962847,
+        "category": "assembly_clearance",
+        "part": "0",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "base_6_assembly_clearance",
+        "phase_index": 6,
+        "start_task_counter": 2683,
+        "end_task_counter": 4856,
+        "ticks": 2173,
+        "share_reported_steps_pct": 3.6479930162673964,
+        "category": "assembly_clearance",
+        "part": "6",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_move_above",
+        "phase_index": 74,
+        "start_task_counter": 44531,
+        "end_task_counter": 46676,
+        "ticks": 2145,
+        "share_reported_steps_pct": 3.600987123743012,
+        "category": "move_above",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_above_part",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.015,
+          "cartesian_orientation_step": 0.03,
+          "prealign_steps": 240,
+          "prealign_until_converged": true,
+          "prealign_joint_position_tolerance": 0.05
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_descend",
+        "phase_index": 13,
+        "start_task_counter": 7364,
+        "end_task_counter": 9491,
+        "ticks": 2127,
+        "share_reported_steps_pct": 3.5707690499773364,
+        "category": "descend",
+        "part": "3",
+        "timeout_ticks": 2400,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_descend_to_grasp",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.015
+        }
+      }
+    ],
+    "all_phases": [
+      {
+        "phase": "base_6_move_above",
+        "phase_index": 0,
+        "start_task_counter": 0,
+        "end_task_counter": 927,
+        "ticks": 927,
+        "share_reported_steps_pct": 1.5562307989322948,
+        "category": "move_above",
+        "part": "6",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_move_above_part",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.015,
+          "cartesian_orientation_step": 0.03,
+          "prealign_steps": 240
+        }
+      },
+      {
+        "phase": "base_6_preshape",
+        "phase_index": 1,
+        "start_task_counter": 927,
+        "end_task_counter": 939,
+        "ticks": 12,
+        "share_reported_steps_pct": 0.020145382510450418,
+        "category": "preshape",
+        "part": "6",
+        "timeout_ticks": 744,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_preshape_gripper",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "base_6_descend",
+        "phase_index": 2,
+        "start_task_counter": 939,
+        "end_task_counter": 1208,
+        "ticks": 269,
+        "share_reported_steps_pct": 0.4515923246092635,
+        "category": "descend",
+        "part": "6",
+        "timeout_ticks": 900,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_descend_to_grasp",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.004,
+          "cartesian_orientation_step": 0.015
+        }
+      },
+      {
+        "phase": "base_6_close_and_attach",
+        "phase_index": 3,
+        "start_task_counter": 1208,
+        "end_task_counter": 2030,
+        "ticks": 822,
+        "share_reported_steps_pct": 1.3799587019658537,
+        "category": "close_and_attach",
+        "part": "6",
+        "timeout_ticks": 2000,
+        "advance": {
+          "type": "all_of",
+          "min_steps": 24,
+          "conditions": [
+            {
+              "type": "local_skill_complete",
+              "robot": "franka_right",
+              "skill": "ur5e_close_gripper",
+              "min_steps": 24
+            },
+            {
+              "type": "object_attached",
+              "object": "fabrica_beam_6",
+              "robot": "franka_right"
+            }
+          ]
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "base_6_lift",
+        "phase_index": 4,
+        "start_task_counter": 2030,
+        "end_task_counter": 2620,
+        "ticks": 590,
+        "share_reported_steps_pct": 0.9904813067638122,
+        "category": "lift",
+        "part": "6",
+        "timeout_ticks": 4000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.0002,
+          "cartesian_orientation_step": 0.0005
+        }
+      },
+      {
+        "phase": "base_6_pickup_clearance",
+        "phase_index": 5,
+        "start_task_counter": 2620,
+        "end_task_counter": 2683,
+        "ticks": 63,
+        "share_reported_steps_pct": 0.10576325817986469,
+        "category": "pickup_clearance",
+        "part": "6",
+        "timeout_ticks": 4800,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8
+        }
+      },
+      {
+        "phase": "base_6_assembly_clearance",
+        "phase_index": 6,
+        "start_task_counter": 2683,
+        "end_task_counter": 4856,
+        "ticks": 2173,
+        "share_reported_steps_pct": 3.6479930162673964,
+        "category": "assembly_clearance",
+        "part": "6",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8
+        }
+      },
+      {
+        "phase": "base_6_transport_hover",
+        "phase_index": 7,
+        "start_task_counter": 4856,
+        "end_task_counter": 5129,
+        "ticks": 273,
+        "share_reported_steps_pct": 0.458307452112747,
+        "category": "transport_hover",
+        "part": "6",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8
+        }
+      },
+      {
+        "phase": "base_6_place",
+        "phase_index": 8,
+        "start_task_counter": 5129,
+        "end_task_counter": 5635,
+        "ticks": 506,
+        "share_reported_steps_pct": 0.8494636291906592,
+        "category": "place",
+        "part": "6",
+        "timeout_ticks": 4800,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.00025,
+          "cartesian_orientation_step": 0.001,
+          "target_object_stable_steps": 8
+        }
+      },
+      {
+        "phase": "base_6_release_and_lock",
+        "phase_index": 9,
+        "start_task_counter": 5635,
+        "end_task_counter": 5736,
+        "ticks": 101,
+        "share_reported_steps_pct": 0.16955696946295767,
+        "category": "release_and_install",
+        "part": "6",
+        "timeout_ticks": 720,
+        "advance": {
+          "type": "objects_static",
+          "objects": [
+            "fabrica_beam_6"
+          ],
+          "min_steps": 72,
+          "linear_velocity_threshold": 0.05,
+          "angular_velocity_threshold": 2.0
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "base_6_visual_support",
+        "phase_index": 10,
+        "start_task_counter": 5736,
+        "end_task_counter": 6508,
+        "ticks": 772,
+        "share_reported_steps_pct": 1.29601960817231,
+        "category": "visual_support_close",
+        "part": "6",
+        "timeout_ticks": 2400,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_close_gripper",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_00_part_3_move_above",
+        "phase_index": 11,
+        "start_task_counter": 6508,
+        "end_task_counter": 7352,
+        "ticks": 844,
+        "share_reported_steps_pct": 1.4168919032350127,
+        "category": "move_above",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_above_part",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.015,
+          "cartesian_orientation_step": 0.03,
+          "prealign_steps": 240
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_preshape",
+        "phase_index": 12,
+        "start_task_counter": 7352,
+        "end_task_counter": 7364,
+        "ticks": 12,
+        "share_reported_steps_pct": 0.020145382510450418,
+        "category": "preshape",
+        "part": "3",
+        "timeout_ticks": 744,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_preshape_gripper",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_00_part_3_descend",
+        "phase_index": 13,
+        "start_task_counter": 7364,
+        "end_task_counter": 9491,
+        "ticks": 2127,
+        "share_reported_steps_pct": 3.5707690499773364,
+        "category": "descend",
+        "part": "3",
+        "timeout_ticks": 2400,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_descend_to_grasp",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.015
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_close_and_attach",
+        "phase_index": 14,
+        "start_task_counter": 9491,
+        "end_task_counter": 10509,
+        "ticks": 1018,
+        "share_reported_steps_pct": 1.7089999496365438,
+        "category": "close_and_attach",
+        "part": "3",
+        "timeout_ticks": 2000,
+        "advance": {
+          "type": "all_of",
+          "min_steps": 24,
+          "conditions": [
+            {
+              "type": "local_skill_complete",
+              "robot": "franka_left",
+              "skill": "ur5e_close_gripper",
+              "min_steps": 24
+            },
+            {
+              "type": "object_attached",
+              "object": "fabrica_beam_3",
+              "robot": "franka_left"
+            }
+          ]
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_00_part_3_lift",
+        "phase_index": 15,
+        "start_task_counter": 10509,
+        "end_task_counter": 10698,
+        "ticks": 189,
+        "share_reported_steps_pct": 0.31728977453959406,
+        "category": "lift",
+        "part": "3",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.0002,
+          "cartesian_orientation_step": 0.0005
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_pickup_clearance",
+        "phase_index": 16,
+        "start_task_counter": 10698,
+        "end_task_counter": 11784,
+        "ticks": 1086,
+        "share_reported_steps_pct": 1.8231571171957628,
+        "category": "pickup_clearance",
+        "part": "3",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_assembly_clearance",
+        "phase_index": 17,
+        "start_task_counter": 11784,
+        "end_task_counter": 13690,
+        "ticks": 1906,
+        "share_reported_steps_pct": 3.1997582554098747,
+        "category": "assembly_clearance",
+        "part": "3",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_transport_hover",
+        "phase_index": 18,
+        "start_task_counter": 13690,
+        "end_task_counter": 14264,
+        "ticks": 574,
+        "share_reported_steps_pct": 0.9636207967498783,
+        "category": "transport_hover",
+        "part": "3",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_00",
+        "phase_index": 19,
+        "start_task_counter": 14264,
+        "end_task_counter": 17008,
+        "ticks": 2744,
+        "share_reported_steps_pct": 4.606577467389662,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_01",
+        "phase_index": 20,
+        "start_task_counter": 17008,
+        "end_task_counter": 17172,
+        "ticks": 164,
+        "share_reported_steps_pct": 0.2753202276428224,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_02",
+        "phase_index": 21,
+        "start_task_counter": 17172,
+        "end_task_counter": 17265,
+        "ticks": 93,
+        "share_reported_steps_pct": 0.15612671445599074,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_03",
+        "phase_index": 22,
+        "start_task_counter": 17265,
+        "end_task_counter": 17371,
+        "ticks": 106,
+        "share_reported_steps_pct": 0.177950878842312,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_04",
+        "phase_index": 23,
+        "start_task_counter": 17371,
+        "end_task_counter": 17448,
+        "ticks": 77,
+        "share_reported_steps_pct": 0.12926620444205683,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_05",
+        "phase_index": 24,
+        "start_task_counter": 17448,
+        "end_task_counter": 17572,
+        "ticks": 124,
+        "share_reported_steps_pct": 0.20816895260798765,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_06",
+        "phase_index": 25,
+        "start_task_counter": 17572,
+        "end_task_counter": 17665,
+        "ticks": 93,
+        "share_reported_steps_pct": 0.15612671445599074,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_07",
+        "phase_index": 26,
+        "start_task_counter": 17665,
+        "end_task_counter": 17760,
+        "ticks": 95,
+        "share_reported_steps_pct": 0.15948427820773248,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_08",
+        "phase_index": 27,
+        "start_task_counter": 17760,
+        "end_task_counter": 17824,
+        "ticks": 64,
+        "share_reported_steps_pct": 0.10744204005573556,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_insert_09",
+        "phase_index": 28,
+        "start_task_counter": 17824,
+        "end_task_counter": 17952,
+        "ticks": 128,
+        "share_reported_steps_pct": 0.21488408011147112,
+        "category": "loaded_insert",
+        "part": "3",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.00025,
+          "cartesian_orientation_step": 0.001,
+          "target_object_stable_steps": 8,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_release_and_lock",
+        "phase_index": 29,
+        "start_task_counter": 17952,
+        "end_task_counter": 18059,
+        "ticks": 107,
+        "share_reported_steps_pct": 0.1796296607181829,
+        "category": "release_and_install",
+        "part": "3",
+        "timeout_ticks": 720,
+        "advance": {
+          "type": "objects_static",
+          "objects": [
+            "fabrica_beam_6",
+            "fabrica_beam_3"
+          ],
+          "min_steps": 72,
+          "linear_velocity_threshold": 0.05,
+          "angular_velocity_threshold": 2.0
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_00_part_3_retreat",
+        "phase_index": 30,
+        "start_task_counter": 18059,
+        "end_task_counter": 18145,
+        "ticks": 86,
+        "share_reported_steps_pct": 0.14437524132489465,
+        "category": "retreat",
+        "part": "3",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.008,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "assemble_00_part_3_park",
+        "phase_index": 31,
+        "start_task_counter": 18145,
+        "end_task_counter": 18471,
+        "ticks": 326,
+        "share_reported_steps_pct": 0.547282891533903,
+        "category": "park",
+        "part": "3",
+        "timeout_ticks": 1800,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.01,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_move_above",
+        "phase_index": 32,
+        "start_task_counter": 18471,
+        "end_task_counter": 19411,
+        "ticks": 940,
+        "share_reported_steps_pct": 1.578054963318616,
+        "category": "move_above",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_above_part",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.015,
+          "cartesian_orientation_step": 0.03,
+          "prealign_steps": 240
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_preshape",
+        "phase_index": 33,
+        "start_task_counter": 19411,
+        "end_task_counter": 19423,
+        "ticks": 12,
+        "share_reported_steps_pct": 0.020145382510450418,
+        "category": "preshape",
+        "part": "2",
+        "timeout_ticks": 744,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_preshape_gripper",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_01_part_2_descend",
+        "phase_index": 34,
+        "start_task_counter": 19423,
+        "end_task_counter": 21202,
+        "ticks": 1779,
+        "share_reported_steps_pct": 2.986552957174274,
+        "category": "descend",
+        "part": "2",
+        "timeout_ticks": 2400,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_descend_to_grasp",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.015
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_close_and_attach",
+        "phase_index": 35,
+        "start_task_counter": 21202,
+        "end_task_counter": 22161,
+        "ticks": 959,
+        "share_reported_steps_pct": 1.6099518189601625,
+        "category": "close_and_attach",
+        "part": "2",
+        "timeout_ticks": 2000,
+        "advance": {
+          "type": "all_of",
+          "min_steps": 24,
+          "conditions": [
+            {
+              "type": "local_skill_complete",
+              "robot": "franka_left",
+              "skill": "ur5e_close_gripper",
+              "min_steps": 24
+            },
+            {
+              "type": "object_attached",
+              "object": "fabrica_beam_2",
+              "robot": "franka_left"
+            }
+          ]
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_01_part_2_lift",
+        "phase_index": 36,
+        "start_task_counter": 22161,
+        "end_task_counter": 22351,
+        "ticks": 190,
+        "share_reported_steps_pct": 0.31896855641546495,
+        "category": "lift",
+        "part": "2",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.0002,
+          "cartesian_orientation_step": 0.0005
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_pickup_clearance",
+        "phase_index": 37,
+        "start_task_counter": 22351,
+        "end_task_counter": 22924,
+        "ticks": 573,
+        "share_reported_steps_pct": 0.9619420148740074,
+        "category": "pickup_clearance",
+        "part": "2",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_assembly_clearance",
+        "phase_index": 38,
+        "start_task_counter": 22924,
+        "end_task_counter": 26583,
+        "ticks": 3659,
+        "share_reported_steps_pct": 6.142662883811506,
+        "category": "assembly_clearance",
+        "part": "2",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_transport_hover",
+        "phase_index": 39,
+        "start_task_counter": 26583,
+        "end_task_counter": 26802,
+        "ticks": 219,
+        "share_reported_steps_pct": 0.3676532308157201,
+        "category": "transport_hover",
+        "part": "2",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_00",
+        "phase_index": 40,
+        "start_task_counter": 26802,
+        "end_task_counter": 29650,
+        "ticks": 2848,
+        "share_reported_steps_pct": 4.781170782480232,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_01",
+        "phase_index": 41,
+        "start_task_counter": 29650,
+        "end_task_counter": 29809,
+        "ticks": 159,
+        "share_reported_steps_pct": 0.266926318263468,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_02",
+        "phase_index": 42,
+        "start_task_counter": 29809,
+        "end_task_counter": 29908,
+        "ticks": 99,
+        "share_reported_steps_pct": 0.16619940571121594,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_03",
+        "phase_index": 43,
+        "start_task_counter": 29908,
+        "end_task_counter": 30008,
+        "ticks": 100,
+        "share_reported_steps_pct": 0.1678781875870868,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_04",
+        "phase_index": 44,
+        "start_task_counter": 30008,
+        "end_task_counter": 30078,
+        "ticks": 70,
+        "share_reported_steps_pct": 0.11751473131096077,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_05",
+        "phase_index": 45,
+        "start_task_counter": 30078,
+        "end_task_counter": 30195,
+        "ticks": 117,
+        "share_reported_steps_pct": 0.19641747947689156,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_06",
+        "phase_index": 46,
+        "start_task_counter": 30195,
+        "end_task_counter": 30280,
+        "ticks": 85,
+        "share_reported_steps_pct": 0.1426964594490238,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_07",
+        "phase_index": 47,
+        "start_task_counter": 30280,
+        "end_task_counter": 30380,
+        "ticks": 100,
+        "share_reported_steps_pct": 0.1678781875870868,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_08",
+        "phase_index": 48,
+        "start_task_counter": 30380,
+        "end_task_counter": 30436,
+        "ticks": 56,
+        "share_reported_steps_pct": 0.09401178504876861,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_insert_09",
+        "phase_index": 49,
+        "start_task_counter": 30436,
+        "end_task_counter": 30553,
+        "ticks": 117,
+        "share_reported_steps_pct": 0.19641747947689156,
+        "category": "loaded_insert",
+        "part": "2",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.00025,
+          "cartesian_orientation_step": 0.001,
+          "target_object_stable_steps": 8,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_release_and_lock",
+        "phase_index": 50,
+        "start_task_counter": 30553,
+        "end_task_counter": 30662,
+        "ticks": 109,
+        "share_reported_steps_pct": 0.18298722446992463,
+        "category": "release_and_install",
+        "part": "2",
+        "timeout_ticks": 720,
+        "advance": {
+          "type": "objects_static",
+          "objects": [
+            "fabrica_beam_6",
+            "fabrica_beam_3",
+            "fabrica_beam_2"
+          ],
+          "min_steps": 72,
+          "linear_velocity_threshold": 0.05,
+          "angular_velocity_threshold": 2.0
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_01_part_2_retreat",
+        "phase_index": 51,
+        "start_task_counter": 30662,
+        "end_task_counter": 30748,
+        "ticks": 86,
+        "share_reported_steps_pct": 0.14437524132489465,
+        "category": "retreat",
+        "part": "2",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.008,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "assemble_01_part_2_park",
+        "phase_index": 52,
+        "start_task_counter": 30748,
+        "end_task_counter": 30987,
+        "ticks": 239,
+        "share_reported_steps_pct": 0.4012288683331375,
+        "category": "park",
+        "part": "2",
+        "timeout_ticks": 1800,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.01,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_move_above",
+        "phase_index": 53,
+        "start_task_counter": 30987,
+        "end_task_counter": 32308,
+        "ticks": 1321,
+        "share_reported_steps_pct": 2.217670858025417,
+        "category": "move_above",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_above_part",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.015,
+          "cartesian_orientation_step": 0.03,
+          "prealign_steps": 240,
+          "prealign_until_converged": true,
+          "prealign_joint_position_tolerance": 0.05
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_preshape",
+        "phase_index": 54,
+        "start_task_counter": 32308,
+        "end_task_counter": 32371,
+        "ticks": 63,
+        "share_reported_steps_pct": 0.10576325817986469,
+        "category": "preshape",
+        "part": "1",
+        "timeout_ticks": 744,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_preshape_gripper",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_02_part_1_descend",
+        "phase_index": 55,
+        "start_task_counter": 32371,
+        "end_task_counter": 34254,
+        "ticks": 1883,
+        "share_reported_steps_pct": 3.1611462722648445,
+        "category": "descend",
+        "part": "1",
+        "timeout_ticks": 2400,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_descend_to_grasp",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.015
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_close_and_attach",
+        "phase_index": 56,
+        "start_task_counter": 34254,
+        "end_task_counter": 34816,
+        "ticks": 562,
+        "share_reported_steps_pct": 0.9434754142394278,
+        "category": "close_and_attach",
+        "part": "1",
+        "timeout_ticks": 2000,
+        "advance": {
+          "type": "all_of",
+          "min_steps": 24,
+          "conditions": [
+            {
+              "type": "local_skill_complete",
+              "robot": "franka_left",
+              "skill": "ur5e_close_gripper",
+              "min_steps": 24
+            },
+            {
+              "type": "object_attached",
+              "object": "fabrica_beam_1",
+              "robot": "franka_left"
+            }
+          ]
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_02_part_1_lift",
+        "phase_index": 57,
+        "start_task_counter": 34816,
+        "end_task_counter": 35006,
+        "ticks": 190,
+        "share_reported_steps_pct": 0.31896855641546495,
+        "category": "lift",
+        "part": "1",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.0002,
+          "cartesian_orientation_step": 0.0005
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_pickup_clearance",
+        "phase_index": 58,
+        "start_task_counter": 35006,
+        "end_task_counter": 35576,
+        "ticks": 570,
+        "share_reported_steps_pct": 0.9569056692463949,
+        "category": "pickup_clearance",
+        "part": "1",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_transition_settle": {
+            "motion_metric": "native_com_pose_difference",
+            "stable_native_ticks": 24,
+            "minimum_hold_native_ticks": 48,
+            "maximum_hold_native_ticks": 480,
+            "maximum_linear_speed_m_s": 0.002,
+            "maximum_angular_speed_rad_s": 0.02
+          },
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_assembly_clearance",
+        "phase_index": 59,
+        "start_task_counter": 35576,
+        "end_task_counter": 40182,
+        "ticks": 4606,
+        "share_reported_steps_pct": 7.7324693202612185,
+        "category": "assembly_clearance",
+        "part": "1",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_transport_hover",
+        "phase_index": 60,
+        "start_task_counter": 40182,
+        "end_task_counter": 40209,
+        "ticks": 27,
+        "share_reported_steps_pct": 0.04532711064851344,
+        "category": "transport_hover",
+        "part": "1",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_00",
+        "phase_index": 61,
+        "start_task_counter": 40209,
+        "end_task_counter": 43108,
+        "ticks": 2899,
+        "share_reported_steps_pct": 4.8667886581496465,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_01",
+        "phase_index": 62,
+        "start_task_counter": 43108,
+        "end_task_counter": 43278,
+        "ticks": 170,
+        "share_reported_steps_pct": 0.2853929188980476,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_02",
+        "phase_index": 63,
+        "start_task_counter": 43278,
+        "end_task_counter": 43374,
+        "ticks": 96,
+        "share_reported_steps_pct": 0.16116306008360334,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_03",
+        "phase_index": 64,
+        "start_task_counter": 43374,
+        "end_task_counter": 43483,
+        "ticks": 109,
+        "share_reported_steps_pct": 0.18298722446992463,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_04",
+        "phase_index": 65,
+        "start_task_counter": 43483,
+        "end_task_counter": 43559,
+        "ticks": 76,
+        "share_reported_steps_pct": 0.12758742256618597,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_05",
+        "phase_index": 66,
+        "start_task_counter": 43559,
+        "end_task_counter": 43671,
+        "ticks": 112,
+        "share_reported_steps_pct": 0.18802357009753723,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_06",
+        "phase_index": 67,
+        "start_task_counter": 43671,
+        "end_task_counter": 43751,
+        "ticks": 80,
+        "share_reported_steps_pct": 0.13430255006966946,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_07",
+        "phase_index": 68,
+        "start_task_counter": 43751,
+        "end_task_counter": 43848,
+        "ticks": 97,
+        "share_reported_steps_pct": 0.1628418419594742,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_08",
+        "phase_index": 69,
+        "start_task_counter": 43848,
+        "end_task_counter": 43907,
+        "ticks": 59,
+        "share_reported_steps_pct": 0.09904813067638121,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_insert_09",
+        "phase_index": 70,
+        "start_task_counter": 43907,
+        "end_task_counter": 44035,
+        "ticks": 128,
+        "share_reported_steps_pct": 0.21488408011147112,
+        "category": "loaded_insert",
+        "part": "1",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.00025,
+          "cartesian_orientation_step": 0.001,
+          "target_object_stable_steps": 8,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_release_and_lock",
+        "phase_index": 71,
+        "start_task_counter": 44035,
+        "end_task_counter": 44141,
+        "ticks": 106,
+        "share_reported_steps_pct": 0.177950878842312,
+        "category": "release_and_install",
+        "part": "1",
+        "timeout_ticks": 720,
+        "advance": {
+          "type": "objects_static",
+          "objects": [
+            "fabrica_beam_6",
+            "fabrica_beam_3",
+            "fabrica_beam_2",
+            "fabrica_beam_1"
+          ],
+          "min_steps": 72,
+          "linear_velocity_threshold": 0.05,
+          "angular_velocity_threshold": 2.0
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_02_part_1_retreat",
+        "phase_index": 72,
+        "start_task_counter": 44141,
+        "end_task_counter": 44227,
+        "ticks": 86,
+        "share_reported_steps_pct": 0.14437524132489465,
+        "category": "retreat",
+        "part": "1",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.008,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "assemble_02_part_1_park",
+        "phase_index": 73,
+        "start_task_counter": 44227,
+        "end_task_counter": 44531,
+        "ticks": 304,
+        "share_reported_steps_pct": 0.5103496902647439,
+        "category": "park",
+        "part": "1",
+        "timeout_ticks": 1800,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.01,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_move_above",
+        "phase_index": 74,
+        "start_task_counter": 44531,
+        "end_task_counter": 46676,
+        "ticks": 2145,
+        "share_reported_steps_pct": 3.600987123743012,
+        "category": "move_above",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_above_part",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.015,
+          "cartesian_orientation_step": 0.03,
+          "prealign_steps": 240,
+          "prealign_until_converged": true,
+          "prealign_joint_position_tolerance": 0.05
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_preshape",
+        "phase_index": 75,
+        "start_task_counter": 46676,
+        "end_task_counter": 46739,
+        "ticks": 63,
+        "share_reported_steps_pct": 0.10576325817986469,
+        "category": "preshape",
+        "part": "0",
+        "timeout_ticks": 744,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_preshape_gripper",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_03_part_0_descend",
+        "phase_index": 76,
+        "start_task_counter": 46739,
+        "end_task_counter": 48568,
+        "ticks": 1829,
+        "share_reported_steps_pct": 3.0704920509678177,
+        "category": "descend",
+        "part": "0",
+        "timeout_ticks": 2400,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_descend_to_grasp",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.015
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_close_and_attach",
+        "phase_index": 77,
+        "start_task_counter": 48568,
+        "end_task_counter": 49492,
+        "ticks": 924,
+        "share_reported_steps_pct": 1.5511944533046822,
+        "category": "close_and_attach",
+        "part": "0",
+        "timeout_ticks": 2000,
+        "advance": {
+          "type": "all_of",
+          "min_steps": 24,
+          "conditions": [
+            {
+              "type": "local_skill_complete",
+              "robot": "franka_left",
+              "skill": "ur5e_close_gripper",
+              "min_steps": 24
+            },
+            {
+              "type": "object_attached",
+              "object": "fabrica_beam_0",
+              "robot": "franka_left"
+            }
+          ]
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_03_part_0_lift",
+        "phase_index": 78,
+        "start_task_counter": 49492,
+        "end_task_counter": 49682,
+        "ticks": 190,
+        "share_reported_steps_pct": 0.31896855641546495,
+        "category": "lift",
+        "part": "0",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.0002,
+          "cartesian_orientation_step": 0.0005
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_pickup_clearance",
+        "phase_index": 79,
+        "start_task_counter": 49682,
+        "end_task_counter": 50166,
+        "ticks": 484,
+        "share_reported_steps_pct": 0.8125304279215002,
+        "category": "pickup_clearance",
+        "part": "0",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_assembly_clearance",
+        "phase_index": 80,
+        "start_task_counter": 50166,
+        "end_task_counter": 52487,
+        "ticks": 2321,
+        "share_reported_steps_pct": 3.8964527338962847,
+        "category": "assembly_clearance",
+        "part": "0",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_transport_hover",
+        "phase_index": 81,
+        "start_task_counter": 52487,
+        "end_task_counter": 52581,
+        "ticks": 94,
+        "share_reported_steps_pct": 0.1578054963318616,
+        "category": "transport_hover",
+        "part": "0",
+        "timeout_ticks": 12000,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 8,
+          "beam_assisted_phase_handoff_ticks": 24
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_00",
+        "phase_index": 82,
+        "start_task_counter": 52581,
+        "end_task_counter": 55593,
+        "ticks": 3012,
+        "share_reported_steps_pct": 5.056491010123055,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_01",
+        "phase_index": 83,
+        "start_task_counter": 55593,
+        "end_task_counter": 55777,
+        "ticks": 184,
+        "share_reported_steps_pct": 0.30889586516023976,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_02",
+        "phase_index": 84,
+        "start_task_counter": 55777,
+        "end_task_counter": 55888,
+        "ticks": 111,
+        "share_reported_steps_pct": 0.18634478822166636,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_03",
+        "phase_index": 85,
+        "start_task_counter": 55888,
+        "end_task_counter": 55980,
+        "ticks": 92,
+        "share_reported_steps_pct": 0.15444793258011988,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_04",
+        "phase_index": 86,
+        "start_task_counter": 55980,
+        "end_task_counter": 56057,
+        "ticks": 77,
+        "share_reported_steps_pct": 0.12926620444205683,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_05",
+        "phase_index": 87,
+        "start_task_counter": 56057,
+        "end_task_counter": 56187,
+        "ticks": 130,
+        "share_reported_steps_pct": 0.21824164386321285,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_06",
+        "phase_index": 88,
+        "start_task_counter": 56187,
+        "end_task_counter": 56280,
+        "ticks": 93,
+        "share_reported_steps_pct": 0.15612671445599074,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_07",
+        "phase_index": 89,
+        "start_task_counter": 56280,
+        "end_task_counter": 56394,
+        "ticks": 114,
+        "share_reported_steps_pct": 0.19138113384927896,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_08",
+        "phase_index": 90,
+        "start_task_counter": 56394,
+        "end_task_counter": 56453,
+        "ticks": 59,
+        "share_reported_steps_pct": 0.09904813067638121,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.001,
+          "cartesian_orientation_step": 0.004,
+          "target_object_stable_steps": 1,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_insert_09",
+        "phase_index": 91,
+        "start_task_counter": 56453,
+        "end_task_counter": 56576,
+        "ticks": 123,
+        "share_reported_steps_pct": 0.20649017073211678,
+        "category": "loaded_insert",
+        "part": "0",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_move_part_to_staging",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.00025,
+          "cartesian_orientation_step": 0.001,
+          "target_object_stable_steps": 8,
+          "beam_assisted_descent_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_release_and_lock",
+        "phase_index": 92,
+        "start_task_counter": 56576,
+        "end_task_counter": 56682,
+        "ticks": 106,
+        "share_reported_steps_pct": 0.177950878842312,
+        "category": "release_and_install",
+        "part": "0",
+        "timeout_ticks": 720,
+        "advance": {
+          "type": "objects_static",
+          "objects": [
+            "fabrica_beam_6",
+            "fabrica_beam_3",
+            "fabrica_beam_2",
+            "fabrica_beam_1",
+            "fabrica_beam_0"
+          ],
+          "min_steps": 72,
+          "linear_velocity_threshold": 0.05,
+          "angular_velocity_threshold": 2.0
+        },
+        "relevant_skill_contract": {}
+      },
+      {
+        "phase": "assemble_03_part_0_retreat",
+        "phase_index": 93,
+        "start_task_counter": 56682,
+        "end_task_counter": 56767,
+        "ticks": 85,
+        "share_reported_steps_pct": 0.1426964594490238,
+        "category": "retreat",
+        "part": "0",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.008,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "assemble_03_part_0_park",
+        "phase_index": 94,
+        "start_task_counter": 56767,
+        "end_task_counter": 56979,
+        "ticks": 212,
+        "share_reported_steps_pct": 0.355901757684624,
+        "category": "park",
+        "part": "0",
+        "timeout_ticks": 1800,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.01,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "base_6_visual_support_open",
+        "phase_index": 95,
+        "start_task_counter": 56979,
+        "end_task_counter": 57062,
+        "ticks": 83,
+        "share_reported_steps_pct": 0.13933889569728206,
+        "category": "visual_support_open",
+        "part": "6",
+        "timeout_ticks": 720,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_preshape_gripper",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "stable_steps": 12
+        }
+      },
+      {
+        "phase": "base_6_retreat",
+        "phase_index": 96,
+        "start_task_counter": 57062,
+        "end_task_counter": 57175,
+        "ticks": 113,
+        "share_reported_steps_pct": 0.1897023519734081,
+        "category": "retreat",
+        "part": "6",
+        "timeout_ticks": 1200,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "ur5e_retreat_vertical",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "cartesian_position_step": 0.008,
+          "cartesian_orientation_step": 0.03
+        }
+      },
+      {
+        "phase": "beam_assisted_return_home_franka_left",
+        "phase_index": 97,
+        "start_task_counter": 57175,
+        "end_task_counter": 57764,
+        "ticks": 589,
+        "share_reported_steps_pct": 0.9888025248879413,
+        "category": "return_home",
+        "part": "postassembly",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_left",
+          "skill": "move_arm_to_joint_positions",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "joint_position_tolerance": 0.01,
+          "joint_target_stable_steps": 8
+        }
+      },
+      {
+        "phase": "beam_assisted_return_clearance_franka_right",
+        "phase_index": 98,
+        "start_task_counter": 57764,
+        "end_task_counter": 57876,
+        "ticks": 112,
+        "share_reported_steps_pct": 0.18802357009753723,
+        "category": "return_home",
+        "part": "postassembly",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "move_arm_to_joint_positions",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "joint_position_tolerance": 0.01,
+          "joint_target_stable_steps": 8
+        }
+      },
+      {
+        "phase": "beam_assisted_return_home_franka_right",
+        "phase_index": 99,
+        "start_task_counter": 57876,
+        "end_task_counter": 59326,
+        "ticks": 1450,
+        "share_reported_steps_pct": 2.4342337200127586,
+        "category": "return_home",
+        "part": "postassembly",
+        "timeout_ticks": 3600,
+        "advance": {
+          "type": "local_skill_complete",
+          "robot": "franka_right",
+          "skill": "move_arm_to_joint_positions",
+          "min_steps": 1
+        },
+        "relevant_skill_contract": {
+          "joint_position_tolerance": 0.01,
+          "joint_target_stable_steps": 8
+        }
+      },
+      {
+        "phase": "beam_assisted_final_verification",
+        "phase_index": 100,
+        "start_task_counter": 59326,
+        "end_task_counter": 59566,
+        "ticks": 240,
+        "share_reported_steps_pct": 0.4029076502090083,
+        "category": "final_stability_window",
+        "part": "postassembly",
+        "timeout_ticks": 2400,
+        "advance": {
+          "type": "all_of",
+          "physics_stable_steps": 240,
+          "conditions": [
+            {
+              "type": "object_targets_reached",
+              "objects": [
+                {
+                  "object": "fabrica_beam_0",
+                  "target": "part_0_assembled",
+                  "position_tolerance": 0.003,
+                  "orientation_tolerance": 0.04
+                },
+                {
+                  "object": "fabrica_beam_1",
+                  "target": "part_1_assembled",
+                  "position_tolerance": 0.003,
+                  "orientation_tolerance": 0.04
+                },
+                {
+                  "object": "fabrica_beam_2",
+                  "target": "part_2_assembled",
+                  "position_tolerance": 0.003,
+                  "orientation_tolerance": 0.04
+                },
+                {
+                  "object": "fabrica_beam_3",
+                  "target": "part_3_assembled",
+                  "position_tolerance": 0.003,
+                  "orientation_tolerance": 0.04
+                },
+                {
+                  "object": "fabrica_beam_6",
+                  "target": "part_6_assembled",
+                  "position_tolerance": 0.003,
+                  "orientation_tolerance": 0.04
+                }
+              ]
+            },
+            {
+              "type": "objects_static",
+              "objects": [
+                {
+                  "object": "fabrica_beam_0",
+                  "linear_velocity_threshold": 0.05,
+                  "angular_velocity_threshold": 2.0
+                },
+                {
+                  "object": "fabrica_beam_1",
+                  "linear_velocity_threshold": 0.05,
+                  "angular_velocity_threshold": 2.0
+                },
+                {
+                  "object": "fabrica_beam_2",
+                  "linear_velocity_threshold": 0.05,
+                  "angular_velocity_threshold": 2.0
+                },
+                {
+                  "object": "fabrica_beam_3",
+                  "linear_velocity_threshold": 0.05,
+                  "angular_velocity_threshold": 2.0
+                },
+                {
+                  "object": "fabrica_beam_6",
+                  "linear_velocity_threshold": 0.05,
+                  "angular_velocity_threshold": 2.0
+                }
+              ]
+            },
+            {
+              "type": "objects_detached",
+              "objects": [
+                "fabrica_beam_0",
+                "fabrica_beam_1",
+                "fabrica_beam_2",
+                "fabrica_beam_3",
+                "fabrica_beam_6"
+              ]
+            }
+          ]
+        },
+        "relevant_skill_contract": {}
+      }
+    ],
+    "insert00_total_ticks": 11503,
+    "assembly_clearance_plus_insert_ticks": 29925,
+    "assembly_clearance_plus_insert_share_pct": 50.237547635435725,
+    "insert00_mechanism": {
+      "actual_phase_ticks": [
+        2744,
+        2848,
+        2899,
+        3012
+      ],
+      "nominal_configured_legs": [
+        {
+          "phase": "assemble_00_part_3_insert_00",
+          "previous_target": "part_3_preinsert_hover",
+          "target": "part_3_insert_00",
+          "nominal_delta_world_m": [
+            0.0,
+            0.0,
+            -0.1200000000000001
+          ],
+          "same_target_orientation": true,
+          "remaining_nine_effective_target_drop_m": 0.01720000191889892,
+          "local_object_stable_steps": 1,
+          "hold_for_target_object_settle": false,
+          "strict_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        },
+        {
+          "phase": "assemble_01_part_2_insert_00",
+          "previous_target": "part_2_preinsert_hover",
+          "target": "part_2_insert_00",
+          "nominal_delta_world_m": [
+            0.0,
+            0.0,
+            -0.1200000000000001
+          ],
+          "same_target_orientation": true,
+          "remaining_nine_effective_target_drop_m": 0.01720000191889892,
+          "local_object_stable_steps": 1,
+          "hold_for_target_object_settle": false,
+          "strict_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        },
+        {
+          "phase": "assemble_02_part_1_insert_00",
+          "previous_target": "part_1_preinsert_hover",
+          "target": "part_1_insert_00",
+          "nominal_delta_world_m": [
+            0.0,
+            0.0,
+            -0.1200000000000001
+          ],
+          "same_target_orientation": true,
+          "remaining_nine_effective_target_drop_m": 0.01720000191889892,
+          "local_object_stable_steps": 1,
+          "hold_for_target_object_settle": false,
+          "strict_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        },
+        {
+          "phase": "assemble_03_part_0_insert_00",
+          "previous_target": "part_0_preinsert_hover",
+          "target": "part_0_insert_00",
+          "nominal_delta_world_m": [
+            0.0,
+            0.0,
+            -0.1200000000000001
+          ],
+          "same_target_orientation": true,
+          "remaining_nine_effective_target_drop_m": 0.01720000191889892,
+          "local_object_stable_steps": 1,
+          "hold_for_target_object_settle": false,
+          "strict_admission": {
+            "motion_metric": "native_com_pose_difference",
+            "lateral_tolerance_m": 0.00015,
+            "orientation_tolerance_rad": 0.001,
+            "stable_native_ticks": 12,
+            "max_linear_speed_m_s": 0.02,
+            "max_angular_speed_rad_s": 0.2,
+            "geometry_certificate": "C01_full_insert_corridor",
+            "published_axial_slack_m": 2e-05,
+            "published_lateral_slack_m": 2e-05
+          }
+        }
+      ],
+      "source_fact": "In _assisted_absolute_object_servo_pose, native descent_admission gates axial motion; absolute_object_servo receives allow_axial_motion=ready while bounded lateral/orientation alignment remains active. Each first insert phase is configured120mm below preinsert_hover with the same XY/orientation; later9 stages total only17.2mm. The12-tick strict admission is not a fixed thousands-tick wait. First insert local target_object_stable_steps=1 and hold_for_target_object_settle=False; unused configured48-tick hold parameter must not be mistaken for executed fixed waits.",
+      "unresolved": "Nominal configured drop is not measured physical path length. Current phase totals and stride8 aggregate evidence do not separate travel, cold alignment/reset, servo tracking, repeated FK/CAD, or any host wait within these phases. No dominant-cause percentage inferred.",
+      "candidate": "After full dual-arm/gripper/payload/installed-geometry confirmation, investigate separating far free approach from near-target strict insertion while preserving entry/adjacent transitions and original12-tick admission, model and final gates. This changes the executed trajectory and requires new authorized physical validation; do not blindly merge10 stages or delete gates."
+    }
+  },
+  "wait_and_stability": {
+    "exact_final_common_window_ticks": 240,
+    "exact_final_window_step_share_pct": 0.4029076502090083,
+    "release_install_phase_total_ticks": 529,
+    "release_install_phase_share_pct": 0.8880756123356892,
+    "release_plus_final_phase_total_ticks": 769,
+    "release_plus_final_phase_share_pct": 1.2909832625446975,
+    "interpretation": "Final240 is a real common stability window. Release/install phases include actual gripper opening and bounded support-anchor descent, so529 ticks are not pure idle. Other phase names/stride8 states cannot establish a complete no-motion waiting fraction.",
+    "configured_windows_not_additive": [
+      {
+        "mechanism": "five captures plus visual support qualification",
+        "required_ticks_each": 12,
+        "sites": 6,
+        "pure_wait": false
+      },
+      {
+        "mechanism": "strict insert admission",
+        "required_ticks_each": 12,
+        "sites": 40,
+        "pure_wait": false
+      },
+      {
+        "mechanism": "release phase minimum",
+        "required_ticks_each": 72,
+        "sites": 5,
+        "pure_wait": false
+      },
+      {
+        "mechanism": "part1 pickup transition",
+        "minimum_hold_native_ticks": 48,
+        "stable_native_ticks": 24,
+        "pure_wait": "unmeasured exact duration; nested minimum and stable windows overlap"
+      },
+      {
+        "mechanism": "new return joint targets",
+        "required_ticks_each": 8,
+        "sites": 3,
+        "pure_wait": false
+      },
+      {
+        "mechanism": "held free-move handoff",
+        "ticks_each": 24,
+        "sites": 12,
+        "pure_wait": false
+      }
+    ],
+    "pure_wait_fraction_outside_final_window": "not identifiable from current aggregate timings and sparse state trace; do not multiply gated sample counts by8 or label all insert/clearance ticks as waiting."
+  },
+  "wall_time": {
+    "wrapper_inclusive_s": 6555.985216497909,
+    "wrapper_inclusive_min": 109.26642027496516,
+    "wall_to_certificate_simulated_time_ratio": 26.41323434444178,
+    "components": [
+      {
+        "name": "runtime_constraint_monitor",
+        "measured_s": 536.2798664523289,
+        "share_inclusive_wall_pct": 8.180004205970434,
+        "checks": 7445,
+        "boundary": "generate_demos constraint_hook.observe after env.step; includes capsule classification, environment refresh and entity monitor, not a capsule-only timer."
+      },
+      {
+        "name": "stage_trajectory_precheck",
+        "measured_s": 83.8109528021887,
+        "share_inclusive_wall_pct": 1.278388373898119,
+        "checks": 931,
+        "boundary": "precheck_hook.observe_before_step before env.step; includes four-waypoint passive prediction and its own entity checks."
+      },
+      {
+        "name": "production_final_CAD_guard_last_progress_checkpoint",
+        "measured_s": 488.56214336445555,
+        "share_inclusive_wall_pct": 7.452154439503706,
+        "calls": 18496,
+        "finite_samples": 92480,
+        "last_task_step": 59552,
+        "boundary": "ProductionCarryChecker.check/check_empty internal wall timer inside policy.act. Progress checkpoint at59552; trailing calls are not measured in a final total."
+      },
+      {
+        "name": "original_video_encode_serial_three_views",
+        "measured_s": 141.70242000000002,
+        "per_view_s": {
+          "front": 66.813561,
+          "left_wrist": 38.679337,
+          "right_wrist": 36.209522
+        },
+        "share_inclusive_wall_pct": 2.1614206762304895,
+        "boundary": "LiveRolloutVideoRecorder.finalize serial per-camera calls after rollout, within wrapper inclusive interval."
+      }
+    ],
+    "known_disjoint_host_interval_sum_s": 1250.3553826189732,
+    "known_disjoint_host_interval_share_pct": 19.071967695602748,
+    "remaining_unattributed_wrapper_wall_s": 5305.629833878937,
+    "remaining_unattributed_share_pct": 80.92803230439726,
+    "timer_relationships": "Source call order is policy.act(CAD) -> passive stage hook -> env.step -> runtime constraint hook -> recorder/PNG writes; finalize encodes after the loop. The four quoted host-timer intervals are sequential disjoint sections, so their subtotal can be formed once. They are nested inside the6555.9852s wrapper, cannot be added on top of it, and cannot be added again with their included FK/entity work. Concurrent external visible-mesh monitor/GPU activity can overlap these host waits; this subtotal is not CPU/GPU utilization. CAD is a last checkpoint, so the unattributed remainder also contains its unrecorded final tail.",
+    "missing_profile": [
+      "policy/controller and IK/FK exclusive wall time",
+      "world.step native physics versus render/GPU versus synchronization",
+      "get_obs camera readback and device transfer",
+      "native body/joint diagnostics serialization and write time",
+      "PNG conversion/compression and disk write time",
+      "external watch_visible_meshes CPU wall time and contention",
+      "initial scene load/compile/runtime setup versus93.229s first policy preflight/ACK",
+      "final unrecorded CAD calls after59552 and remaining loop/shutdown costs"
+    ],
+    "existing_sampled_step_log": {
+      "count": 997,
+      "first": [
+        {
+          "log_line": 794,
+          "step": 1,
+          "phase": "base_6_move_above",
+          "step_wall_s": 93.229,
+          "mean_steps_per_s": 0.011
+        },
+        {
+          "log_line": 795,
+          "step": 2,
+          "phase": "base_6_move_above",
+          "step_wall_s": 0.032,
+          "mean_steps_per_s": 0.021
+        },
+        {
+          "log_line": 796,
+          "step": 3,
+          "phase": "base_6_move_above",
+          "step_wall_s": 0.033,
+          "mean_steps_per_s": 0.032
+        },
+        {
+          "log_line": 797,
+          "step": 4,
+          "phase": "base_6_move_above",
+          "step_wall_s": 0.032,
+          "mean_steps_per_s": 0.043
+        },
+        {
+          "log_line": 798,
+          "step": 5,
+          "phase": "base_6_move_above",
+          "step_wall_s": 0.032,
+          "mean_steps_per_s": 0.054
+        },
+        {
+          "log_line": 799,
+          "step": 60,
+          "phase": "base_6_move_above",
+          "step_wall_s": 0.049,
+          "mean_steps_per_s": 0.583
+        }
+      ],
+      "last": [
+        {
+          "log_line": 1887,
+          "step": 59220,
+          "phase": "beam_assisted_return_home_franka_right",
+          "step_wall_s": 0.065,
+          "mean_steps_per_s": 9.421
+        },
+        {
+          "log_line": 1888,
+          "step": 59280,
+          "phase": "beam_assisted_return_home_franka_right",
+          "step_wall_s": 0.154,
+          "mean_steps_per_s": 9.421
+        },
+        {
+          "log_line": 1889,
+          "step": 59340,
+          "phase": "beam_assisted_final_verification",
+          "step_wall_s": 0.073,
+          "mean_steps_per_s": 9.422
+        },
+        {
+          "log_line": 1890,
+          "step": 59400,
+          "phase": "beam_assisted_final_verification",
+          "step_wall_s": 0.158,
+          "mean_steps_per_s": 9.422
+        },
+        {
+          "log_line": 1891,
+          "step": 59460,
+          "phase": "beam_assisted_final_verification",
+          "step_wall_s": 0.072,
+          "mean_steps_per_s": 9.421
+        },
+        {
+          "log_line": 1892,
+          "step": 59520,
+          "phase": "beam_assisted_final_verification",
+          "step_wall_s": 0.159,
+          "mean_steps_per_s": 9.421
+        }
+      ],
+      "sampled_step_wall_s": {
+        "min": 0.032,
+        "median": 0.134,
+        "mean": 0.2039147442326981,
+        "max": 93.229
+      },
+      "largest_sampled_steps": [
+        {
+          "log_line": 794,
+          "step": 1,
+          "phase": "base_6_move_above",
+          "step_wall_s": 93.229,
+          "mean_steps_per_s": 0.011
+        },
+        {
+          "log_line": 1527,
+          "step": 40200,
+          "phase": "assemble_02_part_1_transport_hover",
+          "step_wall_s": 0.23,
+          "mean_steps_per_s": 9.232
+        },
+        {
+          "log_line": 1438,
+          "step": 35040,
+          "phase": "assemble_02_part_1_pickup_clearance",
+          "step_wall_s": 0.227,
+          "mean_steps_per_s": 9.58
+        },
+        {
+          "log_line": 1440,
+          "step": 35160,
+          "phase": "assemble_02_part_1_pickup_clearance",
+          "step_wall_s": 0.227,
+          "mean_steps_per_s": 9.559
+        },
+        {
+          "log_line": 1442,
+          "step": 35280,
+          "phase": "assemble_02_part_1_pickup_clearance",
+          "step_wall_s": 0.22,
+          "mean_steps_per_s": 9.54
+        },
+        {
+          "log_line": 1446,
+          "step": 35520,
+          "phase": "assemble_02_part_1_pickup_clearance",
+          "step_wall_s": 0.22,
+          "mean_steps_per_s": 9.497
+        },
+        {
+          "log_line": 1444,
+          "step": 35400,
+          "phase": "assemble_02_part_1_pickup_clearance",
+          "step_wall_s": 0.219,
+          "mean_steps_per_s": 9.515
+        },
+        {
+          "log_line": 1284,
+          "step": 26880,
+          "phase": "assemble_01_part_2_insert_00",
+          "step_wall_s": 0.19,
+          "mean_steps_per_s": 9.327
+        }
+      ]
+    },
+    "sampled_mean_excluding_first_startup_s": 0.1105160642570281,
+    "step_log_scope": "997 rounded step-wall samples; first step93.229s includes native preflight/actual images/ACK. Remaining sampled mean is descriptive only: sampling every60 aliases the render/monitor stride8, excludes recorder/video writes after the printed timer, and does not split physics/render/IO. Do not multiply it by all59567 steps.",
+    "encode_only_theoretical_ceiling_pct": 2.1614206762304895,
+    "ceiling_scope": "Even zero encode time could remove only its measured2.16% inclusive share. This is a timing ceiling, not a measured optimization or forecast.",
+    "original_wrapper_timing_events": [
+      {
+        "utc": "2026-10-21T03:21:59.916495+00:00",
+        "wall_unix_s": 1792552919.9165235,
+        "monotonic_s": 3433998.255090196,
+        "pid": 2741269,
+        "phase": "D28_native",
+        "category": "native",
+        "action": "start",
+        "command": [
+          "bash",
+          "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/tools/run_beam_route.sh",
+          "assisted",
+          "A44_beam_full",
+          "0"
+        ],
+        "scope": "Inclusive elapsed wall time; nested phase intervals must not be added."
+      },
+      {
+        "utc": "2026-10-21T05:11:15.901844+00:00",
+        "wall_unix_s": 1792559475.9018672,
+        "monotonic_s": 3440554.240433605,
+        "pid": 2741269,
+        "phase": "D28_native",
+        "category": "native",
+        "action": "end",
+        "elapsed_s": 6555.985216497909,
+        "returncode": 0,
+        "log": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/batch_D_20261016/D28_native.log"
+      }
+    ],
+    "wrapper_boundary_exact": "Original D28_native timing wraps bash run_beam_route.sh assisted A44_beam_full0 from UTC2026-10-21T03:21:59.916495 to05:11:15.901844; monotonic elapsed6555.985216497909. Launcher covers environment setup/gates, worker startup/loop/render/readback/recording/original-video encoding, concurrent CAD watcher lifetime/wait and source-after verification. Postreview pipeline, local transfer and documents are outside this native wrapper."
+  },
+  "io_evidence": {
+    "raw_file_bytes": {
+      "assisted_trace.jsonl": 38403830,
+      "motion_trace.jsonl": 67896646,
+      "physics_boundary_trace.jsonl": 2543150677,
+      "entity_geometry_trace.jsonl": 491584394,
+      "video_frame_clock.jsonl": 14501681,
+      "visual_support_trace.jsonl": 2948289
+    },
+    "total_raw_jsonl_bytes": 3158485517,
+    "PNG_counts_and_bytes": {
+      "observation_images_right_wrist": {
+        "files": 7445,
+        "bytes": 1874889794
+      },
+      "observation_images_front": {
+        "files": 7445,
+        "bytes": 4077078958
+      },
+      "observation_images_left_wrist": {
+        "files": 7445,
+        "bytes": 2296391444
+      }
+    },
+    "PNG_total_files": 22335,
+    "PNG_total_bytes": 8248360196,
+    "raw_plus_PNG_logical_bytes": 11406845713,
+    "raw_plus_PNG_decimal_GB": 11.406845713,
+    "scope": "Existing artifact logical sizes, not disk bandwidth or timed write costs. Runtime writes include22335 PNGs and3.158GB six JSONL streams; PNGs are subsequently read for encoding. No claim that disk IO dominates without profiling."
+  },
+  "prioritized_candidates": [
+    {
+      "priority": 1,
+      "category": "seconds_per_step_no_physics_change_candidate",
+      "action": "First add bounded passive exclusive timers around controller/FK, complete CAD guard, stage/constraint/entity, native world step, render/readback, serialization/PNG/IO and external observer. Do not execute a new probe under this analysis-only task.",
+      "expected_value": "Localize the currently81% unattributed inclusive wall instead of changing a small measured component blindly.",
+      "risk": "low if no extra physics step and no state reads with side effects; timer overhead and GPU asynchronous attribution must be stated.",
+      "measurement": "Keep run class/source/layout/stride/terminal coverage equal. Report inclusive and exclusive host intervals, CPU/GPU synchronization and raw artifacts separately; do not claim speedup until a new authorized paired measurement."
+    },
+    {
+      "priority": 2,
+      "category": "seconds_per_step_no_physics_change_candidate",
+      "action": "Buffer existing JSONL and lossless PNG writes with bounded queues and mandatory terminal/failure drain; preserve every required event, original image, ordering, clock and explicit IO failure. Avoid reopening streams for each record.",
+      "expected_value": "Targets11.407GB recorded logical writes and22335 PNG serial compression/write calls; wall share remains unmeasured.",
+      "risk": "medium evidence-loss risk; queue overflow must block or fail explicitly, never drop data. Fix terminal evidence flush/selection, not reduce its coverage.",
+      "measurement": "Compare record counts/sequence/epoch-index-time, decoded pixels, complete failure and terminal certificates, bytes and write/queue timings on identical captured inputs before any native acceptance."
+    },
+    {
+      "priority": 3,
+      "category": "seconds_per_step_no_physics_change_candidate",
+      "action": "Reuse exact same-clock native snapshots and FK results; cache transforms of exactly unchanged static bodies and unchanged arm subtrees, vectorize remaining repeated math. Keep full54/self and both-arm/gripper/payload checks for every original final batch.",
+      "expected_value": "The final CAD timer already measures at least488.56s; controller repeats and native readbacks outside that timer are unprofiled.",
+      "risk": "medium stale-state risk. Keys must include source/geometry, run/epoch/index, native view identity, both full12q, final targets, part poses, grasp/support/contact policy. No tolerance-based or cross-tick unproven reuse.",
+      "measurement": "Run existing dangerous negatives and progressing positives plus recorded actual final-command inputs. Compare decisions, minimum pairs/distances, original exemptions, source and SDK targets; measure CPU/FK/FCL calls and timer, preserving all original guard invocations.",
+      "already_present": "BVH meshes, pair topology, corner arrays and active-CAD vectorized AABB broad phase are already cached; simply suggesting these again is not a new improvement."
+    },
+    {
+      "priority": 4,
+      "category": "offline_and_iteration_cost_no_physics_change_candidate",
+      "action": "Reuse immutable raw index/open readers and source/config/asset-bound completed postreview stages; run changed-module tests and adjacent production edges, preserve once-per-run original reports and one full video decode.",
+      "expected_value": "Reduces repeated orchestration, scanning, hashing, report/clip encoding and waiting between candidates; these costs are outside6555.9852s native wrapper and need separate accounting.",
+      "risk": "low to medium stale evidence risk; only reuse when input/tool/source/output SHA and applicability match.",
+      "measurement": "Count native attempts separately from offline checks, record whole-cycle start/end, cache hits and invalidated domains; no duplicate report or all-history rerun for a local change."
+    },
+    {
+      "priority": 5,
+      "category": "iteration_cost_method_requires_future_authorization",
+      "action": "Use an explicitly isolated short scene to screen the changed fourth/fifth/end-return mechanism, followed by one ordinary full-from-head acceptance for a promising candidate.",
+      "expected_value": "Avoids spending another109min on each rejected local mechanism; no numerical speedup is claimed across different scopes.",
+      "risk": "short scene fixes initial installed conditions and is not equivalent restoration. User must authorize any new native short screening.",
+      "measurement": "Publish reached/unvisited gates and separate short/full/native-start counts and artifact times. No checkpoint shortcut until continuous-versus-restored trajectory equivalence is demonstrated."
+    },
+    {
+      "priority": 6,
+      "category": "postrun_wall_no_physics_change_candidate",
+      "action": "Consider parallel or streaming original-view encoding after preserving full raw lossless frames and backpressure; keep complete final recordings and one decode.",
+      "expected_value": "Current three serial encodes total141.702s (2.16% wrapper), so this cannot explain most of the109min.",
+      "risk": "low physical risk if only after native exit, medium CPU/IO contention and evidence-flush risk.",
+      "measurement": "Measure end-to-end finalize time, peak RAM/IO and per-view SHA/pixel/frame/time agreement. No assumed3x benefit."
+    },
+    {
+      "priority": 7,
+      "category": "fewer_physics_steps_changes_executed_trajectory",
+      "action": "Only after attribution, improve real approach/alignment/staged-turn geometry and target continuity using measured grasp/other-arm state and original limits. Focus on insert_00 and assembly_clearance; do not blindly enlarge speed or relax gates.",
+      "expected_value": "Insert+assembly_clearance account for29925 of59567 steps (50.24%); four insert_00 phases alone11503 steps (19.31%).",
+      "risk": "high relative to implementation-only optimizations: fewer control steps change path/tracking/contact and require full geometric/physical validation under original success gates.",
+      "measurement": "Separate phase ticks from wall cost per tick; require lower original error and no earlier gate failure, stop non-improving tuning, and accept only a new complete ordinary run when authorized."
+    }
+  ],
+  "changes_that_alter_physics_or_acceptance": [
+    "physics/control dt and substeps; command/action repeat or control decimation",
+    "solver iteration counts, masses, friction, drive gains, collision/contact settings, fixed-constraint formulation",
+    "higher Cartesian/joint speed or larger command tracking/step limits and different paths/phase handoffs",
+    "shorter12/8/24/48/72/240 native windows, looser model/grasp/insert/home tolerances or altered success interpretation",
+    "skipping per-batch full final-command guard or introducing wider exemptions is protection/coverage change and is excluded from the no-physics optimization set",
+    "removing/decimating cameras or native/entity sampling is not automatically an equivalent optimization: it changes evidence contracts and may hide the current terminal gap"
+  ],
+  "evidence_sha256": {
+    "collect_results.json": "e5b111da61170eeeaa2935b37c823af657eee03264b4a2fb197d6fcc16e0e29a",
+    "task_config_snapshot.json": "f5e50359f05860807f871b0134918c902200ee2df605be013591fe9c00c9631f",
+    "D28_conclusions.json": "12bf1ae3157c098b772444a8133cf051c49d1dab973ac1729e78c01dd523c7e6",
+    "D28_native.log": "e6eb097a547d54cd439a1886436797ffd410688090caa4b1a13016fd880660e3",
+    "local_launcher_source": "df563ae34878b4f210cdfcc2a8ad21cd7c0d3ef1e1a5b7aef35920f4307bbefe"
+  },
+  "authority_source_files": {
+    "toolkits/factory_dual_franka_assembly/generate_demos.py": "e9597c11a0321cdd64c75870af305593aa9bfa01d032c5d2be6fffba1edc6a4f",
+    "internutopia/core/runner.py": "b18cfa5e3fec9cc4a5656e0745c30e00884201e21036d0245adbb21b58ee3734",
+    "toolkits/constraint_checking/integration/runtime_monitor.py": "3e1845d4bd8fa094a21908d7b8278a725bb51497e98d5a2b9970c3b031679e66",
+    "toolkits/constraint_checking/integration/stage_precheck.py": "d6e47b67ce052cb358e25df1def736a2c3fc341a98c61d3555b64ad1cc8ed70e",
+    "toolkits/factory_dual_franka_assembly/beam_physics_diagnostics.py": "f1b6b9d51a470e3bb6e724d9e49944805b23cdbe5a7e5a61b99bf223c827a51c",
+    "toolkits/factory_dual_franka_assembly/beam_assisted_state.py": "d77de1959d242f6b6f9e89d042266bd549500d3eb43ac244ddd351ddde36f015"
+  },
+  "source_locations": {
+    "serial_rollout_order": "toolkits/factory_dual_franka_assembly/generate_demos.py:612-665",
+    "serial_PNG_write": "generate_demos.py:292-317",
+    "serial_video_encode": "generate_demos.py:321-354",
+    "combined_world_physics_render_and_diagnostics": "internutopia/core/runner.py:125-190",
+    "runtime_monitor_timer": "toolkits/constraint_checking/integration/runtime_monitor.py:200-250,480-482",
+    "stage_timer": "toolkits/constraint_checking/integration/stage_precheck.py:58-134",
+    "per_record_diagnostic_open_write": "beam_physics_diagnostics.py:501-507",
+    "per_event_assisted_open_write": "beam_assisted_state.py:110-117",
+    "active_CAD_timer_and_existing_caches": "P/tools/visual_mesh_check.py:75-210",
+    "external_concurrent_mesh_monitor": "P/tools/watch_visible_meshes.py:29-83"
+  }
+}

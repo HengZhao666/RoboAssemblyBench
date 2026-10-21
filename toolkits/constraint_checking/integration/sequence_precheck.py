@@ -53,7 +53,9 @@ class AssemblySequencePrechecker:
         known_robots = {str(name) for name in robot_names}
         known_objects = {str(name) for name in object_names}
         holding: dict[str, str | None] = {name: None for name in known_robots}
-        held_by: dict[str, str] = {}
+        # Keep each hand's permission: runtime sharing requires both existing
+        # and incoming grasps to explicitly permit pure physical support.
+        held_by: dict[str, dict[str, bool]] = {}
         actions: list[dict] = []
         errors: list[dict] = []
         warnings: list[dict] = []
@@ -87,17 +89,21 @@ class AssemblySequencePrechecker:
                 actions.append(action)
                 self._validate_reference(action, known_robots, known_objects, errors)
                 if robot and object_name:
-                    owner = held_by.get(object_name)
-                    if owner and owner != robot:
+                    owners = held_by.get(object_name, {})
+                    skill_name = str(skill.get('name') or '').lower()
+                    requires_payload = bool(skill.get('requires_held_object',
+                        'move_part' in skill_name or 'hold_part' in skill_name))
+                    shared_approach = (not requires_payload and owners and all(owners.values())
+                        and self._shared_physical(self._next_attach(phases[index:], robot, object_name)))
+                    if owners and robot not in owners and not shared_approach:
                         errors.append(
                             self._issue(
                                 action,
                                 'object_owned_by_other_robot',
-                                f'{object_name} is held by {owner}, but {robot} is scheduled to manipulate it.',
+                                f'{object_name} is held by {", ".join(owners)}, but {robot} is scheduled to manipulate it.',
                             )
                         )
-                    skill_name = str(skill.get('name') or '').lower()
-                    if ('move_part' in skill_name or 'hold_part' in skill_name) and owner != robot:
+                    if requires_payload and robot not in owners:
                         errors.append(
                             self._issue(
                                 action,
@@ -124,7 +130,7 @@ class AssemblySequencePrechecker:
                     errors.append(self._issue(action, 'incomplete_attach', 'Attach requires robot and object.'))
                     continue
                 current_payload = holding.get(robot)
-                current_owner = held_by.get(object_name)
+                current_owners = held_by.get(object_name, {})
                 if current_payload and current_payload != object_name:
                     errors.append(
                         self._issue(
@@ -134,23 +140,23 @@ class AssemblySequencePrechecker:
                         )
                     )
                     continue
-                if current_owner and current_owner != robot:
+                permits_shared = self._shared_physical(attach)
+                if (current_owners and robot not in current_owners
+                        and not (permits_shared and all(current_owners.values()))):
                     errors.append(
                         self._issue(
                             action,
                             'double_grasp',
-                            f'{object_name} is already held by {current_owner}; {robot} cannot attach it.',
+                            f'{object_name} is already held by {", ".join(current_owners)}; {robot} cannot attach it.',
                         )
                     )
                     continue
                 holding[robot] = object_name
-                held_by[object_name] = robot
+                held_by.setdefault(object_name, {})[robot] = permits_shared
 
-            released_objects = set()
             for detach in _as_list(phase.get('detach')):
                 object_name = self._text(detach.get('object')) if isinstance(detach, dict) else self._text(detach)
                 robot = self._text(detach.get('robot')) if isinstance(detach, dict) else None
-                released_objects.add(object_name)
                 self._release(index, phase_name, object_name, robot, holding, held_by, actions, errors, warnings)
 
             for lock in _as_list(phase.get('lock')):
@@ -177,7 +183,6 @@ class AssemblySequencePrechecker:
                         errors,
                     )
                     continue
-                released_objects.add(object_name)
                 self._release(
                     index,
                     phase_name,
@@ -195,17 +200,9 @@ class AssemblySequencePrechecker:
                 if str(command).lower() != 'open':
                     continue
                 payload = holding.get(str(robot))
-                if payload and payload not in released_objects:
-                    action = {
-                        'phase_index': index,
-                        'phase': phase_name,
-                        'kind': 'release',
-                        'robot': str(robot),
-                        'object': payload,
-                    }
-                    actions.append(action)
-                    holding[str(robot)] = None
-                    held_by.pop(payload, None)
+                if payload:
+                    self._release(index, phase_name, payload, str(robot), holding,
+                                  held_by, actions, errors, warnings, kind='release')
 
         return SequencePrecheckReport(
             feasible=not errors,
@@ -216,6 +213,26 @@ class AssemblySequencePrechecker:
             final_holding=holding,
             check_seconds=max(time.perf_counter() - started, 0.0),
         )
+
+    @staticmethod
+    def _shared_physical(attach: dict | None) -> bool:
+        return bool(isinstance(attach, dict) and attach.get('allow_shared_physical_grasp')
+                    and str(attach.get('attachment_mode', 'fixed_joint')).lower()
+                    in {'pure_physical_grasp', 'contact_pure_physical_grasp'})
+
+    @staticmethod
+    def _next_attach(phases, robot, object_name):
+        """Allow a free-hand approach only to its next declared shared grasp.
+
+        Future permission never supplies a payload for a carry/hold skill.
+        An earlier incompatible grasp cannot borrow a later permission.
+        """
+        for phase in phases:
+            for attach in _as_list(phase.get('attach')):
+                if (isinstance(attach, dict) and attach.get('robot') == robot
+                        and attach.get('object') == object_name):
+                    return attach
+        return None
 
     @staticmethod
     def _local_skills(phase: dict) -> list[dict]:
@@ -266,17 +283,17 @@ class AssemblySequencePrechecker:
         if not object_name:
             errors.append(AssemblySequencePrechecker._issue(action, 'incomplete_release', 'Release requires object.'))
             return
-        owner = held_by.get(object_name)
-        if requested_robot and owner and owner != requested_robot:
+        owners = held_by.get(object_name, {})
+        if requested_robot and owners and requested_robot not in owners:
             errors.append(
                 AssemblySequencePrechecker._issue(
                     action,
                     'release_by_non_owner',
-                    f'{requested_robot} cannot release {object_name}, which is held by {owner}.',
+                    f'{requested_robot} cannot release {object_name}, which is held by {", ".join(owners)}.',
                 )
             )
             return
-        if owner is None:
+        if not owners:
             warnings.append(
                 AssemblySequencePrechecker._issue(
                     action,
@@ -285,8 +302,12 @@ class AssemblySequencePrechecker:
                 )
             )
             return
+        # Unqualified detach selects the primary hand, as the runtime does.
+        owner = requested_robot or next(iter(owners))
         holding[owner] = None
-        held_by.pop(object_name, None)
+        owners.pop(owner)
+        if not owners:
+            held_by.pop(object_name, None)
         action['robot'] = owner
 
     @staticmethod

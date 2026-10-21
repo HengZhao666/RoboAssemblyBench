@@ -1,0 +1,59 @@
+[
+  {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_videos/observation_images_front.mp4",
+    "relative_path": "episode_0000_live_videos/observation_images_front.mp4",
+    "size": 29711614,
+    "sha256": "a471efe2a648a70151627f92852a1b41c4076be4274a26a96f8b736a914b1ca2",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "r_frame_rate": "30/1",
+          "duration": "248.166667",
+          "nb_read_frames": "7445"
+        }
+      ]
+    },
+    "decode_exit": 0,
+    "decode_errors": ""
+  },
+  {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_videos/observation_images_left_wrist.mp4",
+    "relative_path": "episode_0000_live_videos/observation_images_left_wrist.mp4",
+    "size": 29997166,
+    "sha256": "0dd61d3381733d59734a379a86347b197641d4173df403d183a2b949666754cc",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "r_frame_rate": "30/1",
+          "duration": "248.166667",
+          "nb_read_frames": "7445"
+        }
+      ]
+    },
+    "decode_exit": 0,
+    "decode_errors": ""
+  },
+  {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_videos/observation_images_right_wrist.mp4",
+    "relative_path": "episode_0000_live_videos/observation_images_right_wrist.mp4",
+    "size": 13752242,
+    "sha256": "a1a1b3174edd0d47fffdc2b0cf916095c29b1e02b793e721268cba84da45f01d",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "r_frame_rate": "30/1",
+          "duration": "248.166667",
+          "nb_read_frames": "7445"
+        }
+      ]
+    },
+    "decode_exit": 0,
+    "decode_errors": ""
+  }
+]

@@ -168,12 +168,14 @@ def test_randomization_profiles_keep_position_randomization_and_isolate_visual_d
         assert all(abs(value) <= 1.0 for item in area_lights for value in item['position'][:2])
         assert all(3.2 <= item['position'][2] <= 3.8 for item in area_lights)
     if profile == 'scene':
-        assert Path(result['scene']['asset_path']).name in {
-            'warehouse_with_forklifts.usd',
-            'warehouse.usd',
-            'warehouse_multiple_shelves.usd',
-            'full_warehouse.usd',
-        }
+        preference = recipe.get('scene_asset_preference') or recipe.get('scene_profile_metadata', {}).get('scene_asset_preference')
+        if preference in {'fallback', 'fallback_first', 'stable_fallback'}:
+            assert result['scene']['asset_path'] == recipe['scene_asset_fallback_path']
+        else:
+            assert Path(result['scene']['asset_path']).name in {
+                'warehouse_with_forklifts.usd', 'warehouse.usd',
+                'warehouse_multiple_shelves.usd', 'full_warehouse.usd',
+            }
         assert result['scene']['variant'] in set(result['scene']['available_variants'])
         assert abs(result['scene']['position'][0]) <= 0.08
         assert abs(result['scene']['position'][1]) <= 0.08
@@ -1896,7 +1898,13 @@ def _fake_observation(position_x: float):
     return {'franka_left': left, 'franka_right': right}
 
 
-def test_compact_cartesian_recorder_aligns_next_sample_actions_and_three_videos(tmp_path):
+def test_compact_cartesian_recorder_aligns_next_sample_actions_and_three_videos(tmp_path, monkeypatch):
+    # This tiny encoding/alignment fixture explicitly sizes all three cameras;
+    # production keeps the upstream 960x540 front default.
+    monkeypatch.setenv('RAB_FRONT_OUTPUT_WIDTH', '16')
+    monkeypatch.setenv('RAB_FRONT_OUTPUT_HEIGHT', '12')
+    monkeypatch.setenv('RAB_DATASET_OUTPUT_WIDTH', '16')
+    monkeypatch.setenv('RAB_DATASET_OUTPUT_HEIGHT', '12')
     task = _fake_task()
     recorder = CompactCartesianEpisodeRecorder(
         output_dir=tmp_path,
@@ -1944,6 +1952,7 @@ def test_compact_cartesian_recorder_aligns_next_sample_actions_and_three_videos(
 
 def test_policy_evaluation_success_detector_requires_consecutive_stable_steps():
     task = object.__new__(FactoryDualFrankaAssemblyTask)
+    task.phase_specs = []  # Explicit legacy-policy fixture, not a Beam clock fixture.
     task.step_counter = 0
     task.max_steps = 100
     task.success = False

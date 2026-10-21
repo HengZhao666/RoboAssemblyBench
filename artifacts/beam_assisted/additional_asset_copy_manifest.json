@@ -1,0 +1,229 @@
+{
+  "schema": "assisted-pr-additional-assets-v1",
+  "base_commit": "2739e27e66418048d79097376648af1b389a2b68",
+  "files": [
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/PACKAGE_MANIFEST.json",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/PACKAGE_MANIFEST.json",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/PACKAGE_MANIFEST.json",
+      "bytes": 989,
+      "sha256": "7cd1e5acc0111a75aa8bb7169b0a49f04bf2022c81619f7375889a3ff48d9911",
+      "git_blob_sha1": "6b95015bdcbbdcdbab2bc255a9b658abb8308c1c",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/README.md",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/README.md",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/README.md",
+      "bytes": 925,
+      "sha256": "83172b38c28f6e4cbe63a07326ddc761dfcc9acd0fe9385f4b2cb17fd27c6175",
+      "git_blob_sha1": "242cff3777aec94cb85e1264502774e1ca53a6d0",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/beam/fixture_raw_sdf512.usda",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/beam/fixture_raw_sdf512.usda",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/beam/fixture_raw_sdf512.usda",
+      "bytes": 243337,
+      "sha256": "255d2b54f573600d08dfd649c5e9a7a47572631dcf254a4f87cec067cc5d3a64",
+      "git_blob_sha1": "4ea6b28a94910de2ca08c60a3936dfd1e9514770",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/beam/pickup.json",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/beam/pickup.json",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/beam/pickup.json",
+      "bytes": 656,
+      "sha256": "66b6cc47f84fe9d6b3bcecd9e2288023a97c455589b1d676d5ee21e72800707e",
+      "git_blob_sha1": "486be92be8b3f76d36e1e111062628d07a500035",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_support/optical_board_raw_sdf512.usda",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_support/optical_board_raw_sdf512.usda",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_support/optical_board_raw_sdf512.usda",
+      "bytes": 4375708,
+      "sha256": "682610b9b2eaeb91b367113b845a82eb82d7d718edb7d2775d2d4e46d0bd4273",
+      "git_blob_sha1": "e36d07664d387685a942a23f688177130d7fd992",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_0.usd",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_0.usd",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_0.usd",
+      "bytes": 82820,
+      "sha256": "3d6d3856b27db4e1fe74d1b647d6dbc411e62abe75c02da2b5017292c8d0bce8",
+      "git_blob_sha1": "5cff33be92e9ea8e0b477c0bd6975f4ffd6dcd7f",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_1.usd",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_1.usd",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_1.usd",
+      "bytes": 82828,
+      "sha256": "be5bfaf2e843cc186d38f9e3e2370d66b05c535d29bca43ffd504e6f2dbcc367",
+      "git_blob_sha1": "799868a6fe4aafdeb4c78885a1225d0f08dfc987",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_2.usd",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_2.usd",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_2.usd",
+      "bytes": 58505,
+      "sha256": "96a8041833ff23bc8b258ff7e1f16a54e81e8bb25649ba3c4a28dc2e68502c60",
+      "git_blob_sha1": "b111a95b906793f8b66efaf5d59d326d48ade40b",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_3.usd",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_3.usd",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_3.usd",
+      "bytes": 58575,
+      "sha256": "d186d271b9e37e5f2a0e91f5efefee38e5406b4162add19d87e14624d21cb694",
+      "git_blob_sha1": "54ccdb0f9d59887c3937991a4178b8d916407de4",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_6.usd",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_6.usd",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_6.usd",
+      "bytes": 288684,
+      "sha256": "6c1bb0c16f53baf7fdd00683e0fdbb2e8476849b3d042cc6192433f905abbba5",
+      "git_blob_sha1": "cd4c67d8308e2dca5a4ce76cc684ff3ccdeb4434",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/grasps.pkl",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/grasps.pkl",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/grasps.pkl",
+      "bytes": 2329246,
+      "sha256": "be9abe29e0069e99c33220cae445bb5f295c7d3ef3bd80698fab7aa235ead5d0",
+      "git_blob_sha1": "8c949fb05150299420c45259bc226b2ca1f146e6",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/motion.pkl",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/motion.pkl",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/motion.pkl",
+      "bytes": 292470,
+      "sha256": "4ef97db230a1c4987009d3903952d49f791bd09a856ef73c59bd8671d443c704",
+      "git_blob_sha1": "c45ca174240efa426f4f0eece464b019668e1380",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/plan_info.pkl",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/plan_info.pkl",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/plan_info.pkl",
+      "bytes": 5165,
+      "sha256": "4373e6bd90a64683b0cf67ad6641516e8633df394d402c4a7fb99f380605d15c",
+      "git_blob_sha1": "15c03cceacc27fc00d34206500c50ddb82f0a3a4",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/precedence.pkl",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/precedence.pkl",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/precedence.pkl",
+      "bytes": 126039,
+      "sha256": "46c4053fc6c3b08dfa98edcfc6e7136e87174b14b1500c6c9776ed82d9008d26",
+      "git_blob_sha1": "99da7ab2cb26ead03459e914ff79d7ebf498f639",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/stats.json",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/stats.json",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/stats.json",
+      "bytes": 273,
+      "sha256": "d8dced5691304f81e1dbeba8938e150ca15d8eca4c85c56d893ed975eb7564c3",
+      "git_blob_sha1": "4ea2e60f91f636d4d3c171dc27eb35eeaae16ab6",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/tree.pkl",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/tree.pkl",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/tree.pkl",
+      "bytes": 8215,
+      "sha256": "4d6ff2e7dd1948ee9d83da7833994ed1e7074d611444fa4a20d28a8e3792bcf7",
+      "git_blob_sha1": "a1eda23c3f551870fb7a6bfb9fbbf3484f9d6020",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/tree_opt.pkl",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/tree_opt.pkl",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/metadata/tree_opt.pkl",
+      "bytes": 597,
+      "sha256": "60746f70f0627dfd07ddc3b1f250e99daa340c85d7dbfca65531bb2762aa31e9",
+      "git_blob_sha1": "bc4dc1d73b4780eaf7dc94f52d95283d7e6ecc26",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/scene/scene.usda",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/scene/scene.usda",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/scene/scene.usda",
+      "bytes": 12142,
+      "sha256": "97e16e5e298af6ceddb342b035b2c5ac80b40acc3f15bfae8caabe3e460a711a",
+      "git_blob_sha1": "43d46d8d5d443310d201083b4445a05a4c622983",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/scene/scene_spec.json",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/scene/scene_spec.json",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/scene/scene_spec.json",
+      "bytes": 16130,
+      "sha256": "611d0726d45a4500311efceae3a5f48043a29846440312961ca6c16acbd56ecf",
+      "git_blob_sha1": "ccb7c52db72e5c802517719716aaccdb7ad920db",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/validation/isaacsim_runtime_validation.json",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/validation/isaacsim_runtime_validation.json",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/validation/isaacsim_runtime_validation.json",
+      "bytes": 304,
+      "sha256": "41751cbce386846ab4d564defa90167c3e9c40844ca163020255a422a739e56b",
+      "git_blob_sha1": "ee528bc20e3aaf39e8133ada5efc260ead7c6ec4",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/validation/validation.json",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/validation/validation.json",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/validation/validation.json",
+      "bytes": 356,
+      "sha256": "7845aaad73a25dac5542dbdbff2e84126a734bb58ce1169d4dd37811cd9b04f2",
+      "git_blob_sha1": "dc038a510ba872bc3c9cc80f88ed6e39c5cedecd",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/internutopia/assets/robots/franka/lula_franka_gen.urdf",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/assets/robots/franka/lula_franka_gen.urdf",
+      "repository_target": "internutopia/assets/robots/franka/lula_franka_gen.urdf",
+      "bytes": 14771,
+      "sha256": "e9024642e7952cbcaec0ae14425bf1cd19d674d3c98eeef3793913f63a8101b6",
+      "git_blob_sha1": "36de758bc81399bce582595e036551028252261e",
+      "reason": "Additional verified runtime asset not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/SHA256SUMS",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/SHA256SUMS",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/SHA256SUMS",
+      "bytes": 27322,
+      "sha256": "991b6aa25a4ec3c11bc2f84c60a7e4bd36a2f782f785825e6cd4a25c7724bff4",
+      "git_blob_sha1": "34c1857eccc231f2f4df447b6177bf75a4af926d",
+      "reason": "Additional canonical asset acquisition/handoff contract not present in upstream base."
+    },
+    {
+      "server_source": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/HANDOFF_README.md",
+      "server_resolved_source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/HANDOFF_README.md",
+      "repository_target": "roboassemblybench/assets/Fabrica/canonical_7_bundles/HANDOFF_README.md",
+      "bytes": 2163,
+      "sha256": "4b3435fe27a278d9b580c99f763582ba2ff7e354b02fb56c358b0bba6f9330d6",
+      "git_blob_sha1": "4b3cdb12bc2c9cddf4a0ac3f6f0585e5ae942dde",
+      "reason": "Additional canonical asset acquisition/handoff contract not present in upstream base."
+    }
+  ],
+  "count": 24,
+  "total_bytes": 8028220,
+  "notes": [
+    "Read assets through assisted A symlink graph; no physical-route mechanism or result was loaded.",
+    "Retain 472 upstream-identical robot-bundle and asset launcher files from the base commit.",
+    "Copy as ordinary files to repository_target, never publish server symlink targets as repository links."
+  ]
+}

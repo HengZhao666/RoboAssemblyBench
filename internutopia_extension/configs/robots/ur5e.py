@@ -81,15 +81,14 @@ class UR5eRobotCfg(RobotCfg):
     gripper_open_position: float = 0.0
     gripper_closed_position: float = 0.80
     gripper_close_openness: float = 0.08
-    # Defaults preserve every existing recipe. Beam may explicitly opt into a
-    # different pair; nondefault gains require verified native readbacks.
+    # Gripper defaults match upstream. Beam supplies its own verified values.
     arm_drive_kp: float = 8.0e4
     arm_drive_kd: float = 4.0e3
-    gripper_drive_kp: float = 6.0e6
-    gripper_drive_kd: float = 8.0e3
+    gripper_drive_kp: float = 7500.0
+    gripper_drive_kd: float = 173.0
     # None preserves the asset's effort limit; explicit values use the native view.
     gripper_drive_max_effort: Optional[float] = None
-    # None keeps the legacy material for existing recipes. Beam opts in to a
+    # None keeps the upstream material for existing recipes. Beam opts in to a
     # bounded friction trial and records the material actually authored.
     gripper_pad_static_friction: Optional[float] = None
     gripper_pad_dynamic_friction: Optional[float] = None

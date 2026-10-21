@@ -1,0 +1,5442 @@
+{
+  "run": "A44_beam_full",
+  "cycle": "D28",
+  "passed_analysis": true,
+  "formal_success": false,
+  "terminal_transition": {
+    "from_phase": "beam_assisted_final_verification",
+    "from_phase_index": 100,
+    "to_phase": "complete",
+    "to_phase_index": 101,
+    "transition_type": "terminal",
+    "reason": "success-criteria-met",
+    "status": "success",
+    "step_counter": 59566,
+    "phase_step_counter": 240
+  },
+  "result_fields": {
+    "success": true,
+    "assisted_success": true,
+    "steps": 59567,
+    "phase": null,
+    "failure_reason": null,
+    "phase_status": "success"
+  },
+  "insertion_phases": [
+    {
+      "phase": "assemble_00_part_3_insert_00",
+      "samples": 343,
+      "ready_samples": 68,
+      "first_ready_step": 14352,
+      "max_native_count": 14,
+      "minimum_lateral_m": 3.520127661715e-05,
+      "maximum_lateral_m": 0.00039386794882299836,
+      "first_lateral_m": 0.00039386794882299836,
+      "last_lateral_m": 8.583262102581338e-05,
+      "maximum_orientation_error_rad": 0.000726498890190547,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 5.176943180406307e-05,
+        "orientation_error_rad": 0.0006857479295832289,
+        "linear_speed_m_s": 0.004485448168724326,
+        "angular_speed_rad_s": 0.035059234151425485,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 88,
+        "qualified_linear_speed_m_s": 0.002133780837398222,
+        "qualified_angular_speed_rad_s": 0.0015466632245801166,
+        "qualified_linear_velocity_world": [
+          -9.890278408022652e-05,
+          -5.646745170048531e-05,
+          -0.0021307393853419736
+        ],
+        "native_center_of_mass_position": [
+          0.8289062684872863,
+          -0.12054533884145768,
+          1.1847937942397198
+        ],
+        "native_center_of_mass_orientation": [
+          -0.9999999421115235,
+          -0.0003198298651807579,
+          0.00011285034270707103,
+          2.739720999417846e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00030672550201416016,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17008,
+        "phase": "assemble_00_part_3_insert_00",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17011,
+          "time": 70.87917036330327,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844109535217285,
+            -0.12048611044883728,
+            1.0307283401489258
+          ],
+          "orientation": [
+            -0.9999999469848481,
+            -0.00030344824909822376,
+            -0.00011339644096554649,
+            3.302586817416924e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784484466730235,
+            -0.1206783618992996,
+            1.0290073844518162
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288357978192581,
+            -0.12062870937735466,
+            1.252727797135599
+          ],
+          "orientation": [
+            0.00019123386318741682,
+            0.9999999578339981,
+            -8.088390448267786e-05,
+            -0.0002030256280673553
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 8.583262102581338e-05,
+          "orientation_error_rad": 0.0006512458963034502,
+          "linear_speed_m_s": 0.01494026718124234,
+          "angular_speed_rad_s": 0.01426805825274777,
+          "native_count": 13,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 2744,
+          "qualified_linear_speed_m_s": 0.018264960372369406,
+          "qualified_angular_speed_rad_s": 0.016668864303663263,
+          "qualified_linear_velocity_world": [
+            0.0010491760284666496,
+            -0.002187004932509904,
+            -0.018103176972307733
+          ],
+          "native_center_of_mass_position": [
+            0.8288943329844377,
+            -0.12051248040285366,
+            1.0693322457504513
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999462116906,
+            -0.0003034405486566968,
+            0.0001199854618001352,
+            3.32255689179917e-05
+          ]
+        },
+        "fk_native_position_residual_m": 6.861475856477241e-07,
+        "fk_native_orientation_residual_rad": 5.051307267004861e-05,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00200498104095459,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_01",
+      "samples": 20,
+      "ready_samples": 3,
+      "first_ready_step": 17112,
+      "max_native_count": 14,
+      "minimum_lateral_m": 7.561315571658979e-05,
+      "maximum_lateral_m": 0.00018289725551862436,
+      "first_lateral_m": 0.00014592489354971932,
+      "last_lateral_m": 9.702464051124064e-05,
+      "maximum_orientation_error_rad": 0.0007112988443345426,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 9.551818991470777e-05,
+        "orientation_error_rad": 0.0006710974012191327,
+        "linear_speed_m_s": 0.004480265797775619,
+        "angular_speed_rad_s": 0.04402870046252718,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 104,
+        "qualified_linear_speed_m_s": 0.0021614917276476966,
+        "qualified_angular_speed_rad_s": 0.002659331762917852,
+        "qualified_linear_velocity_world": [
+          -5.494422939170532e-05,
+          3.9855649666945366e-05,
+          -0.002160425686649648
+        ],
+        "native_center_of_mass_position": [
+          0.8288894755247653,
+          -0.12050207611991785,
+          1.0669684761189286
+        ],
+        "native_center_of_mass_orientation": [
+          -0.9999999441040355,
+          -0.00031396112926231415,
+          0.0001149742756295611,
+          1.1185954167872272e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00029778480529785156,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17168,
+        "phase": "assemble_00_part_3_insert_01",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17171,
+          "time": 71.54583706473932,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844055891036987,
+            -0.12047617882490158,
+            1.0258220434188843
+          ],
+          "orientation": [
+            -0.9999999430152767,
+            -0.00031572866666274767,
+            -0.00011929307995674027,
+            7.34938297639173e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784484368824212,
+            -0.12067839998150978,
+            1.0259815454483032
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288360316754904,
+            -0.12063175505856522,
+            1.2497024268485
+          ],
+          "orientation": [
+            0.00018976496154572993,
+            0.9999999555188466,
+            -0.00010715623282591598,
+            -0.00020363964803727633
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.702464051124064e-05,
+          "orientation_error_rad": 0.000675187226269177,
+          "linear_speed_m_s": 0.003960232544356462,
+          "angular_speed_rad_s": 0.039356868117445036,
+          "native_count": 8,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 160,
+          "qualified_linear_speed_m_s": 0.0026404341099894976,
+          "qualified_angular_speed_rad_s": 0.0030168356199111604,
+          "qualified_linear_velocity_world": [
+            -8.021372302365184e-05,
+            -5.13871542229555e-05,
+            -0.00263871510554201
+          ],
+          "native_center_of_mass_position": [
+            0.8288894245169349,
+            -0.12050121275597113,
+            1.0644254245106977
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999436215972,
+            -0.00031572695755502286,
+            0.00011408882045960086,
+            7.551950446954697e-06
+          ]
+        },
+        "fk_native_position_residual_m": 4.53242636626835e-07,
+        "fk_native_orientation_residual_rad": 0.00010292461906120026,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0019780397415161133,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_02",
+      "samples": 12,
+      "ready_samples": 2,
+      "first_ready_step": 17248,
+      "max_native_count": 13,
+      "minimum_lateral_m": 9.06599490161987e-05,
+      "maximum_lateral_m": 0.00019249595099502477,
+      "first_lateral_m": 0.00012184264178663617,
+      "last_lateral_m": 9.06599490161987e-05,
+      "maximum_orientation_error_rad": 0.0007139446081003428,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00010575370974751284,
+        "orientation_error_rad": 0.0006866973431513217,
+        "linear_speed_m_s": 0.004717665057481853,
+        "angular_speed_rad_s": 0.03807876430258223,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 76,
+        "qualified_linear_speed_m_s": 0.0020663400769175303,
+        "qualified_angular_speed_rad_s": 0.0027979885095112153,
+        "qualified_linear_velocity_world": [
+          0.00017417010953718533,
+          -0.00048396750005790646,
+          -0.0020012999638502594
+        ],
+        "native_center_of_mass_position": [
+          0.8288859937216948,
+          -0.12049339543524806,
+          1.0633892593679466
+        ],
+        "native_center_of_mass_orientation": [
+          -0.9999999422822743,
+          -0.00032093232993261217,
+          0.00011143343723483688,
+          4.525156463527963e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00029838085174560547,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17264,
+        "phase": "assemble_00_part_3_insert_02",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17267,
+          "time": 71.94583708560094,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844091057777405,
+            -0.12048164755105972,
+            1.0240663290023804
+          ],
+          "orientation": [
+            -0.9999999467086809,
+            -0.00030418218937176654,
+            -0.00011406374079933841,
+            3.233101061194513e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784484507025494,
+            -0.12067834619710155,
+            1.0223427264684941
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288362361558944,
+            -0.12062878699447485,
+            1.2460628569728027
+          ],
+          "orientation": [
+            0.00019129435053199593,
+            0.999999957728119,
+            -8.086349179644622e-05,
+            -0.00020349773296442192
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 9.06599490161987e-05,
+          "orientation_error_rad": 0.0006529399335845072,
+          "linear_speed_m_s": 0.015035435316535029,
+          "angular_speed_rad_s": 0.012180693927974157,
+          "native_count": 13,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 92,
+          "qualified_linear_speed_m_s": 0.01818471017061696,
+          "qualified_angular_speed_rad_s": 0.015026429722203373,
+          "qualified_linear_velocity_world": [
+            0.0010639165696316036,
+            -0.002115141184695018,
+            -0.0180299180056652
+          ],
+          "native_center_of_mass_position": [
+            0.8288925367796678,
+            -0.12050801234887555,
+            1.0626701752185743
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999460913485,
+            -0.0003041746509914622,
+            0.00011931816182545095,
+            3.2530882663088584e-05
+          ]
+        },
+        "fk_native_position_residual_m": 7.638831249910417e-07,
+        "fk_native_orientation_residual_rad": 5.0369927711305846e-05,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0007535219192504883,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_03",
+      "samples": 13,
+      "ready_samples": 1,
+      "first_ready_step": 17328,
+      "max_native_count": 14,
+      "minimum_lateral_m": 8.371595698409113e-05,
+      "maximum_lateral_m": 0.00018739599552335695,
+      "first_lateral_m": 0.00014433064055683755,
+      "last_lateral_m": 9.92089940580465e-05,
+      "maximum_orientation_error_rad": 0.0007114758489357186,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00010658033612794395,
+        "orientation_error_rad": 0.0006671003186600741,
+        "linear_speed_m_s": 0.03025383373955364,
+        "angular_speed_rad_s": 0.03827904678362857,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 63,
+        "qualified_linear_speed_m_s": 0.03478994760034671,
+        "qualified_angular_speed_rad_s": 0.006873233266629203,
+        "qualified_linear_velocity_world": [
+          0.0010005159770715773,
+          -0.0019085319167549007,
+          -0.03472314685821581
+        ],
+        "native_center_of_mass_position": [
+          0.8288884193937062,
+          -0.12049350731842672,
+          1.0617880454835618
+        ],
+        "native_center_of_mass_orientation": [
+          -0.9999999446414467,
+          -0.0003098445158606716,
+          0.00011551662607261417,
+          3.700525344305574e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00029730796813964844,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17368,
+        "phase": "assemble_00_part_3_insert_03",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17371,
+          "time": 72.37917044153437,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844047546386719,
+            -0.12047415971755981,
+            1.0215156078338623
+          ],
+          "orientation": [
+            -0.9999999431561867,
+            -0.00031537389103413615,
+            -0.00011908994252446657,
+            6.672155071089392e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844844863770052,
+            -0.1206783542454643,
+            1.021683931350708
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288363110985671,
+            -0.1206315449613085,
+            1.2454037032901604
+          ],
+          "orientation": [
+            0.00019005177737997468,
+            0.9999999553863019,
+            -0.00010753550695934234,
+            -0.00020382303865043206
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.92089940580465e-05,
+          "orientation_error_rad": 0.0006743519185147344,
+          "linear_speed_m_s": 0.003948838173643257,
+          "angular_speed_rad_s": 0.046230579522283634,
+          "native_count": 9,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 103,
+          "qualified_linear_speed_m_s": 0.0023582115174247617,
+          "qualified_angular_speed_rad_s": 0.00058040482047656,
+          "qualified_linear_velocity_world": [
+            -1.4937524677507176e-05,
+            5.8829232608055195e-05,
+            -0.002357430285854081
+          ],
+          "native_center_of_mass_position": [
+            0.8288885743858604,
+            -0.12049910601423099,
+            1.060119007034856
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999437151859,
+            -0.0003153723400150239,
+            0.00011429195796493217,
+            6.874639761879319e-06
+          ]
+        },
+        "fk_native_position_residual_m": 1.1043666287567395e-06,
+        "fk_native_orientation_residual_rad": 0.000103633002825033,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0001633167266845703,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_04",
+      "samples": 10,
+      "ready_samples": 1,
+      "first_ready_step": 17448,
+      "max_native_count": 12,
+      "minimum_lateral_m": 0.00010708866047065639,
+      "maximum_lateral_m": 0.00019492149113978908,
+      "first_lateral_m": 0.00012965606115051466,
+      "last_lateral_m": 0.00010708866047065639,
+      "maximum_orientation_error_rad": 0.0007136102801037905,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00010708866047065639,
+        "orientation_error_rad": 0.0006863504869462132,
+        "linear_speed_m_s": 0.004749163108276337,
+        "angular_speed_rad_s": 0.03689471350655678,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 77,
+        "qualified_linear_speed_m_s": 0.002152336614031856,
+        "qualified_angular_speed_rad_s": 0.004239541302269445,
+        "qualified_linear_velocity_world": [
+          0.00023545261607452704,
+          -0.000565793536796607,
+          -0.002063248079946995
+        ],
+        "native_center_of_mass_position": [
+          0.82888573661505,
+          -0.12049208886441623,
+          1.0590945278058117
+        ],
+        "native_center_of_mass_orientation": [
+          -0.99999994228529,
+          -0.0003208317817454332,
+          0.00011167533372043898,
+          5.000436277990322e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002980232238769531,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17448,
+        "phase": "assemble_00_part_3_insert_04",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17451,
+          "time": 72.71250379225239,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844017148017883,
+            -0.12046688795089722,
+            1.020491361618042
+          ],
+          "orientation": [
+            -0.9999999411153767,
+            -0.00032083289554783604,
+            -0.00012170656566030605,
+            4.796677503183964e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844846971302849,
+            -0.12067827189156714,
+            1.0196917016161497
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288366953203734,
+            -0.1206315159687767,
+            1.2434132763964505
+          ],
+          "orientation": [
+            0.0001911187131313308,
+            0.9999999550949051,
+            -0.00010893448197604174,
+            -0.00020351192545788244
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 0.00010708866047065639,
+          "orientation_error_rad": 0.0006863504869462132,
+          "linear_speed_m_s": 0.004749163108276337,
+          "angular_speed_rad_s": 0.03689471350655678,
+          "native_count": 12,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 77,
+          "qualified_linear_speed_m_s": 0.002152336614031856,
+          "qualified_angular_speed_rad_s": 0.004239541302269445,
+          "qualified_linear_velocity_world": [
+            0.00023545261607452704,
+            -0.000565793536796607,
+            -0.002063248079946995
+          ],
+          "native_center_of_mass_position": [
+            0.82888573661505,
+            -0.12049208886441623,
+            1.0590945278058117
+          ],
+          "native_center_of_mass_orientation": [
+            -0.99999994228529,
+            -0.0003208317817454332,
+            0.00011167533372043898,
+            5.000436277990322e-06
+          ]
+        },
+        "fk_native_position_residual_m": 7.807864618798898e-07,
+        "fk_native_orientation_residual_rad": 0.0001063552360478102,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.000735163688659668,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_05",
+      "samples": 15,
+      "ready_samples": 1,
+      "first_ready_step": 17512,
+      "max_native_count": 14,
+      "minimum_lateral_m": 8.405028247281456e-05,
+      "maximum_lateral_m": 0.00018780487779955997,
+      "first_lateral_m": 0.00015185952169922458,
+      "last_lateral_m": 9.955864545768712e-05,
+      "maximum_orientation_error_rad": 0.0007129738221231688,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00010650645633095773,
+        "orientation_error_rad": 0.0006665935051951755,
+        "linear_speed_m_s": 0.030179684820159168,
+        "angular_speed_rad_s": 0.0378265388552073,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 64,
+        "qualified_linear_speed_m_s": 0.034562897532491116,
+        "qualified_angular_speed_rad_s": 0.005616977365990886,
+        "qualified_linear_velocity_world": [
+          0.0009222810922912379,
+          -0.0018138278136617426,
+          -0.0345029464262209
+        ],
+        "native_center_of_mass_position": [
+          0.8288880849634966,
+          -0.12049341436342738,
+          1.058510597966034
+        ],
+        "native_center_of_mass_orientation": [
+          -0.9999999447961881,
+          -0.0003098425415762137,
+          0.00011521748966199851,
+          3.361770909734227e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00029718875885009766,
+      "maximum_lateral_bias_m": 0.00012000000000000003,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17568,
+        "phase": "assemble_00_part_3_insert_05",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17571,
+          "time": 73.21250381832942,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844045758247375,
+            -0.12047385424375534,
+            1.0175869464874268
+          ],
+          "orientation": [
+            -0.9999999438331344,
+            -0.0003137335994552164,
+            -0.00011787423201944344,
+            3.2591497517637798e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844845228558641,
+            -0.12067834002376882,
+            1.0177650451660156
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288363797120881,
+            -0.12063185285432221,
+            1.2414850659796481
+          ],
+          "orientation": [
+            0.0001902648985640501,
+            0.9999999549497979,
+            -0.00011124662307777518,
+            -0.0002037740404656175
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.955864545768712e-05,
+          "orientation_error_rad": 0.0006703244953228725,
+          "linear_speed_m_s": 0.0040676308760812,
+          "angular_speed_rad_s": 0.04303772443760116,
+          "native_count": 10,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 120,
+          "qualified_linear_speed_m_s": 0.002459047394056692,
+          "qualified_angular_speed_rad_s": 0.002063076826195133,
+          "qualified_linear_velocity_world": [
+            8.051214141807112e-05,
+            0.00013004756033259033,
+            -0.0024542859477560525
+          ],
+          "native_center_of_mass_position": [
+            0.8288883017972251,
+            -0.12049837029937452,
+            1.056190454023103
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999441088485,
+            -0.0003137328451712995,
+            0.00011550766880613641,
+            3.461251721103569e-06
+          ]
+        },
+        "fk_native_position_residual_m": 8.46461750501593e-07,
+        "fk_native_orientation_residual_rad": 0.00011102168324378543,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00016117095947265625,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_06",
+      "samples": 12,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 11,
+      "minimum_lateral_m": 0.00010300272535488255,
+      "maximum_lateral_m": 0.00019712007944838535,
+      "first_lateral_m": 0.00012446592108879623,
+      "last_lateral_m": 0.00010300272535488255,
+      "maximum_orientation_error_rad": 0.00071499040466115,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.00029659271240234375,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17664,
+        "phase": "assemble_00_part_3_insert_06",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17667,
+          "time": 73.61250383919105,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844027280807495,
+            -0.12047088146209717,
+            1.0155694484710693
+          ],
+          "orientation": [
+            -0.9999999428605161,
+            -0.0003159326262460719,
+            -0.00012026773078479529,
+            -1.1014607760445346e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844848137231404,
+            -0.12067822613481388,
+            1.015757441520691
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288364129688923,
+            -0.12063194591981227,
+            1.2394784315851388
+          ],
+          "orientation": [
+            0.00019149177826508068,
+            0.9999999544697511,
+            -0.00011554779356539724,
+            -0.0002025835685345419
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 0.00010300272535488255,
+          "orientation_error_rad": 0.0006761034504648968,
+          "linear_speed_m_s": 0.00461891874796617,
+          "angular_speed_rad_s": 0.036825551413319085,
+          "native_count": 11,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 92,
+          "qualified_linear_speed_m_s": 0.0023029454181003072,
+          "qualified_angular_speed_rad_s": 0.0021969992748195675,
+          "qualified_linear_velocity_world": [
+            7.797168509203329e-05,
+            -0.00015827718837095703,
+            -0.0022961764624511096
+          ],
+          "native_center_of_mass_position": [
+            0.828886638954326,
+            -0.12049517934090528,
+            1.0541727430778014
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999436953916,
+            -0.0003159328892815812,
+            0.00011311416959542974,
+            -8.988454748399867e-07
+          ]
+        },
+        "fk_native_position_residual_m": 2.977635641683312e-07,
+        "fk_native_orientation_residual_rad": 0.000119628920202034,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0014634132385253906,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_07",
+      "samples": 12,
+      "ready_samples": 3,
+      "first_ready_step": 17728,
+      "max_native_count": 14,
+      "minimum_lateral_m": 8.681165094616189e-05,
+      "maximum_lateral_m": 0.00019200247090089937,
+      "first_lateral_m": 0.0001474082026097655,
+      "last_lateral_m": 8.681165094616189e-05,
+      "maximum_orientation_error_rad": 0.000711982865967062,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.0001253981743977635,
+        "orientation_error_rad": 0.0007066201748845718,
+        "linear_speed_m_s": 0.006453779968596978,
+        "angular_speed_rad_s": 0.04911912436208145,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 63,
+        "qualified_linear_speed_m_s": 0.0005258057039872477,
+        "qualified_angular_speed_rad_s": 0.003732946325858786,
+        "qualified_linear_velocity_world": [
+          0.0001885663586852139,
+          -0.0004890313510121514,
+          4.198457389273276e-05
+        ],
+        "native_center_of_mass_position": [
+          0.8288793345306752,
+          -0.12047637054723287,
+          1.0537927179343662
+        ],
+        "native_center_of_mass_orientation": [
+          -0.9999999399431015,
+          -0.00032956482152290804,
+          0.00010658462160087432,
+          1.1854965577826698e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002962350845336914,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17760,
+        "phase": "assemble_00_part_3_insert_07",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17763,
+          "time": 74.01250386005268,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844120264053345,
+            -0.12048467993736267,
+            1.0136981010437012
+          ],
+          "orientation": [
+            -0.9999999504109871,
+            -0.00029313117558322485,
+            -0.00010893450422416925,
+            3.722111248004446e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844847514602243,
+            -0.12067825058730806,
+            1.0111252685420218
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288360065518945,
+            -0.12062771296746007,
+            1.2348462271578033
+          ],
+          "orientation": [
+            0.00019169447541984085,
+            0.9999999581014729,
+            -7.490043218446324e-05,
+            -0.0002035686767379495
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 8.681165094616189e-05,
+          "orientation_error_rad": 0.0006298508604793591,
+          "linear_speed_m_s": 0.03199452591649769,
+          "angular_speed_rad_s": 0.042945596154850996,
+          "native_count": 14,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 95,
+          "qualified_linear_speed_m_s": 0.03644520497217223,
+          "qualified_angular_speed_rad_s": 0.005753985636962548,
+          "qualified_linear_velocity_world": [
+            0.0009147070037302379,
+            -0.0014014371970114672,
+            -0.036406761052637
+          ],
+          "native_center_of_mass_position": [
+            0.8288950612749955,
+            -0.12051062653265733,
+            1.0523024040039681
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999485959534,
+            -0.0002931224969034318,
+            0.0001244474005494113,
+            3.7418405291175586e-05
+          ]
+        },
+        "fk_native_position_residual_m": 8.684851697677523e-07,
+        "fk_native_orientation_residual_rad": 3.8465251503360014e-05,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00017261505126953125,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_08",
+      "samples": 8,
+      "ready_samples": 1,
+      "first_ready_step": 17824,
+      "max_native_count": 12,
+      "minimum_lateral_m": 0.0001253172406853604,
+      "maximum_lateral_m": 0.0001886509230125036,
+      "first_lateral_m": 0.00015320500781523333,
+      "last_lateral_m": 0.0001253172406853604,
+      "maximum_orientation_error_rad": 0.0007136783423829859,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.0001253172406853604,
+        "orientation_error_rad": 0.0007067786169039019,
+        "linear_speed_m_s": 0.006432659656581739,
+        "angular_speed_rad_s": 0.050778516239780455,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 64,
+        "qualified_linear_speed_m_s": 0.00029599189993283247,
+        "qualified_angular_speed_rad_s": 0.002991919496737542,
+        "qualified_linear_velocity_world": [
+          0.0002151295078057027,
+          -0.0001439075774531597,
+          -0.0001436005182744367
+        ],
+        "native_center_of_mass_position": [
+          0.8288792366200589,
+          -0.12047584067383171,
+          1.0517849709857332
+        ],
+        "native_center_of_mass_orientation": [
+          -0.999999939979855,
+          -0.000329727307297471,
+          0.00010631139484112315,
+          4.251666258419033e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002961158752441406,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17824,
+        "phase": "assemble_00_part_3_insert_08",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17827,
+          "time": 74.27917054062709,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7843948006629944,
+            -0.12045001983642578,
+            1.013182282447815
+          ],
+          "orientation": [
+            -0.999999937557999,
+            -0.00032972824679952553,
+            -0.0001270705027089974,
+            4.045831449030236e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784485120023246,
+            -0.12067810525768412,
+            1.0124787356862766
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.828836623335853,
+            -0.12063188927374269,
+            1.236199694783795
+          ],
+          "orientation": [
+            0.00018860538954755654,
+            0.9999999555484549,
+            -0.00010926741617048861,
+            -0.0002034495694729237
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 0.0001253172406853604,
+          "orientation_error_rad": 0.0007067786169039019,
+          "linear_speed_m_s": 0.006432659656581739,
+          "angular_speed_rad_s": 0.050778516239780455,
+          "native_count": 12,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 64,
+          "qualified_linear_speed_m_s": 0.00029599189993283247,
+          "qualified_angular_speed_rad_s": 0.002991919496737542,
+          "qualified_linear_velocity_world": [
+            0.0002151295078057027,
+            -0.0001439075774531597,
+            -0.0001436005182744367
+          ],
+          "native_center_of_mass_position": [
+            0.8288792366200589,
+            -0.12047584067383171,
+            1.0517849709857332
+          ],
+          "native_center_of_mass_orientation": [
+            -0.999999939979855,
+            -0.000329727307297471,
+            0.00010631139484112315,
+            4.251666258419033e-06
+          ]
+        },
+        "fk_native_position_residual_m": 6.508266494498477e-07,
+        "fk_native_orientation_residual_rad": 0.00010731392961006295,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00015091896057128906,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_00_part_3_insert_09",
+      "samples": 15,
+      "ready_samples": 6,
+      "first_ready_step": 17888,
+      "max_native_count": 34,
+      "minimum_lateral_m": 8.75689571427012e-05,
+      "maximum_lateral_m": 0.00017819099024349327,
+      "first_lateral_m": 0.00016359815168403433,
+      "last_lateral_m": 9.659358490791506e-05,
+      "maximum_orientation_error_rad": 0.0007184658769860473,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00012591648862794142,
+        "orientation_error_rad": 0.0007086568770639666,
+        "linear_speed_m_s": 0.0064252367981210605,
+        "angular_speed_rad_s": 0.05083125617212882,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 64,
+        "qualified_linear_speed_m_s": 0.00027363905841492475,
+        "qualified_angular_speed_rad_s": 0.0021866277092605583,
+        "qualified_linear_velocity_world": [
+          0.00011399734246890501,
+          -0.00020392061815098037,
+          -0.00014247568807749565
+        ],
+        "native_center_of_mass_position": [
+          0.8288790689422462,
+          -0.12047545871783354,
+          1.0514210120631124
+        ],
+        "native_center_of_mass_orientation": [
+          -0.9999999396811332,
+          -0.000330658460839424,
+          0.0001061666904537782,
+          5.598773326851544e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00029587745666503906,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 17944,
+        "phase": "assemble_00_part_3_insert_09",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 17947,
+          "time": 74.77917056670412,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_3",
+        "current_object_pose": {
+          "position": [
+            0.7844056487083435,
+            -0.1204766184091568,
+            1.006678819656372
+          ],
+          "orientation": [
+            -0.9999999434204748,
+            -0.00031451116632006933,
+            -0.00011933270486800248,
+            1.2160237923593222e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844838530314826,
+            -0.12067859898173917,
+            1.0055999999999998
+          ],
+          "orientation": [
+            -1.0,
+            -0.0,
+            -0.0,
+            -0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8288354365171849,
+            -0.12063275943533483,
+            1.2293211587505315
+          ],
+          "orientation": [
+            0.00018924571535589078,
+            0.9999999550641395,
+            -0.00011340858021020834,
+            -0.0002029686481379084
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 9.659358490791506e-05,
+          "orientation_error_rad": 0.0006727824349588447,
+          "linear_speed_m_s": 0.02191064099944444,
+          "angular_speed_rad_s": 0.04934479189404565,
+          "native_count": 34,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 120,
+          "qualified_linear_speed_m_s": 0.029026381543572385,
+          "qualified_angular_speed_rad_s": 0.0022804061417959513,
+          "qualified_linear_velocity_world": [
+            -0.00017538105700294743,
+            0.0004121556276509484,
+            -0.029022925330443167
+          ],
+          "native_center_of_mass_position": [
+            0.8288894873352373,
+            -0.12050101271277407,
+            1.0452821974544841
+          ],
+          "native_center_of_mass_orientation": [
+            -0.9999999440368337,
+            -0.00031451088865572805,
+            0.00011404919580071346,
+            1.4183072874034984e-06
+          ]
+        },
+        "fk_native_position_residual_m": 3.6436526703649924e-07,
+        "fk_native_orientation_residual_rad": 0.00011551784590117734,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00016009807586669922,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_00",
+      "samples": 356,
+      "ready_samples": 69,
+      "first_ready_step": 26920,
+      "max_native_count": 14,
+      "minimum_lateral_m": 3.878571480452321e-05,
+      "maximum_lateral_m": 0.0003995674841842468,
+      "first_lateral_m": 0.0003995674841842468,
+      "last_lateral_m": 8.448146843433975e-05,
+      "maximum_orientation_error_rad": 0.0006693306276853838,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 5.108771589141016e-05,
+        "orientation_error_rad": 0.0006207748785565293,
+        "linear_speed_m_s": 0.003548380819925438,
+        "angular_speed_rad_s": 0.03558818815414307,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 118,
+        "qualified_linear_speed_m_s": 0.002153492655598806,
+        "qualified_angular_speed_rad_s": 0.0055893327247921775,
+        "qualified_linear_velocity_world": [
+          -4.033149076196855e-05,
+          0.00033955198033967695,
+          -0.002126172251069588
+        ],
+        "native_center_of_mass_position": [
+          0.7399612269189847,
+          -0.12053964365863201,
+          1.183620988015376
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999087485781,
+          0.0003028092349769414,
+          0.0003013361111706902,
+          -2.4394820877219084e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00027370452880859375,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 29648,
+        "phase": "assemble_01_part_2_insert_00",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 29651,
+          "time": 123.54583977675065,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844222784042358,
+            -0.12048414349555969,
+            1.0306636095046997
+          ],
+          "orientation": [
+            0.9999999533657706,
+            0.0002974442993599571,
+            6.634311639803792e-05,
+            -1.9847828644569975e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844670803188186,
+            -0.12068365637237699,
+            1.0308246612548828
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398781818147925,
+            -0.12063824072815409,
+            1.2580532675247766
+          ],
+          "orientation": [
+            0.00018312031254962027,
+            0.999999917704849,
+            -2.339909992921937e-06,
+            0.0003620107340029427
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 8.448146843433975e-05,
+          "orientation_error_rad": 0.0006107977061481078,
+          "linear_speed_m_s": 0.004215843709009302,
+          "angular_speed_rad_s": 0.03411892459932435,
+          "native_count": 10,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 2846,
+          "qualified_linear_speed_m_s": 0.001992796969699487,
+          "qualified_angular_speed_rad_s": 0.005227455628045421,
+          "qualified_linear_velocity_world": [
+            8.75493990540449e-05,
+            -0.00024034912974347795,
+            -0.001976311504039858
+          ],
+          "native_center_of_mass_position": [
+            0.7399526250866785,
+            -0.1205053516859511,
+            1.0692835051722727
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999107000168,
+            0.00029744892001156944,
+            0.0002995545209960324,
+            -1.977846069821751e-05
+          ]
+        },
+        "fk_native_position_residual_m": 1.3803529169451778e-06,
+        "fk_native_orientation_residual_rad": 0.00012346257990959435,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.003231525421142578,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_01",
+      "samples": 20,
+      "ready_samples": 3,
+      "first_ready_step": 29704,
+      "max_native_count": 14,
+      "minimum_lateral_m": 6.59861358238542e-05,
+      "maximum_lateral_m": 0.0001803228454862455,
+      "first_lateral_m": 0.00012332201830910297,
+      "last_lateral_m": 8.366194875830185e-05,
+      "maximum_orientation_error_rad": 0.0006279990961138288,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00011452493656747425,
+        "orientation_error_rad": 0.000604525495618787,
+        "linear_speed_m_s": 0.014167750290633503,
+        "angular_speed_rad_s": 0.014816690341843021,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 54,
+        "qualified_linear_speed_m_s": 0.01676218025825418,
+        "qualified_angular_speed_rad_s": 0.01156569168267128,
+        "qualified_linear_velocity_world": [
+          0.0009218674985668902,
+          -0.0025425393942303796,
+          -0.01654256149313276
+        ],
+        "native_center_of_mass_position": [
+          0.7399467091287781,
+          -0.12047821788394902,
+          1.0688735581845694
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999122402321,
+          0.0002953188305282089,
+          0.00029703590538135324,
+          8.717078301749922e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002542734146118164,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 29808,
+        "phase": "assemble_01_part_2_insert_01",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 29811,
+          "time": 124.2125064781867,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.784421443939209,
+            -0.12048517912626266,
+            1.0260077714920044
+          ],
+          "orientation": [
+            0.9999999550281465,
+            0.0002919848296107066,
+            6.555166707282579e-05,
+            -1.9787447334227303e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844676913541804,
+            -0.12068351818826568,
+            1.0251832900258695
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398787552147557,
+            -0.12063832298115346,
+            1.2524117922349598
+          ],
+          "orientation": [
+            0.00018242494004913132,
+            0.9999999176277274,
+            -3.413645412666199e-06,
+            0.0003625658928056403
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 8.366194875830185e-05,
+          "orientation_error_rad": 0.0005998123285793412,
+          "linear_speed_m_s": 0.004295858997682826,
+          "angular_speed_rad_s": 0.036221383916388614,
+          "native_count": 12,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 158,
+          "qualified_linear_speed_m_s": 0.0015124820058006155,
+          "qualified_angular_speed_rad_s": 0.0012507995178895367,
+          "qualified_linear_velocity_world": [
+            5.2781729512079897e-05,
+            -0.00023738659631287033,
+            -0.0014928039090219979
+          ],
+          "native_center_of_mass_position": [
+            0.7399517294998444,
+            -0.12050597100936493,
+            1.064627597005907
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999125469677,
+            0.0002919894363291717,
+            0.00029876307208002783,
+            -1.9719352600194646e-05
+          ]
+        },
+        "fk_native_position_residual_m": 1.374967341457866e-06,
+        "fk_native_orientation_residual_rad": 0.00012135745001886905,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0001558065414428711,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_02",
+      "samples": 12,
+      "ready_samples": 2,
+      "first_ready_step": 29864,
+      "max_native_count": 14,
+      "minimum_lateral_m": 6.90985559250094e-05,
+      "maximum_lateral_m": 0.000183468778954381,
+      "first_lateral_m": 0.00013087724300455143,
+      "last_lateral_m": 9.25853724984028e-05,
+      "maximum_orientation_error_rad": 0.0006278918541069245,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00011389365512349841,
+        "orientation_error_rad": 0.0006055110679019358,
+        "linear_speed_m_s": 0.014488249270371959,
+        "angular_speed_rad_s": 0.01620127334223928,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 55,
+        "qualified_linear_speed_m_s": 0.016540853132053536,
+        "qualified_angular_speed_rad_s": 0.01303355606513483,
+        "qualified_linear_velocity_world": [
+          0.0009168395425644492,
+          -0.002666667424828889,
+          -0.016298715054712504
+        ],
+        "native_center_of_mass_position": [
+          0.7399466743604147,
+          -0.12047907079454805,
+          1.0640800799957768
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999116563761,
+          0.0002953543711506077,
+          0.0002989002381500836,
+          1.0568029924192733e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002536773681640625,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 29904,
+        "phase": "assemble_01_part_2_insert_02",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 29907,
+          "time": 124.61250649904832,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844196557998657,
+            -0.12047643214464188,
+            1.0237187147140503
+          ],
+          "orientation": [
+            0.9999999526839832,
+            0.00030000921930819113,
+            6.706567703123072e-05,
+            -1.134436745168005e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844677316440605,
+            -0.12068350895889611,
+            1.0238609313964844
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398787038374409,
+            -0.12063791071639639,
+            1.2510879652692106
+          ],
+          "orientation": [
+            0.00018127436897875132,
+            0.999999917989548,
+            -1.1916766986855347e-05,
+            0.0003619647652567963
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.25853724984028e-05,
+          "orientation_error_rad": 0.0006152464036105227,
+          "linear_speed_m_s": 0.004247967114632151,
+          "angular_speed_rad_s": 0.018043050358854062,
+          "native_count": 8,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 95,
+          "qualified_linear_speed_m_s": 0.0023200993575309397,
+          "qualified_angular_speed_rad_s": 0.01649048776023314,
+          "qualified_linear_velocity_world": [
+            3.474353823294022e-05,
+            -0.0009983363036369368,
+            -0.0020940340351119115
+          ],
+          "native_center_of_mass_position": [
+            0.7399500584622967,
+            -0.12049859478917821,
+            1.0623386743048755
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999098497201,
+            0.0003000118567858171,
+            0.0003002770814505754,
+            -1.1274401567952531e-05
+          ]
+        },
+        "fk_native_position_residual_m": 5.264364677736448e-07,
+        "fk_native_orientation_residual_rad": 0.00010439952185495338,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0001380443572998047,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_03",
+      "samples": 13,
+      "ready_samples": 2,
+      "first_ready_step": 29992,
+      "max_native_count": 13,
+      "minimum_lateral_m": 7.902864703446055e-05,
+      "maximum_lateral_m": 0.00018185836153843463,
+      "first_lateral_m": 0.00011107827198204651,
+      "last_lateral_m": 7.902864703446055e-05,
+      "maximum_orientation_error_rad": 0.0006386844874455651,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 8.996738353612731e-05,
+        "orientation_error_rad": 0.000604874611254575,
+        "linear_speed_m_s": 0.004340775466147614,
+        "angular_speed_rad_s": 0.03402216542828016,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 84,
+        "qualified_linear_speed_m_s": 0.0017030703681167327,
+        "qualified_angular_speed_rad_s": 0.002556010789654963,
+        "qualified_linear_velocity_world": [
+          0.00022174315996642313,
+          -0.00026572114417858683,
+          -0.0016675343844436289
+        ],
+        "native_center_of_mass_position": [
+          0.7399521296100061,
+          -0.12049949884029418,
+          1.0607594236449909
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999116563109,
+          0.00029438190785647275,
+          0.0002993134251804717,
+          -2.0931707514562104e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002530813217163086,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 30008,
+        "phase": "assemble_01_part_2_insert_03",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 30011,
+          "time": 125.04583985498175,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844251394271851,
+            -0.12048910558223724,
+            1.021445631980896
+          ],
+          "orientation": [
+            0.9999999581507583,
+            0.00028166100503026776,
+            6.240766829113651e-05,
+            2.1698910275001725e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784467568469535,
+            -0.12068354624777489,
+            1.0196964308031278
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398779153568706,
+            -0.12063413453541381,
+            1.2469236886922446
+          ],
+          "orientation": [
+            0.00018185692303691704,
+            0.9999999170227765,
+            -4.299278651976168e-05,
+            0.00036198635341175165
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 7.902864703446055e-05,
+          "orientation_error_rad": 0.0005786138050170473,
+          "linear_speed_m_s": 0.016109141104492786,
+          "angular_speed_rad_s": 0.016917899872126267,
+          "native_count": 13,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 100,
+          "qualified_linear_speed_m_s": 0.01835216610885341,
+          "qualified_angular_speed_rad_s": 0.020700294459189115,
+          "qualified_linear_velocity_world": [
+            0.0006816589207694912,
+            -0.002396196650925359,
+            -0.018182287634199858
+          ],
+          "native_center_of_mass_position": [
+            0.7399551830726259,
+            -0.12051279002621054,
+            1.0600651772684317
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999164027958,
+            0.00028165593693722096,
+            0.00029561907411206447,
+            2.176459624710126e-05
+          ]
+        },
+        "fk_native_position_residual_m": 7.147332697068784e-07,
+        "fk_native_orientation_residual_rad": 4.2314606813682176e-05,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0013306140899658203,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_04",
+      "samples": 8,
+      "ready_samples": 1,
+      "first_ready_step": 30064,
+      "max_native_count": 13,
+      "minimum_lateral_m": 0.00011194447711781608,
+      "maximum_lateral_m": 0.00018196415087893758,
+      "first_lateral_m": 0.00014112587548663108,
+      "last_lateral_m": 0.00011194447711781608,
+      "maximum_orientation_error_rad": 0.0006294162672990608,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00011348869779955091,
+        "orientation_error_rad": 0.0006071383377134104,
+        "linear_speed_m_s": 0.014480550877698969,
+        "angular_speed_rad_s": 0.016054036608770975,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 56,
+        "qualified_linear_speed_m_s": 0.016922813757177062,
+        "qualified_angular_speed_rad_s": 0.013726182107041015,
+        "qualified_linear_velocity_world": [
+          0.0009066266822201012,
+          -0.002693745083264342,
+          -0.01668242760948109
+        ],
+        "native_center_of_mass_position": [
+          0.7399464820984812,
+          -0.12047964270152318,
+          1.0595918346867976
+        ],
+        "native_center_of_mass_orientation": [
+          0.999999911450362,
+          0.0002962056388948749,
+          0.0002987259352693002,
+          1.1149139913167609e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00025260448455810547,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 30072,
+        "phase": "assemble_01_part_2_insert_04",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 30075,
+          "time": 125.31250653555617,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844152450561523,
+            -0.12045758217573166,
+            1.020492434501648
+          ],
+          "orientation": [
+            0.9999999508232319,
+            0.0003059617950871029,
+            6.743191944723555e-05,
+            -1.3922994569168484e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844680041980302,
+            -0.12068344614000247,
+            1.0206146240234375
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398790715312435,
+            -0.12063758026921732,
+            1.2478417699149178
+          ],
+          "orientation": [
+            0.0001826812610230227,
+            0.999999917984034,
+            -9.457014333939188e-06,
+            0.0003613447763173305
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 0.00011194447711781608,
+          "orientation_error_rad": 0.0006272273488562715,
+          "linear_speed_m_s": 0.003450077601370021,
+          "angular_speed_rad_s": 0.05200490862178448,
+          "native_count": 6,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 64,
+          "qualified_linear_speed_m_s": 0.0026827139327544915,
+          "qualified_angular_speed_rad_s": 0.0013558365373142066,
+          "qualified_linear_velocity_world": [
+            0.00015589270338262344,
+            -0.000602402099840122,
+            -0.002609552302624981
+          ],
+          "native_center_of_mass_position": [
+            0.7399456759467706,
+            -0.12047997521724652,
+            1.059112426463363
+          ],
+          "native_center_of_mass_orientation": [
+            0.999999907903557,
+            0.0003059650337681405,
+            0.0003006433234226723,
+            -1.3851640406684486e-05
+          ]
+        },
+        "fk_native_position_residual_m": 6.470560301563822e-07,
+        "fk_native_orientation_residual_rad": 0.00010921981929454711,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00012540817260742188,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_05",
+      "samples": 15,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 11,
+      "minimum_lateral_m": 8.830280477011609e-05,
+      "maximum_lateral_m": 0.00018336884255974273,
+      "first_lateral_m": 0.00010810000642839204,
+      "last_lateral_m": 8.830280477011609e-05,
+      "maximum_orientation_error_rad": 0.0006294349769884138,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.00025272369384765625,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 30192,
+        "phase": "assemble_01_part_2_insert_05",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 30195,
+          "time": 125.8125065616332,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.784420907497406,
+            -0.12048053741455078,
+            1.0176609754562378
+          ],
+          "orientation": [
+            0.9999999540614968,
+            0.00029550159010091365,
+            6.595967354125186e-05,
+            -1.4322552851156849e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844679229812461,
+            -0.12068346492902605,
+            1.0178275108337402
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398785432105649,
+            -0.12063755276529756,
+            1.245056166616827
+          ],
+          "orientation": [
+            0.00018291947312223044,
+            0.9999999175113399,
+            -8.937950619971405e-06,
+            0.00036254364279010874
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 8.830280477011609e-05,
+          "orientation_error_rad": 0.0006062244022954536,
+          "linear_speed_m_s": 0.00435973283118765,
+          "angular_speed_rad_s": 0.03147177382873697,
+          "native_count": 11,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 114,
+          "qualified_linear_speed_m_s": 0.0018265723163615642,
+          "qualified_angular_speed_rad_s": 0.00722902372688455,
+          "qualified_linear_velocity_world": [
+            0.00014528925997277171,
+            -0.0006885381915700971,
+            -0.0016855778286938858
+          ],
+          "native_center_of_mass_position": [
+            0.7399512246751,
+            -0.12050208699392582,
+            1.0562808369609666
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999114851665,
+            0.00029550492224795713,
+            0.00029917107831192496,
+            -1.4253638117037198e-05
+          ]
+        },
+        "fk_native_position_residual_m": 1.460418939129823e-06,
+        "fk_native_orientation_residual_rad": 0.00011030023515296948,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0026738643646240234,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_06",
+      "samples": 11,
+      "ready_samples": 1,
+      "first_ready_step": 30280,
+      "max_native_count": 12,
+      "minimum_lateral_m": 8.94714888227765e-05,
+      "maximum_lateral_m": 0.00018712680567388074,
+      "first_lateral_m": 0.00012374003148235338,
+      "last_lateral_m": 8.94714888227765e-05,
+      "maximum_orientation_error_rad": 0.000636493783638768,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 8.94714888227765e-05,
+        "orientation_error_rad": 0.0005991607806397301,
+        "linear_speed_m_s": 0.004367126937124333,
+        "angular_speed_rad_s": 0.033994380396648254,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": false,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 85,
+        "qualified_linear_speed_m_s": 0.0015732254066231663,
+        "qualified_angular_speed_rad_s": 0.0019481580675495059,
+        "qualified_linear_velocity_world": [
+          3.12312184345974e-05,
+          -0.00031094781559920704,
+          -0.0015418736157719929
+        ],
+        "native_center_of_mass_position": [
+          0.7399507582524131,
+          -0.1204999710840523,
+          1.054361868937976
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999126975373,
+          0.0002915281059880215,
+          0.00029853614958653556,
+          -2.219118814531842e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002511739730834961,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 30280,
+        "phase": "assemble_01_part_2_insert_06",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 30283,
+          "time": 126.17917324742302,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844204902648926,
+            -0.12047943472862244,
+            1.0157420635223389
+          ],
+          "orientation": [
+            0.9999999551257952,
+            0.00029152292282183105,
+            6.532474455038992e-05,
+            -2.225917522462983e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844678937015581,
+            -0.12068347168813405,
+            1.01491557689933
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398782558357068,
+            -0.12063829565392331,
+            1.2421441634278825
+          ],
+          "orientation": [
+            0.00018273208501843344,
+            0.999999917435083,
+            -1.2993113389337486e-06,
+            0.0003629560912055626
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 8.94714888227765e-05,
+          "orientation_error_rad": 0.0005991607806397301,
+          "linear_speed_m_s": 0.004367126937124333,
+          "angular_speed_rad_s": 0.033994380396648254,
+          "native_count": 12,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 85,
+          "qualified_linear_speed_m_s": 0.0015732254066231663,
+          "qualified_angular_speed_rad_s": 0.0019481580675495059,
+          "qualified_linear_velocity_world": [
+            3.12312184345974e-05,
+            -0.00031094781559920704,
+            -0.0015418736157719929
+          ],
+          "native_center_of_mass_position": [
+            0.7399507582524131,
+            -0.1204999710840523,
+            1.054361868937976
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999126975373,
+            0.0002915281059880215,
+            0.00029853614958653556,
+            -2.219118814531842e-05
+          ]
+        },
+        "fk_native_position_residual_m": 1.4244414151018886e-06,
+        "fk_native_orientation_residual_rad": 0.00012559928100983305,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0012949705123901367,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_07",
+      "samples": 12,
+      "ready_samples": 2,
+      "first_ready_step": 30336,
+      "max_native_count": 14,
+      "minimum_lateral_m": 6.996430950770706e-05,
+      "maximum_lateral_m": 0.00018604248424288841,
+      "first_lateral_m": 0.0001421787255252368,
+      "last_lateral_m": 9.472829603602416e-05,
+      "maximum_orientation_error_rad": 0.0006250887898427411,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.0001140559619236636,
+        "orientation_error_rad": 0.0006029761644387943,
+        "linear_speed_m_s": 0.01477098013981006,
+        "angular_speed_rad_s": 0.015302983531754915,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 56,
+        "qualified_linear_speed_m_s": 0.016954768693179537,
+        "qualified_angular_speed_rad_s": 0.015376784800602622,
+        "qualified_linear_velocity_world": [
+          0.0009154895164107135,
+          -0.0025981005149578996,
+          -0.01672949294206906
+        ],
+        "native_center_of_mass_position": [
+          0.7399464331598941,
+          -0.12047916731308315,
+          1.0539667687329828
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999122279347,
+          0.0002940825646289235,
+          0.0002980913847636654,
+          1.418077511310242e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00025010108947753906,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 30376,
+        "phase": "assemble_01_part_2_insert_07",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 30379,
+          "time": 126.57917326828465,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844188213348389,
+            -0.1204744279384613,
+            1.0136125087738037
+          ],
+          "orientation": [
+            0.9999999531560346,
+            0.00029858741025660414,
+            6.610327175715642e-05,
+            -1.2800181741999864e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844678786487921,
+            -0.12068347516000402,
+            1.0137536525726318
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398788520691998,
+            -0.12063775638971072,
+            1.2409808550375898
+          ],
+          "orientation": [
+            0.00018150613938546626,
+            0.9999999179362622,
+            -1.1175992285412028e-05,
+            0.00036201945746838613
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.472829603602416e-05,
+          "orientation_error_rad": 0.0006121696871886529,
+          "linear_speed_m_s": 0.004193778685003248,
+          "angular_speed_rad_s": 0.018862155482784804,
+          "native_count": 8,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 96,
+          "qualified_linear_speed_m_s": 0.0025096405629282427,
+          "qualified_angular_speed_rad_s": 0.0155214728551361,
+          "qualified_linear_velocity_world": [
+            7.998982573462939e-05,
+            -0.0010200477198685548,
+            -0.002291593339156119
+          ],
+          "native_center_of_mass_position": [
+            0.7399491496320391,
+            -0.12049635125806166,
+            1.0522323828719746
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999105462153,
+            0.0002985903872854084,
+            0.0002993146763127603,
+            -1.2730547400787264e-05
+          ]
+        },
+        "fk_native_position_residual_m": 3.6561134842838286e-07,
+        "fk_native_orientation_residual_rad": 0.00010586385641312115,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0001291036605834961,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_08",
+      "samples": 7,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 8,
+      "minimum_lateral_m": 0.00011350865881849584,
+      "maximum_lateral_m": 0.00018450427239036772,
+      "first_lateral_m": 0.00011350865881849584,
+      "last_lateral_m": 0.00013136566711429047,
+      "maximum_orientation_error_rad": 0.0006245994697867006,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.00024890899658203125,
+      "maximum_lateral_bias_m": 0.00010192887864814738,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 30432,
+        "phase": "assemble_01_part_2_insert_08",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 30435,
+          "time": 126.81250661378726,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844105958938599,
+            -0.12043872475624084,
+            1.0132579803466797
+          ],
+          "orientation": [
+            0.9999999513054494,
+            0.00030438489175760444,
+            6.675598313088708e-05,
+            -1.6809964014714746e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784464093764322,
+            -0.1206658021813833,
+            1.0135068893432617
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.739875656189598,
+            -0.12062126103017728,
+            1.2407348708719261
+          ],
+          "orientation": [
+            0.0001796445489072807,
+            0.999999918730268,
+            -6.630498448969173e-06,
+            0.00036086469770089475
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 0.00013136566711429047,
+          "orientation_error_rad": 0.0006241445395874755,
+          "linear_speed_m_s": 0.0057446653397429555,
+          "angular_speed_rad_s": 0.04201511592286834,
+          "native_count": 8,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 52,
+          "qualified_linear_speed_m_s": 0.0005471936789264924,
+          "qualified_angular_speed_rad_s": 0.00023912121486893492,
+          "qualified_linear_velocity_world": [
+            0.00015094006712669083,
+            -0.0005255353611880934,
+            2.122740054268633e-05
+          ],
+          "native_center_of_mass_position": [
+            0.739940974516923,
+            -0.12046073920844497,
+            1.0518779123417141
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999085434106,
+            0.0003043888037557601,
+            0.0002999673872371637,
+            -1.6738977525583514e-05
+          ]
+        },
+        "fk_native_position_residual_m": 5.845671582140883e-07,
+        "fk_native_orientation_residual_rad": 0.00011510874941813239,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00018537044525146484,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_01_part_2_insert_09",
+      "samples": 14,
+      "ready_samples": 6,
+      "first_ready_step": 30488,
+      "max_native_count": 34,
+      "minimum_lateral_m": 7.79059999778843e-05,
+      "maximum_lateral_m": 0.00017017906488604975,
+      "first_lateral_m": 0.00013608392354901597,
+      "last_lateral_m": 8.378061309610378e-05,
+      "maximum_orientation_error_rad": 0.00064403134839846,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00012991267830602418,
+        "orientation_error_rad": 0.0006279626429158466,
+        "linear_speed_m_s": 0.005676531262911845,
+        "angular_speed_rad_s": 0.04307455238017989,
+        "native_count": 12,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 52,
+        "qualified_linear_speed_m_s": 0.00045913194993968734,
+        "qualified_angular_speed_rad_s": 0.00025680533959026826,
+        "qualified_linear_velocity_world": [
+          9.391351856657883e-05,
+          -0.0004468626489862889,
+          -4.7918382973773074e-05
+        ],
+        "native_center_of_mass_position": [
+          0.7399418471371239,
+          -0.12046225118817475,
+          1.0515593097216809
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999078306654,
+          0.0003062794676651895,
+          0.00030046119165263215,
+          -1.5956844195295555e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00024640560150146484,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 30544,
+        "phase": "assemble_01_part_2_insert_09",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 30547,
+          "time": 127.2791733047925,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_2",
+        "current_object_pose": {
+          "position": [
+            0.7844229936599731,
+            -0.12048470228910446,
+            1.006805658340454
+          ],
+          "orientation": [
+            0.9999999547704793,
+            0.00029392035035789155,
+            6.308028659526216e-05,
+            -9.525987732266577e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844665908462218,
+            -0.12068376465023507,
+            1.0055999999999998
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7398780505156319,
+            -0.12063818434163917,
+            1.2328282366635623
+          ],
+          "orientation": [
+            0.00018101049533382648,
+            0.999999918636376,
+            -1.3258358025695602e-05,
+            0.00036025915355830684
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 8.378061309610378e-05,
+          "orientation_error_rad": 0.0006015281940209324,
+          "linear_speed_m_s": 0.02483973267134885,
+          "angular_speed_rad_s": 0.0377188058570215,
+          "native_count": 34,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 108,
+          "qualified_linear_speed_m_s": 0.030987025517835606,
+          "qualified_angular_speed_rad_s": 0.005335326888037525,
+          "qualified_linear_velocity_world": [
+            -0.00016247943046924563,
+            2.2595268070535533e-05,
+            -0.03098659129900432
+          ],
+          "native_center_of_mass_position": [
+            0.7399530885357875,
+            -0.12050655629371318,
+            1.0454252636982735
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999128656546,
+            0.0002939225639341854,
+            0.00029629169160957935,
+            -9.457441891745198e-06
+          ]
+        },
+        "fk_native_position_residual_m": 8.763003105930388e-07,
+        "fk_native_orientation_residual_rad": 0.00010172503147724119,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00018298625946044922,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_00",
+      "samples": 362,
+      "ready_samples": 80,
+      "first_ready_step": 40248,
+      "max_native_count": 15,
+      "minimum_lateral_m": 3.0476566793845935e-05,
+      "maximum_lateral_m": 0.00016553481317659938,
+      "first_lateral_m": 0.00016553481317659938,
+      "last_lateral_m": 8.771750394897736e-05,
+      "maximum_orientation_error_rad": 0.0014554120399508101,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 9.562658957909017e-05,
+        "orientation_error_rad": 0.0005479148299476047,
+        "linear_speed_m_s": 0.039202932415267004,
+        "angular_speed_rad_s": 0.16390804795434857,
+        "native_count": 15,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 39,
+        "qualified_linear_speed_m_s": 0.04988136409687411,
+        "qualified_angular_speed_rad_s": 0.0355503554577226,
+        "qualified_linear_velocity_world": [
+          0.00024744300991315805,
+          -0.0008536567855326683,
+          -0.049873445100717485
+        ],
+        "native_center_of_mass_position": [
+          0.8288679049503997,
+          -0.12051787326861815,
+          1.2073576404764281
+        ],
+        "native_center_of_mass_orientation": [
+          0.999999962463699,
+          0.00026554804910866874,
+          2.9422050608821598e-05,
+          -6.0755057327316116e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00027883052825927734,
+      "maximum_lateral_bias_m": 0.00012000000000000003,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43104,
+        "phase": "assemble_02_part_1_insert_00",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43107,
+          "time": 179.61250936752185,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7844029068946838,
+            -0.12048748880624771,
+            1.030673623085022
+          ],
+          "orientation": [
+            0.9999999435404233,
+            0.0003030682393602006,
+            0.00014502031899376905,
+            6.156274246523958e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844920922139913,
+            -0.12067508393720336,
+            1.03086256980896
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287877279473072,
+            -0.09506269429470267,
+            1.2645640406232552
+          ],
+          "orientation": [
+            -0.00012808489728778773,
+            -0.7065239290147634,
+            0.7076886689181792,
+            -0.0008180517200042041
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 8.771750394897736e-05,
+          "orientation_error_rad": 0.0006720689084421388,
+          "linear_speed_m_s": 0.01843877898052689,
+          "angular_speed_rad_s": 0.3181653910549968,
+          "native_count": 8,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 2895,
+          "qualified_linear_speed_m_s": 0.0024386865469508616,
+          "qualified_angular_speed_rad_s": 0.007262288406904375,
+          "qualified_linear_velocity_world": [
+            0.00027017695084298433,
+            -0.0002512443166308115,
+            -0.002410616681032681
+          ],
+          "native_center_of_mass_position": [
+            0.8288733876720837,
+            -0.1205299064976567,
+            1.101549711087788
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999435414213,
+            0.00030306821553326255,
+            0.00014502036878807838,
+            5.991973597388448e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.612315112385221e-05,
+        "fk_native_orientation_residual_rad": 0.0003487580272051959,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00017213821411132812,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_01",
+      "samples": 21,
+      "ready_samples": 3,
+      "first_ready_step": 43168,
+      "max_native_count": 14,
+      "minimum_lateral_m": 7.355421305819639e-05,
+      "maximum_lateral_m": 0.0001762225296200052,
+      "first_lateral_m": 0.000115128552739657,
+      "last_lateral_m": 9.032087687615672e-05,
+      "maximum_orientation_error_rad": 0.0014311607032516027,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00010874698061027635,
+        "orientation_error_rad": 0.0006110402960584165,
+        "linear_speed_m_s": 0.009841114622524422,
+        "angular_speed_rad_s": 0.09809744908461444,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 60,
+        "qualified_linear_speed_m_s": 0.013109570738079107,
+        "qualified_angular_speed_rad_s": 0.07815973308982992,
+        "qualified_linear_velocity_world": [
+          0.0013810795722181393,
+          -0.0018979656866955077,
+          -0.012897720356870365
+        ],
+        "native_center_of_mass_position": [
+          0.8288611886011991,
+          -0.12050341766083536,
+          1.1011013195644708
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999533288789,
+          0.00030312731833153457,
+          -3.81481820862848e-05,
+          8.859954405050225e-07
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002917051315307617,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43272,
+        "phase": "assemble_02_part_1_insert_01",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43275,
+          "time": 180.3125094040297,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7844000458717346,
+            -0.12048599869012833,
+            1.026110053062439
+          ],
+          "orientation": [
+            0.9999999411923239,
+            0.0003027556524696571,
+            0.00016102113308179378,
+            5.153486203667742e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844933920614197,
+            -0.1206744615070065,
+            1.0262980461120605
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287857306290275,
+            -0.09506217100047608,
+            1.2599997370524998
+          ],
+          "orientation": [
+            -0.0001234950798560575,
+            -0.7065239940985466,
+            0.7076885995928729,
+            -0.0008225073135208574
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.032087687615672e-05,
+          "orientation_error_rad": 0.0006859018975832345,
+          "linear_speed_m_s": 0.019139044310454077,
+          "angular_speed_rad_s": 0.3348406949538044,
+          "native_count": 8,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 164,
+          "qualified_linear_speed_m_s": 0.002114505279444633,
+          "qualified_angular_speed_rad_s": 0.001949789606730526,
+          "qualified_linear_velocity_world": [
+            0.0002903453097332412,
+            -0.00018671608074759223,
+            -0.0020861374075322537
+          ],
+          "native_center_of_mass_position": [
+            0.8288727947346043,
+            -0.12052846079348946,
+            1.096984717900866
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999411931572,
+            0.0003027556260137748,
+            0.00016102118282474464,
+            4.989185554918039e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.582011349294707e-05,
+        "fk_native_orientation_residual_rad": 0.0003615506770385039,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0002199411392211914,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_02",
+      "samples": 12,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 11,
+      "minimum_lateral_m": 9.234727180298764e-05,
+      "maximum_lateral_m": 0.00017997266005516133,
+      "first_lateral_m": 0.00014635614162275656,
+      "last_lateral_m": 9.234727180298764e-05,
+      "maximum_orientation_error_rad": 0.001474672026718837,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.0002900362014770508,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43368,
+        "phase": "assemble_02_part_1_insert_02",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43371,
+          "time": 180.71250942489132,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7844007611274719,
+            -0.1204833835363388,
+            1.0238381624221802
+          ],
+          "orientation": [
+            0.9999999474008875,
+            0.0002992210344882992,
+            0.00012447806584624946,
+            1.304630427101862e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844936252460039,
+            -0.12067434780872874,
+            1.0240072011947632
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287998807014537,
+            -0.0950623888901695,
+            1.2577059776179218
+          ],
+          "orientation": [
+            -0.0001473409525107449,
+            -0.7065244619279037,
+            0.7076881569440755,
+            -0.0007971883261836315
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.234727180298764e-05,
+          "orientation_error_rad": 0.0006486855199314931,
+          "linear_speed_m_s": 0.01824124801589076,
+          "angular_speed_rad_s": 0.324041995361466,
+          "native_count": 6,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 90,
+          "qualified_linear_speed_m_s": 0.0018107474282099672,
+          "qualified_angular_speed_rad_s": 0.021163795642894247,
+          "qualified_linear_velocity_world": [
+            -0.0006983909789418012,
+            -0.00016254204654163776,
+            -0.0016627195711868491
+          ],
+          "native_center_of_mass_position": [
+            0.8288683302350396,
+            -0.12052464374877023,
+            1.0947160779224827
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999474030175,
+            0.000299221014036467,
+            0.00012447811500846076,
+            1.2882003621248739e-05
+          ]
+        },
+        "fk_native_position_residual_m": 2.351947359311658e-05,
+        "fk_native_orientation_residual_rad": 0.0002920374934951219,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0017474889755249023,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_03",
+      "samples": 14,
+      "ready_samples": 1,
+      "first_ready_step": 43448,
+      "max_native_count": 13,
+      "minimum_lateral_m": 8.110925228294159e-05,
+      "maximum_lateral_m": 0.00018103662851322457,
+      "first_lateral_m": 0.00012063416107333614,
+      "last_lateral_m": 8.906393427100901e-05,
+      "maximum_orientation_error_rad": 0.0010606007919349244,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 8.110925228294159e-05,
+        "orientation_error_rad": 0.0005853347309005633,
+        "linear_speed_m_s": 0.010668190076502743,
+        "angular_speed_rad_s": 0.10049507881699761,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 74,
+        "qualified_linear_speed_m_s": 0.013972652947230485,
+        "qualified_angular_speed_rad_s": 0.0870151518993819,
+        "qualified_linear_velocity_world": [
+          0.0009617028511308966,
+          -0.0013566122061387045,
+          -0.01387334715676181
+        ],
+        "native_center_of_mass_position": [
+          0.8288697449416954,
+          -0.12052783352182933,
+          1.0936107025912354
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999571733776,
+          0.0002901305790726084,
+          -3.8337229655108904e-05,
+          2.7832785550012556e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00028204917907714844,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43480,
+        "phase": "assemble_02_part_1_insert_03",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43483,
+          "time": 181.17917611589655,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7843958735466003,
+            -0.1204897090792656,
+            1.0214990377426147
+          ],
+          "orientation": [
+            0.9999999446384633,
+            0.0002941500000563899,
+            0.00015512877209742287,
+            1.1572030465674776e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844936283667658,
+            -0.12067434628284543,
+            1.0216929912567139
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287925858671708,
+            -0.09506386376186488,
+            1.2553940394746708
+          ],
+          "orientation": [
+            -0.00013163781458536022,
+            -0.7065228684920886,
+            0.7076897352691313,
+            -0.0008109031408329467
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 8.906393427100901e-05,
+          "orientation_error_rad": 0.000665501538384984,
+          "linear_speed_m_s": 0.019323201762601452,
+          "angular_speed_rad_s": 0.3303251291128632,
+          "native_count": 9,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 106,
+          "qualified_linear_speed_m_s": 0.001471469056859298,
+          "qualified_angular_speed_rad_s": 0.005242530150223118,
+          "qualified_linear_velocity_world": [
+            5.540716785510551e-05,
+            -0.00032619674194158126,
+            -0.0014337876120930064
+          ],
+          "native_center_of_mass_position": [
+            0.8288677874199492,
+            -0.12053038062358051,
+            1.0923742275672381
+          ],
+          "native_center_of_mass_orientation": [
+            0.999999944640351,
+            0.00029414997456862654,
+            0.00015512882042645944,
+            1.1407729816358783e-05
+          ]
+        },
+        "fk_native_position_residual_m": 2.584070360859056e-05,
+        "fk_native_orientation_residual_rad": 0.0003336656346065444,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0008352994918823242,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_04",
+      "samples": 9,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 8,
+      "minimum_lateral_m": 9.542469379545812e-05,
+      "maximum_lateral_m": 0.00018293981223064807,
+      "first_lateral_m": 0.00011928198826549214,
+      "last_lateral_m": 0.00010774853549328974,
+      "maximum_orientation_error_rad": 0.0006789930292907921,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.0002834796905517578,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43552,
+        "phase": "assemble_02_part_1_insert_04",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43555,
+          "time": 181.47917613154277,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7843881845474243,
+            -0.12047258019447327,
+            1.0202760696411133
+          ],
+          "orientation": [
+            0.9999999423710588,
+            0.00029777070188369926,
+            0.00016190964901471167,
+            1.9384365052005717e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844905506097837,
+            -0.12067579749162755,
+            1.0204368829727173
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.828781591423812,
+            -0.09506552105192961,
+            1.2541399977696364
+          ],
+          "orientation": [
+            -0.0001164977614858761,
+            -0.7065225288476363,
+            0.7076900608096353,
+            -0.0008249183398261546
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 0.00010774853549328974,
+          "orientation_error_rad": 0.0006789930292907921,
+          "linear_speed_m_s": 0.01940304492092178,
+          "angular_speed_rad_s": 0.3499949432618478,
+          "native_count": 5,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 69,
+          "qualified_linear_speed_m_s": 0.0028875534662884954,
+          "qualified_angular_speed_rad_s": 0.004949434707077592,
+          "qualified_linear_velocity_world": [
+            -0.0004086081313627207,
+            -0.0004500115590546248,
+            -0.002822852106004882
+          ],
+          "native_center_of_mass_position": [
+            0.8288610599229322,
+            -0.1205130701393271,
+            1.0911506562487852
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999423742303,
+            0.00029777067528183337,
+            0.00016190969793863187,
+            1.922006440306216e-05
+          ]
+        },
+        "fk_native_position_residual_m": 2.7536010093694884e-05,
+        "fk_native_orientation_residual_rad": 0.00037492337916155967,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0010377168655395508,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_05",
+      "samples": 14,
+      "ready_samples": 1,
+      "first_ready_step": 43616,
+      "max_native_count": 14,
+      "minimum_lateral_m": 8.102741206930939e-05,
+      "maximum_lateral_m": 0.00018483586250451537,
+      "first_lateral_m": 8.102741206930939e-05,
+      "last_lateral_m": 9.481898916384096e-05,
+      "maximum_orientation_error_rad": 0.0008453525117533693,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.0001076515253572065,
+        "orientation_error_rad": 0.0006090008727745272,
+        "linear_speed_m_s": 0.02422732382305684,
+        "angular_speed_rad_s": 0.15420012216838672,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 57,
+        "qualified_linear_speed_m_s": 0.037866151113541996,
+        "qualified_angular_speed_rad_s": 0.07665033076003264,
+        "qualified_linear_velocity_world": [
+          0.0015085469844302456,
+          -0.0013190085003689084,
+          -0.03781309168430054
+        ],
+        "native_center_of_mass_position": [
+          0.8288644063140901,
+          -0.1205075769355949,
+          1.0905299729417002
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999536399968,
+          0.0002798846945265218,
+          0.00011992669574120463,
+          1.4661583835636902e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002809762954711914,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43664,
+        "phase": "assemble_02_part_1_insert_05",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43667,
+          "time": 181.945842822548,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7843996286392212,
+            -0.12048118561506271,
+            1.0176876783370972
+          ],
+          "orientation": [
+            0.9999999461808271,
+            0.0002996459096776614,
+            0.00013341660164650318,
+            7.119138486165157e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844921921455374,
+            -0.12067503676444198,
+            1.0178676843643188
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287928989433908,
+            -0.09506437252829239,
+            1.2515686167078235
+          ],
+          "orientation": [
+            -0.0001344416961425131,
+            -0.7065229596140685,
+            0.7076896471786792,
+            -0.0008079230929504762
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 9.481898916384096e-05,
+          "orientation_error_rad": 0.0006561656704143666,
+          "linear_speed_m_s": 0.017529505516457947,
+          "angular_speed_rad_s": 0.29944553714450406,
+          "native_count": 7,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 105,
+          "qualified_linear_speed_m_s": 0.0028922560554602364,
+          "qualified_angular_speed_rad_s": 0.01274711379579355,
+          "qualified_linear_velocity_world": [
+            0.00041564719475414543,
+            -0.00020775576114398267,
+            -0.002854683878041648
+          ],
+          "native_center_of_mass_position": [
+            0.8288684645890259,
+            -0.120523032842245,
+            1.0885647986827236
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999461819833,
+            0.0002996458877572218,
+            0.00013341665087852162,
+            6.954837836595813e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.5684698386099402e-05,
+        "fk_native_orientation_residual_rad": 0.0003254894299025852,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0002809762954711914,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_06",
+      "samples": 10,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 10,
+      "minimum_lateral_m": 6.79425722005237e-05,
+      "maximum_lateral_m": 0.0001804786458824003,
+      "first_lateral_m": 6.79425722005237e-05,
+      "last_lateral_m": 0.00010416075152126294,
+      "maximum_orientation_error_rad": 0.0008952675067470534,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.0002843141555786133,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43744,
+        "phase": "assemble_02_part_1_insert_06",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43747,
+          "time": 182.27917617326602,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7843917608261108,
+            -0.12047471106052399,
+            1.0160633325576782
+          ],
+          "orientation": [
+            0.9999999437976146,
+            0.00029997947918920017,
+            0.0001487588222584435,
+            1.6967399416440916e-05
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844908308938522,
+            -0.12067566972484156,
+            1.0162426233291626
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287863317067108,
+            -0.09506449019376258,
+            1.2499438013922355
+          ],
+          "orientation": [
+            -0.0001268052540398213,
+            -0.7065230661451702,
+            0.7076895319424634,
+            -0.000816886964119742
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 0.00010416075152126294,
+          "orientation_error_rad": 0.0006705364177356169,
+          "linear_speed_m_s": 0.017913437040984106,
+          "angular_speed_rad_s": 0.3046227644494851,
+          "native_count": 7,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 73,
+          "qualified_linear_speed_m_s": 0.0030799416143075767,
+          "qualified_angular_speed_rad_s": 0.019038225537007066,
+          "qualified_linear_velocity_world": [
+            0.0009199760087674964,
+            -0.0005985485058406934,
+            -0.0028777463712064103
+          ],
+          "native_center_of_mass_position": [
+            0.8288627719782303,
+            -0.12051572943531715,
+            1.0869390886031023
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999438003888,
+            0.00029997945474802366,
+            0.00014875887154526743,
+            1.6803098767263002e-05
+          ]
+        },
+        "fk_native_position_residual_m": 2.596629386165481e-05,
+        "fk_native_orientation_residual_rad": 0.00034893818315351365,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.001147150993347168,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_07",
+      "samples": 13,
+      "ready_samples": 2,
+      "first_ready_step": 43832,
+      "max_native_count": 14,
+      "minimum_lateral_m": 7.401411917436773e-05,
+      "maximum_lateral_m": 0.0001830632187522581,
+      "first_lateral_m": 7.401411917436773e-05,
+      "last_lateral_m": 9.36983815471107e-05,
+      "maximum_orientation_error_rad": 0.0014730232255495438,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 8.259571262683062e-05,
+        "orientation_error_rad": 0.0006265030316391941,
+        "linear_speed_m_s": 0.025576527454909802,
+        "angular_speed_rad_s": 0.1460468802877085,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 81,
+        "qualified_linear_speed_m_s": 0.039313500079195575,
+        "qualified_angular_speed_rad_s": 0.0778316170005658,
+        "qualified_linear_velocity_world": [
+          0.0011325361147360175,
+          -0.001298379745754471,
+          -0.03927572864329246
+        ],
+        "native_center_of_mass_position": [
+          0.828874214786874,
+          -0.12053097492202346,
+          1.0850567855862514
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999509388389,
+          0.00027826479991230335,
+          0.0001432849481162336,
+          1.2666673530760108e-05
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002841949462890625,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43848,
+        "phase": "assemble_02_part_1_insert_07",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43851,
+          "time": 182.71250952919945,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7843992710113525,
+            -0.12048260867595673,
+            1.0137474536895752
+          ],
+          "orientation": [
+            0.9999999471190185,
+            0.0002959644791080703,
+            0.00013443028819329721,
+            9.771634788411772e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844931327736386,
+            -0.12067458720150695,
+            1.0129623482017076
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287939317119792,
+            -0.09506360405750683,
+            1.2466623904083007
+          ],
+          "orientation": [
+            -0.00013649536108380943,
+            -0.7065236528245197,
+            0.7076889577494196,
+            -0.0008052627238089314
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 9.36983815471107e-05,
+          "orientation_error_rad": 0.0006504212908487001,
+          "linear_speed_m_s": 0.019324384823259395,
+          "angular_speed_rad_s": 0.32743550928717136,
+          "native_count": 12,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 97,
+          "qualified_linear_speed_m_s": 0.001123770908742532,
+          "qualified_angular_speed_rad_s": 0.008212751839893796,
+          "qualified_linear_velocity_world": [
+            -8.504413609439126e-06,
+            -2.7527792058999805e-05,
+            -0.001123401509234135
+          ],
+          "native_center_of_mass_position": [
+            0.8288682507590799,
+            -0.12052369811629304,
+            1.0846244842584667
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999471206106,
+            0.0002959644570210815,
+            0.0001344303368204542,
+            9.607334138688248e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.4259404553780743e-05,
+        "fk_native_orientation_residual_rad": 0.00031883407744854393,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0011363029479980469,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_08",
+      "samples": 7,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 9,
+      "minimum_lateral_m": 0.00013193788553014115,
+      "maximum_lateral_m": 0.00018743910282722473,
+      "first_lateral_m": 0.00014161225485724292,
+      "last_lateral_m": 0.00013193788553014115,
+      "maximum_orientation_error_rad": 0.0006665894586419509,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.0002827644348144531,
+      "maximum_lateral_bias_m": 0.00010980845902407456,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 43904,
+        "phase": "assemble_02_part_1_insert_08",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 43907,
+          "time": 182.94584287470207,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7843840718269348,
+            -0.12044747918844223,
+            1.0133898258209229
+          ],
+          "orientation": [
+            0.9999999444573122,
+            0.0003073213276656474,
+            0.00012896036071143691,
+            2.863463646580157e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844858064779139,
+            -0.12066675711487546,
+            1.0136725902557373
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287845354282447,
+            -0.09505544631841364,
+            1.2473731483031554
+          ],
+          "orientation": [
+            -0.00013544510347462155,
+            -0.7065230665542079,
+            0.7076895394347041,
+            -0.0008086137264574219
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 0.00013193788553014115,
+          "orientation_error_rad": 0.0006665894586419509,
+          "linear_speed_m_s": 0.01979085013492259,
+          "angular_speed_rad_s": 0.3000482825192028,
+          "native_count": 9,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 56,
+          "qualified_linear_speed_m_s": 0.0013433881457152134,
+          "qualified_angular_speed_rad_s": 0.011333616057093212,
+          "qualified_linear_velocity_world": [
+            0.0009175797530054215,
+            -0.0009006018308934038,
+            -0.00038942964591068074
+          ],
+          "native_center_of_mass_position": [
+            0.8288522759098852,
+            -0.12049079306266941,
+            1.0842673417195128
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999444577692,
+            0.00030732130647737104,
+            0.00012896041120453165,
+            2.699162997294045e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.360507033624623e-05,
+        "fk_native_orientation_residual_rad": 0.00032501599310565723,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00014960765838623047,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_02_part_1_insert_09",
+      "samples": 15,
+      "ready_samples": 6,
+      "first_ready_step": 43968,
+      "max_native_count": 33,
+      "minimum_lateral_m": 8.26675129944484e-05,
+      "maximum_lateral_m": 0.0001706695516015463,
+      "first_lateral_m": 0.00014059368443646174,
+      "last_lateral_m": 9.200234959215399e-05,
+      "maximum_orientation_error_rad": 0.0006647300399873975,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00011838270195676002,
+        "orientation_error_rad": 0.0006576932242284907,
+        "linear_speed_m_s": 0.008895289770820035,
+        "angular_speed_rad_s": 0.26204084066148947,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 61,
+        "qualified_linear_speed_m_s": 0.010913970706434293,
+        "qualified_angular_speed_rad_s": 0.030762874861960637,
+        "qualified_linear_velocity_world": [
+          0.000920075094009003,
+          -0.0004596558943915758,
+          -0.010865400814560007
+        ],
+        "native_center_of_mass_position": [
+          0.8288631658435411,
+          -0.12049982490378912,
+          1.0838546205202373
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999459308567,
+          0.00030178532186327404,
+          0.00013051654855951355,
+          5.41607295748315e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00028395652770996094,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 44024,
+        "phase": "assemble_02_part_1_insert_09",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 44027,
+          "time": 183.4458429007791,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_1",
+        "current_object_pose": {
+          "position": [
+            0.7843990325927734,
+            -0.12048462778329849,
+            1.0069516897201538
+          ],
+          "orientation": [
+            0.9999999449009468,
+            0.0002947569720554543,
+            0.00015248210435158497,
+            8.101774719014297e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844902383230874,
+            -0.12067593882518872,
+            1.0055999999999998
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.8287824181537887,
+            -0.09506374612183019,
+            1.239302175046147
+          ],
+          "orientation": [
+            -0.00011842115962155112,
+            -0.7065234743023325,
+            0.7076891155810144,
+            -0.0008257871105827374
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 9.200234959215399e-05,
+          "orientation_error_rad": 0.0006639220057498858,
+          "linear_speed_m_s": 0.014285732287335326,
+          "angular_speed_rad_s": 0.31728495789033967,
+          "native_count": 33,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 117,
+          "qualified_linear_speed_m_s": 0.0348272477607068,
+          "qualified_angular_speed_rad_s": 0.005213385798837136,
+          "qualified_linear_velocity_world": [
+            -0.000590921553325905,
+            0.00035875276368741625,
+            -0.034820386194843074
+          ],
+          "native_center_of_mass_position": [
+            0.8288705711613257,
+            -0.1205256940284127,
+            1.0778271148075476
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999449022644,
+            0.00029475694700254016,
+            0.0001524821527803475,
+            7.937474069655225e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.8390012249623304e-05,
+        "fk_native_orientation_residual_rad": 0.00037337198427048125,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00019741058349609375,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_00",
+      "samples": 377,
+      "ready_samples": 44,
+      "first_ready_step": 52624,
+      "max_native_count": 14,
+      "minimum_lateral_m": 3.444883714382546e-05,
+      "maximum_lateral_m": 0.0002799186636816061,
+      "first_lateral_m": 0.0002799186636816061,
+      "last_lateral_m": 7.606145077185726e-05,
+      "maximum_orientation_error_rad": 0.0009677167825425664,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00011018042028651755,
+        "orientation_error_rad": 0.0006613872595232044,
+        "linear_speed_m_s": 0.009672832180859538,
+        "angular_speed_rad_s": 0.10144143731804584,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 43,
+        "qualified_linear_speed_m_s": 0.014028690918093459,
+        "qualified_angular_speed_rad_s": 0.06293536438146802,
+        "qualified_linear_velocity_world": [
+          0.000598519337277984,
+          -0.0016236273973459468,
+          -0.013921558014564671
+        ],
+        "native_center_of_mass_position": [
+          0.7399756198589672,
+          -0.12050354214055482,
+          1.2076289273179583
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999211130404,
+          0.00026960709241372717,
+          0.0002916472273311645,
+          5.274809459812012e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00025916099548339844,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 55592,
+        "phase": "assemble_03_part_0_insert_00",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 55595,
+          "time": 231.645845414605,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844041585922241,
+            -0.12049995362758636,
+            1.030773639678955
+          ],
+          "orientation": [
+            0.9999999377724803,
+            0.0002680443409739717,
+            0.0002293409491435509,
+            3.1616071134369146e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784473531140735,
+            -0.12068202621678015,
+            1.0290408661642632
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7399735975413242,
+            -0.0946962691129126,
+            1.2663033578677307
+          ],
+          "orientation": [
+            0.0003562584539048523,
+            -0.7070792550007127,
+            0.707134204152297,
+            0.0001324592350404054
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 7.606145077185726e-05,
+          "orientation_error_rad": 0.000705563719804387,
+          "linear_speed_m_s": 0.011478676368072418,
+          "angular_speed_rad_s": 0.09082667238704499,
+          "native_count": 13,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 3011,
+          "qualified_linear_speed_m_s": 0.015268543461786169,
+          "qualified_angular_speed_rad_s": 0.059240105778810094,
+          "qualified_linear_velocity_world": [
+            0.0008109005495826268,
+            -0.001187889762758684,
+            -0.015200650566823544
+          ],
+          "native_center_of_mass_position": [
+            0.7399866007303048,
+            -0.12053824335287619,
+            1.1016830139795846
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999097632383,
+            0.00026804396848181697,
+            0.00032957063390458285,
+            3.023837664634957e-06
+          ]
+        },
+        "fk_native_position_residual_m": 1.78450403086197e-06,
+        "fk_native_orientation_residual_rad": 4.465032436858136e-05,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00023615360260009766,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_01",
+      "samples": 23,
+      "ready_samples": 2,
+      "first_ready_step": 55688,
+      "max_native_count": 13,
+      "minimum_lateral_m": 6.29448224776611e-05,
+      "maximum_lateral_m": 0.00017492348307746264,
+      "first_lateral_m": 0.0001236303779593038,
+      "last_lateral_m": 7.666917452920067e-05,
+      "maximum_orientation_error_rad": 0.0008678983067696868,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 7.893906371356346e-05,
+        "orientation_error_rad": 0.0006950789526424482,
+        "linear_speed_m_s": 0.011640000890910397,
+        "angular_speed_rad_s": 0.0865083221101778,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 95,
+        "qualified_linear_speed_m_s": 0.015369079230761048,
+        "qualified_angular_speed_rad_s": 0.054808425694006464,
+        "qualified_linear_velocity_world": [
+          0.0006374481182182053,
+          -0.001145531060194103,
+          -0.01531306680218307
+        ],
+        "native_center_of_mass_position": [
+          0.7399834870407204,
+          -0.12053627941540247,
+          1.0997307647437105
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999124940873,
+          0.000268644487990831,
+          0.0003206434135496001,
+          5.455132131772123e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002567768096923828,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 55776,
+        "phase": "assemble_03_part_0_insert_01",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 55779,
+          "time": 232.41251212125644,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844186425209045,
+            -0.12049318104982376,
+            1.0257337093353271
+          ],
+          "orientation": [
+            0.9999999578095332,
+            0.00027486915247477094,
+            9.395677789052486e-05,
+            6.750651355564826e-08
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844731593128846,
+            -0.12068213058207389,
+            1.0259196758270264
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7400195953162533,
+            -0.094698324089992,
+            1.2631949834497018
+          ],
+          "orientation": [
+            0.00025928678909466506,
+            -0.7070813919482766,
+            0.7071320836333527,
+            0.00023286734841384296
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 7.666917452920067e-05,
+          "orientation_error_rad": 0.0005809679300789999,
+          "linear_speed_m_s": 0.01803610820495599,
+          "angular_speed_rad_s": 0.3084255753458737,
+          "native_count": 11,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 183,
+          "qualified_linear_speed_m_s": 0.0017020816442207814,
+          "qualified_angular_speed_rad_s": 0.004616975747974951,
+          "qualified_linear_velocity_world": [
+            0.00022570737266427914,
+            9.90975281109632e-06,
+            -0.001687021014189666
+          ],
+          "native_center_of_mass_position": [
+            0.7399818861529301,
+            -0.120532160250812,
+            1.0966310537167774
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999433692898,
+            0.0002748691123579811,
+            0.00019418646646355582,
+            -6.95788767829271e-08
+          ]
+        },
+        "fk_native_position_residual_m": 2.144340656995981e-05,
+        "fk_native_orientation_residual_rad": 0.0003237866060431917,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0013382434844970703,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_02",
+      "samples": 14,
+      "ready_samples": 2,
+      "first_ready_step": 55872,
+      "max_native_count": 14,
+      "minimum_lateral_m": 6.727482745784693e-05,
+      "maximum_lateral_m": 0.00017347393544310183,
+      "first_lateral_m": 0.00012237640841648734,
+      "last_lateral_m": 7.891878284266812e-05,
+      "maximum_orientation_error_rad": 0.0008448474712662273,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 6.727482745784693e-05,
+        "orientation_error_rad": 0.0005751028062398785,
+        "linear_speed_m_s": 0.02474033568441009,
+        "angular_speed_rad_s": 0.17361337740305668,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 95,
+        "qualified_linear_speed_m_s": 0.037862397711879124,
+        "qualified_angular_speed_rad_s": 0.04952091178658943,
+        "qualified_linear_velocity_world": [
+          0.0013446299992141261,
+          -0.0013154118761715043,
+          -0.0378156425603711
+        ],
+        "native_center_of_mass_position": [
+          0.7399874998153589,
+          -0.12053992611324049,
+          1.0948258371986503
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999414295654,
+          0.00026043245620000074,
+          0.00022200454607205884,
+          5.4574164313940326e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00025534629821777344,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 55888,
+        "phase": "assemble_03_part_0_insert_02",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 55891,
+          "time": 232.87917881226167,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844145894050598,
+            -0.12049214541912079,
+            1.0235165357589722
+          ],
+          "orientation": [
+            0.9999999552255054,
+            0.0002767994051405093,
+            0.0001137147718093041,
+            1.6446333250471662e-07
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844717451557771,
+            -0.12068251576383429,
+            1.022707744259843
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7400125713774877,
+            -0.09469821475745017,
+            1.259981688608986
+          ],
+          "orientation": [
+            0.0002687073566981784,
+            -0.7070812066387338,
+            0.707132268983846,
+            0.00022175758560414438
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 7.891878284266812e-05,
+          "orientation_error_rad": 0.0005984947444417331,
+          "linear_speed_m_s": 0.018139442519187594,
+          "angular_speed_rad_s": 0.3074818790096895,
+          "native_count": 12,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 111,
+          "qualified_linear_speed_m_s": 0.0012640998817850004,
+          "qualified_angular_speed_rad_s": 0.002652451251500334,
+          "qualified_linear_velocity_world": [
+            0.0002679554381984311,
+            -0.00010885640684337076,
+            -0.0012305684365194359
+          ],
+          "native_center_of_mass_position": [
+            0.7399806346545269,
+            -0.12053140740741401,
+            1.0944156358939574
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999388049411,
+            0.00027679935204320995,
+            0.0002139444603418807,
+            2.757141097586048e-08
+          ]
+        },
+        "fk_native_position_residual_m": 2.017911735564959e-05,
+        "fk_native_orientation_residual_rad": 0.0002947204673812948,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.001356363296508789,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_03",
+      "samples": 11,
+      "ready_samples": 2,
+      "first_ready_step": 55944,
+      "max_native_count": 14,
+      "minimum_lateral_m": 8.15155432327262e-05,
+      "maximum_lateral_m": 0.00016451399530389543,
+      "first_lateral_m": 0.0001303519451825877,
+      "last_lateral_m": 8.15155432327262e-05,
+      "maximum_orientation_error_rad": 0.0006846881786398012,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00011837101891069696,
+        "orientation_error_rad": 0.0005506401456802512,
+        "linear_speed_m_s": 0.0242397866326188,
+        "angular_speed_rad_s": 0.16538680977400189,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 56,
+        "qualified_linear_speed_m_s": 0.036792566319744056,
+        "qualified_angular_speed_rad_s": 0.043478558201346086,
+        "qualified_linear_velocity_world": [
+          0.001319881550042561,
+          -0.0019889202598178664,
+          -0.03671505202620184
+        ],
+        "native_center_of_mass_position": [
+          0.7399748305486844,
+          -0.12048884137491736,
+          1.0936297332931137
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999495289115,
+          0.0002648202280044219,
+          0.00017553329930988112,
+          6.946009430267821e-07
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00023996829986572266,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 55976,
+        "phase": "assemble_03_part_0_insert_03",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 55979,
+          "time": 233.2458454980515,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844143509864807,
+            -0.12048947811126709,
+            1.0217090845108032
+          ],
+          "orientation": [
+            0.9999999578841909,
+            0.00027467430234697654,
+            9.373164521310408e-05,
+            -1.5053318499633822e-07
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844714154920357,
+            -0.12068260289582027,
+            1.0218868255615234
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.740015042047691,
+            -0.09469893894853576,
+            1.2591615219754473
+          ],
+          "orientation": [
+            0.00026581946425807896,
+            -0.7070814173890657,
+            0.7071320577131173,
+            0.00022688652444486322
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 8.15155432327262e-05,
+          "orientation_error_rad": 0.0005804536802058263,
+          "linear_speed_m_s": 0.01797869698392451,
+          "angular_speed_rad_s": 0.31049975555494025,
+          "native_count": 10,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 88,
+          "qualified_linear_speed_m_s": 0.0016323174849697667,
+          "qualified_angular_speed_rad_s": 0.0017422733526275237,
+          "qualified_linear_velocity_world": [
+            3.956156883594146e-05,
+            -4.395918495765852e-05,
+            -0.00163124579511094
+          ],
+          "native_center_of_mass_position": [
+            0.7399775626873982,
+            -0.12052841029880886,
+            1.0926064089044225
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999434664765,
+            0.0002746742841222724,
+            0.00019396133376267313,
+            -2.8763810401543104e-07
+          ]
+        },
+        "fk_native_position_residual_m": 2.005319364719025e-05,
+        "fk_native_orientation_residual_rad": 0.00030610833645438267,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0003641843795776367,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_04",
+      "samples": 10,
+      "ready_samples": 1,
+      "first_ready_step": 56040,
+      "max_native_count": 13,
+      "minimum_lateral_m": 8.691936406753788e-05,
+      "maximum_lateral_m": 0.00017463475113510977,
+      "first_lateral_m": 0.00010270641391781643,
+      "last_lateral_m": 8.691936406753788e-05,
+      "maximum_orientation_error_rad": 0.0006908522316222889,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.0001180807254835114,
+        "orientation_error_rad": 0.0006908522316222889,
+        "linear_speed_m_s": 0.010645506506682214,
+        "angular_speed_rad_s": 0.0930166023445507,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 60,
+        "qualified_linear_speed_m_s": 0.013900586705611716,
+        "qualified_angular_speed_rad_s": 0.061232954612011184,
+        "qualified_linear_velocity_world": [
+          0.00073156942693236,
+          -0.0017483622455223026,
+          -0.013770778714082919
+        ],
+        "native_center_of_mass_position": [
+          0.7399736844006094,
+          -0.12049656688692494,
+          1.0918370544922986
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999151384656,
+          0.00028052919071343773,
+          0.00030154050667594094,
+          -9.987873109649456e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.00025522708892822266,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 56056,
+        "phase": "assemble_03_part_0_insert_04",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 56059,
+          "time": 233.57917884876952,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844117879867554,
+            -0.12048465013504028,
+            1.0203900337219238
+          ],
+          "orientation": [
+            0.9999999561918966,
+            0.0002763918062560206,
+            0.00010593913051707373,
+            8.215024097519286e-07
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844712161265418,
+            -0.12068265510334285,
+            1.0205719470977783
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.740009895315319,
+            -0.09469842457854658,
+            1.257845130993505
+          ],
+          "orientation": [
+            0.00027420884903841603,
+            -0.7070811143867181,
+            0.7071323605441089,
+            0.00021715998894219495
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 8.691936406753788e-05,
+          "orientation_error_rad": 0.0005920007005873222,
+          "linear_speed_m_s": 0.017849150682397057,
+          "angular_speed_rad_s": 0.3042488208134367,
+          "native_count": 11,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 76,
+          "qualified_linear_speed_m_s": 0.0009922756677447496,
+          "qualified_angular_speed_rad_s": 0.012058669491027787,
+          "qualified_linear_velocity_world": [
+            9.909946799245072e-06,
+            -0.00014779835996291842,
+            -0.0009811566839934367
+          ],
+          "native_center_of_mass_position": [
+            0.7399767306953182,
+            -0.12052391254082527,
+            1.0912884428592027
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999405507902,
+            0.0002763916885861193,
+            0.00020616881911845244,
+            6.845696311426253e-07
+          ]
+        },
+        "fk_native_position_residual_m": 1.894242900510982e-05,
+        "fk_native_orientation_residual_rad": 0.00028045227811913443,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00017452239990234375,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_05",
+      "samples": 16,
+      "ready_samples": 2,
+      "first_ready_step": 56136,
+      "max_native_count": 14,
+      "minimum_lateral_m": 7.687595329812945e-05,
+      "maximum_lateral_m": 0.00018091017014465455,
+      "first_lateral_m": 0.0001288029943000687,
+      "last_lateral_m": 7.959074895063999e-05,
+      "maximum_orientation_error_rad": 0.0009134913071841398,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 7.687595329812945e-05,
+        "orientation_error_rad": 0.0005652649849469538,
+        "linear_speed_m_s": 0.02510505902109049,
+        "angular_speed_rad_s": 0.16671219853828814,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 79,
+        "qualified_linear_speed_m_s": 0.03818483874021608,
+        "qualified_angular_speed_rad_s": 0.056418586045049346,
+        "qualified_linear_velocity_world": [
+          0.0008177514491793274,
+          -0.0014762033590471554,
+          -0.03814752961629901
+        ],
+        "native_center_of_mass_position": [
+          0.7399859682338248,
+          -0.12052992272535334,
+          1.0898548463099627
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999446727538,
+          0.00026298821473510407,
+          0.00020363726574791914,
+          4.85309102151194e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002554655075073242,
+      "maximum_lateral_bias_m": 0.00012,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 56184,
+        "phase": "assemble_03_part_0_insert_05",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 56187,
+          "time": 234.11251220991835,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844147682189941,
+            -0.12049137055873871,
+            1.0173076391220093
+          ],
+          "orientation": [
+            0.9999999580937771,
+            0.00027184898980529257,
+            9.953951842999354e-05,
+            -1.566908650139748e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844723872506906,
+            -0.12068234317222058,
+            1.0174797773361206
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7400146443956672,
+            -0.09469964802250415,
+            1.2547542032999177
+          ],
+          "orientation": [
+            0.0002689654347197713,
+            -0.7070820004608461,
+            0.7071314737436061,
+            0.00022610413255899473
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 7.959074895063999e-05,
+          "orientation_error_rad": 0.0005790075870238254,
+          "linear_speed_m_s": 0.01743370486051232,
+          "angular_speed_rad_s": 0.30043362209464364,
+          "native_count": 9,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 127,
+          "qualified_linear_speed_m_s": 0.0018573538026946468,
+          "qualified_angular_speed_rad_s": 0.0057626285137183,
+          "qualified_linear_velocity_world": [
+            -1.1476153028870822e-06,
+            0.00011313554176975062,
+            -0.001853904576981201
+          ],
+          "native_center_of_mass_position": [
+            0.7399788033940453,
+            -0.12052977640005993,
+            1.088205479930415
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999430937082,
+            0.0002718491126014126,
+            0.00019976920650627319,
+            -1.7042967420646487e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.0061250832158385e-05,
+        "fk_native_orientation_residual_rad": 0.0003006636184068533,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.000980377197265625,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_06",
+      "samples": 12,
+      "ready_samples": 2,
+      "first_ready_step": 56264,
+      "max_native_count": 13,
+      "minimum_lateral_m": 8.289479778771773e-05,
+      "maximum_lateral_m": 0.0001802364131923594,
+      "first_lateral_m": 0.00011465794042055252,
+      "last_lateral_m": 8.289479778771773e-05,
+      "maximum_orientation_error_rad": 0.000685305823222331,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 8.910644288543739e-05,
+        "orientation_error_rad": 0.000685305823222331,
+        "linear_speed_m_s": 0.011939541024455309,
+        "angular_speed_rad_s": 0.08868420523390146,
+        "native_count": 13,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 77,
+        "qualified_linear_speed_m_s": 0.015467858995261487,
+        "qualified_angular_speed_rad_s": 0.0540574425313758,
+        "qualified_linear_velocity_world": [
+          0.0004383181785011242,
+          -0.0012104957744713013,
+          -0.01541418953599813
+        ],
+        "native_center_of_mass_position": [
+          0.7399811674704363,
+          -0.12052512803954017,
+          1.087177834607516
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999149345243,
+          0.0002684873631010247,
+          0.0003131143409165948,
+          2.211262285943971e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002557039260864258,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 56280,
+        "phase": "assemble_03_part_0_insert_06",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 56283,
+          "time": 234.51251223077998,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844140529632568,
+            -0.12048812210559845,
+            1.0157188177108765
+          ],
+          "orientation": [
+            0.9999999563994664,
+            0.00027648706315200057,
+            0.00010371098489938214,
+            3.354177789240097e-08
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844713578309229,
+            -0.12068261803305355,
+            1.0149038523224116
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7400162580353067,
+            -0.09469869496807728,
+            1.2521791607656947
+          ],
+          "orientation": [
+            0.00026071472682531526,
+            -0.7070814217273607,
+            0.7071320540223446,
+            0.00023075958415638397
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 8.289479778771773e-05,
+          "orientation_error_rad": 0.000590596538728676,
+          "linear_speed_m_s": 0.01823730427269203,
+          "angular_speed_rad_s": 0.3117766443472001,
+          "native_count": 12,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 93,
+          "qualified_linear_speed_m_s": 0.0015894370430589073,
+          "qualified_angular_speed_rad_s": 0.0017915533325114068,
+          "qualified_linear_velocity_world": [
+            0.0001391597619435664,
+            -8.30214172408904e-05,
+            -0.0015811553114045964
+          ],
+          "native_center_of_mass_position": [
+            0.7399786796973258,
+            -0.12052732792487911,
+            1.086617028843795
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999409815563,
+            0.0002764870248254692,
+            0.00020394067354845304,
+            -1.033814492647574e-07
+          ]
+        },
+        "fk_native_position_residual_m": 2.179428479300424e-05,
+        "fk_native_orientation_residual_rad": 0.0003187743114606406,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0007408857345581055,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_07",
+      "samples": 14,
+      "ready_samples": 2,
+      "first_ready_step": 56360,
+      "max_native_count": 14,
+      "minimum_lateral_m": 7.126974657548492e-05,
+      "maximum_lateral_m": 0.00018861352025130438,
+      "first_lateral_m": 0.00013198262966356342,
+      "last_lateral_m": 8.088472138202406e-05,
+      "maximum_orientation_error_rad": 0.000889945901555549,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 7.126974657548492e-05,
+        "orientation_error_rad": 0.0005439437750919258,
+        "linear_speed_m_s": 0.024719543303671907,
+        "angular_speed_rad_s": 0.17914428127542398,
+        "native_count": 14,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 80,
+        "qualified_linear_speed_m_s": 0.03836720776031806,
+        "qualified_angular_speed_rad_s": 0.055479681510801536,
+        "qualified_linear_velocity_world": [
+          0.0009134803664425197,
+          -0.0012953781671354858,
+          -0.03833445161141141
+        ],
+        "native_center_of_mass_position": [
+          0.7399829629925911,
+          -0.12053497280886592,
+          1.0854499111616436
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999487417133,
+          0.00025581082054625207,
+          0.00019253214615121088,
+          2.961003806760476e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002551078796386719,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 56392,
+        "phase": "assemble_03_part_0_insert_07",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 56395,
+          "time": 234.9791789217852,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844154834747314,
+            -0.12048976123332977,
+            1.0135265588760376
+          ],
+          "orientation": [
+            0.9999999575416952,
+            0.0002743433916949348,
+            9.824317553660821e-05,
+            7.677344474121048e-07
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844722522599733,
+            -0.12068237977381722,
+            1.0137046575546265
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7400148464377105,
+            -0.09469886392972285,
+            1.250979420954264
+          ],
+          "orientation": [
+            0.000266406702166918,
+            -0.7070815295045808,
+            0.7071319454645691,
+            0.00022663721119809156
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 8.088472138202406e-05,
+          "orientation_error_rad": 0.0005828090936170104,
+          "linear_speed_m_s": 0.01783841514070504,
+          "angular_speed_rad_s": 0.30690193872629445,
+          "native_count": 10,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 112,
+          "qualified_linear_speed_m_s": 0.0016677632958578467,
+          "qualified_angular_speed_rad_s": 0.001736796841593929,
+          "qualified_linear_velocity_world": [
+            -1.6124664495325522e-06,
+            1.1136782748040433e-05,
+            -0.0016677253320114196
+          ],
+          "native_center_of_mass_position": [
+            0.7399793349241673,
+            -0.12052872823372109,
+            1.0844242842259517
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999426719429,
+            0.00027434328069149357,
+            0.00019847286397469283,
+            6.305963568532025e-07
+          ]
+        },
+        "fk_native_position_residual_m": 2.079824271089074e-05,
+        "fk_native_orientation_residual_rad": 0.0003049392765769398,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.0007090568542480469,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_08",
+      "samples": 7,
+      "ready_samples": 0,
+      "first_ready_step": null,
+      "max_native_count": 7,
+      "minimum_lateral_m": 0.00011778818678932769,
+      "maximum_lateral_m": 0.00018735418163797108,
+      "first_lateral_m": 0.00011778818678932769,
+      "last_lateral_m": 0.00013697147459163636,
+      "maximum_orientation_error_rad": 0.0006180786630274211,
+      "first_warm_detail": null,
+      "maximum_recorded_cold_reference_displacement_m": 0.0002549886703491211,
+      "maximum_lateral_bias_m": 0.00010553468472173284,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 56448,
+        "phase": "assemble_03_part_0_insert_08",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 56451,
+          "time": 235.21251226728782,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844043970108032,
+            -0.12043453007936478,
+            1.0131860971450806
+          ],
+          "orientation": [
+            0.9999999522473463,
+            0.00029690966804162277,
+            8.571875832728513e-05,
+            1.4996343645746461e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.784467032837761,
+            -0.12066879554928926,
+            1.0134410858154297
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7400007626069217,
+            -0.09468605148741703,
+            1.2507137656007692
+          ],
+          "orientation": [
+            0.0002831508274600059,
+            -0.707081837401895,
+            0.7071316357810596,
+            0.00021147002574723185
+          ]
+        },
+        "descent_admission": {
+          "ready": false,
+          "aligned": true,
+          "lateral_error_m": 0.00013697147459163636,
+          "orientation_error_rad": 0.0006180786630274211,
+          "linear_speed_m_s": 0.018875935436812354,
+          "angular_speed_rad_s": 0.2917604969407765,
+          "native_count": 7,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": false,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 54,
+          "qualified_linear_speed_m_s": 0.0006977394523612389,
+          "qualified_angular_speed_rad_s": 0.009831118684978945,
+          "qualified_linear_velocity_world": [
+            0.00017959775590623453,
+            -0.0005376735552011091,
+            0.0004068072485738254
+          ],
+          "native_center_of_mass_position": [
+            0.7399664726019243,
+            -0.12047676140607277,
+            1.084082707550463
+          ],
+          "native_center_of_mass_orientation": [
+            0.9999999386330325,
+            0.0002969094856287229,
+            0.00018594845001282587,
+            1.3647580809397367e-06
+          ]
+        },
+        "fk_native_position_residual_m": 1.8933265156237983e-05,
+        "fk_native_orientation_residual_rad": 0.00025990565390090884,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00016236305236816406,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    },
+    {
+      "phase": "assemble_03_part_0_insert_09",
+      "samples": 15,
+      "ready_samples": 6,
+      "first_ready_step": 56512,
+      "max_native_count": 35,
+      "minimum_lateral_m": 7.639118146553964e-05,
+      "maximum_lateral_m": 0.00016871398887461224,
+      "first_lateral_m": 0.00013806052275048454,
+      "last_lateral_m": 8.189650765985742e-05,
+      "maximum_orientation_error_rad": 0.0007178297443713795,
+      "first_warm_detail": {
+        "ready": true,
+        "aligned": true,
+        "lateral_error_m": 0.00011826683214915236,
+        "orientation_error_rad": 0.0006106513567425767,
+        "linear_speed_m_s": 0.006301790020084274,
+        "angular_speed_rad_s": 0.2579799840659529,
+        "native_count": 15,
+        "geometry_certificate": "C01_full_insert_corridor",
+        "alignment_was_warm": true,
+        "motion_metric": "native_com_pose_difference",
+        "pose_rate_valid": true,
+        "pose_rate_interval_s": 0.004166666883975267,
+        "pose_rate_native_samples": 59,
+        "qualified_linear_speed_m_s": 0.012311346646780418,
+        "qualified_angular_speed_rad_s": 0.012610375371052026,
+        "qualified_linear_velocity_world": [
+          4.885659461984227e-05,
+          -0.0006285139169590632,
+          -0.01229519579130574
+        ],
+        "native_center_of_mass_position": [
+          0.739972407361655,
+          -0.12049353362916554,
+          1.083650627837709
+        ],
+        "native_center_of_mass_orientation": [
+          0.9999999389063047,
+          0.0002903611715675363,
+          0.00019459606984395612,
+          -3.1853710962275975e-06
+        ]
+      },
+      "maximum_recorded_cold_reference_displacement_m": 0.0002568960189819336,
+      "maximum_lateral_bias_m": 0.00012000000000000002,
+      "last_sample": {
+        "event": "absolute_object_servo",
+        "step": 56568,
+        "phase": "assemble_03_part_0_insert_09",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 56571,
+          "time": 235.71251229336485,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "route": "assisted",
+        "formal_physical_success": false,
+        "robot": "franka_left",
+        "object": "fabrica_beam_0",
+        "current_object_pose": {
+          "position": [
+            0.7844222784042358,
+            -0.1204867959022522,
+            1.0066430568695068
+          ],
+          "orientation": [
+            0.9999999591549736,
+            0.000279174540772484,
+            6.087896077198364e-05,
+            -6.736386821055512e-06
+          ]
+        },
+        "command_object_pose": {
+          "position": [
+            0.7844705382363102,
+            -0.12068282988908681,
+            1.0055999999999998
+          ],
+          "orientation": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "command_tcp_pose": {
+          "position": [
+            0.7400146483254643,
+            -0.09469876856012421,
+            1.2428751637111395
+          ],
+          "orientation": [
+            0.0002608759280685974,
+            -0.707081038503298,
+            0.7071324374697132,
+            0.0002298064184777119
+          ]
+        },
+        "descent_admission": {
+          "ready": true,
+          "aligned": true,
+          "lateral_error_m": 8.189650765985742e-05,
+          "orientation_error_rad": 0.0005716294368851188,
+          "linear_speed_m_s": 0.009384824784718965,
+          "angular_speed_rad_s": 0.2996192522447861,
+          "native_count": 35,
+          "geometry_certificate": "C01_full_insert_corridor",
+          "alignment_was_warm": true,
+          "motion_metric": "native_com_pose_difference",
+          "pose_rate_valid": true,
+          "pose_rate_interval_s": 0.004166666883975267,
+          "pose_rate_native_samples": 115,
+          "qualified_linear_speed_m_s": 0.027103661924655763,
+          "qualified_angular_speed_rad_s": 0.0030160298113449248,
+          "qualified_linear_velocity_world": [
+            -1.6340991706844917e-06,
+            0.00010563018683062388,
+            -0.02710345604013231
+          ],
+          "native_center_of_mass_position": [
+            0.7399808316089299,
+            -0.12052577991954232,
+            1.07753746118475
+          ],
+          "native_center_of_mass_orientation": [
+            0.999999948028988,
+            0.0002791751880316831,
+            0.00016110865035494937,
+            -6.873040650431763e-06
+          ]
+        },
+        "fk_native_position_residual_m": 2.224092861803137e-05,
+        "fk_native_orientation_residual_rad": 0.00031717488018070825,
+        "clearance_stage": null
+      },
+      "pre_first_stored_ready_sample_actual_descent_m": 0.00021076202392578125,
+      "first_ready_step_scope": "First stored stride8 ready sample, not exact first ready control tick. Missing ready sample is not proof no readiness occurred."
+    }
+  ],
+  "cold_height_violations": [],
+  "stored_insertion_SDK_matches": 4488,
+  "maximum_insertion_SDK_delta_rad": 0.0,
+  "file_wall_times": {
+    "started_at": 1792552920.5542607,
+    "startup_images_ready.json": 1792552994.535503,
+    "startup_image_review.json": 1792553050.1323898,
+    "collect_results.json": 1792559471.276901,
+    "finished_at": 1792559474.4629166,
+    "ready_to_ACK_s": 55.59688687324524
+  },
+  "encode_intervals": [
+    {
+      "path": "/recorded_video_summaries/observation.images.front",
+      "elapsed_s": 66.8135605477728
+    },
+    {
+      "path": "/recorded_video_summaries/observation.images.left_wrist",
+      "elapsed_s": 38.67933747731149
+    },
+    {
+      "path": "/recorded_video_summaries/observation.images.right_wrist",
+      "elapsed_s": 36.20952227106318
+    }
+  ],
+  "encode_total_s": 141.70242029614747,
+  "source_after_sha256": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+  "tool_sha256": "5b98616dc1f64d94f2730f9d3f80c269c9f21c757a3c03e99889a22cacc5cc87",
+  "limits": [
+    "Original stored admission samples at stride8; first96 initial-insert native/SDK window is denser but not every control event is recorded. No unobserved peaks inferred. Distance before first stored ready sample may include unrecorded admitted ticks; actual cold displacement uses the logged per-episode world reference. File timestamps measure receipt boundaries; encoder intervals are production monotonic durations."
+  ]
+}

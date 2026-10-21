@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "native_started": false,
+  "deployed": false,
+  "baseline_manifest_sha256": "313006095ca35650c66346fc91a282cdee24ca0e3b9dd3bc80b3155c75629460",
+  "baseline_source_files": 889,
+  "unchanged_source_files": 887,
+  "frozen_v34_candidate_unchanged": true,
+  "preflight_other_AST_exact_after_alias_lookup_projection": true,
+  "changed_files": {
+    "tests/toolkits/test_beam_assisted_preflight.py": {
+      "baseline_sha256": "d14e610c9994a76bb22557aeeacff7e81c560ef569eea9f4252cc787b2372475",
+      "candidate_sha256": "02d8f8cb6f46c5804fded79244792e59243307538e49ddbfbc591b385c5f46db"
+    },
+    "toolkits/factory_dual_franka_assembly/beam_assisted_preflight.py": {
+      "baseline_sha256": "08066e9042f02d6101dc224cff2980df4e7006dc673aa2047d0b3534dd7c948a",
+      "candidate_sha256": "2d892011607953d682f419cc18e67aeee8c2ba3fa9268908b295745fe50a80bf"
+    }
+  },
+  "archive": {
+    "path": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/post_failure_alias_fix.tar.gz",
+    "sha256": "97f445784ddf32f125ceaf9911ca7299c5edfa8e480222ebae4a7701ec3d5046",
+    "bytes": 13449
+  },
+  "local_test_attempt": {
+    "passed": false,
+    "passed_without_compile_fixture": 5,
+    "setup_errors": 59,
+    "cause": "Required Isaac UR5e motion-policy assets unavailable on this host. No dependency installed. This does not evaluate the new framework-mapped cases.",
+    "revision": "intermediate test revision before the final two recorded-input cases and tuple-negative fixture correction",
+    "final_source_test_result": false
+  },
+  "server_validation_required": {
+    "test_module": "tests/toolkits/test_beam_assisted_preflight.py",
+    "required_environment": [
+      "BEAM_ASSISTED_PREFLIGHT_SNAPSHOT=<original A43 task_config_snapshot.json>",
+      "BEAM_ASSISTED_PREFLIGHT_BASELINE=<original deployed v34 preflight.py>"
+    ],
+    "new_cases": 18,
+    "recorded_input_cases": 2,
+    "geometry_camera_rerun_required": false
+  },
+  "check_kind": "source identity, syntax and exact unaffected AST projection; production offline module still pending"
+}

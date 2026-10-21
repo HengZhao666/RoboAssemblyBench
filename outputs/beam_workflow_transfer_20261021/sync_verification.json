@@ -1,0 +1,1247 @@
+{
+  "passed": true,
+  "tag": "beam_workflow_transfer_20261021",
+  "documentation_version": "W06.0",
+  "documentation_files": 39,
+  "local_mirror_copies_verified": 78,
+  "server_mirror_copies_verified": 156,
+  "total_mirror_copies_verified": 234,
+  "bundle_sha256": "1cadb1d768697a36dcfa03d35d7c8415e9426616cad6daefe16bc0bb2e5ab562",
+  "local_receipt": {
+    "sha256": "a215de0f3ab01076f6bf0beb1bbb18282f08f82e362760e1337d06be2434c993",
+    "report": {
+      "passed": true,
+      "bundle_sha256": "1cadb1d768697a36dcfa03d35d7c8415e9426616cad6daefe16bc0bb2e5ab562",
+      "roots": [
+        "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10",
+        "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository"
+      ],
+      "copies": 78,
+      "files": [
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/AGENTS.md",
+          "bytes": 2567,
+          "sha256": "9ce1d232839ab06af8f650f36c3d316bf3474fa68796dbc3905440e061203717"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 9938,
+          "sha256": "676c31512a4951ffcf80137e312c771910af0b50b6778058e816ee6121369bd7"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/BEAM_FINDINGS_INDEX.md",
+          "bytes": 814,
+          "sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/BEAM_PHYSICAL_HANDOFF.md",
+          "bytes": 4897,
+          "sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 2353,
+          "sha256": "b84815b0dc73c513c5ce07e0c33ac009401d7f867f08459a0f7460f50043fd45"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 5085,
+          "sha256": "905aea347b45d01f8ad653644fd6c2930db5b1d2b6fb87a3a333c794786c6fbf"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/BEAM_WORKFLOW_LOG.md",
+          "bytes": 8106,
+          "sha256": "2e4073a3ff5f946cf4293798903d25b42b50682538df0875b53322581330147a"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+          "bytes": 3762,
+          "sha256": "ef0ff44a0659ba8c06bb2217f075ccedac8e02299bc2f425ebabdc7bd9e17110"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/beam_routes/assisted/CHECKLIST.md",
+          "bytes": 5146,
+          "sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/beam_routes/assisted/FINDINGS.md",
+          "bytes": 53643,
+          "sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/beam_routes/assisted/PERFORMANCE.md",
+          "bytes": 11089,
+          "sha256": "9c32a13d47439c7e96a104ce0f3291272c21325484b10d63f88071eef902bcf1"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/beam_routes/docs_manifest.json",
+          "bytes": 3835,
+          "sha256": "c5d72c4120eb0144bd541de5e6bcb4ac34be40a80fa7b59f43a4976b54dc795d"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/beam_routes/physical/CHECKLIST.md",
+          "bytes": 1210,
+          "sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/beam_routes/physical/FINDINGS.md",
+          "bytes": 124770,
+          "sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/beam_routes/registry.json",
+          "bytes": 4752,
+          "sha256": "c0796b419bfca7c4ebc8ff52de96cfed3f3d700ea1f2eba99a97bb1c23534527"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+          "bytes": 10589,
+          "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 3276,
+          "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+          "bytes": 157679,
+          "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 7728,
+          "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 22481,
+          "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+          "bytes": 43193,
+          "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/before_manifest.json",
+          "bytes": 994,
+          "sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/source_verification.json",
+          "bytes": 1531,
+          "sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_context_reorganization_20261016/validation.json",
+          "bytes": 2940,
+          "sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json",
+          "bytes": 133091,
+          "sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_workflow_transfer_20261021/before_documents.tar.gz",
+          "bytes": 222391,
+          "sha256": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz",
+          "bytes": 9800,
+          "sha256": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_workflow_transfer_20261021/before_manifest.json",
+          "bytes": 6041,
+          "sha256": "b8d2601cd84564c8254291b53ae396af143ce7b94c2be3002d56380087061d7e"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_workflow_transfer_20261021/skill_install_verification.json",
+          "bytes": 2905,
+          "sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_workflow_transfer_20261021/validation.json",
+          "bytes": 12833,
+          "sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/fabrica-assisted-repair/SKILL.md",
+          "bytes": 4812,
+          "sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/fabrica-assisted-repair/agents/openai.yaml",
+          "bytes": 342,
+          "sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/fabrica-assisted-repair/references/implementation-map.md",
+          "bytes": 17580,
+          "sha256": "c0c44c8f357f1cdc367f9c8bab42a2f00d397149b6d40ba685e13c7b9fb0d7b5"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/fabrica-assisted-repair/references/task-handoff-template.md",
+          "bytes": 2339,
+          "sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/simulation-repair-loop/SKILL.md",
+          "bytes": 8618,
+          "sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/simulation-repair-loop/agents/openai.yaml",
+          "bytes": 303,
+          "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/simulation-repair-loop/references/process-retrospective.md",
+          "bytes": 2643,
+          "sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/simulation-repair-loop/references/review-and-reuse.md",
+          "bytes": 2357,
+          "sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/skills/simulation-repair-loop/scripts/sync_documents.py",
+          "bytes": 6736,
+          "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/AGENTS.md",
+          "bytes": 2567,
+          "sha256": "9ce1d232839ab06af8f650f36c3d316bf3474fa68796dbc3905440e061203717"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 9938,
+          "sha256": "676c31512a4951ffcf80137e312c771910af0b50b6778058e816ee6121369bd7"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/BEAM_FINDINGS_INDEX.md",
+          "bytes": 814,
+          "sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/BEAM_PHYSICAL_HANDOFF.md",
+          "bytes": 4897,
+          "sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 2353,
+          "sha256": "b84815b0dc73c513c5ce07e0c33ac009401d7f867f08459a0f7460f50043fd45"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 5085,
+          "sha256": "905aea347b45d01f8ad653644fd6c2930db5b1d2b6fb87a3a333c794786c6fbf"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/BEAM_WORKFLOW_LOG.md",
+          "bytes": 8106,
+          "sha256": "2e4073a3ff5f946cf4293798903d25b42b50682538df0875b53322581330147a"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+          "bytes": 3762,
+          "sha256": "ef0ff44a0659ba8c06bb2217f075ccedac8e02299bc2f425ebabdc7bd9e17110"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/beam_routes/assisted/CHECKLIST.md",
+          "bytes": 5146,
+          "sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/beam_routes/assisted/FINDINGS.md",
+          "bytes": 53643,
+          "sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/beam_routes/assisted/PERFORMANCE.md",
+          "bytes": 11089,
+          "sha256": "9c32a13d47439c7e96a104ce0f3291272c21325484b10d63f88071eef902bcf1"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/beam_routes/docs_manifest.json",
+          "bytes": 3835,
+          "sha256": "c5d72c4120eb0144bd541de5e6bcb4ac34be40a80fa7b59f43a4976b54dc795d"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/beam_routes/physical/CHECKLIST.md",
+          "bytes": 1210,
+          "sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/beam_routes/physical/FINDINGS.md",
+          "bytes": 124770,
+          "sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/beam_routes/registry.json",
+          "bytes": 4752,
+          "sha256": "c0796b419bfca7c4ebc8ff52de96cfed3f3d700ea1f2eba99a97bb1c23534527"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+          "bytes": 10589,
+          "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 3276,
+          "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+          "bytes": 157679,
+          "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 7728,
+          "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 22481,
+          "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+          "bytes": 43193,
+          "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before_manifest.json",
+          "bytes": 994,
+          "sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/source_verification.json",
+          "bytes": 1531,
+          "sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/validation.json",
+          "bytes": 2940,
+          "sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json",
+          "bytes": 133091,
+          "sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/before_documents.tar.gz",
+          "bytes": 222391,
+          "sha256": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz",
+          "bytes": 9800,
+          "sha256": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/before_manifest.json",
+          "bytes": 6041,
+          "sha256": "b8d2601cd84564c8254291b53ae396af143ce7b94c2be3002d56380087061d7e"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/skill_install_verification.json",
+          "bytes": 2905,
+          "sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/validation.json",
+          "bytes": 12833,
+          "sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/SKILL.md",
+          "bytes": 4812,
+          "sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/agents/openai.yaml",
+          "bytes": 342,
+          "sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/references/implementation-map.md",
+          "bytes": 17580,
+          "sha256": "c0c44c8f357f1cdc367f9c8bab42a2f00d397149b6d40ba685e13c7b9fb0d7b5"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/references/task-handoff-template.md",
+          "bytes": 2339,
+          "sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/SKILL.md",
+          "bytes": 8618,
+          "sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/agents/openai.yaml",
+          "bytes": 303,
+          "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/references/process-retrospective.md",
+          "bytes": 2643,
+          "sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/references/review-and-reuse.md",
+          "bytes": 2357,
+          "sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9"
+        },
+        {
+          "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/scripts/sync_documents.py",
+          "bytes": 6736,
+          "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77"
+        }
+      ],
+      "native_started": false,
+      "scope": "Explicit document files only; no control source deployment"
+    }
+  },
+  "server_receipt": {
+    "sha256": "64acb4f0e03cebf9b23acb40b201940c0b6ddd594cca0c1888c4887dbc31d831",
+    "report": {
+      "passed": true,
+      "bundle_sha256": "1cadb1d768697a36dcfa03d35d7c8415e9426616cad6daefe16bc0bb2e5ab562",
+      "roots": [
+        "/home/user/beam_integration_20261010_upstream6f57dae",
+        "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository",
+        "/home/user/RoboAssemblyBench",
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository"
+      ],
+      "copies": 156,
+      "files": [
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/AGENTS.md",
+          "bytes": 2567,
+          "sha256": "9ce1d232839ab06af8f650f36c3d316bf3474fa68796dbc3905440e061203717"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 9938,
+          "sha256": "676c31512a4951ffcf80137e312c771910af0b50b6778058e816ee6121369bd7"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/BEAM_FINDINGS_INDEX.md",
+          "bytes": 814,
+          "sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/BEAM_PHYSICAL_HANDOFF.md",
+          "bytes": 4897,
+          "sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 2353,
+          "sha256": "b84815b0dc73c513c5ce07e0c33ac009401d7f867f08459a0f7460f50043fd45"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 5085,
+          "sha256": "905aea347b45d01f8ad653644fd6c2930db5b1d2b6fb87a3a333c794786c6fbf"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/BEAM_WORKFLOW_LOG.md",
+          "bytes": 8106,
+          "sha256": "2e4073a3ff5f946cf4293798903d25b42b50682538df0875b53322581330147a"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+          "bytes": 3762,
+          "sha256": "ef0ff44a0659ba8c06bb2217f075ccedac8e02299bc2f425ebabdc7bd9e17110"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_routes/assisted/CHECKLIST.md",
+          "bytes": 5146,
+          "sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_routes/assisted/FINDINGS.md",
+          "bytes": 53643,
+          "sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_routes/assisted/PERFORMANCE.md",
+          "bytes": 11089,
+          "sha256": "9c32a13d47439c7e96a104ce0f3291272c21325484b10d63f88071eef902bcf1"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_routes/docs_manifest.json",
+          "bytes": 3835,
+          "sha256": "c5d72c4120eb0144bd541de5e6bcb4ac34be40a80fa7b59f43a4976b54dc795d"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_routes/physical/CHECKLIST.md",
+          "bytes": 1210,
+          "sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_routes/physical/FINDINGS.md",
+          "bytes": 124770,
+          "sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_routes/registry.json",
+          "bytes": 4752,
+          "sha256": "c0796b419bfca7c4ebc8ff52de96cfed3f3d700ea1f2eba99a97bb1c23534527"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+          "bytes": 10589,
+          "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 3276,
+          "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+          "bytes": 157679,
+          "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 7728,
+          "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 22481,
+          "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+          "bytes": 43193,
+          "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/before_manifest.json",
+          "bytes": 994,
+          "sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/source_verification.json",
+          "bytes": 1531,
+          "sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_context_reorganization_20261016/validation.json",
+          "bytes": 2940,
+          "sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json",
+          "bytes": 133091,
+          "sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/before_documents.tar.gz",
+          "bytes": 222391,
+          "sha256": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz",
+          "bytes": 9800,
+          "sha256": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/before_manifest.json",
+          "bytes": 6041,
+          "sha256": "b8d2601cd84564c8254291b53ae396af143ce7b94c2be3002d56380087061d7e"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/skill_install_verification.json",
+          "bytes": 2905,
+          "sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/validation.json",
+          "bytes": 12833,
+          "sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/fabrica-assisted-repair/SKILL.md",
+          "bytes": 4812,
+          "sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/fabrica-assisted-repair/agents/openai.yaml",
+          "bytes": 342,
+          "sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/fabrica-assisted-repair/references/implementation-map.md",
+          "bytes": 17580,
+          "sha256": "c0c44c8f357f1cdc367f9c8bab42a2f00d397149b6d40ba685e13c7b9fb0d7b5"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/fabrica-assisted-repair/references/task-handoff-template.md",
+          "bytes": 2339,
+          "sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/simulation-repair-loop/SKILL.md",
+          "bytes": 8618,
+          "sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/simulation-repair-loop/agents/openai.yaml",
+          "bytes": 303,
+          "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/simulation-repair-loop/references/process-retrospective.md",
+          "bytes": 2643,
+          "sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/simulation-repair-loop/references/review-and-reuse.md",
+          "bytes": 2357,
+          "sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/skills/simulation-repair-loop/scripts/sync_documents.py",
+          "bytes": 6736,
+          "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/AGENTS.md",
+          "bytes": 2567,
+          "sha256": "9ce1d232839ab06af8f650f36c3d316bf3474fa68796dbc3905440e061203717"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 9938,
+          "sha256": "676c31512a4951ffcf80137e312c771910af0b50b6778058e816ee6121369bd7"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/BEAM_FINDINGS_INDEX.md",
+          "bytes": 814,
+          "sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/BEAM_PHYSICAL_HANDOFF.md",
+          "bytes": 4897,
+          "sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 2353,
+          "sha256": "b84815b0dc73c513c5ce07e0c33ac009401d7f867f08459a0f7460f50043fd45"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 5085,
+          "sha256": "905aea347b45d01f8ad653644fd6c2930db5b1d2b6fb87a3a333c794786c6fbf"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/BEAM_WORKFLOW_LOG.md",
+          "bytes": 8106,
+          "sha256": "2e4073a3ff5f946cf4293798903d25b42b50682538df0875b53322581330147a"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+          "bytes": 3762,
+          "sha256": "ef0ff44a0659ba8c06bb2217f075ccedac8e02299bc2f425ebabdc7bd9e17110"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/beam_routes/assisted/CHECKLIST.md",
+          "bytes": 5146,
+          "sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/beam_routes/assisted/FINDINGS.md",
+          "bytes": 53643,
+          "sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/beam_routes/assisted/PERFORMANCE.md",
+          "bytes": 11089,
+          "sha256": "9c32a13d47439c7e96a104ce0f3291272c21325484b10d63f88071eef902bcf1"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/beam_routes/docs_manifest.json",
+          "bytes": 3835,
+          "sha256": "c5d72c4120eb0144bd541de5e6bcb4ac34be40a80fa7b59f43a4976b54dc795d"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/beam_routes/physical/CHECKLIST.md",
+          "bytes": 1210,
+          "sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/beam_routes/physical/FINDINGS.md",
+          "bytes": 124770,
+          "sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/beam_routes/registry.json",
+          "bytes": 4752,
+          "sha256": "c0796b419bfca7c4ebc8ff52de96cfed3f3d700ea1f2eba99a97bb1c23534527"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+          "bytes": 10589,
+          "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 3276,
+          "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+          "bytes": 157679,
+          "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 7728,
+          "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 22481,
+          "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+          "bytes": 43193,
+          "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/before_manifest.json",
+          "bytes": 994,
+          "sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/source_verification.json",
+          "bytes": 1531,
+          "sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_context_reorganization_20261016/validation.json",
+          "bytes": 2940,
+          "sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json",
+          "bytes": 133091,
+          "sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_workflow_transfer_20261021/before_documents.tar.gz",
+          "bytes": 222391,
+          "sha256": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz",
+          "bytes": 9800,
+          "sha256": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_workflow_transfer_20261021/before_manifest.json",
+          "bytes": 6041,
+          "sha256": "b8d2601cd84564c8254291b53ae396af143ce7b94c2be3002d56380087061d7e"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_workflow_transfer_20261021/skill_install_verification.json",
+          "bytes": 2905,
+          "sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_workflow_transfer_20261021/validation.json",
+          "bytes": 12833,
+          "sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/fabrica-assisted-repair/SKILL.md",
+          "bytes": 4812,
+          "sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/fabrica-assisted-repair/agents/openai.yaml",
+          "bytes": 342,
+          "sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/fabrica-assisted-repair/references/implementation-map.md",
+          "bytes": 17580,
+          "sha256": "c0c44c8f357f1cdc367f9c8bab42a2f00d397149b6d40ba685e13c7b9fb0d7b5"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/fabrica-assisted-repair/references/task-handoff-template.md",
+          "bytes": 2339,
+          "sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/simulation-repair-loop/SKILL.md",
+          "bytes": 8618,
+          "sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/simulation-repair-loop/agents/openai.yaml",
+          "bytes": 303,
+          "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/simulation-repair-loop/references/process-retrospective.md",
+          "bytes": 2643,
+          "sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/simulation-repair-loop/references/review-and-reuse.md",
+          "bytes": 2357,
+          "sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/skills/simulation-repair-loop/scripts/sync_documents.py",
+          "bytes": 6736,
+          "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/AGENTS.md",
+          "bytes": 2567,
+          "sha256": "9ce1d232839ab06af8f650f36c3d316bf3474fa68796dbc3905440e061203717"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 9938,
+          "sha256": "676c31512a4951ffcf80137e312c771910af0b50b6778058e816ee6121369bd7"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/BEAM_FINDINGS_INDEX.md",
+          "bytes": 814,
+          "sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/BEAM_PHYSICAL_HANDOFF.md",
+          "bytes": 4897,
+          "sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 2353,
+          "sha256": "b84815b0dc73c513c5ce07e0c33ac009401d7f867f08459a0f7460f50043fd45"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 5085,
+          "sha256": "905aea347b45d01f8ad653644fd6c2930db5b1d2b6fb87a3a333c794786c6fbf"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/BEAM_WORKFLOW_LOG.md",
+          "bytes": 8106,
+          "sha256": "2e4073a3ff5f946cf4293798903d25b42b50682538df0875b53322581330147a"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+          "bytes": 3762,
+          "sha256": "ef0ff44a0659ba8c06bb2217f075ccedac8e02299bc2f425ebabdc7bd9e17110"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/beam_routes/assisted/CHECKLIST.md",
+          "bytes": 5146,
+          "sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/beam_routes/assisted/FINDINGS.md",
+          "bytes": 53643,
+          "sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/beam_routes/assisted/PERFORMANCE.md",
+          "bytes": 11089,
+          "sha256": "9c32a13d47439c7e96a104ce0f3291272c21325484b10d63f88071eef902bcf1"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/beam_routes/docs_manifest.json",
+          "bytes": 3835,
+          "sha256": "c5d72c4120eb0144bd541de5e6bcb4ac34be40a80fa7b59f43a4976b54dc795d"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/beam_routes/physical/CHECKLIST.md",
+          "bytes": 1210,
+          "sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/beam_routes/physical/FINDINGS.md",
+          "bytes": 124770,
+          "sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/beam_routes/registry.json",
+          "bytes": 4752,
+          "sha256": "c0796b419bfca7c4ebc8ff52de96cfed3f3d700ea1f2eba99a97bb1c23534527"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+          "bytes": 10589,
+          "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 3276,
+          "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+          "bytes": 157679,
+          "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 7728,
+          "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 22481,
+          "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+          "bytes": 43193,
+          "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/before_manifest.json",
+          "bytes": 994,
+          "sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/source_verification.json",
+          "bytes": 1531,
+          "sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_context_reorganization_20261016/validation.json",
+          "bytes": 2940,
+          "sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json",
+          "bytes": 133091,
+          "sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/before_documents.tar.gz",
+          "bytes": 222391,
+          "sha256": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz",
+          "bytes": 9800,
+          "sha256": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/before_manifest.json",
+          "bytes": 6041,
+          "sha256": "b8d2601cd84564c8254291b53ae396af143ce7b94c2be3002d56380087061d7e"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/skill_install_verification.json",
+          "bytes": 2905,
+          "sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/validation.json",
+          "bytes": 12833,
+          "sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/fabrica-assisted-repair/SKILL.md",
+          "bytes": 4812,
+          "sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/fabrica-assisted-repair/agents/openai.yaml",
+          "bytes": 342,
+          "sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/fabrica-assisted-repair/references/implementation-map.md",
+          "bytes": 17580,
+          "sha256": "c0c44c8f357f1cdc367f9c8bab42a2f00d397149b6d40ba685e13c7b9fb0d7b5"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/fabrica-assisted-repair/references/task-handoff-template.md",
+          "bytes": 2339,
+          "sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/simulation-repair-loop/SKILL.md",
+          "bytes": 8618,
+          "sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/simulation-repair-loop/agents/openai.yaml",
+          "bytes": 303,
+          "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/simulation-repair-loop/references/process-retrospective.md",
+          "bytes": 2643,
+          "sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/simulation-repair-loop/references/review-and-reuse.md",
+          "bytes": 2357,
+          "sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9"
+        },
+        {
+          "path": "/home/user/RoboAssemblyBench/skills/simulation-repair-loop/scripts/sync_documents.py",
+          "bytes": 6736,
+          "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/AGENTS.md",
+          "bytes": 2567,
+          "sha256": "9ce1d232839ab06af8f650f36c3d316bf3474fa68796dbc3905440e061203717"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 9938,
+          "sha256": "676c31512a4951ffcf80137e312c771910af0b50b6778058e816ee6121369bd7"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/BEAM_FINDINGS_INDEX.md",
+          "bytes": 814,
+          "sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/BEAM_PHYSICAL_HANDOFF.md",
+          "bytes": 4897,
+          "sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 2353,
+          "sha256": "b84815b0dc73c513c5ce07e0c33ac009401d7f867f08459a0f7460f50043fd45"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 5085,
+          "sha256": "905aea347b45d01f8ad653644fd6c2930db5b1d2b6fb87a3a333c794786c6fbf"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/BEAM_WORKFLOW_LOG.md",
+          "bytes": 8106,
+          "sha256": "2e4073a3ff5f946cf4293798903d25b42b50682538df0875b53322581330147a"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+          "bytes": 3762,
+          "sha256": "ef0ff44a0659ba8c06bb2217f075ccedac8e02299bc2f425ebabdc7bd9e17110"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/beam_routes/assisted/CHECKLIST.md",
+          "bytes": 5146,
+          "sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/beam_routes/assisted/FINDINGS.md",
+          "bytes": 53643,
+          "sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/beam_routes/assisted/PERFORMANCE.md",
+          "bytes": 11089,
+          "sha256": "9c32a13d47439c7e96a104ce0f3291272c21325484b10d63f88071eef902bcf1"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/beam_routes/docs_manifest.json",
+          "bytes": 3835,
+          "sha256": "c5d72c4120eb0144bd541de5e6bcb4ac34be40a80fa7b59f43a4976b54dc795d"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/beam_routes/physical/CHECKLIST.md",
+          "bytes": 1210,
+          "sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/beam_routes/physical/FINDINGS.md",
+          "bytes": 124770,
+          "sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/beam_routes/registry.json",
+          "bytes": 4752,
+          "sha256": "c0796b419bfca7c4ebc8ff52de96cfed3f3d700ea1f2eba99a97bb1c23534527"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+          "bytes": 10589,
+          "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+          "bytes": 3276,
+          "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+          "bytes": 157679,
+          "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+          "bytes": 7728,
+          "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+          "bytes": 22481,
+          "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+          "bytes": 43193,
+          "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/before_manifest.json",
+          "bytes": 994,
+          "sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/source_verification.json",
+          "bytes": 1531,
+          "sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_context_reorganization_20261016/validation.json",
+          "bytes": 2940,
+          "sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json",
+          "bytes": 133091,
+          "sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/before_documents.tar.gz",
+          "bytes": 222391,
+          "sha256": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz",
+          "bytes": 9800,
+          "sha256": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/before_manifest.json",
+          "bytes": 6041,
+          "sha256": "b8d2601cd84564c8254291b53ae396af143ce7b94c2be3002d56380087061d7e"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/skill_install_verification.json",
+          "bytes": 2905,
+          "sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/validation.json",
+          "bytes": 12833,
+          "sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/SKILL.md",
+          "bytes": 4812,
+          "sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/agents/openai.yaml",
+          "bytes": 342,
+          "sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/references/implementation-map.md",
+          "bytes": 17580,
+          "sha256": "c0c44c8f357f1cdc367f9c8bab42a2f00d397149b6d40ba685e13c7b9fb0d7b5"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/fabrica-assisted-repair/references/task-handoff-template.md",
+          "bytes": 2339,
+          "sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/SKILL.md",
+          "bytes": 8618,
+          "sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/agents/openai.yaml",
+          "bytes": 303,
+          "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/references/process-retrospective.md",
+          "bytes": 2643,
+          "sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/references/review-and-reuse.md",
+          "bytes": 2357,
+          "sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9"
+        },
+        {
+          "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/skills/simulation-repair-loop/scripts/sync_documents.py",
+          "bytes": 6736,
+          "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77"
+        }
+      ],
+      "native_started": false,
+      "scope": "Explicit document files only; no control source deployment"
+    }
+  },
+  "server_context_receipt_sha256": "3155e9406dae2595175eacc1f047eedfc247035ce6de7f4b0cd7d84da87f3eaa",
+  "preserved_server_document_roots": 4,
+  "before_source_tools_ledger_sha256": {
+    "source": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+    "tools": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+    "ledger": "3364fee1a51a202a32ef22185cdc2c396e6ab89976c24c211fdbe2a19ea85189"
+  },
+  "after_source_tools_ledger_sha256": {
+    "source": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+    "tools": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+    "ledger": "3364fee1a51a202a32ef22185cdc2c396e6ab89976c24c211fdbe2a19ea85189"
+  },
+  "source_tools_ledger_unchanged": true,
+  "source_file_reaudit_during_document_sync": false,
+  "native_started": false,
+  "control_code_changed": false,
+  "performance_probe_started": false,
+  "skill_versions": {
+    "simulation-repair-loop": "1.5.0",
+    "fabrica-assisted-repair": "1.0.0"
+  },
+  "installed_skill_files_verified": 9,
+  "validation_sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4",
+  "skill_install_receipt_sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4",
+  "performance_analysis_sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d",
+  "receipt_publication": {
+    "relative_path": "outputs/beam_workflow_transfer_20261021/sync_verification.json",
+    "policy": "Receipt is outside its own bundle to avoid circular hashing; copy exact bytes separately to the six mirrors and verify in receipt_mirror_verification.json."
+  },
+  "limits": "Documentation, source mapping and analysis of existing A44 artifacts only. No new native or performance result; A44 original independent terminal raw gap remains false.",
+  "installed_skill_reference_links_verified": 24,
+  "superseded_initial_receipt_sha256": "e6f3336ccbc24ada1c9b436c11ed16f651bd475cd18e1150017aaea4011f106d",
+  "final_refinement": "Installed project source references corrected and validated; source/tools/ledger unchanged."
+}

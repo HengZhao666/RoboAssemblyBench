@@ -1,0 +1,180 @@
+{
+  "schema": "W05.3",
+  "run": "A44_beam_full",
+  "cycle": "D28",
+  "source_after_sha256": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+  "stages": [
+    {
+      "name": "raw_index",
+      "returncode": 0,
+      "elapsed_s": 23.790621793828905,
+      "required": true,
+      "tool_sha256": "43273cd424aa1cabd3fa5f00f3dc107c1bb5492f10515d9fbc58d2873e10236a",
+      "binding": "fec5209f779710edbcffe649ac9e256ef7fd3ed02270fc97465703d77ed77f86",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/raw_offset_index.json": {
+          "bytes": 19141105,
+          "sha256": "453e282882e1da1bf9e033919b7daec4ea484f5f7f528d742fe032facaa65aef"
+        }
+      }
+    },
+    {
+      "name": "original_postreview",
+      "returncode": 0,
+      "elapsed_s": 29.11419344181195,
+      "required": true,
+      "tool_sha256": "d80a220ba35bc46aa2356020e20498b9c7902b8c019f4c3e01e5713c1ae02762",
+      "binding": "1c995247a67f2a6361a3510aae027654db4d250c3b710115c7cfafd06f5d093c",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/postreview_summary.json": {
+          "bytes": 37256414,
+          "sha256": "834e4c2a06b05868af0381ed39ee05e8c8068f63c46ede87f1e2c521b7fb83ad"
+        }
+      }
+    },
+    {
+      "name": "original_support_review",
+      "returncode": 0,
+      "elapsed_s": 33.354728657286614,
+      "required": false,
+      "tool_sha256": "c08bc709d4bd5dae6205e1e88458ec9f6dbb39845bf71ddae404edcd84dbcb80",
+      "binding": "48226b1e2aa3e8559953bc3469db4a4ca2412d47baad1fa2aa6a3f110480d60c",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/C_support_summary.json": {
+          "bytes": 28586308,
+          "sha256": "a478228e73b2757ce341bed5ddc81c3eaa9e53d360a16bb8c73e6b1ed06a851a"
+        }
+      }
+    },
+    {
+      "name": "support_clock_join",
+      "returncode": 0,
+      "elapsed_s": 20.04206717107445,
+      "required": false,
+      "tool_sha256": "a2a49211e63208b20d35122a6c314caf452ddea504cf1bc09379edb1f6b8d273",
+      "binding": "b1cccc1c0d4808e343900345e70c3044f62b7e9c5002d3fcc884a5267a005df4",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/support_clock_join_review.json": {
+          "bytes": 2322031,
+          "sha256": "36f115256ca6197be5508b22e9f077d24c6479490094bc4e61537c575b96ee83"
+        }
+      }
+    },
+    {
+      "name": "production_evidence",
+      "returncode": 0,
+      "elapsed_s": 31.439371726941317,
+      "required": true,
+      "tool_sha256": "f8bd9ea90b32c039fa01b96d88a80742a70979e896282b35f2bb2380f02d4ea4",
+      "binding": "199a0033a933c5633375d174293e522961a6d06858801af7fa291c017a71c8d9",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_execution_evidence.json": {
+          "bytes": 3617,
+          "sha256": "547e9d1a6e46db60352d543dca5be21849d3a1857281de1a50d6cba78671f641"
+        }
+      }
+    },
+    {
+      "name": "original_candidates",
+      "returncode": 0,
+      "elapsed_s": 33.48108110297471,
+      "required": true,
+      "tool_sha256": "acc43c9e7a212e739a6bb30d3919b51eae15fe619a8c3e7e47425cbb0100dade",
+      "binding": "5d1a6f2438a54cb2f2a6990872a5c3f9d7a618581dd59f98ca686e90217a7309",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_original_candidates_review.json": {
+          "bytes": 1444814,
+          "sha256": "0db931e33bfec7641948f76b6a0f1facffba3280d3f0746a7dd02fb8f9b4a101"
+        }
+      }
+    },
+    {
+      "name": "strict_insertion_evidence",
+      "returncode": 0,
+      "elapsed_s": 25.86150878900662,
+      "required": true,
+      "tool_sha256": "5b98616dc1f64d94f2730f9d3f80c269c9f21c757a3c03e99889a22cacc5cc87",
+      "binding": "68f5631111602eaf4f8963079a3669f87e4cf63c40181cc25fcee2c142a8c79d",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_alignment_native_analysis_reviewed.json": {
+          "bytes": 192097,
+          "sha256": "9e182c8858d9d47a9728601d66677aff47c601da13a4886f108918804af73a1d"
+        }
+      }
+    },
+    {
+      "name": "full_archive_and_video_decode",
+      "returncode": 0,
+      "elapsed_s": 44.69121824670583,
+      "required": true,
+      "tool_sha256": "256781df10aae53900a0e203b9652ed74776e21b5b21d559b621696b160f4471",
+      "binding": "31fb4cbbbb6b44252167e5394ef20cf58ae519ab3328c8258956e14a28058a7d",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_beam_full_evidence.tar.gz": {
+          "bytes": 450611808,
+          "sha256": "1d66c8aec1521ac7e4d994cb941032b64b9993e88a4f96837e4a543b1cbadee1"
+        },
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_beam_full_archive_manifest.json": {
+          "bytes": 2332,
+          "sha256": "a5bcc600441f0122b25006af679ec9bd6acb7980026f4a439e027098bfc798f2"
+        },
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/video_manifest.json": {
+          "bytes": 1897,
+          "sha256": "a44edd92a8f3f1a9a03db981f3cd227fc8101de0922c5e029fb201f1b9c21e1e"
+        }
+      }
+    },
+    {
+      "name": "three_original_video_bundle",
+      "returncode": 0,
+      "elapsed_s": 4.648878148756921,
+      "required": true,
+      "tool_sha256": "41564f9f5158e7bd14aabd6d19936909aed5ba9d6f20eee3da555a947d91f8fc",
+      "binding": "db7d42aed2fcb8d8917216f61a8a0990a7b59e97f16d1d8b6ada8d031bd8339c",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_beam_full_review_bundle.tar.gz": {
+          "bytes": 115562179,
+          "sha256": "fdb744e716123ac24de5f5e5c3a5adc3c83260491b6cb28ada22c6a4fc5fc13b"
+        },
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_beam_full_review_bundle_manifest.json": {
+          "bytes": 701,
+          "sha256": "d4f60131f6e3301fb6164c05e5823fa99f1aeef435df23cb2260f3bec4deb1f2"
+        }
+      }
+    },
+    {
+      "name": "key_node_clips",
+      "returncode": 0,
+      "elapsed_s": 12.73982925992459,
+      "required": true,
+      "tool_sha256": "dbc8b720b0551be466efae447fdba3423fb6b472b53cf72ca8245c15d2222305",
+      "binding": "74d7c25df47c7b848407253e13fb90ff494be8c64bbce0c0df3fe74c81d3801a",
+      "outputs": {
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes.tar.gz": {
+          "bytes": 1608950,
+          "sha256": "c4c2e574d6c045b0c803a543d89643ff5c41233d011e9ba87e9143a8e8c4dec3"
+        },
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes/manifest.json": {
+          "bytes": 7084,
+          "sha256": "7216a6bdc4c0fba61d989b5611037918d6f32fd51997b7391d2fc06a09570216"
+        },
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes/08_return_home.mp4": {
+          "bytes": 1487244,
+          "sha256": "922ab0ce5446619e03a367f9edb18f266a39f734454cf7b05d4efef1659f11bd"
+        },
+        "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes/09_final.mp4": {
+          "bytes": 122358,
+          "sha256": "18ae377973f40150d2808c5668b8e0b9cf117c07d266d9cffd8375cd973958d6"
+        }
+      }
+    }
+  ],
+  "all_required_stages_passed": true,
+  "support_original_report_passed": true,
+  "evidence_checks_passed": false,
+  "original_execution_evidence_checks_passed": true,
+  "final_home_evidence_passed": false,
+  "limits": [
+    "Process completion and cached media do not certify assembly. Original nonzero reports remain visible and require interpretation."
+  ]
+}

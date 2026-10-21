@@ -406,12 +406,19 @@ class LocalSkillExecutor:
         object_state = tracked_objects.get(held_object, {})
         attached_to = object_state.get('attached_to')
         grasped_by = object_state.get('grasped_by')
-        if attached_to == robot_name or grasped_by == robot_name:
-            return None
-
-        attachment_state = getattr(task, '_attachments', {}).get(held_object)
-        if isinstance(attachment_state, dict) and attachment_state.get('robot_name') == robot_name:
-            return None
+        lookup = getattr(task, '_attachment_for', None)
+        if callable(lookup):
+            # The task owns primary/secondary membership and release promotion.
+            # Admission does not replace the adapter's measured hold/slip check.
+            attachment_state = lookup(held_object, robot_name)
+            if isinstance(attachment_state, dict) and attachment_state.get('robot_name') == robot_name:
+                return None
+        else:
+            if attached_to == robot_name or grasped_by == robot_name:
+                return None
+            attachment_state = getattr(task, '_attachments', {}).get(held_object)
+            if isinstance(attachment_state, dict) and attachment_state.get('robot_name') == robot_name:
+                return None
 
         return {
             'held_object': held_object,

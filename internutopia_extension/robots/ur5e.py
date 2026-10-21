@@ -333,6 +333,9 @@ class UR5e(IsaacsimArticulation):
             return
 
         stage = root_prim.GetStage()
+        if os.environ.get('BEAM_GRIPPER_SHELL_VISUALS') == '1':
+            self._author_gripper_shell_visible(root_prim, Gf=Gf, Sdf=Sdf, Usd=Usd,
+                UsdGeom=UsdGeom, UsdShade=UsdShade)
         material = self._visible_fingertip_material(stage, Gf=Gf, Sdf=Sdf, UsdGeom=UsdGeom, UsdShade=UsdShade)
         keywords = ("finger", "fingertip", "tip", "pad")
         for prim in Usd.PrimRange(root_prim):
@@ -364,6 +367,64 @@ class UR5e(IsaacsimArticulation):
                         )
             except Exception:
                 pass
+
+    def _author_gripper_shell_visible(self, root_prim, *, Gf, Sdf, Usd, UsdGeom, UsdShade):
+        """Draw the housing with a separate, collision-free visual mesh.
+
+        The asset reuses its instanced housing mesh as a collider. Preserve that
+        instance and all physical data; hide only its original drawing and copy
+        geometry into a new Gprim without any CollisionAPI or rigid body schema.
+        """
+        stage = root_prim.GetStage()
+        base = stage.GetPrimAtPath(root_prim.GetPath().AppendPath('base_link'))
+        visual = stage.GetPrimAtPath(base.GetPath().AppendPath('visuals'))
+        if not visual or not visual.IsValid():
+            raise RuntimeError('Robotiq housing visual root is missing')
+        destination = base.GetPath().AppendPath('beam_housing_visual')
+        material_path = Sdf.Path(f'/World/Looks/{self._root_prim_path.strip("/").replace("/", "_")}_robotiq_housing_opaque')
+        UsdGeom.Scope.Define(stage, material_path.GetParentPath())
+        material = UsdShade.Material.Define(stage, material_path)
+        shader = UsdShade.Shader.Define(stage, material_path.AppendPath('Shader'))
+        shader.CreateIdAttr('UsdPreviewSurface')
+        shader.CreateInput('diffuseColor', Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(.08, .08, .08))
+        shader.CreateInput('opacity', Sdf.ValueTypeNames.Float).Set(1.)
+        shader.CreateInput('roughness', Sdf.ValueTypeNames.Float).Set(.55)
+        material.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), 'surface')
+        cache, meshes = UsdGeom.XformCache(), []
+        sources = [p for p in Usd.PrimRange(visual, Usd.TraverseInstanceProxies())
+                   if p.IsA(UsdGeom.Mesh)]
+        for source in sources:
+            original = UsdGeom.Mesh(source)
+            mesh = UsdGeom.Mesh.Define(stage, destination.AppendChild('Mesh_' + str(len(meshes))))
+            for getter, creator in [('GetPointsAttr', 'CreatePointsAttr'),
+                    ('GetFaceVertexCountsAttr', 'CreateFaceVertexCountsAttr'),
+                    ('GetFaceVertexIndicesAttr', 'CreateFaceVertexIndicesAttr'),
+                    ('GetNormalsAttr', 'CreateNormalsAttr'),
+                    ('GetSubdivisionSchemeAttr', 'CreateSubdivisionSchemeAttr'),
+                    ('GetOrientationAttr', 'CreateOrientationAttr'),
+                    ('GetDoubleSidedAttr', 'CreateDoubleSidedAttr')]:
+                value = getattr(original, getter)().Get()
+                if value is not None:
+                    getattr(mesh, creator)().Set(value)
+            if original.GetNormalsAttr().Get():
+                mesh.SetNormalsInterpolation(original.GetNormalsInterpolation())
+            relative, _ = cache.ComputeRelativeTransform(source, base)
+            xf = UsdGeom.Xformable(mesh)
+            xf.ClearXformOpOrder()
+            xf.AddTransformOp().Set(relative)
+            mesh.CreateVisibilityAttr().Set(UsdGeom.Tokens.inherited)
+            mesh.CreatePurposeAttr().Set(UsdGeom.Tokens.default_)
+            mesh.CreateDisplayColorAttr([Gf.Vec3f(.08, .08, .08)])
+            mesh.CreateDisplayOpacityAttr([1.])
+            UsdShade.MaterialBindingAPI.Apply(mesh.GetPrim()).Bind(material,
+                bindingStrength=UsdShade.Tokens.strongerThanDescendants)
+            meshes.append({'source': str(source.GetPath()), 'visual': str(mesh.GetPath())})
+        if not meshes:
+            raise RuntimeError('Robotiq housing has no source visual geometry')
+        UsdGeom.Imageable(visual).CreateVisibilityAttr().Set(UsdGeom.Tokens.invisible)
+        self.gripper_shell_visual_diagnostics = {'visual_root': str(destination),
+            'meshes': meshes, 'material': str(material_path),
+            'original_collision_instances_preserved': True, 'physics_edited': False}
 
     def _visible_fingertip_material(self, stage, *, Gf, Sdf, UsdGeom, UsdShade):
         try:
@@ -1048,7 +1109,7 @@ class UR5eRobot(BaseRobot):
         static = getattr(self.config, 'gripper_pad_static_friction', None)
         dynamic = getattr(self.config, 'gripper_pad_dynamic_friction', None)
         if static is None and dynamic is None:
-            return 80.0, 70.0  # Preserve recipes that do not opt in.
+            return 3.0, 2.5  # Upstream default; Beam supplies explicit coefficients.
         if (static is None or dynamic is None or not np.isfinite(static)
                 or not np.isfinite(dynamic) or not 0.0 <= dynamic <= static):
             raise ValueError('Pad friction requires finite 0 <= dynamic <= static coefficients')
@@ -1283,6 +1344,9 @@ class UR5eRobot(BaseRobot):
 
     def apply_action(self, action: dict):
         self.last_action = []
+        self.last_action_controller_names = []
+        self.last_action_skipped = []
+        self._action_batch_sequence = getattr(self, '_action_batch_sequence', 0) + 1
         deferred_controls = []
         has_joint_override = "arm_joint_controller" in action and "arm_ik_controller" in action
         self._renormalize_arm_joint_state_if_needed()
@@ -1302,12 +1366,17 @@ class UR5eRobot(BaseRobot):
                 continue
             control = self._normalize_arm_control(controller_name, control)
             if has_joint_override and controller_name == "arm_ik_controller":
-                self.last_action.append(self.action_to_dict(control))
+                self.last_action_skipped.append({
+                    'controller': controller_name, 'reason': 'arm_joint_override',
+                    'control': self.action_to_dict(control),
+                })
                 continue
-            deferred_controls.append(control)
-            self.last_action.append(self.action_to_dict(control))
-        for control in deferred_controls:
+            deferred_controls.append((controller_name, control))
+        for controller_name, control in deferred_controls:
             self.articulation.apply_action(control)
+            # A suppressed IK proposal or failed SDK call is not a submitted action.
+            self.last_action.append(self.action_to_dict(control))
+            self.last_action_controller_names.append(controller_name)
 
     def get_last_action(self):
         return self.last_action

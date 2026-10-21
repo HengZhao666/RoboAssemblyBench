@@ -1,0 +1,296 @@
+{
+  "passed": true,
+  "documentation_version": "W06.0",
+  "scope": "Documentation/skill validation and existing-artifact analysis only; no source/control deployment or new simulation",
+  "native_started": false,
+  "doc_files": 39,
+  "old_documents_preserved": 27,
+  "changed_existing_documents": [
+    "AGENTS.md",
+    "BEAM_ASSISTED_HANDOFF.md",
+    "BEAM_REPAIR_HANDOFF.md",
+    "BEAM_REVIEW_CHECKLIST.md",
+    "BEAM_WORKFLOW_LOG.md",
+    "beam_routes/docs_manifest.json",
+    "beam_routes/registry.json",
+    "skills/simulation-repair-loop/SKILL.md",
+    "skills/simulation-repair-loop/references/process-retrospective.md",
+    "skills/simulation-repair-loop/references/review-and-reuse.md"
+  ],
+  "unchanged_existing_documents": 17,
+  "selected_markdown_links_checked": 58,
+  "links": [
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "outputs/beam_assisted_20261015/repair_batch_D_20261016.json"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "FABRICA_ASSISTED_REPAIR_HANDOFF.md"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "outputs/beam_assisted_20261015/D28_conclusions.json"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "outputs/beam_assisted_20261015/D27_conclusions.json"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "outputs/beam_assisted_20261015/D28_work/final_home_independent_read_review.json"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "skills/simulation-repair-loop/SKILL.md"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "beam_routes/assisted/PERFORMANCE.md"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "outputs/beam_assisted_20261015/D28_work/D28_local_media_review.json"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "beam_routes/assisted/PERFORMANCE.md"
+    },
+    {
+      "from": "BEAM_ASSISTED_HANDOFF.md",
+      "target": "beam_routes/assisted/FINDINGS.md"
+    },
+    {
+      "from": "BEAM_REPAIR_HANDOFF.md",
+      "target": "FABRICA_ASSISTED_REPAIR_HANDOFF.md"
+    },
+    {
+      "from": "BEAM_REPAIR_HANDOFF.md",
+      "target": "BEAM_PHYSICAL_HANDOFF.md"
+    },
+    {
+      "from": "BEAM_REPAIR_HANDOFF.md",
+      "target": "BEAM_ASSISTED_HANDOFF.md"
+    },
+    {
+      "from": "BEAM_REPAIR_HANDOFF.md",
+      "target": "BEAM_REVIEW_CHECKLIST.md"
+    },
+    {
+      "from": "BEAM_REPAIR_HANDOFF.md",
+      "target": "skills/simulation-repair-loop/SKILL.md"
+    },
+    {
+      "from": "BEAM_REPAIR_HANDOFF.md",
+      "target": "BEAM_WORKFLOW_LOG.md"
+    },
+    {
+      "from": "BEAM_REPAIR_HANDOFF.md",
+      "target": "BEAM_FINDINGS_INDEX.md"
+    },
+    {
+      "from": "BEAM_REVIEW_CHECKLIST.md",
+      "target": "skills/simulation-repair-loop/SKILL.md#中段排查与断点复用"
+    },
+    {
+      "from": "BEAM_WORKFLOW_LOG.md",
+      "target": "FABRICA_ASSISTED_REPAIR_HANDOFF.md"
+    },
+    {
+      "from": "BEAM_WORKFLOW_LOG.md",
+      "target": "beam_routes/assisted/PERFORMANCE.md"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "outputs/beam_assisted_20261015/repair_batch_D_20261016.json"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "skills/fabrica-assisted-repair/SKILL.md"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "skills/fabrica-assisted-repair/references/task-handoff-template.md"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "skills/simulation-repair-loop/SKILL.md"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "skills/fabrica-assisted-repair/references/implementation-map.md"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "BEAM_REPAIR_HANDOFF.md"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "beam_routes/assisted/PERFORMANCE.md"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "beam_routes/registry.json"
+    },
+    {
+      "from": "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+      "target": "beam_routes/docs_manifest.json"
+    },
+    {
+      "from": "beam_routes/assisted/PERFORMANCE.md",
+      "target": "../../outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json"
+    },
+    {
+      "from": "beam_routes/assisted/PERFORMANCE.md",
+      "target": "../../outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json"
+    },
+    {
+      "from": "beam_routes/assisted/PERFORMANCE.md",
+      "target": "../../outputs/beam_assisted_20261015/D28_work/A44_media/collect_results.json"
+    },
+    {
+      "from": "beam_routes/assisted/PERFORMANCE.md",
+      "target": "../../outputs/beam_assisted_20261015/D28_work/A44_media/task_config_snapshot.json"
+    },
+    {
+      "from": "beam_routes/assisted/PERFORMANCE.md",
+      "target": "../../outputs/beam_assisted_20261015/D28_conclusions.json"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/SKILL.md",
+      "target": "references/task-handoff-template.md"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/SKILL.md",
+      "target": "references/implementation-map.md"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/BEAM_ASSISTED_HANDOFF.md"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_conclusions.json"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/roboassemblybench/core/task_registry.py:351"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/canonical_tasks.json"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/roboassemblybench/core/fabrica_canonical.py:6034"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/internutopia_extension/tasks/factory_dual_franka_assembly_task.py:4593"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/scene_builder.py:527"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_assisted_visual_grasp.py:122"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_assisted_state.py:177"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py:2267"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_assisted_servo.py:42"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_assisted_state.py:754"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/tools/assisted_worker.py:328"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/tools/visual_mesh_check.py:77"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_assisted_state.py:238"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/roboassemblybench/core/beam_assisted_compiler.py:12"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_assisted_camera.py:71"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_physics_diagnostics.py:452"
+    },
+    {
+      "from": "skills/fabrica-assisted-repair/references/implementation-map.md",
+      "target": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/toolkits/factory_dual_franka_assembly/beam_failure_video.py:26"
+    },
+    {
+      "from": "skills/simulation-repair-loop/SKILL.md",
+      "target": "references/review-and-reuse.md"
+    },
+    {
+      "from": "skills/simulation-repair-loop/SKILL.md",
+      "target": "references/process-retrospective.md"
+    },
+    {
+      "from": "skills/simulation-repair-loop/SKILL.md",
+      "target": "scripts/sync_documents.py"
+    }
+  ],
+  "physical_route_metadata_unchanged": true,
+  "local_source_tools_ledger_sha256": {
+    "source": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+    "tools": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+    "ledger": "3364fee1a51a202a32ef22185cdc2c396e6ab89976c24c211fdbe2a19ea85189"
+  },
+  "new_skill_format_validation": "quick_validate passed with temporary PyYAML dependency",
+  "common_skill_format_validation": "quick_validate passed",
+  "installed_skill_files_verified": 9,
+  "forward_check": {
+    "mode": "independent read-only subagent with no inherited conversation",
+    "task_not_selected": "lists existing candidates; does not choose/start or inherit Beam authorization/results",
+    "multi_issue_bundle": "two independent defects separately verified; one formal acceptance only with applicable current authorization",
+    "findings_resolved_by_parent": [
+      "Conditional support for moving assembly parent frame added to core skill",
+      "Non-Beam task reads own contract/checklist instead of Beam route",
+      "Performance backlink created before final link validation",
+      "Project source links in the personally installed reference copy now resolve to the verified local workspace; all24 installed links checked"
+    ]
+  },
+  "performance_checks": {
+    "phase_intervals": 101,
+    "sum_ticks": 59566,
+    "terminal_boundary_count_difference": 1,
+    "original_steps": 59567,
+    "new_performance_measurement": false
+  },
+  "beam_handoff_bytes": {
+    "before": 29577,
+    "after": 9938
+  },
+  "document_sync_runtime": {
+    "legacy_local_python3": "3.7; pack failed before any writes",
+    "selected_local": "3.12.14",
+    "selected_server": "3.10.12",
+    "program_requires": "Python>=3.9",
+    "runtime_paths_source": "beam_routes/docs_manifest.json sync_runtime"
+  },
+  "installed_skill_reference_links_checked": 24,
+  "supersedes_initial_document_sync": "initial_sync_before_installed_link_fix (same source/tools/ledger; project-link portability fix only)"
+}

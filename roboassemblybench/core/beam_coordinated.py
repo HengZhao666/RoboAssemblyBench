@@ -7,6 +7,7 @@ candidates, not certificates of physical grasp or path feasibility. After the v1
 from __future__ import annotations
 import copy
 import json
+import os
 from pathlib import Path
 import numpy as np
 from toolkits.factory_dual_franka_assembly.fabrica_online_planner_adapter import _matrix_to_quat_wxyz
@@ -65,6 +66,28 @@ def add_preseat_target(place, targets, assembly_target_names):
     place['local_skill'].update(target_object_target=target['name'],
         position_tolerance=.002, relaxed_position_tolerance=.002,
         target_object_position_tolerance=.002, relaxed_target_object_position_tolerance=.002)
+
+
+def _tighten_final_insertions(phases, prefixes):
+    """Finish physical insertion inside the unchanged installed-interface gate.
+
+    An 8 mm object/6 mm TCP completion can otherwise enter the following
+    installed check with >3 mm displacement. Keep driving to the same target;
+    neither the installed gate nor grasp/force/physics limits are relaxed.
+    """
+    for phase in phases:
+        skill = phase.get('local_skill', {})
+        for pid, prefix in prefixes.items():
+            if (phase['name'].startswith(prefix + '_insert_')
+                    and skill.get('target_object_target') == f'part_{pid}_assembled'
+                    and skill.get('object') == f'fabrica_beam_{pid}'
+                    and skill.get('requires_held_object')):
+                skill.update(position_tolerance=.0015,
+                             relaxed_position_tolerance=.0015,
+                             target_object_position_tolerance=.0015,
+                             relaxed_target_object_position_tolerance=.0015,
+                             orientation_tolerance=.025,
+                             target_object_orientation_tolerance=.025)
 
 
 def coordinate_phases(phases, task, spec, targets, assembly_target_names):
@@ -148,6 +171,36 @@ def coordinate_phases(phases, task, spec, targets, assembly_target_names):
     old = by_name['hold_3_approach_clearance']
     replacement = motion(old['name'], right, [0, 0, -.12], 'tcp')
     old.clear(); old.update(replacement); hold(old, left, '3')
+    side_route = os.environ.get('BEAM_COLUMN3_SIDE_CLEARANCE_ROUTE', '0')
+    if side_route not in {'0', '1'}:
+        raise ValueError('BEAM_COLUMN3_SIDE_CLEARANCE_ROUTE must be 0 or 1')
+    if side_route == '1':
+        # Reorient the empty wrist above the table before the side approach.
+        # These are separate measured-joint completion gates, not a timed
+        # prealign that can switch branches after only 240 small commands.
+        high = [1.85, -1.5707963268, 1.5707963268,
+                -1.5707963268, -1.5707963268, 0.0]
+        reoriented = high.copy()
+        reoriented[4] = 1.50  # Strictly less than a pi turn: no wrap tie.
+        approach = by_name['hold_3_move_above']
+        approach['local_skill']['prealign_steps'] = 0
+        stages = []
+        for name, joints in [('hold_3_high_joint_clearance', high),
+                             ('hold_3_high_wrist_reorientation', reoriented)]:
+            stage = _skill_phase(skill='move_arm_to_joint_positions', robot=right,
+                phase_name=name, timeout_steps=3000, parameters={
+                    'joint_positions': joints, 'gripper_command': 'open',
+                    'max_joint_step': .004, 'max_command_joint_step': .004,
+                    'joint_position_tolerance': .005,
+                    'joint_target_stable_steps': 8,
+                    'limit_command_to_measured_state': True,
+                    'max_command_tracking_error': .18,
+                    'max_wrist_command_tracking_error': .12,
+                    'beam_coordinated': True})
+            hold(stage, left, '3')
+            stages.append(stage)
+        index = transfer3.index(approach)
+        transfer3[index:index] = stages
     for p in first_release:
         hold(p, right, '3')
     phases[:] = [p for p in phases if p not in transfer3]
@@ -217,13 +270,14 @@ def coordinate_phases(phases, task, spec, targets, assembly_target_names):
     phases.append({'name': 'beam_final_unloaded_verification', 'beam_coordinated': True,
         'timeout_steps': 1200, 'robot_targets': {},
         'gripper_commands': {left: 'open', right: 'open'},
-        'advance': {'type': 'all_of', 'conditions': [
-            {'type': 'beam_table_supported', 'stable_steps': 240, 'minimum_vertical_force': 9.81},
+        'advance': {'type': 'all_of', 'physics_stable_steps': 240, 'conditions': [
+            {'type': 'beam_table_supported', 'stable_steps': 1, 'minimum_vertical_force': 9.81},
             {'type': 'objects_detached', 'objects': [obj(p) for p in ['6','3','2','1','0']]},
             {'type': 'object_targets_reached', 'tolerance': .003, 'orientation_tolerance': .04,
              'objects': [{'object': obj(p), 'target': f'part_{p}_assembled'} for p in ['6','3','2','1','0']]},
             {'type': 'objects_static', 'objects': [obj(p) for p in ['6','3','2','1','0']],
              'linear_velocity_threshold': .002, 'angular_velocity_threshold': .02}]}})
+    _tighten_final_insertions(phases, prefix)
     seated = False
     installed = ['6']
     for phase in phases:

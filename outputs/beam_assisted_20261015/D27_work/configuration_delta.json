@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "actual_layouts": 4,
+  "final_home": true,
+  "unchanged_prefix_and_original_final_gates": true,
+  "added_empty_return_phases": [
+    "beam_assisted_return_home_franka_left",
+    "beam_assisted_return_clearance_franka_right",
+    "beam_assisted_return_home_franka_right"
+  ],
+  "wrist_camera_configuration_exact": true,
+  "native_camera_roll_source_checked_separately": true,
+  "expected_authority_recipe_fingerprint": "fb53176f7081433c796615f114ea4829beafc670e84fe0f1972fadf7cdef8d28",
+  "layout_checks": [
+    {
+      "layout_seed": 0,
+      "whole_config_exact_after_declared_projection": true,
+      "baseline_signature": "36621b4ad5866c4ee881e8f7b911bdd4feba5f8c1234a707053ca2fd587e38c1",
+      "expected_authority_signature": "161232a482718ed1731e774e3cbdc2c1a68a8cd5550f586367bea52a922d9138",
+      "success_criteria_exact": true
+    },
+    {
+      "layout_seed": 1,
+      "whole_config_exact_after_declared_projection": true,
+      "baseline_signature": "1755bca29aac1bed238fc0be734f905628be2572ebcaa7b8def0a5bb0292e88d",
+      "expected_authority_signature": "c90e281e3d94b835229fe7e85c7b1c08076284743542c317d052907153e1ce15",
+      "success_criteria_exact": true
+    },
+    {
+      "layout_seed": 505,
+      "whole_config_exact_after_declared_projection": true,
+      "baseline_signature": "f318515d87080b86eb5bcb75c1ec86642c2e38d157a8efa8e13471dc95edf237",
+      "expected_authority_signature": "b38c34c0b0bb61b8b9b66315778566fc74595fffff0839f1b2d164e6baf7eeb8",
+      "success_criteria_exact": true
+    },
+    {
+      "layout_seed": 777,
+      "whole_config_exact_after_declared_projection": true,
+      "baseline_signature": "c0a53bf0b9cd429215e0a2211d3fe37ca6637dd8f4954df427ad4ee8b52da461",
+      "expected_authority_signature": "ef59d9605cc7a47b5291e9b1c2b736ace7d6578ab63e67287aa07c35d04386aa",
+      "success_criteria_exact": true
+    }
+  ],
+  "recipe_path_fingerprint_recomputed": true,
+  "source_manifest_sha256": "476bee3ba19a5c3daa107e6058080e6be9e5715dc6dede48ee34c401477e22e7",
+  "tool_sha256": "5287696359d79f0cec8b1f686075eae4ded020a47e7d5cb0cd209783741ba929",
+  "simulator_created": false,
+  "elapsed_s": 9.42135980213061
+}

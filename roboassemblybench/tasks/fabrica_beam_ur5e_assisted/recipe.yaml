@@ -1,0 +1,29 @@
+extends: fabrica_beam_ur5e_staged
+task_name: fabrica_beam_ur5e_assisted
+prompt: Assemble Beam with measured-pose grasp and installation assistance, keeping all part collisions enabled.
+fabrica_canonical:
+  beam_execution_route: assisted
+metadata:
+  local_skills:
+    move_arm_to_joint_positions:
+      adapter: toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter
+      requires_held_object: false
+      require_success: true
+      fallback: fail
+  beam_execution_route: assisted
+  formal_physical_success: false
+  assisted_assembly_visual_clearance_m: 0.0001
+  assistance: measured_grasp_and_install_fixed_joints
+  grasp_qualification: dual_visible_CAD_surfaces
+  grasp_nominal_surface_clearance_m: 0.00023
+  grasp_max_surface_gap_m: 0.00025
+  gripper_command_max_lead_rad: 0.01
+  installation_alignment_waits_for_actual_release: true
+  installation_alignment_max_step_m: 0.0001
+  installation_alignment_max_step_rad: 0.0002
+  installation_capture_above_target_m: 0.003
+  wrist_camera_translation_left: [0.0, -0.16, 0.08]
+  wrist_camera_translation_right: [0.0, 0.16, 0.08]
+  wrist_camera_pose_source: native_full_path_fingertip_midpoint
+  wrist_camera_transform: absolute_usd_world_matrix_before_existing_render
+  tags: [beam, assisted, measured-pose-constraints]

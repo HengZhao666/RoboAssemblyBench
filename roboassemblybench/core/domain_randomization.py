@@ -802,12 +802,13 @@ def _apply_scene_profile(resolved: dict[str, Any], *, rng: random.Random) -> dic
     half_yaw = math.radians(yaw_degrees) * 0.5
     resolved['scene_position'] = position
     resolved['scene_orientation'] = [math.cos(half_yaw), 0.0, 0.0, math.sin(half_yaw)]
+    available_variants = [variant['name'] for variant in normalized_variants] if variants else [selected_variant['name']]
+    if selected_variant['name'] not in available_variants:
+        available_variants.append(selected_variant['name'])
     return {
         'asset_path': selected_variant['asset_path'],
         'variant': selected_variant['name'],
-        'available_variants': [variant['name'] for variant in normalized_variants]
-        if variants
-        else [selected_variant['name']],
+        'available_variants': available_variants,
         'position': position,
         'yaw_degrees': float(yaw_degrees),
         'orientation': list(resolved['scene_orientation']),

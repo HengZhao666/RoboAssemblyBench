@@ -1,0 +1,1577 @@
+{
+  "schema": "beam-assisted-evidence-index/v1",
+  "scope": "Exact final-run originals and current qualification evidence from verified local copies and server canonical paths; gzip is lossless storage only, no report rewriting or simulation.",
+  "files": [
+    {
+      "original_path": "outputs/beam_assisted_20261015/D25_conclusions.json",
+      "stored_path": "outputs/beam_assisted_20261015/D25_conclusions.json",
+      "original_bytes": 3075,
+      "original_sha256": "7fb6a8f31b611eaa9e7e550b0e2319d48617467ee338ba3c8973bce5eaab9e2c",
+      "stored_bytes": 3075,
+      "stored_sha256": "7fb6a8f31b611eaa9e7e550b0e2319d48617467ee338ba3c8973bce5eaab9e2c",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D25_conclusions.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D25_conclusions.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D26_conclusions.json",
+      "stored_path": "outputs/beam_assisted_20261015/D26_conclusions.json",
+      "original_bytes": 6226,
+      "original_sha256": "c2f0504b66d3eacd597eeb77b15f5ea483e7742e57aa3ec53879701867df9c3e",
+      "stored_bytes": 6226,
+      "stored_sha256": "c2f0504b66d3eacd597eeb77b15f5ea483e7742e57aa3ec53879701867df9c3e",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D26_conclusions.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D26_conclusions.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_conclusions.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_conclusions.json",
+      "original_bytes": 3809,
+      "original_sha256": "eaf7bd8820eac4ed835ecf021ff1388c2f6b8cc24865b1395fd54e362bf7ee9c",
+      "stored_bytes": 3809,
+      "stored_sha256": "eaf7bd8820eac4ed835ecf021ff1388c2f6b8cc24865b1395fd54e362bf7ee9c",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_conclusions.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_conclusions.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_local_evidence_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_local_evidence_review.json",
+      "original_bytes": 825,
+      "original_sha256": "760cd65f782e5a3808f83b24ae34a5f54cd5517e594750c8055cda3766a09f34",
+      "stored_bytes": 825,
+      "stored_sha256": "760cd65f782e5a3808f83b24ae34a5f54cd5517e594750c8055cda3766a09f34",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_local_evidence_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_local_evidence_review.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/A43_beam_full_startup_failure_manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/A43_beam_full_startup_failure_manifest.json",
+      "original_bytes": 6531,
+      "original_sha256": "877d9acdb472b2eee8a64dee29edda84da1c5578f3e210dbf03dac708e65e575",
+      "stored_bytes": 6531,
+      "stored_sha256": "877d9acdb472b2eee8a64dee29edda84da1c5578f3e210dbf03dac708e65e575",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/A43_beam_full_startup_failure_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/A43_beam_full_startup_failure_manifest.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/D27_postprocess_pipeline.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/D27_postprocess_pipeline.json",
+      "original_bytes": 11364,
+      "original_sha256": "182a6ba92612e243bbc0eadfa2bb5a936a87d3f00de81c2abc014c0c8cf8d49d",
+      "stored_bytes": 11364,
+      "stored_sha256": "182a6ba92612e243bbc0eadfa2bb5a936a87d3f00de81c2abc014c0c8cf8d49d",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/D27_postprocess_pipeline.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/D27_postprocess_pipeline.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/affected_module_result.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/affected_module_result.json",
+      "original_bytes": 119932,
+      "original_sha256": "884883123f65de2ee66cbfde5a4c9f1ef72e9844f2ed94abc0024c2330462bd3",
+      "stored_bytes": 119932,
+      "stored_sha256": "884883123f65de2ee66cbfde5a4c9f1ef72e9844f2ed94abc0024c2330462bd3",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/affected_module_result.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/affected_module_result.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/authority_configuration_binding.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/authority_configuration_binding.json",
+      "original_bytes": 2846,
+      "original_sha256": "80f42dd5fe802375f72b893d9c8bd855857f767032ef8fa514d64dabb23406ef",
+      "stored_bytes": 2846,
+      "stored_sha256": "80f42dd5fe802375f72b893d9c8bd855857f767032ef8fa514d64dabb23406ef",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/authority_configuration_binding.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/authority_configuration_binding.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/configuration_delta.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/configuration_delta.json",
+      "original_bytes": 2172,
+      "original_sha256": "ad2b506b4c73da3d56174f922a92d575441207c22fd3f36adc921de3b0fe40f4",
+      "stored_bytes": 2172,
+      "stored_sha256": "ad2b506b4c73da3d56174f922a92d575441207c22fd3f36adc921de3b0fe40f4",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/configuration_delta.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/configuration_delta.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/final_home_control_replay.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/final_home_control_replay.json.gz",
+      "original_bytes": 2506522,
+      "original_sha256": "d7272020c6dd5b4326f75f74c0ef55b1b29dad270e8176d14a287da97bb051aa",
+      "stored_bytes": 88753,
+      "stored_sha256": "64c0f506a9a1ba6168f4b3245aee65184bae1057e2ee179d6f3289924bdf167c",
+      "encoding": "gzip",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/final_home_control_replay.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/final_home_control_replay.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/formal_gate_spec.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/formal_gate_spec.json",
+      "original_bytes": 10857,
+      "original_sha256": "96b107bca6a694f3b9f3211a15e0108147e80282cedc43bd75e51594392a0518",
+      "stored_bytes": 10857,
+      "stored_sha256": "96b107bca6a694f3b9f3211a15e0108147e80282cedc43bd75e51594392a0518",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/formal_gate_spec.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/formal_gate_spec.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/formal_reuse_certificate.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/formal_reuse_certificate.json",
+      "original_bytes": 9067,
+      "original_sha256": "5ea4abf11853e90913cc4a01bc1bb2c48469337267a5ac037728e41af26106c5",
+      "stored_bytes": 9067,
+      "stored_sha256": "5ea4abf11853e90913cc4a01bc1bb2c48469337267a5ac037728e41af26106c5",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/formal_reuse_certificate.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/formal_reuse_certificate.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/post_failure_alias_fix_manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/post_failure_alias_fix_manifest.json",
+      "original_bytes": 2122,
+      "original_sha256": "c651476d546e1dbd29f50fdc6451e089b28a65cf489d560722decf8137687085",
+      "stored_bytes": 2122,
+      "stored_sha256": "c651476d546e1dbd29f50fdc6451e089b28a65cf489d560722decf8137687085",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/post_failure_alias_fix_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_alias_fix_manifest.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/post_failure_alias_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/post_failure_alias_review.json",
+      "original_bytes": 3093,
+      "original_sha256": "8fc087c0f9b4e03b67b040fd3d65723bf3746ab8ca5a8114b1744cb023d529f4",
+      "stored_bytes": 3093,
+      "stored_sha256": "8fc087c0f9b4e03b67b040fd3d65723bf3746ab8ca5a8114b1744cb023d529f4",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/post_failure_alias_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_alias_review.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/prefix_and_tool_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/prefix_and_tool_review.json",
+      "original_bytes": 134228,
+      "original_sha256": "802ba2956039681900fa9de52a1b03b211443d006de9b28014979fbc8c6b651e",
+      "stored_bytes": 134228,
+      "stored_sha256": "802ba2956039681900fa9de52a1b03b211443d006de9b28014979fbc8c6b651e",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/prefix_and_tool_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/prefix_and_tool_review.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/related_suite_reuse_certificate.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/related_suite_reuse_certificate.json",
+      "original_bytes": 540,
+      "original_sha256": "55b0c1aabf1d466ae38b949e3958608af2b2225da1c6acbc9dfcddf8c888cd8d",
+      "stored_bytes": 540,
+      "stored_sha256": "55b0c1aabf1d466ae38b949e3958608af2b2225da1c6acbc9dfcddf8c888cd8d",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/related_suite_reuse_certificate.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/related_suite_reuse_certificate.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/return_geometry_delta024.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/return_geometry_delta024.json",
+      "original_bytes": 3962,
+      "original_sha256": "9722632f061551e834150c5ff0fcbb46b8d6cedba5bcd6e7cd92666445ffafdf",
+      "stored_bytes": 3962,
+      "stored_sha256": "9722632f061551e834150c5ff0fcbb46b8d6cedba5bcd6e7cd92666445ffafdf",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/return_geometry_delta024.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/return_geometry_delta024.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/return_geometry_final.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/return_geometry_final.json",
+      "original_bytes": 9335,
+      "original_sha256": "8384ecda7990376e5653b7266b744daac5dcb0b2178f04115e7b13ef6880cabf",
+      "stored_bytes": 9335,
+      "stored_sha256": "8384ecda7990376e5653b7266b744daac5dcb0b2178f04115e7b13ef6880cabf",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/return_geometry_final.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/return_geometry_final.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/single_round_authorization_checks.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/single_round_authorization_checks.json",
+      "original_bytes": 1017,
+      "original_sha256": "bfb9924d1b8e73d6bd299478f034c51f4f0872d2547e792d3cbf99c590e79da2",
+      "stored_bytes": 1017,
+      "stored_sha256": "bfb9924d1b8e73d6bd299478f034c51f4f0872d2547e792d3cbf99c590e79da2",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/single_round_authorization_checks.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/single_round_authorization_checks.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/source_qualification.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/source_qualification.json",
+      "original_bytes": 126396,
+      "original_sha256": "6b0b040ed9659983c5b08b92283e72172bb3f2037c276d95939e280640ff5b08",
+      "stored_bytes": 126396,
+      "stored_sha256": "6b0b040ed9659983c5b08b92283e72172bb3f2037c276d95939e280640ff5b08",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/source_qualification.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/source_qualification.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_conclusions.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_conclusions.json",
+      "original_bytes": 27409,
+      "original_sha256": "12bf1ae3157c098b772444a8133cf051c49d1dab973ac1729e78c01dd523c7e6",
+      "stored_bytes": 27409,
+      "stored_sha256": "12bf1ae3157c098b772444a8133cf051c49d1dab973ac1729e78c01dd523c7e6",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_conclusions.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_conclusions.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_beam_full_media_receipt.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_beam_full_media_receipt.json",
+      "original_bytes": 345,
+      "original_sha256": "5055d6712610fb10ada64d5abcd987e6b3a6eca05b8396f1e178ccc1d477ba9f",
+      "stored_bytes": 345,
+      "stored_sha256": "5055d6712610fb10ada64d5abcd987e6b3a6eca05b8396f1e178ccc1d477ba9f",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_beam_full_media_receipt.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_beam_full_media_receipt.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_beam_full_sealed_version.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_beam_full_sealed_version.json",
+      "original_bytes": 1113,
+      "original_sha256": "ee7570461681eea82e8ff875fcfd695617bf3bc5efcdeab15e5f1354b9e0209a",
+      "stored_bytes": 1113,
+      "stored_sha256": "ee7570461681eea82e8ff875fcfd695617bf3bc5efcdeab15e5f1354b9e0209a",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_beam_full_sealed_version.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_beam_full_sealed_version.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/bounded_primary_scene_runtime.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/bounded_primary_scene_runtime.json",
+      "original_bytes": 616,
+      "original_sha256": "89897f523fd43414850cc48b95687f121d05264a1e9c33f3ad69c85476a5ec4b",
+      "stored_bytes": 616,
+      "stored_sha256": "89897f523fd43414850cc48b95687f121d05264a1e9c33f3ad69c85476a5ec4b",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/bounded_primary_scene_runtime.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/bounded_primary_scene_runtime.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/collect_results.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/collect_results.json.gz",
+      "original_bytes": 262057776,
+      "original_sha256": "e5b111da61170eeeaa2935b37c823af657eee03264b4a2fb197d6fcc16e0e29a",
+      "stored_bytes": 9652651,
+      "stored_sha256": "303538673445fd3080f86ea215e1f7be6cb199e5817744ae5a6400951fa7f9b6",
+      "encoding": "gzip",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/collect_results.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/collect_results.json",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_front.mp4",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_front.mp4",
+      "original_bytes": 29711614,
+      "original_sha256": "a471efe2a648a70151627f92852a1b41c4076be4274a26a96f8b736a914b1ca2",
+      "stored_bytes": 29711614,
+      "stored_sha256": "a471efe2a648a70151627f92852a1b41c4076be4274a26a96f8b736a914b1ca2",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_front.mp4",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_front.mp4",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "original_bytes": 29997166,
+      "original_sha256": "0dd61d3381733d59734a379a86347b197641d4173df403d183a2b949666754cc",
+      "stored_bytes": 29997166,
+      "stored_sha256": "0dd61d3381733d59734a379a86347b197641d4173df403d183a2b949666754cc",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "original_bytes": 13752242,
+      "original_sha256": "a1a1b3174edd0d47fffdc2b0cf916095c29b1e02b793e721268cba84da45f01d",
+      "stored_bytes": 13752242,
+      "stored_sha256": "a1a1b3174edd0d47fffdc2b0cf916095c29b1e02b793e721268cba84da45f01d",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/execution_evidence.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/execution_evidence.json",
+      "original_bytes": 3617,
+      "original_sha256": "547e9d1a6e46db60352d543dca5be21849d3a1857281de1a50d6cba78671f641",
+      "stored_bytes": 3617,
+      "stored_sha256": "547e9d1a6e46db60352d543dca5be21849d3a1857281de1a50d6cba78671f641",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/execution_evidence.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/execution_evidence.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/08_return_home.mp4",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/08_return_home.mp4",
+      "original_bytes": 1487244,
+      "original_sha256": "922ab0ce5446619e03a367f9edb18f266a39f734454cf7b05d4efef1659f11bd",
+      "stored_bytes": 1487244,
+      "stored_sha256": "922ab0ce5446619e03a367f9edb18f266a39f734454cf7b05d4efef1659f11bd",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/08_return_home.mp4",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/08_return_home.mp4",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/09_final.mp4",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/09_final.mp4",
+      "original_bytes": 122358,
+      "original_sha256": "18ae377973f40150d2808c5668b8e0b9cf117c07d266d9cffd8375cd973958d6",
+      "stored_bytes": 122358,
+      "stored_sha256": "18ae377973f40150d2808c5668b8e0b9cf117c07d266d9cffd8375cd973958d6",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/09_final.mp4",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/09_final.mp4",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/manifest.json",
+      "original_bytes": 7084,
+      "original_sha256": "7216a6bdc4c0fba61d989b5611037918d6f32fd51997b7391d2fc06a09570216",
+      "stored_bytes": 7084,
+      "stored_sha256": "7216a6bdc4c0fba61d989b5611037918d6f32fd51997b7391d2fc06a09570216",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/manifest.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/D28_alignment_native_analysis_reviewed.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/D28_alignment_native_analysis_reviewed.json",
+      "original_bytes": 192097,
+      "original_sha256": "9e182c8858d9d47a9728601d66677aff47c601da13a4886f108918804af73a1d",
+      "stored_bytes": 192097,
+      "stored_sha256": "9e182c8858d9d47a9728601d66677aff47c601da13a4886f108918804af73a1d",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/D28_alignment_native_analysis_reviewed.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/D28_alignment_native_analysis_reviewed.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/D28_original_candidates_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/D28_original_candidates_review.json",
+      "original_bytes": 1444814,
+      "original_sha256": "0db931e33bfec7641948f76b6a0f1facffba3280d3f0746a7dd02fb8f9b4a101",
+      "stored_bytes": 1444814,
+      "stored_sha256": "0db931e33bfec7641948f76b6a0f1facffba3280d3f0746a7dd02fb8f9b4a101",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/D28_original_candidates_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/D28_original_candidates_review.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_isaac_3d.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_isaac_3d.png",
+      "original_bytes": 455613,
+      "original_sha256": "3551ae6dbeb0c8e27a659d59964e7f5fba62a7414f3625001d73f581c75accb4",
+      "stored_bytes": 455613,
+      "stored_sha256": "3551ae6dbeb0c8e27a659d59964e7f5fba62a7414f3625001d73f581c75accb4",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_isaac_3d.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_isaac_3d.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_left_wrist.png",
+      "original_bytes": 304996,
+      "original_sha256": "2dd5137fac8bf692d82bbe12edd5d9b023e1562365176ce00a494c97169efa28",
+      "stored_bytes": 304996,
+      "stored_sha256": "2dd5137fac8bf692d82bbe12edd5d9b023e1562365176ce00a494c97169efa28",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_right_wrist.png",
+      "original_bytes": 263239,
+      "original_sha256": "814d1f2217d4712b229fdaa02ec9101b2de3ba0bd655e233a6c5bb8311ed6245",
+      "stored_bytes": 263239,
+      "stored_sha256": "814d1f2217d4712b229fdaa02ec9101b2de3ba0bd655e233a6c5bb8311ed6245",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/extra/runs/A44_beam_full/startup_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/launch_gate.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/launch_gate.json",
+      "original_bytes": 8704,
+      "original_sha256": "478c7fd7d5dfa49906ad5968551ce02d4538f3178e6d5bf511a099370aff0a97",
+      "stored_bytes": 8704,
+      "stored_sha256": "478c7fd7d5dfa49906ad5968551ce02d4538f3178e6d5bf511a099370aff0a97",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/launch_gate.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/launch_gate.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/macOS_native_playback.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/macOS_native_playback.json",
+      "original_bytes": 3232,
+      "original_sha256": "6d13b0e0447d9f71a18ff792eb95883f9c29a95d8b62c876884a7a1b97a52a3e",
+      "stored_bytes": 3232,
+      "stored_sha256": "6d13b0e0447d9f71a18ff792eb95883f9c29a95d8b62c876884a7a1b97a52a3e",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/macOS_native_playback.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/macOS_native_playback.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/pipeline_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/pipeline_review.json",
+      "original_bytes": 7911,
+      "original_sha256": "01de531dd650507653cb2342259d7a971ccc213b516629e04720a02da0b53177",
+      "stored_bytes": 7911,
+      "stored_sha256": "01de531dd650507653cb2342259d7a971ccc213b516629e04720a02da0b53177",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/pipeline_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/pipeline_review.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/postreview_summary.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/postreview_summary.json.gz",
+      "original_bytes": 37256414,
+      "original_sha256": "834e4c2a06b05868af0381ed39ee05e8c8068f63c46ede87f1e2c521b7fb83ad",
+      "stored_bytes": 3386250,
+      "stored_sha256": "82c3af58f3f1df21c8cd83bb9b8023dddeac32d49f37099571a5185cbbeccebc",
+      "encoding": "gzip",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/postreview_summary.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/postreview_summary.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_front.png",
+      "original_bytes": 549507,
+      "original_sha256": "1a58d35162cbf879962d7eaf163b563d324de65b8086e1ec1ff29c0105873d36",
+      "stored_bytes": 549507,
+      "stored_sha256": "1a58d35162cbf879962d7eaf163b563d324de65b8086e1ec1ff29c0105873d36",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_left_wrist.png",
+      "original_bytes": 319033,
+      "original_sha256": "2067b956fba35d9587f65aa6fa0857049ad16dcf50dc20fe367dc043af06cc8c",
+      "stored_bytes": 319033,
+      "stored_sha256": "2067b956fba35d9587f65aa6fa0857049ad16dcf50dc20fe367dc043af06cc8c",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_right_wrist.png",
+      "original_bytes": 247588,
+      "original_sha256": "9393c448e383c4607d0e6d820c716b607202cbb049eca0d5bfa445f9927f0f95",
+      "stored_bytes": 247588,
+      "stored_sha256": "9393c448e383c4607d0e6d820c716b607202cbb049eca0d5bfa445f9927f0f95",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/capture_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_front.png",
+      "original_bytes": 542945,
+      "original_sha256": "d10b06c27f2fa787f3b1c534b21751a229c311f24d2a4742126bc8e78e2792cc",
+      "stored_bytes": 542945,
+      "stored_sha256": "d10b06c27f2fa787f3b1c534b21751a229c311f24d2a4742126bc8e78e2792cc",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_left_wrist.png",
+      "original_bytes": 293094,
+      "original_sha256": "92261c5e9ef1abdb8e415861a247f261e3a878772bace8b987cc4472b21938e8",
+      "stored_bytes": 293094,
+      "stored_sha256": "92261c5e9ef1abdb8e415861a247f261e3a878772bace8b987cc4472b21938e8",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_right_wrist.png",
+      "original_bytes": 247213,
+      "original_sha256": "8f7c142527a7161b8ad008560188edf69ca374124574b5ac3977bab510338801",
+      "stored_bytes": 247213,
+      "stored_sha256": "8f7c142527a7161b8ad008560188edf69ca374124574b5ac3977bab510338801",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/clearance_entry_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_front.png",
+      "original_bytes": 554864,
+      "original_sha256": "eb7b33d94d8cd19f580ff5721e758961d9a6bb49b74f94ee880e0a23164f76c3",
+      "stored_bytes": 554864,
+      "stored_sha256": "eb7b33d94d8cd19f580ff5721e758961d9a6bb49b74f94ee880e0a23164f76c3",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_left_wrist.png",
+      "original_bytes": 310153,
+      "original_sha256": "562edbc283072dd8139a3b01717636c187f42db2b3a326c2687c9062fcf1f7e4",
+      "stored_bytes": 310153,
+      "stored_sha256": "562edbc283072dd8139a3b01717636c187f42db2b3a326c2687c9062fcf1f7e4",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_right_wrist.png",
+      "original_bytes": 247706,
+      "original_sha256": "604a59b21307c69bf6be0a0701d6d7da18342b82b7068937ade2b6ecae438d4f",
+      "stored_bytes": 247706,
+      "stored_sha256": "604a59b21307c69bf6be0a0701d6d7da18342b82b7068937ade2b6ecae438d4f",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/last_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_front.png",
+      "original_bytes": 545158,
+      "original_sha256": "f967e3feba148cd47e9cc15d9e49c92f7e99933959c2f68ada3e601fd76e8911",
+      "stored_bytes": 545158,
+      "stored_sha256": "f967e3feba148cd47e9cc15d9e49c92f7e99933959c2f68ada3e601fd76e8911",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_left_wrist.png",
+      "original_bytes": 332612,
+      "original_sha256": "b8bc629322682d60aea96d60574bd1b36d36c24285793e9416bb804a0c5836f4",
+      "stored_bytes": 332612,
+      "stored_sha256": "b8bc629322682d60aea96d60574bd1b36d36c24285793e9416bb804a0c5836f4",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_right_wrist.png",
+      "original_bytes": 271235,
+      "original_sha256": "6e416cbf8c5bbaa4062b44b91cacfba01ce5b1929bbc6eedc5f0872e30fb2f86",
+      "stored_bytes": 271235,
+      "stored_sha256": "6e416cbf8c5bbaa4062b44b91cacfba01ce5b1929bbc6eedc5f0872e30fb2f86",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_first_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_front.png",
+      "original_bytes": 554767,
+      "original_sha256": "a5c350ad3166648951e98a9d90b0ced255130a4d51710eb03cbc4d6e1639a0cd",
+      "stored_bytes": 554767,
+      "stored_sha256": "a5c350ad3166648951e98a9d90b0ced255130a4d51710eb03cbc4d6e1639a0cd",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_left_wrist.png",
+      "original_bytes": 315059,
+      "original_sha256": "2f515d955bb6b63b8be6fb144d2e5b6240801df84931711de24e4f00d5252846",
+      "stored_bytes": 315059,
+      "stored_sha256": "2f515d955bb6b63b8be6fb144d2e5b6240801df84931711de24e4f00d5252846",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_right_wrist.png",
+      "original_bytes": 275207,
+      "original_sha256": "8acef12e4bfaff1c08ef45fbdb71cf7b833e0236b927245c28b09570e4d0cf51",
+      "stored_bytes": 275207,
+      "stored_sha256": "8acef12e4bfaff1c08ef45fbdb71cf7b833e0236b927245c28b09570e4d0cf51",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/left_home_last_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_front.png",
+      "original_bytes": 542909,
+      "original_sha256": "f93bb9123603c323d68ae61ce9b406c60b12336aea8dfa586f1de98e58ebd91a",
+      "stored_bytes": 542909,
+      "stored_sha256": "f93bb9123603c323d68ae61ce9b406c60b12336aea8dfa586f1de98e58ebd91a",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_left_wrist.png",
+      "original_bytes": 295057,
+      "original_sha256": "c8713c9d7b60efcda00e8e0cd768931c8714b5e1b15b0d449107c3f105599f17",
+      "stored_bytes": 295057,
+      "stored_sha256": "c8713c9d7b60efcda00e8e0cd768931c8714b5e1b15b0d449107c3f105599f17",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_right_wrist.png",
+      "original_bytes": 249460,
+      "original_sha256": "4568c0b9bebebcde41b132a9fa09c709918331de70cbfda81261d2f249591be2",
+      "stored_bytes": 249460,
+      "stored_sha256": "4568c0b9bebebcde41b132a9fa09c709918331de70cbfda81261d2f249591be2",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/lower_entry_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_front.png",
+      "original_bytes": 553798,
+      "original_sha256": "548f7b81e56f39cfc786d0f8ca883377a67b25f91f8a1b459dba5afb13020db0",
+      "stored_bytes": 553798,
+      "stored_sha256": "548f7b81e56f39cfc786d0f8ca883377a67b25f91f8a1b459dba5afb13020db0",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_left_wrist.png",
+      "original_bytes": 312877,
+      "original_sha256": "bf98a8f475e74f3d0431474814e190f2c259bffab57e0b5e4552fff1eda4b848",
+      "stored_bytes": 312877,
+      "stored_sha256": "bf98a8f475e74f3d0431474814e190f2c259bffab57e0b5e4552fff1eda4b848",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_right_wrist.png",
+      "original_bytes": 275177,
+      "original_sha256": "de4080f524ac42b90db7bdd4b1638dd66406276f97f611eb7c193a8d99a8aaf4",
+      "stored_bytes": 275177,
+      "stored_sha256": "de4080f524ac42b90db7bdd4b1638dd66406276f97f611eb7c193a8d99a8aaf4",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_first_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_front.png",
+      "original_bytes": 561072,
+      "original_sha256": "c21e4942b3bca037c038d836a536d097e52c7efcd63cfc3af3cb122585327956",
+      "stored_bytes": 561072,
+      "stored_sha256": "c21e4942b3bca037c038d836a536d097e52c7efcd63cfc3af3cb122585327956",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_left_wrist.png",
+      "original_bytes": 315819,
+      "original_sha256": "3807e77e8e74e9e88ee7d6347feeeaee0b92e97e6a667e1914e992c71d47fbe7",
+      "stored_bytes": 315819,
+      "stored_sha256": "3807e77e8e74e9e88ee7d6347feeeaee0b92e97e6a667e1914e992c71d47fbe7",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_right_wrist.png",
+      "original_bytes": 301911,
+      "original_sha256": "e4253d96e6e9c64210b8df4f797028a25c37540cb9c78e39b3464a3b543c6be8",
+      "stored_bytes": 301911,
+      "stored_sha256": "e4253d96e6e9c64210b8df4f797028a25c37540cb9c78e39b3464a3b543c6be8",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_clearance_last_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_front.png",
+      "original_bytes": 561586,
+      "original_sha256": "019d96de8ad7e439217f695fa0488c23b20b9720e5fb7027e1a4d8bddda1271d",
+      "stored_bytes": 561586,
+      "stored_sha256": "019d96de8ad7e439217f695fa0488c23b20b9720e5fb7027e1a4d8bddda1271d",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_left_wrist.png",
+      "original_bytes": 313014,
+      "original_sha256": "8253375974745acb538e9da63e841f39467f5f53754c0285f3f2133410547f65",
+      "stored_bytes": 313014,
+      "stored_sha256": "8253375974745acb538e9da63e841f39467f5f53754c0285f3f2133410547f65",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_right_wrist.png",
+      "original_bytes": 302700,
+      "original_sha256": "6f031e98e3584df73185073443cfe5730ea93b16e1881aad6225c81a60946969",
+      "stored_bytes": 302700,
+      "stored_sha256": "6f031e98e3584df73185073443cfe5730ea93b16e1881aad6225c81a60946969",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_first_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_front.png",
+      "original_bytes": 557782,
+      "original_sha256": "dac85bc8bfbdbbd527b083c40e1eb9cdecb9dd251308c94504adbbe8c0b51c61",
+      "stored_bytes": 557782,
+      "stored_sha256": "dac85bc8bfbdbbd527b083c40e1eb9cdecb9dd251308c94504adbbe8c0b51c61",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_left_wrist.png",
+      "original_bytes": 317356,
+      "original_sha256": "ce6faa7e9b3930450c92e2ad1df0980c2251eed9ad0da060f70ffc2216f167a1",
+      "stored_bytes": 317356,
+      "stored_sha256": "ce6faa7e9b3930450c92e2ad1df0980c2251eed9ad0da060f70ffc2216f167a1",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_right_wrist.png",
+      "original_bytes": 235948,
+      "original_sha256": "f85927f1e8b168d8ecb5f9577fe9cba2183e636da7e6b26b3855e3f77a27dc5e",
+      "stored_bytes": 235948,
+      "stored_sha256": "f85927f1e8b168d8ecb5f9577fe9cba2183e636da7e6b26b3855e3f77a27dc5e",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/right_home_last_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_front.png",
+      "original_bytes": 543585,
+      "original_sha256": "d2f13bf6db32fa0cb4f3dbe7ae36a07ec9083bf4460a1f0006d92d1f44f17bdb",
+      "stored_bytes": 543585,
+      "stored_sha256": "d2f13bf6db32fa0cb4f3dbe7ae36a07ec9083bf4460a1f0006d92d1f44f17bdb",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_left_wrist.png",
+      "original_bytes": 283200,
+      "original_sha256": "ed68df3815169c2840370f588b18a793a5ab8d250c300bd631ad830cdad94eda",
+      "stored_bytes": 283200,
+      "stored_sha256": "ed68df3815169c2840370f588b18a793a5ab8d250c300bd631ad830cdad94eda",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_right_wrist.png",
+      "original_bytes": 247677,
+      "original_sha256": "d33a2896b712320f5a60fce1f6002bb043dd34a61ef51a53f56d3b08f467fc9f",
+      "stored_bytes": 247677,
+      "stored_sha256": "d33a2896b712320f5a60fce1f6002bb043dd34a61ef51a53f56d3b08f467fc9f",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/transfer_entry_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_front.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_front.png",
+      "original_bytes": 544689,
+      "original_sha256": "9884763feee9f3fa66604ce7c71ec7062068c88753b25bce38d9e05f3c6ade76",
+      "stored_bytes": 544689,
+      "stored_sha256": "9884763feee9f3fa66604ce7c71ec7062068c88753b25bce38d9e05f3c6ade76",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_front.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_front.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_left_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_left_wrist.png",
+      "original_bytes": 292854,
+      "original_sha256": "499ffc6fe602a70ad643a21e654f3d0c4a584dd5b4f0e3d09c10c95a5b2e0d01",
+      "stored_bytes": 292854,
+      "stored_sha256": "499ffc6fe602a70ad643a21e654f3d0c4a584dd5b4f0e3d09c10c95a5b2e0d01",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_left_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_left_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_right_wrist.png",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_right_wrist.png",
+      "original_bytes": 248554,
+      "original_sha256": "0c1b8de3de76aa92b33dfd85f930c82dbed8cbdd4d079f9ef4329387b7840718",
+      "stored_bytes": 248554,
+      "stored_sha256": "0c1b8de3de76aa92b33dfd85f930c82dbed8cbdd4d079f9ef4329387b7840718",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_right_wrist.png",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/review_images/turn_entry_observation_images_right_wrist.png",
+      "groups": [
+        "A44_complete_media_directory"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/route_source_manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/route_source_manifest.json",
+      "original_bytes": 116675,
+      "original_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+      "stored_bytes": 116675,
+      "stored_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/route_source_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/route_source_manifest.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/source_after.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/source_after.json",
+      "original_bytes": 155177,
+      "original_sha256": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+      "stored_bytes": 155177,
+      "stored_sha256": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/source_after.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/source_after.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/source_before.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/source_before.json",
+      "original_bytes": 155177,
+      "original_sha256": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+      "stored_bytes": 155177,
+      "stored_sha256": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/source_before.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/source_before.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/startup_camera_render_diagnostics.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/startup_camera_render_diagnostics.json",
+      "original_bytes": 152078,
+      "original_sha256": "0722d1366cd92d2c2ef90f85564ef4a78f924d31bb5b5f70b660e79a5e34f9de",
+      "stored_bytes": 152078,
+      "stored_sha256": "0722d1366cd92d2c2ef90f85564ef4a78f924d31bb5b5f70b660e79a5e34f9de",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/startup_camera_render_diagnostics.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/startup_camera_render_diagnostics.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/task_config_snapshot.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/task_config_snapshot.json",
+      "original_bytes": 673194,
+      "original_sha256": "f5e50359f05860807f871b0134918c902200ee2df605be013591fe9c00c9631f",
+      "stored_bytes": 673194,
+      "stored_sha256": "f5e50359f05860807f871b0134918c902200ee2df605be013591fe9c00c9631f",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/task_config_snapshot.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/task_config_snapshot.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/transfer_manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/transfer_manifest.json",
+      "original_bytes": 31918,
+      "original_sha256": "2aa00bdedb0f2493ce5318b9f7ba00d7aeaa12ed9ef85ae4788e1c0a216ec2c0",
+      "stored_bytes": 31918,
+      "stored_sha256": "2aa00bdedb0f2493ce5318b9f7ba00d7aeaa12ed9ef85ae4788e1c0a216ec2c0",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/transfer_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/transfer_manifest.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/video_manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/video_manifest.json",
+      "original_bytes": 1897,
+      "original_sha256": "a44edd92a8f3f1a9a03db981f3cd227fc8101de0922c5e029fb201f1b9c21e1e",
+      "stored_bytes": 1897,
+      "stored_sha256": "a44edd92a8f3f1a9a03db981f3cd227fc8101de0922c5e029fb201f1b9c21e1e",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/video_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/video_manifest.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/A44_media/visible_mesh_runtime_report.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/A44_media/visible_mesh_runtime_report.json.gz",
+      "original_bytes": 28101407,
+      "original_sha256": "aad50bfc23cab095c8550dac1ad27dfddef8e68554e0717f0632b1cddd2ce7cc",
+      "stored_bytes": 941354,
+      "stored_sha256": "0ee3437ca7aee3a569e00bc041c437408aff58da78aa6f87a71c3d991a8fd616",
+      "encoding": "gzip",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/visible_mesh_runtime_report.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_media/visible_mesh_runtime_report.json",
+      "groups": [
+        "A44_complete_media_directory",
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/D28_local_media_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/D28_local_media_review.json",
+      "original_bytes": 13560,
+      "original_sha256": "c080e93ab0cc5a85e806de1e0d46d58bf2e5886f3cc4518eb6cf58fbee232b04",
+      "stored_bytes": 13560,
+      "stored_sha256": "c080e93ab0cc5a85e806de1e0d46d58bf2e5886f3cc4518eb6cf58fbee232b04",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/D28_local_media_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/D28_local_media_review.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/alias_fix_qualification.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/alias_fix_qualification.json",
+      "original_bytes": 1479,
+      "original_sha256": "751d3b1a4c8c74772219944d8d0192d143d9d7f1eb902452481a2a0a7b5c9249",
+      "stored_bytes": 1479,
+      "stored_sha256": "751d3b1a4c8c74772219944d8d0192d143d9d7f1eb902452481a2a0a7b5c9249",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/alias_fix_qualification.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/alias_fix_qualification.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/closure_receipt.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/closure_receipt.json",
+      "original_bytes": 646,
+      "original_sha256": "8a99d4c13ae1ec30527e3930b377f37efdf0031ac146efc7196de7cabf654e2a",
+      "stored_bytes": 646,
+      "stored_sha256": "8a99d4c13ae1ec30527e3930b377f37efdf0031ac146efc7196de7cabf654e2a",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/closure_receipt.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/closure_receipt.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_work/final_home_independent_read_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_work/final_home_independent_read_review.json",
+      "original_bytes": 7928,
+      "original_sha256": "08b53f1165430cdedb5513d28bc251d48b9dfa055c52d330b31563f3aee33cee",
+      "stored_bytes": 7928,
+      "stored_sha256": "08b53f1165430cdedb5513d28bc251d48b9dfa055c52d330b31563f3aee33cee",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/final_home_independent_read_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/final_home_independent_read_review.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/repair_batch_D_20261016.json",
+      "stored_path": "outputs/beam_assisted_20261015/repair_batch_D_20261016.json",
+      "original_bytes": 57429,
+      "original_sha256": "3364fee1a51a202a32ef22185cdc2c396e6ab89976c24c211fdbe2a19ea85189",
+      "stored_bytes": 57429,
+      "stored_sha256": "3364fee1a51a202a32ef22185cdc2c396e6ab89976c24c211fdbe2a19ea85189",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/repair_batch_D_20261016.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/repair_batch_D_20261016.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/tools/assisted_manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/tools/assisted_manifest.json",
+      "original_bytes": 116675,
+      "original_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+      "stored_bytes": 116675,
+      "stored_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/tools/assisted_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/tools/assisted_manifest.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/tools/assisted_tools_manifest.json",
+      "stored_path": "outputs/beam_assisted_20261015/tools/assisted_tools_manifest.json",
+      "original_bytes": 1913,
+      "original_sha256": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+      "stored_bytes": 1913,
+      "stored_sha256": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/tools/assisted_tools_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/tools/assisted_tools_manifest.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_D28_closed_20261021/sync_verification.json",
+      "stored_path": "outputs/beam_assisted_D28_closed_20261021/sync_verification.json",
+      "original_bytes": 48032,
+      "original_sha256": "10494c5a19fdcd9ede58dbc168644b7fe6fdba0b12f695fe80c4b053b839ebec",
+      "stored_bytes": 48032,
+      "stored_sha256": "10494c5a19fdcd9ede58dbc168644b7fe6fdba0b12f695fe80c4b053b839ebec",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_D28_closed_20261021/sync_verification.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_assisted_D28_closed_20261021/sync_verification.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_checkpoint_code_cleanup_20261019/completion_summary.json",
+      "stored_path": "outputs/beam_checkpoint_code_cleanup_20261019/completion_summary.json",
+      "original_bytes": 3240,
+      "original_sha256": "a7d7aade87106c11477b694930bb96211679990ef1ba58df9a74cc2fc1090a4a",
+      "stored_bytes": 3240,
+      "stored_sha256": "a7d7aade87106c11477b694930bb96211679990ef1ba58df9a74cc2fc1090a4a",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_checkpoint_code_cleanup_20261019/completion_summary.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_checkpoint_code_cleanup_20261019/completion_summary.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_output_cleanup_20261019/checkpoint_last_conclusions.json",
+      "stored_path": "outputs/beam_output_cleanup_20261019/checkpoint_last_conclusions.json",
+      "original_bytes": 31481,
+      "original_sha256": "fd63fa9597eba87cf7832370a0acb7b74fa7868a7842861e59eb3c2f6f06cc93",
+      "stored_bytes": 31481,
+      "stored_sha256": "fd63fa9597eba87cf7832370a0acb7b74fa7868a7842861e59eb3c2f6f06cc93",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_output_cleanup_20261019/checkpoint_last_conclusions.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_output_cleanup_20261019/checkpoint_last_conclusions.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_output_cleanup_20261019/cleanup_summary.json",
+      "stored_path": "outputs/beam_output_cleanup_20261019/cleanup_summary.json",
+      "original_bytes": 6735,
+      "original_sha256": "ed2e2a9b81a72abd15ce393429c9cbd41a61773dda818033409236e3cb26afbf",
+      "stored_bytes": 6735,
+      "stored_sha256": "ed2e2a9b81a72abd15ce393429c9cbd41a61773dda818033409236e3cb26afbf",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_output_cleanup_20261019/cleanup_summary.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_output_cleanup_20261019/cleanup_summary.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_workflow_optimization_20261016/tools_manifest.json",
+      "stored_path": "outputs/beam_workflow_optimization_20261016/tools_manifest.json",
+      "original_bytes": 1596,
+      "original_sha256": "31f14b344757b41c4967dea55e35747e56d60990d7467b6608828a12079df950",
+      "stored_bytes": 1596,
+      "stored_sha256": "31f14b344757b41c4967dea55e35747e56d60990d7467b6608828a12079df950",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_workflow_optimization_20261016/tools_manifest.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_optimization_20261016/tools_manifest.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_workflow_transfer_20261021/final_server_context_receipt.json",
+      "stored_path": "outputs/beam_workflow_transfer_20261021/final_server_context_receipt.json",
+      "original_bytes": 34941,
+      "original_sha256": "3155e9406dae2595175eacc1f047eedfc247035ce6de7f4b0cd7d84da87f3eaa",
+      "stored_bytes": 34941,
+      "stored_sha256": "3155e9406dae2595175eacc1f047eedfc247035ce6de7f4b0cd7d84da87f3eaa",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/final_server_context_receipt.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/final_server_context_receipt.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_workflow_transfer_20261021/final_server_receipt.json",
+      "stored_path": "outputs/beam_workflow_transfer_20261021/final_server_receipt.json",
+      "original_bytes": 39059,
+      "original_sha256": "64acb4f0e03cebf9b23acb40b201940c0b6ddd594cca0c1888c4887dbc31d831",
+      "stored_bytes": 39059,
+      "stored_sha256": "64acb4f0e03cebf9b23acb40b201940c0b6ddd594cca0c1888c4887dbc31d831",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/final_server_receipt.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/final_server_receipt.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_workflow_transfer_20261021/receipt_mirror_verification.json",
+      "stored_path": "outputs/beam_workflow_transfer_20261021/receipt_mirror_verification.json",
+      "original_bytes": 1723,
+      "original_sha256": "2e0c6c6bf9da0bd6013b58ef545817d0cc9fa7f4e61625e6b6cab5adc793684c",
+      "stored_bytes": 1723,
+      "stored_sha256": "2e0c6c6bf9da0bd6013b58ef545817d0cc9fa7f4e61625e6b6cab5adc793684c",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/receipt_mirror_verification.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/receipt_mirror_verification.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "stored_path": "outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "original_bytes": 70061,
+      "original_sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e",
+      "stored_bytes": 70061,
+      "stored_sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e",
+      "encoding": "identity",
+      "source_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "groups": [
+        "minimum_text_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/post_failure_fix/affected_module_result.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/post_failure_fix/affected_module_result.json",
+      "original_bytes": 119437,
+      "original_sha256": "53983cd698cf5c7b07b570f1665c452c3f4f50a6347a501cf5704d649ab84030",
+      "stored_bytes": 119437,
+      "stored_sha256": "53983cd698cf5c7b07b570f1665c452c3f4f50a6347a501cf5704d649ab84030",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_fix/affected_module_result.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_fix/affected_module_result.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/post_failure_fix/independent_alias_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/post_failure_fix/independent_alias_review.json",
+      "original_bytes": 3093,
+      "original_sha256": "8fc087c0f9b4e03b67b040fd3d65723bf3746ab8ca5a8114b1744cb023d529f4",
+      "stored_bytes": 3093,
+      "stored_sha256": "8fc087c0f9b4e03b67b040fd3d65723bf3746ab8ca5a8114b1744cb023d529f4",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_fix/independent_alias_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_fix/independent_alias_review.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D28_postprocess_pipeline.json",
+      "stored_path": "outputs/beam_assisted_20261015/D28_postprocess_pipeline.json",
+      "original_bytes": 7911,
+      "original_sha256": "01de531dd650507653cb2342259d7a971ccc213b516629e04720a02da0b53177",
+      "stored_bytes": 7911,
+      "stored_sha256": "01de531dd650507653cb2342259d7a971ccc213b516629e04720a02da0b53177",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_postprocess_pipeline.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_postprocess_pipeline.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/human_instructions/D28_single_round_20261021.json",
+      "stored_path": "outputs/beam_assisted_20261015/human_instructions/D28_single_round_20261021.json",
+      "original_bytes": 570,
+      "original_sha256": "8863b4556e5537ae04d70838717e82c89235a9d4f248611849a168650bd9f6f2",
+      "stored_bytes": 570,
+      "stored_sha256": "8863b4556e5537ae04d70838717e82c89235a9d4f248611849a168650bd9f6f2",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/human_instructions/D28_single_round_20261021.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/human_instructions/D28_single_round_20261021.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D25_probe_review.json",
+      "stored_path": "outputs/beam_assisted_20261015/D25_probe_review.json",
+      "original_bytes": 11255968,
+      "original_sha256": "acfe078d2f9b900224b2ea36b37e020479ace273faa1a5fbffcb441eb04f45f4",
+      "stored_bytes": 11255968,
+      "stored_sha256": "acfe078d2f9b900224b2ea36b37e020479ace273faa1a5fbffcb441eb04f45f4",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D25_probe_review.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D25_probe_review.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_work/base_configuration_identity.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_work/base_configuration_identity.json",
+      "original_bytes": 285,
+      "original_sha256": "7393b5836d9b7974ad5ad46b519f78f593e0b34b23034b1f8ddfa303a05f2f14",
+      "stored_bytes": 285,
+      "stored_sha256": "7393b5836d9b7974ad5ad46b519f78f593e0b34b23034b1f8ddfa303a05f2f14",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/base_configuration_identity.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/base_configuration_identity.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/A44_beam_full_sealed_version.json",
+      "stored_path": "outputs/beam_assisted_20261015/A44_beam_full_sealed_version.json",
+      "original_bytes": 1113,
+      "original_sha256": "ee7570461681eea82e8ff875fcfd695617bf3bc5efcdeab15e5f1354b9e0209a",
+      "stored_bytes": 1113,
+      "stored_sha256": "ee7570461681eea82e8ff875fcfd695617bf3bc5efcdeab15e5f1354b9e0209a",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_beam_full_sealed_version.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_beam_full_sealed_version.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    },
+    {
+      "original_path": "outputs/beam_assisted_20261015/D27_postprocess_pipeline.json",
+      "stored_path": "outputs/beam_assisted_20261015/D27_postprocess_pipeline.json",
+      "original_bytes": 11364,
+      "original_sha256": "182a6ba92612e243bbc0eadfa2bb5a936a87d3f00de81c2abc014c0c8cf8d49d",
+      "stored_bytes": 11364,
+      "stored_sha256": "182a6ba92612e243bbc0eadfa2bb5a936a87d3f00de81c2abc014c0c8cf8d49d",
+      "encoding": "identity",
+      "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_postprocess_pipeline.json",
+      "canonical_server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_postprocess_pipeline.json",
+      "groups": [
+        "canonical_server_evidence"
+      ]
+    }
+  ],
+  "missing": [],
+  "summary": {
+    "file_count": 101,
+    "copied_file_count": 101,
+    "reused_same_bytes_file_count": 0,
+    "complete_A44_media_file_count": 62,
+    "minimum_existing_evidence_file_count": 56,
+    "total_original_bytes": 423356710,
+    "total_stored_bytes": 107503599,
+    "compressed_file_count": 4,
+    "compressed_original_bytes": 329922119,
+    "compressed_stored_bytes": 14069008,
+    "complete_original_video_count": 3,
+    "complete_original_video_sha256": {
+      "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_front.mp4": "a471efe2a648a70151627f92852a1b41c4076be4274a26a96f8b736a914b1ca2",
+      "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_left_wrist.mp4": "0dd61d3381733d59734a379a86347b197641d4173df403d183a2b949666754cc",
+      "outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_right_wrist.mp4": "a1a1b3174edd0d47fffdc2b0cf916095c29b1e02b793e721268cba84da45f01d"
+    },
+    "all_copied_or_reused_bytes_verified": true,
+    "all_gzip_roundtrips_verified": true,
+    "final_file_count": 109
+  },
+  "limits": [
+    "No git operation, simulation, root live source edit or original evidence rewrite was performed.",
+    "Source/critical tools and current shared documentation are assembled by parent separately.",
+    "Six server canonical paths remain in missing pending parent-provided bundle, including aliases whose local original copy is already stored under its actual path.",
+    "Historical false results and independent-terminal raw missingness are unchanged."
+  ]
+}

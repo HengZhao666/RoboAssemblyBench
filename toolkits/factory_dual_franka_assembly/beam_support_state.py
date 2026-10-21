@@ -63,8 +63,9 @@ def combine_support_surfaces(surfaces, world_corners):
     if not under or any(not s['contact'].get('valid') or 'force_world' not in s['contact'] for s in under):
         raise ValueError('Physical support pair force unavailable')
     top = max(s['upper'][2] for s in under)
-    return {'table_top': float(top), 'bottom_gap': float(lo[2]-top),
-            'vertical_force': abs(sum(float(s['contact']['force_world'][2]) for s in under)),
+    signed_force = sum(float(s['contact']['force_world'][2]) for s in under)
+    return {'valid': signed_force >= 0., 'table_top': float(top), 'bottom_gap': float(lo[2]-top),
+            'vertical_force': signed_force,
             'support_surfaces': under}
 
 
@@ -221,6 +222,20 @@ class BeamSupportState:
             if motion_view is None and observation.get('valid'):
                 motion_view = self._get_contact_probe(str(base.unwrap().prim_path), str(table.GetPath()))
         snapshot = live_body_snapshot(motion_view)
+        if getattr(self, '_beam_exploration_enabled', False):
+            # Read COM from this already initialized motion view, between the
+            # same two clock reads as actor pose/contact. Never substitute an
+            # actor origin or an asynchronous diagnostic record for missing COM.
+            from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import _body_com_snapshot
+            snapshot['native_com'] = _body_com_snapshot(motion_view,
+                np.asarray([snapshot['position']]), np.asarray([snapshot['orientation']]))
+            snapshot['motion_view_id'] = id(motion_view)
+            snapshot['motion_body_id'] = str(base.unwrap().prim_path)
+            # The contact cache normally owns it; retain a reference explicitly
+            # so a later wrapper allocation cannot silently reuse this identity.
+            if not hasattr(self, '_beam_exploration_views'):
+                self._beam_exploration_views = {}
+            self._beam_exploration_views.setdefault(id(motion_view), motion_view)
         corners = itertools.product([-.0762, .0762], [-.00889, .00889], [0., .0127])
         world_corners = [np.asarray(snapshot['position']) + quat_rotate(snapshot['orientation'], p) for p in corners]
         support = combine_support_surfaces(surfaces, world_corners)
@@ -312,7 +327,8 @@ class BeamSupportState:
         token = physics_sample_token(sample)
         if token is None or not sample.get('valid'):
             state.update(last_token=None, sample=None, count=0)
-            return False
+            return self._beam_exploration_seat(sample, False) if (
+                getattr(self, '_beam_exploration_enabled', False) and self.phase == 'base_6_set_down') else False
         if token != state['last_token']:
             consecutive = physics_samples_consecutive(state['sample'], sample)
             ready = table_support_ready(sample, float(advance.get('minimum_vertical_force', 1.962)))
@@ -328,8 +344,218 @@ class BeamSupportState:
                 'consecutive': consecutive, 'stable_count': state['count']})
         elif state['sample']['physics_time'] != sample['physics_time']:
             state.update(last_token=None, sample=None, count=0)
+            return self._beam_exploration_seat(sample, False) if (
+                getattr(self, '_beam_exploration_enabled', False) and self.phase == 'base_6_set_down') else False
+        original_ready = state['count'] >= max(int(advance.get('stable_steps', 96)), 1)
+        if getattr(self, '_beam_exploration_enabled', False) and self.phase == 'base_6_set_down':
+            return self._beam_exploration_seat(sample, original_ready)
+        if self._beam_continuing_final():
+            pose = self._beam_phase_pose_result('fabrica_beam_6', sample)
+            ready = bool(pose.get('ready') and sample.get('valid')
+                and float(advance.get('minimum_vertical_force', 1.962)) <= sample['vertical_force'] <= 40.
+                and -.0005 <= sample['bottom_gap'] <= .001)
+            self._beam_exploration_record('final_support_gate', sample,
+                {'mode': 'qualifying', 'ready': ready, 'original_ready': original_ready,
+                 'formal_success': False}, pose)
+            return ready
+        return original_ready
+
+    def _beam_continuing_final(self):
+        return bool(getattr(self, '_beam_exploration_enabled', False)
+            and getattr(self, '_beam_exploration_state', {}).get('continue_after_first_insertion')
+            and self.phase == 'beam_final_unloaded_verification')
+
+    def _beam_continuing_stability(self):
+        return bool(getattr(self, '_beam_exploration_enabled', False)
+            and getattr(self, '_beam_exploration_state', {}).get('continue_after_first_insertion')
+            and getattr(self, '_beam_exploration_state', {}).get('anchor')
+            and (self.phase.endswith('_release')
+                 or self.phase == 'beam_final_unloaded_verification'))
+
+    def _beam_phase_pose_result(self, name, sample, *, linear=.002, angular=.02):
+        """Reuse the existing actor/COM windows on one stationary phase/body."""
+        from toolkits.factory_dual_franka_assembly.beam_pose_stability import PoseStabilityTracker
+        key = (self.phase_index, self.phase_entry_step, name, linear, angular)
+        trackers = getattr(self, '_beam_phase_pose_trackers', None)
+        if trackers is None:
+            trackers = self._beam_phase_pose_trackers = {}
+        if key not in trackers:
+            trackers[key] = PoseStabilityTracker(linear_speed_limit=linear, angular_speed_limit=angular)
+        tracker = trackers[key]
+        com = sample.get('native_com', {})
+        positions = com.get('world_positions', []) if com.get('valid') else []
+        return tracker.observe(sample, com_position=positions[0] if positions else None,
+            body_id=sample.get('motion_body_id'), view_id=sample.get('motion_view_id'),
+            anchor_eligible=bool(sample.get('valid') and sample.get('motion_valid')))
+
+    def _beam_object_pose_sample(self, name):
+        """Copy only an already initialized contact view; never create one here."""
+        if name == 'fabrica_beam_6':
+            return self._beam_table_observation(sample_context='exploration_final_static')
+        from toolkits.factory_dual_franka_assembly.beam_physics_diagnostics import _body_com_snapshot
+        before = self._beam_physics_stamp()
+        result = {'valid': False, 'motion_valid': False, 'physics_stamp_valid': False}
+        try:
+            if before.get('valid') is not True:
+                raise ValueError('Final pose clock invalid')
+            path = str(self._object_prims[name].GetPath())
+            cache = getattr(self, '_beam_final_motion_views', None)
+            if cache is None:
+                cache = self._beam_final_motion_views = {}
+            view = cache.get(path)
+            if view is None:
+                views = [v for (source, _), v in self._contact_probes.items()
+                    if source == path and v.is_physics_handle_valid()]
+                if not views:
+                    raise ValueError('No existing live final-part contact view: ' + name)
+                view = cache[path] = views[0]
+            result.update(live_body_snapshot(view))
+            result['native_com'] = _body_com_snapshot(view,
+                np.asarray([result['position']]), np.asarray([result['orientation']]))
+            result.update(valid=True, motion_body_id=path, motion_view_id=id(view),
+                physics_stamp_valid=True, physics_epoch=before['epoch'],
+                physics_step_index=before['index'], physics_time=before['time'], physics_dt=before['dt'])
+            if self._beam_physics_stamp() != before:
+                raise ValueError('Final pose sample changed clock while reading')
+        except Exception as exc:
+            result.update(valid=False, motion_valid=False, physics_stamp_valid=False,
+                error=f'{type(exc).__name__}: {exc}')
+        return result
+
+    def _beam_pose_objects_static(self, object_specs, *, linear_threshold, angular_threshold):
+        ready, original_ready, results = True, True, {}
+        for spec in self._as_list(object_specs):
+            name = self._extract_object_name(spec)
+            settings = spec if isinstance(spec, dict) else {}
+            linear = float(settings.get('linear_velocity_threshold', linear_threshold))
+            angular = float(settings.get('angular_velocity_threshold', angular_threshold))
+            raw = self._object_velocity_metrics(name, linear_threshold=linear, angular_threshold=angular)
+            original_ready = bool(original_ready and raw.get('valid') and raw.get('is_static'))
+            sample = self._beam_object_pose_sample(name)
+            pose = self._beam_phase_pose_result(name, sample, linear=linear, angular=angular)
+            ready = bool(ready and pose.get('ready'))
+            results[name] = {'sample': sample, 'pose': pose, 'original': raw}
+        self._beam_exploration_record('phase_objects_static', None,
+            {'mode': 'qualifying', 'ready': ready, 'original_ready': original_ready,
+             'formal_success': False, 'objects': results})
+        return ready
+
+    def _beam_exploration_record(self, event, sample, decision, pose_result=None):
+        self._beam_exploration_last_decision = copy.deepcopy(decision)
+        path = os.environ.get('BEAM_EXPLORATION_TRACE_PATH')
+        if not path and os.environ.get('BEAM_MOTION_TRACE_PATH'):
+            path = os.path.join(os.path.dirname(os.environ['BEAM_MOTION_TRACE_PATH']), 'exploration_trace.jsonl')
+        if path:
+            record = {'event': event, 'task_step_label': int(self.step_counter),
+                      'phase': self.phase, 'sample': sample, 'decision': decision,
+                      'pose_result': pose_result, 'formal_success': False}
+            with open(path, 'a') as stream:
+                stream.write(json.dumps(record, allow_nan=False) + '\n')
+
+    def _beam_exploration_seat(self, sample, original_ready):
+        from toolkits.factory_dual_franka_assembly.beam_pose_stability import PoseStabilityTracker
+        from toolkits.factory_dual_franka_assembly.beam_exploration import exploration_seat_decision
+        tracker = getattr(self, '_beam_exploration_pose_tracker', None)
+        if tracker is None:
+            tracker = self._beam_exploration_pose_tracker = PoseStabilityTracker()
+        try:
+            signed_force = sum(float(s['contact']['force_world'][2]) for s in sample['support_surfaces'])
+            eligible = bool(sample.get('valid') and sample.get('motion_valid')
+                            and math.isfinite(signed_force) and 1.962 <= signed_force <= 10.
+                            and -.0005 <= sample['bottom_gap'] <= .001)
+        except (KeyError, TypeError, ValueError, OverflowError):
+            eligible = False
+        com = sample.get('native_com', {})
+        com_position = com.get('world_positions', [None])[0] if com.get('valid') else None
+        pose = tracker.observe(sample, com_position=com_position,
+            body_id=sample.get('motion_body_id'), view_id=sample.get('motion_view_id'),
+            anchor_eligible=eligible)
+        decision = exploration_seat_decision(self._beam_exploration_state, sample, self.phase,
+            copy.deepcopy(getattr(self, '_continuous_grasp_loss_generation', {})), True,
+            pose_result=pose, original_ready=original_ready)
+        self._beam_exploration_record('seat_gate', sample, decision, pose)
+        if decision['ready'] and 'native_anchor' not in self._beam_exploration_state:
+            self._beam_exploration_state['native_anchor'] = {
+                'com_position': list(pose['anchor']['com_position']), 'body_id': sample['motion_body_id'],
+                'view_id': sample['motion_view_id']}
+        if decision['mode'] == 'failure':
+            self._set_terminal_state('failed', reason='beam-exploration-' + decision['reason'],
+                status='failed', transition_type='failure', detail=decision)
+        return bool(decision['ready'])
+
+    def _beam_exploration_guard(self, phase, *, phase_complete=False):
+        """Fail or stop before the next interaction/action; never command physics."""
+        from toolkits.factory_dual_franka_assembly.beam_exploration import exploration_guard_decision
+        state = self._beam_exploration_state
+        if state.get('anchor') and phase.get('name') != 'base_6_set_down':
+            try:
+                # Entry may introduce an installed interface before its first
+                # watchdog tick. Validate it before entry interactions too.
+                self._beam_assembly_integrity(phase)
+            except Exception as exc:
+                self._set_terminal_state('failed', reason='beam-exploration-integrity-unavailable',
+                    status='failed', transition_type='failure', detail={'error': f'{type(exc).__name__}: {exc}'})
+                return True
+            if self.failed:
+                return True
+        # Before seating the helper validates phase scope without reading views.
+        sample = self._beam_table_observation(sample_context='exploration_guard') if state.get('anchor') else None
+        decision = exploration_guard_decision(state, sample, phase.get('name'),
+            copy.deepcopy(getattr(self, '_continuous_grasp_loss_generation', {})), True,
+            phase_complete=phase_complete, integrity_valid=not self.failed)
+        if sample is not None and decision['mode'] not in ('failure', 'seating', 'waiting'):
+            try:
+                native = state['native_anchor']
+                com = sample['native_com']
+                current = np.asarray(com['world_positions'], dtype=float)
+                if (com.get('valid') is not True or current.shape != (1, 3)
+                        or not np.all(np.isfinite(current))
+                        or sample['motion_body_id'] != native['body_id']
+                        or sample['motion_view_id'] != native['view_id']):
+                    raise ValueError('Native COM or motion-view identity changed')
+                if float(np.linalg.norm(current[0] - np.asarray(native['com_position']))) > .001:
+                    raise ValueError('Native COM displaced beyond seated-base budget')
+            except (KeyError, TypeError, ValueError, OverflowError) as exc:
+                state['failure'] = 'native_pose_guard_invalid: ' + str(exc)
+                decision = {'mode': 'failure', 'ready': False, 'reason': state['failure'], 'formal_success': False}
+        if sample is not None or decision['mode'] in ('failure', 'complete'):
+            self._beam_exploration_record('guard', sample, decision)
+        if decision['mode'] == 'failure':
+            self._set_terminal_state('failed', reason='beam-exploration-' + decision['reason'],
+                status='failed', transition_type='failure', detail=decision)
+            return True
+        if decision['mode'] == 'complete':
+            self._beam_exploration_complete = True
+            self._set_terminal_state('exploration_stopped', reason='beam-first-insertion-exploration-complete',
+                status='exploration_stopped', detail=decision)
+            return True
+        return False
+
+    def _beam_joint_conditions_stable(self, advance, ready):
+        """Qualify the complete final predicate on fresh, consecutive physics samples."""
+        sample = self._beam_table_observation(sample_context='post_physics_joint_gate')
+        key = (self.phase_index, self.phase_entry_step, json.dumps(advance, sort_keys=True))
+        state = getattr(self, '_beam_joint_stability', None)
+        if state is None or state['key'] != key:
+            state = self._beam_joint_stability = {'key': key, 'sample': None, 'count': 0}
+        token = physics_sample_token(sample)
+        if token is None or not sample.get('valid'):
+            state.update(sample=None, count=0)
             return False
-        return state['count'] >= max(int(advance.get('stable_steps', 96)), 1)
+        previous = state['sample']
+        old_token = physics_sample_token(previous or {})
+        if not ready:
+            state.update(sample=copy.deepcopy(sample), count=0)
+            return False
+        if token == old_token:
+            if not (sample['physics_time'] == previous['physics_time']
+                    and sample['physics_dt'] == previous['physics_dt']):
+                state.update(sample=None, count=0)
+                return False
+        else:
+            state['count'] = (state['count'] if physics_samples_consecutive(previous, sample) else 0) + 1
+            state['sample'] = copy.deepcopy(sample)
+        return state['count'] >= max(int(advance['physics_stable_steps']), 1)
 
     def _beam_support_watchdog(self, phase):
         if not phase.get('beam_require_table_support'):
@@ -379,6 +605,9 @@ class BeamSupportState:
             position, orientation = part.get_pose()
             pe, ae = pose_error(current_position=position, current_orientation=orientation,
                                 target_position=base_pose[0], target_orientation=base_pose[1])
+            if getattr(self, '_beam_exploration_enabled', False) and not (
+                    math.isfinite(pe) and math.isfinite(ae)):
+                raise ValueError('Non-finite installed-interface pose error')
             parent = base if pid in ['2','3'] else self._resolve_object('fabrica_beam_' + ('2' if pid=='0' else '3'))
             pair = self._pair_contact_observation(str(part.unwrap().prim_path), str(parent.unwrap().prim_path))
             records.append({'part':pid,'relative_position_error':float(pe),

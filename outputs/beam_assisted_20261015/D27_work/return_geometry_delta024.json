@@ -1,0 +1,119 @@
+{
+  "run": "A42_beam_full",
+  "task_step": 57408,
+  "native_step": 57411,
+  "delta_shoulder_lift_rad": -0.24,
+  "other_five_joints": "held at actual entry measurements",
+  "seed_sha256": "9bc0be7e75ce0aa519369e49e858e5475aee1ae855d9ea63920ec6f6dfd7d9dd",
+  "scene_sha256": "ef3dcec37f72950ac9bf06f2a9df2a6387ad6c3f7fe9c3cfa4891a84ef795f27",
+  "complete_visible_meshes": 54,
+  "native_body_poses": 44,
+  "joint_graph_gaps": [],
+  "intended_grasp": null,
+  "self_checked": true,
+  "pair_count_per_pose": 1305,
+  "intersection_threshold_m": 1e-06,
+  "segments": [
+    {
+      "label": "left_home",
+      "robot": "franka_left",
+      "start": [
+        -1.3888615369796753,
+        -2.0821056365966797,
+        2.396467924118042,
+        -1.883813738822937,
+        -1.5711685419082642,
+        -1.3882815837860107
+      ],
+      "goal": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "passed": true,
+      "samples": 140,
+      "max_joint_increment": 0.009991809618558814,
+      "installed_minimum": {
+        "distance": 0.1595115401538746,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh",
+        "sample": 0,
+        "fraction": 0.0
+      },
+      "first_collision": null
+    },
+    {
+      "label": "right_lift_clear_delta024",
+      "robot": "franka_right",
+      "start": [
+        1.4238014221191406,
+        -0.761340856552124,
+        1.5958349704742432,
+        -2.6750006675720215,
+        -2.6380457878112793,
+        -3.4508628845214844
+      ],
+      "goal": [
+        1.4238014221191406,
+        -1.001340856552124,
+        1.5958349704742432,
+        -2.6750006675720215,
+        -2.6380457878112793,
+        -3.4508628845214844
+      ],
+      "passed": true,
+      "samples": 25,
+      "max_joint_increment": 0.01,
+      "installed_minimum": {
+        "distance": 0.004861206593847338,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh",
+        "sample": 1,
+        "fraction": 0.041666666666666664
+      },
+      "first_collision": null
+    },
+    {
+      "label": "right_home",
+      "robot": "franka_right",
+      "start": [
+        1.4238014221191406,
+        -1.001340856552124,
+        1.5958349704742432,
+        -2.6750006675720215,
+        -2.6380457878112793,
+        -3.4508628845214844
+      ],
+      "goal": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "passed": true,
+      "samples": 347,
+      "max_joint_increment": 0.009973592151796197,
+      "installed_minimum": {
+        "distance": 0.13986072574724717,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_1/mesh",
+        "sample": 31,
+        "fraction": 0.08959537572254335
+      },
+      "first_collision": null
+    }
+  ],
+  "scope": "nominal finite native-calibrated kinematic proxy for exact -.24rad delta only; no perturbed states checked in this supplemental run",
+  "nearby_path_reference": "return_geometry_final.json has -.238659143447876 delta, its perturbation results do not constitute -.24 validation",
+  "gaps": [
+    "between-sample CCD",
+    "perturbed tracking states not checked here",
+    "PhysX cooked and unexported geometry",
+    "native dynamics and production-command chain still require full run"
+  ]
+}

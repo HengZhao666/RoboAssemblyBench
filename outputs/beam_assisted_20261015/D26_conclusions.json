@@ -1,0 +1,170 @@
+{
+  "cycle": "D26",
+  "run": "A42_beam_full",
+  "run_class": "ordinary_from_head",
+  "source_version": "v33",
+  "source_manifest_sha256": "476bee3ba19a5c3daa107e6058080e6be9e5715dc6dede48ee34c401477e22e7",
+  "source_files_verified": 889,
+  "source_differences": [],
+  "critical_tool_differences": [],
+  "original_success": true,
+  "original_assisted_success": true,
+  "full_assisted_sequence_completed": true,
+  "original_steps": 57416,
+  "final_certificate": {
+    "stable_physics_steps": 240,
+    "required_stable_physics_steps": 240,
+    "certificate_physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 57419,
+      "time": 239.24584581097588,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "current_native_same_stamp": true,
+    "current_native_recheck": {
+      "ready": true,
+      "reason": null
+    },
+    "final_pose_errors": {
+      "fabrica_beam_0": {
+        "position_error": 1.717909305071513e-07,
+        "orientation_error": 0.0,
+        "ready": true
+      },
+      "fabrica_beam_1": {
+        "position_error": 2.8461001971216595e-07,
+        "orientation_error": 0.0,
+        "ready": true
+      },
+      "fabrica_beam_2": {
+        "position_error": 1.708122688674139e-07,
+        "orientation_error": 0.0,
+        "ready": true
+      },
+      "fabrica_beam_3": {
+        "position_error": 4.2478530663027663e-07,
+        "orientation_error": 0.0,
+        "ready": true
+      },
+      "fabrica_beam_6": {
+        "position_error": 4.6080404524074657e-07,
+        "orientation_error": 0.0,
+        "ready": true
+      }
+    },
+    "last_native_gripper_positions": {
+      "franka_left": {
+        "finger_joint": 8.545514901925344e-06,
+        "right_outer_knuckle_joint": 8.530204468115699e-06,
+        "left_inner_finger_joint": -8.522664757038001e-06,
+        "right_inner_finger_joint": 8.48845775180962e-06,
+        "left_inner_finger_knuckle_joint": -8.57549184729578e-06,
+        "right_inner_finger_knuckle_joint": -8.512310159858316e-06
+      },
+      "franka_right": {
+        "finger_joint": 4.090243237442337e-06,
+        "right_outer_knuckle_joint": 4.09464109907276e-06,
+        "left_inner_finger_joint": -4.145567345403833e-06,
+        "right_inner_finger_joint": 4.31094849773217e-06,
+        "left_inner_finger_knuckle_joint": -3.874491994793061e-06,
+        "right_inner_finger_knuckle_joint": -4.294201971788425e-06
+      }
+    }
+  },
+  "native_progress": [
+    "Ordinary from-head first-four sequence including changed common fourth turn completed.",
+    "Fifth full capture/lift/staged transport/ten insertions/release/retreat/park completed.",
+    "Right opening/withdrawal and original final common240 independent native ticks completed."
+  ],
+  "all_held_native_anchor": {
+    "0": {
+      "samples": 4128,
+      "missing": 0,
+      "maximum_position_m": 7.973930802347367e-05,
+      "maximum_angle_rad": 0.001138730537440058,
+      "path": "D26_work/A42_part0_all_held_anchor_audit.json"
+    },
+    "1": {
+      "samples": 7108,
+      "missing": 0,
+      "maximum_position_m": 9.80371434279825e-05,
+      "maximum_angle_rad": 0.0013869782930628599,
+      "path": "D26_work/A42_part1_all_held_anchor_audit.json"
+    }
+  },
+  "geometry": {
+    "original_finite_candidate_count": 456,
+    "original_finite_candidates_passed": true,
+    "finite_minimum_gap_m": -7.450582029961544e-07,
+    "fifth_right_actual_sample_count": 290,
+    "fifth_right_minimum": {
+      "step": 51448,
+      "physics_stamp": {
+        "valid": true,
+        "epoch": 0,
+        "index": 51451,
+        "time": 214.37917784741148,
+        "dt": 0.004166666666666667,
+        "identity_source": "simulation_context_and_physics_view"
+      },
+      "minimum_gap_m": 0.03302563829801277,
+      "right_body": "/World/env_0/episode_000000/robots/ur5e_right/wrist_2_link"
+    }
+  },
+  "production_execution": {
+    "SDK_submissions": 16484,
+    "maximum_SDK_delta_rad": 0.0,
+    "unmatched_publications": [],
+    "native_samples": {
+      "samples": 32968,
+      "valid": 32968
+    },
+    "three_view_entity_samples": 7177,
+    "fully_independently_aligned": 7176,
+    "evidence_checks_passed": false,
+    "original_errors": [
+      {
+        "step": 57416,
+        "error": "entity_native_camera_or_epoch_binding"
+      }
+    ],
+    "terminal_gap_note": "D26_work/terminal_observation_gap.json"
+  },
+  "insertion": {
+    "original_fourth_and_fifth_completed_phases": 20,
+    "no_stored_ready_sample_phases": [
+      "assemble_02_part_1_insert_02",
+      "assemble_02_part_1_insert_04",
+      "assemble_02_part_1_insert_06",
+      "assemble_02_part_1_insert_08",
+      "assemble_03_part_0_insert_08"
+    ],
+    "cold_height_violations": 0,
+    "stored_insertion_SDK_matches": 4488,
+    "maximum_insertion_SDK_delta_rad": 0.0,
+    "scope": "Original unmodified producers advanced all phases; stride8 misses are not backfilled or claimed as independent12-tick proof."
+  },
+  "postprocess": {
+    "all_stages_completed": true,
+    "original_support_report_passed": true,
+    "independent_execution_all_rows_passed": false,
+    "original_pipeline_sha256": "6b83e02f2e603d6a582144ad896744f0e2eca3b32878bf62888827ae0317c4bb"
+  },
+  "timing": {
+    "native_wrapper_elapsed_s": 6490.063378350809,
+    "fixed_postreview_stage_sum_s": 239.83171796612442,
+    "scope": "Wrapper and fixed postprocessing only; no claim for complete human analysis/download/document wall time."
+  },
+  "media_review": "D26_local_media_review.json",
+  "limits": [
+    "Assisted fixed joints/world support route only; no natural friction grasp or unsupported final stability claim.",
+    "Full final native certificate passed, but complete independent raw native final snapshot remains7ticks earlier; original execution report false retained.",
+    "Finite54-mesh/self checks and recorded candidates do not prove between-sample CCD or cooked contact forces. Original10 lifecycle warnings and missing original geometry/frame coverage retained.",
+    "Only this seed0/layout505 native run validated; no robustness claim."
+  ],
+  "human_stop_instruction": "这一轮结束后暂停，并下载视频",
+  "next_native_run_authorized": false,
+  "D27_not_started": true
+}

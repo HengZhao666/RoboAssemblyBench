@@ -1,0 +1,10 @@
+{
+  "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/publication_20261021/historical_artifacts_inventory.jsonl.gz",
+  "sha256": "84f4d5af9f246945a1257e413dfcd037fb619fbbca6b1e37a3901e3d81756b84",
+  "bytes": 3671811,
+  "regular_files": 215896,
+  "symlinks": 358,
+  "logical_bytes": 114024275811,
+  "hash_scope": "Inventory compressed bytes verified; historical file contents not rehashed",
+  "native_started": false
+}

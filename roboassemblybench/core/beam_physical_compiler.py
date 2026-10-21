@@ -11,6 +11,7 @@ from __future__ import annotations
 import copy
 import json
 import math
+import os
 import warnings
 from functools import lru_cache
 from pathlib import Path
@@ -4666,6 +4667,28 @@ def _canonical_translation_constraints(
 
 def _apply_continuous_beam_physics(phases: list[dict[str, Any]]) -> None:
     """Keep Beam dynamic and use the same force/contact gate throughout a grasp."""
+    column3_pickup_depth = float(os.environ.get('BEAM_COLUMN3_PICKUP_DEPTH_M', '0'))
+    if not math.isfinite(column3_pickup_depth) or not -0.012 <= column3_pickup_depth <= 0.0:
+        raise ValueError('BEAM_COLUMN3_PICKUP_DEPTH_M must be finite and in [-0.012, 0].')
+    column3_turn_speed = float(os.environ.get('BEAM_COLUMN3_TURN_ANGULAR_SPEED_RAD_S', '0.20'))
+    if not math.isfinite(column3_turn_speed) or not 0.0 < column3_turn_speed <= 0.20:
+        raise ValueError('BEAM_COLUMN3_TURN_ANGULAR_SPEED_RAD_S must be finite and in (0, 0.20].')
+    try:
+        turn_force_low, turn_force_high = map(float, os.environ.get(
+            'BEAM_COLUMN3_TURN_PEAK_FORCE_BAND_N', '4,12').split(','))
+    except ValueError as exc:
+        raise ValueError('BEAM_COLUMN3_TURN_PEAK_FORCE_BAND_N requires two numbers.') from exc
+    if not (math.isfinite(turn_force_low) and math.isfinite(turn_force_high)
+            and 4.0 <= turn_force_low < turn_force_high <= 24.0):
+        raise ValueError('Column-3 turn peak force band must satisfy 4 <= low < high <= 24 N.')
+    try:
+        carry_force_low, carry_force_high = map(float, os.environ.get(
+            'BEAM_COLUMN3_CARRY_PEAK_FORCE_BAND_N', '4,12').split(','))
+    except ValueError as exc:
+        raise ValueError('BEAM_COLUMN3_CARRY_PEAK_FORCE_BAND_N requires two numbers.') from exc
+    if not (math.isfinite(carry_force_low) and math.isfinite(carry_force_high)
+            and 4.0 <= carry_force_low < carry_force_high <= 24.0):
+        raise ValueError('Column-3 carry peak force band must satisfy 4 <= low < high <= 24 N.')
     contact_policy = {
         'continuous_physics': True,
         'hold_force_regulation': True,
@@ -4733,6 +4756,13 @@ def _apply_continuous_beam_physics(phases: list[dict[str, Any]]) -> None:
             # raises the fingers at the final board pose, without changing the
             # assembled part target or moving an already grasped rigid body.
             local_skill['grasp_object_frame_offset'] = [0.0, 0.0, 0.028]
+        if column3_pickup_depth and phase['name'] in {
+            'assemble_00_part_3_move_above', 'assemble_00_part_3_descend',
+            'assemble_00_part_3_close_and_attach',
+        }:
+            # Move this pickup relation into the column's wider shaft. Holds
+            # and carrying keep the measured grasp relation captured at close.
+            local_skill['grasp_object_frame_offset'] = [0.0, 0.0, column3_pickup_depth]
         if local_skill.get('name') == 'ur5e_close_gripper':
             local_skill.update(contact_policy)
             local_skill.update({
@@ -4769,6 +4799,10 @@ def _apply_continuous_beam_physics(phases: list[dict[str, Any]]) -> None:
                 'close_force_balance_peak': 4.0,
                 'close_force_balance_step': 0.000025,
             })
+            if phase['name'] == 'assemble_00_part_3_close_and_attach':
+                # Confirm the persistent weak side through contact/force-band
+                # transitions before issuing a small bounded centering move.
+                local_skill['close_force_recenter_track_weak_side'] = True
             phase['timeout_steps'] = max(int(phase.get('timeout_steps', 0)), 2000)
         elif local_skill.get('requires_held_object'):
             # Preserve the captured command through all physical carry phases.
@@ -4821,6 +4855,10 @@ def _apply_continuous_beam_physics(phases: list[dict[str, Any]]) -> None:
                     max_joint_step=0.008,
                 )
                 phase['timeout_steps'] = max(int(phase.get('timeout_steps', 0)), 12000)
+                if phase['name'] == 'assemble_00_part_3_assembly_clearance':
+                    local_skill['grasp_drive_angular_speed'] = column3_turn_speed
+                    if (turn_force_low, turn_force_high) != (4.0, 12.0):
+                        local_skill['beam_turn_peak_force_band_N'] = [turn_force_low, turn_force_high]
         if phase['name'] == 'base_6_peel_lift':
             local_skill.update(offset=[0.0, 0.0, 0.005], cartesian_position_step=0.0002,
                                position_tolerance=0.001)
@@ -4856,6 +4894,34 @@ def _apply_continuous_beam_physics(phases: list[dict[str, Any]]) -> None:
                 'use_arm_ik_controller': False, 'max_command_tracking_error': 0.18,
                 'max_wrist_command_tracking_error': 0.12,
             }
+        if (phase['name'] in {'assemble_00_part_3_lift',
+                             'assemble_00_part_3_post_lift_restore_gravity',
+                             'assemble_00_part_3_pickup_clearance'}
+                and local_skill.get('requires_held_object')
+                and (carry_force_low, carry_force_high) != (4.0, 12.0)):
+            # Establish the bounded transport preload before the long turn.
+            # Admission, original slip anchor, seek budget and hard limits stay.
+            local_skill['beam_carry_peak_force_band_N'] = [carry_force_low, carry_force_high]
+
+
+def _apply_column3_transport_raise(targets: list[dict[str, Any]]) -> None:
+    """Raise only the first column's pickup and turn clearance, before approach.
+
+    Its original hover/insertion targets and all success/force/attachment gates
+    are unchanged. The zero default reproduces the retained trajectory.
+    """
+    height = float(os.environ.get('BEAM_COLUMN3_TRANSPORT_RAISE_M', '0'))
+    if not math.isfinite(height) or not 0.0 <= height <= 0.24:
+        raise ValueError('BEAM_COLUMN3_TRANSPORT_RAISE_M must be finite and in [0, 0.24].')
+    if height == 0.0:
+        return
+    names = ('part_3_pickup_clearance', 'part_3_assembly_clearance')
+    selected = [target for target in targets if target.get('name') in names]
+    if len(selected) != 2 or {target['name'] for target in selected} != set(names):
+        raise ValueError('Column3 transport raise requires unique pickup and assembly clearance targets.')
+    positions = [_vector(target['position'], size=3, name=target['name']) for target in selected]
+    for target, position in zip(selected, positions):
+        target['position'] = _add(position, [0.0, 0.0, height])
 
 
 def compile_continuous_beam_recipe(payload: dict[str, Any]) -> dict[str, Any]:
@@ -5091,6 +5157,8 @@ def compile_continuous_beam_recipe(payload: dict[str, Any]) -> dict[str, Any]:
     resolved = copy.deepcopy(payload)
     resolved['objects'] = _merge_named_entries(generated_objects, resolved.get('objects', []))
     resolved['targets'] = _merge_named_entries(targets, resolved.get('targets', []))
+    if assembly == 'beam':
+        _apply_column3_transport_raise(resolved['targets'])
     resolved['phases'] = phases
     resolved['success'] = success
     resolved['domain_randomization'] = deep_merge(
@@ -5114,6 +5182,13 @@ def compile_continuous_beam_recipe(payload: dict[str, Any]) -> dict[str, Any]:
         len(task['parts']) * 7000,
         len(phases) * 360,
     )
+    if assembly == 'beam':
+        from toolkits.factory_dual_franka_assembly.beam_exploration import (
+            parse_exploration_environment, parse_exploration_continuation,
+            continuation_step_budget)
+        if parse_exploration_continuation(os.environ, parse_exploration_environment(os.environ)):
+            resolved['max_steps'] = continuation_step_budget(
+                phases, resolved['max_steps'], int(resolved.get('phase_timeout_steps', 1200)))
     resolved['fabrica_canonical_resolved'] = {
         'assembly': assembly,
         'metadata_schema_version': metadata['schema_version'],

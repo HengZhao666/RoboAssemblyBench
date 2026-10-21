@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "receipt_sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e",
+  "receipt_mirror_copies_verified": 6,
+  "files": [
+    {
+      "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e"
+    },
+    {
+      "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e"
+    },
+    {
+      "path": "/home/user/RoboAssemblyBench/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/outputs/beam_workflow_transfer_20261021/sync_verification.json",
+      "sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e"
+    }
+  ],
+  "native_started": false
+}

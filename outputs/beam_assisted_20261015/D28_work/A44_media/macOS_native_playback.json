@@ -1,0 +1,108 @@
+{
+  "run": "A44_beam_full",
+  "passed": true,
+  "all_transfer_SHA_equal": true,
+  "decoder": "macOS AVAssetImageGenerator through ObjC bridge",
+  "videos": [
+    {
+      "path": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_front.mp4",
+      "sha256": "a471efe2a648a70151627f92852a1b41c4076be4274a26a96f8b736a914b1ca2",
+      "duration_s": 248.167,
+      "fps": 30.0,
+      "samples": [
+        {
+          "label": "start",
+          "requested_s": 0.0,
+          "actual_s": 0.0,
+          "width": 960,
+          "height": 540,
+          "passed": true
+        },
+        {
+          "label": "mid",
+          "requested_s": 124.0835,
+          "actual_s": 124.06666666666666,
+          "width": 960,
+          "height": 540,
+          "passed": true
+        },
+        {
+          "label": "end",
+          "requested_s": 248.13366666666667,
+          "actual_s": 248.13333333333333,
+          "width": 960,
+          "height": 540,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "path": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "sha256": "0dd61d3381733d59734a379a86347b197641d4173df403d183a2b949666754cc",
+      "duration_s": 248.167,
+      "fps": 30.0,
+      "samples": [
+        {
+          "label": "start",
+          "requested_s": 0.0,
+          "actual_s": 0.0,
+          "width": 640,
+          "height": 480,
+          "passed": true
+        },
+        {
+          "label": "mid",
+          "requested_s": 124.0835,
+          "actual_s": 124.06666666666666,
+          "width": 640,
+          "height": 480,
+          "passed": true
+        },
+        {
+          "label": "end",
+          "requested_s": 248.13366666666667,
+          "actual_s": 248.13333333333333,
+          "width": 640,
+          "height": 480,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "path": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "sha256": "a1a1b3174edd0d47fffdc2b0cf916095c29b1e02b793e721268cba84da45f01d",
+      "duration_s": 248.167,
+      "fps": 30.0,
+      "samples": [
+        {
+          "label": "start",
+          "requested_s": 0.0,
+          "actual_s": 0.0,
+          "width": 640,
+          "height": 480,
+          "passed": true
+        },
+        {
+          "label": "mid",
+          "requested_s": 124.0835,
+          "actual_s": 124.06666666666666,
+          "width": 640,
+          "height": 480,
+          "passed": true
+        },
+        {
+          "label": "end",
+          "requested_s": 248.13366666666667,
+          "actual_s": 248.13333333333333,
+          "width": 640,
+          "height": 480,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "scope": "Nine start/mid/end presentation samples from three complete originals. Server already completed full decode; no repeated local full decode."
+}

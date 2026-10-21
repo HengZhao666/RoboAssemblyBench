@@ -1,0 +1,12 @@
+{
+  "authorized_by_human": true,
+  "baseline_started": 27,
+  "baseline_closed": 27,
+  "additional_native_attempts": 1,
+  "maximum_native_attempts": 28,
+  "cycle": "D28",
+  "run": "A44_beam_full",
+  "human_instruction": "你这不是相当于什么也没干嘛？这次这么简单的任务，怎么过了一个小时，仿真还没开始？快帮我检查好开始，我需要新的视频。",
+  "utc": "2026-10-21T03:18:40.170325+00:00",
+  "scope": "Check/fix startup configuration and one new ordinary from-head run with new complete videos; no extra native probe."
+}

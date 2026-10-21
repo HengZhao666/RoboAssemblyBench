@@ -1,0 +1,600 @@
+{
+  "draft": false,
+  "finalization_ready": true,
+  "pending": [],
+  "cycle": "D28",
+  "run": "A44_beam_full",
+  "source_version": "v35",
+  "run_class": "ordinary_from_head",
+  "outcome": "original_assisted_five_parts_and_three_return_phases_plus_common240_passed_independent_terminal_raw_gap",
+  "steps": 59567,
+  "terminal_task_step": 59566,
+  "terminal_native_index": 59570,
+  "steps_scope": "collect_results.steps=59567 counts steps; terminal trace task_step=59566 is zero-based.",
+  "terminal_reason": "success-criteria-met",
+  "original_success": true,
+  "original_assisted_success": true,
+  "assisted_success": true,
+  "motion_success": true,
+  "formal_success": false,
+  "accepted_full_assembly": false,
+  "all_postreview": false,
+  "postprocess_pipeline": {
+    "all_required_stages_passed": true,
+    "stage_returncodes_zero": 10,
+    "stages_total": 10,
+    "scope": "Existing ten pipeline processes completed; this does not override false report evidence checks.",
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_postprocess_pipeline.json",
+    "sha256": "01de531dd650507653cb2342259d7a971ccc213b516629e04720a02da0b53177"
+  },
+  "execution_evidence_checks_passed": true,
+  "execution_evidence_errors": [],
+  "final_home_independent_review_passed": false,
+  "original_five_plus_home_common240_passed": true,
+  "certificate": {
+    "stable_physics_steps": 240,
+    "required_stable_physics_steps": 240,
+    "physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 59570,
+      "time": 248.20834627840668,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "current_native_recheck": {
+      "ready": true,
+      "reason": null
+    },
+    "same_clock_five_home_current": true,
+    "home": {
+      "franka_left": {
+        "ready": true,
+        "joint_names": [
+          "shoulder_pan_joint",
+          "shoulder_lift_joint",
+          "elbow_joint",
+          "wrist_1_joint",
+          "wrist_2_joint",
+          "wrist_3_joint"
+        ],
+        "target_joint_positions": [
+          0,
+          -1.5707963268,
+          1.5707963268,
+          -1.5707963268,
+          -1.5707963268,
+          0
+        ],
+        "joint_positions": [
+          -0.005089199636131525,
+          -1.5720312595367432,
+          1.5745503902435303,
+          -1.5718871355056763,
+          -1.5707601308822632,
+          -0.005131359212100506
+        ],
+        "maximum_error_rad": 0.005131359212100506,
+        "tolerance_rad": 0.01
+      },
+      "franka_right": {
+        "ready": true,
+        "joint_names": [
+          "shoulder_pan_joint",
+          "shoulder_lift_joint",
+          "elbow_joint",
+          "wrist_1_joint",
+          "wrist_2_joint",
+          "wrist_3_joint"
+        ],
+        "target_joint_positions": [
+          0,
+          -1.5707963268,
+          1.5707963268,
+          -1.5707963268,
+          -1.5707963268,
+          0
+        ],
+        "joint_positions": [
+          0.0019636808428913355,
+          -1.5692514181137085,
+          1.571567416191101,
+          -1.5722631216049194,
+          -1.5722870826721191,
+          -0.0048094759695231915
+        ],
+        "maximum_error_rad": 0.0048094759695231915,
+        "tolerance_rad": 0.01
+      }
+    }
+  },
+  "phase_durations_native_ticks": {
+    "left_home": 589,
+    "right_shoulder_clearance": 112,
+    "right_home": 1450,
+    "final_common_window": 240
+  },
+  "phase_transition_task_steps": {
+    "start_left_home": 57175,
+    "start_right_clearance": 57764,
+    "start_right_home": 57876,
+    "start_final_window": 59326,
+    "terminal": 59566
+  },
+  "stored_return_final_guard_review": {
+    "stored_batches": 299,
+    "independently_replayed_batches": 299,
+    "independently_replayed_full54_self_samples": 1495,
+    "all_stored_samples_passed": true,
+    "recorded_empty_return_or_native_limit_rejections": 0,
+    "not_every_control_step_independently_recorded": true
+  },
+  "independent_terminal": {
+    "passed": false,
+    "original_five_part_common240_qualified": true,
+    "original_native_home_certificate_ready": true,
+    "original_current_native_home_ready": true,
+    "physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 59570,
+      "time": 248.20834627840668,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "independent_terminal_raw_native_available": false,
+    "home": null,
+    "entity_task_step": null,
+    "raw_boundaries": null
+  },
+  "terminal_gap": {
+    "certificate_native_index": 59570,
+    "latest_complete_raw_boundary": {
+      "native_index": 59564,
+      "boundaries": [
+        "after_physics",
+        "after_observation"
+      ],
+      "certificate_gap_ticks": 6
+    },
+    "latest_same_clock_control_and_three_views": {
+      "native_index": 59563,
+      "task_step": 59560,
+      "certificate_gap_ticks": 7,
+      "camera_native_index": 59563
+    },
+    "common240_raw_index_only": {
+      "observed_indices": 60,
+      "missing_indices": 180,
+      "first_index": 59331,
+      "last_index": 59564,
+      "scope": "Clock coverage only; this read does not revalidate body/joint values at missing ticks or repair the original false terminal report."
+    }
+  },
+  "final_home_review_errors": [
+    {
+      "scope": "terminal_native_home_and_common_window",
+      "error": "ValueError: no complete independent raw native sample at the terminal certificate clock"
+    }
+  ],
+  "source_after_clean": true,
+  "source_after_differences": [],
+  "source_after_tool_differences": [],
+  "source_files": 889,
+  "critical_tools": 20,
+  "source_manifest_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+  "tools_manifest_sha256": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+  "independent_read_summary": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/final_home_independent_read_review.json",
+    "sha256": "08b53f1165430cdedb5513d28bc251d48b9dfa055c52d330b31563f3aee33cee"
+  },
+  "original_evidence_sha256": {
+    "collect_results.json": "e5b111da61170eeeaa2935b37c823af657eee03264b4a2fb197d6fcc16e0e29a",
+    "source_after.json": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+    "D28_original_candidates_review.json": "0db931e33bfec7641948f76b6a0f1facffba3280d3f0746a7dd02fb8f9b4a101",
+    "D28_execution_evidence.json": "547e9d1a6e46db60352d543dca5be21849d3a1857281de1a50d6cba78671f641",
+    "postreview_summary.json": "834e4c2a06b05868af0381ed39ee05e8c8068f63c46ede87f1e2c521b7fb83ad",
+    "physics_boundary_trace.jsonl": "0309d2e7229d549b5796dcd2e9b894150f6f40657e898c6f7e52b34e94f2a8e6",
+    "video_frame_clock.jsonl": "199778255057573a245aa8097b297c7dae884ce3be77d6e5ebfa805c496192ff",
+    "entity_geometry_trace.jsonl": "0595b881ecf2750932b8f5e2a126238b3f56dba73e20fe2439fa13a3d4513d4c"
+  },
+  "original_report_warnings_missing_limits_pending": false,
+  "media": {
+    "run": "A44_beam_full",
+    "complete_original_videos": 3,
+    "server_complete_decode_passed": true,
+    "frames_per_original": 7445,
+    "fps": 30,
+    "seconds_per_original": 248.166667,
+    "originals_total_bytes": 73461022,
+    "originals": [
+      {
+        "view": "front",
+        "bytes": 29711614,
+        "sha256": "a471efe2a648a70151627f92852a1b41c4076be4274a26a96f8b736a914b1ca2"
+      },
+      {
+        "view": "left_wrist",
+        "bytes": 29997166,
+        "sha256": "0dd61d3381733d59734a379a86347b197641d4173df403d183a2b949666754cc"
+      },
+      {
+        "view": "right_wrist",
+        "bytes": 13752242,
+        "sha256": "a1a1b3174edd0d47fffdc2b0cf916095c29b1e02b793e721268cba84da45f01d"
+      }
+    ],
+    "archive": {
+      "bytes": 102209761,
+      "sha256": "1c880f612388b1429cc9fbde33720faadd5ec53fd74e98680a638386310ab456",
+      "server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/A44_beam_full_media.tar.gz"
+    },
+    "transfer_manifest_sha256": "2aa00bdedb0f2493ce5318b9f7ba00d7aeaa12ed9ef85ae4788e1c0a216ec2c0",
+    "local_download_verified": true,
+    "all_transfer_file_SHA_equal": true,
+    "macOS_nine_point_native_playback_passed": true,
+    "actual_same_clock_images_reviewed": true,
+    "scope": "Three complete originals transferred unchanged and server-completely-decoded, all transfer hashes verified, nine macOS presentation samples passed; seven actual same-clock recorded trios viewed. Selected frames do not certify continuous safety or fill terminal raw-native gaps.",
+    "local_originals_directory": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos",
+    "local_review": {
+      "local_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/D28_local_media_review.json",
+      "server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/D28_local_media_review.json",
+      "sha256": "c080e93ab0cc5a85e806de1e0d46d58bf2e5886f3cc4518eb6cf58fbee232b04"
+    },
+    "native_playback": {
+      "local_path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/macOS_native_playback.json",
+      "server_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D28_work/macOS_native_playback.json",
+      "sha256": "6d13b0e0447d9f71a18ff792eb95883f9c29a95d8b62c876884a7a1b97a52a3e"
+    },
+    "actual_viewed_trios": [
+      {
+        "label": "left_home_first",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 57179,
+          "time": 238.24584575882182,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "offset_ticks": 0,
+        "images": [
+          {
+            "camera": "observation.images.front",
+            "path": "review_images/left_home_first_observation_images_front.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_front/frame_07146.png",
+            "sha256": "f967e3feba148cd47e9cc15d9e49c92f7e99933959c2f68ada3e601fd76e8911",
+            "frame_index": 7146
+          },
+          {
+            "camera": "observation.images.left_wrist",
+            "path": "review_images/left_home_first_observation_images_left_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_left_wrist/frame_07146.png",
+            "sha256": "b8bc629322682d60aea96d60574bd1b36d36c24285793e9416bb804a0c5836f4",
+            "frame_index": 7146
+          },
+          {
+            "camera": "observation.images.right_wrist",
+            "path": "review_images/left_home_first_observation_images_right_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_right_wrist/frame_07146.png",
+            "sha256": "6e416cbf8c5bbaa4062b44b91cacfba01ce5b1929bbc6eedc5f0872e30fb2f86",
+            "frame_index": 7146
+          }
+        ]
+      },
+      {
+        "label": "left_home_last",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 57763,
+          "time": 240.67917921906337,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "offset_ticks": 0,
+        "images": [
+          {
+            "camera": "observation.images.front",
+            "path": "review_images/left_home_last_observation_images_front.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_front/frame_07219.png",
+            "sha256": "a5c350ad3166648951e98a9d90b0ced255130a4d51710eb03cbc4d6e1639a0cd",
+            "frame_index": 7219
+          },
+          {
+            "camera": "observation.images.left_wrist",
+            "path": "review_images/left_home_last_observation_images_left_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_left_wrist/frame_07219.png",
+            "sha256": "2f515d955bb6b63b8be6fb144d2e5b6240801df84931711de24e4f00d5252846",
+            "frame_index": 7219
+          },
+          {
+            "camera": "observation.images.right_wrist",
+            "path": "review_images/left_home_last_observation_images_right_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_right_wrist/frame_07219.png",
+            "sha256": "8acef12e4bfaff1c08ef45fbdb71cf7b833e0236b927245c28b09570e4d0cf51",
+            "frame_index": 7219
+          }
+        ]
+      },
+      {
+        "label": "right_clearance_first",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 57771,
+          "time": 240.71251255413517,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "offset_ticks": 0,
+        "images": [
+          {
+            "camera": "observation.images.front",
+            "path": "review_images/right_clearance_first_observation_images_front.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_front/frame_07220.png",
+            "sha256": "548f7b81e56f39cfc786d0f8ca883377a67b25f91f8a1b459dba5afb13020db0",
+            "frame_index": 7220
+          },
+          {
+            "camera": "observation.images.left_wrist",
+            "path": "review_images/right_clearance_first_observation_images_left_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_left_wrist/frame_07220.png",
+            "sha256": "bf98a8f475e74f3d0431474814e190f2c259bffab57e0b5e4552fff1eda4b848",
+            "frame_index": 7220
+          },
+          {
+            "camera": "observation.images.right_wrist",
+            "path": "review_images/right_clearance_first_observation_images_right_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_right_wrist/frame_07220.png",
+            "sha256": "de4080f524ac42b90db7bdd4b1638dd66406276f97f611eb7c193a8d99a8aaf4",
+            "frame_index": 7220
+          }
+        ]
+      },
+      {
+        "label": "right_clearance_last",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 57875,
+          "time": 241.1458459100686,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "offset_ticks": 0,
+        "images": [
+          {
+            "camera": "observation.images.front",
+            "path": "review_images/right_clearance_last_observation_images_front.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_front/frame_07233.png",
+            "sha256": "c21e4942b3bca037c038d836a536d097e52c7efcd63cfc3af3cb122585327956",
+            "frame_index": 7233
+          },
+          {
+            "camera": "observation.images.left_wrist",
+            "path": "review_images/right_clearance_last_observation_images_left_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_left_wrist/frame_07233.png",
+            "sha256": "3807e77e8e74e9e88ee7d6347feeeaee0b92e97e6a667e1914e992c71d47fbe7",
+            "frame_index": 7233
+          },
+          {
+            "camera": "observation.images.right_wrist",
+            "path": "review_images/right_clearance_last_observation_images_right_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_right_wrist/frame_07233.png",
+            "sha256": "e4253d96e6e9c64210b8df4f797028a25c37540cb9c78e39b3464a3b543c6be8",
+            "frame_index": 7233
+          }
+        ]
+      },
+      {
+        "label": "right_home_first",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 57883,
+          "time": 241.1791792451404,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "offset_ticks": 0,
+        "images": [
+          {
+            "camera": "observation.images.front",
+            "path": "review_images/right_home_first_observation_images_front.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_front/frame_07234.png",
+            "sha256": "019d96de8ad7e439217f695fa0488c23b20b9720e5fb7027e1a4d8bddda1271d",
+            "frame_index": 7234
+          },
+          {
+            "camera": "observation.images.left_wrist",
+            "path": "review_images/right_home_first_observation_images_left_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_left_wrist/frame_07234.png",
+            "sha256": "8253375974745acb538e9da63e841f39467f5f53754c0285f3f2133410547f65",
+            "frame_index": 7234
+          },
+          {
+            "camera": "observation.images.right_wrist",
+            "path": "review_images/right_home_first_observation_images_right_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_right_wrist/frame_07234.png",
+            "sha256": "6f031e98e3584df73185073443cfe5730ea93b16e1881aad6225c81a60946969",
+            "frame_index": 7234
+          }
+        ]
+      },
+      {
+        "label": "right_home_last",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 59323,
+          "time": 247.1791795580648,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "offset_ticks": 0,
+        "images": [
+          {
+            "camera": "observation.images.front",
+            "path": "review_images/right_home_last_observation_images_front.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_front/frame_07414.png",
+            "sha256": "dac85bc8bfbdbbd527b083c40e1eb9cdecb9dd251308c94504adbbe8c0b51c61",
+            "frame_index": 7414
+          },
+          {
+            "camera": "observation.images.left_wrist",
+            "path": "review_images/right_home_last_observation_images_left_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_left_wrist/frame_07414.png",
+            "sha256": "ce6faa7e9b3930450c92e2ad1df0980c2251eed9ad0da060f70ffc2216f167a1",
+            "frame_index": 7414
+          },
+          {
+            "camera": "observation.images.right_wrist",
+            "path": "review_images/right_home_last_observation_images_right_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_right_wrist/frame_07414.png",
+            "sha256": "f85927f1e8b168d8ecb5f9577fe9cba2183e636da7e6b26b3855e3f77a27dc5e",
+            "frame_index": 7414
+          }
+        ]
+      },
+      {
+        "label": "last",
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 59563,
+          "time": 248.17917961021885,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "offset_ticks": 0,
+        "images": [
+          {
+            "camera": "observation.images.front",
+            "path": "review_images/last_observation_images_front.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_front/frame_07444.png",
+            "sha256": "eb7b33d94d8cd19f580ff5721e758961d9a6bb49b74f94ee880e0a23164f76c3",
+            "frame_index": 7444
+          },
+          {
+            "camera": "observation.images.left_wrist",
+            "path": "review_images/last_observation_images_left_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_left_wrist/frame_07444.png",
+            "sha256": "562edbc283072dd8139a3b01717636c187f42db2b3a326c2687c9062fcf1f7e4",
+            "frame_index": 7444
+          },
+          {
+            "camera": "observation.images.right_wrist",
+            "path": "review_images/last_observation_images_right_wrist.png",
+            "source_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full/episode_0000_live_frames/observation_images_right_wrist/frame_07444.png",
+            "sha256": "604a59b21307c69bf6be0a0701d6d7da18342b82b7068937ade2b6ecae438d4f",
+            "frame_index": 7444
+          }
+        ]
+      }
+    ],
+    "actual_view_observations": [
+      "Both wrist views show fingertips pointing down.",
+      "Recorded left return, right shoulder clearance and right return reach the original posture visually; installed assembly remains visible and stationary at the selected nodes.",
+      "No gross visible arm/installed-part overlap observed in these selected views."
+    ],
+    "reviewed_trios": 7,
+    "reviewed_original_PNGs": 21,
+    "reviewed_trio_offsets_ticks": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "return_clip": {
+      "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/08_return_home.mp4",
+      "frames": 289,
+      "fps": 30,
+      "seconds": 9.633333,
+      "sha256": "922ab0ce5446619e03a367f9edb18f266a39f734454cf7b05d4efef1659f11bd"
+    },
+    "final_clip": {
+      "path": "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/D28_work/A44_media/extra/A44_key_nodes/09_final.mp4",
+      "frames": 38,
+      "fps": 30,
+      "seconds": 1.266667,
+      "sha256": "18ae377973f40150d2808c5668b8e0b9cf117c07d266d9cffd8375cd973958d6"
+    }
+  },
+  "timing": {
+    "native_wrapper_inclusive_elapsed_s": 6555.985216497909,
+    "native_timing_events": [
+      {
+        "utc": "2026-10-21T03:21:59.916495+00:00",
+        "wall_unix_s": 1792552919.9165235,
+        "monotonic_s": 3433998.255090196,
+        "pid": 2741269,
+        "phase": "D28_native",
+        "category": "native",
+        "action": "start",
+        "command": [
+          "bash",
+          "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/tools/run_beam_route.sh",
+          "assisted",
+          "A44_beam_full",
+          "0"
+        ],
+        "scope": "Inclusive elapsed wall time; nested phase intervals must not be added."
+      },
+      {
+        "utc": "2026-10-21T05:11:15.901844+00:00",
+        "wall_unix_s": 1792559475.9018672,
+        "monotonic_s": 3440554.240433605,
+        "pid": 2741269,
+        "phase": "D28_native",
+        "category": "native",
+        "action": "end",
+        "elapsed_s": 6555.985216497909,
+        "returncode": 0,
+        "log": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/batch_D_20261016/D28_native.log"
+      }
+    ],
+    "started_at": "2026-10-21T11:22:00+08:00",
+    "finished_at": "2026-10-21T13:11:14+08:00",
+    "timestamp_resolution_s": 1,
+    "started_to_finished_s": 6554.0,
+    "original_simulation_certificate_time_s": 248.20834627840668,
+    "scope": "Native wrapper inclusive wall time including startup/run/render/encoding; timestamp interval has second resolution. No isolated physics/render timing or whole-repair-round duration is claimed."
+  },
+  "limits": [
+    "Original production five-part plus actual-home 240/240 certificate passed; independent final-home terminal raw coverage did not pass.",
+    "Terminal certificate native59570 has no complete same-clock independent raw native sample; latest after_physics/after_observation native59564 is 6 ticks early; latest action/three-view/entity join native59563 is 7 ticks early.",
+    "Independent common240 raw clock indices cover 60/240 only; 180 missing ticks are not interpolated or credited as observed body/joint values.",
+    "299 archived final-command batches and 1495 finite full54/self samples passed; this is not independent coverage of every return control step or continuous CCD.",
+    "Visible CAD differs from PhysX cooked geometry and excludes unexported warehouse geometry.",
+    "Fixed grasp joints and installation world supports remain assisted conditions; no pure-friction grasp, unsupported stability, continuous collision or complete error-envelope claim.",
+    "Selected image nodes and nine presentation samples are not full continuous-motion or cooked-contact certification.",
+    "Last three-view state native59563 and last independent raw after-physics59564 precede original final certificate59570; missing terminal evidence is retained."
+  ],
+  "pause_policy_after_closure": {
+    "native_attempts_started": 28,
+    "completed_cycles": 28,
+    "maximum_native_attempts": 28,
+    "next_native_run_authorized": false,
+    "human_continuation_remains_active": false,
+    "pause_after_cycle": "D28",
+    "new_run_authorized": false
+  },
+  "history_preserved": "D27/A43 remains the counted 27th startup failure with its immutable conclusion and all original evidence.",
+  "original_report_warnings": {
+    "runtime_link_origin_capsule_count": 442,
+    "stage_capsule_count": 376,
+    "capsule_scope": "Coarse approximations; not evidence of actual visible-mesh collision.",
+    "sequence_release_without_attach_warnings": 10,
+    "sequence_errors": 0,
+    "sequence_scope": "Original sequence model does not recognize assisted lifecycle; actual new capture/release events remain separately in original assisted trace and reports."
+  },
+  "post_failure_tail_not_applicable": true,
+  "closed_utc": "2026-10-21T05:27:11.633149+00:00",
+  "native_attempts_started": 28,
+  "completed_cycles": 28,
+  "maximum_native_attempts": 28
+}

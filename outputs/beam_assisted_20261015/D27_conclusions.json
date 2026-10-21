@@ -1,0 +1,103 @@
+{
+  "run": "A43_beam_full",
+  "cycle": "D27",
+  "source_version": "v34",
+  "closed_utc": "2026-10-21T03:18:40.170325+00:00",
+  "outcome": "startup_failed_before_environment_construction_due_to_final_home_logical_name_mapping",
+  "startup_failure": true,
+  "environment_constructed": false,
+  "first_action_executed": false,
+  "candidate_dynamic_tested": false,
+  "steps": 0,
+  "observed_native_motion_samples": 0,
+  "assisted_success": false,
+  "formal_success": false,
+  "full_assembly_accepted": false,
+  "native_wrapper_elapsed_s": 10.509608914609998,
+  "original_postreview_complete": true,
+  "original_all_required_stages_passed": false,
+  "original_execution_evidence_passed": false,
+  "complete_original_videos": 0,
+  "startup_images": 0,
+  "post_failure_tail_available": false,
+  "new_video_download_not_applicable": true,
+  "no_prior_video_substituted": true,
+  "missing_data": [
+    "collect_results.json",
+    "startup_images_ready.json",
+    "startup_image_review_ack.json",
+    "assisted_trace.jsonl",
+    "physics_boundary_trace.jsonl",
+    "entity_geometry_trace.jsonl",
+    "video_frame_clock.jsonl"
+  ],
+  "failure_kind": "assisted_final_home_logical_name_configuration",
+  "failure_reason": "New final-home runtime preflight rejected the framework logical-name mapping before environment construction; both saved home6q targets exactly match the saved initial configuration.",
+  "configuration_home_numeric_check": {
+    "franka_left": {
+      "saved_config_name": "franka_left",
+      "home_target_logical_name": "franka_left",
+      "initial_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "declared_home_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "all_six_values_exact": true
+    },
+    "franka_right": {
+      "saved_config_name": "franka_right",
+      "home_target_logical_name": "franka_right",
+      "initial_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "declared_home_joint_positions": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "all_six_values_exact": true
+    }
+  },
+  "source_after": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A43_beam_full/source_after.json",
+    "sha256": "b4a1c26e76a490eb96022d44f28ff14c6ee4d1e3951c12ffd5aad72f5ecdc71e"
+  },
+  "postprocess_pipeline": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_postprocess_pipeline.json",
+    "sha256": "182a6ba92612e243bbc0eadfa2bb5a936a87d3f00de81c2abc014c0c8cf8d49d"
+  },
+  "local_evidence_review": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_local_evidence_review.json",
+    "sha256": "760cd65f782e5a3808f83b24ae34a5f54cd5517e594750c8055cda3766a09f34"
+  },
+  "original_archive": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A43_beam_full_startup_failure_evidence.tar.gz",
+    "sha256": "63b72b28b745c1db6386f8e6c9ada98e22bbb0d01610a28f10abce962ee1037b"
+  },
+  "previous_actual_full_run_conclusions": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D26_conclusions.json",
+    "sha256": "c2f0504b66d3eacd597eeb77b15f5ea483e7742e57aa3ec53879701867df9c3e"
+  },
+  "native_attempts_started": 27,
+  "completed_cycles": 27,
+  "scope": "Counted startup failure, not a physical repair failure or a new assembly result. Original evidence downloaded; no new image/video exists."
+}

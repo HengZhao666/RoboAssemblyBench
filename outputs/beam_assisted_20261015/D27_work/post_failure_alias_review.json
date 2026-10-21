@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "review_kind": "isolated_final_home_robot_alias_preflight_patch",
+  "created_utc": "2026-10-21T03:17:23.058313+00:00",
+  "comparison": "Local v34 candidate versus local post_failure_candidate; no server connection, native simulation or test rerun in this review. Parent owns server authority binding.",
+  "old_root": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/candidate",
+  "candidate_root": "/Users/zhaoheng/Desktop/PCL work/Beam\u4fee\u590d/RoboAssemblyBench/outputs/beam_assisted_20261015/D27_work/post_failure_candidate",
+  "source_files": 889,
+  "unchanged_source_files": 887,
+  "changed_files": [
+    "tests/toolkits/test_beam_assisted_preflight.py",
+    "toolkits/factory_dual_franka_assembly/beam_assisted_preflight.py"
+  ],
+  "changed_file_hashes": {
+    "tests/toolkits/test_beam_assisted_preflight.py": {
+      "v34": "d14e610c9994a76bb22557aeeacff7e81c560ef569eea9f4252cc787b2372475",
+      "candidate": "2269d5493f15b67d598ecf88c759708b5772b41408a4cce01ce232d67be12621"
+    },
+    "toolkits/factory_dual_franka_assembly/beam_assisted_preflight.py": {
+      "v34": "08066e9042f02d6101dc224cff2980df4e7006dc673aa2047d0b3534dd7c948a",
+      "candidate": "2d892011607953d682f419cc18e67aeee8c2ba3fa9268908b295745fe50a80bf"
+    }
+  },
+  "old_preflight_AST_exact_after_only_new_helper_and_alias_map_projection": true,
+  "new_helper": "_home_robot_configs",
+  "helper_production_call_count": 1,
+  "projected_alias_mapping_blocks": 1,
+  "helper_only_called_inside_existing_final_home_branch": true,
+  "original_numeric_home_target_checks_AST_exact": true,
+  "all_other_production_source_files_exact": true,
+  "joint_phase_control_solver_collision_camera_sources_exact": {
+    "roboassemblybench/core/beam_assisted_compiler.py": "318fc069a11cf361ec17cb24def89249c417ffb9fb22918e65889a8419113728",
+    "toolkits/factory_dual_franka_assembly/beam_assisted_state.py": "d77de1959d242f6b6f9e89d042266bd549500d3eb43ac244ddd351ddde36f015",
+    "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "a0f0139534f64ca6c4ae3ce8a9c5de652d020bea4f331ac4e07aa12e58e0fb7f",
+    "toolkits/factory_dual_franka_assembly/beam_assisted_servo.py": "57cbfd317852bbe326cdefd34a2b1b3ee86ca9d9bdcc9af6cdce6cc1f0441f75",
+    "toolkits/factory_dual_franka_assembly/beam_assisted_camera.py": "a88d7a0f51e692100464b6bab9c63f82a7448d112eab6d8711e9c32c9b06ce47"
+  },
+  "production_behavior_scope": "Resolve logical robot configs before or after the framework canonical environment suffix; reject ambiguous, missing, duplicate or mixed aliases. Existing target, joint-value, tolerance, return phase and all other checks remain AST-exact. No physical/controller/camera state or configuration is changed.",
+  "runtime_tests_rerun": false,
+  "native_physics_started": false,
+  "wider_geometry_or_416_suite_rerun": false,
+  "expected_remaining_validation": "Parent-bound 66 preflight cases against actual framework mapping and original A43 config; server source identity and deployment remain parent responsibilities."
+}

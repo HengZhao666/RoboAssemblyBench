@@ -30,8 +30,11 @@ from toolkits.factory_dual_franka_assembly.planner_primitives import (
 from toolkits.factory_dual_franka_assembly.beam_support_state import BeamSupportState
 
 
+from toolkits.factory_dual_franka_assembly.beam_assisted_state import BeamAssistedState
+
+
 @BaseTask.register('FactoryDualFrankaAssemblyTask')
-class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
+class FactoryDualFrankaAssemblyTask(BeamAssistedState, BeamSupportState, BaseTask):
     _ARM_IK_CONTROLLER_NAME = 'arm_ik_controller'
     _GRIPPER_CONTROLLER_NAME = 'gripper_controller'
     _HAND_LINK_NAME = 'panda_hand'
@@ -100,6 +103,20 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         self.step_counter = 0
         self.max_steps = config.max_steps
         self.phase_specs = list(config.phase_specs)
+        self._beam_assisted_enabled = bool(self.phase_specs) and all(p.get('beam_assisted') for p in self.phase_specs)
+        from toolkits.factory_dual_franka_assembly.beam_exploration import (
+            parse_exploration_environment, parse_exploration_continuation)
+        self._beam_exploration_enabled = parse_exploration_environment(os.environ)
+        if self._beam_exploration_enabled and (not self.phase_specs
+                or not all(p.get('beam_coordinated') for p in self.phase_specs)):
+            raise ValueError('BEAM_EXPLORE_POST_SEAT requires coordinated continuous-physics Beam phases')
+        if self._beam_exploration_enabled and getattr(config, 'policy_evaluation_mode', False):
+            raise ValueError('BEAM_EXPLORE_POST_SEAT requires the staged phase runner')
+        self._beam_exploration_state = {}
+        if parse_exploration_continuation(os.environ, self._beam_exploration_enabled):
+            self._beam_exploration_state['continue_after_first_insertion'] = True
+        self._beam_exploration_complete = False
+        self._beam_exploration_views = {}
         self.target_poses = {
             name: {
                 'position': np.asarray(pose['position'], dtype=float),
@@ -173,7 +190,7 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         self._policy_release_cooldown_until = {name: 0 for name in config.robot_names}
         self._policy_interaction_history = []
         self._policy_attach_specs = self._collect_policy_attach_specs(config.phase_specs)
-        self._preserve_beam_v169_task_pose = (
+        self._preserve_beam_v169_task_pose = self._beam_assisted_enabled or (
             getattr(config, 'recipe', '') == 'fabrica_beam_ur5e_staged'
             and any(bool(spec.get('continuous_physics')) for spec in self._policy_attach_specs)
         )
@@ -1376,6 +1393,13 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
             )
         )
 
+        if getattr(self, '_beam_exploration_enabled', False):
+            # A bounded experiment must not execute timeout resets, skip ahead,
+            # or reinterpret current target geometry as benchmark success.
+            self._set_terminal_state('failed', reason='beam-exploration-phase-timeout',
+                status='failed', transition_type='failure', detail=timeout_record)
+            return True
+
         reset_spec = timeout_spec.get('reset')
         if isinstance(reset_spec, dict):
             self._apply_phase_actions(reset_spec)
@@ -1676,6 +1700,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         return handled
 
     def _set_object_collision(self, object_name: str, enabled: bool):
+        if not bool(enabled) and getattr(self, '_beam_assisted_enabled', False):
+            self._assisted_forbid_body_rewrite(object_name, 'collision disable')
         self._trace_beam_state_write('set_object_collision', object_name, {'enabled': enabled})
         if self._is_static_environment_object(object_name):
             # Never disable the pickup deck/table, and never run the dynamic
@@ -1862,6 +1888,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
 
     def _set_object_kinematic_enabled(self, object_name: str, enabled: bool) -> None:
         """Toggle RigidBody kinematic so teleported peel poses survive PhysX steps."""
+        if getattr(self, '_beam_assisted_enabled', False):
+            self._assisted_forbid_body_rewrite(object_name, 'kinematic toggle')
         self._trace_beam_state_write('set_kinematic_enabled', object_name, {'enabled': enabled})
         if self._is_static_environment_object(object_name):
             self._lock_static_environment_body(object_name)
@@ -3621,6 +3649,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
     ):
         attachment_state = self._attachments.pop(object_name, None)
         self._remove_attachment_joint(object_name)
+        if (attachment_state or {}).get('attach_spec', {}).get('beam_assisted'):
+            return attachment_state
         if attachment_state is not None:
             if attachment_state.get('kinematic_peel_carry'):
                 self._set_object_kinematic_enabled(object_name, False)
@@ -4024,6 +4054,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         }
 
     def _zero_object_velocity(self, object_name: str, *, rigid_body=None):
+        if getattr(self, '_beam_assisted_enabled', False):
+            self._assisted_forbid_body_rewrite(object_name, 'velocity reset')
         self._trace_beam_state_write('zero_object_velocity', object_name)
         attach_state = self._attachments.get(object_name) or {}
         # Kinematic bodies reject setLinearVelocity (v70: 46k PhysX errors) and
@@ -4047,6 +4079,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
                 pass
 
     def _set_object_pose(self, object_name: str, position, orientation):
+        if getattr(self, '_beam_assisted_enabled', False):
+            self._assisted_forbid_body_rewrite(object_name, 'pose write')
         self._trace_beam_state_write('set_object_pose', object_name,
                                     {'position': position, 'orientation': orientation})
         rigid_body = self._resolve_object(object_name)
@@ -4559,6 +4593,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
     def _attach_object(
         self, object_name: str, robot_name: str, *, phase_spec: dict | None = None, attach_spec: dict | None = None
     ):
+        if (attach_spec or {}).get('beam_assisted'):
+            return self._assisted_attach(object_name, robot_name, phase_spec, attach_spec)
         rigid_body = self._resolve_object(object_name)
         object_pose = rigid_body.get_pose()
         robot_pose = self._get_robot_task_pose(robot_name)
@@ -4955,6 +4991,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
                      for name in ('left_finger', 'right_finger')})
 
     def _detach_object(self, object_name: str, detach_spec=None):
+        if (self._attachments.get(object_name) or {}).get('attach_spec', {}).get('beam_assisted'):
+            return self._assisted_detach(object_name)
         detach_spec = detach_spec if isinstance(detach_spec, dict) else {}
         state = self._attachment_for(object_name, detach_spec.get('robot'))
         if state and state.get('attach_spec', {}).get('allow_shared_physical_grasp'):
@@ -5047,6 +5085,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
 
     def _lock_object(self, object_name: str, target_name: str, *, lock_spec: dict | None = None):
         lock_spec = lock_spec or {}
+        if lock_spec.get('beam_assisted'):
+            return self._assisted_lock(object_name, target_name, lock_spec)
         if (
             self._locked_targets.get(object_name) == target_name
             and not bool(lock_spec.get('force_relock', False))
@@ -5126,6 +5166,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         self._set_object_collision(object_name, collision_enabled)
 
     def _unlock_object(self, object_name: str):
+        if getattr(self, '_beam_assisted_enabled', False):
+            self._assisted_remove_world_joint(object_name)
         self._locked_targets.pop(object_name, None)
         self._frozen_lock_poses.pop(object_name, None)
         self._lock_pin_pose.pop(object_name, None)
@@ -5301,6 +5343,9 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         return abs(float(gripper_opening) - expected_q) <= tolerance
 
     def _attach_ready(self, phase_spec: dict, attach_spec: dict) -> bool:  # noqa: C901
+        if attach_spec.get('beam_assisted_visual_pinch'):
+            from toolkits.factory_dual_franka_assembly.beam_assisted_visual_grasp import ready
+            return ready(self, attach_spec['robot'], attach_spec['object'])
         object_name = attach_spec['object']
         robot_name = attach_spec['robot']
         attachment_state = self._attachment_for(object_name, robot_name)
@@ -5848,6 +5893,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
                 self._detach_object(object_name, object_entry)
 
     def _phase_interactions_complete(self, phase_spec: dict) -> bool:
+        if phase_spec and phase_spec.get('beam_assisted') and not self._assisted_release_open(phase_spec):
+            return False
         if not phase_spec:
             return True
 
@@ -5978,6 +6025,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         getattr(self, '_ur5e_contact_hold_commands', {}).pop(robot_name, None)
 
     def _sync_object_states(self):
+        if getattr(self, '_beam_assisted_enabled', False):
+            self._assisted_update_install_alignment()
         phase_spec = self.get_current_phase_spec()
         pending_detach_objects = {
             object_name
@@ -6300,6 +6349,9 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         linear_threshold: float = 1e-2,
         angular_threshold: float = 0.5,
     ) -> bool:
+        if self._beam_continuing_stability():
+            return self._beam_pose_objects_static(object_specs,
+                linear_threshold=linear_threshold, angular_threshold=angular_threshold)
         for object_spec in self._as_list(object_specs):
             object_name = self._extract_object_name(object_spec)
             if object_name is None:
@@ -6337,10 +6389,22 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         if advance_type == 'beam_table_supported':
             return self._beam_table_supported(advance)
         if advance_type == 'all_of':
-            return all(
+            results = (
                 self._evaluate_advance_condition(phase_spec=phase_spec, advance=condition)
                 for condition in advance.get('conditions', advance.get('all', []))
             )
+            # Warm every final pose window on every physical sample, even
+            # while support/another body is still qualifying. Default strict
+            # execution preserves its original short-circuit evaluation.
+            pose_conditions = self._beam_continuing_stability() and any(
+                c.get('type') in {'objects_static', 'object_static', 'beam_table_supported'}
+                for c in advance.get('conditions', advance.get('all', [])))
+            ready = all(list(results)) if pose_conditions else all(results)
+            if advance.get('physics_stable_steps'):
+                if phase_spec.get('beam_assisted'):
+                    return self._assisted_conditions_stable(advance, ready)
+                return self._beam_joint_conditions_stable(advance, ready)
+            return ready
         if advance_type == 'any_of':
             conditions = advance.get('conditions', advance.get('any', []))
             if not conditions:
@@ -6387,6 +6451,12 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
             object_specs = advance.get('objects')
             if object_specs is None:
                 object_specs = [advance.get('object')]
+            if (phase_spec.get('beam_assisted')
+                    and phase_spec.get('beam_assisted_installed_parts')
+                    and (phase_spec.get('lock') or
+                         phase_spec.get('name') == 'beam_assisted_final_verification')):
+                return self._assisted_installed_poses_ready(
+                    [self._extract_object_name(spec) for spec in self._as_list(object_specs)])
             return self._objects_static(
                 object_specs,
                 linear_threshold=float(advance.get('linear_velocity_threshold', 1e-2)),
@@ -6492,12 +6562,22 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         return True
 
     def _check_success(self) -> bool:
-        if self.phase_specs and self.phase_specs[0].get('beam_coordinated'):
+        pose_final_ready = False
+        assisted_final_ready = bool(getattr(self, '_beam_assisted_enabled', False))
+        if assisted_final_ready:
+            if not self._assisted_final_success_ready():
+                return False
+            pose_final_ready = True
+        elif self.phase_specs and self.phase_specs[0].get('beam_coordinated'):
             final = self.phase_specs[-1]
             if (self.phase_index != len(self.phase_specs) - 1
                     or final.get('name') != 'beam_final_unloaded_verification'
                     or not self._evaluate_advance_condition(phase_spec=final, advance=final['advance'])):
                 return False
+            # This flag is reached only after the unchanged final all-of gate,
+            # including all five native pose windows and joint 240 samples.
+            pose_final_ready = bool(getattr(self, '_beam_exploration_enabled', False)
+                                    and self._beam_continuing_final())
         for success_criterion in self.cfg.success_criteria:
             object_name = success_criterion['object']
             target_name = success_criterion.get('target') or success_criterion.get('target_name')
@@ -6533,12 +6613,22 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
                 if required_robot is not None and attachment_state.get('robot_name') != required_robot:
                     return False
             if bool(success_criterion.get('require_static', False)):
-                static_metrics = self._object_velocity_metrics(
-                    object_name,
-                    linear_threshold=float(success_criterion.get('linear_velocity_threshold', 1e-2)),
-                    angular_threshold=float(success_criterion.get('angular_velocity_threshold', 0.5)),
-                )
-                if not bool(static_metrics.get('valid')) or not bool(static_metrics.get('is_static')):
+                if assisted_final_ready:
+                    # The same-clock five-body native pose window qualified
+                    # motion. Preserve the legacy reading without making its
+                    # stale velocity/static result a second success gate.
+                    static_metrics = self._assisted_success_native_sample['objects'][object_name].get(
+                        'legacy_static_reading', {'valid': False, 'is_static': False})
+                else:
+                    static_metrics = self._object_velocity_metrics(
+                        object_name,
+                        linear_threshold=float(success_criterion.get('linear_velocity_threshold', 1e-2)),
+                        angular_threshold=float(success_criterion.get('angular_velocity_threshold', 0.5)),
+                    )
+                # Keep reading the legacy result for independent diagnostics;
+                # pose exploration has already qualified the stricter complete
+                # final predicate above. Do not start a second pose warm-up.
+                if (not bool(static_metrics.get('valid')) or not bool(static_metrics.get('is_static'))) and not pose_final_ready:
                     return False
             success_contact_spec = success_criterion.get('require_robot_object_contact')
             if success_contact_spec:
@@ -6806,7 +6896,9 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         remains zero until a later completed physics tick is observed.
         Legacy tasks keep their existing scheduling behavior.
         """
-        if not self.phase_specs or not self.phase_specs[0].get('beam_coordinated'):
+        if not self.phase_specs or not (
+                self.phase_specs[0].get('beam_coordinated')
+                or self.phase_specs[0].get('beam_assisted')):
             return True
         stamp = self._beam_physics_stamp()
         if not stamp.get('valid'):
@@ -6835,7 +6927,7 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         return True
 
     def _update_task_state(self):
-        if self.success or self.failed or not self.phase_specs:
+        if self.success or self.failed or getattr(self, '_beam_exploration_complete', False) or not self.phase_specs:
             return
         if not self._beam_task_clock_event('update'):
             return
@@ -6857,22 +6949,37 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         self._beam_support_watchdog(phase_spec)
         if self.failed:
             return
+        if getattr(self, '_beam_exploration_enabled', False) and self._beam_exploration_guard(phase_spec):
+            return
         self._process_phase_interactions(phase_spec)
         self._sync_object_states()
         if self.success or self.failed:
             return
+        if getattr(self, '_beam_exploration_enabled', False) and self._beam_exploration_guard(phase_spec):
+            return
 
         if self._consume_phase_transition_request():
+            if getattr(self, '_beam_exploration_enabled', False) and self._beam_exploration_guard(self.get_current_phase_spec()):
+                return
             self._initialize_phase()
             self._process_phase_interactions(self.get_current_phase_spec())
             self._sync_object_states()
             if self.success or self.failed:
                 return
             phase_spec = self.get_current_phase_spec()
+            if getattr(self, '_beam_exploration_enabled', False) and self._beam_exploration_guard(phase_spec):
+                return
 
-        if self._advance_condition_met(phase_spec):
+        advance_ready = self._advance_condition_met(phase_spec)
+        if self.failed:
+            return
+        if advance_ready:
+            if getattr(self, '_beam_exploration_enabled', False) and self._beam_exploration_guard(phase_spec, phase_complete=True):
+                return
             if self.phase_index + 1 < len(self.phase_specs):
                 self._set_phase(self.phase_index + 1, reason='advance', transition_type='advance', status='running')
+                if getattr(self, '_beam_exploration_enabled', False) and self._beam_exploration_guard(self.get_current_phase_spec()):
+                    return
                 self._initialize_phase()
                 # Apply entry interactions before the next control action. In
                 # particular, release phases must remove a transport joint or
@@ -6880,6 +6987,8 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
                 self._process_phase_interactions(self.get_current_phase_spec())
                 self._sync_object_states()
                 if self.success or self.failed:
+                    return
+                if getattr(self, '_beam_exploration_enabled', False) and self._beam_exploration_guard(self.get_current_phase_spec()):
                     return
             else:
                 self.success = self._check_success()
@@ -6934,6 +7043,10 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         return obs
 
     def cleanup(self) -> None:
+        if getattr(self, '_beam_assisted_enabled', False):
+            from toolkits.factory_dual_franka_assembly.beam_assisted_camera import uninstall_native_wrist_cameras
+            uninstall_native_wrist_cameras(self)
+            getattr(self, '_assisted_install_observed_views', {}).clear()
         try:
             try:
                 from isaacsim.core.utils.prims import delete_prim
@@ -6950,10 +7063,16 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
         self._object_pose_history.clear()
         for object_name in list(self._attachment_joints.keys()):
             self._remove_attachment_joint(object_name)
+        for object_name in list(getattr(self, '_assisted_world_joints', {})):
+            self._assisted_remove_world_joint(object_name)
         self._contact_probes.clear()
         super().cleanup()
 
     def is_done(self) -> bool:
+        if getattr(self, '_beam_assisted_boundary_stop', None):
+            return True
+        if getattr(self, '_beam_exploration_complete', False):
+            return True
         if not self._beam_task_clock_event('done'):
             return self.success or self.failed or self.step_counter >= self.max_steps
         self.step_counter += 1
@@ -6982,7 +7101,31 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
     def calculate_metrics(self) -> dict:
         criteria_passed = bool(self._check_success())
         reported_success = bool(self.success if self.policy_evaluation_mode else self.success or criteria_passed)
+        if getattr(self, '_beam_exploration_enabled', False):
+            reported_success = False
+        if getattr(self, '_beam_assisted_enabled', False):
+            reported_success = bool(self.success and criteria_passed and not self.failed)
         return {
+            **({'assisted_final_qualification': {
+                'certificate': copy.deepcopy(getattr(self, '_assisted_final_certificate', None)),
+                'current_native_recheck': copy.deepcopy(getattr(self, '_assisted_success_last_decision', None)),
+                'current_native_sample': copy.deepcopy(getattr(self, '_assisted_success_native_sample', None)),
+            }} if getattr(self, '_beam_assisted_enabled', False) else {}),
+            'execution_route': 'assisted' if getattr(self, '_beam_assisted_enabled', False) else 'physical',
+            'assisted_success': reported_success if getattr(self, '_beam_assisted_enabled', False) else False,
+            'assisted_boundary_stop': copy.deepcopy(getattr(self, '_beam_assisted_boundary_stop', None)),
+            'beam_exploration': {
+                'enabled': bool(getattr(self, '_beam_exploration_enabled', False)),
+                'completed': bool(getattr(self, '_beam_exploration_complete', False) or (
+                    getattr(self, '_beam_exploration_state', {}).get('continue_after_first_insertion') and self.success)),
+                'continuation_enabled': bool(getattr(self, '_beam_exploration_state', {}).get('continue_after_first_insertion')),
+                'first_insertion_complete': bool(getattr(self, '_beam_exploration_state', {}).get('first_insertion_complete')),
+                'sequence_completed': bool(getattr(self, '_beam_exploration_state', {}).get('continue_after_first_insertion') and self.success),
+                'formal_success': False if (getattr(self, '_beam_exploration_enabled', False) or getattr(self, '_beam_assisted_enabled', False)) else reported_success,
+                'execution_route': 'assisted' if getattr(self, '_beam_assisted_enabled', False) else 'physical',
+                'assisted_success': reported_success if getattr(self, '_beam_assisted_enabled', False) else False,
+                'last_decision': copy.deepcopy(getattr(self, '_beam_exploration_last_decision', None)),
+            },
             'recipe': self.cfg.recipe,
             'seed': self.cfg.seed,
             'layout_seed': int(

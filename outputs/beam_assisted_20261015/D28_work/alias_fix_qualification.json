@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "source_files": 889,
+  "unchanged_source_files": 887,
+  "changed_files": [
+    "tests/toolkits/test_beam_assisted_preflight.py",
+    "toolkits/factory_dual_franka_assembly/beam_assisted_preflight.py"
+  ],
+  "source_manifest_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+  "tools_manifest_sha256": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+  "tests": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_fix/affected_module_result.json",
+    "sha256": "53983cd698cf5c7b07b570f1665c452c3f4f50a6347a501cf5704d649ab84030",
+    "passed": 66,
+    "failed": 0,
+    "skipped": 0
+  },
+  "independent_review": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/D27_work/post_failure_fix/independent_alias_review.json",
+    "sha256": "8fc087c0f9b4e03b67b040fd3d65723bf3746ab8ca5a8114b1744cb023d529f4"
+  },
+  "actual_recorded_A43_config_old_failure_and_new_acceptance_verified": true,
+  "real_framework_env0_and_env1_verified": true,
+  "original_numeric_target_checks_exact": true,
+  "physics_control_camera_and_configuration_sources_exact": true,
+  "reuse_scope": "v34 full configuration, return geometry/controller and camera checks retained; only final-home configuration name resolution changed. Native rendering and full return still pending.",
+  "native_physics": false,
+  "original_A43_preserved": true
+}

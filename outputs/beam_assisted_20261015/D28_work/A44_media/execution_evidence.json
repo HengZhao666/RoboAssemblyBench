@@ -1,0 +1,107 @@
+{
+  "run": "A44_beam_full",
+  "cycle": "D28",
+  "analysis_complete": true,
+  "evidence_checks_passed": true,
+  "source_after_sha256": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+  "tool_sha256": "f8bd9ea90b32c039fa01b96d88a80742a70979e896282b35f2bb2380f02d4ea4",
+  "inputs": {
+    "source_after.json": "1655ffe98920f533736540dcd856facc9b005be96fca09122675bdadc59bb1e2",
+    "collect_results.json": "e5b111da61170eeeaa2935b37c823af657eee03264b4a2fb197d6fcc16e0e29a",
+    "task_config_snapshot.json": "f5e50359f05860807f871b0134918c902200ee2df605be013591fe9c00c9631f",
+    "scene_geometry.json": "62206afa9cff759baf6ad201e0418145a7520b100e09e3e31788b64f31cc892b",
+    "raw_stats": {
+      "assisted_trace.jsonl": [
+        38403830,
+        1792559456236826889
+      ],
+      "motion_trace.jsonl": [
+        67896646,
+        1792558987123481771
+      ],
+      "physics_boundary_trace.jsonl": [
+        2543150677,
+        1792559284582977973
+      ],
+      "entity_geometry_trace.jsonl": [
+        491584394,
+        1792559284313976636
+      ],
+      "video_frame_clock.jsonl": [
+        14501681,
+        1792559284464977387
+      ],
+      "visual_support_trace.jsonl": [
+        2948289,
+        1792559022576662294
+      ]
+    },
+    "video_stats": {
+      "observation_images_front.mp4": [
+        29711614,
+        1792559366260382927
+      ],
+      "observation_images_left_wrist.mp4": [
+        29997166,
+        1792559404942574046
+      ],
+      "observation_images_right_wrist.mp4": [
+        13752242,
+        1792559441152752602
+      ]
+    }
+  },
+  "SDK": {
+    "stored_submissions": 17022,
+    "maximum_delta_rad": 0.0,
+    "unmatched_publications": []
+  },
+  "native": {
+    "samples": 34044,
+    "valid": 34044
+  },
+  "three_views": {
+    "entity_samples": 7445,
+    "aligned": 7445,
+    "body_counts": [
+      44
+    ],
+    "required_dynamic_body_count": 37,
+    "static_mesh_bodies_without_per_tick_reader": [
+      "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_0",
+      "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_1",
+      "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_2",
+      "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_3",
+      "/World/env_0/episode_000000/objects/factory_table_leg_back_left",
+      "/World/env_0/episode_000000/objects/factory_table_leg_back_right",
+      "/World/env_0/episode_000000/objects/factory_table_leg_front_left",
+      "/World/env_0/episode_000000/objects/factory_table_leg_front_right"
+    ]
+  },
+  "terminal_transition": {
+    "from_phase": "beam_assisted_final_verification",
+    "from_phase_index": 100,
+    "to_phase": "complete",
+    "to_phase_index": 101,
+    "transition_type": "terminal",
+    "reason": "success-criteria-met",
+    "status": "success",
+    "step_counter": 59566,
+    "phase_step_counter": 240
+  },
+  "terminal_pinch": null,
+  "errors": [],
+  "tail": {
+    "required": false,
+    "reason": "original assisted final certificate completed without a failure",
+    "original_video_retained": true,
+    "full_assembly_claimed": false
+  },
+  "full_assembly_claimed": false,
+  "limits": [
+    "Recorded samples only; physical tail has separate native trace, not the full CAD entity stream.",
+    "Raw native boundaries omit epoch; matching assisted-event epoch is explicitly joined.",
+    "Static visual-only mesh poses use exported body_rest in the complete CAD monitor; not per-tick native measurements.",
+    "A frozen command is an observation, not proof of its code-level root cause."
+  ]
+}

@@ -15,6 +15,9 @@ robots:
     gripper_pad_dynamic_friction: 0.8
   - name: franka_left
     preserve_continuous_arm_joints: true
+    # Narrow posts saturated at 0.08 with no bilateral force in v180.
+    # Allow further physical closure; retain force limits and contact gates.
+    gripper_close_openness: 0.04
     arm_drive_kp: 80000.0
     arm_drive_kd: 4000.0
     gripper_drive_kp: 7500.0

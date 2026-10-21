@@ -650,10 +650,19 @@ def _collect_png_paths(frames_dir: Path) -> list[Path]:
     return sorted(path for path in frames_dir.rglob('*.png') if path.is_file())
 
 
-def _encode_mp4_from_pngs(frames_dir: Path, output_path: Path, fps: float) -> dict:
+def _encode_mp4_from_pngs(frames_dir: Path, output_path: Path, fps: float,
+                          *, precomputed_image_stats: dict | None = None) -> dict:
     png_paths = _collect_png_paths(frames_dir)
     if not png_paths:
         raise RuntimeError(f'No PNG frames were written to {frames_dir}')
+    if precomputed_image_stats is not None:
+        if (not isinstance(precomputed_image_stats, dict)
+                or precomputed_image_stats.get('count') != [len(png_paths)]):
+            raise ValueError('Precomputed image statistics do not cover every PNG')
+        for key in ('min', 'max', 'mean', 'std'):
+            value = np.asarray(precomputed_image_stats.get(key), float)
+            if value.shape != (3, 1, 1) or not np.all(np.isfinite(value)):
+                raise ValueError('Invalid precomputed image statistics: ' + key)
 
     first_frame = cv2.imread(str(png_paths[0]), cv2.IMREAD_COLOR)
     if first_frame is None:
@@ -674,7 +683,7 @@ def _encode_mp4_from_pngs(frames_dir: Path, output_path: Path, fps: float) -> di
     def _summary(image_stats: RunningImageStats, *, encoder: str, extra: dict | None = None) -> dict:
         payload = {
             'png_count': len(png_paths),
-            'image_stats': image_stats.to_dict(),
+            'image_stats': image_stats.to_dict() if precomputed_image_stats is None else precomputed_image_stats,
             'width': width,
             'height': height,
             'fps': float(fps),
@@ -728,7 +737,8 @@ def _encode_mp4_from_pngs(frames_dir: Path, output_path: Path, fps: float) -> di
                 raise RuntimeError('Failed to open ffmpeg stdin pipe')
             for png_path in png_paths:
                 frame_bgr = _read_frame(png_path)
-                image_stats.update(cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB))
+                if precomputed_image_stats is None:
+                    image_stats.update(cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB))
                 process.stdin.write(frame_bgr.tobytes())
             process.stdin.close()
             return_code = process.wait()
@@ -764,8 +774,9 @@ def _encode_mp4_from_pngs(frames_dir: Path, output_path: Path, fps: float) -> di
     try:
         for png_path in png_paths:
             frame_bgr = _read_frame(png_path)
-            frame_rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
-            image_stats.update(frame_rgb)
+            if precomputed_image_stats is None:
+                frame_rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
+                image_stats.update(frame_rgb)
             writer.write(frame_bgr)
     finally:
         writer.release()

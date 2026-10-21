@@ -121,3 +121,89 @@ def test_current_plumbers_block_recipe_passes_sequence_precheck():
 
     assert report.feasible, report.errors
     assert report.phase_count > 20
+
+
+def shared_attach(robot, **changes):
+    return dict({'robot': robot, 'object': 'part_a',
+                 'attachment_mode': 'pure_physical_grasp',
+                 'allow_shared_physical_grasp': True}, **changes)
+
+
+def test_declared_shared_approach_and_selective_handover_preserve_receiver():
+    report = check([
+        {'name': 'first_grasp', 'attach': [shared_attach('left')]},
+        {'name': 'approach_receiver', 'local_skill': {
+            'name': 'move_above_part', 'robot': 'right', 'object': 'part_a'}},
+        {'name': 'receiver_grasp', 'attach': [shared_attach('right')]},
+        {'name': 'giver_release', 'detach': [{'robot': 'left', 'object': 'part_a'}]},
+        {'name': 'receiver_carry', 'local_skill': {
+            'name': 'move_part_to_target', 'robot': 'right', 'object': 'part_a'}},
+    ])
+    assert report.feasible, report.errors
+    assert report.final_holding == {'left': None, 'right': 'part_a'}
+
+
+def test_shared_grasp_requires_bilateral_permission_and_pure_mode():
+    for first, second in [
+        (shared_attach('left', allow_shared_physical_grasp=False), shared_attach('right')),
+        (shared_attach('left'), shared_attach('right', allow_shared_physical_grasp=False)),
+        (shared_attach('left', attachment_mode='fixed_joint'), shared_attach('right')),
+        (shared_attach('left'), shared_attach('right', attachment_mode='fixed_joint')),
+    ]:
+        report = check([{'name': 'first', 'attach': [first]}, {'name': 'second', 'attach': [second]}])
+        assert 'double_grasp' in {issue['code'] for issue in report.errors}
+
+
+def test_future_shared_grasp_does_not_authorize_unheld_payload_motion():
+    report = check([
+        {'name': 'first', 'attach': [shared_attach('left')]},
+        {'name': 'early_hold', 'local_skill': {'name': 'custom_hold', 'robot': 'right',
+            'object': 'part_a', 'requires_held_object': True}},
+        {'name': 'second', 'attach': [shared_attach('right')]},
+    ])
+    assert 'payload_not_held' in {issue['code'] for issue in report.errors}
+
+
+def test_open_shared_hand_does_not_release_other_hand():
+    report = check([
+        {'name': 'first', 'attach': [shared_attach('left')]},
+        {'name': 'second', 'attach': [shared_attach('right')]},
+        {'name': 'open_first', 'gripper_commands': {'left': 'open'}},
+        {'name': 'second_carry', 'local_skill': {'name': 'move_part_to_target',
+            'robot': 'right', 'object': 'part_a'}},
+    ])
+    assert report.feasible, report.errors
+    assert report.final_holding == {'left': None, 'right': 'part_a'}
+
+
+def test_detach_one_hand_and_open_other_in_same_phase_releases_both():
+    report = check([
+        {'name': 'first', 'attach': [shared_attach('left')]},
+        {'name': 'second', 'attach': [shared_attach('right')]},
+        {'name': 'release_both', 'detach': [{'robot': 'left', 'object': 'part_a'}],
+            'gripper_commands': {'right': 'open'}},
+    ])
+    assert report.feasible, report.errors
+    assert report.final_holding == {'left': None, 'right': None}
+
+
+def test_shared_grasp_does_not_authorize_occupied_hand_or_non_owner_release():
+    report = check([
+        {'name': 'first', 'attach': [shared_attach('left')]},
+        {'name': 'second_payload', 'attach': [{'robot': 'right', 'object': 'part_b'}]},
+        {'name': 'second_grasp', 'attach': [shared_attach('right')]},
+        {'name': 'bad_release', 'detach': [{'robot': 'right', 'object': 'part_a'}]},
+    ])
+    assert {'end_effector_occupied', 'release_by_non_owner'}.issubset(
+        {issue['code'] for issue in report.errors})
+
+
+def test_generated_beam_sequence_passes_symbolic_shared_grasp_precheck():
+    from toolkits.factory_dual_franka_assembly.scene_builder import build_dual_franka_assembly_episode
+    cfg = build_dual_franka_assembly_episode(recipe='fabrica_beam_ur5e_staged', seed=0,
+        layout_seed=505, attach_runtime_cameras=False, domain_randomization_enabled=True)
+    report = AssemblySequencePrechecker().check(phases=cfg.phase_specs,
+        robot_names=cfg.robot_names, object_names=[obj.name for obj in cfg.objects])
+    assert report.feasible, report.errors
+    assert not report.warnings, report.warnings
+    assert all(obj is None for obj in report.final_holding.values())

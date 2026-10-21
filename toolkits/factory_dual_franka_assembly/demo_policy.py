@@ -2294,6 +2294,35 @@ class DualFrankaAssemblyDemoPolicy:
             'orientation': planned_orientation,
         }
 
+    def _beam_native_release_hold(self, task, robot_name, phase_spec):
+        """Keep the existing measured-hold behavior in its native joint branch.
+
+        Only an explicit coordinated Beam release uses this path. No target
+        recapture, force/gripper change, joint-state write or velocity reset.
+        """
+        robot = task.robots.get(robot_name)
+        entries = phase_spec.get('detach', [])
+        entries = entries if isinstance(entries, list) else [entries]
+        explicit_release = any(isinstance(entry, dict) and entry.get('robot') == robot_name
+                               and (entry.get('object') or entry.get('name')) for entry in entries)
+        if (phase_spec.get('beam_coordinated') is not True
+                or str(phase_spec.get('gripper_commands', {}).get(robot_name, '')).lower() != 'open'
+                or not explicit_release
+                or not getattr(getattr(robot, 'config', None), 'preserve_continuous_arm_joints', False)):
+            return None
+        measured, _ = self._native_arm_measurement(task, robot_name)
+        if measured is None or measured.size != 6:
+            raise RuntimeError('Beam release requires six valid native arm measurements')
+        path = os.environ.get('BEAM_RELEASE_JOINT_TRACE_PATH')
+        if path:
+            record = {'task_step': int(task.step_counter), 'phase': phase_spec.get('name'),
+                      'robot': robot_name, 'measured_native_q': measured.tolist(),
+                      'command_native_q': measured.tolist(),
+                      'mode': 'same_measured_hold_without_angle_wrapping'}
+            with open(path, 'a') as stream:
+                stream.write(json.dumps(record, allow_nan=False) + '\n')
+        return [measured.tolist()]
+
     def _compose_robot_action(self, task, robot_name: str, phase_spec: dict, tracked_robots: dict, tracked_objects: dict):
         action = OrderedDict()
         state = self._refresh_robot_plan_if_needed(
@@ -2307,6 +2336,10 @@ class DualFrankaAssemblyDemoPolicy:
         current_joint_positions = self._current_arm_joint_positions(task, robot_name)
 
         def _joint_hold_action(*, idle=False):
+            native_release = self._beam_native_release_hold(task, robot_name, phase_spec)
+            if native_release is not None:
+                self._clear_beam_idle_anchor(task, robot_name, 'native_release_hold')
+                return native_release
             if idle and self._beam_idle_eligible(task, robot_name, phase_spec, tracked_robots, tracked_objects):
                 return self._beam_idle_joint_action(task, robot_name)
             if idle:
@@ -2811,7 +2844,11 @@ class DualFrankaAssemblyDemoPolicy:
                     task.terminal_reason = f"local-skill-failure:{action.get('reason', 'unknown')}"
                 action = OrderedDict()
             if action is not None:
+                if phase_spec.get('beam_assisted'):
+                    task._assisted_active_arm(robot_name)
                 self._clear_beam_idle_anchor(task, robot_name, 'local_skill_takeover', rearm=True)
+            if action is None and phase_spec.get('beam_assisted'):
+                action = task._assisted_idle_action(robot_name, phase_spec)
             if action is None:
                 action = self._compose_robot_action(
                     task=task,
@@ -2821,4 +2858,6 @@ class DualFrankaAssemblyDemoPolicy:
                     tracked_objects=tracked_objects,
                 )
             actions[robot_name] = action
+        if phase_spec.get('beam_assisted'):
+            return task._assisted_guard_actions(actions)
         return actions

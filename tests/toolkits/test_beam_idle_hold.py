@@ -10,6 +10,8 @@ from unittest.mock import patch
 
 import numpy as np
 
+from toolkits.factory_dual_franka_assembly.beam_assisted_state import BeamAssistedState, consecutive_native_gate
+
 from toolkits.factory_dual_franka_assembly.beam_idle_hold import (
     native_joint_vector, published_arm_target,
 )
@@ -414,6 +416,144 @@ class PublishedTargetExtraction(unittest.TestCase):
                         {'joint_indices': [0, 2, 2, 4], 'joint_positions': [0, 2, 2, 4]}):
             with self.subTest(command=command):
                 self.assertIsNone(published_arm_target(command, [0, 2, 4]))
+
+
+class AssistedSupportTask(Task, BeamAssistedState):
+    """Real policy/idle/guard chain with A15's observed handoff q values.
+
+    Twelve active/idle ticks below are controlled replay, not unsampled native
+    observations. Native A15 inputs are stride8; SDK inputs here are returned
+    explicit-joint policy actions, not a new simulator execution.
+    """
+    published_q = np.array([1.4236666130347722, -.6674058809191656, 1.5875385082874862,
+                            -2.762521127313603, -2.638225830195295, -3.450689571654421])
+    handoff_q = np.array([1.4236582517623901, -.6667607426643372, 1.587741494178772,
+                          -2.7623071670532227, -2.6382079124450684, -3.4506664276123047])
+
+    def __init__(self):
+        super().__init__('fabrica_beam_ur5e_assisted')
+        self.cfg.robot_names = ['left', 'right']
+        self.right_subset = NativeSubset()
+        self.right_subset.q = self.handoff_q.copy()
+        self.robots['right'] = NS(controllers={'arm_joint_controller': NS(get_joint_subset=lambda: self.right_subset)})
+        self.tracking['right'] = dict(self.tracking['left'])
+        self.active_robot, self.active_target = 'right', self.published_q.copy()
+        self.driver_command = .123  # Deliberately opaque: hold/idle must not rewrite it.
+        self.epoch = 0
+        self.events = []
+        self.spec = {'name':'base_6_visual_support','beam_assisted':True,
+            'beam_assisted_visual_support':{'robot':'right','stable_native_ticks':12},
+            'local_skill':{'name':'ur5e_close_gripper','robot':'right'}}
+        self.phase=self.spec['name']
+        self.phase_specs = [self.spec]
+        self.set_tick(6524)
+
+    def set_tick(self, step):
+        self.step_counter = step
+        self.clock = dict(valid=True,epoch=self.epoch,index=step+3,time=(step+3)/240,dt=1/240)
+
+    def _beam_physics_stamp(self):
+        return dict(self.clock)
+
+    def _assisted_event(self, event, **detail):
+        self.events.append((event,detail))
+
+
+class AssistedSupportHandoff(unittest.TestCase):
+    def setUp(self):
+        self.task = AssistedSupportTask()
+        self.policy = Policy()
+        def action_for(**kwargs):
+            if kwargs['robot_name'] != self.task.active_robot:
+                return None
+            return {'arm_joint_controller':[self.task.active_target.tolist()],
+                    'gripper_controller':[self.task.driver_command]}
+        self.policy._local_skill_executor.action_for = action_for
+
+    def active_window(self):
+        state = {}
+        for step in range(6524,6536):
+            self.task.set_tick(step)
+            action = self.policy.act(self.task)['right']
+            np.testing.assert_allclose(action['arm_joint_controller'][0],self.task.published_q,atol=1e-12,rtol=0)
+            self.assertEqual(action['gripper_controller'],[self.task.driver_command])
+            ready=consecutive_native_gate(state,self.task.clock,True,12)
+        self.assertTrue(ready)
+        return np.asarray(action['arm_joint_controller'][0])
+
+    def handoff(self):
+        self.task.active_robot='left'
+        self.task.active_target=np.zeros(6)
+        self.task.spec['name']=self.task.phase='assemble_00_part_3_move_above'
+        self.task.spec['local_skill']={'name':'ur5e_move_above_part','robot':'left'}
+        self.task.phase_index+=1
+        self.task.phase_entry_step=6536
+        self.task.set_tick(6536)
+        return self.policy.act(self.task)['right']
+
+    def test_real_a15_first_idle_keeps_published_pd_bias_through_final_guard(self):
+        last=self.active_window()
+        action=self.handoff()
+        sdk_input=np.asarray(action['arm_joint_controller'][0])
+        self.assertAlmostEqual(self.task.handoff_q[1]-last[1],.0006451382548284812,places=12)
+        np.testing.assert_allclose(sdk_input,last,atol=1e-12,rtol=0)
+        self.assertNotIn('gripper_controller',action)
+
+    def test_multi_tick_and_phase_handoffs_preserve_same_final_target(self):
+        last=self.active_window()
+        self.handoff()
+        for step in range(6537,6560):
+            self.task.set_tick(step)
+            if step==6540:
+                self.task.phase_index+=1
+                self.task.phase_entry_step=step
+                self.task.spec['name']='next_left_phase'
+            action=self.policy.act(self.task)['right']
+            np.testing.assert_allclose(action['arm_joint_controller'][0],last,atol=1e-12,rtol=0)
+            self.assertNotIn('gripper_controller',action)
+
+    def test_missing_malformed_or_nonfinite_published_target_fails_closed(self):
+        for target in (None,[1.,2.],[0.,0.,0.,0.,0.,float('nan')]):
+            with self.subTest(target=target):
+                self.setUp();self.active_window()
+                if target is None:self.task._assisted_published_q.pop('right')
+                else:self.task._assisted_published_q['right']=np.asarray(target)
+                with self.assertRaises(ValueError):self.handoff()
+
+    def test_missing_stale_epoch_future_stamp_or_excess_tracking_fails_closed(self):
+        for invalid in ('missing','stale','epoch','future','invalid_clock','tracking'):
+            with self.subTest(invalid=invalid):
+                self.setUp();self.active_window()
+                record=self.task._assisted_published_q_stamps
+                if invalid=='missing':record.pop('right')
+                if invalid=='stale':record['right']['index']-=2
+                if invalid=='epoch':self.task.epoch+=1
+                if invalid=='future':record['right']['index']+=5
+                if invalid=='tracking':self.task.right_subset.q+=.121
+                if invalid=='invalid_clock':
+                    self.task._beam_physics_stamp=lambda:dict(valid=False,epoch=0,index=6539)
+                with self.assertRaises(ValueError):self.handoff()
+
+    def test_support_marker_for_other_robot_keeps_original_measured_idle(self):
+        self.active_window()
+        self.task.spec['beam_assisted_visual_support']['robot']='left'
+        action=self.handoff()
+        np.testing.assert_allclose(action['arm_joint_controller'][0],self.task.handoff_q,atol=1e-12,rtol=0)
+
+    def test_preshape_open_exits_support_and_retreat_active_target_wins(self):
+        self.active_window();self.handoff()
+        self.task.set_tick(6537)
+        self.task.spec.pop('beam_assisted_visual_support')
+        self.task.spec['gripper_commands']={'right':'open'}
+        action=self.policy.act(self.task)['right']
+        self.assertEqual(action['gripper_controller'],[1.])
+        np.testing.assert_allclose(action['arm_joint_controller'][0],self.task.handoff_q,atol=1e-12,rtol=0)
+        self.task.set_tick(6538)
+        self.task.active_robot='right';self.task.active_target=self.task.handoff_q+.001
+        self.task.spec['local_skill']={'name':'ur5e_retreat','robot':'right'}
+        action=self.policy.act(self.task)['right']
+        np.testing.assert_allclose(action['arm_joint_controller'][0],self.task.active_target,atol=1e-12,rtol=0)
+        self.assertEqual(action['gripper_controller'],[self.task.driver_command])
 
 
 if __name__ == '__main__':

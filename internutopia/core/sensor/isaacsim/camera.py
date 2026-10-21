@@ -1,4 +1,5 @@
 from typing import Optional, Tuple
+import os
 
 import numpy as np
 import omni.replicator.core as rep
@@ -52,6 +53,7 @@ class IsaacsimCamera(ICamera):
         self.camera_params = camera_params
         self.rp = None
         self.rp_annotators = {}
+        self._reference_time_error = None
         self.rp = rep.create.render_product(prim_path, resolution)
         self.prim = XFormPrim(prim_path)
         super().__init__()
@@ -132,6 +134,13 @@ class IsaacsimCamera(ICamera):
         if self.rgba:
             self.rp_annotators['rgba'] = rep.AnnotatorRegistry.get_annotator('LdrColor')
             self.rp_annotators['rgba'].attach(self.rp)
+            if os.environ.get('BEAM_VIDEO_CLOCK_TRACE') == '1':
+                try:
+                    reference = rep.AnnotatorRegistry.get_annotator('ReferenceTime')
+                    reference.attach(self.rp)
+                    self.rp_annotators['render_reference_time'] = reference
+                except Exception as exc:
+                    self._reference_time_error = type(exc).__name__ + ': ' + str(exc)
         if self.distance_to_image_plane:
             self.rp_annotators['distance_to_image_plane'] = rep.AnnotatorRegistry.get_annotator(
                 'distance_to_image_plane'
@@ -149,6 +158,18 @@ class IsaacsimCamera(ICamera):
         if self.rgba:
             return self.rp_annotators['rgba'].get_data()
         return None
+
+    def get_render_reference_time(self):
+        """Read the existing annotation graph; never orchestrate a new frame."""
+        if self._reference_time_error:
+            return {'error': self._reference_time_error}
+        annotator = self.rp_annotators.get('render_reference_time')
+        if annotator is None:
+            return None
+        try:
+            return annotator.get_data()
+        except Exception as exc:
+            return {'error': type(exc).__name__ + ': ' + str(exc)}
 
     def get_distance_to_image_plane(self) -> np.ndarray:
         """See `ICamera.get_distance_to_image_plane` for documentation."""

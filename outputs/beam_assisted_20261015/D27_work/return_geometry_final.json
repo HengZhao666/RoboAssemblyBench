@@ -1,0 +1,262 @@
+{
+  "run": "A42_beam_full",
+  "task_step": 57408,
+  "native_step": 57411,
+  "seed_sha256": "9bc0be7e75ce0aa519369e49e858e5475aee1ae855d9ea63920ec6f6dfd7d9dd",
+  "scene_sha256": "ef3dcec37f72950ac9bf06f2a9df2a6387ad6c3f7fe9c3cfa4891a84ef795f27",
+  "complete_visible_meshes": 54,
+  "native_body_poses": 44,
+  "calibrated_robot_bodies": 32,
+  "joint_graph_gaps": [],
+  "calibration_matrix_error": 2.6645352591003757e-15,
+  "intended_grasp": null,
+  "intersection_threshold_m": 1e-06,
+  "segments": [
+    {
+      "label": "left_home",
+      "robot": "franka_left",
+      "start": [
+        -1.3888615369796753,
+        -2.0821056365966797,
+        2.396467924118042,
+        -1.883813738822937,
+        -1.5711685419082642,
+        -1.3882815837860107
+      ],
+      "goal": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "nominal_passed": true,
+      "nominal_first_collision": null,
+      "samples": 140,
+      "max_joint_increment": 0.009991809618558814,
+      "installed_minimum": {
+        "distance": 0.1595115401538746,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh",
+        "sample": 0,
+        "fraction": 0.0
+      },
+      "first_gap": {
+        "distance": 0.1595115401538746,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh"
+      },
+      "last_gap": {
+        "distance": 0.3782940229880096,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_left/base_link/visuals/base/mesh",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh"
+      }
+    },
+    {
+      "label": "right_lift_clear",
+      "robot": "franka_right",
+      "start": [
+        1.4238014221191406,
+        -0.761340856552124,
+        1.5958349704742432,
+        -2.6750006675720215,
+        -2.6380457878112793,
+        -3.4508628845214844
+      ],
+      "goal": [
+        1.4238014221191406,
+        -1.0,
+        1.5958349704742432,
+        -2.6750006675720215,
+        -2.6380457878112793,
+        -3.4508628845214844
+      ],
+      "nominal_passed": true,
+      "nominal_first_collision": null,
+      "samples": 25,
+      "max_joint_increment": 0.009944130976994833,
+      "installed_minimum": {
+        "distance": 0.004865952354555807,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh",
+        "sample": 1,
+        "fraction": 0.041666666666666664
+      },
+      "first_gap": {
+        "distance": 0.005216274879645851,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh"
+      },
+      "last_gap": {
+        "distance": 0.14205021695842895,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh"
+      }
+    },
+    {
+      "label": "right_home",
+      "robot": "franka_right",
+      "start": [
+        1.4238014221191406,
+        -1.0,
+        1.5958349704742432,
+        -2.6750006675720215,
+        -2.6380457878112793,
+        -3.4508628845214844
+      ],
+      "goal": [
+        0.0,
+        -1.5707963268,
+        1.5707963268,
+        -1.5707963268,
+        -1.5707963268,
+        0.0
+      ],
+      "nominal_passed": true,
+      "nominal_first_collision": null,
+      "samples": 347,
+      "max_joint_increment": 0.009973592151796197,
+      "installed_minimum": {
+        "distance": 0.1390577909645606,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_1/mesh",
+        "sample": 31,
+        "fraction": 0.08959537572254335
+      },
+      "first_gap": {
+        "distance": 0.14205021695842895,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh"
+      },
+      "last_gap": {
+        "distance": 0.45842397982722854,
+        "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/upper_arm_link/visuals/upperarm/mesh",
+        "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh"
+      }
+    }
+  ],
+  "independent_tracking_sensitivity": [
+    {
+      "label": "left_home",
+      "independent_003_perturbations_passed": true,
+      "tested": 10780,
+      "planned": 10780,
+      "patterns": 77,
+      "first_collision": null
+    },
+    {
+      "label": "right_lift_clear",
+      "independent_003_perturbations_passed": false,
+      "tested": 7,
+      "planned": 1925,
+      "patterns": 77,
+      "first_collision": {
+        "sample": 0,
+        "fraction": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.03,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "collisions": [
+          {
+            "phase": "right_lift_clear",
+            "step": 0,
+            "mesh_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep",
+            "mesh_b": "/World/env_0/episode_000000/objects/fabrica_beam_0/mesh",
+            "body_a": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger",
+            "body_b": "/World/env_0/episode_000000/objects/fabrica_beam_0",
+            "depth": 0.0024993915166146297,
+            "contacts": [
+              {
+                "position": [
+                  0.7341120950877658,
+                  -0.08579552918676353,
+                  1.07555556297304
+                ],
+                "depth": 0.0024578279754716784
+              },
+              {
+                "position": [
+                  0.7340519055724135,
+                  -0.08581537380818344,
+                  1.0755754113197502
+                ],
+                "depth": 0.0024373692467532723
+              },
+              {
+                "position": [
+                  0.7341742664575568,
+                  -0.08577952533964132,
+                  1.0755395665764984
+                ],
+                "depth": 0.002474320671651764
+              },
+              {
+                "position": [
+                  0.7343035712838164,
+                  -0.08575924485925648,
+                  1.0755192860961136
+                ],
+                "depth": 0.0024951984868807134
+              },
+              {
+                "position": [
+                  0.7343697287142268,
+                  -0.08575515449050877,
+                  1.0755151957273659
+                ],
+                "depth": 0.0024993915166146297
+              },
+              {
+                "position": [
+                  0.7338000386953345,
+                  -0.08596481382850633,
+                  1.0757248550653633
+                ],
+                "depth": 0.0022832159648966677
+              },
+              {
+                "position": [
+                  0.7338425628840914,
+                  -0.0859289765358351,
+                  1.075689017772692
+                ],
+                "depth": 0.002320191464356018
+              },
+              {
+                "position": [
+                  0.7338895238935939,
+                  -0.0858957692981146,
+                  1.0756558105349716
+                ],
+                "depth": 0.0023544500177539174
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "right_home",
+      "independent_003_perturbations_passed": true,
+      "tested": 26719,
+      "planned": 26719,
+      "patterns": 77,
+      "first_collision": null
+    }
+  ],
+  "scope": "finite native-calibrated kinematic proxy only; never native dynamics or proof of full error hypercube; existing exact exemptions unchanged",
+  "gaps": [
+    "between-sample CCD",
+    "all unsampled perturbations",
+    "PhysX cooked geometry differs from visible CAD",
+    "unexported warehouse geometry",
+    "native tracking and dynamic contact must still be tested in one full run"
+  ],
+  "recommendation": "Left home, then right shoulder_lift-only decrease about .24rad while preserving measured five other arm axes, then right home; guard every final submitted batch against same-clock actual scene."
+}

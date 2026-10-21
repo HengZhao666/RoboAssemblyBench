@@ -1,0 +1,4 @@
+interface:
+  display_name: "仿真修复与轻量交接"
+  short_description: "按路线隔离上下文，复用证据驱动的审查、修复与流程复盘方法"
+  default_prompt: "使用 $simulation-repair-loop，按当前路线交接处理本轮任务，并检查有无可省去的重复工作。"

@@ -1,0 +1,26 @@
+{
+  "version": "v35",
+  "run": "A44_beam_full",
+  "source_files": 889,
+  "critical_tools": 20,
+  "source_manifest_sha256": "6fb47c35bccf5be5fdd854d17c1bfe825dc59d9722708c15510e1217d9fd4fd7",
+  "tools_manifest_sha256": "1b17561c813c4c77b0f5d383d62058c801df7ed64a704beab1e9af8d03af5218",
+  "changed_source_paths": [
+    "tests/toolkits/test_beam_assisted_preflight.py",
+    "toolkits/factory_dual_franka_assembly/beam_assisted_preflight.py"
+  ],
+  "changed_critical_tools": [],
+  "archives": [
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/versions/assisted_v35_before_A44_beam_full.tar.gz",
+      "bytes": 5911860,
+      "sha256": "677a9855adf3bd9200940032c628c9917d019a00f0cc3c7e8a350a5f7d494bd1"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/versions/assisted_v35_tools_before_A44_beam_full.tar.gz",
+      "bytes": 105487,
+      "sha256": "b196332c33a82647608245c60271820b99e844f941683a5f330ad3427830d574"
+    }
+  ],
+  "tool_sha256": "48119063c00bfb2d4438a9b8b44a295978d6d4b29b800b3107ece231c9a28593"
+}

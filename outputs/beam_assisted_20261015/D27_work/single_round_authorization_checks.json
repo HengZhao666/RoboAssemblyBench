@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "exact_new_final_round",
+      "passed": true
+    },
+    {
+      "case": "pause",
+      "passed": true
+    },
+    {
+      "case": "wrong_latest",
+      "passed": true
+    },
+    {
+      "case": "not_closed",
+      "passed": true
+    },
+    {
+      "case": "extra_budget",
+      "passed": true
+    },
+    {
+      "case": "wrong_pause",
+      "passed": true
+    },
+    {
+      "case": "used",
+      "passed": true
+    },
+    {
+      "case": "grant_authorized_by_human",
+      "passed": true
+    },
+    {
+      "case": "grant_baseline_started",
+      "passed": true
+    },
+    {
+      "case": "grant_baseline_closed",
+      "passed": true
+    },
+    {
+      "case": "grant_additional_native_attempts",
+      "passed": true
+    },
+    {
+      "case": "grant_maximum_native_attempts",
+      "passed": true
+    },
+    {
+      "case": "grant_run",
+      "passed": true
+    },
+    {
+      "case": "grant_cycle",
+      "passed": true
+    }
+  ],
+  "native_started": false
+}

@@ -284,7 +284,9 @@ def test_close_recenter_uses_half_of_single_finger_gap_imbalance():
 
     assert result['updated'] is True
     assert result['step'] == pytest.approx(0.005)
-    assert result['offset_world'] == pytest.approx([0.005, 0.0, 0.0])
+    # Move toward the nearer left pad: its 2mm gap widens while the
+    # opposite 12mm gap narrows, meeting at 7mm after a -5mm translation.
+    assert result['offset_world'] == pytest.approx([-0.005, 0.0, 0.0])
 
 
 def test_task_specs_are_discoverable():
@@ -315,8 +317,11 @@ def test_scene_builder_builds_screw_fastening_episode():
     assert len(task_cfg.robots[1].sensors) == 1
 
 
-def test_runtime_cameras_scale_to_dataset_width_without_changing_aspect_ratio(monkeypatch):
+def test_runtime_cameras_scale_to_configured_output_width_without_changing_aspect_ratio(monkeypatch):
     monkeypatch.setenv('RAB_DATASET_OUTPUT_WIDTH', '352')
+    monkeypatch.setenv('RAB_FRONT_OUTPUT_WIDTH', '352')
+    monkeypatch.delenv('RAB_RUNTIME_CAMERA_MAX_WIDTH', raising=False)
+    monkeypatch.delenv('RAB_FRONT_RUNTIME_CAMERA_MAX_WIDTH', raising=False)
 
     task_cfg = build_dual_franka_assembly_episode(
         recipe='screw_fastening', seed=3, episode_idx=0, attach_runtime_cameras=True

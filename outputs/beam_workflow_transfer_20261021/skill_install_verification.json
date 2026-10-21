@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "scope": "Only two user-authorized skill installations; no source/config/ledger changes or native execution",
+  "installed_reference_links_verified": 24,
+  "files": [
+    {
+      "skill": "simulation-repair-loop",
+      "path": "SKILL.md",
+      "destination": "/Users/zhaoheng/.codex/skills/simulation-repair-loop/SKILL.md",
+      "sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4",
+      "bytes": 8618
+    },
+    {
+      "skill": "simulation-repair-loop",
+      "path": "agents/openai.yaml",
+      "destination": "/Users/zhaoheng/.codex/skills/simulation-repair-loop/agents/openai.yaml",
+      "sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3",
+      "bytes": 303
+    },
+    {
+      "skill": "simulation-repair-loop",
+      "path": "references/process-retrospective.md",
+      "destination": "/Users/zhaoheng/.codex/skills/simulation-repair-loop/references/process-retrospective.md",
+      "sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54",
+      "bytes": 2643
+    },
+    {
+      "skill": "simulation-repair-loop",
+      "path": "references/review-and-reuse.md",
+      "destination": "/Users/zhaoheng/.codex/skills/simulation-repair-loop/references/review-and-reuse.md",
+      "sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9",
+      "bytes": 2357
+    },
+    {
+      "skill": "simulation-repair-loop",
+      "path": "scripts/sync_documents.py",
+      "destination": "/Users/zhaoheng/.codex/skills/simulation-repair-loop/scripts/sync_documents.py",
+      "sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77",
+      "bytes": 6736
+    },
+    {
+      "skill": "fabrica-assisted-repair",
+      "path": "SKILL.md",
+      "destination": "/Users/zhaoheng/.codex/skills/fabrica-assisted-repair/SKILL.md",
+      "sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6",
+      "bytes": 4812
+    },
+    {
+      "skill": "fabrica-assisted-repair",
+      "path": "agents/openai.yaml",
+      "destination": "/Users/zhaoheng/.codex/skills/fabrica-assisted-repair/agents/openai.yaml",
+      "sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73",
+      "bytes": 342
+    },
+    {
+      "skill": "fabrica-assisted-repair",
+      "path": "references/implementation-map.md",
+      "destination": "/Users/zhaoheng/.codex/skills/fabrica-assisted-repair/references/implementation-map.md",
+      "sha256": "c0c44c8f357f1cdc367f9c8bab42a2f00d397149b6d40ba685e13c7b9fb0d7b5",
+      "bytes": 17580
+    },
+    {
+      "skill": "fabrica-assisted-repair",
+      "path": "references/task-handoff-template.md",
+      "destination": "/Users/zhaoheng/.codex/skills/fabrica-assisted-repair/references/task-handoff-template.md",
+      "sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6",
+      "bytes": 2339
+    }
+  ]
+}

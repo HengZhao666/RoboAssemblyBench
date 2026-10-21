@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "documentation_version": "W06.0",
+  "files": [
+    "AGENTS.md",
+    "BEAM_ASSISTED_HANDOFF.md",
+    "BEAM_FINDINGS_INDEX.md",
+    "BEAM_PHYSICAL_HANDOFF.md",
+    "BEAM_REPAIR_HANDOFF.md",
+    "BEAM_REVIEW_CHECKLIST.md",
+    "BEAM_WORKFLOW_LOG.md",
+    "FABRICA_ASSISTED_REPAIR_HANDOFF.md",
+    "beam_routes/assisted/CHECKLIST.md",
+    "beam_routes/assisted/FINDINGS.md",
+    "beam_routes/assisted/PERFORMANCE.md",
+    "beam_routes/docs_manifest.json",
+    "beam_routes/physical/CHECKLIST.md",
+    "beam_routes/physical/FINDINGS.md",
+    "beam_routes/registry.json",
+    "outputs/beam_context_reorganization_20261016/before/AGENTS.md",
+    "outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md",
+    "outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md",
+    "outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md",
+    "outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md",
+    "outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md",
+    "outputs/beam_context_reorganization_20261016/before_manifest.json",
+    "outputs/beam_context_reorganization_20261016/source_verification.json",
+    "outputs/beam_context_reorganization_20261016/validation.json",
+    "outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json",
+    "outputs/beam_workflow_transfer_20261021/before_documents.tar.gz",
+    "outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz",
+    "outputs/beam_workflow_transfer_20261021/before_manifest.json",
+    "outputs/beam_workflow_transfer_20261021/skill_install_verification.json",
+    "outputs/beam_workflow_transfer_20261021/validation.json",
+    "skills/fabrica-assisted-repair/SKILL.md",
+    "skills/fabrica-assisted-repair/agents/openai.yaml",
+    "skills/fabrica-assisted-repair/references/implementation-map.md",
+    "skills/fabrica-assisted-repair/references/task-handoff-template.md",
+    "skills/simulation-repair-loop/SKILL.md",
+    "skills/simulation-repair-loop/agents/openai.yaml",
+    "skills/simulation-repair-loop/references/process-retrospective.md",
+    "skills/simulation-repair-loop/references/review-and-reuse.md",
+    "skills/simulation-repair-loop/scripts/sync_documents.py"
+  ],
+  "local_mirrors": [
+    "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/submission/beam_upstream_integration_2026-10-10",
+    "/Users/zhaoheng/Desktop/PCL work/Beam修复/RoboAssemblyBench/outputs/beam_assisted_20261015/assisted_repository"
+  ],
+  "server_mirrors": [
+    "/home/user/beam_integration_20261010_upstream6f57dae",
+    "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository",
+    "/home/user/RoboAssemblyBench",
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository"
+  ],
+  "skill_install": "/Users/zhaoheng/.codex/skills/simulation-repair-loop",
+  "sync_program": "skills/simulation-repair-loop/scripts/sync_documents.py",
+  "scope": "Explicit documentation/skill snapshots only; no source/config/tool seal deployment or run authorization",
+  "receipt": "outputs/beam_workflow_transfer_20261021/sync_verification.json",
+  "skill_installs": {
+    "simulation-repair-loop": "/Users/zhaoheng/.codex/skills/simulation-repair-loop",
+    "fabrica-assisted-repair": "/Users/zhaoheng/.codex/skills/fabrica-assisted-repair"
+  },
+  "sync_runtime": {
+    "minimum_python": "3.9",
+    "local_python": "/Users/zhaoheng/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "local_verified_version": "3.12.14",
+    "server_python": "python3",
+    "server_verified_version": "3.10.12",
+    "note": "Default local python3 is3.7 and lacks Path.is_relative_to; use the specified existing runtime. Recheck path/version if environment changes."
+  }
+}

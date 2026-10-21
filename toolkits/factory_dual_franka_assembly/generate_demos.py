@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import inspect
 import json
 import re
@@ -268,13 +269,15 @@ class LiveRolloutVideoRecorder:
             return None
         return self._to_uint8_rgb(sensor_obs.get('rgba'))
 
-    def record(self, task, obs: dict, *, step_index: int):
+    def record(self, task, obs: dict, *, step_index: int, post_failure: bool = False,
+               failure_task_step: int | None = None):
         if step_index % self.frame_stride != 0:
             return
 
         step_payload = {
             'observations': _sanitize_episode_value(obs),
-            'objects': _sanitize_episode_value(task.get_tracked_object_states()),
+            'objects': None if post_failure else _sanitize_episode_value(task.get_tracked_object_states()),
+            'capture_segment': 'post_failure' if post_failure else 'rollout',
         }
         captured_any = False
         for camera_spec in self.camera_specs:
@@ -296,6 +299,20 @@ class LiveRolloutVideoRecorder:
             frame_index = self._written_png_counts[camera_video_key]
             frame_path = frame_dir / f'frame_{frame_index:05d}.png'
             cv2.imwrite(str(frame_path), cv2.cvtColor(frame_rgb, cv2.COLOR_RGB2BGR))
+            if os.environ.get('BEAM_VIDEO_CLOCK_TRACE') == '1':
+                from toolkits.factory_dual_franka_assembly.beam_video_clock import video_frame_clock
+                binding = self._camera_bindings[camera_video_key]
+                sensor_observation = ((obs.get(binding['robot_name']) or {}).get('sensors') or {}).get(
+                    binding['sensor_name'], {})
+                clock = video_frame_clock(task, step=step_index, camera=camera_video_key,
+                    frame_index=frame_index, sensor_observation=sensor_observation)
+                clock['image_path'] = str(frame_path.relative_to(self.output_dir))
+                clock['capture_segment'] = 'post_failure' if post_failure else 'rollout'
+                if post_failure:
+                    clock['failure_task_step'] = int(task.step_counter) if failure_task_step is None else int(failure_task_step)
+                    clock['capture_entry_task_step'] = int(task.step_counter)
+                with (self.output_dir / 'video_frame_clock.jsonl').open('a') as handle:
+                    handle.write(json.dumps(clock, allow_nan=False) + '\n')
             self._written_png_counts[camera_video_key] += 1
             captured_any = True
 
@@ -314,7 +331,14 @@ class LiveRolloutVideoRecorder:
         for camera_video_key, frame_dir in list(self._frame_dirs.items()):
             width, height = self._frame_shapes.get(camera_video_key, (0, 0))
             video_path = video_root_dir / f'{camera_video_key.replace(".", "_")}.mp4'
-            encode_summary = _encode_mp4_from_pngs(frame_dir, video_path, self.fps)
+            encode_start = time.monotonic()
+            print(f'[video-encode] event=start camera={camera_video_key} '
+                  f'frames={self._written_png_counts[camera_video_key]}', flush=True)
+            encode_summary = _encode_mp4_from_pngs(frame_dir, video_path, self.fps,
+                precomputed_image_stats=self._image_stats[camera_video_key].to_dict())
+            encode_elapsed = time.monotonic()-encode_start
+            print(f'[video-encode] event=end camera={camera_video_key} '
+                  f'elapsed_s={encode_elapsed:.6f}', flush=True)
             videos[camera_video_key] = str(video_path)
             summaries[camera_video_key] = {
                 'frames_dir': str(frame_dir),
@@ -327,6 +351,7 @@ class LiveRolloutVideoRecorder:
                 'renderer': 'live_rollout_frame_capture',
                 'frame_count': int(self._written_png_counts.get(camera_video_key, 0)),
                 'image_stats': encode_summary.get('image_stats', self._image_stats[camera_video_key].to_dict()),
+                'encode_elapsed_s': encode_elapsed,
             }
             if not self.keep_frames:
                 shutil.rmtree(frame_dir, ignore_errors=True)
@@ -441,6 +466,8 @@ def _run_task_sequence(
     rendering_interval_override: int | None = None,
 ):
     simulation_fps = 240 if rendering_fps is None else max(int(rendering_fps), 1)
+    if record_live_video and (int(live_video_fps) < 1 or int(live_video_frame_stride) < 1):
+        raise ValueError('Live video fps and frame stride must be positive.')
     if record_trajectory_only and not record_lerobot_raw:
         raise ValueError('Trajectory-only recording requires record_lerobot_raw=True.')
     dataset_rendering_interval = max(int(dataset_frame_stride), 1) - 1 if record_lerobot_raw else None
@@ -452,7 +479,11 @@ def _run_task_sequence(
     rollout_rendering_interval = (
         dataset_rendering_interval
         if record_lerobot_raw and not record_trajectory_only
-        else (None if requires_runtime_rendering else simulation_fps - 1)
+        else (
+            int(live_video_frame_stride) - 1
+            if record_live_video
+            else (None if requires_runtime_rendering else simulation_fps - 1)
+        )
     )
     if rendering_interval_override is not None:
         if requires_runtime_rendering:
@@ -550,6 +581,10 @@ def _run_task_sequence(
                     record_steps=record_episode_steps,
                 )
             if record_live_video and video_recorder is None:
+                if not (record_lerobot_raw and not record_trajectory_only):
+                    # Runner reset keeps its render trigger. Align a new live
+                    # episode with its own sample steps without advancing physics.
+                    env.runner.render_trigger = int(task.step_counter) % int(live_video_frame_stride)
                 video_recorder = LiveRolloutVideoRecorder(
                     output_dir=output_dir or Path.cwd(),
                     episode_idx=episode_idx,
@@ -651,6 +686,8 @@ def _run_task_sequence(
                     finished_metrics[-1] if runner_completed else task.calculate_metrics(),
                     policy,
                 )
+                from copy import deepcopy
+                metrics = deepcopy(metrics)
                 if runtime_checker is not None:
                     metrics['runtime_robochecker'] = runtime_checker.finalize()
                 constraint_hook.attach_metrics(metrics)
@@ -666,6 +703,12 @@ def _run_task_sequence(
                 recorded_frame_mode = None
                 recorded_dataset = {}
                 if video_recorder is not None:
+                    from toolkits.factory_dual_franka_assembly.beam_failure_video import record_failure_tail
+                    tail = record_failure_tail(env, task, video_recorder, metrics)
+                    if tail is not None:
+                        metrics['post_failure_recording'] = tail
+                        if results_output_path is not None:
+                            _write_json(results_output_path, results)
                     live_video_output = video_recorder.finalize()
                     recorded_videos = live_video_output.get('videos', {})
                     recorded_video_summaries = live_video_output.get('summaries', {})
@@ -1546,6 +1589,9 @@ def main():
     )
     parser.add_argument('--headless', action='store_true')
     args = parser.parse_args()
+
+    if args.record_live_video and (args.live_video_fps < 1 or args.live_video_frame_stride < 1):
+        parser.error('Live video fps and frame stride must be positive.')
 
     headless = args.headless or not has_display()
     output_root = Path(args.output_dir).resolve()

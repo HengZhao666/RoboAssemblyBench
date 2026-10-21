@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "actual_recorded_full_build_config_equal": true,
+  "baseline_run": "A42_beam_full",
+  "actual_A27_full_build_config_equal": false,
+  "source_manifest_sha256": "476bee3ba19a5c3daa107e6058080e6be9e5715dc6dede48ee34c401477e22e7",
+  "elapsed_s": 34.312810787931085
+}

@@ -1,0 +1,192 @@
+{
+  "run": "A44_beam_full",
+  "source_run": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A44_beam_full",
+  "layout": "front640x360 | left_wrist480x360 | right_wrist480x360; full uncropped views",
+  "fps": 30,
+  "all_three_views_same_recorded_physics_stamp": true,
+  "clock_scope": "Frame identities and native stamps matched; render ReferenceTime absolute relation remains unverified as in original clock log.",
+  "formal_success": false,
+  "assisted_success": true,
+  "actual_result": {
+    "success": true,
+    "failed": false,
+    "steps": 59567,
+    "phase": null,
+    "phase_status": "success",
+    "failure_reason": null
+  },
+  "clips": [
+    {
+      "name": "08_return_home",
+      "title": "双臂安全回到初始位置",
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes/08_return_home.mp4",
+      "size": 1487244,
+      "sha256": "922ab0ce5446619e03a367f9edb18f266a39f734454cf7b05d4efef1659f11bd",
+      "source_frame_start_inclusive": 7138,
+      "source_frame_end_exclusive": 7427,
+      "source_video_time_start_s": 237.93333333333334,
+      "source_video_time_end_s": 247.56666666666666,
+      "first_frame": {
+        "task_step_label": 57112,
+        "camera": "observation.images.front",
+        "frame_index": 7138,
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 57115,
+          "time": 237.9791790782474,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "render_reference_time": {
+          "valid": true,
+          "numerator": 7171,
+          "denominator": 30,
+          "seconds": 239.03333333333333,
+          "source": "same_render_product.ReferenceTime"
+        },
+        "clock_relation": "unverified; distinct clocks retained",
+        "physics_time_minus_render_time_s": -1.0541542550859333,
+        "image_path": "episode_0000_live_frames/observation_images_front/frame_07138.png",
+        "capture_segment": "rollout"
+      },
+      "last_frame": {
+        "task_step_label": 59416,
+        "camera": "observation.images.front",
+        "frame_index": 7426,
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 59419,
+          "time": 247.57917957892641,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "render_reference_time": {
+          "valid": true,
+          "numerator": 7459,
+          "denominator": 30,
+          "seconds": 248.63333333333333,
+          "source": "same_render_product.ReferenceTime"
+        },
+        "clock_relation": "unverified; distinct clocks retained",
+        "physics_time_minus_render_time_s": -1.0541537544069115,
+        "image_path": "episode_0000_live_frames/observation_images_front/frame_07426.png",
+        "capture_segment": "rollout"
+      },
+      "scope": "Actual sequential empty-arm return from the installed frame through left home, right shoulder clearance and right home. Native final commands, actual joints and full geometry guards remain authoritative.",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 1600,
+            "height": 360,
+            "r_frame_rate": "30/1",
+            "duration": "9.633333",
+            "nb_read_frames": "289"
+          }
+        ]
+      },
+      "full_decode_exit": 0,
+      "cache": {
+        "binding": "5d73ff5a3d735e2b9bd8eedc11ccc5343eeabb8e42de710758f8a0886b6d1afc",
+        "returncode": 0,
+        "outputs": {
+          "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes/08_return_home.mp4": {
+            "bytes": 1487244,
+            "sha256": "922ab0ce5446619e03a367f9edb18f266a39f734454cf7b05d4efef1659f11bd"
+          }
+        }
+      }
+    },
+    {
+      "name": "09_final",
+      "title": "最终五件验收",
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes/09_final.mp4",
+      "size": 122358,
+      "sha256": "18ae377973f40150d2808c5668b8e0b9cf117c07d266d9cffd8375cd973958d6",
+      "source_frame_start_inclusive": 7407,
+      "source_frame_end_exclusive": 7445,
+      "source_video_time_start_s": 246.9,
+      "source_video_time_end_s": 248.16666666666666,
+      "first_frame": {
+        "task_step_label": 59264,
+        "camera": "observation.images.front",
+        "frame_index": 7407,
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 59267,
+          "time": 246.94584621256217,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "render_reference_time": {
+          "valid": true,
+          "numerator": 7440,
+          "denominator": 30,
+          "seconds": 248.0,
+          "source": "same_render_product.ReferenceTime"
+        },
+        "clock_relation": "unverified; distinct clocks retained",
+        "physics_time_minus_render_time_s": -1.0541537874378264,
+        "image_path": "episode_0000_live_frames/observation_images_front/frame_07407.png",
+        "capture_segment": "rollout"
+      },
+      "last_frame": {
+        "task_step_label": 59560,
+        "camera": "observation.images.front",
+        "frame_index": 7444,
+        "physics_stamp": {
+          "valid": true,
+          "epoch": 0,
+          "index": 59563,
+          "time": 248.17917961021885,
+          "dt": 0.004166666666666667,
+          "identity_source": "simulation_context_and_physics_view"
+        },
+        "render_reference_time": {
+          "valid": true,
+          "numerator": 7477,
+          "denominator": 30,
+          "seconds": 249.23333333333332,
+          "source": "same_render_product.ReferenceTime"
+        },
+        "clock_relation": "unverified; distinct clocks retained",
+        "physics_time_minus_render_time_s": -1.0541537231144673,
+        "image_path": "episode_0000_live_frames/observation_images_front/frame_07444.png",
+        "capture_segment": "rollout"
+      },
+      "scope": "Final native five-part window if reached; actual result/qualification report remains authoritative.",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 1600,
+            "height": 360,
+            "r_frame_rate": "30/1",
+            "duration": "1.266667",
+            "nb_read_frames": "38"
+          }
+        ]
+      },
+      "full_decode_exit": 0,
+      "cache": {
+        "binding": "6b88c22c8be8987cd7758696701d655adecfaa60be7a32d332504d8191fdcd87",
+        "returncode": 0,
+        "outputs": {
+          "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/A44_key_nodes/09_final.mp4": {
+            "bytes": 122358,
+            "sha256": "18ae377973f40150d2808c5668b8e0b9cf117c07d266d9cffd8375cd973958d6"
+          }
+        }
+      }
+    }
+  ],
+  "focus_names": [
+    "08_return_home",
+    "09_final"
+  ]
+}

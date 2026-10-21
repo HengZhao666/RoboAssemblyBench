@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-16T08:29:18.036137+00:00",
+  "files": {
+    "AGENTS.md": {
+      "bytes": 10589,
+      "sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b"
+    },
+    "BEAM_REPAIR_HANDOFF.md": {
+      "bytes": 7728,
+      "sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b"
+    },
+    "BEAM_ASSISTED_HANDOFF.md": {
+      "bytes": 3276,
+      "sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825"
+    },
+    "BEAM_REVIEW_CHECKLIST.md": {
+      "bytes": 22481,
+      "sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee"
+    },
+    "BEAM_FINDINGS_INDEX.md": {
+      "bytes": 157679,
+      "sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9"
+    },
+    "BEAM_WORKFLOW_LOG.md": {
+      "bytes": 43193,
+      "sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61"
+    }
+  },
+  "scope": "Documentation only; no runtime changes or native authorization"
+}

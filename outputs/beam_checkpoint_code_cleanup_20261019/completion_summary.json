@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "utc": "2026-10-19T02:00:32.775630+00:00",
+  "server_removed_loose_files": 194,
+  "remaining_experiment_executable_files": [],
+  "normal_authority_and_critical_tools_byte_identical": true,
+  "source_tool_version_archives_unchanged": true,
+  "configuration_comparison": {
+    "passed": true,
+    "layouts": [
+      {
+        "layout": 0,
+        "whole_configuration_equal_to_frozen_v26": true
+      },
+      {
+        "layout": 1,
+        "whole_configuration_equal_to_frozen_v26": true
+      },
+      {
+        "layout": 505,
+        "whole_configuration_equal_to_frozen_v26": true
+      },
+      {
+        "layout": 777,
+        "whole_configuration_equal_to_frozen_v26": true
+      }
+    ],
+    "elapsed_s": 34.35273570660502,
+    "simulator_created": false,
+    "source_root": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository"
+  },
+  "regression": {
+    "passed": true,
+    "returncode": 0,
+    "elapsed_s": 188.49256466375664,
+    "counts": {
+      "passed": 258
+    },
+    "files": [
+      "test_beam_assisted_route.py",
+      "test_beam_assisted_object_servo.py",
+      "test_beam_assisted_preflight.py",
+      "test_beam_assisted_release_state.py",
+      "test_beam_assisted_camera_contract.py",
+      "test_beam_runtime_integrity.py",
+      "test_roboassemblybench_pipeline.py",
+      "test_fabrica_cooling_manifold_task.py"
+    ],
+    "source_root": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository",
+    "native_physics": false,
+    "unit_environment_matches_frozen_D07_full_suite": true,
+    "production_environment_separately_checked_by_four_configurations": true,
+    "scope": "Normal assisted interfaces plus ACT training checkpoint selection/resume and RL checkpoint recipe metadata."
+  },
+  "validation_environment_correction": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/code_cleanup_20261019/validation_summary.json",
+    "sha256": "5faf21c9d5a734698d2fa15741ba8b8c0f4bc1b5c8c0b4064036321a62208bb0",
+    "status": "Explicitly interrupted after114passing cases; no test failures. Production env was used instead of frozen unit fixture env. Original scripts/reports/logs retained."
+  },
+  "current_gate_validation": {
+    "passed": true,
+    "route": "assisted",
+    "run_name": "A24_beam_full",
+    "cycle": "D08",
+    "checked": [
+      "actual_configuration_and_targets",
+      "admitted_error_and_final_command_geometry",
+      "bimanual_support_lifecycle",
+      "full_entities_and_camera_visibility",
+      "full_phase_release_completion_interfaces",
+      "production_controller_object_space_replay"
+    ],
+    "runtime_image_and_dynamics_still_require_native_verification": true,
+    "formal_success": false
+  },
+  "archive": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/code_cleanup_20261019/server_before_loose_code.tar.gz",
+    "sha256": "cf6fd8584eccd5935007c0209ebf91094bc0d9713f7273d656186801dcf8af50"
+  },
+  "generic_training_resume_and_model_checkpoints_preserved": true,
+  "generic_waypoints_and_startup_native_snapshots_preserved": true,
+  "native_runs_started": 0,
+  "source_changed": false
+}

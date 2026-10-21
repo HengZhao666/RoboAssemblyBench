@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fabrica 辅助装配修复"
+  short_description: "复用物理辅助机制与差异验证，将多个已定位问题合并为一轮修复验收"
+  default_prompt: "使用 $fabrica-assisted-repair，读取项目 Fabrica 辅助修复交接，按当前任务与授权处理问题，并复用 Beam 已验证机制。"

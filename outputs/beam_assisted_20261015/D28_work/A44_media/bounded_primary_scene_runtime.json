@@ -1,0 +1,11 @@
+{
+  "url": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/warehouse_with_forklifts.usd",
+  "status": 200,
+  "bytes": 14116,
+  "sha256": "8613993787bdd58914a9e801f534a17cb76c216bea05000bf9313f0f7222b7e3",
+  "etag": "\"fa2f7faa6cf6a2aaecc0194e479f8315\"",
+  "elapsed_s": 0.6102099260315299,
+  "request_attempts": 1,
+  "prior_transport_failures": [],
+  "scope": "Only replace blocking SDK existence transport for the exact checked URL. Same URL is loaded by original USD/PhysX scene loader. No local/fallback substitution or physics/state edit."
+}

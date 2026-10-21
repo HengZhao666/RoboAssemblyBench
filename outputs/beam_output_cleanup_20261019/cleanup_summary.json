@@ -1,0 +1,189 @@
+{
+  "schema": 1,
+  "started_utc": "2026-10-19T01:43:39.786813+00:00",
+  "finished_utc": "2026-10-19T01:44:12.348607+00:00",
+  "human_selected_output_only_cleanup": true,
+  "plan_sha256": "b6195421bfba582815f2b35f328815d70568f159feaf2e4edf798b8cbe85bf15",
+  "deleted_files": 262503,
+  "removed_empty_directories": 526,
+  "allocated_bytes_unlinked": 182878003200,
+  "group_deleted_files": {
+    "C4": 36653,
+    "C3": 47640,
+    "CP1": 65696,
+    "C2": 22447,
+    "A5": 21301,
+    "R2": 6410,
+    "C1": 2996,
+    "A3": 7371,
+    "CP2": 364,
+    "A4": 12550,
+    "A_old_extra": 367,
+    "A1": 5728,
+    "A2": 10815,
+    "R4": 1208,
+    "R1": 20877,
+    "R3": 73,
+    "R0": 7
+  },
+  "group_allocated_bytes_unlinked": {
+    "C4": 40333201408,
+    "C3": 37672480768,
+    "CP1": 34360774656,
+    "C2": 14071255040,
+    "A5": 10571870208,
+    "R2": 13941440512,
+    "C1": 2223804416,
+    "A3": 3720200192,
+    "CP2": 1782108160,
+    "A4": 6031937536,
+    "A_old_extra": 1436901376,
+    "A1": 2622267392,
+    "A2": 4922560512,
+    "R4": 899530752,
+    "R1": 8196509696,
+    "R3": 81711104,
+    "R0": 9449472
+  },
+  "kept_files": 1963,
+  "kept_allocated_bytes": 254382080,
+  "available_bytes_before": 0,
+  "available_bytes_after": 182014644224,
+  "available_bytes_increase": 182014644224,
+  "authority_checks_before": [
+    {
+      "scope": "assisted",
+      "files": 889,
+      "differences": []
+    },
+    {
+      "scope": "critical_tools",
+      "files": 20,
+      "differences": []
+    },
+    {
+      "scope": "physical",
+      "files": 876,
+      "differences": []
+    }
+  ],
+  "authority_checks_after": [
+    {
+      "scope": "assisted",
+      "files": 889,
+      "differences": []
+    },
+    {
+      "scope": "critical_tools",
+      "files": 20,
+      "differences": []
+    },
+    {
+      "scope": "physical",
+      "files": 876,
+      "differences": []
+    }
+  ],
+  "current_gate_validation": {
+    "passed": true,
+    "route": "assisted",
+    "run_name": "A24_beam_full",
+    "cycle": "D08",
+    "checked": [
+      "actual_configuration_and_targets",
+      "admitted_error_and_final_command_geometry",
+      "bimanual_support_lifecycle",
+      "full_entities_and_camera_visibility",
+      "full_phase_release_completion_interfaces",
+      "production_controller_object_space_replay"
+    ],
+    "runtime_image_and_dynamics_still_require_native_verification": true,
+    "formal_success": false
+  },
+  "retained_current_outputs_before": {
+    "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/fabrica_beam_v201_native_release_hold": {
+      "files": 10434,
+      "logical_bytes": 12032616610,
+      "metadata_sha256": "dc1022374769a0edf14ba0a69f212deee61d11848d35bbf5e3f19e22aba213d4"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A20_beam_full": {
+      "files": 13252,
+      "logical_bytes": 6883107316,
+      "metadata_sha256": "8860fc38fd24a88cad2c219409323629a62bc38279400084038f3fccb3184e63"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A21_beam_full": {
+      "files": 12996,
+      "logical_bytes": 6738099126,
+      "metadata_sha256": "42f60b0c2e7a320c7eaedd525705ba39dede32fc3094b69f779ae83283f71501"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A22_beam_full": {
+      "files": 13173,
+      "logical_bytes": 7195693559,
+      "metadata_sha256": "b85b665a353e240935a091b05fd24f0a3a260a8c4713667cf8debc0d528a5db9"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A23_beam_full": {
+      "files": 41,
+      "logical_bytes": 91684243,
+      "metadata_sha256": "5377570ac1576e03e531de92c5255860e2ceaf6640872931ff186ab377311189"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A24_beam_full": {
+      "files": 40,
+      "logical_bytes": 91390281,
+      "metadata_sha256": "76db0836d17e4c53ab76d57183114422b93748913806e0ce33107202b2c858cc"
+    }
+  },
+  "retained_current_outputs_after": {
+    "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/fabrica_beam_v201_native_release_hold": {
+      "files": 10434,
+      "logical_bytes": 12032616610,
+      "metadata_sha256": "dc1022374769a0edf14ba0a69f212deee61d11848d35bbf5e3f19e22aba213d4"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A20_beam_full": {
+      "files": 13252,
+      "logical_bytes": 6883107316,
+      "metadata_sha256": "8860fc38fd24a88cad2c219409323629a62bc38279400084038f3fccb3184e63"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A21_beam_full": {
+      "files": 12996,
+      "logical_bytes": 6738099126,
+      "metadata_sha256": "42f60b0c2e7a320c7eaedd525705ba39dede32fc3094b69f779ae83283f71501"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A22_beam_full": {
+      "files": 13173,
+      "logical_bytes": 7195693559,
+      "metadata_sha256": "b85b665a353e240935a091b05fd24f0a3a260a8c4713667cf8debc0d528a5db9"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A23_beam_full": {
+      "files": 41,
+      "logical_bytes": 91684243,
+      "metadata_sha256": "5377570ac1576e03e531de92c5255860e2ceaf6640872931ff186ab377311189"
+    },
+    "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A24_beam_full": {
+      "files": 40,
+      "logical_bytes": 91390281,
+      "metadata_sha256": "76db0836d17e4c53ab76d57183114422b93748913806e0ce33107202b2c858cc"
+    }
+  },
+  "retained_current_outputs_unchanged": true,
+  "ledger_unchanged_during_cleanup": true,
+  "runtime_code_changed": false,
+  "assets_changed": false,
+  "version_archives_changed": false,
+  "checkpoint_code_cleanup_performed": false,
+  "checkpoint_next_step": "Next separate task: remove checkpoint/restart code residues and imports without changing normal from-head assisted execution. No code removal or native run in this cleanup.",
+  "native_runs_started": 0,
+  "protected_dependency_exceptions": [
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/runs/A19_beam_full/scene_geometry.json",
+      "group": "A5",
+      "allocated": 86896640,
+      "size": 86895325,
+      "mtime_ns": 1792134327155985417,
+      "ino": 20073931,
+      "dev": 64771,
+      "mode": 33204,
+      "nlink": 1,
+      "reason": "bound_reference:beam_assisted_20261015/D08_delta.json;bound_reference:beam_assisted_20261015/launch_gates/A24_beam_full.json;reference:beam_assisted_20261015/D08_delta.json;reference:beam_assisted_20261015/launch_gates/A24_beam_full.json"
+    }
+  ]
+}

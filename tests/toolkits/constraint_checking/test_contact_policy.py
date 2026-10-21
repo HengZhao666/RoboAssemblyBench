@@ -32,7 +32,7 @@ def test_positive_clearance_is_proximity_not_collision():
     assert decision.reason == 'positive_surface_clearance'
 
 
-def test_target_gripper_contact_is_allowed_during_grasp():
+def test_target_palm_capsule_is_not_exempted_as_finger_contact():
     decision = AssemblyContactPolicy().classify(
         _event(
             'franka_left/wrist_3_link->Gripper/Robotiq_2F_85/base_link',
@@ -41,11 +41,10 @@ def test_target_gripper_contact_is_allowed_during_grasp():
         PhaseTask(),
     )
 
-    assert decision.classification == 'allowed_contact'
-    assert decision.reason == 'phase_target_end_effector_contact'
+    assert decision.classification == 'collision'
 
 
-def test_target_outer_finger_contact_is_allowed_during_grasp():
+def test_target_outer_knuckle_capsule_is_not_exempted():
     decision = AssemblyContactPolicy().classify(
         _event(
             'franka_left/Gripper/Robotiq_2F_85/left_outer_knuckle' '->Gripper/Robotiq_2F_85/left_outer_finger',
@@ -54,13 +53,13 @@ def test_target_outer_finger_contact_is_allowed_during_grasp():
         PhaseTask(),
     )
 
-    assert decision.classification == 'allowed_contact'
+    assert decision.classification == 'collision'
 
 
 def test_target_panda_finger_contact_is_allowed_during_grasp():
     decision = AssemblyContactPolicy().classify(
         _event(
-            'franka_left/panda_hand->panda_leftfinger',
+            'franka_left/panda_leftfinger',
             'fabrica_plumbers_block_4',
         ),
         PhaseTask(),

@@ -1,0 +1,277 @@
+[
+  {
+    "path": "internutopia.egg-info",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/internutopia.egg-info",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia.egg-info",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia.egg-info",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": ".cursor",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/.cursor",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/.cursor",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/.cursor",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": ".cache",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/.cache",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/.cache",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/.cache",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "toolkits/indoor_scenes_generation/infinigen/infinigen/assets",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/toolkits/indoor_scenes_generation/infinigen/infinigen/assets",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/toolkits/indoor_scenes_generation/infinigen/infinigen/assets",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/toolkits/indoor_scenes_generation/infinigen/infinigen/assets",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "internutopia/assets",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/internutopia/assets",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/assets",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/assets",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/robofactory_native/downloads",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/robofactory_native/downloads",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/robofactory_native/downloads",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/robofactory_native/downloads",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/fabrica_franka_plumbers_block_optical_board_black_fullbundle_sdf001",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/fabrica_franka_plumbers_block_optical_board_black_fullbundle_sdf001",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_franka_plumbers_block_optical_board_black_fullbundle_sdf001",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_franka_plumbers_block_optical_board_black_fullbundle_sdf001",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/official_replay_assets",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/official_replay_assets",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/official_replay_assets",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/official_replay_assets",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/official_logs",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/official_logs",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/official_logs",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/official_logs",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/fabrica_franka_cooling_optical_board_black_fullbundle_sdf001",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/fabrica_franka_cooling_optical_board_black_fullbundle_sdf001",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_franka_cooling_optical_board_black_fullbundle_sdf001",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_franka_cooling_optical_board_black_fullbundle_sdf001",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/checkpoints",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/checkpoints",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/checkpoints",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/checkpoints",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/fabrica_ur5e_d405_plumbers_block_minimal_workcell_fullbundle_sdf001_v1",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_d405_plumbers_block_minimal_workcell_fullbundle_sdf001_v1",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_d405_plumbers_block_minimal_workcell_fullbundle_sdf001_v1",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_d405_plumbers_block_minimal_workcell_fullbundle_sdf001_v1",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/open_in_isaacsim.sh",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/open_in_isaacsim.sh",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/open_in_isaacsim.sh",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/open_in_isaacsim.sh",
+    "exists": true,
+    "is_dir": false,
+    "bytes": 558,
+    "sha256": "75c0374eee8a7e045284cb5f740931e7d2a943304cc99a82a5fa9228548038ce",
+    "git_blob_sha1": "3ae721c97f4492d32e60b1c6195b4d131790f847",
+    "upstream_base": {
+      "status": "tracked_equal_server",
+      "mode": "100755",
+      "kind": "blob",
+      "git_object": "3ae721c97f4492d32e60b1c6195b4d131790f847"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/README.md",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/README.md",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/README.md",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/README.md",
+    "exists": true,
+    "is_dir": false,
+    "bytes": 533,
+    "sha256": "13b6453e34e3ff89fe44bbc501b54fa9b9908b28c1693152118bf3c76c7e46dd",
+    "git_blob_sha1": "6077a6c5428b47fee515c64131a43d71d7de188a",
+    "upstream_base": {
+      "status": "tracked_equal_server",
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "6077a6c5428b47fee515c64131a43d71d7de188a"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/optical_board.usda",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/optical_board.usda",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/optical_board.usda",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/optical_board.usda",
+    "exists": true,
+    "is_dir": false,
+    "bytes": 269,
+    "sha256": "840854c486fd4aa4dfa87c1121866b2f6a8f81adac22584610ade7e0b490b1c7",
+    "git_blob_sha1": "ed55fb5691e0318851fb5a9df7731fad8299fb41",
+    "upstream_base": {
+      "status": "tracked_equal_server",
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "ed55fb5691e0318851fb5a9df7731fad8299fb41"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/open_in_isaacsim.py",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/open_in_isaacsim.py",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/open_in_isaacsim.py",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/open_in_isaacsim.py",
+    "exists": true,
+    "is_dir": false,
+    "bytes": 3908,
+    "sha256": "b199b9d8755020fa387283b826148e2d43feda476ef35619012ed08ef5c117f3",
+    "git_blob_sha1": "165f161a3a1c6b42d6fed30c0924a2baa6f3b734",
+    "upstream_base": {
+      "status": "tracked_equal_server",
+      "mode": "100644",
+      "kind": "blob",
+      "git_object": "165f161a3a1c6b42d6fed30c0924a2baa6f3b734"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/canonical_7_bundles/handoff",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/handoff",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/handoff",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/handoff",
+    "exists": true,
+    "is_dir": true,
+    "upstream_base": {
+      "status": "directory_requires_contents_inventory"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/canonical_7_bundles/HANDOFF_README.md",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/HANDOFF_README.md",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/HANDOFF_README.md",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/HANDOFF_README.md",
+    "exists": true,
+    "is_dir": false,
+    "bytes": 2163,
+    "sha256": "4b3435fe27a278d9b580c99f763582ba2ff7e354b02fb56c358b0bba6f9330d6",
+    "git_blob_sha1": "4b3cdb12bc2c9cddf4a0ac3f6f0585e5ae942dde",
+    "upstream_base": {
+      "status": "not_tracked_at_upstream_base"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/canonical_7_bundles/SHA256SUMS",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/SHA256SUMS",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/SHA256SUMS",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/SHA256SUMS",
+    "exists": true,
+    "is_dir": false,
+    "bytes": 27322,
+    "sha256": "991b6aa25a4ec3c11bc2f84c60a7e4bd36a2f782f785825e6cd4a25c7724bff4",
+    "git_blob_sha1": "34c1857eccc231f2f4df447b6177bf75a4af926d",
+    "upstream_base": {
+      "status": "not_tracked_at_upstream_base"
+    }
+  },
+  {
+    "path": "roboassemblybench/assets/Fabrica/canonical_7_bundles/.gitkeep",
+    "logical_path": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/.gitkeep",
+    "target": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/.gitkeep",
+    "real_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/.gitkeep",
+    "exists": true,
+    "is_dir": false,
+    "bytes": 1,
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "git_blob_sha1": "8b137891791fe96927ad78e64b0aad7bded08bdc",
+    "upstream_base": {
+      "status": "not_tracked_at_upstream_base"
+    }
+  }
+]

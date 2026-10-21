@@ -290,7 +290,7 @@ class ContactControlRegression(unittest.TestCase):
     def test_material_trial_is_opt_in_and_rejects_invalid_coefficients(self):
         read=extracted_definitions('internutopia_extension/robots/ur5e.py', ['_gripper_contact_friction'])['_gripper_contact_friction']
         robot=SimpleNamespace(config=SimpleNamespace())
-        self.assertEqual(read(robot),(80.,70.))
+        self.assertEqual(read(robot),(3.,2.5))
         robot.config=SimpleNamespace(gripper_pad_static_friction=1.,gripper_pad_dynamic_friction=.8)
         self.assertEqual(read(robot),(1.,.8))
         for static,dynamic in [(1.,None),(None,.8),(-1.,.8),(1.,2.),(float('nan'),.8),(1.,float('inf'))]:
@@ -992,6 +992,38 @@ class ContinuousRobotStateRegression(unittest.TestCase):
         self.assertEqual(self.writes, [])
         self.assertEqual(self.published, [])
 
+    def test_overridden_ik_is_not_recorded_as_sdk_submission(self):
+        self.robot.controllers['arm_ik_controller'] = self.robot.controllers['arm_joint_controller']
+        self.robot.apply_action({'arm_ik_controller': [(self.command + .1).tolist()],
+                                 'arm_joint_controller': [self.command.tolist()]})
+        self.assertEqual(len(self.published), 1)
+        self.assertEqual(len(self.robot.last_action), 1)
+        self.assertEqual(self.robot.last_action_controller_names, ['arm_joint_controller'])
+        self.assertEqual(self.robot.last_action_skipped[0]['reason'], 'arm_joint_override')
+        np.testing.assert_array_equal(self.robot.last_action[0]['joint_positions'], self.command)
+
+    def test_failed_sdk_call_is_not_recorded_and_error_propagates(self):
+        def fail(control):
+            raise RuntimeError('native submission failed')
+        self.robot.articulation.apply_action = fail
+        with self.assertRaisesRegex(RuntimeError, 'native submission failed'):
+            self.robot.apply_action({'arm_joint_controller': [self.command.tolist()]})
+        self.assertEqual(self.robot.last_action, [])
+        self.assertEqual(self.robot.last_action_controller_names, [])
+
+    def test_partial_batch_records_only_completed_calls(self):
+        self.robot.controllers['gripper_controller'] = self.robot.controllers['arm_joint_controller']
+        def publish(control):
+            if self.published:
+                raise RuntimeError('second native call failed')
+            self.published.append(control)
+        self.robot.articulation.apply_action = publish
+        with self.assertRaisesRegex(RuntimeError, 'second native call failed'):
+            self.robot.apply_action({'arm_joint_controller': [self.command.tolist()],
+                                     'gripper_controller': [[.66]]})
+        self.assertEqual(len(self.robot.last_action), 1)
+        self.assertEqual(self.robot.last_action_controller_names, ['arm_joint_controller'])
+
     def test_continuous_native_ik_control_is_not_rewrapped(self):
         control=SimpleNamespace(joint_positions=self.command.copy())
         self.robot._normalize_arm_control('arm_ik_controller',control)
@@ -1269,6 +1301,81 @@ class LoadedForceRegression(unittest.TestCase):
             for _ in range(2):
                 result = self.adapter._publish_loaded_action(**self.args)
                 self.assertEqual(result, {'failure': 'loaded_gripper_force_limit'})
+
+    def _diagnostic_hold(self):
+        return {'valid': True, 'arm_q': self.args['command_q'].tolist(),
+                'gripper_q': .66, 'gripper_openness': 1.-.66/.8}
+
+    def test_diagnostic_hold_keeps_finger_target_and_resumes_without_accumulated_seek(self):
+        from unittest.mock import patch
+        hold = self._diagnostic_hold()
+        with patch.dict(os.environ, {'BEAM_HOLD_TRACE_PATH': ''}):
+            for step in range(10, 50):
+                self.task.step_counter = step
+                a = self.adapter._publish_loaded_action(**self.args, diagnostic_hold=hold)
+                self.assertEqual(a['gripper_controller'], [hold['gripper_openness']])
+                self.assertAlmostEqual(self.saved['loaded_force_state']['contact_command_closure'], .66)
+            self.task.step_counter = 50
+            a = self.adapter._publish_loaded_action(**self.args)
+        self.assertAlmostEqual(.8*(1.-a['gripper_controller'][0])-.66, .025/240)
+
+    def test_diagnostic_hold_retains_contact_force_and_target_guards(self):
+        hold = self._diagnostic_hold()
+        for forces, reason in [((0., 2.), 'loaded_force_contact_missing'),
+                               ((float('nan'), 2.), 'loaded_force_contact_missing'),
+                               ((float('inf'), 2.), 'loaded_force_contact_missing'),
+                               ((41., 2.), 'loaded_gripper_force_limit')]:
+            self.metrics = ContactControlRegression.metrics(*forces)
+            self.assertEqual(self.adapter._publish_loaded_action(**self.args, diagnostic_hold=hold),
+                             {'failure': reason})
+        self.metrics = ContactControlRegression.metrics(2., 2.)
+        hold['arm_q'][2] += .01
+        self.assertEqual(self.adapter._publish_loaded_action(**self.args, diagnostic_hold=hold),
+                         {'failure': 'loaded_target_hold_target_changed'})
+
+    def test_table_safety_failure_precedes_diagnostic_hold_capture(self):
+        from unittest.mock import patch
+        self.task._beam_table_observation = lambda: {'unsafe': True}
+        self.task._contact_physics_dt = lambda: 1/240
+        self.saved['pose'] = {'position': [0., 0., .4]}
+        self.task._ur5e_contact_hold_commands = {'right': self.saved}
+        with patch.dict(os.environ, {'BEAM_LOADED_TARGET_HOLD_SECONDS': '2', 'BEAM_MOTION_TRACE_PATH': ''}), \
+             patch('toolkits.factory_dual_franka_assembly.beam_seating_control.seating_decision',
+                   return_value={'failure': 'excessive_table_force', 'delta_z': 0}), \
+             patch('toolkits.factory_dual_franka_assembly.beam_loaded_target_hold.capture_loaded_native_targets') as capture:
+            result = self.adapter._beam_table_seat_action(phase_key='seat', **{
+                k: self.args[k] for k in ('task', 'robot_name', 'spec')},
+                tracked_robots={}, tracked_objects={})
+        self.assertEqual(result, {'failure': 'excessive_table_force'})
+        capture.assert_not_called()
+
+    def test_seating_entry_captures_once_holds_dictionary_and_resumes_at_expiry(self):
+        from unittest.mock import patch
+        current = {}
+        self.task._beam_table_observation = lambda: current
+        self.task._contact_physics_dt = lambda: 1/240
+        self.saved['pose'] = {'position': [0., 0., .4]}
+        self.task._ur5e_contact_hold_commands = {'right': self.saved}
+        captured = self._diagnostic_hold()
+        calls = []
+        self.adapter._hold_previous_grasp_command = lambda **kw: calls.append(kw.get('diagnostic_hold')) or {}
+        with patch.dict(os.environ, {'BEAM_LOADED_TARGET_HOLD_SECONDS': '.1', 'BEAM_MOTION_TRACE_PATH': ''}), \
+             patch('toolkits.factory_dual_franka_assembly.beam_seating_control.seating_decision',
+                   return_value={'failure': None, 'delta_z': 0}), \
+             patch('toolkits.factory_dual_franka_assembly.beam_loaded_target_hold.capture_loaded_native_targets',
+                   return_value=captured) as capture:
+            for index in range(60):
+                current.update(physics_epoch=0, physics_step_index=index, physics_time=index/240.,
+                    physics_dt=1/240., physics_stamp_valid=True, valid=True, motion_valid=True,
+                    physics_handle_valid=True, vertical_force=2., bottom_gap=0.)
+                self.adapter._beam_table_seat_action(phase_key='seat', **{
+                    k: self.args[k] for k in ('task', 'robot_name', 'spec')},
+                    tracked_robots={}, tracked_objects={})
+        capture.assert_called_once()
+        self.assertEqual(calls[:23], [None]*23)
+        self.assertEqual(calls[23:47], [captured]*24)
+        self.assertEqual(calls[47:], [None]*13)
+        self.assertTrue(self.saved['beam_seat']['loaded_target_hold']['complete'])
 
     def test_friction_details_use_count_then_start_and_native_physics_dt(self):
         from unittest.mock import patch
