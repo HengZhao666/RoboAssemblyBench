@@ -48,6 +48,20 @@ class DeploymentTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Output already exists'):
                 runner.launch(SimpleNamespace(output_dir=Path(tmp)), {})
 
+    def test_exit_zero_does_not_replace_the_required_geometry_report(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            release = {k: {} for k in ('runtime_files', 'assets', 'isaac_files', 'reference_environment',
+                                      'trace_files', 'primary_scene', 'physics_source_version')}
+            (out / 'runtime_release.json').write_text(json.dumps(release))
+            (out / 'collect_results.json').write_text(json.dumps([dict(success=True, assisted_success=True,
+                assisted_final_qualification={'current_native_recheck': {'ready': True}})]))
+            checked = {'runtime_binding_sha256': runner.runtime_identity(release)}
+            self.assertFalse(runner.finish(out, 0, 0, checked))
+            (out / 'visible_mesh_runtime_report.json').write_text(json.dumps(dict(
+                samples=1, finished_marker_seen=True, failures_above_precision=[], stop_requested=False)))
+            self.assertTrue(runner.finish(out, 0, 0, checked))
+
     def test_real_worker_arguments_keep_reference_route_and_guards(self):
         args = runner.worker_arguments(Path('/tmp/output with spaces'))
         self.assertEqual(args[args.index('--worker-recipe') + 1], 'fabrica_beam_ur5e_assisted')
