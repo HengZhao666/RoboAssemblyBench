@@ -1,8 +1,8 @@
 {
   "schema": "beam-assisted-portable-validation-v1",
   "run": "A46_beam_portable_20261026",
-  "status": "in_progress",
-  "observed_at": "2026-10-26T10:39:37.090235+00:00",
+  "status": "stopped_by_user",
+  "observed_at": "2026-10-26T10:58:11.480841+00:00",
   "tested_source_commit": "8857874f7c0696feac5c2bbe81a99a7cc5dfc877",
   "runtime_binding_sha256": "e1297cfb01037a40b0e886ec88c46d2e856ad76a7b0360d1cb775a82b70aee09",
   "deployment_tests_passed": 13,
@@ -94,24 +94,11 @@
     },
     "passed": true
   },
-  "progress": [
-    "[rollout-progress] event=step_complete task=0 step=12060 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=276 phase_timeout=12000 step_wall_seconds=0.092 average_steps_per_second=9.503",
-    "[rollout-progress] event=step_complete task=0 step=12180 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=396 phase_timeout=12000 step_wall_seconds=0.092 average_steps_per_second=9.482",
-    "[rollout-progress] event=step_complete task=0 step=12300 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=516 phase_timeout=12000 step_wall_seconds=0.094 average_steps_per_second=9.460"
-  ],
-  "geometry_progress": {
-    "samples": 1500,
-    "last_step": 12000,
-    "phase": "assemble_00_part_3_assembly_clearance",
-    "failures": 0,
-    "numerical_surface_contacts": 0,
-    "stop_requested": false
-  },
   "initial_geometry_gaps_equal_to_A45": true,
   "traceback_seen": false,
   "stop_requested": false,
   "full_run_completed": false,
-  "functional_success": null,
+  "functional_success": false,
   "strict_independent_terminal_verified": false,
   "runtime_environment": {
     "gpu": "NVIDIA L20, 46068 MiB",
@@ -148,6 +135,97 @@
     "supplemental_release_manifest_sha256": "701fe5b2fc119e0dcdfbaf698d56df1bb357d451310318e40fc073da47804e60",
     "materialized_at": "2026-10-26T10:15:19.295132+00:00"
   },
-  "scope": "Portable startup and executed early stages verified; complete new-entry assembly/home run remains in progress. Existing SDK/GPU/base Python environment reused; no claim of clean OS or different-hardware validation.",
-  "preserved_baseline": "Original v35 control, physical parameters and A44/A45 results retained; historical independent terminal raw gap not changed."
+  "scope": "Portable entry and executed stages verified; explicit user stop at third-part close_and_attach. Full five-part assembly and final home were not completed in A46. Raw functional_success=false and task failed are preserved as incomplete stop outcomes; no new failure observed before the stop.",
+  "preserved_baseline": "Original v35 control, physical parameters and A44/A45 results retained; historical independent terminal raw gap not changed.",
+  "prepublication_observed_at": "2026-10-26T10:39:37.090235+00:00",
+  "prepublication_progress": [
+    "[rollout-progress] event=step_complete task=0 step=12060 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=276 phase_timeout=12000 step_wall_seconds=0.092 average_steps_per_second=9.503",
+    "[rollout-progress] event=step_complete task=0 step=12180 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=396 phase_timeout=12000 step_wall_seconds=0.092 average_steps_per_second=9.482",
+    "[rollout-progress] event=step_complete task=0 step=12300 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=516 phase_timeout=12000 step_wall_seconds=0.094 average_steps_per_second=9.460"
+  ],
+  "prepublication_geometry_progress": {
+    "samples": 1500,
+    "last_step": 12000,
+    "phase": "assemble_00_part_3_assembly_clearance",
+    "failures": 0,
+    "numerical_surface_contacts": 0,
+    "stop_requested": false
+  },
+  "last_task_step": 21897,
+  "last_phase": "assemble_01_part_2_close_and_attach",
+  "new_failure_before_user_stop": false,
+  "user_requested_stop": true,
+  "raw_terminal_reason": "assisted-external-evidence-stop",
+  "raw_task_failed": true,
+  "worker_and_monitor_exited": true,
+  "worker_exit_code": 0,
+  "geometry_monitor_exit_code": 0,
+  "geometry_monitor_passed": true,
+  "geometry_samples": 2737,
+  "geometry_failures": 0,
+  "geometry_gaps": [
+    "unexported warehouse geometry",
+    "between-sample CCD",
+    "PhysX cooked collision/SDF differs from visible CAD"
+  ],
+  "source_assets_unchanged": true,
+  "tail_recording": {
+    "requested_seconds": "5",
+    "completed": true,
+    "failure_task_step": 21897,
+    "capture_entry_task_step": 21897,
+    "failure_reason": "assisted-external-evidence-stop",
+    "control_mode": "retain_last_published_targets_no_new_actions",
+    "evaluation_continues": false,
+    "physics_steps": 1200,
+    "native_samples": 150,
+    "native_valid_samples": 150,
+    "native_errors": [],
+    "frames_added": {
+      "observation.images.front": 150,
+      "observation.images.left_wrist": 150,
+      "observation.images.right_wrist": 150
+    },
+    "failure_physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 21900,
+      "time": 91.25000475905836,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "physics_dt": 0.004166666666666667,
+    "planned_physics_steps": 1200,
+    "expected_frames_per_camera": 150,
+    "failure_native_sample_valid": true,
+    "end_physics_stamp": {
+      "valid": true,
+      "epoch": 0,
+      "index": 23100,
+      "time": 96.25000501982868,
+      "dt": 0.004166666666666667,
+      "identity_source": "simulation_context_and_physics_view"
+    },
+    "completed_seconds": 5.000000260770321,
+    "all_cameras_recorded": true,
+    "capture_complete": true,
+    "native_complete": true
+  },
+  "original_partial_videos": [
+    {
+      "path": "/home/user/beam portable validation 20261026/A46_beam_portable_20261026/episode_0000_live_videos/observation_images_front.mp4",
+      "bytes": 11526279,
+      "sha256": "80f03ea2b4fc6e13489567254947f3df39570100fe856b97e088138fbf5762a4"
+    },
+    {
+      "path": "/home/user/beam portable validation 20261026/A46_beam_portable_20261026/episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "bytes": 10473001,
+      "sha256": "861836fb075d453f7c4b2d9c3d2a05cee42c83a57b47b45811a9ceb99c0c1800"
+    },
+    {
+      "path": "/home/user/beam portable validation 20261026/A46_beam_portable_20261026/episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "bytes": 6464790,
+      "sha256": "22a6b090803453aafbca65383f10303efd314e672831ce52786a2cb73e4c73ca"
+    }
+  ]
 }
