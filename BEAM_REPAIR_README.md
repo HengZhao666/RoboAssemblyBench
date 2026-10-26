@@ -4,6 +4,20 @@
 
 **版本范围：Beam assisted v35，代表运行 A44；文档整理日期：2026-10-22。** 本页介绍个人仓库保存的 Beam 交付快照，其他任务的后续修改另行维护。
 
+## 运行前先确认入口（2026-10-26 补充）
+
+**main 中有辅助版源码，但通用 Beam 命令不会自动运行这套辅助流程。** 根 README 中的 Beam 任务及 generate_fabrica_canonical_ur5e_demo.sh 的 beam 参数，默认选择 fabrica_beam_ur5e_staged。本页 A44 使用的任务是 **fabrica_beam_ur5e_assisted**。
+
+只修改任务名也不够：[assisted_worker.py](outputs/beam_assisted_20261015/tools/assisted_worker.py) 还负责初始化实测几何、最终命令检查和腕部相机。直接使用通用 generate_demos.py 启动辅助配方，缺少这层初始化时会在相应检查处失败。
+
+A44 的完整入口是 [run_beam_route.sh](outputs/beam_assisted_20261015/tools/run_beam_route.sh) 的 assisted 分支，使用 seed 0、layout seed 505、taoyuan_grscenes_tabletop 场景及该脚本的运行配置。普通脚本的其他随机布局，不能直接等同于这一轮已记录结果。
+
+**这些运行工具仍是原服务器部署快照。** 它们包含原绝对路径、第三方几何依赖、源／配置绑定的启动资格和单轮授权记录；复制到新目录后，旧配置指纹也可能不再匹配。旧外层启动器还会校验实验文档同步收据。这些都需要在新部署中重新绑定，不能直接照搬旧账本或资格文件。
+
+环境文件中的 python-fcl 为 0.7.0.6，服务器受控运行另外优先加载 0.7.0.8；复现时应按部署记录核对实际导入的依赖和资产版本。这个差异是需要核对的条件，尚不能据此认定某次失败的原因。
+
+因此，当前交付不能声称“clone main 后按普通 Beam 命令即可复现 A44”，也尚无经过独立新环境完整验收的通用单行启动命令。排查时先核对任务名、是否使用辅助 worker、资产／Isaac Sim／python-fcl 等依赖及实际配置；不要只根据 main 分支名判断运行的是哪条路线。环境与资产范围见 [DEPLOYMENT.md](docs/beam_assisted/DEPLOYMENT.md)。
+
 ## 只想快速了解，先看这三处
 
 - **看效果：** [A44 正面完整视频](outputs/beam_assisted_20261015/D28_work/A44_media/episode_0000_live_videos/observation_images_front.mp4)。
