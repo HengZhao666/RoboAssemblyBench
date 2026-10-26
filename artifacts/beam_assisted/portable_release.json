@@ -669,7 +669,7 @@
     "outputs/beam_assisted_20261015/tools/camera_visibility_preflight.py": "974c5fe04dc5db24ecdc3be856023cdf608c94a3b4b87d2af048f640ee5714b7",
     "outputs/beam_assisted_20261015/tools/publish_runtime_control.py": "a37a215be8345d01690a186b30f16bb745afd82456e3129eeaeef626e8da234d",
     "outputs/beam_assisted_20261015/tools/bounded_scene_http_probe.py": "cc7a9055bd922c96eed0e9777ccb415c41f18b2096d16b2aca48f119315ec485",
-    "scripts/beam_assisted/run.py": "7c4efe364699937cf007954ffd5b72e391ea2b2142eace3ef0bd715fe16d765e",
+    "scripts/beam_assisted/run.py": "797462688bd900b9b1774c63d1952fdf97646a344d8a99030717b5c8befbd149",
     "scripts/beam_assisted/runtime/worker.py": "00ee5dbba68808ad78a9acd95a9d62647518c880722b8510fda2cc22e1c367cd",
     "scripts/beam_assisted/runtime/watch_visible_meshes.py": "5c545ed9d4e6b2fa6c09922f1b4fb2394aaa92fbd2d9c64728e8b876f8534949",
     "scripts/beam_assisted/runtime/sweep_model.py": "575480bead37cca1d14f7f7912b1b08049f06f92556bb1a4173c2970aff18767",

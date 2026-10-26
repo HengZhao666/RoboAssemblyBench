@@ -202,8 +202,8 @@ def control(directory, kind):
         return publish_stop_request(directory, {'reason': 'User requested stop through portable entrypoint'})
     ready = json.loads((directory / 'startup_images_ready.json').read_text())
     return publish(directory, directory.name, 'ack', dict(run_name=directory.name, accepted=True,
-        reviewer='Human explicitly approved the three original startup images',
-        scope='User invoked --approve-startup or typed yes after viewing startup_review.html; no success claim',
+        reviewer='Invoker of the portable startup approval',
+        scope='Explicit --approve-startup invocation or terminal yes after viewing startup_review.html; no success claim',
         physics_stamp=ready['physics_stamp'], image_sha256={r['camera']: r['sha256'] for r in ready['images']}))
 
 
@@ -243,12 +243,16 @@ def finish(out, worker_code, watcher_code, checked):
         verify_release(frozen)
     except (ValueError, OSError):
         unchanged = False
-    success = bool(worker_code == 0 and watcher_code == 0 and row.get('success') is True
+    monitor_passed = bool(watcher_code == 0 and guard.get('finished_marker_seen') is True
+        and guard.get('samples', 0) > 0 and guard.get('failures_above_precision') == []
+        and guard.get('stop_requested') is False)
+    success = bool(worker_code == 0 and monitor_passed and row.get('success') is True
                    and row.get('assisted_success') is True and current.get('ready') is True and unchanged)
     report = dict(functional_success=success, assisted_success=row.get('assisted_success', False),
         recipe=RECIPE, seed=0, layout_seed=505, steps=row.get('steps'), terminal_reason=row.get('terminal_reason'),
         worker_exit_code=worker_code, geometry_monitor_exit_code=watcher_code,
-        geometry_failures=len(guard.get('failures_above_precision', [])), source_assets_unchanged=unchanged,
+        geometry_monitor_passed=monitor_passed, geometry_failures=len(guard.get('failures_above_precision', [])),
+        geometry_samples=guard.get('samples'), geometry_gaps=guard.get('gaps'), source_assets_unchanged=unchanged,
         preflight=checked, strict_independent_terminal_verified=False,
         limits=['Auxiliary fixed joints and installation support remain active.',
                 'This summary verifies the original functional contract, not full independent terminal raw coverage.'],
