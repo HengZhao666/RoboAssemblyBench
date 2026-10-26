@@ -1,5 +1,7 @@
 # RoboAssemblyBench：双 UR5e 数据生成、训练与仿真评测
 
+> **运行修复后的 Beam 辅助版：** 请使用 [专用复现说明](docs/beam_assisted/RUN.md) 和 `bash roboassemblybench/scripts/run_beam_assisted.sh`。下文通用 `beam` 命令选择 `fabrica_beam_ur5e_staged`，不会自动进入已修复的辅助流程。代码差异与 A44 结果见 [BEAM_REPAIR_README.md](BEAM_REPAIR_README.md)。
+
 本分支 `ur5e-batch-generation-20260826` 面向 **两台 UR5e + 两个 Robotiq 2F-85** 的 Fabrica 长程装配任务。本文从一台新机器开始，说明如何安装环境、准备资产、验证七个任务、生成带域随机化的数据、转换为 LeRobot v3、训练 ACT，并在 Isaac Sim 中做闭环模型评测。
 
 当前支持的七个 canonical 任务是：

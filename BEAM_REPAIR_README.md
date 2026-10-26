@@ -4,19 +4,22 @@
 
 **版本范围：Beam assisted v35，代表运行 A44；文档整理日期：2026-10-22。** 本页介绍个人仓库保存的 Beam 交付快照，其他任务的后续修改另行维护。
 
-## 运行前先确认入口（2026-10-26 补充）
+## 如何运行辅助版（2026-10-26 更新）
 
-**main 中有辅助版源码，但通用 Beam 命令不会自动运行这套辅助流程。** 根 README 中的 Beam 任务及 generate_fabrica_canonical_ur5e_demo.sh 的 beam 参数，默认选择 fabrica_beam_ur5e_staged。本页 A44 使用的任务是 **fabrica_beam_ur5e_assisted**。
+**使用新的可移植入口：[运行说明 RUN.md](docs/beam_assisted/RUN.md)。** 它自动定位当前仓库、资产和输出目录，完成辅助 worker 的必要初始化，并生成当前配置绑定；不依赖原服务器路径、旧实验账本或文档同步收据。
 
-只修改任务名也不够：[assisted_worker.py](outputs/beam_assisted_20261015/tools/assisted_worker.py) 还负责初始化实测几何、最终命令检查和腕部相机。直接使用通用 generate_demos.py 启动辅助配方，缺少这层初始化时会在相应检查处失败。
+准备 Linux/NVIDIA、Isaac Sim 5.1.0、Python 3.11 项目环境和 FFmpeg 后，在已激活的环境中执行：
 
-A44 的完整入口是 [run_beam_route.sh](outputs/beam_assisted_20261015/tools/run_beam_route.sh) 的 assisted 分支，使用 seed 0、layout seed 505、taoyuan_grscenes_tabletop 场景及该脚本的运行配置。普通脚本的其他随机布局，不能直接等同于这一轮已记录结果。
+```bash
+export ISAAC_SIM_ROOT=/你安装的路径/isaac-sim-5.1.0
+python -m pip install -r requirements/beam_assisted.txt
+bash roboassemblybench/scripts/run_beam_assisted.sh --check
+bash roboassemblybench/scripts/run_beam_assisted.sh --output-dir outputs/beam_assisted_demo
+```
 
-**这些运行工具仍是原服务器部署快照。** 它们包含原绝对路径、第三方几何依赖、源／配置绑定的启动资格和单轮授权记录；复制到新目录后，旧配置指纹也可能不再匹配。旧外层启动器还会校验实验文档同步收据。这些都需要在新部署中重新绑定，不能直接照搬旧账本或资格文件。
+查看本轮 `startup_review.html` 中三张启动图后，在终端输入 `yes`。完成后查看输出目录中的 `result_summary.json` 和 `episode_0000_live_videos/`。
 
-环境文件中的 python-fcl 为 0.7.0.6，服务器受控运行另外优先加载 0.7.0.8；复现时应按部署记录核对实际导入的依赖和资产版本。这个差异是需要核对的条件，尚不能据此认定某次失败的原因。
-
-因此，当前交付不能声称“clone main 后按普通 Beam 命令即可复现 A44”，也尚无经过独立新环境完整验收的通用单行启动命令。排查时先核对任务名、是否使用辅助 worker、资产／Isaac Sim／python-fcl 等依赖及实际配置；不要只根据 main 分支名判断运行的是哪条路线。环境与资产范围见 [DEPLOYMENT.md](docs/beam_assisted/DEPLOYMENT.md)。
+普通 `generate_fabrica_canonical_ur5e_demo.sh beam` 仍选择 staged 任务。直接改任务名也缺少辅助初始化；复现本页效果应使用新入口。固定参考为 assisted、seed 0、layout seed 505；其他环境或布局不自动获得相同成功结论。完整验证范围和最新记录以 [RUN.md](docs/beam_assisted/RUN.md#验证记录) 为准。
 
 ## 只想快速了解，先看这三处
 
@@ -116,7 +119,7 @@ A44 在服务器 v35 上从头完成五件辅助装配、三段双臂回位，�
 ## 需要精确比较文件、复现或继续开发？
 
 - **全部文件与功能差异：** [CHANGES_FROM_UPSTREAM.md](docs/beam_assisted/CHANGES_FROM_UPSTREAM.md) 和 [机器比较清单](artifacts/beam_assisted/source_vs_latest_base_analysis.json)。其中“50 项新增、34 项修改”针对固定上游基线 2739e27，不是相对所有历史原版的累计统计。
-- **环境、资产和兼容性：** [DEPLOYMENT.md](docs/beam_assisted/DEPLOYMENT.md)。共享 UR5e 默认驱动／摩擦配置与该上游基线有差异，部分工具仍依赖原服务器布局和外部 Isaac Sim／Conda 环境，不能视为任意机器的一键运行包。
+- **环境、资产和兼容性：** [DEPLOYMENT.md](docs/beam_assisted/DEPLOYMENT.md)。共享 UR5e 默认驱动／摩擦配置与该上游基线有差异，历史工具保留原部署记录；新入口解除服务器路径依赖，仍需要匹配的外部 Isaac Sim／Python 环境，见 [RUN.md](docs/beam_assisted/RUN.md)。
 - **服务器原始源码和工具：** [完整归档](artifacts/beam_assisted/server_code_and_tools.tar.gz)、[归档清单](artifacts/beam_assisted/package_manifest.json) 与 [原交付逐文件清单](artifacts/beam_assisted/publication_manifest.json)。原清单对应既有交付快照；后来增加的本页由新的 Git 提交保存，不改写旧封存身份。
 - **继续 Beam：** 从 [BEAM_REPAIR_HANDOFF.md](BEAM_REPAIR_HANDOFF.md) 进入辅助路线，核对交接及本任务账本；本页不提供新的仿真授权。
 - **复用到 stool 等其他任务：** 从 [FABRICA_ASSISTED_REPAIR_HANDOFF.md](FABRICA_ASSISTED_REPAIR_HANDOFF.md) 和 [迁移技能](skills/fabrica-assisted-repair/SKILL.md) 开始。当前 Beam 辅助编译器仅支持 Beam，需要为新任务适配几何、抓取和装配顺序。

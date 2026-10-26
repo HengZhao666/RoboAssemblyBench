@@ -134,7 +134,8 @@ roboassemblybench/assets/Fabrica/canonical_7_bundles/*
 !roboassemblybench/assets/Fabrica/canonical_7_bundles/canonical_tasks.json
 
 # user scripts
-/scripts
+/scripts/*
+!/scripts/beam_assisted/
 
 # sphinx build dir
 docs/en/_build

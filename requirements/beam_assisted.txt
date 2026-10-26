@@ -1,0 +1,3 @@
+# Install inside the existing Python 3.11 / Isaac Sim 5.1 environment.
+# The general environment.yml carries 0.7.0.6; assisted CAD uses this version.
+python-fcl==0.7.0.8

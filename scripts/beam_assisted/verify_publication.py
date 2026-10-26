@@ -75,18 +75,32 @@ def main():
     args = parser.parse_args()
     root = args.root.resolve()
     manifest = json.loads((root / "artifacts/beam_assisted/publication_manifest.json").read_text())
+    portable_path = root / 'artifacts/beam_assisted/portable_release.json'
+    portable = json.loads(portable_path.read_text()) if portable_path.exists() else {}
+    overrides = portable.get('publication_overrides', {})
+    if portable and portable['prior_snapshot_manifest_sha256'] != identity(root / 'artifacts/beam_assisted/publication_manifest.json')[1]:
+        raise ValueError('Original v35 publication manifest changed')
     checked = set()
     for row in manifest["files"]:
         if row["path"] in checked:
             raise ValueError("Duplicate publication path: " + row["path"])
         checked.add(row["path"])
-        if identity(local_path(root, row["path"])) != (row["bytes"], row["sha256"]):
+        expected = overrides.get(row['path'], row)
+        if row['path'] in overrides and expected['original_sha256'] != row['sha256']:
+            raise ValueError('Override is not bound to the original snapshot: ' + row['path'])
+        if identity(local_path(root, row["path"])) != (expected["bytes"], expected["sha256"]):
             raise ValueError("Missing or changed publication file: " + row["path"])
+    for group in ('runtime_files', 'assets', 'documentation_files'):
+        for name, expected in portable.get(group, {}).items():
+            if identity(local_path(root, name))[1] != expected:
+                raise ValueError('Portable release file changed: ' + name)
     restored = 0
     if args.restore_evidence:
         index = json.loads((root / "artifacts/beam_assisted/evidence_index.json").read_text())
         restored = sum(restore_one(root, row) for row in index["files"])
-    print(json.dumps({"passed": True, "files_verified": len(checked), "evidence_restored": restored, "native_started": False}))
+    print(json.dumps({"passed": True, "files_verified": len(checked), "evidence_restored": restored,
+                     "declared_publication_overrides": sorted(overrides),
+                     "portable_runtime_files_verified": len(portable.get('runtime_files', {})), "native_started": False}))
 
 
 if __name__ == "__main__":
