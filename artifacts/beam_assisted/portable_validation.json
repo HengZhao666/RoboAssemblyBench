@@ -1,0 +1,153 @@
+{
+  "schema": "beam-assisted-portable-validation-v1",
+  "run": "A46_beam_portable_20261026",
+  "status": "in_progress",
+  "observed_at": "2026-10-26T10:39:37.090235+00:00",
+  "tested_source_commit": "8857874f7c0696feac5c2bbe81a99a7cc5dfc877",
+  "runtime_binding_sha256": "e1297cfb01037a40b0e886ec88c46d2e856ad76a7b0360d1cb775a82b70aee09",
+  "deployment_tests_passed": 13,
+  "configuration_equal_to_A44": true,
+  "checks": {
+    "preflight.json": {
+      "passed": true,
+      "scope": "Real task builder -> env0 mapping -> production preflight; no simulator",
+      "source_root": "/home/user/beam portable validation 20261026/checkout",
+      "mapped_preflight_passed": true,
+      "reference_physical_configuration_equal": true
+    },
+    "runtime_import_binding.json": {
+      "source_root": "/home/user/beam portable validation 20261026/checkout",
+      "passed": true
+    },
+    "runtime_initialization_preflight.json": {
+      "passed": true
+    },
+    "runtime_configuration_binding.json": {
+      "passed": true
+    },
+    "initial_native_joint_preflight.json": {
+      "passed": true,
+      "errors": [],
+      "scope": "read-only check after existing reset; no state setters, hold or physics step"
+    },
+    "initial_entity_preflight.json": {
+      "route": "assisted",
+      "scope": "native initial colliders; supplementary base and full sequential54 visible-mesh preflights retained at route root; actual full-path visible-mesh monitor required for every recorded state",
+      "gaps": {
+        "missing": [
+          {
+            "root": "/World/env_0/episode_000000/objects/factory_table_leg_front_left",
+            "reason": "no_enabled_supported_colliders"
+          },
+          {
+            "root": "/World/env_0/episode_000000/objects/factory_table_leg_front_right",
+            "reason": "no_enabled_supported_colliders"
+          },
+          {
+            "root": "/World/env_0/episode_000000/objects/factory_table_leg_back_left",
+            "reason": "no_enabled_supported_colliders"
+          },
+          {
+            "root": "/World/env_0/episode_000000/objects/factory_table_leg_back_right",
+            "reason": "no_enabled_supported_colliders"
+          },
+          {
+            "root": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_0",
+            "reason": "no_enabled_supported_colliders"
+          },
+          {
+            "root": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_1",
+            "reason": "no_enabled_supported_colliders"
+          },
+          {
+            "root": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_2",
+            "reason": "no_enabled_supported_colliders"
+          },
+          {
+            "root": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_3",
+            "reason": "no_enabled_supported_colliders"
+          }
+        ],
+        "skipped": []
+      }
+    },
+    "native_usd_startup_sync.json": {
+      "scope": "existing native PhysX result publication to USD only; no simulate/step or q/body pose/velocity setters",
+      "passed": true
+    },
+    "startup_camera_render_diagnostics.json": {
+      "passed": true
+    },
+    "camera_runtime_visibility.json": {
+      "passed": true,
+      "scope": "actual initial native full-path poses and all exported visible triangles; full grippers included; native image still required"
+    }
+  },
+  "source_imports": {
+    "source_root": "/home/user/beam portable validation 20261026/checkout",
+    "modules": {
+      "sweep_model": "/home/user/beam portable validation 20261026/checkout/scripts/beam_assisted/runtime/sweep_model.py",
+      "visual_mesh_check": "/home/user/beam portable validation 20261026/checkout/outputs/beam_assisted_20261015/tools/visual_mesh_check.py",
+      "toolkits.factory_dual_franka_assembly.beam_assisted_servo": "/home/user/beam portable validation 20261026/checkout/toolkits/factory_dual_franka_assembly/beam_assisted_servo.py",
+      "toolkits.factory_dual_franka_assembly.generate_demos": "/home/user/beam portable validation 20261026/checkout/toolkits/factory_dual_franka_assembly/generate_demos.py",
+      "roboassemblybench.core.beam_assisted_compiler": "/home/user/beam portable validation 20261026/checkout/roboassemblybench/core/beam_assisted_compiler.py"
+    },
+    "passed": true
+  },
+  "progress": [
+    "[rollout-progress] event=step_complete task=0 step=12060 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=276 phase_timeout=12000 step_wall_seconds=0.092 average_steps_per_second=9.503",
+    "[rollout-progress] event=step_complete task=0 step=12180 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=396 phase_timeout=12000 step_wall_seconds=0.092 average_steps_per_second=9.482",
+    "[rollout-progress] event=step_complete task=0 step=12300 phase=assemble_00_part_3_assembly_clearance phase_index=17 phase_step=516 phase_timeout=12000 step_wall_seconds=0.094 average_steps_per_second=9.460"
+  ],
+  "geometry_progress": {
+    "samples": 1500,
+    "last_step": 12000,
+    "phase": "assemble_00_part_3_assembly_clearance",
+    "failures": 0,
+    "numerical_surface_contacts": 0,
+    "stop_requested": false
+  },
+  "initial_geometry_gaps_equal_to_A45": true,
+  "traceback_seen": false,
+  "stop_requested": false,
+  "full_run_completed": false,
+  "functional_success": null,
+  "strict_independent_terminal_verified": false,
+  "runtime_environment": {
+    "gpu": "NVIDIA L20, 46068 MiB",
+    "python": "3.11",
+    "isaac_sim": "5.1.0",
+    "package_metadata": {
+      "numpy": "1.26.0",
+      "scipy": "1.15.3",
+      "pydantic": "2.11.7",
+      "Pillow": "11.3.0",
+      "PyYAML": "6.0.2",
+      "opencv-python": null,
+      "python-fcl": "0.7.0.8"
+    },
+    "fcl_import": "/home/user/beam portable validation 20261026/deps/fcl/__init__.py"
+  },
+  "asset_files_verified": 494,
+  "runtime_files_verified": 671,
+  "materialization": {
+    "commit": "8857874f7c0696feac5c2bbe81a99a7cc5dfc877",
+    "source": "Fresh GitHub clone transferred from macOS because server GitHub connection failed",
+    "scope": "All tracked source plus required Beam assets and archived helpers; historical output media and unrelated task assets excluded from this validation copy",
+    "files": 1066,
+    "required_files": 1165,
+    "archive_bytes": 6696288,
+    "archive_sha256": "fb325b97a5b618a890352af7ea6110ebc84c83d23d25bcaad128d61c18dcbe26",
+    "all_github_runtime_source_and_assets_verified": true,
+    "asset_materialization": "Copy verified cache to regular files inside validation root; verify each SHA256 before and after copy. No links to old project.",
+    "runtime_binding_sha256": "e1297cfb01037a40b0e886ec88c46d2e856ad76a7b0360d1cb775a82b70aee09",
+    "source_root": "/home/user/beam portable validation 20261026/checkout",
+    "independent_asset_files": 494,
+    "asset_cache": "/home/user/beam_integration_20261010_upstream6f57dae/beam_assisted_20261015/assisted_repository",
+    "assets_are_copies_not_symlinks": true,
+    "supplemental_release_manifest_sha256": "701fe5b2fc119e0dcdfbaf698d56df1bb357d451310318e40fc073da47804e60",
+    "materialized_at": "2026-10-26T10:15:19.295132+00:00"
+  },
+  "scope": "Portable startup and executed early stages verified; complete new-entry assembly/home run remains in progress. Existing SDK/GPU/base Python environment reused; no claim of clean OS or different-hardware validation.",
+  "preserved_baseline": "Original v35 control, physical parameters and A44/A45 results retained; historical independent terminal raw gap not changed."
+}

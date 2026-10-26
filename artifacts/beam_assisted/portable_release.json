@@ -1243,6 +1243,12 @@
       "bytes": 5161,
       "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
     },
+    "docs/beam_assisted/DEPLOYMENT.md": {
+      "original_sha256": "87d32580d6862c2ee040962396e9fdf1d2b13342dc2ea5b927feabbe857a0ebd",
+      "sha256": "bdf1f8efe4e2b87f6182966d6c389b77afc42b815f0fca5bb724ed682551bc59",
+      "bytes": 5297,
+      "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
+    },
     "scripts/beam_assisted/verify_publication.py": {
       "original_sha256": "f40d38a0234831dc9f2f82e03b49aa64476c53597ede2aed1c5cba99281a0d90",
       "sha256": "2a9ac0788ad1ce316c566d2d346ad36276d1512275eac8f9dda227a73a65abad",
@@ -1252,8 +1258,9 @@
   },
   "documentation_files": {
     "README.md": "b74427f3ebd764b1e86884c802f03a9c287195dd4891d505d896a68ff4fc7eb5",
-    "BEAM_REPAIR_README.md": "3fe6e10f262968ca50771502f60101661ae502acd6255ac513a2f35cf1471261",
+    "BEAM_REPAIR_README.md": "000798cc8a566723b9f2edc1fdc605e30f5e6d23325de031f1b1d63383e8bd5f",
     "BEAM_ASSISTED_PR_HANDOFF.md": "75a6737da99344bf1b5572561ee034cf8196df5990b38db8a661cdec6c703496",
-    "docs/beam_assisted/RUN.md": "eba032f21e2e67f7f80771559cf71db35989dea72d25829e4dbc0f3c192acbf9"
+    "docs/beam_assisted/RUN.md": "925fed7a67973e81ceec6cb6f23141ca9084ae46e58c63ef740195df5e662097",
+    "docs/beam_assisted/DEPLOYMENT.md": "bdf1f8efe4e2b87f6182966d6c389b77afc42b815f0fca5bb724ed682551bc59"
   }
 }

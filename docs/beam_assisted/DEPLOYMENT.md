@@ -1,5 +1,7 @@
 # Beam assisted 额外运行依赖与资产核查
 
+> 本页保留 2026-10-21 的原部署审计。新可移植入口及当前验证范围见 [RUN.md](RUN.md)；下文的服务器绝对路径属于历史记录，不是新入口的运行前提。
+
 2026-10-21。来源：`pcl-server` 只读文件盘点、SHA256、静态 Python METADATA / Conda 包元数据；未运行测试、pip、Isaac 或仿真。原仓库对比基线为 `2739e27e66418048d79097376648af1b389a2b68`。完整机器清单见 [runtime_dependencies.json](../../artifacts/beam_assisted/runtime_dependencies.json)，新增资产定位见[复制清单](../../artifacts/beam_assisted/additional_asset_copy_manifest.json)。
 
 ## 项目代码之外的运行依赖

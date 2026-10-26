@@ -85,7 +85,7 @@ bash roboassemblybench/scripts/run_beam_assisted.sh --output-dir outputs/beam_as
    从 beam_assisted_state.py 的最终动作检查读起，再看 [实体几何](toolkits/constraint_checking/integration/entity_geometry.py)、[运行时检查](toolkits/constraint_checking/integration/runtime_monitor.py)、[接触允许范围](toolkits/constraint_checking/integration/contact_policy.py)。独立几何复核工具在 [visual_mesh_check.py](outputs/beam_assisted_20261015/tools/visual_mesh_check.py) 和 [sweep_model.py](outputs/beam_assisted_20261015/tools/sweep_model.py)。
 
 6. **相机、启动和采集。**  
-   看 [腕部相机](toolkits/factory_dual_franka_assembly/beam_assisted_camera.py)、[真实配置预检](toolkits/factory_dual_franka_assembly/beam_assisted_preflight.py)、[采集主入口](toolkits/factory_dual_franka_assembly/generate_demos.py)。运行与后审工具集中在 [tools 目录](outputs/beam_assisted_20261015/tools/)。
+   从新 [公开启动器](scripts/beam_assisted/run.py) 和 [部署适配层](scripts/beam_assisted/runtime/) 进入，再看 [腕部相机](toolkits/factory_dual_franka_assembly/beam_assisted_camera.py)、[真实配置预检](toolkits/factory_dual_franka_assembly/beam_assisted_preflight.py)、[采集主入口](toolkits/factory_dual_franka_assembly/generate_demos.py)。新入口复用的原始 worker、几何与相机工具保存在 [tools 目录](outputs/beam_assisted_20261015/tools/)；其中旧服务器外层启动器仅供历史核对。
 
 按问题查测试，可看 [辅助路线](tests/toolkits/test_beam_assisted_route.py)、[持件控制](tests/toolkits/test_beam_assisted_object_servo.py)、[释放状态](tests/toolkits/test_beam_assisted_release_state.py) 和 [真实配置预检](tests/toolkits/test_beam_assisted_preflight.py)。这些测试验证相应代码行为，完整装配结果另看实际运行证据。
 

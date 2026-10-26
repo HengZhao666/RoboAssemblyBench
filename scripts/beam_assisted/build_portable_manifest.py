@@ -117,7 +117,8 @@ def main():
         scope='Portable bootstrap adds no grasp/control/physics changes; original archives and seals remain immutable.')
     published = json.loads((ROOT / 'artifacts/beam_assisted/publication_manifest.json').read_text())
     by_path = {r['path']: r for r in published['files']}
-    allowed = ['.gitignore', 'README.md', 'BEAM_ASSISTED_PR_HANDOFF.md', 'scripts/beam_assisted/verify_publication.py']
+    allowed = ['.gitignore', 'README.md', 'BEAM_ASSISTED_PR_HANDOFF.md',
+               'docs/beam_assisted/DEPLOYMENT.md', 'scripts/beam_assisted/verify_publication.py']
     manifest['publication_overrides'] = {}
     for name in allowed:
         file = ROOT / name
@@ -125,7 +126,8 @@ def main():
             manifest['publication_overrides'][name] = dict(original_sha256=by_path[name]['sha256'],
                 sha256=sha(file), bytes=file.stat().st_size, reason='Portable release navigation/integrity tool; original bytes remain in v35 snapshot')
     manifest['documentation_files'] = {name: sha(ROOT / name) for name in
-        ['README.md', 'BEAM_REPAIR_README.md', 'BEAM_ASSISTED_PR_HANDOFF.md', 'docs/beam_assisted/RUN.md'] if (ROOT / name).is_file()}
+        ['README.md', 'BEAM_REPAIR_README.md', 'BEAM_ASSISTED_PR_HANDOFF.md',
+         'docs/beam_assisted/RUN.md', 'docs/beam_assisted/DEPLOYMENT.md'] if (ROOT / name).is_file()}
     file = ROOT / 'artifacts/beam_assisted/portable_release.json'
     file.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(dict(runtime_files=len(runtime), assets=len(assets), isaac_files=isaac_files,
