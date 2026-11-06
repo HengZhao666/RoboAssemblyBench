@@ -1,0 +1,10 @@
+{
+  "assembly": "stool_circular",
+  "package_root": "/data/hjj/src/fabrica_isaaclab/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1",
+  "scene_usda": "/data/hjj/src/fabrica_isaaclab/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/scene/scene.usda",
+  "part_count": 9,
+  "plan_steps": 8,
+  "status": "pass",
+  "errors": [],
+  "warnings": []
+}

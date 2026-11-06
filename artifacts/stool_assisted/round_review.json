@@ -1,0 +1,388 @@
+{
+  "schema": "stool_closed_round_review_v1",
+  "run": "S24",
+  "grant": "G04",
+  "reviewed_at_utc": "2026-10-27T02:32:24.108908+00:00",
+  "scope": "Closed S24 evidence snapshot. Current authorization/status only canonical execution_ledger.json; this review does not authorize resumption.",
+  "hypothesis": "S23 physical sequence already completed nine parts; uncapped original proxy events plus same-clock native/complete-graph mesh separation can resolve report coverage without physical control or threshold changes.",
+  "outcome": {
+    "original_criteria_passed": 9,
+    "original_criteria_total": 9,
+    "compiled_phases": 183,
+    "original_phase_history_entries_including_complete": 184,
+    "original_main": {
+      "reported_success": true,
+      "original_report_success": true,
+      "original_criteria_passed": true,
+      "failed": false,
+      "terminal_reason": "success-criteria-met"
+    },
+    "full_motion_completed": true,
+    "runtime_native_qualified": true,
+    "strict_independent_audit": true,
+    "accepted_full_assisted_assembly": true,
+    "checks": {
+      "original_report_readable": {
+        "passed": true
+      },
+      "primary_collect_results_complete": {
+        "passed": true
+      },
+      "worker_contract": {
+        "passed": true
+      },
+      "base_support_independent_native_windows": {
+        "passed": true
+      },
+      "configuration_source_binding": {
+        "passed": true
+      },
+      "source_tools_assets_launch_binding": {
+        "passed": true
+      },
+      "runtime_terminal_qualification": {
+        "passed": true
+      },
+      "independent_raw_native_window": {
+        "passed": true
+      },
+      "exact_wrapper_raw_same_clock": {
+        "passed": true
+      },
+      "published_sdk_backend_actual_execution": {
+        "passed": true
+      },
+      "terminal_three_view_clock_join": {
+        "passed": true
+      },
+      "original_geometry_reports": {
+        "passed": true
+      },
+      "full_original_media_delivery": {
+        "passed": true
+      },
+      "required_original_passive_report_coverage": {
+        "passed": true
+      }
+    },
+    "timeout_count": 0,
+    "recovery_count": 0
+  },
+  "frozen_identity": {
+    "control_source_signature": "409ed6b38c9839978763752e38518064fdb957ab3e628d807b1a87baa1ce1fc8",
+    "control_tools_signature": "41c229803688c7a2bcd8540de8b95a5925b9a1460b68d3ceb835809e8d75bcd8",
+    "configuration_signature": "3748985c783e7bf1f127f9aba4df6788b78df9175b9ad47c476ebbf271418b13",
+    "source_manifest_sha256": "29eabc0f955e368b275340bc50779eea479247fc93e4fe79d937eb618022c114",
+    "tool_manifest_sha256": "4e86de4923881309d78df19e9ed05c40ce6f7dad850c849e7e56e64994e6ddb3",
+    "source_archive_sha256": "d4f7d123d3bfb2db9e6b86db6460c02d6b292bc0d065ba1d0791b6f937dae6e3",
+    "tools_archive_sha256": "0b3fd74b697cfde54d7b3cb253ef506edd09f6cc99e516c7edc8c2e64ebf7148",
+    "source_root": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository",
+    "seed": 0,
+    "layout_seed": 4906,
+    "source_binding_sha256": "91134ca5408053f2238d78d4be6099f2e2de75ccb1d3e056f37967c70bebaea6",
+    "original_audit_sha256": "195e8f85fe363a2039a6b3ac7277672fb21b96072622e40c6e5772766ebf181d",
+    "closure_sha256": "24a10315f91f26b9bf398b12b8dfe5f6346fad657ee162093776b79e0209d9ce",
+    "auditor_sha256": "eda1ce7461e7d821fd952381f4f9b621488d35dee062346db4999ef1e1f400be",
+    "auditor_scope": "Auditor changed separately and is outside runtime CONTROL_TOOLS; full tools manifest/deployment pins it. Frozen manifests are not rewritten during documentation sync."
+  },
+  "changes_that_actually_worked": {
+    "S22": "Front-view-left right-support pose and joint route crossed old S21 dual-arm guard stop; part5 grasp remained blocked.",
+    "S23": [
+      "Left PD160000/5656.85424949238, original effort and contact gates unchanged, removed part5 steady alignment bias.",
+      "Actual side-face part0 grasp plus safe empty approach completed previously unvisited pickup/install path.",
+      "Actual nine-part sequence and right continuous support completed, but original S23 strict audit remained false."
+    ],
+    "S24": "Retained all original report events and independently resolved known board proxy events. Physical controls, grasp/installation targets, trajectory plan and configuration were reused from S23. No new motion improvement is claimed for the reporting change."
+  },
+  "right_support": {
+    "passed": true,
+    "schema": "stool_continuous_base_support_v3",
+    "completed_cycles": 1,
+    "qualification_windows": 2,
+    "ticks_per_window": 12,
+    "windows": {
+      "passed": true,
+      "sdk_execution_join": {
+        "ticks_joined": 24,
+        "completed_submission_identities": 24,
+        "completed_batch_sequence_min": 3644,
+        "completed_batch_sequence_max": 56873,
+        "robot": "franka_right",
+        "peak_accepted_backend_difference_rad": 4.0487285746237944e-09,
+        "accepted_backend_tolerance_rad": 2e-05,
+        "publication_to_native_tick_offsets": [
+          1
+        ],
+        "wrapper_epoch": null,
+        "wrapper_clock_fields": [
+          "physics_step_index",
+          "physics_time",
+          "physics_dt"
+        ],
+        "epoch_scope": "primary qualification and independent native buffers share exact epoch; original SDK wrapper has no epoch field",
+        "gripper_scope": "accepted driver joint only; original controller actuates one DOF, complete six native gripper states/targets remain separately checked"
+      },
+      "acquisition_end": [
+        0,
+        3658
+      ],
+      "release_end": [
+        0,
+        56876
+      ],
+      "ticks_per_window": 12,
+      "full_bodies": 41,
+      "objects": 9,
+      "robots": 2,
+      "continuous_primary_scope": "strict CAD native check each production hold batch; usual independent raw stride between acquisition and release",
+      "force_support_claimed": false
+    },
+    "continuous_native_ticks": 53184,
+    "continuous_start": [
+      0,
+      3658
+    ],
+    "continuous_end": [
+      0,
+      56841
+    ],
+    "hold_phases": 166,
+    "sdk_execution_join": {
+      "ticks_joined": 53184,
+      "completed_submission_identities": 53184,
+      "completed_batch_sequence_min": 3655,
+      "completed_batch_sequence_max": 56838,
+      "robot": "franka_right",
+      "peak_accepted_backend_difference_rad": 4.0487285746237944e-09,
+      "accepted_backend_tolerance_rad": 2e-05,
+      "publication_to_native_tick_offsets": [
+        1
+      ],
+      "wrapper_epoch": null,
+      "wrapper_clock_fields": [
+        "physics_step_index",
+        "physics_time",
+        "physics_dt"
+      ],
+      "epoch_scope": "primary qualification and independent native buffers share exact epoch; original SDK wrapper has no epoch field",
+      "gripper_scope": "accepted driver joint only; original controller actuates one DOF, complete six native gripper states/targets remain separately checked"
+    },
+    "force_support_claimed": false,
+    "measured_base_drift_from_acquisition": {
+      "maximum_translation_m": 0.0,
+      "maximum_rotation_rad": 2.1073424255447017e-08,
+      "maximum_linear_speed_m_s": 1.2496319696430303e-08,
+      "maximum_angular_speed_rad_s": 2.6576518454533684e-07,
+      "qualification": "diagnostic measurements; original installed-base criteria remain the control gate"
+    },
+    "maximum_right_arm_tracking_error_rad": 0.00026875734329223633,
+    "primary_CAD_scope": "existing same-tick controller result, not independently recomputed CAD",
+    "final72_scope": "original final common window is unchanged and checked separately"
+  },
+  "representative_right_CAD_live_sample": {
+    "native_index": 49627,
+    "gaps_m": [
+      0.00014940434342881033,
+      0.00020855946058492237
+    ],
+    "ready": true,
+    "source": "Original S24 assisted_trace.jsonl fabrica_base_support_hold sample read during run",
+    "scope": "Primary same-tick measured CAD, not a new independent CAD recomputation or force measurement"
+  },
+  "left_installation": {
+    "sequence": [
+      3,
+      7,
+      6,
+      4,
+      5,
+      1,
+      0,
+      8
+    ],
+    "all_eight_installed": true,
+    "original_complete_routes_executed": true,
+    "new_final_home_or_park_added": false
+  },
+  "original_report_resolution": {
+    "required_sections": [
+      "runtime_constraint_monitor",
+      "assembly_sequence_precheck",
+      "stage_trajectory_precheck"
+    ],
+    "whole_sequence_phases": 183,
+    "preserved_skip_reasons": {
+      "runtime_constraint_monitor.entity_geometry.skipped": [
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_0/SM_BucketPlastic_B",
+          "reason": "collision_disabled"
+        },
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_1/SM_CardBoxA_02",
+          "reason": "collision_disabled"
+        },
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_2/SM_BarelPlastic_A_01",
+          "reason": "collision_disabled"
+        },
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_3/S_TrafficCone",
+          "reason": "collision_disabled"
+        }
+      ],
+      "stage_trajectory_precheck.skip_reasons": {},
+      "stage_trajectory_precheck.entity_geometry_coverage.skipped": [
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_0/SM_BucketPlastic_B",
+          "reason": "collision_disabled"
+        },
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_1/SM_CardBoxA_02",
+          "reason": "collision_disabled"
+        },
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_2/SM_BarelPlastic_A_01",
+          "reason": "collision_disabled"
+        },
+        {
+          "prim": "/World/env_0/episode_000000/objects/domain_randomization_visual_distractor_3/S_TrafficCone",
+          "reason": "collision_disabled"
+        }
+      ]
+    },
+    "benign_skip_policy": [
+      "holding_robot_current_joints",
+      "stride_skip"
+    ],
+    "warnings_preserved_without_automatic_failure": true,
+    "geometrically_resolved_original_capsule_reports": {
+      "runtime_constraint_monitor": {
+        "schema": "stool_capsule_proxy_resolution_v1",
+        "original_violation_total": 6752,
+        "all_original_events_retained": true,
+        "resolved_events": 6752,
+        "original_pairs": {
+          "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link": 6698,
+          "franka_left/wrist_3_link->Gripper/Robotiq_2F_85/base_link": 30,
+          "franka_left/wrist_1_link->wrist_2_link": 12,
+          "franka_left/wrist_2_link->wrist_3_link": 12
+        },
+        "minimum_verified_separating_plane_gap_m": 0.0037893616707029842,
+        "native_raw_join": true,
+        "waypoint_graph_recomputed": false,
+        "original_capsule_classifications_and_distances_preserved": true,
+        "thresholds_changed": false,
+        "native_cooked_or_contact_force_claimed": false
+      },
+      "stage_trajectory_precheck": {
+        "schema": "stool_capsule_proxy_resolution_v1",
+        "original_violation_total": 3376,
+        "all_original_events_retained": true,
+        "resolved_events": 3376,
+        "original_pairs": {
+          "franka_right/wrist_3_link->Gripper/Robotiq_2F_85/base_link": 3348,
+          "franka_left/wrist_3_link->Gripper/Robotiq_2F_85/base_link": 14,
+          "franka_left/wrist_1_link->wrist_2_link": 7,
+          "franka_left/wrist_2_link->wrist_3_link": 7
+        },
+        "minimum_verified_separating_plane_gap_m": 0.003337897621000563,
+        "native_raw_join": true,
+        "waypoint_graph_recomputed": true,
+        "original_capsule_classifications_and_distances_preserved": true,
+        "thresholds_changed": false,
+        "native_cooked_or_contact_force_claimed": false
+      }
+    },
+    "typed_geometry_sections_verified": 2,
+    "uncapped_trace_receipts_verified": [
+      {
+        "records": 7118,
+        "events": 415133,
+        "sha256": "ace35428724cca76015ab9f02facbf8bf2a18cd1b52a6d27060b453c87414864",
+        "summary_omitted_events": 410133
+      }
+    ]
+  },
+  "native_final_window": {
+    "ticks": 72,
+    "start_index": 56877,
+    "end_index": 56948,
+    "epoch": 0,
+    "objects": 9,
+    "body_paths": {
+      "fabrica_stool_circular_0": "/World/env_0/episode_000000/objects/fabrica_stool_circular_0",
+      "fabrica_stool_circular_1": "/World/env_0/episode_000000/objects/fabrica_stool_circular_1",
+      "fabrica_stool_circular_2": "/World/env_0/episode_000000/objects/fabrica_stool_circular_2",
+      "fabrica_stool_circular_3": "/World/env_0/episode_000000/objects/fabrica_stool_circular_3",
+      "fabrica_stool_circular_4": "/World/env_0/episode_000000/objects/fabrica_stool_circular_4",
+      "fabrica_stool_circular_5": "/World/env_0/episode_000000/objects/fabrica_stool_circular_5",
+      "fabrica_stool_circular_6": "/World/env_0/episode_000000/objects/fabrica_stool_circular_6",
+      "fabrica_stool_circular_7": "/World/env_0/episode_000000/objects/fabrica_stool_circular_7",
+      "fabrica_stool_circular_8": "/World/env_0/episode_000000/objects/fabrica_stool_circular_8"
+    },
+    "peak": {
+      "position_error_m": 6.304881870162496e-07,
+      "orientation_error_rad": 0.0,
+      "linear_speed_m_s": 0.0005814008499819588,
+      "angular_speed_rad_s": 1.1819270138777995e-07
+    },
+    "raw_velocity_gate": "actual native COM velocities; no history override substituted"
+  },
+  "native_target_scope": "Original rebase operation retained; reported final errors are to runtime rebased targets, not an unrebased absolute CAD pose.",
+  "media": {
+    "archive_sha256": "af27bd82cd107034ffd61d626c140f36aec3eada585ff669eb56718aee08d56e",
+    "all_original_members_verified": true,
+    "member_count": 40,
+    "original_full_videos": 3,
+    "new_local_full_validation_decodes": 0,
+    "verification_receipt": "outputs/stool_assisted_20261021/grant04/deliveries/S24_download_verification.json",
+    "verification_sha256": "33f8c40b68a01ae068906a4afe0448670242871127b85cbed09c00c2aa1146a6",
+    "aligned_clip_sha256": "00aea282d8c76c6bd75eb8344f5bb17fc8945688eec9beea0c71a8a218f93252",
+    "aligned_clip_frames": 750,
+    "visual_review": "outputs/stool_assisted_20261021/grant04/review/media_clips/S24/visual_review.json",
+    "visual_review_sha256": "9703f1485bc8c458caf77b64d1dc931a0a5a314332f543d1cfa82fada5379c4f",
+    "left_wrist_preview_occlusion_retained": true
+  },
+  "timing": {
+    "launch_at_utc": "2026-10-26T22:41:28.138781+00:00",
+    "finished_at_utc": "2026-10-27T02:06:22+00:00",
+    "launch_to_finished_wall_seconds": 12293.861219,
+    "native_simulated_seconds": 237.28334570862353,
+    "worker_instrumented_wall_seconds": 12291.436790020205,
+    "policy_compute_seconds": 3391.9021070008166,
+    "policy_calls": 56945,
+    "formal_postprocessing_wall_seconds": 530.215832,
+    "original_full_media_decode_seconds": 8.70750478701666,
+    "official_independent_audit_seconds": 464.34505360201,
+    "preparation_from_S23_closure_to_S24_launch_minutes": 57.79833828333334,
+    "actual_worker_framework_preflight_seconds": 15.711997983045876,
+    "preparation_limit_blocker_was_reported": true,
+    "limits": "Policy compute overlaps phase/worker wall. The residual includes engine/render/evidence and other overhead, without an accurate split. Preparation includes analysis, implementation and review; those were not separately timed. Native simulated time is not engine wall time.",
+    "startup_native_clock_seconds": 0.012500000651925802,
+    "native_elapsed_since_startup_seconds": 237.2708457079716
+  },
+  "failures": {
+    "S24_runtime_failure": null,
+    "S24_failed_checks": [],
+    "S24_missing_checks": [],
+    "historical_comparison": "outputs/stool_assisted_20261021/grant03/S22_S23_pair_review_20261027.json",
+    "historical_S23_strict_result": false,
+    "historical_S23_audit_rewritten": false
+  },
+  "limits": [
+    "Retained measured world supports; no right-arm-only load-bearing, friction-only stability, or pure-physical success claim.",
+    "Original primary support CAD is not independently recomputed; actual SDK/raw identities and stable windows are independently joined.",
+    "Positive complete-mesh separation for the explicitly listed proxy pairs is not continuous CCD, cooked/SDF or force certification.",
+    "One fixed seed/layout repetition; no cross-seed robustness or general-task validation claimed.",
+    "Selected preview left-wrist view is almost black/occluded; only preview plus listed terminal images manually reviewed."
+  ],
+  "cleanup": "outputs/stool_assisted_20261021/grant04/review/cleanup_20261027/cleanup_aggregate_after_S24.json",
+  "pause": {
+    "human_instruction": "这轮结束后暂停",
+    "formal_attempts_closed": 24,
+    "G04_used": 1,
+    "G04_unused": 4,
+    "S25_started": false,
+    "further_action": "Pause after evidence/media/handoff closure. No further repair or simulation until a new explicit human request."
+  }
+}

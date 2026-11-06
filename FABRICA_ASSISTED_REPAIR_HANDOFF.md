@@ -1,5 +1,7 @@
 # 新 Fabrica 任务：辅助修复入口
 
+GitHub 中已修复的 Stool / UR5e 版本从 [STOOL_REPAIR_README.md](STOOL_REPAIR_README.md) 进入，包含精确源码、仿真启动和完整录像。新入口与旧服务器的实验账本分开，文档整理不启动仿真。
+
 2026-10-21，W06.0。供新对话把 Beam 积累的方法用于本项目其他 Fabrica 装配任务。本次只整理流程/经验及性能分析；没有选择新任务、建立新运行授权、修改控制代码或启动仿真。Beam 的状态/权限仍只读[辅助账本](outputs/beam_assisted_20261015/repair_batch_D_20261016.json)。
 
 ## 新对话最少读什么

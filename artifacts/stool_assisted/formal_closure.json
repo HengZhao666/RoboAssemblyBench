@@ -1,0 +1,29 @@
+{
+  "id": "S24",
+  "closed": true,
+  "grant": "G04",
+  "native_observed": true,
+  "first_policy_action_observed": true,
+  "observed_sdk_sequences": {
+    "franka_left": 56945,
+    "franka_right": 56945
+  },
+  "last_observed_task_step": 56945,
+  "main_task_success": true,
+  "original_terminal_reason": "success-criteria-met",
+  "full_motion_complete": true,
+  "strict_independent_audit": true,
+  "accepted_full_assembly": true,
+  "independent_audit": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/independent_audit.json",
+  "closure": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/formal_closure.json",
+  "media_verification": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/media_verification.json",
+  "closed_at_utc": "2026-10-27T02:17:10.936868+00:00",
+  "postprocessing_timing": {
+    "started_at_utc": "2026-10-27T02:08:20.721036+00:00",
+    "interpretation": "Postprocessing wall time only; reused original media/audit have no new decode/audit duration",
+    "media_invocation_wall_seconds": 8.70750478701666,
+    "media_report_reused": false,
+    "audit_invocation_wall_seconds": 464.34505360201,
+    "official_audit_reused": false
+  }
+}

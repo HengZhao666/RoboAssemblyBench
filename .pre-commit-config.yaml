@@ -1,3 +1,6 @@
+# Byte-preserved historical evidence and CAD assets are verified by release SHA.
+# Formatting them would invalidate the accepted reference's original identities.
+exclude: '^(artifacts/stool_assisted/|roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/)'
 repos:
   - repo: https://github.com/PyCQA/flake8
     rev: 4.0.1

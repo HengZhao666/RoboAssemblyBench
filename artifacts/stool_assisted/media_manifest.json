@@ -1,0 +1,22 @@
+{
+  "historical_run": "S24",
+  "original_videos_unmodified": true,
+  "files": {
+    "docs/stool_assisted/media/observation_images_front.mp4": {
+      "bytes": 20660875,
+      "sha256": "c50cae5801fab58add5c57e4eb8fb40a2dad7a15812d63faca1e64301a55c2aa"
+    },
+    "docs/stool_assisted/media/observation_images_right_wrist.mp4": {
+      "bytes": 8903060,
+      "sha256": "494d8eb0b3329daaef1ef664f499a6370592ec1342cb43aa0a66a8fb65c98f58"
+    },
+    "docs/stool_assisted/media/observation_images_left_wrist.mp4": {
+      "bytes": 25430376,
+      "sha256": "2573fc75fe6e97b02ea0562fda4a185ddad969d828f0cdb09e946cc6decbcdf6"
+    },
+    "docs/stool_assisted/media/completed_front.png": {
+      "bytes": 421812,
+      "sha256": "f972e76f211b0406f234c1e61fe9f74690ed6e5fe0b9c0fd0a1de292669cc632"
+    }
+  }
+}

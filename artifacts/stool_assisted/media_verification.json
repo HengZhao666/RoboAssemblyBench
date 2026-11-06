@@ -1,0 +1,937 @@
+{
+  "status": "passed",
+  "all_three_original_videos_decoded": true,
+  "sha256_verified": true,
+  "started_utc": "2026-10-27T02:08:20.751679+00:00",
+  "run": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24",
+  "report_file": "media_verification.json",
+  "files": [
+    {
+      "camera": "observation.images.front",
+      "expected_filename": "observation_images_front.mp4",
+      "declared_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_front.mp4",
+      "declared_summary": {
+        "frames_dir": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_frames/observation_images_front",
+        "video_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_front.mp4",
+        "fps": 30.0,
+        "requested_fps": 30.0,
+        "frame_stride": 8,
+        "width": 960,
+        "height": 540,
+        "renderer": "live_rollout_frame_capture",
+        "frame_count": 7120,
+        "image_stats": {
+          "min": [
+            [
+              [
+                0.003921568859368563
+              ]
+            ],
+            [
+              [
+                0.007843137718737125
+              ]
+            ],
+            [
+              [
+                0.003921568859368563
+              ]
+            ]
+          ],
+          "max": [
+            [
+              [
+                0.9725490212440491
+              ]
+            ],
+            [
+              [
+                0.9725490212440491
+              ]
+            ],
+            [
+              [
+                0.9764705896377563
+              ]
+            ]
+          ],
+          "mean": [
+            [
+              [
+                0.4486777346289957
+              ]
+            ],
+            [
+              [
+                0.48468739328372495
+              ]
+            ],
+            [
+              [
+                0.48273431160691743
+              ]
+            ]
+          ],
+          "std": [
+            [
+              [
+                0.16375261732274093
+              ]
+            ],
+            [
+              [
+                0.1618957512457298
+              ]
+            ],
+            [
+              [
+                0.1666171307884227
+              ]
+            ]
+          ],
+          "count": [
+            7120
+          ]
+        },
+        "encode_elapsed_s": 64.34616263629869
+      },
+      "expected_resolution": [
+        960,
+        540
+      ],
+      "path": "episode_0000_live_videos/observation_images_front.mp4",
+      "size_bytes": 20660875,
+      "sha256_before": "c50cae5801fab58add5c57e4eb8fb40a2dad7a15812d63faca1e64301a55c2aa",
+      "logs": "media_verification_logs/observation_images_front",
+      "probe": {
+        "passed": true,
+        "metadata_exit_code": 0,
+        "packet_probe_exit_code": 0,
+        "metadata_stderr": "",
+        "packet_probe_stderr": "",
+        "metadata_command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffprobe",
+          "-v",
+          "error",
+          "-select_streams",
+          "v:0",
+          "-show_streams",
+          "-show_format",
+          "-of",
+          "json",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_front.mp4"
+        ],
+        "packet_command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffprobe",
+          "-v",
+          "error",
+          "-select_streams",
+          "v:0",
+          "-show_packets",
+          "-show_entries",
+          "packet=pts_time,dts_time,duration_time",
+          "-of",
+          "json",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_front.mp4"
+        ],
+        "note": "packet PTS/DTS are container sample timestamps; decoded frame count is independently provided by the single full ffmpeg decode",
+        "width": 960,
+        "height": 540,
+        "codec": "h264",
+        "stream_frame_count": 7120,
+        "stream_duration_s": 237.333333,
+        "container_duration_s": 237.333333,
+        "start_time_s": 0.0,
+        "time_base": "1/15360",
+        "avg_frame_rate": "30/1",
+        "r_frame_rate": "30/1",
+        "container": {
+          "filename": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_front.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "237.333333",
+          "size": "20660875",
+          "bit_rate": "696433",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf63.1.102"
+          }
+        },
+        "stream": {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.64001f",
+          "width": 960,
+          "height": 540,
+          "coded_width": 960,
+          "coded_height": 540,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p",
+          "level": 31,
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 3645440,
+          "duration": "237.333333",
+          "bit_rate": "693521",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "7120",
+          "extradata_size": 46,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc63.1.102 libx264"
+          }
+        },
+        "timestamps": {
+          "packet_count": 7120,
+          "finite_pts_count": 7120,
+          "finite_dts_count": 7120,
+          "first_packet_pts_s": 0.0,
+          "last_packet_pts_s": 237.266667,
+          "minimum_pts_s": 0.0,
+          "maximum_pts_s": 237.3,
+          "first_packet_dts_s": -0.066667,
+          "last_packet_dts_s": 237.233333,
+          "dts_nondecreasing": true,
+          "duplicate_presentation_timestamps": 0,
+          "minimum_positive_presentation_step_s": 0.03333299999999895,
+          "packet_duration_min_s": 0.033333,
+          "packet_duration_max_s": 0.033333,
+          "complete_raw_timestamps": "ffprobe_packets.stdout.txt"
+        }
+      },
+      "decode": {
+        "passed": true,
+        "exit_code": 0,
+        "timeout": false,
+        "stderr": "",
+        "frame_count": 7120,
+        "progress": {
+          "frame": "7120",
+          "fps": "3087.86",
+          "stream_0_0_q": "-0.0",
+          "bitrate": "N/A",
+          "total_size": "N/A",
+          "out_time_us": "237333333",
+          "out_time_ms": "237333333",
+          "out_time": "00:03:57.333333",
+          "dup_frames": "0",
+          "drop_frames": "0",
+          "speed": "103x",
+          "progress": "end"
+        },
+        "command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffmpeg",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-nostats",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-progress",
+          "pipe:1",
+          "-i",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_front.mp4",
+          "-map",
+          "0:v:0",
+          "-an",
+          "-fps_mode",
+          "passthrough",
+          "-f",
+          "null",
+          "-"
+        ],
+        "scope": "one full ffmpeg video-stream decode from beginning through EOF; no re-encode or clip sampling"
+      },
+      "sha256": "c50cae5801fab58add5c57e4eb8fb40a2dad7a15812d63faca1e64301a55c2aa",
+      "sha256_after": "c50cae5801fab58add5c57e4eb8fb40a2dad7a15812d63faca1e64301a55c2aa",
+      "expected_sha256": null,
+      "sha256_verified": true,
+      "decoded": true,
+      "decoded_count_matches_container": true,
+      "dimensions_match_metadata": true,
+      "raw_clock_frame_count": 7120,
+      "clock_count_matches_decoded": true,
+      "episode_count_matches_decoded": true
+    },
+    {
+      "camera": "observation.images.left_wrist",
+      "expected_filename": "observation_images_left_wrist.mp4",
+      "declared_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "declared_summary": {
+        "frames_dir": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_frames/observation_images_left_wrist",
+        "video_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_left_wrist.mp4",
+        "fps": 30.0,
+        "requested_fps": 30.0,
+        "frame_stride": 8,
+        "width": 640,
+        "height": 480,
+        "renderer": "live_rollout_frame_capture",
+        "frame_count": 7120,
+        "image_stats": {
+          "min": [
+            [
+              [
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0
+              ]
+            ]
+          ],
+          "max": [
+            [
+              [
+                0.9803921580314636
+              ]
+            ],
+            [
+              [
+                0.9803921580314636
+              ]
+            ],
+            [
+              [
+                0.9921568632125854
+              ]
+            ]
+          ],
+          "mean": [
+            [
+              [
+                0.253100090850047
+              ]
+            ],
+            [
+              [
+                0.26796102763070595
+              ]
+            ],
+            [
+              [
+                0.2560874125725321
+              ]
+            ]
+          ],
+          "std": [
+            [
+              [
+                0.18845747055040457
+              ]
+            ],
+            [
+              [
+                0.20333171168300587
+              ]
+            ],
+            [
+              [
+                0.19262796970027238
+              ]
+            ]
+          ],
+          "count": [
+            7120
+          ]
+        },
+        "encode_elapsed_s": 35.51987069519237
+      },
+      "expected_resolution": [
+        640,
+        480
+      ],
+      "path": "episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "size_bytes": 25430376,
+      "sha256_before": "2573fc75fe6e97b02ea0562fda4a185ddad969d828f0cdb09e946cc6decbcdf6",
+      "logs": "media_verification_logs/observation_images_left_wrist",
+      "probe": {
+        "passed": true,
+        "metadata_exit_code": 0,
+        "packet_probe_exit_code": 0,
+        "metadata_stderr": "",
+        "packet_probe_stderr": "",
+        "metadata_command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffprobe",
+          "-v",
+          "error",
+          "-select_streams",
+          "v:0",
+          "-show_streams",
+          "-show_format",
+          "-of",
+          "json",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_left_wrist.mp4"
+        ],
+        "packet_command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffprobe",
+          "-v",
+          "error",
+          "-select_streams",
+          "v:0",
+          "-show_packets",
+          "-show_entries",
+          "packet=pts_time,dts_time,duration_time",
+          "-of",
+          "json",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_left_wrist.mp4"
+        ],
+        "note": "packet PTS/DTS are container sample timestamps; decoded frame count is independently provided by the single full ffmpeg decode",
+        "width": 640,
+        "height": 480,
+        "codec": "h264",
+        "stream_frame_count": 7120,
+        "stream_duration_s": 237.333333,
+        "container_duration_s": 237.333333,
+        "start_time_s": 0.0,
+        "time_base": "1/15360",
+        "avg_frame_rate": "30/1",
+        "r_frame_rate": "30/1",
+        "container": {
+          "filename": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_left_wrist.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "237.333333",
+          "size": "25430376",
+          "bit_rate": "857203",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf63.1.102"
+          }
+        },
+        "stream": {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.64001e",
+          "width": 640,
+          "height": 480,
+          "coded_width": 640,
+          "coded_height": 480,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p",
+          "level": 30,
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 3645440,
+          "duration": "237.333333",
+          "bit_rate": "854314",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "7120",
+          "extradata_size": 45,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc63.1.102 libx264"
+          }
+        },
+        "timestamps": {
+          "packet_count": 7120,
+          "finite_pts_count": 7120,
+          "finite_dts_count": 7120,
+          "first_packet_pts_s": 0.0,
+          "last_packet_pts_s": 237.266667,
+          "minimum_pts_s": 0.0,
+          "maximum_pts_s": 237.3,
+          "first_packet_dts_s": -0.066667,
+          "last_packet_dts_s": 237.233333,
+          "dts_nondecreasing": true,
+          "duplicate_presentation_timestamps": 0,
+          "minimum_positive_presentation_step_s": 0.03333299999999895,
+          "packet_duration_min_s": 0.033333,
+          "packet_duration_max_s": 0.033333,
+          "complete_raw_timestamps": "ffprobe_packets.stdout.txt"
+        }
+      },
+      "decode": {
+        "passed": true,
+        "exit_code": 0,
+        "timeout": false,
+        "stderr": "",
+        "frame_count": 7120,
+        "progress": {
+          "frame": "7120",
+          "fps": "3223.87",
+          "stream_0_0_q": "-0.0",
+          "bitrate": "N/A",
+          "total_size": "N/A",
+          "out_time_us": "237333333",
+          "out_time_ms": "237333333",
+          "out_time": "00:03:57.333333",
+          "dup_frames": "0",
+          "drop_frames": "0",
+          "speed": "107x",
+          "progress": "end"
+        },
+        "command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffmpeg",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-nostats",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-progress",
+          "pipe:1",
+          "-i",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_left_wrist.mp4",
+          "-map",
+          "0:v:0",
+          "-an",
+          "-fps_mode",
+          "passthrough",
+          "-f",
+          "null",
+          "-"
+        ],
+        "scope": "one full ffmpeg video-stream decode from beginning through EOF; no re-encode or clip sampling"
+      },
+      "sha256": "2573fc75fe6e97b02ea0562fda4a185ddad969d828f0cdb09e946cc6decbcdf6",
+      "sha256_after": "2573fc75fe6e97b02ea0562fda4a185ddad969d828f0cdb09e946cc6decbcdf6",
+      "expected_sha256": null,
+      "sha256_verified": true,
+      "decoded": true,
+      "decoded_count_matches_container": true,
+      "dimensions_match_metadata": true,
+      "raw_clock_frame_count": 7120,
+      "clock_count_matches_decoded": true,
+      "episode_count_matches_decoded": true
+    },
+    {
+      "camera": "observation.images.right_wrist",
+      "expected_filename": "observation_images_right_wrist.mp4",
+      "declared_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "declared_summary": {
+        "frames_dir": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_frames/observation_images_right_wrist",
+        "video_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_right_wrist.mp4",
+        "fps": 30.0,
+        "requested_fps": 30.0,
+        "frame_stride": 8,
+        "width": 640,
+        "height": 480,
+        "renderer": "live_rollout_frame_capture",
+        "frame_count": 7120,
+        "image_stats": {
+          "min": [
+            [
+              [
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0
+              ]
+            ],
+            [
+              [
+                0.0
+              ]
+            ]
+          ],
+          "max": [
+            [
+              [
+                0.9686274528503418
+              ]
+            ],
+            [
+              [
+                0.9686274528503418
+              ]
+            ],
+            [
+              [
+                0.9725490212440491
+              ]
+            ]
+          ],
+          "mean": [
+            [
+              [
+                0.25075689191139594
+              ]
+            ],
+            [
+              [
+                0.2610058592821328
+              ]
+            ],
+            [
+              [
+                0.24856416874253348
+              ]
+            ]
+          ],
+          "std": [
+            [
+              [
+                0.18605733718582362
+              ]
+            ],
+            [
+              [
+                0.2023043611517582
+              ]
+            ],
+            [
+              [
+                0.1872285165431634
+              ]
+            ]
+          ],
+          "count": [
+            7120
+          ]
+        },
+        "encode_elapsed_s": 36.51383160613477
+      },
+      "expected_resolution": [
+        640,
+        480
+      ],
+      "path": "episode_0000_live_videos/observation_images_right_wrist.mp4",
+      "size_bytes": 8903060,
+      "sha256_before": "494d8eb0b3329daaef1ef664f499a6370592ec1342cb43aa0a66a8fb65c98f58",
+      "logs": "media_verification_logs/observation_images_right_wrist",
+      "probe": {
+        "passed": true,
+        "metadata_exit_code": 0,
+        "packet_probe_exit_code": 0,
+        "metadata_stderr": "",
+        "packet_probe_stderr": "",
+        "metadata_command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffprobe",
+          "-v",
+          "error",
+          "-select_streams",
+          "v:0",
+          "-show_streams",
+          "-show_format",
+          "-of",
+          "json",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_right_wrist.mp4"
+        ],
+        "packet_command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffprobe",
+          "-v",
+          "error",
+          "-select_streams",
+          "v:0",
+          "-show_packets",
+          "-show_entries",
+          "packet=pts_time,dts_time,duration_time",
+          "-of",
+          "json",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_right_wrist.mp4"
+        ],
+        "note": "packet PTS/DTS are container sample timestamps; decoded frame count is independently provided by the single full ffmpeg decode",
+        "width": 640,
+        "height": 480,
+        "codec": "h264",
+        "stream_frame_count": 7120,
+        "stream_duration_s": 237.333333,
+        "container_duration_s": 237.333333,
+        "start_time_s": 0.0,
+        "time_base": "1/15360",
+        "avg_frame_rate": "30/1",
+        "r_frame_rate": "30/1",
+        "container": {
+          "filename": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_right_wrist.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "237.333333",
+          "size": "8903060",
+          "bit_rate": "300103",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf63.1.102"
+          }
+        },
+        "stream": {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.64001e",
+          "width": 640,
+          "height": 480,
+          "coded_width": 640,
+          "coded_height": 480,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p",
+          "level": 30,
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 3645440,
+          "duration": "237.333333",
+          "bit_rate": "297200",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "7120",
+          "extradata_size": 45,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc63.1.102 libx264"
+          }
+        },
+        "timestamps": {
+          "packet_count": 7120,
+          "finite_pts_count": 7120,
+          "finite_dts_count": 7120,
+          "first_packet_pts_s": 0.0,
+          "last_packet_pts_s": 237.266667,
+          "minimum_pts_s": 0.0,
+          "maximum_pts_s": 237.3,
+          "first_packet_dts_s": -0.066667,
+          "last_packet_dts_s": 237.233333,
+          "dts_nondecreasing": true,
+          "duplicate_presentation_timestamps": 0,
+          "minimum_positive_presentation_step_s": 0.03333299999999895,
+          "packet_duration_min_s": 0.033333,
+          "packet_duration_max_s": 0.033333,
+          "complete_raw_timestamps": "ffprobe_packets.stdout.txt"
+        }
+      },
+      "decode": {
+        "passed": true,
+        "exit_code": 0,
+        "timeout": false,
+        "stderr": "",
+        "frame_count": 7120,
+        "progress": {
+          "frame": "7120",
+          "fps": "4850.40",
+          "stream_0_0_q": "-0.0",
+          "bitrate": "N/A",
+          "total_size": "N/A",
+          "out_time_us": "237333333",
+          "out_time_ms": "237333333",
+          "out_time": "00:03:57.333333",
+          "dup_frames": "0",
+          "drop_frames": "0",
+          "speed": "162x",
+          "progress": "end"
+        },
+        "command": [
+          "/Embodied_AI/miniconda3/envs/fabrica/bin/ffmpeg",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-nostats",
+          "-xerror",
+          "-err_detect",
+          "explode",
+          "-progress",
+          "pipe:1",
+          "-i",
+          "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/episode_0000_live_videos/observation_images_right_wrist.mp4",
+          "-map",
+          "0:v:0",
+          "-an",
+          "-fps_mode",
+          "passthrough",
+          "-f",
+          "null",
+          "-"
+        ],
+        "scope": "one full ffmpeg video-stream decode from beginning through EOF; no re-encode or clip sampling"
+      },
+      "sha256": "494d8eb0b3329daaef1ef664f499a6370592ec1342cb43aa0a66a8fb65c98f58",
+      "sha256_after": "494d8eb0b3329daaef1ef664f499a6370592ec1342cb43aa0a66a8fb65c98f58",
+      "expected_sha256": null,
+      "sha256_verified": true,
+      "decoded": true,
+      "decoded_count_matches_container": true,
+      "dimensions_match_metadata": true,
+      "raw_clock_frame_count": 7120,
+      "clock_count_matches_decoded": true,
+      "episode_count_matches_decoded": true
+    }
+  ],
+  "errors": [],
+  "binaries": {
+    "ffmpeg": "/Embodied_AI/miniconda3/envs/fabrica/bin/ffmpeg",
+    "ffprobe": "/Embodied_AI/miniconda3/envs/fabrica/bin/ffprobe"
+  },
+  "discovery": {
+    "episode_metadata": "episode_0000.json",
+    "recorded_video_mode": "live_rollout_mp4",
+    "original_mp4_paths": [
+      "episode_0000_live_videos/observation_images_front.mp4",
+      "episode_0000_live_videos/observation_images_left_wrist.mp4",
+      "episode_0000_live_videos/observation_images_right_wrist.mp4"
+    ],
+    "unexpected_mp4s": [],
+    "production_video_key_aliases": {
+      "observation.images.isaac_3d": "observation.images.front",
+      "observation.images.third_person": "observation.images.front"
+    },
+    "discovery": "exact expected filenames within original episode_*_live_videos directories; copied metadata absolute paths never dereferenced outside run"
+  },
+  "original_membership_passed": true,
+  "expected_manifest": null,
+  "binary_capabilities": {
+    "help_exit_code": 0,
+    "fps_mode_supported": true,
+    "help_log": "media_verification_logs/ffmpeg_help.stdout.txt",
+    "synchronization": "-fps_mode passthrough; do not synthesize/drop decoded output frames"
+  },
+  "raw_clock": {
+    "passed": true,
+    "errors": [],
+    "frame_counts": {
+      "observation.images.front": 7120,
+      "observation.images.left_wrist": 7120,
+      "observation.images.right_wrist": 7120
+    },
+    "valid_native_clock_counts": {
+      "observation.images.front": 7120,
+      "observation.images.left_wrist": 7120,
+      "observation.images.right_wrist": 7120
+    },
+    "valid_reference_time_counts": {
+      "observation.images.front": 7120,
+      "observation.images.left_wrist": 7120,
+      "observation.images.right_wrist": 7120
+    },
+    "capture_segments": {
+      "rollout": 21360
+    },
+    "raw_clock_sha256": "ee8e8896696df38b4f26fa7c0dbfbb7f6fd607d83cd9ad69a7c9347b51fc22aa",
+    "scope": "raw retained clock-line membership/count/index; physical terminal clock join is a separate audit"
+  },
+  "diagnostic_only": false,
+  "content_classification": "retained original rollout or failure videos; task outcome requires independent audit",
+  "assembly_outcome_proven": false,
+  "sha256_verified_scope": "same original file bytes before/after full decode; transfer SHA identity is separate",
+  "finished_utc": "2026-10-27T02:08:29.403855+00:00"
+}
