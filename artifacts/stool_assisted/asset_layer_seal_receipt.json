@@ -1,0 +1,302 @@
+{
+  "passed": true,
+  "layers": [
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/stool_circular/fixture_raw_sdf512.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/stool_circular/fixture_raw_sdf512.usda",
+      "sha256": "6ceefeccbf36f1513fbe53aecf27f524480cc368ba41390d13890e4f80bedd22",
+      "bytes": 866398,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_official_support/optical_board_raw_sdf512.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_official_support/optical_board_raw_sdf512.usda",
+      "sha256": "682610b9b2eaeb91b367113b845a82eb82d7d718edb7d2775d2d4e46d0bd4273",
+      "bytes": 4375708,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_0.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_0.usd",
+      "sha256": "8cdf2e41f4f03ccef504d7b3f799f8c12f83c542d6ca22529664878c4ec06f6c",
+      "bytes": 124788,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_1.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_1.usd",
+      "sha256": "3c6832ae04ef9c2117fcc3bf5fc3dba88d1cb2a337977c0be3afc063bb84ba76",
+      "bytes": 22053,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_2.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_2.usd",
+      "sha256": "666d1d8652f5bfa6b82c1ef708dce8d19b94ca45f5681f60b07a8d20dc6cdb17",
+      "bytes": 197465,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_3.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_3.usd",
+      "sha256": "b5626522d17de221f230a5659474571f8415c5677a151eeeb8677d1ef1fd75f0",
+      "bytes": 22001,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_4.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_4.usd",
+      "sha256": "90ab1ea842e6776429c70b0b6adcb2b0f07d8d40269fd29aa14fddbf0bd71015",
+      "bytes": 124992,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_5.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_5.usd",
+      "sha256": "fab409c65b3549ec768b50649ae953d762f8c8b2e6b937ca221e3f3609c5196d",
+      "bytes": 21985,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_6.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_6.usd",
+      "sha256": "ba07ed1b9e8141cd266dd35bfe70bb5f9ebe479ac897ecd2d2d12efe58bee8bd",
+      "bytes": 124828,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_7.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_7.usd",
+      "sha256": "b4375fd15f2b0a886ecd6b3ab0db3e3a27a26406730513f9792fd50b6eea9483",
+      "bytes": 22199,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_8.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_8.usd",
+      "sha256": "eaea370ef911664849b764bf7819547806365e21502054f912abd151f20ee9c3",
+      "bytes": 125159,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/configuration/Robotiq_2F_85_config_physics_mimic.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/configuration/Robotiq_2F_85_config_physics_mimic.usda",
+      "sha256": "4c9793815940d276bfe17fafabdb1c2f02a2de0d0423da64e95e421133e2727c",
+      "bytes": 5551,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/materials/materials.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/materials/materials.usd",
+      "sha256": "be51967b16cff7e79fd00d84c903d1319978419ea3c908396ff7e5d053c72acc",
+      "bytes": 3275,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_Finger1step_JFT.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_Finger1step_JFT.usd",
+      "sha256": "446419dcab650d66482157f7c009a058a269d3f112549b5f3774cbbaf52f4f33",
+      "bytes": 77992,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_basestep_JFX.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_basestep_JFX.usd",
+      "sha256": "65ab3ec6f3d5b02fda2ab408d3a42e8857ca5cb157d8e3f2d00451d89369d531",
+      "bytes": 3373227,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_finger2step_JFP.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_finger2step_JFP.usd",
+      "sha256": "5c71d8ea3eef8f985092eb75f74124d299960531f0518047d33187e015cc50cb",
+      "bytes": 230153,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_finger3step_JFL.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_finger3step_JFL.usd",
+      "sha256": "88e81d87b4802684c2b035d72a01ff181b8b8df64c01854891c2feec1ffc5a4d",
+      "bytes": 143687,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_finger4step_JFH.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_finger4step_JFH.usd",
+      "sha256": "65353dd1e6179373a26762fc005c6fb43f65142ccc8707f9a09bb2e0131805e5",
+      "bytes": 135710,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_fingertipsstep_JFD.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/parts/Defeatured_2F_85_PAD_OPEN_fingertipsstep_JFD.usd",
+      "sha256": "8a291a7b7a8ba6a2e1762e7d4bb937828c99f929edd8f82fdbd1cb9f1b51da18",
+      "bytes": 43102,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/payloads/Robotiq_2F_85_base.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/payloads/Robotiq_2F_85_base.usda",
+      "sha256": "187a24f95bc97e1fb3f26c7f39096a1b8e91591e3e3acc619b9559ffc8d10a5f",
+      "bytes": 17724,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/payloads/Robotiq_2F_85_phyisics_mimic.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/payloads/Robotiq_2F_85_phyisics_mimic.usda",
+      "sha256": "1b9625826ff31675b15c5ac117e81c69ebe5e3364efd1b9fa6d40f9dcbaac386",
+      "bytes": 21833,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_base.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_base.usd",
+      "sha256": "12347912499e3ead2c0fa1ba782dee8b87fa9255397baeba94d99480b01e3ea8",
+      "bytes": 6422847,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_physics.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_physics.usd",
+      "sha256": "4d1a1045809d2d2abd9f0dc88922a7bbcfc84b731f96baf986d0959546fd054b",
+      "bytes": 6197,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_robot_schema.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_robot_schema.usd",
+      "sha256": "1bee266ccaa15fc78bfca1ecd5aa740e1823ad8731000746124d93920287c226",
+      "bytes": 2268,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_sensor.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/configuration/ur5e_sensor.usd",
+      "sha256": "3d589a64b5a80d8fe923fd29ca1cba8c9c37468e026ef7f39f37913797c78dfe",
+      "bytes": 602,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/ur5e.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/UniversalRobots/ur5e/ur5e.usd",
+      "sha256": "d7a290e94f3de151fdf660007f6a53448cbda8cf558d83fd04a91c00eda5bbc7",
+      "bytes": 4830,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda",
+      "sha256": "8da4d26e40f112615d4a90feff57b3f5132c095b7916fa58cf78c632e04c252b",
+      "bytes": 1418,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/scenes/usd/factory_cell_tabletop.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/stool_repository/roboassemblybench/scenes/usd/factory_cell_tabletop.usda",
+      "sha256": "1311fbd29271687e2daf039e466cef2df83871ff2825c51d61536c1cb685d9f6",
+      "bytes": 7990,
+      "seal_status": "hashed_local_composed_layer",
+      "seal_scope": "original local USD layer file bytes"
+    },
+    {
+      "identifier": "anon:0x58cd82787e50:World0.usd",
+      "original_resolved_path": "anon:0x58cd82787e50:World0.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/asset_layers/layer_0028.usda",
+      "sha256": "f3199cab658e0bd881d9151aeefcff8cf8cbc179cfc61789290703a071211a0a",
+      "bytes": 121268,
+      "seal_status": "captured_composed_layer_text",
+      "seal_scope": "canonical USD text of the actual composed layer captured at startup; not original remote/anonymous file bytes; dependency layers sealed separately"
+    },
+    {
+      "identifier": "anon:0x58cd82788a10:World0-session.usda",
+      "original_resolved_path": "anon:0x58cd82788a10:World0-session.usda",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/asset_layers/layer_0029.usda",
+      "sha256": "875b882cd60cd9dacc6b0cfeecd3f9ee116a616a46707aa6080029a19ccb214e",
+      "bytes": 37231,
+      "seal_status": "captured_composed_layer_text",
+      "seal_scope": "canonical USD text of the actual composed layer captured at startup; not original remote/anonymous file bytes; dependency layers sealed separately"
+    },
+    {
+      "identifier": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_BarelPlastic_A_01.usd",
+      "original_resolved_path": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_BarelPlastic_A_01.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/asset_layers/layer_0030.usda",
+      "sha256": "d79b6a9b84e5e30b2c95e353b695a72ace9dc47b6f8df37dac06da24853a4ae1",
+      "bytes": 293821,
+      "seal_status": "captured_composed_layer_text",
+      "seal_scope": "canonical USD text of the actual composed layer captured at startup; not original remote/anonymous file bytes; dependency layers sealed separately"
+    },
+    {
+      "identifier": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_BucketPlastic_B.usd",
+      "original_resolved_path": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_BucketPlastic_B.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/asset_layers/layer_0031.usda",
+      "sha256": "61e792c0944ab15dc723c5cbfdf81150aaa19cc05f5c54ec333dd55dfdd90c29",
+      "bytes": 222965,
+      "seal_status": "captured_composed_layer_text",
+      "seal_scope": "canonical USD text of the actual composed layer captured at startup; not original remote/anonymous file bytes; dependency layers sealed separately"
+    },
+    {
+      "identifier": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_CardBoxA_02.usd",
+      "original_resolved_path": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_CardBoxA_02.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/asset_layers/layer_0032.usda",
+      "sha256": "08cbb39c750f1929f65d7453e790d5d9d76caaa0000970e40f2a276a88c55a0c",
+      "bytes": 33762,
+      "seal_status": "captured_composed_layer_text",
+      "seal_scope": "canonical USD text of the actual composed layer captured at startup; not original remote/anonymous file bytes; dependency layers sealed separately"
+    },
+    {
+      "identifier": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd",
+      "original_resolved_path": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd",
+      "resolved_path": "/home/user/beam_integration_20261010_upstream6f57dae/stool_assisted_20261021/runs/S24/asset_layers/layer_0033.usda",
+      "sha256": "e3efe7611cc400502b9883487d81aa6c1e7f5031660d154d07a466e6493846e1",
+      "bytes": 152808,
+      "seal_status": "captured_composed_layer_text",
+      "seal_scope": "canonical USD text of the actual composed layer captured at startup; not original remote/anonymous file bytes; dependency layers sealed separately"
+    }
+  ],
+  "native_physics_executed": 0,
+  "scope": "actual used USD layers at startup; local original bytes or retained canonical layer text",
+  "physics_stamp_before": {
+    "valid": true,
+    "epoch": 0,
+    "index": 3,
+    "time": 0.012500000651925802,
+    "dt": 0.004166666666666667,
+    "identity_source": "simulation_context_and_physics_view"
+  },
+  "physics_stamp_after": {
+    "valid": true,
+    "epoch": 0,
+    "index": 3,
+    "time": 0.012500000651925802,
+    "dt": 0.004166666666666667,
+    "identity_source": "simulation_context_and_physics_view"
+  },
+  "native_clock_unchanged": true
+}

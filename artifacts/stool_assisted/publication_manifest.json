@@ -1,0 +1,234 @@
+{
+  "schema": "stool_publication_manifest_v1",
+  "base_commit": "29595e464f9abc2bc850d1ab56fd22c31f7ac320",
+  "accepted_historical_run": "S24",
+  "files": {
+    ".gitignore": {
+      "bytes": 2624,
+      "sha256": "03b7a630fbe83d4b8b35eed64c7a26e5db2fd108857c4f156653e3b2b0979396"
+    },
+    ".pre-commit-config.yaml": {
+      "bytes": 1455,
+      "sha256": "ee4e8322229f594d2b6dce0279bed1fb84278de76190b7641bd2bce38696f81a"
+    },
+    "FABRICA_ASSISTED_REPAIR_HANDOFF.md": {
+      "bytes": 3997,
+      "sha256": "dd859ee7a05134bd1072a7c4989badc17c64ec1cbb5f2a94b0d519a69277a39b"
+    },
+    "README.md": {
+      "bytes": 24957,
+      "sha256": "c884a88eac52a47f342dd4505ac63fc177a9aceca3334f8c9e1094cbe0476580"
+    },
+    "STOOL_REPAIR_README.md": {
+      "bytes": 2652,
+      "sha256": "7a78946c3f879eba35b8d37f3cd522b59a2b8f9bfcf4d9563effcd3fdd57ea1d"
+    },
+    "artifacts/stool_assisted/S24_source_snapshot.tar.gz": {
+      "bytes": 6181257,
+      "sha256": "d4f7d123d3bfb2db9e6b86db6460c02d6b292bc0d065ba1d0791b6f937dae6e3"
+    },
+    "artifacts/stool_assisted/S24_tools_snapshot.tar.gz": {
+      "bytes": 163120,
+      "sha256": "0b3fd74b697cfde54d7b3cb253ef506edd09f6cc99e516c7edc8c2e64ebf7148"
+    },
+    "artifacts/stool_assisted/asset_layer_seal_receipt.json": {
+      "bytes": 27495,
+      "sha256": "b0fd1d98abd4b284a5a921f00ab2f76721e6552e12a800da47a48fec158eaf65"
+    },
+    "artifacts/stool_assisted/changes_from_main.patch": {
+      "bytes": 414841,
+      "sha256": "0f510eb01e14358f2ff3974210aca03c0de4b907f17b856ca436f343ed7c87a4"
+    },
+    "artifacts/stool_assisted/formal_closure.json": {
+      "bytes": 1266,
+      "sha256": "24a10315f91f26b9bf398b12b8dfe5f6346fad657ee162093776b79e0209d9ce"
+    },
+    "artifacts/stool_assisted/integration_preflight.json": {
+      "bytes": 176935,
+      "sha256": "6922d33153b926a3ef6313999c809bd95416b8e2791b0279ce1312f89f6248cd"
+    },
+    "artifacts/stool_assisted/media_manifest.json": {
+      "bytes": 800,
+      "sha256": "f280be5d7b6a6332e1afdc787a4dc5c87f91b24aa9f32a6910de29ad546f8f32"
+    },
+    "artifacts/stool_assisted/media_verification.json": {
+      "bytes": 30074,
+      "sha256": "02c9b7876407eeaa1229187fa1e3c4b477ed7a96b96c71de9c5ff98bf9354e8d"
+    },
+    "artifacts/stool_assisted/reference_worker_config.json.gz": {
+      "bytes": 2093848,
+      "sha256": "a24d3c4246c3434da2926e73764952e5b5d7459b3db2d4e02552a3cf09cabdf5"
+    },
+    "artifacts/stool_assisted/release.json": {
+      "bytes": 154712,
+      "sha256": "6d0ea85990189a794ea93fa4c736c31a6d0e4a3acc5b5a05bf8c06fb3fffabec"
+    },
+    "artifacts/stool_assisted/round_review.json": {
+      "bytes": 17166,
+      "sha256": "dae146632e7a4607d69bebe1354d6096dcbd1bae375da435e764272f30837143"
+    },
+    "artifacts/stool_assisted/runtime_source_binding.json": {
+      "bytes": 159292,
+      "sha256": "5baace9798586d2c3f70145a461782577a962971a04147d82afd880e8085a6f2"
+    },
+    "artifacts/stool_assisted/source_binding.json": {
+      "bytes": 132068,
+      "sha256": "91134ca5408053f2238d78d4be6099f2e2de75ccb1d3e056f37967c70bebaea6"
+    },
+    "docs/stool_assisted/RESULTS.md": {
+      "bytes": 1902,
+      "sha256": "3ca15fef7f7413a216b953ea09843f1d98a87d649ccbd31f20578c7230763a3c"
+    },
+    "docs/stool_assisted/RUN.md": {
+      "bytes": 4987,
+      "sha256": "ee154100109f64505f4ec472e67f9c2b4f7bc32843716a69729c79bc69dbaf58"
+    },
+    "docs/stool_assisted/SOURCE.md": {
+      "bytes": 3467,
+      "sha256": "13da2d67d437ff63935644f0bea43f1d57a1dea1ccabc995060bb99d3e32858d"
+    },
+    "docs/stool_assisted/VALIDATION.md": {
+      "bytes": 2858,
+      "sha256": "e90383549c62a2c4cfdf009eec30c1d047154c0bf21a5f2eeecd8798dd3ce945"
+    },
+    "docs/stool_assisted/media/completed_front.png": {
+      "bytes": 421812,
+      "sha256": "f972e76f211b0406f234c1e61fe9f74690ed6e5fe0b9c0fd0a1de292669cc632"
+    },
+    "docs/stool_assisted/media/observation_images_front.mp4": {
+      "bytes": 20660875,
+      "sha256": "c50cae5801fab58add5c57e4eb8fb40a2dad7a15812d63faca1e64301a55c2aa"
+    },
+    "docs/stool_assisted/media/observation_images_left_wrist.mp4": {
+      "bytes": 25430376,
+      "sha256": "2573fc75fe6e97b02ea0562fda4a185ddad969d828f0cdb09e946cc6decbcdf6"
+    },
+    "docs/stool_assisted/media/observation_images_right_wrist.mp4": {
+      "bytes": 8903060,
+      "sha256": "494d8eb0b3329daaef1ef664f499a6370592ec1342cb43aa0a66a8fb65c98f58"
+    },
+    "docs/stool_assisted/results.html": {
+      "bytes": 1752,
+      "sha256": "338c3a1dafcc3a399d2b72d78b903f19969cb100eb2ed40492e7ca15f6b994ad"
+    },
+    "requirements/stool_assisted.txt": {
+      "bytes": 89,
+      "sha256": "0e87fb82ec0e698ed2568de2bff2bbf178740c1eefe7007849a7a6d0d5a3d565"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/PACKAGE_MANIFEST.json": {
+      "bytes": 1019,
+      "sha256": "b29cec302f2985c99c4b5e8cfae2187509e3b45deed6835ffcca68d0f17dfa2d"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/README.md": {
+      "bytes": 955,
+      "sha256": "c2a1545d499eba361b5ee30468783c430391a9e2a1514b8f8bc33933a573a7c8"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/stool_circular/fixture_raw_sdf512.usda": {
+      "bytes": 866398,
+      "sha256": "6ceefeccbf36f1513fbe53aecf27f524480cc368ba41390d13890e4f80bedd22"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/stool_circular/pickup.json": {
+      "bytes": 1184,
+      "sha256": "ee2fbefa9749587c8dce1de327e3c372fe42bf1b46860d3a9b4c6cedf2253220"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_official_support/optical_board_raw_sdf512.usda": {
+      "bytes": 4375708,
+      "sha256": "682610b9b2eaeb91b367113b845a82eb82d7d718edb7d2775d2d4e46d0bd4273"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_0.usd": {
+      "bytes": 124788,
+      "sha256": "8cdf2e41f4f03ccef504d7b3f799f8c12f83c542d6ca22529664878c4ec06f6c"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_1.usd": {
+      "bytes": 22053,
+      "sha256": "3c6832ae04ef9c2117fcc3bf5fc3dba88d1cb2a337977c0be3afc063bb84ba76"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_2.usd": {
+      "bytes": 197465,
+      "sha256": "666d1d8652f5bfa6b82c1ef708dce8d19b94ca45f5681f60b07a8d20dc6cdb17"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_3.usd": {
+      "bytes": 22001,
+      "sha256": "b5626522d17de221f230a5659474571f8415c5677a151eeeb8677d1ef1fd75f0"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_4.usd": {
+      "bytes": 124992,
+      "sha256": "90ab1ea842e6776429c70b0b6adcb2b0f07d8d40269fd29aa14fddbf0bd71015"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_5.usd": {
+      "bytes": 21985,
+      "sha256": "fab409c65b3549ec768b50649ae953d762f8c8b2e6b937ca221e3f3609c5196d"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_6.usd": {
+      "bytes": 124828,
+      "sha256": "ba07ed1b9e8141cd266dd35bfe70bb5f9ebe479ac897ecd2d2d12efe58bee8bd"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_7.usd": {
+      "bytes": 22199,
+      "sha256": "b4375fd15f2b0a886ecd6b3ab0db3e3a27a26406730513f9792fd50b6eea9483"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/assets/fabrica_parts/stool_circular/fabrica_stool_circular_8.usd": {
+      "bytes": 125159,
+      "sha256": "eaea370ef911664849b764bf7819547806365e21502054f912abd151f20ee9c3"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/metadata/grasps.pkl": {
+      "bytes": 5031402,
+      "sha256": "6772b07539611817ab9e5036c4927331259d24d7b6c745596ea2a4dbaa6b0ece"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/metadata/motion.pkl": {
+      "bytes": 514542,
+      "sha256": "a0a6f6f8ed7c0df14b97442125b743136378c7091433da1cfaf337ec3956fcaf"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/metadata/plan_info.pkl": {
+      "bytes": 10154,
+      "sha256": "e7c7e3e183b2a906bdd653978ad88970ffa1da3e8ca3f6fbca64fee57b932584"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/metadata/precedence.pkl": {
+      "bytes": 308441,
+      "sha256": "ef754cc7609299269f9427849086e443e489f298700595166ed0d20d8d19d17d"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/metadata/stats.json": {
+      "bytes": 276,
+      "sha256": "b08e65861314952e48fe5bddbb2c46cae018a74764fad9c94880793bc32a33b7"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/metadata/tree.pkl": {
+      "bytes": 176740,
+      "sha256": "1b0a8cd7a58a735bf13252fa8eec857c1ffb382e5515a3322d93a75278d6eb6f"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/metadata/tree_opt.pkl": {
+      "bytes": 861,
+      "sha256": "b6cc2c2b1a9275355d604039e2001b6cb11e6390f9e20dfae70b84a4c2c6c3ed"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/scene/scene.usda": {
+      "bytes": 20046,
+      "sha256": "763714d81538ada6be5f5afdb0e1bedf5745172be5dedda9f3a6dfd46a2c63c0"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/scene/scene_spec.json": {
+      "bytes": 25140,
+      "sha256": "a053ef6a850d8e57bb6a786b26780aaeffc198064343106f96676165eee30557"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/validation/isaacsim_runtime_validation.json": {
+      "bytes": 324,
+      "sha256": "683fe3715c5a7264da087e1e4e09ce3abc93bf851c8bb83855059bacea094e96"
+    },
+    "roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_stool_circular_fixture_pickup_sdf512_v1/validation/validation.json": {
+      "bytes": 386,
+      "sha256": "c844c0603ff08b525d013ce7938cc86ba1e6ff2b251526900996e3fefcde3fb0"
+    },
+    "roboassemblybench/scripts/run_stool_assisted.sh": {
+      "bytes": 696,
+      "sha256": "b03a2c772885667b831c9d5f87cbcf2c4a5430d0195725ac41dbda785396e6b9"
+    },
+    "scripts/stool_assisted/run.py": {
+      "bytes": 22632,
+      "sha256": "353306ae68838105809b8c9b2220add070c8a770c3951fc5cf680b629afd7bbc"
+    },
+    "tests/toolkits/test_stool_assisted_portable.py": {
+      "bytes": 4477,
+      "sha256": "1ea3ae5c2e365afec59ccf0fb8b587b880c86a141e6e5cd34a167cf11a56fb29"
+    }
+  },
+  "file_count_excluding_self": 56,
+  "self_hash_excluded": true,
+  "native_runs_started_during_integration": 0
+}

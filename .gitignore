@@ -136,6 +136,7 @@ roboassemblybench/assets/Fabrica/canonical_7_bundles/*
 # user scripts
 /scripts/*
 !/scripts/beam_assisted/
+!/scripts/stool_assisted/
 
 # sphinx build dir
 docs/en/_build
