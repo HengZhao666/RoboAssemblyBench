@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository",
+  "manifest": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/source_manifest.json",
+  "manifest_sha256": "f173bbde0bb71f6d9808d991b5a43ac18787ec62494117ad06dce7a80b26da72",
+  "files": 900,
+  "differences": []
+}

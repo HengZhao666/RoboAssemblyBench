@@ -50,46 +50,68 @@
 
 ## 4. 复现步骤
 
-1. **重建源码树并核 SHA**：
+Stool 的源码树可以放在任意目录：`integration/runtime_env.sh` 按当前目录（`$PWD`）设置路径，运行时也没有源码 SHA 断言。下面用 `S` 表示源码树根。
+
+1. **环境**：按 [`artifacts/physical_environment/`](../../artifacts/physical_environment/README.md) 建 conda 环境 `internutopia311`、装 Isaac Sim 5.1.0、准备 ffmpeg 9.0.2（必须带 libx264：worker 启动时会用 `-c:v libx264` 试编码一帧）。
+
+2. **重建源码树并核 SHA**（在仓库根目录执行）：
 
    ```bash
-   python3 roboassemblybench/scripts/prepare_physical_reference.py stool --dest /path/to/stool_physical
+   S=/path/to/stool_physical
+   python3 roboassemblybench/scripts/prepare_physical_reference.py stool --dest "$S"
    ```
 
-   必须输出 `problems: 0`。请在 Linux 上重建：overlay 中有 30 个 Git 跟踪的 `._*` 文件，macOS 自带的 tar 会把它们当作扩展属性吞掉（脚本用 Python `tarfile`，不受影响）。`compat/` 下部分符号链接指向绝对路径，这些是其他路线的冻结副本，不在 Stool 纯物理的运行路径上。
+   必须输出 `problems: 0`。请在 Linux 上重建：overlay 中有 30 个 Git 跟踪的 `._*` 文件，macOS 自带的 tar 会把它们当作扩展属性吞掉（脚本用 Python `tarfile`，不受影响）。`compat/` 是其他路线的冻结副本，部分符号链接指向不存在的绝对路径；验证器、worker 和任务代码都不引用它。
 
-2. **运行环境**：Isaac Sim 5.1.0，conda 环境 `internutopia311`（Python 3.11），以及以下锁定依赖：
-
-   - cloudpickle 3.1.2、farama_notifications 0.0.6、gymnasium 1.2.1、ikpy 3.4.2
-   - numpy 1.26.4、packaging 23.2、python_fcl 0.7.0.6、PyYAML 6.0.1
-   - scipy 1.17.1、transforms3d 0.4.2、trimesh 4.12.2
-   - pytest 8.3.5、pluggy 1.5.0、iniconfig 2.0.0，以及 ffmpeg/ffprobe
-
-   `integration/runtime_env.sh` 从源码树根下的三个目录加载这些依赖：`.deploy_parts/locked_runtime`（Python 包）、`.deploy_parts/runtime_bin`（ffmpeg、ffprobe）、`.runtime_python`（pytest 等）。请建好这三个目录（例如 `pip install --target .deploy_parts/locked_runtime ...`），并把 `runtime_env.sh` 里的 `ISAAC_SIM_ROOT` 和 python-fcl 路径（`.../runtime_tools/geometry_deps`）改成本机路径。
-
-3. **放回运行脚本**：把 `artifacts/stool_physical/run_tools/` 复制到源码树的 `outputs/stool_physical/`，并替换脚本中的下列值：
-
-   | 原值 | 含义 |
-   |---|---|
-   | `/home/user/work/zhaoheng/stool_physical_20261120` | 源码树根 |
-   | `/Embodied_AI/miniconda3` | conda 安装目录（python 与 git） |
-   | `/home/user/isaacsim-5.1.0` | `ISAAC_SIM_ROOT` |
-   | `GPU-e064bda0-b445-2d7f-50d5-c1180deadea2` | GPU UUID（`launch_round.py`） |
-
-4. **全程运行**（约 1.5 小时）：
+3. **源码树内的三个运行时目录**（`runtime_env.sh` 和 `integration/plumbers_validate.py` 从这里加载；版本与 wheel SHA-256 见 [`stool_private_runtime.json`](../../artifacts/physical_environment/stool_private_runtime.json)）：
 
    ```bash
-   cd /path/to/stool_physical
+   ENV=artifacts/physical_environment
+   PY="$(conda run -n internutopia311 which python)"
+   # 锁定的数值依赖：numpy 1.26.4、scipy 1.17.1、trimesh 4.12.2、python-fcl 0.7.0.6 等 11 个
+   "$PY" -m pip install --no-deps --require-hashes --only-binary=:all: \
+       --target "$S/.deploy_parts/locked_runtime" -r $ENV/stool_locked_runtime.txt
+   # pytest 8.3.5、pluggy 1.5.0、iniconfig 2.0.0
+   "$PY" -m pip install --no-deps --require-hashes --only-binary=:all: \
+       --target "$S/.runtime_python" -r $ENV/stool_runtime_python.txt
+   # ffmpeg / ffprobe
+   mkdir -p "$S/.deploy_parts/runtime_bin"
+   for x in ffmpeg ffprobe; do ln -s "$(conda run -n physical_ffmpeg which $x)" "$S/.deploy_parts/runtime_bin/$x"; done
+   ```
+
+   `--require-hashes` 保证装上的是验证时的同一批 wheel。worker 在锁定模式下还会断言 numpy、scipy、trimesh、fcl 的版本。不要用 `integration/install_private_runtime.py`：它装的是同一批 wheel，但会把带本机路径的清单写回受跟踪的 `integration/private_runtime_manifest.json`。
+
+4. **改两个脚本里的环境值**：
+
+   | 文件 | 原值 | 改成 |
+   |---|---|---|
+   | `$S/integration/runtime_env.sh` | `ISAAC_SIM_ROOT=/home/user/isaacsim-5.1.0` | 本机 Isaac Sim 目录 |
+   | 同上 | `CONDA_EXE=/Embodied_AI/miniconda3/bin/conda` | 本机 conda |
+   | 同上 | `PYTHONPATH` 末尾的 `/home/user/beam_integration_20261010_upstream6f57dae/runtime_tools/geometry_deps` | 可删去（锁定目录里已有 python-fcl，且排在前面） |
+   | `$S/outputs/stool_physical/run_smoke.sh`（从 `artifacts/stool_physical/run_tools/` 复制） | `cd /home/user/work/zhaoheng/stool_physical_20261120` | `cd "$S"` |
+   | 同上 | `/Embodied_AI/miniconda3/envs/internutopia311/bin/python` | 本机 `internutopia311` 的 python |
+
+   `integration/plumbers_validate.py` 也会往 `PYTHONPATH` 追加同一个 Beam `geometry_deps` 路径。路径不存在时 Python 会忽略它，不用改。改过 `runtime_env.sh` 后，`prepare_physical_reference.py stool --verify-only` 会报这一个文件不同，属预期。
+
+   ```bash
+   mkdir -p "$S/outputs/stool_physical"
+   cp artifacts/stool_physical/run_tools/run_smoke.sh artifacts/stool_physical/run_tools/watch.sh "$S/outputs/stool_physical/"
+   ```
+
+5. **全程运行**（约 1.5 小时，需空闲内存约 16 GiB 以上）：
+
+   ```bash
+   cd "$S"
    N=smoke_repro; mkdir -p outputs/stool_physical/$N
-   nohup bash outputs/stool_physical/run_smoke.sh $N 9000 > outputs/stool_physical/$N/launcher.log 2>&1 &
+   CUDA_VISIBLE_DEVICES=0 nohup bash outputs/stool_physical/run_smoke.sh $N 9000 > outputs/stool_physical/$N/launcher.log 2>&1 &
    bash outputs/stool_physical/watch.sh outputs/stool_physical/$N/native/validation.log   # 按阶段跟进度
    ```
 
    `run_smoke.sh NAME 超时秒数` 会先 `source integration/runtime_env.sh`，再以 `--seed 4906 --layout-seed 4906`、场景 `taoyuan_grscenes_tabletop` 运行 `integration/plumbers_validate.py`，输出写到 `outputs/stool_physical/NAME/native/`。默认只开闭爪两份 trace，可加环境变量 `MOTION=1`、`HOLD=1`、`HOLDFAIL=1`。
 
-5. **核对**：把 `native/validation_summary.json` 与 [`runs/smoke38/native/validation_summary.json`](../../artifacts/stool_physical/runs/smoke38/native/validation_summary.json) 对照。仿真是确定性的，源码和配置相同时应逐步相同。
+6. **核对**：`native/validation_summary.json` 应为 `num_successful: 1`，`worker_exit_code: 0`。把它与 [`runs/smoke38/native/validation_summary.json`](../../artifacts/stool_physical/runs/smoke38/native/validation_summary.json) 对照：53,191 步、`success-criteria-met`、九件误差。仿真是确定性的，逐步相同只在原 GPU（NVIDIA L20，驱动 580.178.04）上验证过；换硬件后若有差异，以验收指标为准。
 
-`launch_round.py` 是带额度和资源检查的正式运行入口：它要求磁盘 ≥20 GiB、内存与 GPU 余量充足，并读写 `outputs/stool_physical/ledger.json`。仅复现时用 `run_smoke.sh` 即可。
+`run_tools/launch_round.py` / `start_round.sh` 是原批次带额度的正式启动器，会读写运行记录，复现时不要用。
 
 ## 5. 验收口径
 

@@ -23,14 +23,18 @@ python3 roboassemblybench/scripts/prepare_physical_reference.py stool   # -> out
 
 ## 第二步：准备运行环境
 
-两条路线共用：
+验证时的完整环境已锁定在 [artifacts/physical_environment/](artifacts/physical_environment/README.md)：
 
-- Isaac Sim 5.1.0（设 `ISAAC_SIM_ROOT`，运行前 `source $ISAAC_SIM_ROOT/setup_conda_env.sh`）
-- conda 环境 `internutopia311`（Python 3.11），按仓库 `environment.yml` 和 `requirements/` 安装
-- python-fcl、ffmpeg、NVIDIA GPU 与 Vulkan ICD
+- 机器与版本：NVIDIA L20（驱动 580.178.04）、Ubuntu 22.04、Isaac Sim 5.1.0（build `5.1.0-rc.19`）、Python 3.11.13
+- conda 环境 `internutopia311`：conda 精确清单与 104 个 pip 包
+- ffmpeg 9.0.2（带 libx264）
+- Beam 用的 python-fcl 0.7.0.8；Stool 源码树内的锁定依赖（按 wheel SHA-256 安装）
 
-各路线还需要的依赖、启动脚本里要替换的路径，以及运行和核对结果的方法，见各自的复现说明。
+两条路线的放置方式不同：
+
+- **Beam**：启动链对 worker 配置、资产清单和关键模块做了 SHA 断言，这些文件里写的是绝对路径，所以必须按原路径 `/home/user/beam_integration_20261010_upstream6f57dae/` 摆放，只改两个 shell 脚本里的环境值。
+- **Stool**：源码树可放在任意目录，只改两个脚本里的环境值，并在树内建好三个运行时目录。
 
 ## 第三步：运行并核对
 
-先跑短冒烟，与仓库中保存的结果逐行比对，再跑全程。仿真是确定性的：源码相同、配置相同时，结果应与仓库记录逐步一致。不同 GPU 或驱动可能带来数值差异。
+先跑短冒烟，与仓库中保存的结果逐行比对（Beam 用 `artifacts/beam_physical/compare_progress.py`），再跑全程。仿真是确定性的：源码相同、配置相同时，结果应与仓库记录逐步一致。不同 GPU 或驱动可能带来数值差异。

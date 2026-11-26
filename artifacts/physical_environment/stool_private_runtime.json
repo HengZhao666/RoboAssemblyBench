@@ -1,0 +1,105 @@
+{
+ "locked_runtime": {
+  "directory": ".deploy_parts/locked_runtime",
+  "built_by": "integration/install_private_runtime.py",
+  "wheels": [
+   {
+    "package": "numpy",
+    "version": "1.26.4",
+    "wheel": "numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "666dbfb6ec68962c033a450943ded891bed2d54e6755e35e5835d63f4f6931d5"
+   },
+   {
+    "package": "scipy",
+    "version": "1.17.1",
+    "wheel": "scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+    "sha256": "43af8d1f3bea642559019edfe64e9b11192a8978efbd1539d7bc2aaa23d92de4"
+   },
+   {
+    "package": "trimesh",
+    "version": "4.12.2",
+    "wheel": "trimesh-4.12.2-py3-none-any.whl",
+    "sha256": "b5b5afa63c5272345f2858f7676bc8c217dc8a89f4fadf6193fe10a81b5ff2aa"
+   },
+   {
+    "package": "python-fcl",
+    "version": "0.7.0.6",
+    "wheel": "python_fcl-0.7.0.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "d2bbd86356ee79b9350b717c2f137bd9726b9fb6d82db4e70b17e99520f77e81"
+   },
+   {
+    "package": "gymnasium",
+    "version": "1.2.1",
+    "wheel": "gymnasium-1.2.1-py3-none-any.whl",
+    "sha256": "85cd1c16351db0b89f73be54e952ddfece97b56d1e5400d2dcd59f58b7707963"
+   },
+   {
+    "package": "farama-notifications",
+    "version": "0.0.6",
+    "wheel": "farama_notifications-0.0.6-py3-none-any.whl",
+    "sha256": "f84839188efa1ce5bb361c2a84881b2dc2c0d0d7fb661ff00421820170930935"
+   },
+   {
+    "package": "packaging",
+    "version": "23.2",
+    "wheel": "packaging-23.2-py3-none-any.whl",
+    "sha256": "8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7"
+   },
+   {
+    "package": "PyYAML",
+    "version": "6.0.1",
+    "wheel": "PyYAML-6.0.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "d2b04aac4d386b172d5b9692e2d2da8de7bfb6c387fa4f801fbf6fb2e6ba4673"
+   },
+   {
+    "package": "ikpy",
+    "version": "3.4.2",
+    "wheel": "ikpy-3.4.2-py3-none-any.whl",
+    "sha256": "9ead7b2085f057822e563786a70b52a4f5d0db03de9d562f1488df38ccef36af"
+   },
+   {
+    "package": "transforms3d",
+    "version": "0.4.2",
+    "wheel": "transforms3d-0.4.2-py3-none-any.whl",
+    "sha256": "1c70399d9e9473ecc23311fd947f727f7c69ed0b063244828c383aa1aefa5941"
+   },
+   {
+    "package": "cloudpickle",
+    "version": "3.1.2",
+    "wheel": "cloudpickle-3.1.2-py3-none-any.whl",
+    "sha256": "9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a"
+   }
+  ]
+ },
+ "runtime_python": {
+  "directory": ".runtime_python",
+  "wheels": [
+   {
+    "package": "pytest",
+    "version": "8.3.5",
+    "wheel": "pytest-8.3.5-py3-none-any.whl",
+    "sha256": "c69214aa47deac29fad6c2a4f590b9c4a9fdb16a403176fe154b79c0b4d4d820"
+   },
+   {
+    "package": "pluggy",
+    "version": "1.5.0",
+    "wheel": "pluggy-1.5.0-py3-none-any.whl",
+    "sha256": "44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669"
+   },
+   {
+    "package": "iniconfig",
+    "version": "2.0.0",
+    "wheel": "iniconfig-2.0.0-py3-none-any.whl",
+    "sha256": "b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374"
+   }
+  ]
+ },
+ "runtime_bin": {
+  "directory": ".deploy_parts/runtime_bin",
+  "files": [
+   "ffmpeg",
+   "ffprobe"
+  ],
+  "version": "ffmpeg 9.0.2 (conda-forge, x264 1!164.3095, openh264 2.6.0)"
+ }
+}

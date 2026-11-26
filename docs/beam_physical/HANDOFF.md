@@ -23,8 +23,9 @@ v239（`v239_unload`）完整运行：60,524 步，`terminal_reason=success-crit
 | `launch_round62/source_manifest.json` | 运行时的 900 个源文件及 SHA-256 |
 | `changes_from_main.patch` | 34 个代码文件相对 `main` 的可读 diff（测试 fixture 只在 tarball 中） |
 | `launch_round62/` | 完整启动链：`run_full_assembly.sh`（全部环境开关）、`smoke_run.sh`、`checked_worker.py`、`fill_worker.py`、`smoke_entry.py`、`review62.py`、`prefix_check.py`、`smoke_review.py`、`tools/`（worker、supervise、preflight、verify_source、CAD guard、资源预算、状态写入审计、流式录像），以及合同、身份、资产清单和预检结果。`production_worker_config.json.gz` 是实际使用的 worker 配置，解压后 SHA-256 为 `3bf5d839e72c9d3751d10c265667d377b5efacade3a8ce24b19309c74592f100` |
-| `repro_check_20261124/` | 一次复现核对：复制启动链、重新生成 worker 配置（SHA 相同），420 步冒烟与原运行逐行相同（`smoke_review.json`） |
-| `cleanup_20261124/setup_repro_check.sh` | 生成上述复现核对目录的脚本，可作为复制启动链的模板 |
+| `repro_check_20261124/` | 现成的冒烟启动链（目录名已对应），420 步冒烟曾与原运行逐行相同（`smoke_review.json`） |
+| `reference_output_v239/` | 已验证运行的进度行 `progress_history.jsonl`、`idle_hold_trace.jsonl`、`video_frame_clock.jsonl.gz`、退出码与前后源码核验 |
+| `compare_progress.py` | 把新运行的进度行与 `reference_output_v239/` 逐行比对 |
 | `offline_v239_unload/` | 离线配置检查（`config_check.json`、`gate_check.json`、`test_config.py`、`run_offline.sh`）与分析脚本（`analysis/`） |
 | `worker_baseline/full_assembly_worker.py` | `checked_worker.py` 依赖的基线 worker |
 | `geometry/` | CAD 几何基准：`geometry_tools/`、`joint_geometry/`（`scene_geometry.json` 以 gzip 存放） |
@@ -54,46 +55,90 @@ v231–v239 的行为由 `run_full_assembly.sh` 里的环境开关选择。不�
 
 ## 4. 复现步骤
 
-1. **重建源码树并核 SHA**，默认写到 `outputs/beam_physical_reference/`：
+### 为什么必须用原路径
+
+启动链会在启动时核对身份，并对以下内容做 SHA 断言（见 `launch_round62/checked_worker.py` 开头）：
+
+- worker 配置 `production_worker_config.json`、资产清单 `asset_manifest.json`、900 个源文件；
+- 控制器、编译器等 4 个关键模块，要求它们从源码树内加载，按 `resolve()` 后的真实路径判断。
+
+配置和资产清单里写的是绝对路径 `/home/user/beam_integration_20261010_upstream6f57dae/...`，`checked_worker.py`、`tools/*.py`、`fill_worker.py` 里也写死了这个根目录。改这些路径会让 SHA 断言在启动时失败。
+
+所以请在新机器上**按原绝对路径摆放**。`/home/user/beam_integration_20261010_upstream6f57dae` 必须是真实目录或 bind mount，不能是符号链接，否则 `resolve()` 后模块路径不在源码树内，断言失败。这样只需改两个 shell 脚本里的环境值，其余文件一字不改。
+
+### 步骤
+
+1. **环境**：按 [`artifacts/physical_environment/`](../../artifacts/physical_environment/README.md) 建 conda 环境 `internutopia311`、装 Isaac Sim 5.1.0、准备 ffmpeg 9.0.2，并设好 `ISAAC_ASSETS_ROOT`（worker 配置引用 `Isaac/Environments/Simple_Warehouse/warehouse_with_forklifts.usd`）。
+
+2. **摆放文件**（在仓库根目录执行；创建 `/home/user` 下的目录可能需要 sudo）：
 
    ```bash
-   python3 roboassemblybench/scripts/prepare_physical_reference.py beam
+   R=/home/user/beam_integration_20261010_upstream6f57dae
+   B=$R/grasp_repairs_20261012_20rounds
+   A=artifacts/beam_physical
+   sudo mkdir -p "$R" && sudo chown "$USER" "$R"
+   # 源码树：必须输出 problems: 0
+   python3 roboassemblybench/scripts/prepare_physical_reference.py beam --dest "$R/candidate_repository"
+   # 启动链（目录名不能改）与实际 worker 配置
+   mkdir -p "$B"
+   cp -r $A/launch_round62 "$B/round62_v239_unload"
+   cp -r $A/repro_check_20261124 "$B/repro_check_20261124"
+   gunzip -k "$B/round62_v239_unload/production_worker_config.json.gz"
+   cp "$B/round62_v239_unload/production_worker_config.json" "$B/repro_check_20261124/"
+   # 基线 worker 与 CAD 几何基准
+   mkdir -p "$B/round24_native_release" "$B/batch34_38_20261111"
+   cp $A/worker_baseline/full_assembly_worker.py "$B/round24_native_release/"
+   cp -r $A/geometry/geometry_tools $A/geometry/joint_geometry "$B/batch34_38_20261111/"
+   gunzip "$B/batch34_38_20261111/joint_geometry/scene_geometry.json.gz"
+   # python-fcl 与 ffmpeg
+   pip install --no-deps --target "$R/runtime_tools/geometry_deps" python-fcl==0.7.0.8
+   mkdir -p "$R/runtime_tools/bin" && ln -s "$(conda run -n physical_ffmpeg which ffmpeg)" "$R/runtime_tools/bin/ffmpeg"
+   # 核对：worker 配置 SHA 必须是 3bf5d839e72c9d3751d10c265667d377b5efacade3a8ce24b19309c74592f100
+   sha256sum "$B/round62_v239_unload/production_worker_config.json" "$B/repro_check_20261124/production_worker_config.json"
    ```
 
-   必须输出 `problems: 0`。资产目录中与 Beam 无关的条目以符号链接指回本仓库。
+   资产目录中与 Beam 无关的条目是指回本仓库的符号链接，重建后不要移动或删除仓库目录。
 
-2. **运行环境**：Isaac Sim 5.1.0、conda 环境 `internutopia311`（Python 3.11）、`python-fcl 0.7.0.8`（加入 `PYTHONPATH`）、`ffmpeg`（加入 `PATH`）、NVIDIA GPU 与 Vulkan ICD。`ISAAC_ASSETS_ROOT` 指向 Isaac 官方资产，worker 配置会引用 `Isaac/Environments/Simple_Warehouse/warehouse_with_forklifts.usd`。
+3. **只改两个 shell 脚本里的环境值**：`$B/repro_check_20261124/smoke_run.sh`（冒烟）和 `$B/round62_v239_unload/run_full_assembly.sh`（全程）。这两个脚本在运行时不做 SHA 校验，需要改的是：
 
-3. **几何基准与基线 worker**：解压 `geometry/joint_geometry/scene_geometry.json.gz`（`gunzip -k`）。启动链按下面的相对位置查找它们，请在一个工作根目录 `R` 下照此摆放：
-
-   ```text
-   $R/candidate_repository/                                       第 1 步重建的源码树
-   $R/grasp_repairs_20261012_20rounds/<你的运行目录>/              复制自 launch_round62/
-   $R/grasp_repairs_20261012_20rounds/round24_native_release/full_assembly_worker.py
-   $R/grasp_repairs_20261012_20rounds/batch34_38_20261111/geometry_tools/
-   $R/grasp_repairs_20261012_20rounds/batch34_38_20261111/joint_geometry/
-   $R/runtime_tools/geometry_deps/                                python-fcl
-   $R/runtime_tools/bin/                                          ffmpeg
-   ```
-
-4. **改启动链里的固定路径**。复制 `launch_round62/` 为新的运行目录（可参照 `cleanup_20261124/setup_repro_check.sh` 的做法），把脚本中的下列值换成本机的值：
-
-   | 原值 | 含义 |
+   | 原值 | 改成 |
    |---|---|
-   | `/home/user/beam_integration_20261010_upstream6f57dae` | 工作根 `R` |
-   | `round62_v239_unload` | 运行目录名 |
-   | `/home/user/isaacsim-5.1.0` | `ISAAC_SIM_ROOT` |
-   | `/Embodied_AI/miniconda3` | conda 安装目录（含 `bin/git`） |
-   | `GPU-e064bda0-b445-2d7f-50d5-c1180deadea2` | GPU UUID（`CUDA_VISIBLE_DEVICES`、`nvidia-smi --id`） |
-   | `/usr/share/vulkan/icd.d/nvidia_icd.json` | Vulkan ICD |
+   | `/Embodied_AI/miniconda3/etc/profile.d/conda.sh`、`PATH` 里的 `/Embodied_AI/miniconda3/...` | 本机 conda 安装目录 |
+   | `GIT_PYTHON_GIT_EXECUTABLE=/Embodied_AI/miniconda3/bin/git` | 本机 git |
+   | `ISAAC_SIM_ROOT=/home/user/isaacsim-5.1.0` | 本机 Isaac Sim 目录 |
+   | `CUDA_VISIBLE_DEVICES=GPU-e064bda0-b445-2d7f-50d5-c1180deadea2` | 本机 GPU 的 UUID（`nvidia-smi -L`）或编号 |
+   | `VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json` | 本机 NVIDIA Vulkan ICD |
 
-   `checked_worker.py` 和 `tools/preflight.py` 会核对基线 worker 与工具的 SHA，除路径外不要改这些文件。改完后重新跑 preflight（见 `setup_repro_check.sh`）。重新生成的 `production_worker_config.json` 中会含本机路径，SHA 不必等于原值；行为一致以第 5 步的逐行对照为准。
+   其余开关和参数都不要改，它们决定 v239 的行为，`checked_worker.py` 也会断言其中一部分。
 
-5. **短冒烟**：`bash smoke_run.sh`，跑 420 步。输出目录必须不存在（脚本用 `test ! -e` 防止覆盖）。然后用 `smoke_review.py` 与仓库中的进度行对照，预期 `prefix_rows_identical_to_round62: true`。
+4. **短冒烟**（420 步，几分钟）：
 
-6. **全程运行**：`bash run_full_assembly.sh`，约 2 小时。按原诊断设置，输出约 3.4 GiB，需要空闲内存 ≥16 GiB、显存 ≥12 GiB。脚本前后会用 `tools/verify_source.py` 核源码。结束后用 `review62.py` 或直接对照 `launch_round62/manual_review.json` 的指标：步数、终止原因、五件误差、窗口漂移、合力。
+   ```bash
+   bash "$B/repro_check_20261124/smoke_run.sh"
+   python3 artifacts/beam_physical/compare_progress.py "$B/repro_check_20261124/smoke_out"
+   ```
 
-物理设置：步长 1/240 s，TGS 求解器，CPU dynamics。
+   预期 `passed: true`：除最后一行（冒烟截止行）外，进度行与已验证运行逐行相同。`smoke_out/` 里的 `runner_config_admission.json`、`runtime_solver_admission.json`、`native_scene_asset_admission.json`、`passive_observer_close.json` 都应为 `passed: true`。重跑前先删掉 `smoke_out/`，脚本用 `test ! -e` 防止覆盖。
+
+5. **全程运行**（约 2 小时；输出约 3.4 GiB；需空闲内存 ≥16 GiB、显存 ≥12 GiB）：
+
+   ```bash
+   nohup bash "$B/round62_v239_unload/run_full_assembly.sh" > full_run.log 2>&1 &
+   ```
+
+   输出在 `$R/candidate_repository/outputs/fabrica_beam_v239_unload/`；要换位置，改脚本里的 `OUT=`，它不受 SHA 约束。脚本在运行前后都会用 `tools/verify_source.py` 核 900 个源文件。
+
+6. **核对全程结果**：
+
+   ```bash
+   python3 artifacts/beam_physical/compare_progress.py "$R/candidate_repository/outputs/fabrica_beam_v239_unload" --full
+   ```
+
+   预期全部 353 行进度相同、`exit_code` 为 0。再对照 [`launch_round62/manual_review.json`](../../artifacts/beam_physical/launch_round62/manual_review.json) 的指标：60,524 步、`success-criteria-met`、五件误差、窗口漂移、合力。`reference_output_v239/` 里还有 `idle_hold_trace.jsonl` 和 `video_frame_clock.jsonl.gz`，可逐行比对。
+
+物理设置：步长 1/240 s，TGS 求解器，CPU dynamics。逐行相同只在原 GPU（NVIDIA L20，驱动 580.178.04）上验证过；换硬件后若出现差异，以第 6 步的验收指标为准。
+
+不要用 `launch_round62.py` / `prepare_round62.py`：它们是原批次的带额度启动器，会读写运行记录并拒绝重放。
 
 ## 5. 验收口径
 
