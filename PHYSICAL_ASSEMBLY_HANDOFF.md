@@ -35,15 +35,15 @@ python3 roboassemblybench/scripts/prepare_physical_reference.py stool   # -> out
 
 对服务器与 Mac 工作区做了逐项核对：
 
-- 两条路线的服务器交接与 Mac 工作区副本 SHA-256 相同（`PROJECT_HANDOFF.md`、`BEAM_PHYSICAL_HANDOFF.md`、Stool `HANDOFF.md`/`CONTRACT.md`、`beam_routes/physical/*.md`、`BEAM_REVIEW_CHECKLIST.md`）。
+- 两条路线的服务器交接与 Mac 工作区副本 SHA-256 相同（检查时及 2026-11-26 同步后均如此；同步前的服务器原件备份在 `grasp_repairs_20261012_20rounds/handoff_sync_20261126/`）（`PROJECT_HANDOFF.md`、`BEAM_PHYSICAL_HANDOFF.md`、Stool `HANDOFF.md`/`CONTRACT.md`、`beam_routes/physical/*.md`、`BEAM_REVIEW_CHECKLIST.md`）。
 - 交接中引用的关键路径全部存在：Beam 账本、第62轮启动链/离线检查/输出、复现核对、清理收据、基线 worker、几何基准、`runtime_tools/geometry_deps`；Stool 账本、P08/P09 包、R01–R05、smoke35–38、启动脚本。
 - 源码身份：Beam 生产树 900 个文件与第62轮 `source_manifest.json` 逐一相符（0 不符）；Stool 工作树 9 个改动文件与 P09 `source_sha256.json` 逐一相符；P08/P09 补丁 SHA 前缀与交接记载一致（`e8937ecd6f7ceae7`、`25e2c78c6d0ee736`）。
 - 账本状态与交接一致：Beam `round62_reviewed_fixed_batch_stopped`（`next_round=63`，无活动轮次）；Stool `R05_verified_success_stopped__root_fix_validated_smoke38`。
 - 发现的缺口及处理：
   1. 两条路线都没有可脱离服务器的源码副本（Beam 生产树不是 git 仓库；Stool 基于未推送 GitHub 的 `6f1de1d`，且是不能提交的部分克隆）。**已解决**：以 overlay + SHA 清单 + 重建脚本收入本仓库。
-  2. 服务器 Beam 交接"先用五分钟"一段的预期账本状态仍写第58轮，证据表的 `$Q`/`$O` 仍指第58轮（大文件已于 2026-11-24 删除）；本仓库的 Beam 交接以第62轮为准；Mac 工作区主副本已改正，**服务器副本尚未同步**。
-  3. 生产树内 `candidate_repository/PROJECT_HANDOFF.md` 的 Stool 行仍写"R05 暂缓"，与服务器根目录的总导航不同步，**尚未同步**。
-  4. Stool 交接中"累计"一行仍停在 smoke26 / 4 轮，"唯一当前状态"一节指向辅助路线账本，容易误读；本仓库的 Stool 交接已单独写明纯物理账本和最新状态；Mac 工作区主副本已改正，**服务器副本尚未同步**。
+  2. 服务器 Beam 交接"先用五分钟"一段的预期账本状态仍写第58轮，证据表的 `$Q`/`$O` 仍指第58轮（大文件已于 2026-11-24 删除）；本仓库的 Beam 交接以第62轮为准；**已解决**：Mac 工作区主副本与服务器副本均已改正（2026-11-26 同步，SHA 一致）。
+  3. 生产树内 `candidate_repository/PROJECT_HANDOFF.md` 的 Stool 行仍写"R05 暂缓"，与服务器根目录的总导航不同步。**已解决**：已用根目录版本同步（2026-11-26）。
+  4. Stool 交接中"累计"一行仍停在 smoke26 / 4 轮，"唯一当前状态"一节指向辅助路线账本，容易误读；本仓库的 Stool 交接已单独写明纯物理账本和最新状态；**已解决**：Mac 工作区主副本与服务器副本均已改正（2026-11-26 同步，SHA 一致）。
   5. 本仓库 `main` 上的根目录 `BEAM_PHYSICAL_HANDOFF.md` 还是 2026-10-16（第25轮前）的版本；**已解决**：改为指向新交接，原文副本见 [docs/beam_physical/reference/](docs/beam_physical/reference/)。`beam_routes/physical/` 与 `BEAM_REVIEW_CHECKLIST.md` 同步为最新维护版。
 - 未放入仓库：三路视频（只记 SHA，见各路线交接）、大体积 trace/输出、Isaac Sim 与 conda 环境、锁定依赖的 wheel 本体。
 
