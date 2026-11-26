@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Rebuild the exact source trees of the two verified pure-physical assembly runs.
 
-  beam   Beam v239 (round 62, 2026-11-24): the 900-file production tree that ran on
-         pcl-server, plus the Beam Fabrica assets it loaded.
-  stool  Stool circular P09 (smoke38, 2026-11-24; formal R05 = P08): the server work tree
-         = Plumbers integration commit 6f1de1d + delta P09, all tracked files.
+  beam   Beam v239: the 900-file source tree of the verified run, plus the Beam
+         Fabrica assets it loaded.
+  stool  Stool circular P09: Plumbers integration commit 6f1de1d + delta P09, all
+         tracked files of the verified run.
 
 Files that are byte-identical on this repository's main branch are copied from the
 repository checkout; the rest come from artifacts/<route>_physical/source_overlay_*.tar.gz.
@@ -35,7 +35,7 @@ ROUTES = {
         'overlay': ART / 'beam_physical/source_overlay_v239.tar.gz',
         'manifest': ART / 'beam_physical/launch_round62/source_manifest.json',
         'asset_manifest': ART / 'beam_physical/launch_round62/asset_manifest.json',
-        'server_root': '/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/',
+        'recorded_root': '/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/',
         'asset_dir': 'roboassemblybench/assets',
     },
     'stool': {
@@ -60,7 +60,7 @@ def load_expected(route):
     links = {}
     if route == 'beam':
         files = {item['path']: item['sha256'] for item in data['files']}
-        prefix = cfg['server_root']
+        prefix = cfg['recorded_root']
         for section in ('files', 'negative_control_assets'):
             for item in json.loads(cfg['asset_manifest'].read_text()).get(section, []):
                 assert item['path'].startswith(prefix), item['path']
@@ -127,7 +127,7 @@ def prepare(route, dest):
     if route == 'beam':
         # The run loads the Beam bundle (and its scene/fixture files) from
         # roboassemblybench/assets; link every asset entry of this checkout that the
-        # tree does not already hold, so it sees the same asset layout as the server.
+        # tree does not already hold, so it sees the same asset layout as the verified run.
         fill_with_links(ROOT / cfg['asset_dir'], dest / cfg['asset_dir'])
     for rel, target in links.items():
         out = dest / rel
