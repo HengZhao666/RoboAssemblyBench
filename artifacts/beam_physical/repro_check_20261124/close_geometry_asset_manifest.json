@@ -1,0 +1,26 @@
+{
+  "native_started": false,
+  "old_geometry_dependencies_match": true,
+  "files": [
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/joint_geometry/scene_geometry.json",
+      "sha256": "91654d521b8b5ee8d99c5603310b46c35d4a2beee36e816ad2a5ff8834b5b46f"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/geometry_tools/sweep_model.py",
+      "sha256": "5de0b140034a08c0424ba91402db7da28a3366d2e1d3407ab4748c679eac5fa2"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/geometry_tools/visual_mesh_check.py",
+      "sha256": "f61d61f47ff238febb0908d36fedf8674d06ba888cedff05ed70db2f94005a1d"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda",
+      "sha256": "8da4d26e40f112615d4a90feff57b3f5132c095b7916fa58cf78c632e04c252b"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/isaac_official/Isaac/Robots/Robotiq/2F-85/payloads/Robotiq_2F_85_phyisics_mimic.usda",
+      "sha256": "1b9625826ff31675b15c5ac117e81c69ebe5e3364efd1b9fa6d40f9dcbaac386"
+    }
+  ]
+}

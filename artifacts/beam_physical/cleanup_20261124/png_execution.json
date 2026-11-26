@@ -1,0 +1,7 @@
+{
+ "instruction": "2026-11-24 human: Delete them too (old-round PNG frames, server)",
+ "executed_at": "2026-11-24T11:37:26+0800",
+ "removed_files": 15768,
+ "removed_bytes": 5082114231,
+ "failed": []
+}

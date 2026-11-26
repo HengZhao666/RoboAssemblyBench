@@ -1,0 +1,1481 @@
+{
+  "round": 62,
+  "candidate": "v239_unload",
+  "reviewed_at_utc": "2026-11-23T19:14:32.141446+00:00",
+  "reviewer": "Claude Code (claude-opus-5-5)",
+  "exit_code": 0,
+  "finished_at": "2026-11-24T03:07:01+08:00",
+  "originals": {
+    "collect_results.json": {
+      "sha256": "6cf29b8a8ae992a45c61e0c3d80bcea5c258c9afe94d78bdb20eee9c8072984b",
+      "bytes": 241999592
+    },
+    "episode_0000.json": {
+      "sha256": "cf07eaab0efef56826075b2d4e3230a0c40ff01f8a0ceda2d1481d1bef13be7b",
+      "bytes": 242098831
+    },
+    "progress_history.jsonl": {
+      "sha256": "ed8dddf45ea20ee7f6662c8882387563030052e0858e9a86df75ff5a9d02954d",
+      "bytes": 624564
+    },
+    "state_write_counts.json": {
+      "sha256": "97f060afc88376ba799fdba0e5fec870d3e56237db09fd7bcf24576b250f3b23",
+      "bytes": 102333
+    }
+  },
+  "videos": {
+    "observation_images_front.mp4": {
+      "sha256": "600722cc25ebd35e6c1b62372123c7d17825103e28ffbafc6e9dd9f1dced9427",
+      "bytes": 21501123
+    },
+    "observation_images_left_wrist.mp4": {
+      "sha256": "d3fead47d767109b69241e97e84e78614304f728ec43548b0d0d3318803a926b",
+      "bytes": 18199476
+    },
+    "observation_images_right_wrist.mp4": {
+      "sha256": "a1d4e81c74672ffb8d6c880d909a127a0b48111883afd79486d8cd7c4d900241",
+      "bytes": 13403142
+    }
+  },
+  "metrics": {
+    "success": true,
+    "failed": false,
+    "steps": 60524,
+    "terminal_reason": "success-criteria-met",
+    "timeout_count": 0,
+    "recovery_count": 0
+  },
+  "terminal": {
+    "from_phase": "beam_final_unloaded_verification",
+    "to_phase": "complete",
+    "reason": "success-criteria-met",
+    "step_counter": 60523,
+    "phase_step_counter": 240
+  },
+  "prefix": {
+    "identical_to_round61_until": "inside handover_left_2_unload_lift (step ~45,930)"
+  },
+  "fixed_criteria": {
+    "fabrica_beam_v239_unload": {
+      "base_load_col2": {
+        "handover_left_2_unload_lift": {
+          "mean": 0,
+          "max": 0,
+          "last": 0
+        },
+        "handover_left_2_release": {
+          "mean": 0,
+          "max": 0,
+          "last": 0
+        },
+        "assemble_03_part_0_insert_09": {
+          "mean": 0,
+          "max": 0,
+          "last": 0
+        },
+        "assemble_03_part_0_physical_hold_check": {
+          "mean": 0,
+          "max": 0,
+          "last": 0
+        }
+      },
+      "part0_on_col2": {
+        "assemble_03_part_0_physical_hold_check": {
+          "force": {
+            "mean": 4.14,
+            "max": 4.784,
+            "last": 3.991
+          },
+          "lateral": {
+            "mean": 4.135,
+            "max": 4.777,
+            "last": 3.987
+          }
+        },
+        "assemble_03_part_0_release": {
+          "force": {
+            "mean": 2.503,
+            "max": 4.506,
+            "last": 2.135
+          },
+          "lateral": {
+            "mean": 0.26,
+            "max": 1.117,
+            "last": 0.049
+          }
+        },
+        "assemble_03_part_0_retreat": {
+          "force": {
+            "mean": 2.705,
+            "max": 4.366,
+            "last": 3.491
+          },
+          "lateral": {
+            "mean": 1.135,
+            "max": 2.024,
+            "last": 1.201
+          }
+        },
+        "hold_2_final_release": {
+          "force": {
+            "mean": 2.78,
+            "max": 3.287,
+            "last": 2.592
+          },
+          "lateral": {
+            "mean": 1.157,
+            "max": 1.247,
+            "last": 1.224
+          }
+        },
+        "beam_final_unloaded_verification": {
+          "force": {
+            "mean": 2.59,
+            "max": 3.21,
+            "last": 2.597
+          },
+          "lateral": {
+            "mean": 1.065,
+            "max": 1.29,
+            "last": 1.145
+          }
+        }
+      },
+      "stack_snapshots": {
+        "handover_left_2_unload_lift:first": {
+          "step": 45936,
+          "2": {
+            "dz_mm": 0.052,
+            "dxy_mm": [
+              -0.168,
+              0.142
+            ],
+            "tilt_mrad": 0.85
+          },
+          "0": {
+            "dz_mm": -53.172,
+            "dxy_mm": [
+              -414.65,
+              -142.465
+            ],
+            "tilt_mrad": 174.63
+          }
+        },
+        "handover_left_2_unload_lift:last": {
+          "step": 46000,
+          "2": {
+            "dz_mm": 0.151,
+            "dxy_mm": [
+              -0.164,
+              0.14
+            ],
+            "tilt_mrad": 0.74
+          },
+          "0": {
+            "dz_mm": -53.103,
+            "dxy_mm": [
+              -414.574,
+              -142.41
+            ],
+            "tilt_mrad": 175.22
+          }
+        },
+        "hold_3_to_2_switch_release:first": {
+          "step": 46008,
+          "2": {
+            "dz_mm": 0.152,
+            "dxy_mm": [
+              -0.164,
+              0.139
+            ],
+            "tilt_mrad": 0.75
+          },
+          "0": {
+            "dz_mm": -53.122,
+            "dxy_mm": [
+              -414.577,
+              -142.331
+            ],
+            "tilt_mrad": 175.83
+          }
+        },
+        "hold_3_to_2_switch_release:last": {
+          "step": 46096,
+          "2": {
+            "dz_mm": 0.153,
+            "dxy_mm": [
+              -0.163,
+              0.139
+            ],
+            "tilt_mrad": 0.74
+          },
+          "0": {
+            "dz_mm": -52.843,
+            "dxy_mm": [
+              -414.019,
+              -142.605
+            ],
+            "tilt_mrad": 174.49
+          }
+        },
+        "handover_left_2_park:first": {
+          "step": 49704,
+          "2": {
+            "dz_mm": 0.104,
+            "dxy_mm": [
+              -0.221,
+              0.244
+            ],
+            "tilt_mrad": 0.42
+          },
+          "0": {
+            "dz_mm": -53.107,
+            "dxy_mm": [
+              -414.54,
+              -142.465
+            ],
+            "tilt_mrad": 175.95
+          }
+        },
+        "handover_left_2_park:last": {
+          "step": 49936,
+          "2": {
+            "dz_mm": 0.103,
+            "dxy_mm": [
+              -0.221,
+              0.244
+            ],
+            "tilt_mrad": 0.42
+          },
+          "0": {
+            "dz_mm": -53.124,
+            "dxy_mm": [
+              -414.601,
+              -142.398
+            ],
+            "tilt_mrad": 175.6
+          }
+        },
+        "assemble_03_part_0_insert_09:first": {
+          "step": 57616,
+          "2": {
+            "dz_mm": 0.103,
+            "dxy_mm": [
+              -0.221,
+              0.244
+            ],
+            "tilt_mrad": 0.42
+          },
+          "0": {
+            "dz_mm": 5.581,
+            "dxy_mm": [
+              -0.476,
+              -0.056
+            ],
+            "tilt_mrad": 3.29
+          }
+        },
+        "assemble_03_part_0_insert_09:last": {
+          "step": 57688,
+          "2": {
+            "dz_mm": 0.082,
+            "dxy_mm": [
+              -0.208,
+              0.249
+            ],
+            "tilt_mrad": 0.38
+          },
+          "0": {
+            "dz_mm": 0.259,
+            "dxy_mm": [
+              -0.421,
+              -0.181
+            ],
+            "tilt_mrad": 6.15
+          }
+        },
+        "assemble_03_part_0_physical_hold_check:first": {
+          "step": 57696,
+          "2": {
+            "dz_mm": 0.067,
+            "dxy_mm": [
+              -0.214,
+              0.261
+            ],
+            "tilt_mrad": 0.55
+          },
+          "0": {
+            "dz_mm": 0.138,
+            "dxy_mm": [
+              -0.42,
+              -0.194
+            ],
+            "tilt_mrad": 6.18
+          }
+        },
+        "assemble_03_part_0_physical_hold_check:last": {
+          "step": 57784,
+          "2": {
+            "dz_mm": 0.031,
+            "dxy_mm": [
+              -0.258,
+              0.256
+            ],
+            "tilt_mrad": 0.97
+          },
+          "0": {
+            "dz_mm": 0.012,
+            "dxy_mm": [
+              -0.419,
+              -0.19
+            ],
+            "tilt_mrad": 6.12
+          }
+        },
+        "hold_2_final_release:first": {
+          "step": 58624,
+          "2": {
+            "dz_mm": 0.007,
+            "dxy_mm": [
+              -0.242,
+              0.143
+            ],
+            "tilt_mrad": 3.55
+          },
+          "0": {
+            "dz_mm": 0.084,
+            "dxy_mm": [
+              0.14,
+              0.282
+            ],
+            "tilt_mrad": 2.14
+          }
+        },
+        "hold_2_final_release:last": {
+          "step": 58712,
+          "2": {
+            "dz_mm": -0.038,
+            "dxy_mm": [
+              -0.243,
+              0.156
+            ],
+            "tilt_mrad": 1.38
+          },
+          "0": {
+            "dz_mm": 0.045,
+            "dxy_mm": [
+              0.138,
+              0.122
+            ],
+            "tilt_mrad": 1.73
+          }
+        },
+        "beam_final_unloaded_verification:first": {
+          "step": 60288,
+          "2": {
+            "dz_mm": -0.017,
+            "dxy_mm": [
+              -0.225,
+              0.053
+            ],
+            "tilt_mrad": 0.99
+          },
+          "0": {
+            "dz_mm": 0.064,
+            "dxy_mm": [
+              0.152,
+              0.022
+            ],
+            "tilt_mrad": 1.92
+          }
+        },
+        "beam_final_unloaded_verification:last": {
+          "step": 60520,
+          "2": {
+            "dz_mm": -0.019,
+            "dxy_mm": [
+              -0.224,
+              0.023
+            ],
+            "tilt_mrad": 1.04
+          },
+          "0": {
+            "dz_mm": 0.063,
+            "dxy_mm": [
+              0.155,
+              -0.02
+            ],
+            "tilt_mrad": 2.05
+          }
+        }
+      },
+      "part0_motion_after_arms_leave": {
+        "assemble_03_part_0_park": {
+          "step8_mm_mean": 0.0203,
+          "ang_speed_mean": 0.544,
+          "ang_speed_max": 0.755
+        },
+        "hold_2_final_park": {
+          "step8_mm_mean": 0.0196,
+          "ang_speed_mean": 0.24,
+          "ang_speed_max": 0.325
+        },
+        "beam_terminal_home_franka_right": {
+          "step8_mm_mean": 0.0145,
+          "ang_speed_mean": 0.27,
+          "ang_speed_max": 0.388
+        },
+        "beam_final_unloaded_verification": {
+          "step8_mm_mean": 0.0168,
+          "ang_speed_mean": 0.261,
+          "ang_speed_max": 0.338
+        }
+      },
+      "result": {
+        "success": true,
+        "terminal": "success-criteria-met",
+        "steps": 60524
+      },
+      "final_window": {
+        "fabrica_beam_6": {
+          "drift_mm": 0.001,
+          "drift_rad": 0.0,
+          "raw_lin": 0.0002,
+          "raw_ang": 0.011
+        },
+        "fabrica_beam_3": {
+          "drift_mm": 0.001,
+          "drift_rad": 0.0001,
+          "raw_lin": 0.0001,
+          "raw_ang": 0.017
+        },
+        "fabrica_beam_2": {
+          "drift_mm": 0.029,
+          "drift_rad": 0.0006,
+          "raw_lin": 0.0004,
+          "raw_ang": 0.021
+        },
+        "fabrica_beam_1": {
+          "drift_mm": 0.055,
+          "drift_rad": 0.0008,
+          "raw_lin": 0.0019,
+          "raw_ang": 0.168
+        },
+        "fabrica_beam_0": {
+          "drift_mm": 0.109,
+          "drift_rad": 0.0012,
+          "raw_lin": 0.002,
+          "raw_ang": 0.237
+        }
+      },
+      "final_window_steps": {
+        "count": 240,
+        "phase_steps": 240
+      }
+    },
+    "fabrica_beam_v236_no_window": {
+      "base_load_col2": {
+        "handover_left_2_unload_lift": null,
+        "handover_left_2_release": {
+          "mean": 2.305,
+          "max": 2.428,
+          "last": 2.237
+        },
+        "assemble_03_part_0_insert_09": {
+          "mean": 2.274,
+          "max": 2.313,
+          "last": 2.293
+        },
+        "assemble_03_part_0_physical_hold_check": {
+          "mean": 2.521,
+          "max": 5.098,
+          "last": 1.388
+        }
+      },
+      "part0_on_col2": {
+        "assemble_03_part_0_physical_hold_check": {
+          "force": {
+            "mean": 3.367,
+            "max": 4.772,
+            "last": 3.073
+          },
+          "lateral": {
+            "mean": 3.363,
+            "max": 4.769,
+            "last": 3.069
+          }
+        },
+        "assemble_03_part_0_release": {
+          "force": {
+            "mean": 2.296,
+            "max": 3.173,
+            "last": 2.208
+          },
+          "lateral": {
+            "mean": 0.133,
+            "max": 1.118,
+            "last": 0.025
+          }
+        },
+        "assemble_03_part_0_retreat": {
+          "force": {
+            "mean": 2.408,
+            "max": 4.033,
+            "last": 1.913
+          },
+          "lateral": {
+            "mean": 0.136,
+            "max": 1.496,
+            "last": 0.029
+          }
+        },
+        "hold_2_final_release": {
+          "force": {
+            "mean": 3.269,
+            "max": 4.162,
+            "last": 2.564
+          },
+          "lateral": {
+            "mean": 0.852,
+            "max": 1.315,
+            "last": 0.839
+          }
+        },
+        "beam_final_unloaded_verification": {
+          "force": {
+            "mean": 3.123,
+            "max": 5.307,
+            "last": 3.745
+          },
+          "lateral": {
+            "mean": 0.682,
+            "max": 2.49,
+            "last": 0.659
+          }
+        }
+      },
+      "stack_snapshots": {
+        "handover_left_2_unload_lift:first": null,
+        "handover_left_2_unload_lift:last": null,
+        "hold_3_to_2_switch_release:first": {
+          "step": 45936,
+          "2": {
+            "dz_mm": 0.008,
+            "dxy_mm": [
+              -0.167,
+              0.177
+            ],
+            "tilt_mrad": 0.21
+          },
+          "0": {
+            "dz_mm": -53.172,
+            "dxy_mm": [
+              -414.65,
+              -142.465
+            ],
+            "tilt_mrad": 174.63
+          }
+        },
+        "hold_3_to_2_switch_release:last": {
+          "step": 46024,
+          "2": {
+            "dz_mm": 0.008,
+            "dxy_mm": [
+              -0.168,
+              0.173
+            ],
+            "tilt_mrad": 0.25
+          },
+          "0": {
+            "dz_mm": -53.587,
+            "dxy_mm": [
+              -415.226,
+              -142.311
+            ],
+            "tilt_mrad": 176.37
+          }
+        },
+        "handover_left_2_park:first": {
+          "step": 49592,
+          "2": {
+            "dz_mm": 0.016,
+            "dxy_mm": [
+              -0.195,
+              0.292
+            ],
+            "tilt_mrad": 0.4
+          },
+          "0": {
+            "dz_mm": -53.693,
+            "dxy_mm": [
+              -415.411,
+              -142.354
+            ],
+            "tilt_mrad": 176.47
+          }
+        },
+        "handover_left_2_park:last": {
+          "step": 49824,
+          "2": {
+            "dz_mm": 0.017,
+            "dxy_mm": [
+              -0.195,
+              0.292
+            ],
+            "tilt_mrad": 0.4
+          },
+          "0": {
+            "dz_mm": -52.712,
+            "dxy_mm": [
+              -413.792,
+              -142.545
+            ],
+            "tilt_mrad": 174.5
+          }
+        },
+        "assemble_03_part_0_insert_09:first": {
+          "step": 57336,
+          "2": {
+            "dz_mm": 0.017,
+            "dxy_mm": [
+              -0.195,
+              0.293
+            ],
+            "tilt_mrad": 0.4
+          },
+          "0": {
+            "dz_mm": 6.373,
+            "dxy_mm": [
+              -0.533,
+              -0.036
+            ],
+            "tilt_mrad": 3.16
+          }
+        },
+        "assemble_03_part_0_insert_09:last": {
+          "step": 57400,
+          "2": {
+            "dz_mm": 0.017,
+            "dxy_mm": [
+              -0.195,
+              0.292
+            ],
+            "tilt_mrad": 0.4
+          },
+          "0": {
+            "dz_mm": 1.28,
+            "dxy_mm": [
+              -0.197,
+              -0.069
+            ],
+            "tilt_mrad": 3.16
+          }
+        },
+        "assemble_03_part_0_physical_hold_check:first": {
+          "step": 57408,
+          "2": {
+            "dz_mm": 0.008,
+            "dxy_mm": [
+              -0.195,
+              0.283
+            ],
+            "tilt_mrad": 0.3
+          },
+          "0": {
+            "dz_mm": 0.694,
+            "dxy_mm": [
+              -0.227,
+              -0.125
+            ],
+            "tilt_mrad": 3.75
+          }
+        },
+        "assemble_03_part_0_physical_hold_check:last": {
+          "step": 57496,
+          "2": {
+            "dz_mm": -0.024,
+            "dxy_mm": [
+              -0.199,
+              0.243
+            ],
+            "tilt_mrad": 0.66
+          },
+          "0": {
+            "dz_mm": -0.097,
+            "dxy_mm": [
+              -0.58,
+              -0.416
+            ],
+            "tilt_mrad": 9.16
+          }
+        },
+        "hold_2_final_release:first": {
+          "step": 58336,
+          "2": {
+            "dz_mm": 0.047,
+            "dxy_mm": [
+              -0.195,
+              0.337
+            ],
+            "tilt_mrad": 4.38
+          },
+          "0": {
+            "dz_mm": 0.071,
+            "dxy_mm": [
+              0.011,
+              0.13
+            ],
+            "tilt_mrad": 3.47
+          }
+        },
+        "hold_2_final_release:last": {
+          "step": 58432,
+          "2": {
+            "dz_mm": 0.022,
+            "dxy_mm": [
+              -0.192,
+              0.144
+            ],
+            "tilt_mrad": 0.63
+          },
+          "0": {
+            "dz_mm": 0.665,
+            "dxy_mm": [
+              0.973,
+              -0.069
+            ],
+            "tilt_mrad": 16.26
+          }
+        },
+        "beam_final_unloaded_verification:first": {
+          "step": 60008,
+          "2": {
+            "dz_mm": 0.301,
+            "dxy_mm": [
+              0.26,
+              -0.283
+            ],
+            "tilt_mrad": 6.06
+          },
+          "0": {
+            "dz_mm": 0.028,
+            "dxy_mm": [
+              0.083,
+              -0.779
+            ],
+            "tilt_mrad": 1.72
+          }
+        },
+        "beam_final_unloaded_verification:last": {
+          "step": 60576,
+          "2": {
+            "dz_mm": -0.099,
+            "dxy_mm": [
+              0.032,
+              1.025
+            ],
+            "tilt_mrad": 3.0
+          },
+          "0": {
+            "dz_mm": 0.314,
+            "dxy_mm": [
+              0.84,
+              0.366
+            ],
+            "tilt_mrad": 7.36
+          }
+        }
+      },
+      "part0_motion_after_arms_leave": {
+        "assemble_03_part_0_park": {
+          "step8_mm_mean": 0.3141,
+          "ang_speed_mean": 1.592,
+          "ang_speed_max": 3.452
+        },
+        "hold_2_final_park": {
+          "step8_mm_mean": 0.3759,
+          "ang_speed_mean": 2.148,
+          "ang_speed_max": 3.241
+        },
+        "beam_terminal_home_franka_right": {
+          "step8_mm_mean": 0.2194,
+          "ang_speed_mean": 1.22,
+          "ang_speed_max": 3.372
+        },
+        "beam_final_unloaded_verification": {
+          "step8_mm_mean": 0.2898,
+          "ang_speed_mean": 1.819,
+          "ang_speed_max": 3.522
+        }
+      },
+      "result": {
+        "success": true,
+        "terminal": "success-criteria-met",
+        "steps": 60580
+      },
+      "final_window": {
+        "fabrica_beam_6": {
+          "drift_mm": 0.002,
+          "drift_rad": 0.0001,
+          "raw_lin": 0.001,
+          "raw_ang": 0.034
+        },
+        "fabrica_beam_3": {
+          "drift_mm": 0.05,
+          "drift_rad": 0.0009,
+          "raw_lin": 0.0019,
+          "raw_ang": 0.243
+        },
+        "fabrica_beam_2": {
+          "drift_mm": 1.429,
+          "drift_rad": 0.0294,
+          "raw_lin": 0.0055,
+          "raw_ang": 0.796
+        },
+        "fabrica_beam_1": {
+          "drift_mm": 0.044,
+          "drift_rad": 0.0007,
+          "raw_lin": 0.0082,
+          "raw_ang": 0.157
+        },
+        "fabrica_beam_0": {
+          "drift_mm": 1.398,
+          "drift_rad": 0.0286,
+          "raw_lin": 0.0171,
+          "raw_ang": 1.946
+        }
+      },
+      "final_window_steps": {
+        "count": 240,
+        "phase_steps": 576
+      }
+    },
+    "fabrica_beam_v232_window": {
+      "base_load_col2": {
+        "handover_left_2_unload_lift": null,
+        "handover_left_2_release": {
+          "mean": 0,
+          "max": 0,
+          "last": 0
+        },
+        "assemble_03_part_0_insert_09": {
+          "mean": 0.07,
+          "max": 0.231,
+          "last": 0
+        },
+        "assemble_03_part_0_physical_hold_check": {
+          "mean": 0.108,
+          "max": 0.253,
+          "last": 0
+        }
+      },
+      "part0_on_col2": {
+        "assemble_03_part_0_physical_hold_check": {
+          "force": {
+            "mean": 0,
+            "max": 0,
+            "last": 0
+          },
+          "lateral": {
+            "mean": 0.0,
+            "max": 0.0,
+            "last": 0.0
+          }
+        },
+        "assemble_03_part_0_release": {
+          "force": {
+            "mean": 2.48,
+            "max": 5.182,
+            "last": 4.713
+          },
+          "lateral": {
+            "mean": 0.196,
+            "max": 2.801,
+            "last": 2.801
+          }
+        },
+        "assemble_03_part_0_retreat": {
+          "force": {
+            "mean": 2.401,
+            "max": 3.646,
+            "last": 2.102
+          },
+          "lateral": {
+            "mean": 0.684,
+            "max": 1.55,
+            "last": 0.935
+          }
+        },
+        "hold_2_final_release": {
+          "force": {
+            "mean": 2.657,
+            "max": 3.425,
+            "last": 2.57
+          },
+          "lateral": {
+            "mean": 1.027,
+            "max": 1.116,
+            "last": 1.005
+          }
+        },
+        "beam_final_unloaded_verification": {
+          "force": {
+            "mean": 2.604,
+            "max": 3.309,
+            "last": 2.639
+          },
+          "lateral": {
+            "mean": 0.991,
+            "max": 1.166,
+            "last": 1.037
+          }
+        }
+      },
+      "stack_snapshots": {
+        "handover_left_2_unload_lift:first": null,
+        "handover_left_2_unload_lift:last": null,
+        "hold_3_to_2_switch_release:first": null,
+        "hold_3_to_2_switch_release:last": null,
+        "handover_left_2_park:first": {
+          "step": 65152,
+          "2": {
+            "dz_mm": -0.008,
+            "dxy_mm": [
+              -0.095,
+              -0.556
+            ],
+            "tilt_mrad": 0.48
+          },
+          "0": {
+            "dz_mm": -53.585,
+            "dxy_mm": [
+              -415.178,
+              -142.406
+            ],
+            "tilt_mrad": 174.64
+          }
+        },
+        "handover_left_2_park:last": {
+          "step": 65384,
+          "2": {
+            "dz_mm": -0.008,
+            "dxy_mm": [
+              -0.095,
+              -0.556
+            ],
+            "tilt_mrad": 0.49
+          },
+          "0": {
+            "dz_mm": -52.759,
+            "dxy_mm": [
+              -413.918,
+              -142.549
+            ],
+            "tilt_mrad": 175.97
+          }
+        },
+        "assemble_03_part_0_insert_09:first": {
+          "step": 72928,
+          "2": {
+            "dz_mm": -0.005,
+            "dxy_mm": [
+              -0.09,
+              -0.53
+            ],
+            "tilt_mrad": 0.44
+          },
+          "0": {
+            "dz_mm": 6.529,
+            "dxy_mm": [
+              -0.628,
+              0.006
+            ],
+            "tilt_mrad": 3.24
+          }
+        },
+        "assemble_03_part_0_insert_09:last": {
+          "step": 73008,
+          "2": {
+            "dz_mm": -0.005,
+            "dxy_mm": [
+              -0.09,
+              -0.529
+            ],
+            "tilt_mrad": 0.44
+          },
+          "0": {
+            "dz_mm": 0.655,
+            "dxy_mm": [
+              -0.152,
+              -0.076
+            ],
+            "tilt_mrad": 3.25
+          }
+        },
+        "assemble_03_part_0_physical_hold_check:first": {
+          "step": 73016,
+          "2": {
+            "dz_mm": -0.005,
+            "dxy_mm": [
+              -0.09,
+              -0.53
+            ],
+            "tilt_mrad": 0.44
+          },
+          "0": {
+            "dz_mm": 0.393,
+            "dxy_mm": [
+              -0.131,
+              -0.079
+            ],
+            "tilt_mrad": 3.24
+          }
+        },
+        "assemble_03_part_0_physical_hold_check:last": {
+          "step": 73104,
+          "2": {
+            "dz_mm": -0.005,
+            "dxy_mm": [
+              -0.09,
+              -0.527
+            ],
+            "tilt_mrad": 0.44
+          },
+          "0": {
+            "dz_mm": 0.116,
+            "dxy_mm": [
+              -0.114,
+              -0.081
+            ],
+            "tilt_mrad": 3.25
+          }
+        },
+        "hold_2_final_release:first": {
+          "step": 74320,
+          "2": {
+            "dz_mm": 0.002,
+            "dxy_mm": [
+              -0.078,
+              -0.482
+            ],
+            "tilt_mrad": 0.26
+          },
+          "0": {
+            "dz_mm": -0.096,
+            "dxy_mm": [
+              -0.508,
+              -0.39
+            ],
+            "tilt_mrad": 2.42
+          }
+        },
+        "hold_2_final_release:last": {
+          "step": 74416,
+          "2": {
+            "dz_mm": 0.002,
+            "dxy_mm": [
+              -0.073,
+              -0.537
+            ],
+            "tilt_mrad": 0.14
+          },
+          "0": {
+            "dz_mm": -0.103,
+            "dxy_mm": [
+              -0.507,
+              -0.488
+            ],
+            "tilt_mrad": 2.71
+          }
+        },
+        "beam_final_unloaded_verification:first": {
+          "step": 75952,
+          "2": {
+            "dz_mm": 0.002,
+            "dxy_mm": [
+              -0.064,
+              -0.424
+            ],
+            "tilt_mrad": 0.18
+          },
+          "0": {
+            "dz_mm": -0.102,
+            "dxy_mm": [
+              -0.499,
+              -0.369
+            ],
+            "tilt_mrad": 2.65
+          }
+        },
+        "beam_final_unloaded_verification:last": {
+          "step": 77144,
+          "2": {
+            "dz_mm": 0.004,
+            "dxy_mm": [
+              -0.066,
+              -0.461
+            ],
+            "tilt_mrad": 0.21
+          },
+          "0": {
+            "dz_mm": -0.101,
+            "dxy_mm": [
+              -0.502,
+              -0.411
+            ],
+            "tilt_mrad": 2.65
+          }
+        }
+      },
+      "part0_motion_after_arms_leave": {
+        "assemble_03_part_0_park": {
+          "step8_mm_mean": 0.0056,
+          "ang_speed_mean": 0.313,
+          "ang_speed_max": 0.671
+        },
+        "hold_2_final_park": {
+          "step8_mm_mean": 0.0117,
+          "ang_speed_mean": 0.284,
+          "ang_speed_max": 0.341
+        },
+        "beam_terminal_home_franka_right": {
+          "step8_mm_mean": 0.0104,
+          "ang_speed_mean": 0.287,
+          "ang_speed_max": 0.381
+        },
+        "beam_final_unloaded_verification": {
+          "step8_mm_mean": 0.0109,
+          "ang_speed_mean": 0.29,
+          "ang_speed_max": 0.419
+        }
+      },
+      "result": {
+        "success": false,
+        "terminal": "timeout-failure",
+        "steps": 77149
+      },
+      "final_window": {
+        "fabrica_beam_6": {
+          "drift_mm": 0.0,
+          "drift_rad": 0.0,
+          "raw_lin": 0.003,
+          "raw_ang": 0.046
+        },
+        "fabrica_beam_3": {
+          "drift_mm": 0.0,
+          "drift_rad": 0.0,
+          "raw_lin": 0.0006,
+          "raw_ang": 0.258
+        },
+        "fabrica_beam_2": {
+          "drift_mm": 0.0,
+          "drift_rad": 0.0,
+          "raw_lin": 0.0006,
+          "raw_ang": 0.069
+        },
+        "fabrica_beam_1": {
+          "drift_mm": 0.0,
+          "drift_rad": 0.0,
+          "raw_lin": 0.0041,
+          "raw_ang": 0.176
+        },
+        "fabrica_beam_0": {
+          "drift_mm": 0.0,
+          "drift_rad": 0.0,
+          "raw_lin": 0.0023,
+          "raw_ang": 0.126
+        }
+      },
+      "final_window_steps": {
+        "count": 0,
+        "phase_steps": 1200
+      }
+    }
+  },
+  "final_verification": {
+    "mode": "fixed_reference_pose_window",
+    "count": 240,
+    "required": 240,
+    "qualified": true,
+    "phase_steps": 240,
+    "pose_drift_from_window_reference": {
+      "fabrica_beam_6": {
+        "position_mm": 0.001,
+        "orientation_rad": 0.0
+      },
+      "fabrica_beam_3": {
+        "position_mm": 0.001,
+        "orientation_rad": 0.0001
+      },
+      "fabrica_beam_2": {
+        "position_mm": 0.029,
+        "orientation_rad": 0.0006
+      },
+      "fabrica_beam_1": {
+        "position_mm": 0.055,
+        "orientation_rad": 0.0008
+      },
+      "fabrica_beam_0": {
+        "position_mm": 0.109,
+        "orientation_rad": 0.0012
+      }
+    },
+    "targets": {
+      "fabrica_beam_0": {
+        "position_error_mm": 0.265,
+        "orientation_error_rad": 0.0042,
+        "pose_passed": true,
+        "released_passed": true,
+        "raw_static_passed": false
+      },
+      "fabrica_beam_1": {
+        "position_error_mm": 0.123,
+        "orientation_error_rad": 0.0029,
+        "pose_passed": true,
+        "released_passed": true,
+        "raw_static_passed": false
+      },
+      "fabrica_beam_2": {
+        "position_error_mm": 0.185,
+        "orientation_error_rad": 0.0041,
+        "pose_passed": true,
+        "released_passed": true,
+        "raw_static_passed": true
+      },
+      "fabrica_beam_3": {
+        "position_error_mm": 0.236,
+        "orientation_error_rad": 0.0024,
+        "pose_passed": true,
+        "released_passed": true,
+        "raw_static_passed": true
+      },
+      "fabrica_beam_6": {
+        "position_error_mm": 0.054,
+        "orientation_error_rad": 0.0014,
+        "pose_passed": true,
+        "released_passed": true,
+        "raw_static_passed": true
+      }
+    },
+    "raw_speeds_reported_separately": {
+      "fabrica_beam_6": {
+        "linear": 0.0002,
+        "angular": 0.011
+      },
+      "fabrica_beam_3": {
+        "linear": 0.0001,
+        "angular": 0.017
+      },
+      "fabrica_beam_2": {
+        "linear": 0.0004,
+        "angular": 0.021
+      },
+      "fabrica_beam_1": {
+        "linear": 0.0019,
+        "angular": 0.168
+      },
+      "fabrica_beam_0": {
+        "linear": 0.002,
+        "angular": 0.237
+      }
+    },
+    "note": "success by the human-approved fixed-reference pose window; with column 2 unloaded (0 N) before part 0 the stack is static after both arms leave (part 0 8-step motion 0.015-0.02 mm, round 59: 0.22-0.38) and the final window drift of part 0 is 0.109 mm / 0.0012 rad (round 59: 1.40 mm / 0.0286 rad). Part 0 still reads ~4.1 N side load while both hands hold during the hold check (round 59 3.4 N, round 55 0 N); after release it settles at ~1.1 N (round 55 ~1.0 N)."
+  },
+  "progress": {
+    "wall_seconds": 6875.057642670814,
+    "steps_per_second": 8.8,
+    "phase_starts": {
+      "base_6_move_above": 95,
+      "base_6_preshape": 948,
+      "base_6_descend": 960,
+      "base_6_close_and_attach": 1227,
+      "base_6_grip_settle": 1970,
+      "base_6_peel_lift": 2042,
+      "base_6_grip_contact_prime": 2129,
+      "base_6_peel_physical_hold_check": 2201,
+      "base_6_lift": 2297,
+      "base_6_post_lift_restore_gravity": 3308,
+      "base_6_assembly_clearance": 3356,
+      "base_6_transport_hover": 6578,
+      "base_6_place": 7606,
+      "base_6_physical_hold_check": 8392,
+      "base_6_restore_gravity": 8488,
+      "base_6_clear_support_filters": 8536,
+      "base_6_set_down": 8560,
+      "assemble_00_part_3_transit_clearance": 11213,
+      "assemble_00_part_3_move_above": 11386,
+      "assemble_00_part_3_preshape": 12236,
+      "assemble_00_part_3_descend": 12248,
+      "assemble_00_part_3_close_and_attach": 13252,
+      "assemble_00_part_3_grip_settle": 14005,
+      "assemble_00_part_3_peel_lift": 14077,
+      "assemble_00_part_3_grip_contact_prime": 14263,
+      "assemble_00_part_3_peel_physical_hold_check": 14335,
+      "assemble_00_part_3_lift": 14431,
+      "assemble_00_part_3_post_lift_restore_gravity": 15279,
+      "assemble_00_part_3_pickup_clearance": 15327,
+      "assemble_00_part_3_assembly_clearance": 16265,
+      "assemble_00_part_3_transport_hover": 20098,
+      "assemble_00_part_3_insert_00": 21057,
+      "assemble_00_part_3_insert_01": 21727,
+      "assemble_00_part_3_insert_02": 21822,
+      "assemble_00_part_3_insert_03": 21848,
+      "assemble_00_part_3_insert_04": 21879,
+      "assemble_00_part_3_insert_05": 21891,
+      "assemble_00_part_3_insert_06": 21930,
+      "assemble_00_part_3_insert_07": 21952,
+      "assemble_00_part_3_insert_08": 21979,
+      "assemble_00_part_3_insert_09": 22010,
+      "assemble_00_part_3_physical_hold_check": 22085,
+      "assemble_00_part_3_restore_gravity": 22181,
+      "assemble_00_part_3_clear_support_filters": 22229,
+      "hold_6_to_3_switch_release": 22253,
+      "hold_3_approach_clearance": 22354,
+      "hold_3_high_joint_clearance": 22731,
+      "hold_3_high_wrist_reorientation": 23166,
+      "hold_3_move_above": 23593,
+      "hold_3_preshape": 24380,
+      "hold_3_descend": 24392,
+      "hold_3_close_and_attach": 24763,
+      "assemble_00_part_3_release": 25457,
+      "assemble_00_part_3_retreat": 25558,
+      "assemble_00_part_3_park": 26006,
+      "assemble_01_part_2_transit_clearance": 26340,
+      "assemble_01_part_2_move_above": 26510,
+      "assemble_01_part_2_preshape": 27316,
+      "assemble_01_part_2_descend": 27328,
+      "assemble_01_part_2_close_and_attach": 27928,
+      "assemble_01_part_2_grip_settle": 28616,
+      "assemble_01_part_2_peel_lift": 28688,
+      "assemble_01_part_2_grip_contact_prime": 28995,
+      "assemble_01_part_2_peel_physical_hold_check": 29067,
+      "assemble_01_part_2_lift": 29163,
+      "assemble_01_part_2_post_lift_restore_gravity": 30300,
+      "assemble_01_part_2_pickup_clearance": 30348,
+      "assemble_01_part_2_assembly_clearance": 30647,
+      "assemble_01_part_2_transport_hover": 32436,
+      "assemble_01_part_2_insert_00": 32745,
+      "assemble_01_part_2_insert_01": 33413,
+      "assemble_01_part_2_insert_02": 33510,
+      "assemble_01_part_2_insert_03": 33538,
+      "assemble_01_part_2_insert_04": 33569,
+      "assemble_01_part_2_insert_05": 33582,
+      "assemble_01_part_2_insert_06": 33621,
+      "assemble_01_part_2_insert_07": 33644,
+      "assemble_01_part_2_insert_08": 33671,
+      "assemble_01_part_2_insert_09": 33702,
+      "assemble_01_part_2_physical_hold_check": 33777,
+      "assemble_01_part_2_restore_gravity": 33873,
+      "assemble_01_part_2_clear_support_filters": 33921,
+      "assemble_01_part_2_release": 33945,
+      "assemble_01_part_2_retreat": 34046,
+      "assemble_01_part_2_park": 34491,
+      "assemble_02_part_1_transit_clearance": 34729,
+      "assemble_02_part_1_move_above": 34899,
+      "assemble_02_part_1_preshape": 35614,
+      "assemble_02_part_1_descend": 35682,
+      "assemble_02_part_1_close_and_attach": 36623,
+      "assemble_02_part_1_grip_settle": 37366,
+      "assemble_02_part_1_peel_lift": 37510,
+      "assemble_02_part_1_grip_contact_prime": 37725,
+      "assemble_02_part_1_peel_physical_hold_check": 37797,
+      "assemble_02_part_1_lift": 37893,
+      "assemble_02_part_1_post_lift_restore_gravity": 38887,
+      "assemble_02_part_1_pickup_clearance": 38935,
+      "assemble_02_part_1_assembly_clearance": 39403,
+      "assemble_02_part_1_transport_hover": 41648,
+      "assemble_02_part_1_insert_00": 42034,
+      "assemble_02_part_1_insert_01": 42707,
+      "assemble_02_part_1_insert_02": 42802,
+      "assemble_02_part_1_insert_03": 42827,
+      "assemble_02_part_1_insert_04": 42858,
+      "assemble_02_part_1_insert_05": 42870,
+      "assemble_02_part_1_insert_06": 42909,
+      "assemble_02_part_1_insert_07": 42931,
+      "assemble_02_part_1_insert_08": 42957,
+      "assemble_02_part_1_insert_09": 42994,
+      "assemble_02_part_1_physical_hold_check": 43077,
+      "assemble_02_part_1_restore_gravity": 43173,
+      "assemble_02_part_1_clear_support_filters": 43221,
+      "assemble_02_part_1_release": 43245,
+      "assemble_02_part_1_retreat": 43363,
+      "assemble_02_part_1_park": 43809,
+      "handover_left_2_move_above": 44118,
+      "handover_left_2_preshape": 44586,
+      "handover_left_2_descend": 44598,
+      "handover_left_2_close_and_attach": 45200,
+      "handover_left_2_unload_lift": 45929,
+      "hold_3_to_2_switch_release": 46001,
+      "hold_2_approach_clearance": 46102,
+      "hold_2_high_lift_clearance": 46445,
+      "hold_2_high_joint_clearance": 46560,
+      "hold_2_high_wrist_reorientation": 46873,
+      "hold_2_move_above": 47300,
+      "hold_2_preshape": 48054,
+      "hold_2_descend": 48066,
+      "hold_2_close_and_attach": 48436,
+      "handover_left_2_release": 49153,
+      "handover_left_2_retreat": 49254,
+      "handover_left_2_park": 49699,
+      "assemble_03_part_0_transit_clearance": 49941,
+      "assemble_03_part_0_move_above": 50111,
+      "assemble_03_part_0_preshape": 50859,
+      "assemble_03_part_0_descend": 50927,
+      "assemble_03_part_0_close_and_attach": 51849,
+      "assemble_03_part_0_grip_settle": 52458,
+      "assemble_03_part_0_peel_lift": 52602,
+      "assemble_03_part_0_grip_contact_prime": 52826,
+      "assemble_03_part_0_peel_physical_hold_check": 52898,
+      "assemble_03_part_0_lift": 52994,
+      "assemble_03_part_0_post_lift_restore_gravity": 53920,
+      "assemble_03_part_0_pickup_clearance": 53968,
+      "assemble_03_part_0_assembly_clearance": 54415,
+      "assemble_03_part_0_transport_hover": 56049,
+      "assemble_03_part_0_insert_00": 56461,
+      "assemble_03_part_0_insert_01": 57171,
+      "assemble_03_part_0_insert_02": 57290,
+      "assemble_03_part_0_insert_03": 57335,
+      "assemble_03_part_0_insert_04": 57390,
+      "assemble_03_part_0_insert_05": 57391,
+      "assemble_03_part_0_insert_06": 57462,
+      "assemble_03_part_0_insert_07": 57501,
+      "assemble_03_part_0_insert_08": 57552,
+      "assemble_03_part_0_insert_09": 57608,
+      "assemble_03_part_0_physical_hold_check": 57688,
+      "assemble_03_part_0_restore_gravity": 57784,
+      "assemble_03_part_0_clear_support_filters": 57832,
+      "assemble_03_part_0_release": 57856,
+      "assemble_03_part_0_retreat": 57957,
+      "assemble_03_part_0_park": 58400,
+      "hold_2_final_release": 58616,
+      "hold_2_final_retreat": 58717,
+      "hold_2_final_park": 59120,
+      "beam_terminal_home_franka_left": 59315,
+      "beam_terminal_home_franka_right": 59692,
+      "beam_final_unloaded_verification": 60283
+    },
+    "round55_phase_starts": {
+      "assemble_00_part_3_descend": 12248,
+      "assemble_01_part_2_descend": 31514,
+      "assemble_02_part_1_descend": 44378,
+      "assemble_03_part_0_descend": 66371,
+      "assemble_03_part_0_release": 73183,
+      "hold_2_final_release": 74316,
+      "hold_2_final_retreat": 74417,
+      "beam_final_unloaded_verification": 75948
+    },
+    "steps_saved_vs_round55": {
+      "assemble_00_part_3_descend": 0,
+      "assemble_01_part_2_descend": 4186,
+      "assemble_02_part_1_descend": 8696,
+      "assemble_03_part_0_descend": 15444,
+      "assemble_03_part_0_release": 15327,
+      "hold_2_final_release": 15700,
+      "hold_2_final_retreat": 15700,
+      "beam_final_unloaded_verification": 15665
+    }
+  },
+  "state_write_forbidden_after_init": 0,
+  "full_assembly_success": true,
+  "primary_task_success": true
+}

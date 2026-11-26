@@ -1,0 +1,21 @@
+{
+  "issues": [],
+  "counts": {
+    "phases": 169,
+    "skills": 307,
+    "completion_bindings": 119,
+    "ownership_checks": 266,
+    "moving_force_bands": 7,
+    "minimum_window_checks": 213
+  },
+  "reviewed_exceptions": [
+    {
+      "phase": "base_6_close_and_attach",
+      "scope": "Base has native pass evidence; moving-grasp force-band rule does not generalize to base.",
+      "balance_target": 2.0,
+      "clamp_low": 4.0
+    }
+  ],
+  "nominal_end_ownership": [],
+  "scope": "Static necessary conditions only. Requires runtime ownership/contact, actual final publication and full geometry/native validation."
+}

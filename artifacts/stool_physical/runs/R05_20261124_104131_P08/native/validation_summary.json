@@ -1,0 +1,2055 @@
+{
+  "schema_version": "roboassemblybench_fabrica_canonical_validation_v1",
+  "requested_recipes": [
+    "fabrica_stool_circular_ur5e_physical"
+  ],
+  "worker_exit_code": 0,
+  "resource_abort": null,
+  "resource_usage": {
+    "elapsed_seconds": 5423.012501709163,
+    "minimum_available_memory_gib": 25.30561065673828,
+    "worker_log": {
+      "input_lines": 166656,
+      "written_lines": 166656,
+      "material_warning_occurrences": 164965,
+      "material_warning_suppressed": 0,
+      "aggregation_enabled": false
+    }
+  },
+  "num_requested": 1,
+  "num_completed": 1,
+  "num_successful": 1,
+  "missing_recipes": [],
+  "runtime_collision_total": 0,
+  "stage_precheck_collision_total": 1667,
+  "tasks": [
+    {
+      "recipe_request": "fabrica_stool_circular_ur5e_physical",
+      "recipe": "fabrica_stool_circular_ur5e_physical",
+      "seed": 4906,
+      "success": true,
+      "failed": false,
+      "steps": 53580,
+      "terminal_reason": "success-criteria-met",
+      "terminal_phase": "assemble_07_part_8_unloaded_settle",
+      "terminal_phase_index": 231,
+      "phase_status": "success",
+      "timeout_count": 0,
+      "recovery_count": 0,
+      "runtime_collisions": {
+        "checks": 1674,
+        "violation_total": 0,
+        "minimum_distance": null,
+        "violations_by_phase": {},
+        "monitor_error": []
+      },
+      "stage_precheck_collisions": {
+        "checks": 419,
+        "violation_total": 1667,
+        "minimum_distance": -0.048329854112595064,
+        "violations_by_phase": {
+          "base_2_close_and_attach": 16,
+          "base_2_place": 8,
+          "base_2_retreat": 4,
+          "assemble_00_part_3_move_above": 8,
+          "assemble_00_part_3_descend": 4,
+          "assemble_00_part_3_close_and_attach": 40,
+          "assemble_00_part_3_lift": 20,
+          "assemble_00_part_3_pickup_clearance": 4,
+          "assemble_00_part_3_assembly_clearance": 72,
+          "assemble_00_part_3_transport_hover": 4,
+          "assemble_00_part_3_insert_00": 12,
+          "assemble_00_part_3_insert_07": 4,
+          "assemble_00_part_3_insert_09": 8,
+          "assemble_00_part_3_park": 8,
+          "assemble_01_part_7_move_above": 12,
+          "assemble_01_part_7_descend": 4,
+          "assemble_01_part_7_close_and_attach": 20,
+          "assemble_01_part_7_lift": 16,
+          "assemble_01_part_7_pickup_clearance": 4,
+          "assemble_01_part_7_assembly_clearance": 20,
+          "assemble_01_part_7_transport_hover": 4,
+          "assemble_01_part_7_insert_00": 12,
+          "assemble_01_part_7_insert_03": 4,
+          "assemble_01_part_7_insert_09": 8,
+          "assemble_01_part_7_release": 4,
+          "assemble_02_part_6_move_above": 12,
+          "assemble_02_part_6_preshape": 4,
+          "assemble_02_part_6_close_and_attach": 48,
+          "assemble_02_part_6_lift": 24,
+          "assemble_02_part_6_pickup_clearance": 4,
+          "assemble_02_part_6_stage_hover": 72,
+          "assemble_02_part_6_stage_place": 4,
+          "assemble_02_part_6_regrasp_move_above": 12,
+          "assemble_02_part_6_regrasp_descend": 4,
+          "assemble_02_part_6_regrasp_close_and_attach": 20,
+          "assemble_02_part_6_regrasp_lift": 16,
+          "assemble_02_part_6_assembly_clearance": 4,
+          "assemble_02_part_6_transport_hover": 4,
+          "assemble_02_part_6_insert_00": 16,
+          "assemble_02_part_6_insert_09": 12,
+          "assemble_02_part_6_release": 4,
+          "assemble_02_part_6_park": 4,
+          "assemble_03_part_4_move_above": 12,
+          "assemble_03_part_4_descend": 4,
+          "assemble_03_part_4_close_and_attach": 48,
+          "assemble_03_part_4_lift": 16,
+          "assemble_03_part_4_pickup_clearance": 4,
+          "assemble_03_part_4_stage_hover": 72,
+          "assemble_03_part_4_stage_place": 4,
+          "assemble_03_part_4_regrasp_move_above": 12,
+          "assemble_03_part_4_regrasp_descend": 4,
+          "assemble_03_part_4_regrasp_close_and_attach": 20,
+          "assemble_03_part_4_regrasp_lift": 12,
+          "assemble_03_part_4_assembly_clearance": 12,
+          "assemble_03_part_4_transport_hover": 4,
+          "assemble_03_part_4_insert_00": 12,
+          "assemble_03_part_4_insert_08": 4,
+          "assemble_03_part_4_insert_09": 8,
+          "assemble_03_part_4_retreat": 4,
+          "assemble_03_part_4_unloaded_settle": 4,
+          "assemble_04_part_5_move_above": 12,
+          "assemble_04_part_5_descend": 7,
+          "assemble_04_part_5_close_and_attach": 60,
+          "assemble_04_part_5_lift": 40,
+          "assemble_04_part_5_pickup_clearance": 4,
+          "assemble_04_part_5_assembly_clearance": 44,
+          "assemble_04_part_5_transport_hover": 4,
+          "assemble_04_part_5_insert_00": 12,
+          "assemble_04_part_5_insert_05": 4,
+          "assemble_04_part_5_insert_09": 8,
+          "assemble_04_part_5_retreat": 4,
+          "assemble_04_part_5_park": 4,
+          "assemble_05_part_1_move_above": 12,
+          "assemble_05_part_1_descend": 4,
+          "assemble_05_part_1_close_and_attach": 20,
+          "assemble_05_part_1_lift": 16,
+          "assemble_05_part_1_pickup_clearance": 4,
+          "assemble_05_part_1_assembly_clearance": 44,
+          "assemble_05_part_1_insert_00": 16,
+          "assemble_05_part_1_insert_09": 12,
+          "assemble_05_part_1_release": 4,
+          "assemble_05_part_1_park": 4,
+          "assemble_06_part_0_move_above": 16,
+          "assemble_06_part_0_descend": 4,
+          "assemble_06_part_0_close_and_attach": 20,
+          "assemble_06_part_0_lift": 16,
+          "assemble_06_part_0_pickup_clearance": 4,
+          "assemble_06_part_0_stage_hover": 68,
+          "assemble_06_part_0_stage_place": 4,
+          "assemble_06_part_0_stage_retreat": 4,
+          "assemble_06_part_0_regrasp_move_above": 12,
+          "assemble_06_part_0_regrasp_descend": 8,
+          "assemble_06_part_0_regrasp_close_and_attach": 20,
+          "assemble_06_part_0_regrasp_lift": 12,
+          "assemble_06_part_0_assembly_clearance": 8,
+          "assemble_06_part_0_transport_hover": 8,
+          "assemble_06_part_0_insert_00": 12,
+          "assemble_06_part_0_insert_04": 4,
+          "assemble_06_part_0_insert_09": 8,
+          "assemble_06_part_0_release": 4,
+          "assemble_06_part_0_retreat": 4,
+          "assemble_07_part_8_move_above": 12,
+          "assemble_07_part_8_preshape": 4,
+          "assemble_07_part_8_close_and_attach": 24,
+          "assemble_07_part_8_lift": 16,
+          "assemble_07_part_8_pickup_clearance": 4,
+          "assemble_07_part_8_stage_hover": 72,
+          "assemble_07_part_8_stage_place": 4,
+          "assemble_07_part_8_stage_retreat": 4,
+          "assemble_07_part_8_regrasp_move_above": 8,
+          "assemble_07_part_8_regrasp_preshape": 4,
+          "assemble_07_part_8_regrasp_descend": 4,
+          "assemble_07_part_8_regrasp_close_and_attach": 20,
+          "assemble_07_part_8_regrasp_lift": 16,
+          "assemble_07_part_8_assembly_clearance": 4,
+          "assemble_07_part_8_transport_hover": 8,
+          "assemble_07_part_8_insert_00": 12,
+          "assemble_07_part_8_insert_04": 4,
+          "assemble_07_part_8_insert_09": 12,
+          "assemble_07_part_8_release": 4,
+          "assemble_07_part_8_park": 16
+        },
+        "monitor_error": []
+      },
+      "assembly_sequence_precheck": {
+        "enabled": true,
+        "mode": "passive",
+        "feasible": true,
+        "phase_count": 232,
+        "normalized_action_count": 236,
+        "actions": [
+          {
+            "phase_index": 1,
+            "phase": "base_2_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 2,
+            "phase": "base_2_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 3,
+            "phase": "base_2_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 4,
+            "phase": "base_2_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 4,
+            "phase": "base_2_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 5,
+            "phase": "base_2_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 6,
+            "phase": "base_2_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 7,
+            "phase": "base_2_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 8,
+            "phase": "base_2_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 9,
+            "phase": "base_2_place",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 10,
+            "phase": "base_2_release",
+            "kind": "detach",
+            "robot": "franka_right",
+            "object": "fabrica_stool_circular_2"
+          },
+          {
+            "phase_index": 11,
+            "phase": "base_2_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_right",
+            "object": null
+          },
+          {
+            "phase_index": 12,
+            "phase": "base_2_park",
+            "kind": "skill",
+            "skill": "move_arm_to_joint_positions",
+            "robot": "franka_right",
+            "object": null
+          },
+          {
+            "phase_index": 15,
+            "phase": "assemble_00_part_3_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 16,
+            "phase": "assemble_00_part_3_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 17,
+            "phase": "assemble_00_part_3_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 18,
+            "phase": "assemble_00_part_3_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 18,
+            "phase": "assemble_00_part_3_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 19,
+            "phase": "assemble_00_part_3_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 20,
+            "phase": "assemble_00_part_3_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 21,
+            "phase": "assemble_00_part_3_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 22,
+            "phase": "assemble_00_part_3_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 23,
+            "phase": "assemble_00_part_3_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 24,
+            "phase": "assemble_00_part_3_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 25,
+            "phase": "assemble_00_part_3_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 26,
+            "phase": "assemble_00_part_3_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 27,
+            "phase": "assemble_00_part_3_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 28,
+            "phase": "assemble_00_part_3_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 29,
+            "phase": "assemble_00_part_3_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 30,
+            "phase": "assemble_00_part_3_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 31,
+            "phase": "assemble_00_part_3_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 32,
+            "phase": "assemble_00_part_3_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 33,
+            "phase": "assemble_00_part_3_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_3"
+          },
+          {
+            "phase_index": 34,
+            "phase": "assemble_00_part_3_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 35,
+            "phase": "assemble_00_part_3_park",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 37,
+            "phase": "assemble_01_part_7_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 38,
+            "phase": "assemble_01_part_7_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 39,
+            "phase": "assemble_01_part_7_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 40,
+            "phase": "assemble_01_part_7_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 40,
+            "phase": "assemble_01_part_7_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 41,
+            "phase": "assemble_01_part_7_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 42,
+            "phase": "assemble_01_part_7_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 43,
+            "phase": "assemble_01_part_7_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 44,
+            "phase": "assemble_01_part_7_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 45,
+            "phase": "assemble_01_part_7_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 46,
+            "phase": "assemble_01_part_7_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 47,
+            "phase": "assemble_01_part_7_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 48,
+            "phase": "assemble_01_part_7_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 49,
+            "phase": "assemble_01_part_7_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 50,
+            "phase": "assemble_01_part_7_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 51,
+            "phase": "assemble_01_part_7_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 52,
+            "phase": "assemble_01_part_7_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 53,
+            "phase": "assemble_01_part_7_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 54,
+            "phase": "assemble_01_part_7_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 55,
+            "phase": "assemble_01_part_7_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_7"
+          },
+          {
+            "phase_index": 56,
+            "phase": "assemble_01_part_7_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 57,
+            "phase": "assemble_01_part_7_park",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 60,
+            "phase": "assemble_02_part_6_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 61,
+            "phase": "assemble_02_part_6_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 62,
+            "phase": "assemble_02_part_6_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 63,
+            "phase": "assemble_02_part_6_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 63,
+            "phase": "assemble_02_part_6_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 64,
+            "phase": "assemble_02_part_6_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 65,
+            "phase": "assemble_02_part_6_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 66,
+            "phase": "assemble_02_part_6_stage_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 67,
+            "phase": "assemble_02_part_6_stage_place",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 68,
+            "phase": "assemble_02_part_6_stage_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 69,
+            "phase": "assemble_02_part_6_stage_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 70,
+            "phase": "assemble_02_part_6_regrasp_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 71,
+            "phase": "assemble_02_part_6_regrasp_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 72,
+            "phase": "assemble_02_part_6_regrasp_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 73,
+            "phase": "assemble_02_part_6_regrasp_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 73,
+            "phase": "assemble_02_part_6_regrasp_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 74,
+            "phase": "assemble_02_part_6_regrasp_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 75,
+            "phase": "assemble_02_part_6_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 76,
+            "phase": "assemble_02_part_6_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 77,
+            "phase": "assemble_02_part_6_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 78,
+            "phase": "assemble_02_part_6_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 79,
+            "phase": "assemble_02_part_6_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 80,
+            "phase": "assemble_02_part_6_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 81,
+            "phase": "assemble_02_part_6_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 82,
+            "phase": "assemble_02_part_6_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 83,
+            "phase": "assemble_02_part_6_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 84,
+            "phase": "assemble_02_part_6_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 85,
+            "phase": "assemble_02_part_6_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 86,
+            "phase": "assemble_02_part_6_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 87,
+            "phase": "assemble_02_part_6_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_6"
+          },
+          {
+            "phase_index": 88,
+            "phase": "assemble_02_part_6_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 89,
+            "phase": "assemble_02_part_6_park",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 92,
+            "phase": "assemble_03_part_4_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 93,
+            "phase": "assemble_03_part_4_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 94,
+            "phase": "assemble_03_part_4_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 95,
+            "phase": "assemble_03_part_4_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 95,
+            "phase": "assemble_03_part_4_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 96,
+            "phase": "assemble_03_part_4_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 97,
+            "phase": "assemble_03_part_4_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 98,
+            "phase": "assemble_03_part_4_stage_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 99,
+            "phase": "assemble_03_part_4_stage_place",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 100,
+            "phase": "assemble_03_part_4_stage_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 101,
+            "phase": "assemble_03_part_4_stage_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 102,
+            "phase": "assemble_03_part_4_regrasp_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 103,
+            "phase": "assemble_03_part_4_regrasp_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 104,
+            "phase": "assemble_03_part_4_regrasp_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 105,
+            "phase": "assemble_03_part_4_regrasp_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 105,
+            "phase": "assemble_03_part_4_regrasp_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 106,
+            "phase": "assemble_03_part_4_regrasp_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 107,
+            "phase": "assemble_03_part_4_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 108,
+            "phase": "assemble_03_part_4_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 109,
+            "phase": "assemble_03_part_4_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 110,
+            "phase": "assemble_03_part_4_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 111,
+            "phase": "assemble_03_part_4_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 112,
+            "phase": "assemble_03_part_4_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 113,
+            "phase": "assemble_03_part_4_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 114,
+            "phase": "assemble_03_part_4_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 115,
+            "phase": "assemble_03_part_4_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 116,
+            "phase": "assemble_03_part_4_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 117,
+            "phase": "assemble_03_part_4_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 118,
+            "phase": "assemble_03_part_4_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 119,
+            "phase": "assemble_03_part_4_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_4"
+          },
+          {
+            "phase_index": 120,
+            "phase": "assemble_03_part_4_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 121,
+            "phase": "assemble_03_part_4_park",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 123,
+            "phase": "assemble_04_part_5_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 124,
+            "phase": "assemble_04_part_5_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 125,
+            "phase": "assemble_04_part_5_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 126,
+            "phase": "assemble_04_part_5_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 126,
+            "phase": "assemble_04_part_5_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 127,
+            "phase": "assemble_04_part_5_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 128,
+            "phase": "assemble_04_part_5_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 129,
+            "phase": "assemble_04_part_5_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 130,
+            "phase": "assemble_04_part_5_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 131,
+            "phase": "assemble_04_part_5_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 132,
+            "phase": "assemble_04_part_5_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 133,
+            "phase": "assemble_04_part_5_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 134,
+            "phase": "assemble_04_part_5_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 135,
+            "phase": "assemble_04_part_5_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 136,
+            "phase": "assemble_04_part_5_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 137,
+            "phase": "assemble_04_part_5_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 138,
+            "phase": "assemble_04_part_5_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 139,
+            "phase": "assemble_04_part_5_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 140,
+            "phase": "assemble_04_part_5_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 141,
+            "phase": "assemble_04_part_5_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_5"
+          },
+          {
+            "phase_index": 142,
+            "phase": "assemble_04_part_5_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 143,
+            "phase": "assemble_04_part_5_park",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 145,
+            "phase": "assemble_05_part_1_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 146,
+            "phase": "assemble_05_part_1_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 147,
+            "phase": "assemble_05_part_1_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 148,
+            "phase": "assemble_05_part_1_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 148,
+            "phase": "assemble_05_part_1_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 149,
+            "phase": "assemble_05_part_1_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 150,
+            "phase": "assemble_05_part_1_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 151,
+            "phase": "assemble_05_part_1_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 152,
+            "phase": "assemble_05_part_1_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 153,
+            "phase": "assemble_05_part_1_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 154,
+            "phase": "assemble_05_part_1_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 155,
+            "phase": "assemble_05_part_1_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 156,
+            "phase": "assemble_05_part_1_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 157,
+            "phase": "assemble_05_part_1_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 158,
+            "phase": "assemble_05_part_1_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 159,
+            "phase": "assemble_05_part_1_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 160,
+            "phase": "assemble_05_part_1_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 161,
+            "phase": "assemble_05_part_1_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 162,
+            "phase": "assemble_05_part_1_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 163,
+            "phase": "assemble_05_part_1_release",
+            "kind": "skill",
+            "skill": "ur5e_release_supported_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 163,
+            "phase": "assemble_05_part_1_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_1"
+          },
+          {
+            "phase_index": 164,
+            "phase": "assemble_05_part_1_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 165,
+            "phase": "assemble_05_part_1_park",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 168,
+            "phase": "assemble_06_part_0_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 169,
+            "phase": "assemble_06_part_0_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 170,
+            "phase": "assemble_06_part_0_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 171,
+            "phase": "assemble_06_part_0_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 171,
+            "phase": "assemble_06_part_0_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 172,
+            "phase": "assemble_06_part_0_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 173,
+            "phase": "assemble_06_part_0_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 174,
+            "phase": "assemble_06_part_0_stage_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 175,
+            "phase": "assemble_06_part_0_stage_place",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 176,
+            "phase": "assemble_06_part_0_stage_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 177,
+            "phase": "assemble_06_part_0_stage_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 178,
+            "phase": "assemble_06_part_0_regrasp_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 179,
+            "phase": "assemble_06_part_0_regrasp_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 180,
+            "phase": "assemble_06_part_0_regrasp_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 181,
+            "phase": "assemble_06_part_0_regrasp_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 181,
+            "phase": "assemble_06_part_0_regrasp_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 182,
+            "phase": "assemble_06_part_0_regrasp_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 183,
+            "phase": "assemble_06_part_0_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 184,
+            "phase": "assemble_06_part_0_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 185,
+            "phase": "assemble_06_part_0_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 186,
+            "phase": "assemble_06_part_0_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 187,
+            "phase": "assemble_06_part_0_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 188,
+            "phase": "assemble_06_part_0_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 189,
+            "phase": "assemble_06_part_0_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 190,
+            "phase": "assemble_06_part_0_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 191,
+            "phase": "assemble_06_part_0_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 192,
+            "phase": "assemble_06_part_0_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 193,
+            "phase": "assemble_06_part_0_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 194,
+            "phase": "assemble_06_part_0_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 195,
+            "phase": "assemble_06_part_0_release",
+            "kind": "skill",
+            "skill": "ur5e_release_supported_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 195,
+            "phase": "assemble_06_part_0_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_0"
+          },
+          {
+            "phase_index": 196,
+            "phase": "assemble_06_part_0_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 197,
+            "phase": "assemble_06_part_0_park",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 200,
+            "phase": "assemble_07_part_8_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 201,
+            "phase": "assemble_07_part_8_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 202,
+            "phase": "assemble_07_part_8_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 203,
+            "phase": "assemble_07_part_8_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 203,
+            "phase": "assemble_07_part_8_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 204,
+            "phase": "assemble_07_part_8_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 205,
+            "phase": "assemble_07_part_8_pickup_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 206,
+            "phase": "assemble_07_part_8_stage_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 207,
+            "phase": "assemble_07_part_8_stage_place",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 208,
+            "phase": "assemble_07_part_8_stage_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 209,
+            "phase": "assemble_07_part_8_stage_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 210,
+            "phase": "assemble_07_part_8_regrasp_move_above",
+            "kind": "skill",
+            "skill": "ur5e_move_above_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 211,
+            "phase": "assemble_07_part_8_regrasp_preshape",
+            "kind": "skill",
+            "skill": "ur5e_preshape_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 212,
+            "phase": "assemble_07_part_8_regrasp_descend",
+            "kind": "skill",
+            "skill": "ur5e_descend_to_grasp",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 213,
+            "phase": "assemble_07_part_8_regrasp_close_and_attach",
+            "kind": "skill",
+            "skill": "ur5e_close_gripper",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 213,
+            "phase": "assemble_07_part_8_regrasp_close_and_attach",
+            "kind": "attach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 214,
+            "phase": "assemble_07_part_8_regrasp_lift",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 215,
+            "phase": "assemble_07_part_8_assembly_clearance",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 216,
+            "phase": "assemble_07_part_8_transport_hover",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 217,
+            "phase": "assemble_07_part_8_insert_00",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 218,
+            "phase": "assemble_07_part_8_insert_01",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 219,
+            "phase": "assemble_07_part_8_insert_02",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 220,
+            "phase": "assemble_07_part_8_insert_03",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 221,
+            "phase": "assemble_07_part_8_insert_04",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 222,
+            "phase": "assemble_07_part_8_insert_05",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 223,
+            "phase": "assemble_07_part_8_insert_06",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 224,
+            "phase": "assemble_07_part_8_insert_07",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 225,
+            "phase": "assemble_07_part_8_insert_08",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 226,
+            "phase": "assemble_07_part_8_insert_09",
+            "kind": "skill",
+            "skill": "ur5e_move_part_to_staging",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 227,
+            "phase": "assemble_07_part_8_release",
+            "kind": "skill",
+            "skill": "ur5e_release_supported_part",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 227,
+            "phase": "assemble_07_part_8_release",
+            "kind": "detach",
+            "robot": "franka_left",
+            "object": "fabrica_stool_circular_8"
+          },
+          {
+            "phase_index": 228,
+            "phase": "assemble_07_part_8_retreat",
+            "kind": "skill",
+            "skill": "ur5e_retreat_vertical",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 229,
+            "phase": "assemble_07_part_8_park",
+            "kind": "skill",
+            "skill": "move_arm_to_joint_positions",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 230,
+            "phase": "terminal_both_arms_home",
+            "kind": "skill",
+            "skill": "move_arm_to_joint_positions",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 230,
+            "phase": "terminal_both_arms_home",
+            "kind": "skill",
+            "skill": "move_arm_to_joint_positions",
+            "robot": "franka_right",
+            "object": null
+          },
+          {
+            "phase_index": 231,
+            "phase": "assemble_07_part_8_unloaded_settle",
+            "kind": "skill",
+            "skill": "move_arm_to_joint_positions",
+            "robot": "franka_left",
+            "object": null
+          },
+          {
+            "phase_index": 231,
+            "phase": "assemble_07_part_8_unloaded_settle",
+            "kind": "skill",
+            "skill": "move_arm_to_joint_positions",
+            "robot": "franka_right",
+            "object": null
+          }
+        ],
+        "errors": [],
+        "warnings": [],
+        "final_holding": {
+          "franka_right": null,
+          "franka_left": null
+        },
+        "check_seconds": 0.0012867830228060484
+      }
+    }
+  ]
+}

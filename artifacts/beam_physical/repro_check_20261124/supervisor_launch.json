@@ -1,0 +1,13 @@
+{
+  "round": 62,
+  "state": "supervisor_spawned",
+  "at_utc": "2026-11-23T17:11:13.134225+00:00",
+  "resource_snapshot": {
+    "memory_available_GiB": 30.192550659179688,
+    "disk_free_GiB": 50.217769622802734,
+    "GPU_free_MiB": 45128
+  },
+  "source_manifest_sha256": "f173bbde0bb71f6d9808d991b5a43ac18787ec62494117ad06dce7a80b26da72",
+  "worker_config_sha256": "3bf5d839e72c9d3751d10c265667d377b5efacade3a8ce24b19309c74592f100",
+  "supervisor_pid": 3630671
+}

@@ -1,0 +1,57 @@
+{
+  "stop": 420,
+  "rows": 4,
+  "compared_rows": 3,
+  "terminal": "smoke-step-limit",
+  "steps": 421,
+  "prefix_rows_identical_to_round61": true,
+  "admissions": {
+    "runner_config_admission.json": true,
+    "runtime_solver_admission.json": true,
+    "native_scene_asset_admission.json": true,
+    "passive_observer_close.json": true
+  },
+  "loaded_modules": {
+    "controller": {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py",
+      "sha256": "d4e6f553ae63ed358860e8e63c99e683d14fe74a4ed971f1dabaf7674b8a3e3b"
+    },
+    "compiler": {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/core/beam_coordinated.py",
+      "sha256": "3bc2faa6b494300dd89eacd9c484a822e1958ab6163b5a4feedd05d91f4e89cc"
+    },
+    "physical_compiler": {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/core/beam_physical_compiler.py",
+      "sha256": "8317ed79537f75bf837ea7a8d8f32be119d3c850dc648c92a1b7b8d29aaa2b5d"
+    },
+    "support_state": {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/toolkits/factory_dual_franka_assembly/beam_support_state.py",
+      "sha256": "8065411d711d4543eeb2554476ab1c7c9037b2baeb9b6e29a33fa88f47c7b8eb"
+    }
+  },
+  "opt_stats": {
+    "flags": {
+      "BEAM_OPT_PROBE_TRACE": true,
+      "BEAM_OPT_FASTCOPY": true,
+      "BEAM_OPT_FRAME_CACHE": true,
+      "BEAM_OPT_VELOCITY_CACHE": true
+    },
+    "fastcopy_calls": 898,
+    "fastcopy_fallbacks": 0,
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "cache_uncacheable": 0,
+    "cache_invalidations": 0,
+    "probe_trace_calls": 0,
+    "probe_sweep_calls": 0,
+    "full_trace_calls": 0,
+    "failure_snapshot_calls": 0,
+    "velocity_cache_hits": 5098,
+    "velocity_cache_misses": 5074,
+    "velocity_cache_uncacheable": 0,
+    "velocity_cache_invalidations": 0
+  },
+  "reference": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/fabrica_beam_v238_lift04/progress_history.jsonl",
+  "scope": "Launch-chain smoke; not a formal round, no assembly evidence. The only v239 behaviour change (handover lift 0.2 mm, tolerance 0.4 mm) first acts at step 45,929; it is covered by offline_v239_unload/config_check.json.",
+  "passed": true
+}

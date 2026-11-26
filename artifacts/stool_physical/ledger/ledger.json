@@ -1,0 +1,463 @@
+{
+  "schema": 1,
+  "task_id": "fabrica_stool_circular_ur5e_staged",
+  "route": "physical",
+  "work_root": "/home/user/work/zhaoheng/stool_physical_20261120",
+  "base": {
+    "repository": "/home/user/work/zhaoheng/RoboAssemblyBench-integrated",
+    "commit": "6f1de1d98220df888fd69b697432719ce80ded5a",
+    "note": "Plumbers C01 framework copied; Plumbers tree untouched"
+  },
+  "authorization": {
+    "date": "2026-11-20",
+    "human_instruction": "参照已经修复好的纯物理装配流程：plumbers block以及beam，帮我在服务器上修复stool的纯物理装配流程。同样要求流程精简、输出轻量化、仿真快、任务速度也快。可以向beam一样纯靠代码，也可以参考plumbers block，必要的地方使用RL。",
+    "human_choices": {
+      "base": "Plumbers 框架",
+      "formal_rounds": "5 轮，成功即停",
+      "acceptance": "原合同+纯物理+回位"
+    },
+    "maximum_formal_rounds": 5,
+    "stop_on_verified_success": true,
+    "offline_checks_and_short_smoke_count_as_rounds": false,
+    "other_routes_unaffected": true
+  },
+  "acceptance": {
+    "parts": "nine parts at original stool runtime targets with original per-part position envelopes and 0.15 rad",
+    "pure_physical": "no fixed grasp/assembly joints, no runtime pose/velocity writes, no collision/gravity disabling, no kinematic carrying",
+    "release": "all parts really released (grippers open, no contact attachment)",
+    "terminal": "both arms home, then all-part unloaded settle window"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "package": "P03",
+      "run_directory": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R01_20261120_042836_P03",
+      "started_at": "2026-11-19T20:28:36.945532+00:00",
+      "delta_sha256": "3512d8f0e7fb096d7f385a97b33a580a3bc602fade77c81d6c3f0162f05a19f6",
+      "source_sha256": {
+        "integration/phase_journal.py": "1cfb576db64a1103fe6b6bdcef62fecfae0ea7c46287076f5d2836293b3d87b1",
+        "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "8209354120c547dedc626d51eb43b547dfd568f59dfcbbaf34c30ca0475d7a64",
+        "roboassemblybench/core/fabrica_canonical.py": "2dc96f2795721a249d8500a5f6333db7a77bcf306fad517721e04053ed3add03",
+        "roboassemblybench/core/plumbers_physical.py": "c354b5974cc1396cee00424472edd555efe84df4c7f1973ccbc05c56f1a62126",
+        "roboassemblybench/core/plumbers_support.py": "9242df7ab4cb91cf16080c43f7ec5392b240c437bbf7bebdb2dd3bbe1dedbb48",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml": "5a07d06a2ac9eae7b917a74e57b4893fd193b42e561ccddfbe1257aaef6ebbda",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml": "d8d452716dade8ed57dc916a8fe40de7577d319dbfa1cd89f067c307556f7949",
+        "toolkits/factory_dual_franka_assembly/demo_policy.py": "43f41442be9ccfe7b0d60d1ed609678d9b6d9172b857f3687f7c9a7ae4174030",
+        "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "b1bf46d580a733885d52085b52d20b13150a63fe2895b5990888d6a6692ef304"
+      },
+      "resource_start_free_gib": 48.87,
+      "command": [
+        "/Embodied_AI/miniconda3/envs/internutopia311/bin/python",
+        "-B",
+        "/home/user/work/zhaoheng/stool_physical_20261120/integration/plumbers_validate.py",
+        "--tasks",
+        "fabrica_stool_circular_ur5e_physical",
+        "--seed",
+        "4906",
+        "--layout-seed",
+        "4906",
+        "--output-dir",
+        "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R01_20261120_042836_P03/native",
+        "--worker-timeout-seconds",
+        "14400",
+        "--record-live-video",
+        "--live-video-fps",
+        "10",
+        "--live-video-frame-stride",
+        "24",
+        "--live-video-encoder",
+        "stream"
+      ],
+      "state": "finished",
+      "review_complete": true,
+      "pid": 2587442,
+      "finished_at": "2026-11-19T20:59:58.725832+00:00",
+      "exit_code": 1,
+      "raw_success": false,
+      "steps": 19549,
+      "terminal_reason": "local-skill-failure:close_until_contact_timeout",
+      "terminal_phase": "assemble_03_part_4_close_and_attach",
+      "verified_success": false,
+      "review": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R01_20261120_042836_P03/review.json"
+    },
+    {
+      "round": 2,
+      "package": "P04",
+      "run_directory": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R02_20261120_055515_P04",
+      "started_at": "2026-11-19T21:55:15.384090+00:00",
+      "delta_sha256": "2eb931a41de6c8e9be876d0ef8cae37a745673e984730811e34b823ec5f555e2",
+      "source_sha256": {
+        "integration/phase_journal.py": "1cfb576db64a1103fe6b6bdcef62fecfae0ea7c46287076f5d2836293b3d87b1",
+        "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "8209354120c547dedc626d51eb43b547dfd568f59dfcbbaf34c30ca0475d7a64",
+        "roboassemblybench/core/fabrica_canonical.py": "2dc96f2795721a249d8500a5f6333db7a77bcf306fad517721e04053ed3add03",
+        "roboassemblybench/core/plumbers_physical.py": "c354b5974cc1396cee00424472edd555efe84df4c7f1973ccbc05c56f1a62126",
+        "roboassemblybench/core/plumbers_support.py": "9242df7ab4cb91cf16080c43f7ec5392b240c437bbf7bebdb2dd3bbe1dedbb48",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml": "5a07d06a2ac9eae7b917a74e57b4893fd193b42e561ccddfbe1257aaef6ebbda",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml": "bcf42c7f4666472b4872b8acd72dac3d8a0539e04f26a5784669ec0fddf61097",
+        "toolkits/factory_dual_franka_assembly/demo_policy.py": "43f41442be9ccfe7b0d60d1ed609678d9b6d9172b857f3687f7c9a7ae4174030",
+        "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "b1bf46d580a733885d52085b52d20b13150a63fe2895b5990888d6a6692ef304"
+      },
+      "resource_start_free_gib": 48.81,
+      "command": [
+        "/Embodied_AI/miniconda3/envs/internutopia311/bin/python",
+        "-B",
+        "/home/user/work/zhaoheng/stool_physical_20261120/integration/plumbers_validate.py",
+        "--tasks",
+        "fabrica_stool_circular_ur5e_physical",
+        "--seed",
+        "4906",
+        "--layout-seed",
+        "4906",
+        "--output-dir",
+        "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R02_20261120_055515_P04/native",
+        "--worker-timeout-seconds",
+        "14400",
+        "--record-live-video",
+        "--live-video-fps",
+        "10",
+        "--live-video-frame-stride",
+        "24",
+        "--live-video-encoder",
+        "stream",
+        "--full-debug-traces"
+      ],
+      "state": "finished",
+      "review_complete": true,
+      "pid": 2595683,
+      "finished_at": "2026-11-19T22:46:42.638384+00:00",
+      "exit_code": 1,
+      "raw_success": false,
+      "steps": 31968,
+      "terminal_reason": "local-skill-failure:close_until_contact_timeout",
+      "terminal_phase": "assemble_06_part_0_close_and_attach",
+      "verified_success": false,
+      "review": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R02_20261120_055515_P04/review.json"
+    },
+    {
+      "round": 3,
+      "package": "P05",
+      "run_directory": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R03_20261120_064817_P05",
+      "started_at": "2026-11-19T22:48:17.435128+00:00",
+      "delta_sha256": "0660b24959766225663750e07119f0907be14237754785797495c20912da3499",
+      "source_sha256": {
+        "integration/phase_journal.py": "1cfb576db64a1103fe6b6bdcef62fecfae0ea7c46287076f5d2836293b3d87b1",
+        "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "8209354120c547dedc626d51eb43b547dfd568f59dfcbbaf34c30ca0475d7a64",
+        "roboassemblybench/core/fabrica_canonical.py": "2dc96f2795721a249d8500a5f6333db7a77bcf306fad517721e04053ed3add03",
+        "roboassemblybench/core/plumbers_physical.py": "9fdb77cc05954dd4be93aef2c55a8971723dcefb9424c6d901b2aded8aebf2a3",
+        "roboassemblybench/core/plumbers_support.py": "9242df7ab4cb91cf16080c43f7ec5392b240c437bbf7bebdb2dd3bbe1dedbb48",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml": "5a07d06a2ac9eae7b917a74e57b4893fd193b42e561ccddfbe1257aaef6ebbda",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml": "dc49b7940ea1adb82031baad2220c07854c3c59e045dea5051f32a27963fc4d5",
+        "toolkits/factory_dual_franka_assembly/demo_policy.py": "43f41442be9ccfe7b0d60d1ed609678d9b6d9172b857f3687f7c9a7ae4174030",
+        "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "b1bf46d580a733885d52085b52d20b13150a63fe2895b5990888d6a6692ef304"
+      },
+      "resource_start_free_gib": 48.75,
+      "command": [
+        "/Embodied_AI/miniconda3/envs/internutopia311/bin/python",
+        "-B",
+        "/home/user/work/zhaoheng/stool_physical_20261120/integration/plumbers_validate.py",
+        "--tasks",
+        "fabrica_stool_circular_ur5e_physical",
+        "--seed",
+        "4906",
+        "--layout-seed",
+        "4906",
+        "--output-dir",
+        "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R03_20261120_064817_P05/native",
+        "--worker-timeout-seconds",
+        "14400",
+        "--record-live-video",
+        "--live-video-fps",
+        "10",
+        "--live-video-frame-stride",
+        "24",
+        "--live-video-encoder",
+        "stream",
+        "--full-debug-traces"
+      ],
+      "state": "finished",
+      "review_complete": true,
+      "pid": 2601704,
+      "finished_at": "2026-11-20T00:04:54.269723+00:00",
+      "exit_code": 1,
+      "raw_success": false,
+      "steps": 42567,
+      "terminal_reason": "timeout-failure",
+      "terminal_phase": "assemble_06_part_0_insert_09",
+      "verified_success": false,
+      "review": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R03_20261120_064817_P05/review.json"
+    },
+    {
+      "round": 4,
+      "package": "P06",
+      "run_directory": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R04_20261120_082309_P06",
+      "started_at": "2026-11-20T00:23:09.787093+00:00",
+      "delta_sha256": "c2c544425fee17aff8242d31dd3c07022ffd5a2759f5f45a8bf7015be48c5ba4",
+      "source_sha256": {
+        "integration/phase_journal.py": "1cfb576db64a1103fe6b6bdcef62fecfae0ea7c46287076f5d2836293b3d87b1",
+        "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "8209354120c547dedc626d51eb43b547dfd568f59dfcbbaf34c30ca0475d7a64",
+        "roboassemblybench/core/fabrica_canonical.py": "2dc96f2795721a249d8500a5f6333db7a77bcf306fad517721e04053ed3add03",
+        "roboassemblybench/core/plumbers_physical.py": "5d6afdc1f1fbf0a6af096be12de6d379666c32cc4ef17c8bf3b0f2481408c8f0",
+        "roboassemblybench/core/plumbers_support.py": "9242df7ab4cb91cf16080c43f7ec5392b240c437bbf7bebdb2dd3bbe1dedbb48",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml": "5a07d06a2ac9eae7b917a74e57b4893fd193b42e561ccddfbe1257aaef6ebbda",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml": "80efa90f6cb8bee5dbf029971f835549116a17f915ca35d9e0372109b0d8a395",
+        "toolkits/factory_dual_franka_assembly/demo_policy.py": "43f41442be9ccfe7b0d60d1ed609678d9b6d9172b857f3687f7c9a7ae4174030",
+        "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "b1bf46d580a733885d52085b52d20b13150a63fe2895b5990888d6a6692ef304"
+      },
+      "resource_start_free_gib": 48.45,
+      "command": [
+        "/Embodied_AI/miniconda3/envs/internutopia311/bin/python",
+        "-B",
+        "/home/user/work/zhaoheng/stool_physical_20261120/integration/plumbers_validate.py",
+        "--tasks",
+        "fabrica_stool_circular_ur5e_physical",
+        "--seed",
+        "4906",
+        "--layout-seed",
+        "4906",
+        "--output-dir",
+        "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R04_20261120_082309_P06/native",
+        "--worker-timeout-seconds",
+        "14400",
+        "--record-live-video",
+        "--live-video-fps",
+        "10",
+        "--live-video-frame-stride",
+        "24",
+        "--live-video-encoder",
+        "stream",
+        "--full-debug-traces"
+      ],
+      "state": "finished",
+      "review_complete": true,
+      "pid": 2610334,
+      "finished_at": "2026-11-20T01:41:33.636697+00:00",
+      "exit_code": 1,
+      "raw_success": false,
+      "steps": 43619,
+      "terminal_reason": "timeout-failure",
+      "terminal_phase": "assemble_06_part_0_insert_09",
+      "verified_success": false,
+      "review": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R04_20261120_082309_P06/review.json"
+    },
+    {
+      "round": 5,
+      "package": "P08",
+      "run_directory": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R05_20261124_104131_P08",
+      "started_at": "2026-11-24T02:41:31.518761+00:00",
+      "delta_sha256": "e8937ecd6f7ceae7fca1d97b498fb564b324272f4ec1358aaecaa5990732abb2",
+      "source_sha256": {
+        "integration/phase_journal.py": "1cfb576db64a1103fe6b6bdcef62fecfae0ea7c46287076f5d2836293b3d87b1",
+        "internutopia_extension/tasks/factory_dual_franka_assembly_task.py": "3db848afc49703825c7b83fef3091c8e211660dc0b13a10ab2feb3383b70f583",
+        "roboassemblybench/core/fabrica_canonical.py": "d8a5795ed7407e83bdde8e547e27eaae3475c57ad1f99e28e219260dc93dcbea",
+        "roboassemblybench/core/plumbers_physical.py": "be8d15b13b906e33a64d3405f221b880a1c8c727c9a23d3c3cd511faaddd6ee9",
+        "roboassemblybench/core/plumbers_support.py": "9242df7ab4cb91cf16080c43f7ec5392b240c437bbf7bebdb2dd3bbe1dedbb48",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml": "5a07d06a2ac9eae7b917a74e57b4893fd193b42e561ccddfbe1257aaef6ebbda",
+        "roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml": "9d5967519d813289796b1cea7c3acea4589fcf667452e5d53f44be41a736fab0",
+        "toolkits/factory_dual_franka_assembly/demo_policy.py": "43f41442be9ccfe7b0d60d1ed609678d9b6d9172b857f3687f7c9a7ae4174030",
+        "toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py": "f093bf809c759eef9b2322ce460e54b700bff8214fe31d060df169b0713b66ed"
+      },
+      "resource_start_free_gib": 65.59,
+      "command": [
+        "/Embodied_AI/miniconda3/envs/internutopia311/bin/python",
+        "-B",
+        "/home/user/work/zhaoheng/stool_physical_20261120/integration/plumbers_validate.py",
+        "--tasks",
+        "fabrica_stool_circular_ur5e_physical",
+        "--seed",
+        "4906",
+        "--layout-seed",
+        "4906",
+        "--output-dir",
+        "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R05_20261124_104131_P08/native",
+        "--worker-timeout-seconds",
+        "14400",
+        "--record-live-video",
+        "--live-video-fps",
+        "10",
+        "--live-video-frame-stride",
+        "24",
+        "--live-video-encoder",
+        "stream",
+        "--full-debug-traces"
+      ],
+      "state": "finished",
+      "review_complete": true,
+      "pid": 3750938,
+      "finished_at": "2026-11-24T04:11:54.639896+00:00",
+      "exit_code": 0,
+      "raw_success": true,
+      "steps": 53580,
+      "terminal_reason": "success-criteria-met",
+      "terminal_phase": "assemble_07_part_8_unloaded_settle",
+      "verified_success": true,
+      "reviewed_at": "2026-11-24T04:34:08.825569+00:00",
+      "review": "/home/user/work/zhaoheng/stool_physical_20261120/outputs/stool_physical/rounds/R05_20261124_104131_P08/review.json"
+    }
+  ],
+  "active_round": null,
+  "state": "R05_verified_success_stopped__root_fix_validated_smoke38",
+  "preparation_smokes": {
+    "counted_as_formal_rounds": false,
+    "note": "From-start runs with short worker timeouts and close-control/gate traces only; outputs under outputs/stool_physical/smokeNN.",
+    "results": [
+      {
+        "id": "smoke00",
+        "finding": "phase_journal hard-coded plumbers part names; fixed to task part list"
+      },
+      {
+        "id": "smoke01-02",
+        "finding": "base 75 mm grasp: close stalled at 75.3 mm, zero force"
+      },
+      {
+        "id": "smoke03",
+        "finding": "base pad centre 0.136 drove fingers into tray pocket (78 mm stall); reverted to 0.143"
+      },
+      {
+        "id": "smoke04-05",
+        "finding": "gentle-seek command lead 0.001 rad < ~0.0011 rad static finger lag on 45-deg grasp: deadlock; base fixture check never ran (YAML int key)"
+      },
+      {
+        "id": "smoke06",
+        "finding": "lead 0.004: bilateral contact but 0/19 N imbalance on pocket-held plate (rigid pads)"
+      },
+      {
+        "id": "smoke07",
+        "finding": "compliant pads 5000/15: base picked, carried, placed, released, right arm home; leg 3 recentre timeout (0.42 mm arm sag at kp 80000)"
+      },
+      {
+        "id": "smoke08",
+        "finding": "kp 160000: sag 0.22 mm, still single-finger leg contact"
+      },
+      {
+        "id": "smoke09",
+        "finding": "kp 640000: sag 0.07 mm; leg pad centre 0.145 put fingertips into tray pocket"
+      },
+      {
+        "id": "smoke10-11",
+        "finding": "Fabrica 170 mm pinch: leg bilateral 4.5/4.7 N but strict contact rejected (hex legs vs rectangular box: cross-axis faces)"
+      },
+      {
+        "id": "smoke12",
+        "finding": "grasp-aligned box: legs 3 and 7 grasped, carried, inserted, released (step 17.4k); cap 6 strict contact rejected (pad samples above 30 mm cap)"
+      },
+      {
+        "id": "smoke13",
+        "finding": "cap pad 0.160 + native sweep preflight: preflight too conservative (3.4 mm at open)"
+      },
+      {
+        "id": "smoke14",
+        "finding": "cap pad 0.160 without preflight: fingers stall on tray, zero force"
+      },
+      {
+        "id": "smoke15",
+        "finding": "cap strict pair from measured PhysX contact points: cap 6 grasped, lifted and carried to hover (cap_first debug order)"
+      },
+      {
+        "id": "smoke16",
+        "finding": "cap4_first debug order: close pose gate timeout (different arm approach); not representative"
+      },
+      {
+        "id": "smoke17",
+        "finding": "real order with traces: cap 4 fingers fully closed (q=0.8) above the cap; grasp centre only 4.8 mm below cap top"
+      },
+      {
+        "id": "smoke18",
+        "finding": "seat-before-release gate: leg 3 released 0.45 mm above seat (was 5 mm)"
+      },
+      {
+        "id": "smoke19",
+        "finding": "socket rebase phases pass; cap 6 stuck in insert_09 with 0.75 mm/2 deg seat gate"
+      },
+      {
+        "id": "smoke20",
+        "finding": "leg3_cap6 order + motion trace: cap 6 seated relative to leg 3 (0.23 deg, 0.15 mm) and released"
+      },
+      {
+        "id": "smoke21",
+        "finding": "full real order, relaxed seat gate: base, legs 3/7, cap 6 seated; cap 4 rattled in edge grip (0.19 m/s, 16.7 rad/s) and timed out in transport_hover"
+      },
+      {
+        "id": "smoke22",
+        "finding": "rigid left pads: leg 7 fine, cap 4 lost after close (held_object_not_grasped)"
+      },
+      {
+        "id": "smoke23",
+        "finding": "left pads 5000/60: leg 7 lost during pickup_clearance (held_object_not_grasped)"
+      },
+      {
+        "id": "smoke24",
+        "finding": "cap regrasp: contact band 2.8 mm (tray) -> 12.6 mm (regrasp), hover passes; insert_09 stalls 15 mm up"
+      },
+      {
+        "id": "smoke25",
+        "finding": "motion trace: command stops after 5.4 mm; lateral alignment (origin-based, ~100 mm lever) freezes axial depth"
+      },
+      {
+        "id": "smoke26",
+        "finding": "servo reference point added; regrasp lift loaded_force_recovery_timeout (11.9/5.4 N): staged cap tilted 11-12 deg"
+      },
+      {
+        "id": "smoke27",
+        "finding": "hole-free cell snapping: still 11.65 deg; cause is SDF-vs-triangle-mesh contact sampled only at hole-rim vertices"
+      },
+      {
+        "id": "smoke28",
+        "finding": "static staging pad: staged 3.5 deg, regrasp 5.1/4.5 N, cap 4 seated on leg 7 in 360 steps (0.16 deg, 0.08 mm) and released"
+      },
+      {
+        "id": "smoke29",
+        "finding": "full real order: base, legs 3/7, cap 6 (staged+regrasped) done; cap 4 dropped from the tray edge grip on the way to the pad (step 24.1k). Next: 4/5 N cap hold band, slow staging carry."
+      },
+      {
+        "id": "smoke30",
+        "finding": "Plumbers default rotation on staging carry too slow (~0.05 rad/s for a 1.6 rad turn); stopped"
+      },
+      {
+        "id": "smoke31",
+        "finding": "moderate staging rotation + 4/5 N cap band: cap 6 done (21.0k); cap 4 carried to the pad but strict contact flickered to contact_missing at 5.8/5.4 N while touching the pad (step 25.3k)"
+      },
+      {
+        "id": "smoke32",
+        "finding": "identical failure to smoke31 (deterministic): state_sync contact_missing at step 25301 with 5.8/5.4 N; contact recovery never engaged; truncation was not the cause. smoke33 adds a read-only hold-failure dump."
+      },
+      {
+        "id": "smoke33",
+        "finding": "hold-failure dump: measured-point pair rejected only because the left finger force-weighted point sat at z=15.04 mm on a 15 mm half-height cap (SDF contact margin 1 mm). Pairing now allows the 1 mm SDF margin; negatives still rejected."
+      },
+      {
+        "id": "smoke34",
+        "finding": "full real order: base, legs 3/7/5/1, caps 6/4 inserted and released (leg 1 seated at 36.9k). Full 85 mm open of leg 1 swept the upper finger into leg 3 (wrist video), base tilted 1.3 deg; 60 mm retreat then tipped leg 3 to 27 deg and dropped cap 6 (96.7 deg). timeout-failure in part 1 unloaded settle at 38.2k."
+      },
+      {
+        "id": "smoke35",
+        "finding": "physical_limited_release for parts 1/0/8 (Plumbers ur5e_release_supported_part to openness 0.34, min 0.33, 6 zero-force steps, 0.34 kept through a 100 mm vertical retreat). Leg 1 release: leg 3 0.1 deg, cap 6 0.3 deg, leg 1 1.2 deg. Full contract met: success-criteria-met at 53,580 steps, 0 timeouts, 0 recoveries, both arms home (53.4k) and final unloaded settle; 5,456 s wall, 209 MB with debug traces."
+      },
+      {
+        "id": "smoke36",
+        "finding": "board boundingCube collider, no staging pad: base, legs 3/7 fine; cap 6 set down upright (0.00 deg) but crept 7 mm / tilted 2.9 deg on the 0.5-friction board before the regrasp (gripper not touching, wrist+front video); jaw 8.8 mm off the cap > 7 mm attach tolerance; timeout in part 6 regrasp_close_and_attach at 20,564."
+      },
+      {
+        "id": "smoke37",
+        "finding": "board box collider + 0.8/0.6 friction, no pad: caps 6/4/0 staged (0.0-0.6 deg), regrasped and inserted; 8/9 parts in. Cap 8 (tilted 2.4 deg in its edge grip) timed out in stage_place at 57,027: convergence measured at the shared assembly origin ~100 mm below the cap read 5.2 mm vs 3 mm tolerance while its centre was ~1.9 mm off."
+      },
+      {
+        "id": "smoke38",
+        "finding": "Root fix validated (uncounted): board boundingCube collider + 0.8/0.6 friction, NO staging pad, centre-based staging convergence. Caps 6/4/0/8 staged 0.00-0.20 deg and regrasped; success-criteria-met at 53,191 steps, 0 timeouts/recoveries, both arms home, unloaded settle 30/30, max criteria error 1.48 mm / 0.039 rad, base-relative nominal <=1.59 mm / 0.043 rad; 5,347 s, 170 MB with debug traces. Source frozen as P09_board_root_fix (delta sha256 25e2c78c6d0ee736)."
+      }
+    ]
+  },
+  "next_action": "None pending. Formal record remains R05 (with staging pad, 5/5 rounds). Root fix (no pad) validated in uncounted smoke38 with package P09; a counted formal round would need a new human instruction.",
+  "updated_at_utc": "2026-11-24T09:36:40.645928+00:00",
+  "human_instruction_history": [
+    {
+      "at_utc": "2026-11-23T17:47:51.060719+00:00",
+      "instruction": "Regrasp caps",
+      "context": "choice of cap grasp strategy before the last formal round R05"
+    },
+    {
+      "at_utc": "2026-11-24T05:39:39.130226+00:00",
+      "instruction": "好的 帮我根治这个问题 (remove the grey staging pad at its root cause; R05 result stays as recorded)",
+      "scope": "uncounted validation runs of the root fix; formal budget 5/5 unchanged"
+    }
+  ]
+}

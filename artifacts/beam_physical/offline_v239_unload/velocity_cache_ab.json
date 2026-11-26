@@ -1,0 +1,67 @@
+{
+  "ab": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/perf_r56_20261119/vc_v232",
+  "reference": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/outputs/fabrica_beam_v232_window",
+  "stop": 4700,
+  "ab_rows": 29,
+  "terminal": "failed",
+  "progress_identical": true,
+  "traces": {
+    "hold_trace.jsonl": {
+      "present": true,
+      "keyed": true,
+      "lines": 14624,
+      "reference_lines": 14624,
+      "identical": true
+    },
+    "motion_trace.jsonl": {
+      "present": true,
+      "keyed": true,
+      "lines": 2728,
+      "reference_lines": 2728,
+      "identical": true
+    },
+    "attach_debug.jsonl": {
+      "present": true,
+      "keyed": true,
+      "lines": 672,
+      "reference_lines": 672,
+      "identical": true
+    },
+    "close_gate_trace.jsonl": {
+      "present": true,
+      "keyed": true,
+      "lines": 743,
+      "reference_lines": 743,
+      "identical": true
+    }
+  },
+  "opt_stats": {
+    "flags": {
+      "BEAM_OPT_PROBE_TRACE": true,
+      "BEAM_OPT_FASTCOPY": true,
+      "BEAM_OPT_FRAME_CACHE": true,
+      "BEAM_OPT_VELOCITY_CACHE": true
+    },
+    "fastcopy_calls": 52417,
+    "fastcopy_fallbacks": 0,
+    "cache_hits": 14559,
+    "cache_misses": 3471,
+    "cache_uncacheable": 0,
+    "cache_invalidations": 6,
+    "probe_trace_calls": 3401,
+    "probe_sweep_calls": 0,
+    "full_trace_calls": 0,
+    "failure_snapshot_calls": 0,
+    "velocity_cache_hits": 56485,
+    "velocity_cache_misses": 56471,
+    "velocity_cache_uncacheable": 0,
+    "velocity_cache_invalidations": 7
+  },
+  "ms_per_step_2000_4600": {
+    "ab": 82.06,
+    "round55": 90.42
+  },
+  "speedup_2000_4600": 1.102,
+  "worker_sha256": "e79788eafe9687551a90ad58f6f3b3c32adaaa174ae0e19e102b1aaed273ef91",
+  "passed": true
+}

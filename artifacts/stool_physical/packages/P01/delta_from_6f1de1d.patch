@@ -1,0 +1,267 @@
+diff --git a/integration/phase_journal.py b/integration/phase_journal.py
+index 8731b54..8dd9cda 100644
+--- a/integration/phase_journal.py
++++ b/integration/phase_journal.py
+@@ -1,6 +1,7 @@
+ """Read native USD poses at phase boundaries without touching task state."""
+ from pathlib import Path
+ import json
++import re
+ 
+ 
+ class PhaseJournal:
+@@ -23,8 +24,12 @@ class PhaseJournal:
+         cache = UsdGeom.XformCache(Usd.TimeCode.Default())
+         stage = get_current_stage()
+         objects = {}
+-        for index in range(5):
+-            name = f'fabrica_plumbers_block_{index}'
++        # Every Fabrica part of this assembly (plumbers: 5, stool: 9).
++        names = sorted(n for n in task.objects
++                       if re.fullmatch(r'fabrica_[a-z_]+_\d+', n))
++        if not names:
++            raise RuntimeError('Native phase journal found no Fabrica parts')
++        for name in names:
+             prim = stage.GetPrimAtPath(task.objects[name].config.prim_path)
+             if not prim.IsValid():
+                 raise RuntimeError(f'Native phase journal has no valid prim: {name}')
+diff --git a/roboassemblybench/core/fabrica_canonical.py b/roboassemblybench/core/fabrica_canonical.py
+index 2d363e6..b002223 100644
+--- a/roboassemblybench/core/fabrica_canonical.py
++++ b/roboassemblybench/core/fabrica_canonical.py
+@@ -5955,6 +5955,9 @@ def _apply_ik_execution_policy(phases: list[dict[str, Any]], spec: dict[str, Any
+                 local_skill.update(copy.deepcopy(close_gate_policy))
+ 
+ 
++_GENERIC_PHYSICAL_ASSEMBLIES = frozenset({'plumbers_block', 'stool_circular'})
++
++
+ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:  # noqa: C901
+     from roboassemblybench.core.rl.recipe import (
+         compile_precision_insertions,
+@@ -6028,9 +6031,11 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
+     if not isinstance(robots, list):
+         raise ValueError('robots must be a list.')
+     robot_platform = _recipe_robot_platform(spec=spec, robots=robots)
+-    plumbers_physics = assembly == 'plumbers_block' and bool(spec.get('continuous_physics', False))
++    # Stool reuses the generic Plumbers continuous-physics pass (pure physical
++    # grasps, no locks/pose writes); Beam keeps its dedicated compiler.
++    plumbers_physics = assembly in _GENERIC_PHYSICAL_ASSEMBLIES and bool(spec.get('continuous_physics', False))
+     if bool(spec.get('continuous_physics', False)) and not plumbers_physics:
+-        raise ValueError('continuous_physics is supported for UR5e plumbers_block and the dedicated Beam compiler.')
++        raise ValueError('continuous_physics is supported for UR5e plumbers_block/stool_circular and the dedicated Beam compiler.')
+     if plumbers_physics and robot_platform != 'ur5e':
+         raise ValueError('Continuous plumbers physics currently requires UR5e with Robotiq 2F-85.')
+     _apply_robot_pose_overrides(robots=robots, spec=spec)
+@@ -6519,7 +6524,7 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
+     if axial_transport:
+         resolved['fabrica_canonical_resolved']['free_axial_transport'] = axial_transport
+     resolved = compile_precision_insertions(resolved, precision)
+-    if assembly == 'plumbers_block' and spec.get('continuous_physics'):
++    if assembly in _GENERIC_PHYSICAL_ASSEMBLIES and spec.get('continuous_physics'):
+         from roboassemblybench.core.plumbers_physical import (
+             apply_plumbers_wait_step_limit,
+         )
+diff --git a/roboassemblybench/core/plumbers_physical.py b/roboassemblybench/core/plumbers_physical.py
+index 4a498e9..01f0324 100644
+--- a/roboassemblybench/core/plumbers_physical.py
++++ b/roboassemblybench/core/plumbers_physical.py
+@@ -248,7 +248,7 @@ def _move_hold_force_controls(spec: dict, phases: list) -> dict:
+     if not isinstance(overrides, dict):
+         raise ValueError('physical_move_hold_force_control must map moving part ids to force settings')
+     moving = {
+-        str(p.get('local_skill', {}).get('object', '')).removeprefix('fabrica_plumbers_block_')
++        str(p.get('local_skill', {}).get('object', '')).rsplit('_', 1)[-1]
+         for p in phases
+         if p['name'].startswith('assemble_') and p.get('local_skill', {}).get('name') == 'ur5e_close_gripper'
+     }
+@@ -329,14 +329,16 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+     points = spec.get('physical_success_reference_points_m', {})
+     if not isinstance(points, dict):
+         raise ValueError('physical_success_reference_points_m must map part ids to CAD-local points')
+-    known = {entry['object'] for entry in success}
++    # Part ids are the trailing token of fabrica_<assembly>_<id> for every
++    # generic physical assembly (plumbers_block, stool_circular).
++    known_ids = {str(entry['object']).rsplit('_', 1)[-1] for entry in success}
+     hold_angle_overrides = spec.get('physical_hold_orientation_slip_tolerances_rad', {})
+     if not isinstance(hold_angle_overrides, dict):
+         raise ValueError('physical_hold_orientation_slip_tolerances_rad must map part ids to radians')
+     hold_angle_overrides = {str(key): value for key, value in hold_angle_overrides.items()}
+     for part_id, value in hold_angle_overrides.items():
+         if (
+-            f'fabrica_plumbers_block_{part_id}' not in known
++            part_id not in known_ids
+             or isinstance(value, bool)
+             or not isinstance(value, (int, float))
+             or not math.isfinite(value)
+@@ -347,14 +349,14 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+             )
+     for part_id, point in points.items():
+         if (
+-            f'fabrica_plumbers_block_{part_id}' not in known
++            part_id not in known_ids
+             or not isinstance(point, (list, tuple))
+             or len(point) != 3
+             or not all(isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) for v in point)
+         ):
+             raise ValueError('Invalid physical success reference point')
+     for entry in success:
+-        key = entry['object'].removeprefix('fabrica_plumbers_block_')
++        key = str(entry['object']).rsplit('_', 1)[-1]
+         if key in points:
+             entry['position_reference_point'] = copy.deepcopy(points[key])
+     goals = {entry['object']: copy.deepcopy(entry) for entry in success}
+@@ -476,14 +478,14 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+         skill = phase.get('local_skill', {})
+         for attach in phase.get('attach', []):
+             attach.update(contact_policy)
+-            part_id = str(attach.get('object', '')).removeprefix('fabrica_plumbers_block_')
++            part_id = str(attach.get('object', '')).rsplit('_', 1)[-1]
+             if part_id in hold_angle_overrides:
+                 attach['hold_orientation_slip_tolerance'] = float(hold_angle_overrides[part_id])
+                 attach['hold_orientation_slip_limit_override'] = True
+             if part_id in move_hold_controls:
+                 attach['hold_force_control'] = copy.deepcopy(move_hold_controls[part_id])
+             recovery = spec.get('physical_contact_recovery', {}).get(
+-                str(attach.get('object', '')).removeprefix('fabrica_plumbers_block_')
++                str(attach.get('object', '')).rsplit('_', 1)[-1]
+             )
+             if recovery:
+                 steps, gap = recovery['steps'], float(recovery['maximum_surface_gap_m'])
+@@ -503,7 +505,7 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+                 skill[key] = copy.deepcopy(attach[key])
+ 
+         if skill.get('name') == 'ur5e_close_gripper':
+-            part_id = str(skill.get('object', '')).removeprefix('fabrica_plumbers_block_')
++            part_id = str(skill.get('object', '')).rsplit('_', 1)[-1]
+             skill.update(contact_policy)
+             if part_id in hold_angle_overrides:
+                 skill['hold_orientation_slip_tolerance'] = float(hold_angle_overrides[part_id])
+diff --git a/roboassemblybench/core/plumbers_support.py b/roboassemblybench/core/plumbers_support.py
+index f56f39f..0398a92 100644
+--- a/roboassemblybench/core/plumbers_support.py
++++ b/roboassemblybench/core/plumbers_support.py
+@@ -61,12 +61,16 @@ def add_terminal_joint_home(phases, *, spec, robots):
+     retreat = phases[right_park - 1]
+     if not retreat['name'].endswith('_retreat'):
+         raise ValueError('Terminal right home requires a preceding clearance retreat')
+-    retreat['local_skill'].update(object=retreat['local_skill']['offset_reference_object'],
+-                                  requires_held_object=False, free_space_trajectory=True, free_space_stage='approach',
+-                                  free_space_linear_speed=.01, free_space_angular_speed=.08,
+-                                  free_space_joint_speed=.25, free_space_joint_acceleration=.6,
+-                                  free_space_position_lookahead=.003, free_space_orientation_lookahead=.02,
+-                                  free_space_joint_lookahead=.06)
++    # Plumbers ends with a support withdrawal (offset-referenced, free-space).
++    # Stool's right arm last parks right after placing its base, so its
++    # ordinary vertical retreat is kept unchanged.
++    if 'offset_reference_object' in retreat['local_skill']:
++        retreat['local_skill'].update(object=retreat['local_skill']['offset_reference_object'],
++                                    requires_held_object=False, free_space_trajectory=True, free_space_stage='approach',
++                                    free_space_linear_speed=.01, free_space_angular_speed=.08,
++                                    free_space_joint_speed=.25, free_space_joint_acceleration=.6,
++                                    free_space_position_lookahead=.003, free_space_orientation_lookahead=.02,
++                                    free_space_joint_lookahead=.06)
+     # Keep the already homed left arm there while the right opens, withdraws
+     # and goes home. Never replace the right hand's earlier support command.
+     for phase in phases[park_indices[left] + 1:]:
+diff --git a/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml
+new file mode 100644
+index 0000000..569cc70
+--- /dev/null
++++ b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml
+@@ -0,0 +1,3 @@
++task_name: fabrica_stool_circular_ur5e_staged
++title: Fabrica circular stool UR5e staged assembly
++summary: Stage the stool base and insert the remaining canonical parts along the official Fabrica paths.
+diff --git a/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml
+new file mode 100644
+index 0000000..9e7f0ff
+--- /dev/null
++++ b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml
+@@ -0,0 +1,73 @@
++extends: fabrica_stool_circular_ur5e_staged
++task_name: fabrica_stool_circular_ur5e_physical
++prompt: Assemble the canonical Fabrica circular stool with continuous physical UR5e grasping, transport, insertion, release, and both-arm home.
++
++# Pure physical route derived from the Plumbers C01 framework: friction grasps
++# only (no fixed joints, locks, pose/velocity writes, collision/gravity toggles).
++policy_auto_grasp: false
++physics_scene:
++  enable_external_forces_every_iteration: true
++  enable_stabilization: true
++
++robots:
++  - name: franka_left
++    preserve_continuous_arm_joints: true
++    gripper_min_openness: 0.0
++    gripper_drive_kp: 7500.0
++    gripper_drive_kd: 173.0
++    gripper_drive_max_effort: null
++    gripper_require_drive_readback: true
++    gripper_pad_static_friction: 1.0
++    gripper_pad_dynamic_friction: 0.8
++  - name: franka_right
++    preserve_continuous_arm_joints: true
++    gripper_min_openness: 0.0
++    gripper_drive_kp: 7500.0
++    gripper_drive_kd: 173.0
++    gripper_drive_max_effort: null
++    gripper_require_drive_readback: true
++    gripper_pad_static_friction: 1.0
++    gripper_pad_dynamic_friction: 0.8
++
++fabrica_canonical:
++  continuous_physics: true
++  physical_idle_hold_anchor: true
++  stabilize_fixture_parts: false
++  skip_terminal_retreat: false
++  skip_terminal_park: false
++  physical_settle_steps: 120
++  physical_wait_step_limit: 30
++  close_force_stability:
++    enabled: true
++    window_steps: 5
++    hysteresis_margin: 0.5
++  physical_rotation_speed: 0.15
++  physical_rotation_acceleration: 0.45
++  physical_rotation_lookahead: 0.010
++  physical_transport_rotation_speed: 0.35
++  physical_transport_rotation_acceleration: 1.80
++  physical_terminal_home:
++    enabled: true
++    joint_tolerance: 0.025
++    max_joint_step: 0.001
++  hold_force_control:
++    enabled: true
++    low: 6.0
++    target: 8.0
++    soft_limit: 14.0
++    unload: 18.0
++    hard_limit: 40.0
++    soft_limit_action: limit_and_slow
++    soft_limit_motion_scale: 0.5
++    joint_rate: 0.025
++    unload_rate: 0.025
++    max_command_lead: 0.001
++    max_seek: 0.03
++    max_closing_travel: null
++    filter_tau: 0.02
++    stable_steps: 24
++    resume_steps: 48
++    recovery_timeout_steps: 480
++    slip_window_steps: 48
++    slip_growth: 0.0001
++    slip_preload: true
+diff --git a/toolkits/factory_dual_franka_assembly/demo_policy.py b/toolkits/factory_dual_franka_assembly/demo_policy.py
+index 76e8fe7..3386dc9 100644
+--- a/toolkits/factory_dual_franka_assembly/demo_policy.py
++++ b/toolkits/factory_dual_franka_assembly/demo_policy.py
+@@ -267,7 +267,7 @@ class DualFrankaAssemblyDemoPolicy:
+             return True
+         cfg = getattr(task, 'cfg', getattr(task, 'config', None))
+         recipe = getattr(cfg, 'recipe', '')
+-        if not isinstance(recipe, str) or not recipe.startswith('fabrica_plumbers_block_ur5e_'):
++        if not isinstance(recipe, str) or not recipe.startswith(('fabrica_plumbers_block_ur5e_', 'fabrica_stool_circular_ur5e_')):
+             return False
+         phases = getattr(task, 'phase_specs', ())
+         index = getattr(task, 'phase_index', None)

@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_0.usd",
+      "sha256": "3d6d3856b27db4e1fe74d1b647d6dbc411e62abe75c02da2b5017292c8d0bce8"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_1.usd",
+      "sha256": "be5bfaf2e843cc186d38f9e3e2370d66b05c535d29bca43ffd504e6f2dbcc367"
+    }
+  ],
+  "negative_control_assets": [
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/beam_contact_mesh_variants/caps_midpoint2mm_v1/fabrica_beam_0.usd",
+      "sha256": "7c98b315cf5566ae49aa8307ad7191fc7a8c40357445c81f20abf23c14e078b9",
+      "bytes": 507926
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/beam_contact_mesh_variants/caps_midpoint2mm_v1/fabrica_beam_1.usd",
+      "sha256": "97b7d95a10afdacc5a10bebaf6990cccc4a02d89e41260d077dd03a76efaf028",
+      "bytes": 507750
+    }
+  ]
+}

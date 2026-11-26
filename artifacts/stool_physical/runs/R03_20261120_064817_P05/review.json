@@ -1,0 +1,18 @@
+{
+  "round": 3,
+  "package": "P05",
+  "reviewed_at_utc": "2026-11-20T00:05:10.564340+00:00",
+  "verified_success": false,
+  "steps": 42567,
+  "terminal_reason": "timeout-failure",
+  "terminal_phase": "assemble_06_part_0_insert_09",
+  "wall_seconds": 4596.739324387861,
+  "reached": [
+    "base 2",
+    "legs 3/7/5/1",
+    "caps 6/4 seated and released",
+    "cap 0 grasped and carried (R02 fixed by 0.1729 pad)"
+  ],
+  "failure": "cap 0 could not seat on leg 1: leg 1 stands 4.18 deg tilted. Every part was released 4.4-5.0 mm above its seat (final insert phase 8 mm / 50.5 mm axial tolerance) and dropped; settled tilts 0.8-3.6 deg, leg 1 4.2 deg (tipped during release/retreat).",
+  "next": "physical_seat_before_release on all moving parts (1.5 mm / 1 mm axial / 0.75 mm lateral / 2 deg, 24 steps); acceptance tolerances unchanged"
+}

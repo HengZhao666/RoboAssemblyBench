@@ -1,0 +1,48 @@
+{
+  "files": [
+    {
+      "path": "tools/close_cad_guard.py",
+      "sha256": "0f549771e0bf97fc99d59882557614baea337594a10e6beab547f3fd4444730d"
+    },
+    {
+      "path": "tools/joint_cad_guard.py",
+      "sha256": "f6f7415675e032d53936f59e9e8fb35f8093df1cf319b1f4e8e6069b8c9b54fb"
+    },
+    {
+      "path": "tools/lean_worker.py",
+      "sha256": "27133a347fdee1c1692924109631bb569feefa4b041f10bec7654c2adbdb80f8"
+    },
+    {
+      "path": "tools/phase_timing.py",
+      "sha256": "0278387dc81369c4859220584f995728b07575b9dbc41913e780e0f97f2111bb"
+    },
+    {
+      "path": "tools/physical_stream_capture.py",
+      "sha256": "f2ef7e83f3f158af8708e150461bd32ddf6a0d7c9f3b796dc29b73c9b1b39296"
+    },
+    {
+      "path": "tools/preflight.py",
+      "sha256": "77606b3fa18970b13bd7caf9669725c116f4685247e67cb22f948e0f69aad345"
+    },
+    {
+      "path": "tools/resource_budget.py",
+      "sha256": "aff935ec2e3a48fae8bce8f30e30ece8f1cb561c9b64925236b9e9aaf4118ec5"
+    },
+    {
+      "path": "tools/state_write_audit.py",
+      "sha256": "fb5b35e866a8a07b7ef9fb06a2d72285b44ee51bc435c5088ae708ca13800550"
+    },
+    {
+      "path": "tools/supervise.py",
+      "sha256": "3c1b2ff0f490e3eda0d61451dc8f187216eeb66fa7b1e657a795123e0704f951"
+    },
+    {
+      "path": "tools/verify_source.py",
+      "sha256": "735d6c562384d02e8140153fcc59fe9a4777d61fc86fc1073c477da167c69172"
+    },
+    {
+      "path": "tools/worker.py",
+      "sha256": "e79788eafe9687551a90ad58f6f3b3c32adaaa174ae0e19e102b1aaed273ef91"
+    }
+  ]
+}

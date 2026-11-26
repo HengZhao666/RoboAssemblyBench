@@ -1,0 +1,1172 @@
+diff --git a/integration/phase_journal.py b/integration/phase_journal.py
+index 8731b54..8dd9cda 100644
+--- a/integration/phase_journal.py
++++ b/integration/phase_journal.py
+@@ -1,6 +1,7 @@
+ """Read native USD poses at phase boundaries without touching task state."""
+ from pathlib import Path
+ import json
++import re
+ 
+ 
+ class PhaseJournal:
+@@ -23,8 +24,12 @@ class PhaseJournal:
+         cache = UsdGeom.XformCache(Usd.TimeCode.Default())
+         stage = get_current_stage()
+         objects = {}
+-        for index in range(5):
+-            name = f'fabrica_plumbers_block_{index}'
++        # Every Fabrica part of this assembly (plumbers: 5, stool: 9).
++        names = sorted(n for n in task.objects
++                       if re.fullmatch(r'fabrica_[a-z_]+_\d+', n))
++        if not names:
++            raise RuntimeError('Native phase journal found no Fabrica parts')
++        for name in names:
+             prim = stage.GetPrimAtPath(task.objects[name].config.prim_path)
+             if not prim.IsValid():
+                 raise RuntimeError(f'Native phase journal has no valid prim: {name}')
+diff --git a/internutopia_extension/tasks/factory_dual_franka_assembly_task.py b/internutopia_extension/tasks/factory_dual_franka_assembly_task.py
+index f777948..b41045c 100644
+--- a/internutopia_extension/tasks/factory_dual_franka_assembly_task.py
++++ b/internutopia_extension/tasks/factory_dual_franka_assembly_task.py
+@@ -2842,6 +2842,80 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
+             'contact_box_scale': (half_extents * 2.0).tolist(),
+         }
+ 
++    @staticmethod
++    def _force_point_strict_pair(left, right, contact_metrics, *, allowed_axes, surface_gap_limit, interior_margin):
++        """Opposing face pair from the measured PhysX finger contact points.
++
++        Used only when opted in. The modelled pad sample grid can lie well above
++        a short part whose exposed top is pinched by the pad tips; the actual
++        contact points are then the faithful geometry. Each finger needs valid
++        force details (a full buffer is accepted: truncation drops points only); its force-weighted point must lie on one
++        face of the same box axis (opposite signs), within the surface-gap limit
++        of that face and inside the face extents on the other two axes.
++        """
++        center = contact_metrics.get('contact_box_center')
++        orientation = contact_metrics.get('contact_box_orientation')
++        scale = contact_metrics.get('contact_box_scale')
++        if center is None or orientation is None or scale is None:
++            return None
++        half = 0.5 * np.asarray(scale, dtype=float).reshape(-1)
++        if half.size != 3:
++            return None
++        w, x, y, z = (float(v) for v in orientation)
++        rotation = np.array([
++            [1 - 2 * (y * y + z * z), 2 * (x * y - w * z), 2 * (x * z + w * y)],
++            [2 * (x * y + w * z), 1 - 2 * (x * x + z * z), 2 * (y * z - w * x)],
++            [2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y)],
++        ])
++        center = np.asarray(center, dtype=float)
++
++        def weighted_point(metric):
++            observation = (metric or {}).get('force_observation') or {}
++            # A full detail buffer only drops points; the kept points must still pass
++            # the face/side/gap/interior tests below (cap on its staging pad, smoke31).
++            if not observation.get('valid') or not observation.get('details_valid'):
++                return None
++            points, weights = [], []
++            for contact in observation.get('contacts') or []:
++                force = abs(float(contact.get('normal_force', 0.0)))
++                point = contact.get('point_world')
++                if force > 0.01 and point is not None:
++                    points.append(rotation.T @ (np.asarray(point, dtype=float) - center))
++                    weights.append(force)
++            if not points:
++                return None
++            return np.average(np.asarray(points), axis=0, weights=np.asarray(weights))
++
++        left_point, right_point = weighted_point(left), weighted_point(right)
++        if left_point is None or right_point is None:
++            return None
++        best = None
++        for axis in allowed_axes:
++            index = {'x': 0, 'y': 1, 'z': 2}.get(axis)
++            if index is None or left_point[index] * right_point[index] >= 0.0:
++                continue
++            gaps = [abs(half[index] - abs(float(point[index]))) for point in (left_point, right_point)]
++            if max(gaps) > surface_gap_limit:
++                continue
++            inside = all(
++                abs(float(point[other])) <= half[other] + interior_margin
++                for point in (left_point, right_point)
++                for other in range(3)
++                if other != index
++            )
++            if not inside:
++                continue
++            candidate = {
++                'axis': axis,
++                'combined_surface_gap': float(sum(gaps)),
++                'left_local_point': left_point.tolist(),
++                'right_local_point': right_point.tolist(),
++                'source': 'measured_force_points',
++            }
++            if best is None or candidate['combined_surface_gap'] < best['combined_surface_gap']:
++                best = candidate
++        return best
++
+     def _strict_physical_grasp_contact(  # noqa: C901
+         self, object_name: str, contact_metrics: dict, attach_spec: dict | None = None
+     ) -> dict:
+@@ -2977,6 +3051,20 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
+                             'right_local_point': right_contact.get('local_point'),
+                         }
+                     )
++        if not strict_sample_pairs and bool(attach_spec.get('strict_contact_from_force_points', False)):
++            # Measured contact points of SDF parts can sit up to the collider's
++            # SDF margin outside the mesh (Fabrica assets: 1 mm); a top-band
++            # pinch averaged to z=15.04 mm on a 15 mm half-height cap (smoke33).
++            force_pair = self._force_point_strict_pair(
++                left_finger_metrics,
++                right_finger_metrics,
++                contact_metrics,
++                allowed_axes=allowed_axes,
++                surface_gap_limit=strict_surface_gap,
++                interior_margin=interior_margin + float(attach_spec.get('strict_force_point_surface_margin', 0.001)),
++            )
++            if force_pair is not None:
++                strict_sample_pairs.append(force_pair)
+         strict_sample_pair = (
+             min(strict_sample_pairs, key=lambda item: item['combined_surface_gap']) if strict_sample_pairs else None
+         )
+@@ -4112,6 +4200,15 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
+                 object_orientation,
+                 np.asarray(contact_box_offset, dtype=float),
+             )
++        # Optional box rotation in the part frame (wxyz). Prismatic parts whose
++        # pinched flats are not box faces (hexagonal stool legs) align the box
++        # with the selected grasp; omitted keeps the original object-aligned box.
++        local_orientation = attach_spec.get('contact_box_orientation')
++        if local_orientation is not None:
++            local_orientation = np.asarray(local_orientation, dtype=float).reshape(-1)
++            if local_orientation.size != 4 or not np.all(np.isfinite(local_orientation)):
++                raise ValueError('contact_box_orientation must be a finite wxyz quaternion')
++            object_orientation = quat_multiply(object_orientation, local_orientation / np.linalg.norm(local_orientation))
+         return object_position, object_orientation
+ 
+     def _is_slender_attach_object(self, object_name: str, attach_spec: dict | None = None) -> bool:
+@@ -5151,6 +5248,15 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
+             reasons.append('orientation_slip')
+         if not contact_ready:
+             reasons.append('contact_missing')
++        fail_trace = os.environ.get('STOOL_HOLD_FAIL_TRACE')
++        if reasons and fail_trace:
++            # Read-only diagnostic: no state, probe or physics change.
++            with open(fail_trace, 'a', encoding='utf-8') as handle:
++                handle.write(json.dumps({
++                    'step': int(self.step_counter), 'phase': self.phase, 'stage': validation_stage,
++                    'object': object_name, 'reasons': reasons, 'strict_contact': strict_contact,
++                    'contact_metrics': contact_metrics,
++                }, default=str) + '\n')
+         if reasons and attach_spec.get('continuous_physics'):
+             # The ordinary trace is deduplicated per task step. A post-physics
+             # failure can occur after that step's valid pre-action sample.
+@@ -5239,6 +5345,10 @@ class FactoryDualFrankaAssemblyTask(BeamSupportState, BaseTask):
+         anchor_target_position = np.asarray(anchor_target['position'], dtype=float).copy()
+         anchor_target_orientation = normalize_quat(anchor_target['orientation'])
+         target_names = list(dict.fromkeys([*self._as_list(spec.get('targets')), anchor_name]))
++        if bool(spec.get('keep_anchor_target', False)):
++            # Socket re-anchoring moves only the dependent part's targets; the
++            # socket's own success target stays on the base-rebased pose.
++            target_names = [name for name in target_names if name != anchor_name]
+         for target_name in target_names:
+             if target_name not in self.target_poses:
+                 raise KeyError(f'Unknown rebase target: {target_name}')
+diff --git a/roboassemblybench/core/fabrica_canonical.py b/roboassemblybench/core/fabrica_canonical.py
+index 2d363e6..bc8b168 100644
+--- a/roboassemblybench/core/fabrica_canonical.py
++++ b/roboassemblybench/core/fabrica_canonical.py
+@@ -5955,6 +5955,9 @@ def _apply_ik_execution_policy(phases: list[dict[str, Any]], spec: dict[str, Any
+                 local_skill.update(copy.deepcopy(close_gate_policy))
+ 
+ 
++_GENERIC_PHYSICAL_ASSEMBLIES = frozenset({'plumbers_block', 'stool_circular'})
++
++
+ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:  # noqa: C901
+     from roboassemblybench.core.rl.recipe import (
+         compile_precision_insertions,
+@@ -6028,9 +6031,11 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
+     if not isinstance(robots, list):
+         raise ValueError('robots must be a list.')
+     robot_platform = _recipe_robot_platform(spec=spec, robots=robots)
+-    plumbers_physics = assembly == 'plumbers_block' and bool(spec.get('continuous_physics', False))
++    # Stool reuses the generic Plumbers continuous-physics pass (pure physical
++    # grasps, no locks/pose writes); Beam keeps its dedicated compiler.
++    plumbers_physics = assembly in _GENERIC_PHYSICAL_ASSEMBLIES and bool(spec.get('continuous_physics', False))
+     if bool(spec.get('continuous_physics', False)) and not plumbers_physics:
+-        raise ValueError('continuous_physics is supported for UR5e plumbers_block and the dedicated Beam compiler.')
++        raise ValueError('continuous_physics is supported for UR5e plumbers_block/stool_circular and the dedicated Beam compiler.')
+     if plumbers_physics and robot_platform != 'ur5e':
+         raise ValueError('Continuous plumbers physics currently requires UR5e with Robotiq 2F-85.')
+     _apply_robot_pose_overrides(robots=robots, spec=spec)
+@@ -6116,6 +6121,19 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
+         # Static triangle collision preserves the perforated plate geometry and
+         # avoids the passive base rocking measured with the authored SDF board.
+         board_object['collision_approximation'] = 'none'
++        # Stool: the plate is a plain 10 mm slab, so a box collider has the same
++        # top face; SDF parts then rest on a flat surface instead of on hole-rim
++        # vertices of the triangle mesh (staged caps tilted ~12 deg, smoke24-27).
++        board_collision = str(spec.get('physical_board_collision', 'none'))
++        if board_collision not in ('none', 'boundingCube'):
++            raise ValueError('physical_board_collision must be none or boundingCube')
++        board_object['collision_approximation'] = board_collision
++        board_friction = spec.get('physical_board_friction')
++        if board_friction is not None:
++            static_f, dynamic_f = float(board_friction['static']), float(board_friction['dynamic'])
++            if set(board_friction) != {'static', 'dynamic'} or not 0 < dynamic_f <= static_f <= 1.5:
++                raise ValueError('physical_board_friction needs 0 < dynamic <= static <= 1.5')
++            board_object.update(static_friction=static_f, dynamic_friction=dynamic_f)
+     generated_objects = [
+         board_object,
+         _static_asset_object(
+@@ -6210,6 +6228,23 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
+         from roboassemblybench.core.plumbers_physical import apply_plumbers_physics
+ 
+         apply_plumbers_physics(phases, success=success, spec=spec)
++        from roboassemblybench.core.plumbers_physical import align_contact_boxes_to_grasps
++
++        align_contact_boxes_to_grasps(phases, task, spec)
++        from roboassemblybench.core.plumbers_physical import apply_force_point_strict_contact
++
++        apply_force_point_strict_contact(phases, spec)
++        from roboassemblybench.core.plumbers_physical import cap_regrasp_targets
++
++        targets.extend(cap_regrasp_targets(task, targets, spec))
++        from roboassemblybench.core.plumbers_physical import cap_staging_pad
++
++        staging_pad = cap_staging_pad(task, targets, spec)
++        if staging_pad is not None:
++            generated_objects.append(staging_pad)
++        from roboassemblybench.core.plumbers_physical import apply_servo_reference_points
++
++        apply_servo_reference_points(phases, task, spec)
+         if reverse_part0 is not None and reverse_part0['weak_side_close']:
+             close = next(p for p in phases if p['name'] == 'assemble_00_part_0_close_and_attach')
+             close['local_skill']['close_force_weak_side_preload'] = True
+@@ -6519,7 +6554,7 @@ def compile_fabrica_canonical_recipe(payload: dict[str, Any]) -> dict[str, Any]:
+     if axial_transport:
+         resolved['fabrica_canonical_resolved']['free_axial_transport'] = axial_transport
+     resolved = compile_precision_insertions(resolved, precision)
+-    if assembly == 'plumbers_block' and spec.get('continuous_physics'):
++    if assembly in _GENERIC_PHYSICAL_ASSEMBLIES and spec.get('continuous_physics'):
+         from roboassemblybench.core.plumbers_physical import (
+             apply_plumbers_wait_step_limit,
+         )
+diff --git a/roboassemblybench/core/plumbers_physical.py b/roboassemblybench/core/plumbers_physical.py
+index 4a498e9..716045e 100644
+--- a/roboassemblybench/core/plumbers_physical.py
++++ b/roboassemblybench/core/plumbers_physical.py
+@@ -155,8 +155,8 @@ def align_plumbers_move_grasps_to_pads(task: dict, spec: dict) -> None:
+     parts = {str(part['part_id']): part for part in task['parts']}
+     for part_id, value in centers.items():
+         pad = float(value)
+-        if str(part_id) not in steps or not math.isfinite(pad) or not 0.10 <= pad <= 0.17:
+-            raise ValueError('physical_move_pad_centers_m requires an existing part and distance in [0.10, 0.17] m.')
++        if str(part_id) not in steps or not math.isfinite(pad) or not 0.10 <= pad <= 0.18:
++            raise ValueError('physical_move_pad_centers_m requires an existing part and distance in [0.10, 0.18] m.')
+         step = steps[str(part_id)]
+         offset = [float(x) for x in offsets.get(str(part_id), [0.0, 0.0, 0.0])]
+         if len(offset) != 3 or not all(math.isfinite(x) for x in offset) or sum(x * x for x in offset) > 0.03**2:
+@@ -248,7 +248,7 @@ def _move_hold_force_controls(spec: dict, phases: list) -> dict:
+     if not isinstance(overrides, dict):
+         raise ValueError('physical_move_hold_force_control must map moving part ids to force settings')
+     moving = {
+-        str(p.get('local_skill', {}).get('object', '')).removeprefix('fabrica_plumbers_block_')
++        str(p.get('local_skill', {}).get('object', '')).rsplit('_', 1)[-1]
+         for p in phases
+         if p['name'].startswith('assemble_') and p.get('local_skill', {}).get('name') == 'ur5e_close_gripper'
+     }
+@@ -287,6 +287,33 @@ def _insertion_release_settings(spec, success):
+     return release_settings
+ 
+ 
++def _seat_only_gate_settings(spec: dict) -> dict:
++    """Per-part final-insertion seating gate that leaves success tolerances alone.
++
++    Unlike physical_insertion_release_tolerances (which also tightens the
++    success entry), this only makes the last grasped insertion phase reach the
++    seated pose before release. Stool parts otherwise release ~5 mm high and
++    drop into their sockets, tilting by up to 4 degrees (R03 leg 1).
++    """
++    raw = spec.get('physical_seat_before_release', {})
++    if not isinstance(raw, dict):
++        raise ValueError('physical_seat_before_release must map part ids to gate settings')
++    allowed = {'position_m', 'axial_m', 'lateral_m', 'orientation_rad', 'stable_steps'}
++    result = {}
++    for part_id, settings in raw.items():
++        if not isinstance(settings, dict) or set(settings) != allowed:
++            raise ValueError(f'physical_seat_before_release[{part_id}] requires {sorted(allowed)}')
++        for key in allowed - {'stable_steps'}:
++            value = settings[key]
++            limit = 0.2 if key == 'orientation_rad' else 0.01
++            if isinstance(value, bool) or not math.isfinite(float(value)) or not 0 < float(value) <= limit:
++                raise ValueError(f'physical_seat_before_release[{part_id}].{key} must be in (0, {limit}]')
++        if type(settings['stable_steps']) is not int or settings['stable_steps'] < 2:
++            raise ValueError('physical_seat_before_release needs at least two stable steps')
++        result[str(part_id)] = dict(settings)
++    return result
++
++
+ def _apply_seated_release_gate(skill, release_settings):
+     precision = release_settings.get(str(skill.get('object', '')).rsplit('_', 1)[-1])
+     if (
+@@ -318,6 +345,316 @@ def _apply_seated_release_gate(skill, release_settings):
+     )
+ 
+ 
++def _close_command_lead(spec: dict) -> float:
++    value = spec.get('physical_close_force_max_command_lead', 0.001)
++    if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0.0 < float(value) <= 0.01:
++        raise ValueError('physical_close_force_max_command_lead must be in (0, 0.01] rad.')
++    return float(value)
++
++
++def _close_max_seek(spec: dict) -> float:
++    value = spec.get('physical_close_force_max_seek', 0.03)
++    if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0.0 < float(value) <= 0.15:
++        raise ValueError('physical_close_force_max_seek must be in (0, 0.15] rad.')
++    return float(value)
++
++
++def _cap_regrasp_settings(spec: dict) -> dict | None:
++    raw = spec.get('physical_cap_regrasp')
++    if raw is None:
++        return None
++    required = {'parts', 'staging_offset_from_assembly_m', 'place_clearance_m', 'hover_height_m',
++                'regrasp_deeper_m', 'place_position_tolerance_m', 'board_hole_free_cell'}
++    if not isinstance(raw, dict) or not required <= set(raw) <= required | {'staging_pad'}:
++        raise ValueError(f'physical_cap_regrasp requires exactly {sorted(required)} (+ optional staging_pad)')
++    parts = raw['parts']
++    offset = [float(v) for v in raw['staging_offset_from_assembly_m']]
++    if not isinstance(parts, list) or not parts or not all(isinstance(p, str) for p in parts):
++        raise ValueError('physical_cap_regrasp.parts must list part ids')
++    if len(offset) != 2 or not all(math.isfinite(v) for v in offset) or math.hypot(*offset) < 0.12:
++        raise ValueError('physical_cap_regrasp staging offset must be a finite xy at least 120 mm from the assembly')
++    bounds = {'place_clearance_m': (0.0, 0.005), 'hover_height_m': (0.04, 0.15),
++              'regrasp_deeper_m': (0.0, 0.025), 'place_position_tolerance_m': (0.001, 0.006)}
++    cell = raw['board_hole_free_cell']
++    if (not isinstance(cell, dict) or set(cell) != {'origin_xy_m', 'pitch_m'}
++            or len(cell['origin_xy_m']) != 2 or not 0.005 <= float(cell['pitch_m']) <= 0.1):
++        raise ValueError('board_hole_free_cell requires origin_xy_m (cell-centre lattice origin) and pitch_m')
++    out = dict(parts=list(parts), staging_offset_from_assembly_m=offset,
++               cell_origin=[float(v) for v in cell['origin_xy_m']], cell_pitch=float(cell['pitch_m']))
++    pad = raw.get('staging_pad')
++    if pad is None:
++        out['pad_height'] = 0.0
++        out['pad_margin'] = None
++    elif (not isinstance(pad, dict) or set(pad) != {'height_m', 'margin_m'}
++            or not 0.001 <= float(pad['height_m']) <= 0.01 or not 0.005 <= float(pad['margin_m']) <= 0.05):
++        raise ValueError('staging_pad requires height_m in [1, 10] mm and margin_m in [5, 50] mm')
++    else:
++        out['pad_height'] = float(pad['height_m'])
++        out['pad_margin'] = float(pad['margin_m'])
++    for key, (lo, hi) in bounds.items():
++        value = float(raw[key])
++        if not math.isfinite(value) or not lo < value <= hi:
++            raise ValueError(f'physical_cap_regrasp.{key} must be in ({lo}, {hi}]')
++        out[key] = value
++    return out
++
++
++def cap_regrasp_targets(task: dict, targets: list[dict], spec: dict) -> list[dict]:
++    """World staging targets: the part upright (assembled orientation) resting on the board."""
++    cfg = _cap_regrasp_settings(spec)
++    if cfg is None:
++        return []
++    by_name = {t['name']: t for t in targets}
++    parts = {str(p['part_id']): p for p in task['parts']}
++    dx, dy = cfg['staging_offset_from_assembly_m']
++    result = []
++    for pid in cfg['parts']:
++        assembled = by_name[f'part_{pid}_assembled']
++        lo, hi = parts[pid]['bbox_min'], parts[pid]['bbox_max']
++        bottom = float(lo[2])
++        orientation = [float(v) for v in assembled['orientation']]
++        # Put the part's footprint centre on a hole-free cell centre of the
++        # perforated board (a footprint edge over a hole tipped caps 12 deg).
++        centre_local = [0.5 * (float(a) + float(b)) for a, b in zip(lo, hi)]
++        centre_offset = quat_rotate(orientation, centre_local)
++        want = [float(assembled['position'][0]) + dx + centre_offset[0],
++                float(assembled['position'][1]) + dy + centre_offset[1]]
++        ox, oy = cfg['cell_origin']; pitch = cfg['cell_pitch']
++        snapped = [ox + pitch * round((want[0] - ox) / pitch), oy + pitch * round((want[1] - oy) / pitch)]
++        base = [snapped[0] - centre_offset[0], snapped[1] - centre_offset[1],
++                float(assembled['position'][2]) + cfg['pad_height'] - bottom + cfg['place_clearance_m']]
++        result.append(dict(name=f'part_{pid}_staged', reference='world', position=list(base), orientation=orientation))
++        hover = [base[0], base[1], base[2] + cfg['hover_height_m']]
++        result.append(dict(name=f'part_{pid}_stage_hover', reference='world', position=hover, orientation=list(orientation)))
++    return result
++
++
++def cap_staging_pad(task: dict, targets: list[dict], spec: dict) -> dict | None:
++    """Visible static box under all staging footprints.
++
++    The board is an exact triangle mesh whose flat top has vertices only on hole
++    rims; SDF parts are contact-sampled against those vertices, so an 18 mm cap
++    rests tilted ~12 deg on a few rim vertices (smoke24-27). A primitive box gives
++    a flat support. It is a passive fixture: it constrains no part.
++    """
++    cfg = _cap_regrasp_settings(spec)
++    if cfg is None or cfg['pad_margin'] is None:
++        return None
++    parts = {str(p['part_id']): p for p in task['parts']}
++    by_name = {t['name']: t for t in cap_regrasp_targets(task, targets, spec)}
++    xs, ys = [], []
++    for pid in cfg['parts']:
++        staged = by_name[f'part_{pid}_staged']
++        lo, hi = parts[pid]['bbox_min'], parts[pid]['bbox_max']
++        corners = [quat_rotate(staged['orientation'], [x, y, 0.0]) for x in (lo[0], hi[0]) for y in (lo[1], hi[1])]
++        xs += [staged['position'][0] + c[0] for c in corners]
++        ys += [staged['position'][1] + c[1] for c in corners]
++    margin = cfg['pad_margin']
++    x0, x1, y0, y1 = min(xs) - margin, max(xs) + margin, min(ys) - margin, max(ys) + margin
++    any_assembled = next(t for t in targets if t['name'] == f"part_{cfg['parts'][0]}_assembled")
++    top_z = float(any_assembled['position'][2]) + cfg['pad_height']
++    return {
++        'name': 'cap_staging_pad',
++        'kind': 'static_cube',
++        'prim_path': '/cap_staging_pad',
++        'position': [0.5 * (x0 + x1), 0.5 * (y0 + y1), top_z - 0.5 * cfg['pad_height']],
++        'orientation': [1.0, 0.0, 0.0, 0.0],
++        'scale': [x1 - x0, y1 - y0, cfg['pad_height']],
++        'color': [0.55, 0.55, 0.58],
++        'visible': True,
++        'tracked': False,
++        'static_friction': 0.8,
++        'dynamic_friction': 0.6,
++        'restitution': 0.0,
++    }
++
++
++def _deepen_grasp(phase: dict, deeper: float) -> None:
++    """Move the TCP `deeper` metres further along the grasp approach (object frame)."""
++    skill = phase.get('local_skill') or {}
++    if 'grasp_relative_position' in skill:
++        approach = quat_rotate(skill['grasp_relative_orientation'], [0.0, 0.0, 1.0])
++        skill['grasp_relative_position'] = [float(p + deeper * a) for p, a in zip(skill['grasp_relative_position'], approach)]
++    for attach in phase.get('attach', []):
++        target = attach.get('target') or {}
++        if 'offset' in target:
++            # Object-in-TCP offset; the approach is TCP +z, so the object moves -z in the TCP frame.
++            rel = skill['grasp_relative_position']
++            inverse = quat_conjugate(skill['grasp_relative_orientation'])
++            expected = [-v for v in quat_rotate(inverse, rel)]
++            target['offset'] = expected
++            if math.dist([float(v) for v in target['orientation']],
++                         [float(v) for v in inverse]) > 1e-6 and math.dist(
++                             [float(v) for v in target['orientation']], [-float(v) for v in inverse]) > 1e-6:
++                raise ValueError(f"{phase['name']}: attach orientation is not the inverse grasp rotation")
++
++
++def _add_cap_regrasps(phases: list[dict], *, spec: dict) -> None:
++    cfg = _cap_regrasp_settings(spec)
++    if cfg is None:
++        return
++    for pid in cfg['parts']:
++        names = {ph['name']: i for i, ph in enumerate(phases)}
++        prefix = next((n.removesuffix('_pickup_clearance') for n in names
++                       if n.startswith('assemble_') and n.endswith(f'_part_{pid}_pickup_clearance')), None)
++        if prefix is None:
++            raise ValueError(f'physical_cap_regrasp: part {pid} pickup_clearance phase not found')
++
++        def clone(suffix, new_suffix):
++            phase = copy.deepcopy(phases[names[f'{prefix}_{suffix}']])
++            phase['name'] = f'{prefix}_{new_suffix}'
++            return phase
++
++        obj = phases[names[f'{prefix}_close_and_attach']]['local_skill']['object']
++        hover = clone('assembly_clearance', 'stage_hover')
++        hover['local_skill']['target_object_target'] = f'part_{pid}_stage_hover'
++        place = clone('pickup_clearance', 'stage_place')
++        place['local_skill']['target_object_target'] = f'part_{pid}_staged'
++        place['local_skill']['target_object_position_tolerance'] = cfg['place_position_tolerance_m']
++        # The tray edge grip is shallow: carry it to the pad gentler than the
++        # fast transport (smoke29 drop) but fast enough for the ~1.6 rad
++        # tray-to-upright turn. Budget the timeout with the same braking law
++        # the physical pass uses (Plumbers defaults overran 4800 steps, smoke30).
++        speed, acceleration, lookahead = 0.25, 1.0, 0.020
++        interval_dv = acceleration / 240
++        budget = min(speed, math.sqrt(interval_dv**2 + acceleration * 0.9 * lookahead) - interval_dv)
++        rotation_steps = math.ceil(240 * (math.pi / budget + 2 * budget / acceleration + 5.0))
++        for phase in (hover, place):
++            phase['local_skill'].update(physical_rotation_speed=speed, physical_rotation_acceleration=acceleration,
++                                        physical_rotation_lookahead=lookahead,
++                                        cartesian_orientation_command_lookahead=lookahead)
++            phase['timeout_steps'] = max(int(phase['timeout_steps']), rotation_steps)
++        release = clone('release', 'stage_release')
++        robot = next(iter(release['gripper_commands']))
++        release['advance'] = {'type': 'all_of', 'min_steps': 24, 'conditions': [
++            {'type': 'objects_released', 'objects': [obj]},
++            {'type': 'gripper_open', 'robot': robot, 'minimum_openness': 0.95}]}
++        retreat = clone('retreat', 'stage_retreat')
++        regrasp = []
++        for suffix in ('move_above', 'preshape', 'descend', 'close_and_attach', 'lift'):
++            phase = clone(suffix, f'regrasp_{suffix}')
++            _deepen_grasp(phase, cfg['regrasp_deeper_m'])
++            regrasp.append(phase)
++        at = names[f'{prefix}_pickup_clearance'] + 1
++        phases[at:at] = [hover, place, release, retreat, *regrasp]
++
++
++def _add_socket_rebases(phases: list[dict], *, spec: dict, success: list[dict]) -> None:
++    """Before picking a part, re-anchor its assembly targets on its real socket.
++
++    Released legs stand with socket play (0.7-4.7 deg); a 95 mm leg then moves
++    its peg top 1-7 mm from the base-rebased nominal, and a cap following the
++    nominal path cannot seat (R03/R04 cap 0). The same measured-pose rebase the
++    original contract applies to the base is applied to the socket part, but
++    only to the dependent part's own assembly-side targets (anchor kept).
++    """
++    mapping = spec.get('physical_rebase_targets_to_socket', {})
++    if not isinstance(mapping, dict):
++        raise ValueError('physical_rebase_targets_to_socket must map part ids to socket part ids')
++    if not mapping:
++        return
++    tolerances = {str(e['object']).rsplit('_', 1)[-1]: e for e in success}
++    robot = str(spec.get('assembly_robot', 'franka_left'))
++    for part_id, socket_id in mapping.items():
++        part_id, socket_id = str(part_id), str(socket_id)
++        if part_id not in tolerances or socket_id not in tolerances:
++            raise ValueError(f'physical_rebase_targets_to_socket: unknown part {part_id} or socket {socket_id}')
++        tag = f'_part_{part_id}_'
++        names = []
++        for phase in phases:
++            if tag not in phase['name'] or not phase['name'].startswith('assemble_'):
++                continue
++            skill = phase.get('local_skill') or {}
++            for key in ('target_object_target', 'target_object_final_target'):
++                name = skill.get(key)
++                if (isinstance(name, str) and name.startswith(f'part_{part_id}_') and 'pickup' not in name
++                        and 'stage' not in name):
++                    names.append(name)
++        names = list(dict.fromkeys(names))
++        if f'part_{part_id}_assembled' not in names:
++            raise ValueError(f'part {part_id}: no assembled target to re-anchor')
++        index = next((i for i, ph in enumerate(phases)
++                      if ph['name'].startswith('assemble_') and ph['name'].endswith(f'_part_{part_id}_move_above')), None)
++        if index is None:
++            raise ValueError(f'part {part_id}: move_above phase not found')
++        prefix = phases[index]['name'].removesuffix('_move_above')
++        socket = tolerances[socket_id]
++        socket_object = str(socket['object'])
++        phases.insert(index, {
++            'name': f'{prefix}_rebase_to_socket',
++            'timeout_steps': 120,
++            'robot_targets': {},
++            'gripper_commands': {robot: 'open'},
++            'rebase_from_object': {
++                'object': socket_object,
++                'anchor_target': f'part_{socket_id}_assembled',
++                'targets': names,
++                'position_tolerance': float(socket['position_tolerance']),
++                'orientation_tolerance': float(socket['orientation_tolerance']),
++                'require_released': True,
++                'keep_anchor_target': True,
++            },
++            'advance': {'type': 'targets_rebased', 'object': socket_object},
++        })
++
++
++def _add_limited_releases(phases: list[dict], *, spec: dict) -> None:
++    """Open only enough to clear the part when neighbours are already seated.
++
++    A full 85 mm Robotiq opening sweeps a finger into the adjacent leg/cap and
++    the vertical retreat then drags it over (smoke34: leg 1 release tipped leg
++    3 to 27 deg and dropped cap 6). Same skill and force-cleared gate as the
++    Plumbers pin release; the jaw keeps that aperture until the retreat ends.
++    """
++    raw = spec.get('physical_limited_release')
++    if not raw:
++        return
++    config = dict(openness=0.34, minimum_openness=0.33, joint_rate=0.2, clear_force_steps=6, retreat_distance_m=0.10)
++    if not isinstance(raw, dict) or set(raw) - set(config) - {'parts'}:
++        raise ValueError('physical_limited_release needs parts plus known settings')
++    parts = [str(p) for p in raw.get('parts', [])]
++    config.update({k: v for k, v in raw.items() if k != 'parts'})
++    if (
++        not parts
++        or type(config['clear_force_steps']) is not int
++        or not 2 <= config['clear_force_steps'] <= 30
++        or not 0 < config['minimum_openness'] <= config['openness'] < 0.5
++        or not 0 < config['joint_rate'] <= 1.0
++        or not 0.04 <= config['retreat_distance_m'] <= 0.15
++    ):
++        raise ValueError('Invalid physical_limited_release aperture, rate, force or retreat settings')
++    from toolkits.factory_dual_franka_assembly.ur5e_skill_api import UR5E_ASSEMBLY_ADAPTER
++
++    for part in parts:
++        release = next((p for p in phases if p['name'].endswith(f'_part_{part}_release')), None)
++        if release is None or len(release.get('detach') or []) != 1:
++            raise ValueError(f'physical_limited_release: no single-object release for part {part}')
++        prefix = release['name'].removesuffix('_release')
++        retreat = next((p for p in phases if p['name'] == prefix + '_retreat'), None)
++        robot = next(iter(release.get('gripper_commands') or {}), None)
++        if retreat is None or robot is None or (retreat.get('local_skill') or {}).get('robot') != robot:
++            raise ValueError(f'physical_limited_release: part {part} needs its release and retreat')
++        obj = release['detach'][0]['object']
++        release['local_skill'] = {
++            'name': 'ur5e_release_supported_part', 'adapter': UR5E_ASSEMBLY_ADAPTER, 'robot': robot,
++            'object': obj, 'requires_held_object': False, 'require_success': True, 'fallback': 'fail',
++            'release_openness': config['openness'], 'release_joint_rate': config['joint_rate']}
++        release['physical_gripper_release'] = dict(
++            robot=robot, object=obj, minimum_openness=config['minimum_openness'],
++            clear_force_steps=config['clear_force_steps'])
++
++        def limited_gate(condition):
++            if condition.get('type') == 'gripper_open' and condition.get('robot') == robot:
++                condition['minimum_openness'] = config['minimum_openness']
++            for child in condition.get('conditions', []):
++                limited_gate(child)
++
++        limited_gate(release['advance'])
++        retreat['local_skill'].update(
++            gripper_command=config['openness'], offset=[0.0, 0.0, config['retreat_distance_m']])
++        retreat.setdefault('gripper_commands', {})[robot] = config['openness']
++
++
+ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dict) -> None:  # noqa: C901
+     close_stability = close_force_stability_settings(spec.get('close_force_stability', {'enabled': False}))
+     if close_stability.get('hysteresis_margin', 0.0) >= 4.0 - 0.1:
+@@ -329,14 +666,16 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+     points = spec.get('physical_success_reference_points_m', {})
+     if not isinstance(points, dict):
+         raise ValueError('physical_success_reference_points_m must map part ids to CAD-local points')
+-    known = {entry['object'] for entry in success}
++    # Part ids are the trailing token of fabrica_<assembly>_<id> for every
++    # generic physical assembly (plumbers_block, stool_circular).
++    known_ids = {str(entry['object']).rsplit('_', 1)[-1] for entry in success}
+     hold_angle_overrides = spec.get('physical_hold_orientation_slip_tolerances_rad', {})
+     if not isinstance(hold_angle_overrides, dict):
+         raise ValueError('physical_hold_orientation_slip_tolerances_rad must map part ids to radians')
+     hold_angle_overrides = {str(key): value for key, value in hold_angle_overrides.items()}
+     for part_id, value in hold_angle_overrides.items():
+         if (
+-            f'fabrica_plumbers_block_{part_id}' not in known
++            part_id not in known_ids
+             or isinstance(value, bool)
+             or not isinstance(value, (int, float))
+             or not math.isfinite(value)
+@@ -347,14 +686,14 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+             )
+     for part_id, point in points.items():
+         if (
+-            f'fabrica_plumbers_block_{part_id}' not in known
++            part_id not in known_ids
+             or not isinstance(point, (list, tuple))
+             or len(point) != 3
+             or not all(isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) for v in point)
+         ):
+             raise ValueError('Invalid physical success reference point')
+     for entry in success:
+-        key = entry['object'].removeprefix('fabrica_plumbers_block_')
++        key = str(entry['object']).rsplit('_', 1)[-1]
+         if key in points:
+             entry['position_reference_point'] = copy.deepcopy(points[key])
+     goals = {entry['object']: copy.deepcopy(entry) for entry in success}
+@@ -426,8 +765,12 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+         'close_force_weak_side_preload': True,
+         'close_force_joint_rate': 0.025,
+         'close_force_unload_rate': 0.06,
+-        'close_force_max_command_lead': 0.001,
+-        'close_force_max_seek': 0.03,
++        # Gentle-seek command may lead the measured finger joint by this much.
++        # Tilted stool grasps lag ~0.0011 rad statically, which deadlocks 0.001.
++        'close_force_max_command_lead': _close_command_lead(spec),
++        # Joint travel allowed past the nominal close preset while seeking first
++        # contact. Wide stool base grasps (75 mm, near full open) need more.
++        'close_force_max_seek': _close_max_seek(spec),
+         # The nominal close preset is not a physical jaw-travel limit. Thin
+         # tabs may need the remaining travel, bounded by closed joint position.
+         'physical_gripper_min_openness': 0.0,
+@@ -476,14 +819,14 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+         skill = phase.get('local_skill', {})
+         for attach in phase.get('attach', []):
+             attach.update(contact_policy)
+-            part_id = str(attach.get('object', '')).removeprefix('fabrica_plumbers_block_')
++            part_id = str(attach.get('object', '')).rsplit('_', 1)[-1]
+             if part_id in hold_angle_overrides:
+                 attach['hold_orientation_slip_tolerance'] = float(hold_angle_overrides[part_id])
+                 attach['hold_orientation_slip_limit_override'] = True
+             if part_id in move_hold_controls:
+                 attach['hold_force_control'] = copy.deepcopy(move_hold_controls[part_id])
+             recovery = spec.get('physical_contact_recovery', {}).get(
+-                str(attach.get('object', '')).removeprefix('fabrica_plumbers_block_')
++                str(attach.get('object', '')).rsplit('_', 1)[-1]
+             )
+             if recovery:
+                 steps, gap = recovery['steps'], float(recovery['maximum_surface_gap_m'])
+@@ -503,7 +846,7 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+                 skill[key] = copy.deepcopy(attach[key])
+ 
+         if skill.get('name') == 'ur5e_close_gripper':
+-            part_id = str(skill.get('object', '')).removeprefix('fabrica_plumbers_block_')
++            part_id = str(skill.get('object', '')).rsplit('_', 1)[-1]
+             skill.update(contact_policy)
+             if part_id in hold_angle_overrides:
+                 skill['hold_orientation_slip_tolerance'] = float(hold_angle_overrides[part_id])
+@@ -603,7 +946,7 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+                 )
+                 phase['timeout_steps'] = max(int(phase['timeout_steps']), 4000)
+ 
+-            _apply_seated_release_gate(skill, release_settings)
++            _apply_seated_release_gate(skill, {**_seat_only_gate_settings(spec), **release_settings})
+             part_id = str(skill.get('object', '')).rsplit('_', 1)[-1]
+             if (
+                 part_id in spec.get('physical_insertion_entry_offsets_m', {})
+@@ -676,6 +1019,9 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+     from roboassemblybench.core.plumbers_release import apply_pin_release_sequence
+ 
+     apply_pin_release_sequence(result, spec=spec)
++    _add_cap_regrasps(result, spec=spec)
++    _add_socket_rebases(result, spec=spec, success=success)
++    _add_limited_releases(result, spec=spec)
+     result[-1]['physical_unloaded_verification'] = True
+     idle_robot = str(spec.get('assembly_robot', 'franka_left'))
+     for index, phase in enumerate(result):
+@@ -696,3 +1042,86 @@ def apply_plumbers_physics(phases: list[dict], *, success: list[dict], spec: dic
+ 
+     annotate_active_parts(result)
+     phases[:] = result
++
++
++def align_contact_boxes_to_grasps(phases: list[dict], task: dict, spec: dict) -> None:
++    """Rotate listed parts' contact boxes so box +y is the selected pinch axis.
++
++    The strict contact model classifies finger samples against box faces. A
++    hexagonal prism pinched across flats at 60 degrees to its bounding box
++    shows one finger on box x and the other on box y and is rejected, even
++    with opposing force contact. Only the box frame and pinch width change;
++    gaps, forces, opposing-side and interior-patch requirements are unchanged.
++    """
++    parts = spec.get('physical_contact_box_align_to_grasp_parts', [])
++    if not isinstance(parts, list) or not all(isinstance(x, str) for x in parts):
++        raise ValueError('physical_contact_box_align_to_grasp_parts must list part ids')
++    if not parts:
++        return
++    steps = {str(step['move_part']): step for step in task['assembly_steps']}
++    audit = {}
++    for part_id in parts:
++        if part_id not in steps:
++            raise ValueError(f'physical_contact_box_align_to_grasp_parts: unknown moving part {part_id}')
++        grasp = steps[part_id]['move_grasp']
++        axis = quat_rotate(grasp['tcp_in_assembly_orientation'], [0.0, 1.0, 0.0])
++        if abs(axis[2]) > 0.2:
++            raise ValueError(f'part {part_id}: pinch axis is not lateral to the part z axis')
++        yaw = math.atan2(axis[1], axis[0]) - math.pi / 2.0
++        orientation = [math.cos(yaw / 2.0), 0.0, 0.0, math.sin(yaw / 2.0)]
++        width = float(grasp['grasp_width_m'])
++        name_suffix = f'_{part_id}'
++        touched = 0
++        for phase in phases:
++            for entry in [*phase.get('attach', []), phase.get('local_skill') or {}]:
++                if not str(entry.get('object', '')).endswith(name_suffix) or 'contact_box_scale' not in entry:
++                    continue
++                scale = [float(v) for v in entry['contact_box_scale']]
++                lateral = max(scale[0], scale[1])
++                entry['contact_box_orientation'] = list(orientation)
++                entry['contact_box_scale'] = [lateral, width, scale[2]]
++                touched += 1
++        if not touched:
++            raise ValueError(f'part {part_id}: no contact box entries to align')
++        audit[part_id] = dict(pinch_axis_in_part=[float(v) for v in axis], box_yaw_rad=yaw,
++                              pinch_width_m=width, entries=touched)
++    spec['_contact_box_alignment_audit'] = audit
++
++
++def apply_force_point_strict_contact(phases: list[dict], spec: dict) -> None:
++    """Opt-in measured-contact-point strict pair for listed parts (see task helper)."""
++    parts = spec.get('physical_strict_contact_from_force_points_parts', [])
++    if not isinstance(parts, list) or not all(isinstance(x, str) for x in parts):
++        raise ValueError('physical_strict_contact_from_force_points_parts must list part ids')
++    for part_id in parts:
++        touched = 0
++        for phase in phases:
++            for entry in [*phase.get('attach', []), phase.get('local_skill') or {}]:
++                if str(entry.get('object', '')).endswith(f'_{part_id}') and 'contact_box_scale' in entry:
++                    entry['strict_contact_from_force_points'] = True
++                    touched += 1
++        if not touched:
++            raise ValueError(f'part {part_id}: no contact entries for force-point strict contact')
++
++
++def apply_servo_reference_points(phases: list[dict], task: dict, spec: dict) -> None:
++    """Opt-in: held-part servo phases measure the part at its CAD bounding-box centre."""
++    parts = spec.get('physical_servo_reference_point_parts', [])
++    if not isinstance(parts, list) or not all(isinstance(p, str) for p in parts):
++        raise ValueError('physical_servo_reference_point_parts must list part ids')
++    by_id = {str(p['part_id']): p for p in task['parts']}
++    for pid in parts:
++        if pid not in by_id:
++            raise ValueError(f'physical_servo_reference_point_parts: unknown part {pid}')
++        lo, hi = by_id[pid]['bbox_min'], by_id[pid]['bbox_max']
++        centre = [0.5 * (float(a) + float(b)) for a, b in zip(lo, hi)]
++        touched = 0
++        for phase in phases:
++            skill = phase.get('local_skill') or {}
++            if str(skill.get('object', '')).endswith(f'_{pid}') and skill.get('servo_target_object_pose'):
++                skill['target_object_reference_point'] = list(centre)
++                if phase['name'].endswith('_stage_place'):
++                    skill['target_object_reference_point_for_convergence'] = True
++                touched += 1
++        if not touched:
++            raise ValueError(f'part {pid}: no held servo phases for a reference point')
+diff --git a/roboassemblybench/core/plumbers_support.py b/roboassemblybench/core/plumbers_support.py
+index f56f39f..0398a92 100644
+--- a/roboassemblybench/core/plumbers_support.py
++++ b/roboassemblybench/core/plumbers_support.py
+@@ -61,12 +61,16 @@ def add_terminal_joint_home(phases, *, spec, robots):
+     retreat = phases[right_park - 1]
+     if not retreat['name'].endswith('_retreat'):
+         raise ValueError('Terminal right home requires a preceding clearance retreat')
+-    retreat['local_skill'].update(object=retreat['local_skill']['offset_reference_object'],
+-                                  requires_held_object=False, free_space_trajectory=True, free_space_stage='approach',
+-                                  free_space_linear_speed=.01, free_space_angular_speed=.08,
+-                                  free_space_joint_speed=.25, free_space_joint_acceleration=.6,
+-                                  free_space_position_lookahead=.003, free_space_orientation_lookahead=.02,
+-                                  free_space_joint_lookahead=.06)
++    # Plumbers ends with a support withdrawal (offset-referenced, free-space).
++    # Stool's right arm last parks right after placing its base, so its
++    # ordinary vertical retreat is kept unchanged.
++    if 'offset_reference_object' in retreat['local_skill']:
++        retreat['local_skill'].update(object=retreat['local_skill']['offset_reference_object'],
++                                    requires_held_object=False, free_space_trajectory=True, free_space_stage='approach',
++                                    free_space_linear_speed=.01, free_space_angular_speed=.08,
++                                    free_space_joint_speed=.25, free_space_joint_acceleration=.6,
++                                    free_space_position_lookahead=.003, free_space_orientation_lookahead=.02,
++                                    free_space_joint_lookahead=.06)
+     # Keep the already homed left arm there while the right opens, withdraws
+     # and goes home. Never replace the right hand's earlier support command.
+     for phase in phases[park_indices[left] + 1:]:
+diff --git a/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml
+new file mode 100644
+index 0000000..569cc70
+--- /dev/null
++++ b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/annotation.yaml
+@@ -0,0 +1,3 @@
++task_name: fabrica_stool_circular_ur5e_staged
++title: Fabrica circular stool UR5e staged assembly
++summary: Stage the stool base and insert the remaining canonical parts along the official Fabrica paths.
+diff --git a/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml
+new file mode 100644
+index 0000000..d915a20
+--- /dev/null
++++ b/roboassemblybench/tasks/fabrica_stool_circular_ur5e_physical/recipe.yaml
+@@ -0,0 +1,226 @@
++extends: fabrica_stool_circular_ur5e_staged
++task_name: fabrica_stool_circular_ur5e_physical
++prompt: Assemble the canonical Fabrica circular stool with continuous physical UR5e grasping, transport, insertion, release, and both-arm home.
++
++# Pure physical route derived from the Plumbers C01 framework: friction grasps
++# only (no fixed joints, locks, pose/velocity writes, collision/gravity toggles).
++policy_auto_grasp: false
++physics_scene:
++  enable_external_forces_every_iteration: true
++  enable_stabilization: true
++
++robots:
++  - name: franka_left
++    preserve_continuous_arm_joints: true
++    gripper_min_openness: 0.0
++    gripper_drive_kp: 7500.0
++    gripper_drive_kd: 173.0
++    gripper_drive_max_effort: null
++    gripper_require_drive_readback: true
++    gripper_pad_static_friction: 1.0
++    gripper_pad_dynamic_friction: 0.8
++    # Open issue (see handoff): caps can only be pinched on their top 3-5 mm.
++    # Rigid pads lose that grip (smoke22), damping 60 drops leg 7 (smoke23),
++    # 5000/15 can rattle the cap (smoke21 cap 4). Best known: 5000/15.
++    gripper_pad_contact_stiffness: 5000.0
++    gripper_pad_contact_damping: 15.0
++    # Gravity sag of the position drive scales 1/kp: 80000 -> 0.42 mm,
++    # 160000 (S23) -> 0.22 mm at the leg grasp, enough to give single-finger
++    # contact on pocket-held parts (smoke07/08). 4x S23, same kd=sqrt(200 kp).
++    arm_drive_kp: 640000.0
++    arm_drive_kd: 11313.708498984761
++  - name: franka_right
++    preserve_continuous_arm_joints: true
++    gripper_min_openness: 0.0
++    gripper_drive_kp: 7500.0
++    gripper_drive_kd: 173.0
++    gripper_drive_max_effort: null
++    gripper_require_drive_readback: true
++    gripper_pad_static_friction: 1.0
++    gripper_pad_dynamic_friction: 0.8
++    # Compliant pads (Plumbers C01 base hand): a part held by its tray pocket
++    # cannot self-centre; rigid pads turn ~0.2 mm offset into 0/19 N (smoke06).
++    gripper_pad_contact_stiffness: 5000.0
++    gripper_pad_contact_damping: 15.0
++    # Gravity sag of the position drive scales 1/kp: 80000 -> 0.42 mm,
++    # 160000 (S23) -> 0.22 mm at the leg grasp, enough to give single-finger
++    # contact on pocket-held parts (smoke07/08). 4x S23, same kd=sqrt(200 kp).
++    arm_drive_kp: 640000.0
++    arm_drive_kd: 11313.708498984761
++
++fabrica_canonical:
++  continuous_physics: true
++  # Fabrica pinch points sit 160 mm (base) / 170 mm (moving parts) from the
++  # converted Robotiq frame. Native USD finger FK (outputs/stool_physical/
++  # pad_fk.py) puts the inner-pad centroid ~121 mm (75 mm gap) / ~130 mm
++  # (18 mm gap) from base_link; Plumbers' 143 mm at a 40 mm gap fixes the
++  # control-frame offset at ~15 mm. Shift grasps so pads land on the pinch.
++  # Deeper (0.136) drove the fingers into the tray pocket walls (smoke03:
++  # stalled at a 78 mm gap, zero target force); 0.143 closes freely to 75.3 mm.
++  physical_base_pad_center_m: 0.143
++  # Seek past the nominal preset: the 75 mm base needs q ~0.131 vs 0.098.
++  physical_close_force_max_seek: 0.08
++  # 45-degree tilted grasps hold the finger ~0.0011 rad behind its command;
++  # the Plumbers 0.001 rad seek lead then never advances (smoke02/04).
++  physical_close_force_max_command_lead: 0.004
++  # The native finger-sweep preflight (physical_pickup_fixture_clearance) was
++  # tried on caps: with the 2 mm recentre allowance and its triangle-inequality
++  # motion bound it rejects anything within ~14 mm (smoke13: 3.4 mm at open).
++  # Hexagonal legs: align the strict-contact box with the pinched flats
++  # (smoke11: left finger on box x, right on box y, both 4.5 N opposing).
++  physical_contact_box_align_to_grasp_parts: ['3', '7', '5', '1']
++  # Caps (18x18x30 mm) sit in tray pockets with only their tops exposed, so
++  # the pads grip the top ~3 mm band of two opposing faces (PhysX contacts at
++  # z=12..15 mm of a 15 mm half-height, smoke12). 10 mm deeper hits the tray
++  # (smoke14: zero-force stall). The modelled pad samples lie 35-50 mm above the
++  # cap, so qualify the opposing pair from the measured contact points instead.
++  # Finish seating while still grasped. The last insert phase otherwise ends
++  # ~5 mm high (8 mm / 50.5 mm axial tolerance); released parts dropped and
++  # tilted 0.8-4.2 deg, and cap 0 could not seat on a 4.2-deg leg 1 (R03).
++  # Axial (not released high) is the purpose; lateral/orientation stay loose
++  # because the socket leg shifts under insertion and caps twist about the
++  # round peg in their edge grip (R04 cap 0: 6.3 deg). Acceptance unchanged.
++  physical_seat_before_release:
++    '3': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++    '7': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++    '6': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++    '4': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++    '5': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++    '1': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++    '0': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++    '8': {position_m: 0.003, axial_m: 0.0015, lateral_m: 0.002, orientation_rad: 0.14, stable_steps: 24}
++  # Caps follow their real leg, not the base-rebased nominal: released legs
++  # lean 0.7-4.7 deg in their sockets (peg top 1-7 mm off); cap 0 could not
++  # seat in R03/R04. Socket table from the task contract.
++  physical_rebase_targets_to_socket: {'6': '3', '4': '7', '0': '1', '8': '5'}
++  # Caps expose only their top 3-5 mm in the tray, and that edge grip either
++  # slips or rattles (smoke21-23). Edge-pick, set the cap upright on a free
++  # board spot (0.56, -0.02), release, retreat, then re-pick 10 mm deeper with
++  # the same Fabrica grasp orientation before the normal transport/insertion.
++  physical_cap_regrasp:
++    parts: ['6', '4', '0', '8']
++    staging_offset_from_assembly_m: [-0.14, 0.13]
++    place_clearance_m: 0.0015
++    hover_height_m: 0.08
++    regrasp_deeper_m: 0.010
++    place_position_tolerance_m: 0.003
++    # Staging spots = the R05-validated cells (25 mm lattice from the board
++    # origin); with the flat board collider below the holes no longer matter.
++    board_hole_free_cell: {origin_xy_m: [0.47, -0.14], pitch_m: 0.025}
++  # The optical board is a plain 925x625x10 mm slab (mesh vertices only at z=0
++  # and z=-10 mm). As an exact triangle mesh its top has vertices only on the
++  # 6.6 mm hole rims, so SDF parts are contact-sampled there and a set-down cap
++  # rests ~12 deg tilted (smoke24-27). A box collider has the identical top face
++  # (holes filled; nothing in Stool uses them) and replaces R05's extra 3 mm
++  # staging pad. Plumbers keeps its triangle-mesh board.
++  physical_board_collision: boundingCube
++  # Same surface friction as R05's staging pad (0.8/0.6). At the default 0.5 a
++  # set-down cap crept 7 mm and tilted to 2.9 deg before the regrasp closed,
++  # leaving the jaw 8.8 mm off the cap (> 7 mm attach tolerance, smoke36).
++  physical_board_friction: {static: 0.8, dynamic: 0.6}
++  # Servo caps at their own centre: lateral error at the shared assembly origin
++  # (~100 mm below a cap) froze insertion depth once the cap tilted a few
++  # tenths of a degree on its peg (smoke19/24/25).
++  physical_servo_reference_point_parts: ['6', '4', '0', '8']
++  # 10 g caps: carry at the Plumbers part-0 band (4/5 N) instead of 6/8 N;
++  # squeezing the 3 mm tray edge grip harder made it chatter and drop (smoke29).
++  physical_move_hold_force_control:
++    '6': {low: 4.0, target: 5.0}
++    '4': {low: 4.0, target: 5.0}
++    '0': {low: 4.0, target: 5.0}
++    '8': {low: 4.0, target: 5.0}
++  # Bounded contact recovery as Plumbers C01 used for its pins: the strict
++  # check flickered to contact_missing with both fingers at 5.4-5.8 N while the
++  # cap touched the pad (smoke31). Retains <=24 steps, never claims a grasp.
++  physical_contact_recovery:
++    '6': {steps: 24, maximum_surface_gap_m: 0.0005}
++    '4': {steps: 24, maximum_surface_gap_m: 0.0005}
++    '0': {steps: 24, maximum_surface_gap_m: 0.0005}
++    '8': {steps: 24, maximum_surface_gap_m: 0.0005}
++  physical_strict_contact_from_force_points_parts: ['6', '4', '0', '8', '1']
++  # The last leg and caps are released beside seated neighbours. A full open
++  # swept a finger into leg 3 and the retreat tipped it and dropped cap 6
++  # (smoke34). Open to 0.34 (~33 mm jaw, ~7 mm/side over an 18 mm grip), require
++  # zero finger force, and keep that aperture for a 100 mm vertical retreat.
++  physical_limited_release:
++    parts: ['1', '0', '8']
++    openness: 0.34
++    minimum_openness: 0.33
++    retreat_distance_m: 0.10
++  # Fabrica grasp centres sit 9.4 (cap 6, works), 4.8 (cap 4: pads closed above
++  # it, R01/smoke17), 7.9 (cap 8), 12.0 (cap 0) and 3.2 mm (leg 1 peg) below the
++  # part top. Bring the shallow ones to cap 6's verified depth along the
++  # near-vertical approach: pad centre = 0.1703 - (9.4 mm - depth).
++  physical_move_pad_centers_m:
++    '4': 0.1657
++    '8': 0.1688
++    '1': 0.1641
++    # Cap 0 (12.0 mm, tilted 28.7 deg in its pocket) touched the pocket first (R02).
++    '0': 0.1729
++  # Moving parts keep Fabrica's pinch (170 mm): the 57 mm native pad then
++  # spans the pinch with the fingertip only ~7 mm beyond it. A 145 mm pad
++  # centre pushed the tips ~32 mm into the tray pockets (smoke09 part 3).
++  physical_idle_hold_anchor: true
++  stabilize_fixture_parts: false
++  skip_terminal_retreat: false
++  skip_terminal_park: false
++  physical_settle_steps: 120
++  physical_wait_step_limit: 30
++  close_force_stability:
++    enabled: true
++    window_steps: 5
++    hysteresis_margin: 0.5
++  physical_rotation_speed: 0.15
++  physical_rotation_acceleration: 0.45
++  # The governor brakes inside its lookahead: effective transport turn rate is
++  # ~sqrt(a*0.9*lookahead) = 0.13 rad/s at 0.010 (4.3k-step leg transport,
++  # smoke12). 0.030 -> ~0.22 rad/s; slip guards (3 mm / 5 deg) unchanged.
++  physical_rotation_lookahead: 0.030
++  physical_transport_rotation_speed: 0.35
++  physical_transport_rotation_acceleration: 1.80
++  physical_terminal_home:
++    enabled: true
++    joint_tolerance: 0.025
++    # Empty-arm home only (after release/retreat): 0.72 rad/s at 240 Hz.
++    max_joint_step: 0.003
++  hold_force_control:
++    enabled: true
++    low: 6.0
++    target: 8.0
++    soft_limit: 14.0
++    unload: 18.0
++    hard_limit: 40.0
++    soft_limit_action: limit_and_slow
++    soft_limit_motion_scale: 0.5
++    joint_rate: 0.025
++    unload_rate: 0.025
++    max_command_lead: 0.001
++    max_seek: 0.03
++    max_closing_travel: null
++    filter_tau: 0.02
++    stable_steps: 24
++    resume_steps: 48
++    recovery_timeout_steps: 480
++    slip_window_steps: 48
++    slip_growth: 0.0001
++    slip_preload: true
++
++# Debug-only (smoke tests, never a formal round): pick cap 6 right after the
++# base to test cap grasps in ~12 min. Its insertion cannot succeed (no leg).
++profiles:
++  cap_first:
++    task_name: fabrica_stool_circular_ur5e_physical_cap_first
++    fabrica_canonical:
++      assembly_step_order: ['6', '3', '7', '4', '5', '1', '0', '8']
++  cap4_first:
++    task_name: fabrica_stool_circular_ur5e_physical_cap4_first
++    fabrica_canonical:
++      assembly_step_order: ['4', '3', '7', '6', '5', '1', '0', '8']
++  leg3_cap6:
++    task_name: fabrica_stool_circular_ur5e_physical_leg3_cap6
++    fabrica_canonical:
++      assembly_step_order: ['3', '6', '7', '4', '5', '1', '0', '8']
++  leg7_cap4:
++    task_name: fabrica_stool_circular_ur5e_physical_leg7_cap4
++    fabrica_canonical:
++      assembly_step_order: ['7', '4', '3', '6', '5', '1', '0', '8']
+diff --git a/toolkits/factory_dual_franka_assembly/demo_policy.py b/toolkits/factory_dual_franka_assembly/demo_policy.py
+index 76e8fe7..3386dc9 100644
+--- a/toolkits/factory_dual_franka_assembly/demo_policy.py
++++ b/toolkits/factory_dual_franka_assembly/demo_policy.py
+@@ -267,7 +267,7 @@ class DualFrankaAssemblyDemoPolicy:
+             return True
+         cfg = getattr(task, 'cfg', getattr(task, 'config', None))
+         recipe = getattr(cfg, 'recipe', '')
+-        if not isinstance(recipe, str) or not recipe.startswith('fabrica_plumbers_block_ur5e_'):
++        if not isinstance(recipe, str) or not recipe.startswith(('fabrica_plumbers_block_ur5e_', 'fabrica_stool_circular_ur5e_')):
+             return False
+         phases = getattr(task, 'phase_specs', ())
+         index = getattr(task, 'phase_index', None)
+diff --git a/toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py b/toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py
+index 069f967..3728f4f 100644
+--- a/toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py
++++ b/toolkits/factory_dual_franka_assembly/plumbers_block_ur5e_skills.py
+@@ -426,7 +426,13 @@ class UR5eAssemblyAtomicSkillAdapter:
+                                             'strict_contact_ready'
+                                         ),
+                                         'timing': 'observation at step; command for next physics interval',
+-                                    }
++                                        # Sparse full contact detail (read-only) for strict-contact review.
++                                        'contact_detail_sample': (
++                                            close_detail.get('contact_detail')
++                                            if close_elapsed_steps % 120 == 0 else None
++                                        ),
++                                    },
++                                    default=str,
+                                 )
+                                 + '\n'
+                             )
+@@ -1476,6 +1482,24 @@ class UR5eAssemblyAtomicSkillAdapter:
+                     tracked_objects=tracked_objects,
+                 )
+                 target_object_pose = self._target_object_pose(task=task, spec=spec)
++            reference_point = spec.get('target_object_reference_point')
++            if (
++                spec.get('target_object_reference_point_for_convergence')
++                and reference_point is not None
++                and object_pose is not None
++                and target_object_pose is not None
++                and object_pose.get('orientation') is not None
++                and target_object_pose.get('orientation') is not None
++            ):
++                # Judge convergence at the part's own CAD point too: a cap tilted
++                # 2.4 deg in an edge grip reads ~4 mm off at the shared assembly
++                # origin ~100 mm below it (smoke37 part 8 staging place).
++                point = np.asarray(reference_point, dtype=float).reshape(3)
++                object_pose = dict(object_pose, position=(np.asarray(object_pose['position'], dtype=float) + quat_rotate(
++                    normalize_quat(object_pose['orientation']), point)).tolist())
++                target_object_pose = dict(target_object_pose, position=(np.asarray(
++                    target_object_pose['position'], dtype=float) + quat_rotate(
++                    normalize_quat(target_object_pose['orientation']), point)).tolist())
+ 
+             object_position_tolerance = float(
+                 spec.get('target_object_position_tolerance', effective_position_tolerance)
+@@ -2358,6 +2382,22 @@ class UR5eAssemblyAtomicSkillAdapter:
+ 
+         current_object_position = np.asarray(object_pose['position'], dtype=float)
+         target_object_position = np.asarray(target_object_pose['position'], dtype=float)
++        reference_point = spec.get('target_object_reference_point')
++        if (
++            reference_point is not None
++            and object_pose.get('orientation') is not None
++            and target_object_pose.get('orientation') is not None
++        ):
++            # Stool parts share the assembly origin (~100 mm below a cap). Servo
++            # the part's own CAD point so sub-degree tilt is not read as lateral
++            # error that freezes insertion depth during lateral alignment.
++            reference_point = np.asarray(reference_point, dtype=float).reshape(3)
++            current_object_position = current_object_position + quat_rotate(
++                normalize_quat(object_pose['orientation']), reference_point
++            )
++            target_object_position = target_object_position + quat_rotate(
++                normalize_quat(target_object_pose['orientation']), reference_point
++            )
+         object_delta = target_object_position - current_object_position
+         _, _, attachment_mode = self._compliant_attachment_allowance(
+             object_name=object_name,
+@@ -9304,6 +9344,8 @@ class UR5eAssemblyAtomicSkillAdapter:
+             'contact_box_scale',
+             'contact_box_half_extents',
+             'contact_box_offset',
++            'contact_box_orientation',
++            'strict_contact_from_force_points',
+             'caging_contact_distance',
+             'physical_grasp_min_opening_ratio',
+             'physical_contact_axes',

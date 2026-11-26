@@ -1,0 +1,21 @@
+{
+  "round": 2,
+  "package": "P04",
+  "reviewed_at_utc": "2026-11-19T22:47:37.126665+00:00",
+  "verified_success": false,
+  "steps": 31968,
+  "terminal_reason": "local-skill-failure:close_until_contact_timeout",
+  "terminal_phase": "assemble_06_part_0_close_and_attach",
+  "wall_seconds": 3087.171241099946,
+  "reached": [
+    "base 2",
+    "leg 3",
+    "leg 7",
+    "cap 6 on leg 3",
+    "cap 4 on leg 7 (R01 failure fixed by +4.6 mm depth)",
+    "leg 5",
+    "leg 1 (new 18 mm body grasp)"
+  ],
+  "failure": "cap 0 (tilted 28.7 deg in its pocket, Fabrica grasp 12.0 mm below top): fingers touch the pocket before the cap (arm pushed 0.2-0.3 mm at q~0.62-0.65 with zero cap force), then single-finger top-edge contact 11.5/0 N; recentre faulted force_imbalance_increased",
+  "next": "cap 0 pad centre 0.1729 (cap 6's verified 9.4 mm depth)"
+}

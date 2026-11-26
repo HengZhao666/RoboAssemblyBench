@@ -1,0 +1,16 @@
+{
+  "instruction": "请查清方案，分析清楚再开始仿真，避免每次仅作一点参数微调，然后启动一轮成本很高的仿真。授权五轮，或修好停止。不用再更多追求加速和轻量化",
+  "human_answer": "请查清方案，分析清楚再开始仿真，避免每次仅作一点参数微调，然后启动一轮成本很高的仿真。授权五轮，或修好停止。不用再更多追求加速和轻量化",
+  "at_utc": "2026-11-23T17:10:53.451468+00:00",
+  "context": "after round 61 (0.4 mm lift timed out on its completion tolerance); analysis before round 62 in offline_v239_unload/analysis",
+  "authorizes": [
+    "formal rounds 62-66 (at most five), stopping when fixed"
+  ],
+  "not_requested": [
+    "further simulation speed-ups",
+    "further output lightweighting"
+  ],
+  "unchanged": [
+    "final unloaded verification and every gate"
+  ]
+}

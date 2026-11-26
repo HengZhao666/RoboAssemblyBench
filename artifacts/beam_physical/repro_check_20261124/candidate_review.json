@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "round": 62,
+  "candidate": "v239_unload",
+  "base_candidate": "v238_lift04",
+  "changed_source_files": [
+    "roboassemblybench/core/beam_physical_compiler.py (vs round 61: lift completion tolerance max(lift / 2, 0.4 mm); 1 mm default unchanged)"
+  ],
+  "changed_tools": [
+    "tools/preflight.py (BEAM_HANDOVER_UNLOAD_LIFT_M=0.0002)"
+  ],
+  "changed_observers": [
+    "diagnostics restored to round 59: full contact and physics traces every 8 steps from step 45,000, hold trace on (bytes only)"
+  ],
+  "source_manifest_sha256": "f173bbde0bb71f6d9808d991b5a43ac18787ec62494117ad06dce7a80b26da72",
+  "worker_config_sha256": "3bf5d839e72c9d3751d10c265667d377b5efacade3a8ce24b19309c74592f100",
+  "recipe_fingerprint": "8a437a4145eb9fcad37f1c8ca3f9e975ec79f401ffc4fc6729f9c11d39371d0f",
+  "human_pose_acceptance_approved": true,
+  "human_instruction": {
+    "path": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch62_66_20261124/human_authorization.json",
+    "instruction": "请查清方案，分析清楚再开始仿真，避免每次仅作一点参数微调，然后启动一轮成本很高的仿真。授权五轮，或修好停止。不用再更多追求加速和轻量化",
+    "answer": "请查清方案，分析清楚再开始仿真，避免每次仅作一点参数微调，然后启动一轮成本很高的仿真。授权五轮，或修好停止。不用再更多追求加速和轻量化",
+    "at_utc": "2026-11-23T17:10:53.451468+00:00"
+  },
+  "diagnosis": [
+    "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round61_v238_lift04/manual_review.json",
+    "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/offline_v239_unload/analysis"
+  ],
+  "analysis": {
+    "heights": "rounds 55 and 59 held column 2 at the same height during part 0 (-0.005 / +0.017 mm); part 0 settled at -0.10 mm in both; rounds 60/61 lifted it +0.95 / +0.35 mm.",
+    "lateral": "part 0 is servoed to the same nominal xy in both rounds; column 2 sat (-0.09, -0.53) mm (r55) vs (-0.20, +0.29) mm (r59) off nominal: ~0.4 mm misalignment in both.",
+    "mechanism": "round 55: 0 N on the base, column hanging on the compliant right-hand hold (500 N/m) could yield sideways; round 59: 2.3 N base load locked it by friction, part 0 jammed (3.4 N side, tilt 3.2 -> 9.2 mrad) and kept rocking.",
+    "unload": "0.1 mm of rise already reads 0 N on the base (rounds 60/61); the right-hand handover sags 0.056 mm; the loaded left TCP settles 0.255 mm below its command (rounds 60/61).",
+    "prediction": "0.2 mm command -> ~0.15 mm rise, ~0.1 mm after the handover, 0 N base load; part 0 meets the column ~0.1 mm earlier than in round 59 (within the 0.25-0.55 mm hold-check settling)."
+  },
+  "change": {
+    "lift": "0.4 -> 0.2 mm; completion tolerance 0.2 -> 0.4 mm",
+    "kept": "all round-61 changes"
+  },
+  "aim": "repair: part 0 seats without side jam on an unloaded, compliant column; full assembly success with part 0 not rocking.",
+  "fixed_criteria": [
+    "full assembly success",
+    "part 0 side load on column 2 < 1 N at the hold check",
+    "no sustained part-0 rocking after both arms leave",
+    "final window drift of parts 0/2 well below 2 mm / 0.03 rad"
+  ],
+  "falsifiable": [
+    "progress rows before the lift ends equal round 61",
+    "column 2 rise ~0.15 mm and 0 N base load after the lift; ~0.1 mm after the handover",
+    "left finger force on part 0 < 40 N; part 0 side load < 1 N at the hold check"
+  ],
+  "contingency": "if part 0 still jams sideways: align the part-0 insertion target with the measured column-2 xy (controller change); if it seats but the stack still rocks: examine the final release.",
+  "qualification_paths": {
+    "config_check": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/offline_v239_unload/config_check.json",
+    "gate_check": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/offline_v239_unload/gate_check.json",
+    "velocity_cache_ab": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/offline_v239_unload/velocity_cache_ab.json",
+    "production_preflight": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/production_preflight.json",
+    "phase_contract_preflight": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/phase_contract_preflight.json",
+    "smoke_review": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_review.json"
+  },
+  "rollback": {
+    "compiler": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/offline_v239_unload/compiler_before62.py",
+    "compiler_sha256": "ffbb9ce96bcfa634847aae47c8f6f424c9dd5498013491b05559e61aab2e1806"
+  },
+  "not_changed": "every phase other than the lift parameters, final unloaded verification, all gates",
+  "unverified": [
+    "whether the unloaded column really yields sideways as part 0 aligns"
+  ]
+}

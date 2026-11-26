@@ -1,0 +1,17 @@
+{
+  "human_answer": "允许改为位姿稳定验收，原始速度单独报告",
+  "at_utc": "2026-11-17T07:09:21.424075+00:00",
+  "scope": "round51 only; 52/53held",
+  "fixed_pose_window": {
+    "consecutive_fresh_physics_steps": 240,
+    "position_drift_m": 0.002,
+    "orientation_drift_rad": 0.03
+  },
+  "preserved": [
+    "five target poses3mm/0.04rad",
+    "real release",
+    "both arms home",
+    "original force/slip/collision/write/resource gates"
+  ],
+  "raw_velocity": "record independently without replacement/zeroing; no longer final acceptance hard gate"
+}

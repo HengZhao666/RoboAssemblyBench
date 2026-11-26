@@ -1,0 +1,287 @@
+{
+  "passed": true,
+  "colliders": 48,
+  "visible_meshes": 52,
+  "body_rest": 44,
+  "joints": 32,
+  "export_gaps": [],
+  "collider_gaps": {
+    "missing": [
+      {
+        "root": "/World/env_0/episode_000000/objects/factory_table_leg_front_left",
+        "reason": "no_enabled_supported_colliders"
+      },
+      {
+        "root": "/World/env_0/episode_000000/objects/factory_table_leg_front_right",
+        "reason": "no_enabled_supported_colliders"
+      },
+      {
+        "root": "/World/env_0/episode_000000/objects/factory_table_leg_back_left",
+        "reason": "no_enabled_supported_colliders"
+      },
+      {
+        "root": "/World/env_0/episode_000000/objects/factory_table_leg_back_right",
+        "reason": "no_enabled_supported_colliders"
+      }
+    ],
+    "skipped": []
+  },
+  "joint_graph_initial_validation": {
+    "max_native_rest_matrix_error": 8.881784197001252e-16,
+    "colliders": 48,
+    "rest_bodies": 48,
+    "visible_meshes": 52,
+    "joint_graph_gaps": [],
+    "joints": {
+      "franka_left": 15,
+      "franka_right": 15
+    },
+    "scope": "initial calibration only; nonzero native q validation required before nominal sweeps certify coverage"
+  },
+  "nonzero_native_validation": [
+    {
+      "step": 30744,
+      "native_body_errors": [
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 4.545902364027965e-16,
+          "rotation_matrix_max_error": 2.42861286636753e-16
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 5.426552206482569e-16,
+          "rotation_matrix_max_error": 3.3306690738754696e-16
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 4.577566798522237e-16,
+          "rotation_matrix_max_error": 3.3306690738754696e-16
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 7.656716496459005e-16,
+          "rotation_matrix_max_error": 1.1102230246251565e-16
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 7.510691584075473e-16,
+          "rotation_matrix_max_error": 3.3306690738754696e-16
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 6.004449063730082e-16,
+          "rotation_matrix_max_error": 3.3306690738754696e-16
+        }
+      ],
+      "max_position_error_m": 7.656716496459005e-16,
+      "max_rotation_matrix_error": 3.3306690738754696e-16
+    },
+    {
+      "step": 31488,
+      "native_body_errors": [
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 2.794633431264089e-07,
+          "rotation_matrix_max_error": 2.7181539552457654e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 3.54522959666541e-07,
+          "rotation_matrix_max_error": 2.720490703093936e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 3.433313702118293e-07,
+          "rotation_matrix_max_error": 2.718944450484477e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 1.4352508537315166e-07,
+          "rotation_matrix_max_error": 2.553101099422861e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 2.018509070369435e-07,
+          "rotation_matrix_max_error": 7.762908266206736e-08
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 2.2277575803631016e-07,
+          "rotation_matrix_max_error": 3.0085313889455234e-07
+        }
+      ],
+      "max_position_error_m": 3.54522959666541e-07,
+      "max_rotation_matrix_error": 3.0085313889455234e-07
+    },
+    {
+      "step": 32240,
+      "native_body_errors": [
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 1.1520976849998312e-07,
+          "rotation_matrix_max_error": 1.3857253200423233e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 9.153361449746983e-08,
+          "rotation_matrix_max_error": 2.283094292267196e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 1.5743987377541893e-07,
+          "rotation_matrix_max_error": 1.384536570045447e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 1.2281813659214085e-07,
+          "rotation_matrix_max_error": 2.542013984307978e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 6.625186187142117e-08,
+          "rotation_matrix_max_error": 1.7291985578149482e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 2.1479527579380953e-07,
+          "rotation_matrix_max_error": 2.709543178436302e-07
+        }
+      ],
+      "max_position_error_m": 2.1479527579380953e-07,
+      "max_rotation_matrix_error": 2.709543178436302e-07
+    },
+    {
+      "step": 32992,
+      "native_body_errors": [
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 2.1482832225811267e-07,
+          "rotation_matrix_max_error": 1.449060452601847e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 1.8046361686161174e-07,
+          "rotation_matrix_max_error": 1.448877647450622e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 8.872746950612728e-08,
+          "rotation_matrix_max_error": 3.4658764919148766e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 6.507905008790753e-08,
+          "rotation_matrix_max_error": 1.6550155475963425e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 1.9307915885738384e-07,
+          "rotation_matrix_max_error": 1.1225224691782665e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 2.104424487338156e-07,
+          "rotation_matrix_max_error": 2.1535014522316986e-07
+        }
+      ],
+      "max_position_error_m": 2.1482832225811267e-07,
+      "max_rotation_matrix_error": 3.4658764919148766e-07
+    },
+    {
+      "step": 33736,
+      "native_body_errors": [
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 1.0392201036541787e-07,
+          "rotation_matrix_max_error": 9.9938333140287e-08
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 6.191230322714826e-08,
+          "rotation_matrix_max_error": 1.8723301132769765e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 1.2374359778678142e-07,
+          "rotation_matrix_max_error": 1.4567658962461039e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/base_link",
+          "position_error_m": 2.5268619436929554e-07,
+          "rotation_matrix_max_error": 5.117522819801136e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger",
+          "position_error_m": 3.189072119008338e-07,
+          "rotation_matrix_max_error": 4.881013424811592e-07
+        },
+        {
+          "body": "/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger",
+          "position_error_m": 2.6912949615821035e-07,
+          "rotation_matrix_max_error": 4.493348766917201e-07
+        }
+      ],
+      "max_position_error_m": 3.189072119008338e-07,
+      "max_rotation_matrix_error": 5.117522819801136e-07
+    }
+  ],
+  "assets": [
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda",
+      "sha256": "8da4d26e40f112615d4a90feff57b3f5132c095b7916fa58cf78c632e04c252b"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda",
+      "sha256": "8da4d26e40f112615d4a90feff57b3f5132c095b7916fa58cf78c632e04c252b"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_support/optical_board_raw_sdf512.usda",
+      "sha256": "682610b9b2eaeb91b367113b845a82eb82d7d718edb7d2775d2d4e46d0bd4273"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_official_fixture/beam/fixture_raw_sdf512.usda",
+      "sha256": "255d2b54f573600d08dfd649c5e9a7a47572631dcf254a4f87cec067cc5d3a64"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_0.usd",
+      "sha256": "3d6d3856b27db4e1fe74d1b647d6dbc411e62abe75c02da2b5017292c8d0bce8"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_1.usd",
+      "sha256": "be5bfaf2e843cc186d38f9e3e2370d66b05c535d29bca43ffd504e6f2dbcc367"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_2.usd",
+      "sha256": "96a8041833ff23bc8b258ff7e1f16a54e81e8bb25649ba3c4a28dc2e68502c60"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_3.usd",
+      "sha256": "d186d271b9e37e5f2a0e91f5efefee38e5406b4162add19d87e14624d21cb694"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_6.usd",
+      "sha256": "6c1bb0c16f53baf7fdd00683e0fdbb2e8476849b3d042cc6192433f905abbba5"
+    }
+  ],
+  "physical_scene_objects": [
+    "optical_board",
+    "fabrica_fixture",
+    "fabrica_beam_0",
+    "fabrica_beam_1",
+    "fabrica_beam_2",
+    "fabrica_beam_3",
+    "fabrica_beam_6",
+    "assembly_support",
+    "fixture_support",
+    "factory_tabletop_visual",
+    "factory_table_leg_front_left",
+    "factory_table_leg_front_right",
+    "factory_table_leg_back_left",
+    "factory_table_leg_back_right",
+    "taoyuan_left_buffer",
+    "taoyuan_right_buffer"
+  ],
+  "entry_task_step": 30744,
+  "entity_trace_sha256": "67b1765fb9de53e312666ac9644bbdddac26714e0f9ee44fdc0dbbc6cbbb437d",
+  "scope": "Current physical USD geometry, full recorded body graph, native nonzero joint/three gripper body comparisons per arm. Entity trace has task-step label only, so sub-cycle simultaneity remains unverified. No physics or assisted mechanism."
+}

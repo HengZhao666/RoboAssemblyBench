@@ -1,0 +1,120 @@
+{
+  "round": 5,
+  "package": "P08",
+  "reviewed_at_utc": "2026-11-24T04:34:08.825569+00:00",
+  "verified_success": true,
+  "steps": 53580,
+  "terminal_reason": "success-criteria-met",
+  "terminal_phase": "assemble_07_part_8_unloaded_settle",
+  "wall_seconds": 5423.012501709163,
+  "timeout_count": 0,
+  "recovery_count": 0,
+  "contact_recoveries": 0,
+  "criteria": [
+    {
+      "part": "0",
+      "position_error_mm": 0.35,
+      "position_tolerance_mm": 18.0,
+      "orientation_error_rad": 0.015,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "1",
+      "position_error_mm": 0.99,
+      "position_tolerance_mm": 50.5,
+      "orientation_error_rad": 0.022,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "2",
+      "position_error_mm": 0.16,
+      "position_tolerance_mm": 19.2,
+      "orientation_error_rad": 0.003,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "3",
+      "position_error_mm": 0.25,
+      "position_tolerance_mm": 50.5,
+      "orientation_error_rad": 0.01,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "4",
+      "position_error_mm": 0.68,
+      "position_tolerance_mm": 18.0,
+      "orientation_error_rad": 0.026,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "5",
+      "position_error_mm": 0.81,
+      "position_tolerance_mm": 50.5,
+      "orientation_error_rad": 0.019,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "6",
+      "position_error_mm": 1.8,
+      "position_tolerance_mm": 18.0,
+      "orientation_error_rad": 0.041,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "7",
+      "position_error_mm": 0.19,
+      "position_tolerance_mm": 50.5,
+      "orientation_error_rad": 0.011,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    },
+    {
+      "part": "8",
+      "position_error_mm": 0.5,
+      "position_tolerance_mm": 18.0,
+      "orientation_error_rad": 0.012,
+      "orientation_tolerance_rad": 0.15,
+      "passed": true
+    }
+  ],
+  "base_relative_nominal_check": "all 9 parts within 1.54 mm / 0.031 rad of the base-relative assembled pose (independent of cap socket rebase)",
+  "both_arms_home": "terminal_both_arms_home passed at 53.4k; both grippers open, empty",
+  "unloaded_settle": {
+    "phase": "assemble_07_part_8_unloaded_settle",
+    "step": 53579,
+    "stable_steps": 30,
+    "required_stable_steps": 30,
+    "reason": null,
+    "mode": "unloaded_velocity_and_pose"
+  },
+  "runtime_constraint_violations": 0,
+  "pure_physical": "pure_physical_grasp only: no fixed joints, pose writes or locks; parts released (released_passed) and static",
+  "reproduces": "smoke35 (same source, deterministic): identical 53,580 steps",
+  "disclosed_changes": [
+    "cap success targets re-anchored on their real leg before pickup (physical_rebase_targets_to_socket); tolerances unchanged",
+    "static staging pad (108x108x3 mm primitive box) added on the board for the cap regrasp; passive, constrains no part",
+    "cap strict two-finger contact qualified from measured PhysX contact points with the 1 mm SDF margin",
+    "cap regrasp (edge-pick, place upright, re-pick 10 mm deeper); limited 0.34 release for parts 1/0/8"
+  ],
+  "videos": {
+    "observation_images_front.mp4": {
+      "bytes": 8656861,
+      "sha256": "49f0450b7865153f567b594b58a616a10ee8c95207249a02cf4301db22cce9b7"
+    },
+    "observation_images_left_wrist.mp4": {
+      "bytes": 11555572,
+      "sha256": "586435b21e8bc46ca8f3851e4dda5248b518ee0fef81affe663f7d06787e0895"
+    },
+    "observation_images_right_wrist.mp4": {
+      "bytes": 4600188,
+      "sha256": "35d63381d30c834332cc0966c8afb62d54127f528af4fae225c004110355b171"
+    }
+  }
+}
