@@ -8,6 +8,8 @@
 
 Files that are byte-identical on this repository's main branch are copied from the
 repository checkout; the rest come from artifacts/<route>_physical/source_overlay_*.tar.gz.
+A few such files (old notes) were later removed from main; they are read from the pinned
+commit SNAPSHOT_COMMIT instead, so a git clone (not a bare archive download) is needed.
 Every file is checked against the recorded SHA-256 before the tree is reported ready.
 
 Usage (run from anywhere inside the checkout, Python >= 3.8, stdlib only):
@@ -19,6 +21,7 @@ The default destination is outputs/<route>_physical_reference/ (git-ignored outp
 Nothing here starts a simulation.
 """
 import argparse
+import subprocess
 import hashlib
 import json
 import os
@@ -29,6 +32,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ART = ROOT / 'artifacts'
+# Commit at which every file the manifests take from main was present.
+SNAPSHOT_COMMIT = '34d4333abf4760a3c1842378a973bec3145106cf'
 
 ROUTES = {
     'beam': {
@@ -87,6 +92,19 @@ def place(src, dst):
         shutil.copy2(src, dst)
 
 
+def from_history(rel, out):
+    try:
+        data = subprocess.run(['git', '-C', str(ROOT), 'cat-file', 'blob', f'{SNAPSHOT_COMMIT}:{rel}'],
+                              capture_output=True, check=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        raise SystemExit(f'{rel}: not in this checkout and not readable from commit {SNAPSHOT_COMMIT}; '
+                         'use a full git clone of the repository')
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if out.exists() or out.is_symlink():
+        out.unlink()
+    out.write_bytes(data)
+
+
 def fill_with_links(src_dir, dst_dir):
     dst_dir.mkdir(parents=True, exist_ok=True)
     for entry in sorted(src_dir.iterdir()):
@@ -121,9 +139,10 @@ def prepare(route, dest):
         if rel in from_overlay:
             continue
         src = ROOT / rel
-        if not src.is_file():
-            raise SystemExit(f'{rel}: expected on main but missing from this checkout')
-        place(src, dest / rel)
+        if src.is_file():
+            place(src, dest / rel)
+        else:
+            from_history(rel, dest / rel)
     if route == 'beam':
         # The run loads the Beam bundle (and its scene/fixture files) from
         # roboassemblybench/assets; link every asset entry of this checkout that the

@@ -78,6 +78,7 @@ def main():
     portable_path = root / 'artifacts/beam_assisted/portable_release.json'
     portable = json.loads(portable_path.read_text()) if portable_path.exists() else {}
     overrides = portable.get('publication_overrides', {})
+    removals = portable.get('publication_removals', {})
     if portable and portable['prior_snapshot_manifest_sha256'] != identity(root / 'artifacts/beam_assisted/publication_manifest.json')[1]:
         raise ValueError('Original v35 publication manifest changed')
     checked = set()
@@ -85,6 +86,13 @@ def main():
         if row["path"] in checked:
             raise ValueError("Duplicate publication path: " + row["path"])
         checked.add(row["path"])
+        if row['path'] in removals:
+            # Declared removal from main after publication; the original bytes stay in Git history.
+            if removals[row['path']]['original_sha256'] != row['sha256']:
+                raise ValueError('Removal is not bound to the original snapshot: ' + row['path'])
+            if local_path(root, row['path']).exists():
+                raise ValueError('Declared removed file is present: ' + row['path'])
+            continue
         expected = overrides.get(row['path'], row)
         if row['path'] in overrides and expected['original_sha256'] != row['sha256']:
             raise ValueError('Override is not bound to the original snapshot: ' + row['path'])
@@ -100,6 +108,7 @@ def main():
         restored = sum(restore_one(root, row) for row in index["files"])
     print(json.dumps({"passed": True, "files_verified": len(checked), "evidence_restored": restored,
                      "declared_publication_overrides": sorted(overrides),
+                     "declared_publication_removals": len(removals),
                      "portable_runtime_files_verified": len(portable.get('runtime_files', {})), "native_started": False}))
 
 

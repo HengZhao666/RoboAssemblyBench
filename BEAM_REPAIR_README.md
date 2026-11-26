@@ -114,12 +114,12 @@ A44 在服务器 v35 上从头完成五件辅助装配、三段双臂回位，�
 3. [final_home_independent_read_review.json：独立终态验收为何未通过](outputs/beam_assisted_20261015/D28_work/final_home_independent_read_review.json)。
 4. [D28_local_media_review.json：视频完整性、传输校验和抽查记录](outputs/beam_assisted_20261015/D28_work/D28_local_media_review.json)。
 
-进一步查看原报告、采样日志和压缩证据，可从 [证据索引](artifacts/beam_assisted/evidence_index.json) 查具体文件。部分大 JSON 以 .json.gz 无损保存；[原件还原说明](BEAM_ASSISTED_PR_HANDOFF.md) 和 [校验／还原工具](scripts/beam_assisted/verify_publication.py) 说明如何读取。
+进一步查看原报告、采样日志和压缩证据，可从 [证据索引](artifacts/beam_assisted/evidence_index.json) 查具体文件。部分大 JSON 以 .json.gz 无损保存；用 [校验／还原工具](scripts/beam_assisted/verify_publication.py) 还原：`python3 scripts/beam_assisted/verify_publication.py --restore-evidence`。
 
 ## 需要精确比较文件、复现或继续开发？
 
 - **全部文件与功能差异：** [CHANGES_FROM_UPSTREAM.md](docs/beam_assisted/CHANGES_FROM_UPSTREAM.md) 和 [机器比较清单](artifacts/beam_assisted/source_vs_latest_base_analysis.json)。其中“50 项新增、34 项修改”针对固定上游基线 2739e27，不是相对所有历史原版的累计统计。
 - **环境、资产和兼容性：** [DEPLOYMENT.md](docs/beam_assisted/DEPLOYMENT.md)。共享 UR5e 默认驱动／摩擦配置与该上游基线有差异，历史工具保留原部署记录；新入口解除服务器路径依赖，仍需要匹配的外部 Isaac Sim／Python 环境，见 [RUN.md](docs/beam_assisted/RUN.md)。
 - **服务器原始源码和工具：** [完整归档](artifacts/beam_assisted/server_code_and_tools.tar.gz)、[归档清单](artifacts/beam_assisted/package_manifest.json) 与 [原交付逐文件清单](artifacts/beam_assisted/publication_manifest.json)。原清单对应既有交付快照；后来增加的本页由新的 Git 提交保存，不改写旧封存身份。
-- **继续 Beam：** 从 [BEAM_REPAIR_HANDOFF.md](BEAM_REPAIR_HANDOFF.md) 进入辅助路线，核对交接及本任务账本；本页不提供新的仿真授权。
-- **复用到 stool 等其他任务：** 从 [FABRICA_ASSISTED_REPAIR_HANDOFF.md](FABRICA_ASSISTED_REPAIR_HANDOFF.md) 和 [迁移技能](skills/fabrica-assisted-repair/SKILL.md) 开始。当前 Beam 辅助编译器仅支持 Beam，需要为新任务适配几何、抓取和装配顺序。
+- **Beam 纯物理版（不用虚拟工装）：** 见 [PHYSICAL_ASSEMBLY_HANDOFF.md](PHYSICAL_ASSEMBLY_HANDOFF.md)。
+- 当前 Beam 辅助编译器仅支持 Beam，用于其他任务需要重新适配几何、抓取和装配顺序。

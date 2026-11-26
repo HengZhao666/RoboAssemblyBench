@@ -1,6 +1,6 @@
 # 纯物理路线历史证据索引
 
-仅按当前瓶颈检索；历史授权/当前字样不代表现行状态，现行状态读根 BEAM_PHYSICAL_HANDOFF.md。以下原文来自整理前索引纯物理段；原始混合索引在 outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md。
+仅按当前瓶颈检索；历史授权/当前字样不代表现行状态，现行结果与复现见 docs/beam_physical/HANDOFF.md。以下原文来自整理前索引纯物理段；原始混合索引可在提交 34d4333 的 outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md 中查看。
 
 # Beam 结论与证据索引
 
@@ -123,7 +123,7 @@
 - 证据：round21_shell_continuation/evidence/completed_analysis.json、contact_prefix_comparison.json、原runtime/stage报告、shell_visual_trace和video_frame_clock；review_bundle SHA22c6a7cff78d3fc7989bbc0673305a5108d32042fe9e5921bf38f607e6de14d8。native_prefix_clock_review.json服务器保留。本轮严格落桌/首柱后换手/释放/完整五件未验证。
 
 更新：2026-10-14，Asia/Shanghai。累计24轮后审完成，本批4/10已完成；最新仅一轮v201授权已执行，现暂停，不启动25。正式五件装配仍未成功。历史准备/运行记录保留其原始上下文，最新授权、版本和范围以当前交接及各完成条目为准。
-此文件是长期知识索引，不是第二份交接。当前交接读 BEAM_PHYSICAL_HANDOFF.md，实时状态读服务器唯一账本；新对话按瓶颈读取本索引相关ID及原始证据。
+此文件是长期知识索引，不是第二份交接。当前结果与复现读 docs/beam_physical/HANDOFF.md；新对话按瓶颈读取本索引相关ID及原始证据。
 
 ## 记录规范
 

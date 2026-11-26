@@ -1227,15 +1227,15 @@
   "publication_overrides": {
     ".gitignore": {
       "original_sha256": "9b3f6bc65bb60dca4f86dc8b8c9a554a5afa7952a3386cce492b5d215a9c185c",
-      "sha256": "014b65c1528ebe2eab8987c6694853ca901a4b78dd0fe81d6d8f3ac206942ec9",
-      "bytes": 2598,
+      "sha256": "03b7a630fbe83d4b8b35eed64c7a26e5db2fd108857c4f156653e3b2b0979396",
+      "bytes": 2624,
       "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
     },
-    "README.md": {
-      "original_sha256": "976c677bbc772b7659e998050f9f84f0fd96ada43eda9680a0177c24ea8c5d6c",
-      "sha256": "b74427f3ebd764b1e86884c802f03a9c287195dd4891d505d896a68ff4fc7eb5",
-      "bytes": 24614,
-      "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
+    ".pre-commit-config.yaml": {
+      "original_sha256": "5e90f81ee03793613b09d668fcc3eab5127826e5f1b256344c4738718a6a671e",
+      "sha256": "ee4e8322229f594d2b6dce0279bed1fb84278de76190b7641bd2bce38696f81a",
+      "bytes": 1455,
+      "reason": "Navigation/documentation updated on main after publication (2026-11-06..2026-11-26); original bytes remain in the v35 snapshot history"
     },
     "BEAM_ASSISTED_PR_HANDOFF.md": {
       "original_sha256": "49b32f55691f9f2bcad95a2e312a4ea61e79e399101e8a50610ba1bcea3c6cb4",
@@ -1243,24 +1243,253 @@
       "bytes": 5161,
       "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
     },
+    "README.md": {
+      "original_sha256": "976c677bbc772b7659e998050f9f84f0fd96ada43eda9680a0177c24ea8c5d6c",
+      "sha256": "bf0c54e3aabd69b4b9236ae9c98c533293fb3e0363d51a4b03954ddcac6e34c8",
+      "bytes": 25223,
+      "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
+    },
+    "beam_routes/physical/CHECKLIST.md": {
+      "original_sha256": "d99bebc86e607e5ae4b32681ddc2b0a4a0ca92e5bb48c7afa645b48df1945cc7",
+      "sha256": "9bd4244bc76acb222c5d97e5a9567b1478eb17baa995cc70faff43175f438c08",
+      "bytes": 9023,
+      "reason": "Navigation/documentation updated on main after publication (2026-11-06..2026-11-26); original bytes remain in the v35 snapshot history"
+    },
+    "beam_routes/physical/FINDINGS.md": {
+      "original_sha256": "08171174c2fe5f6981a9c7c90027c8faa50776c9c5cacd41686e17845595c6a0",
+      "sha256": "5228471ff6846ef1320d43fabfb4d8cac15669b3a379e1de078787e98e49bbc0",
+      "bytes": 146693,
+      "reason": "Navigation/documentation updated on main after publication (2026-11-06..2026-11-26); original bytes remain in the v35 snapshot history"
+    },
+    "docs/beam_assisted/CHANGES_FROM_UPSTREAM.md": {
+      "original_sha256": "b0cd4c28fb26da539726949d74ec546443512f1336b235c75eb76b88c24d9e0c",
+      "sha256": "cf7bd922c7cd7712e9b3ece5993e6fdb1fcabe4c6f83745f08b44ba50c892b45",
+      "bytes": 21725,
+      "reason": "Navigation/documentation updated on main after publication (2026-11-06..2026-11-26); original bytes remain in the v35 snapshot history"
+    },
     "docs/beam_assisted/DEPLOYMENT.md": {
       "original_sha256": "87d32580d6862c2ee040962396e9fdf1d2b13342dc2ea5b927feabbe857a0ebd",
-      "sha256": "bdf1f8efe4e2b87f6182966d6c389b77afc42b815f0fca5bb724ed682551bc59",
-      "bytes": 5297,
+      "sha256": "92c2e5b01b607b7b8f0d4987ec7d8da94dc52d32e106f61f0c8ace549cd1e9e8",
+      "bytes": 5310,
       "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
     },
     "scripts/beam_assisted/verify_publication.py": {
       "original_sha256": "f40d38a0234831dc9f2f82e03b49aa64476c53597ede2aed1c5cba99281a0d90",
-      "sha256": "2a9ac0788ad1ce316c566d2d346ad36276d1512275eac8f9dda227a73a65abad",
-      "bytes": 4847,
+      "sha256": "7412f522fea640bbf7b25f9bf0bff9248af5b7d6a8feb49131b22a87e7212b5c",
+      "bytes": 5441,
       "reason": "Portable release navigation/integrity tool; original bytes remain in v35 snapshot"
     }
   },
   "documentation_files": {
-    "README.md": "b74427f3ebd764b1e86884c802f03a9c287195dd4891d505d896a68ff4fc7eb5",
-    "BEAM_REPAIR_README.md": "000798cc8a566723b9f2edc1fdc605e30f5e6d23325de031f1b1d63383e8bd5f",
-    "BEAM_ASSISTED_PR_HANDOFF.md": "75a6737da99344bf1b5572561ee034cf8196df5990b38db8a661cdec6c703496",
+    "README.md": "bf0c54e3aabd69b4b9236ae9c98c533293fb3e0363d51a4b03954ddcac6e34c8",
+    "BEAM_REPAIR_README.md": "bd09fa4de356764caf8242ab437a8a08541d8bef4d82d2f1370a46557c2d4672",
     "docs/beam_assisted/RUN.md": "b0240457f6e37b38490c4b664223b68416abcc49fe7672bdc05bc016d54ff007",
-    "docs/beam_assisted/DEPLOYMENT.md": "bdf1f8efe4e2b87f6182966d6c389b77afc42b815f0fca5bb724ed682551bc59"
+    "docs/beam_assisted/DEPLOYMENT.md": "92c2e5b01b607b7b8f0d4987ec7d8da94dc52d32e106f61f0c8ace549cd1e9e8"
+  },
+  "publication_removals": {
+    "AGENTS.md": {
+      "original_sha256": "5c5af2b7cc4e9b5f93751f0ee8a3fc4c01b0c0f807258eb84236e4ba04431712",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "BEAM_ASSISTED_HANDOFF.md": {
+      "original_sha256": "676c31512a4951ffcf80137e312c771910af0b50b6778058e816ee6121369bd7",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "BEAM_ASSISTED_PR_HANDOFF.md": {
+      "original_sha256": "49b32f55691f9f2bcad95a2e312a4ea61e79e399101e8a50610ba1bcea3c6cb4",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "BEAM_FINDINGS_INDEX.md": {
+      "original_sha256": "778e1bad5a8e657a2689a5151c4e61733c13485723b7f87d7bb3f130a267661e",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "BEAM_PHYSICAL_HANDOFF.md": {
+      "original_sha256": "5c6588a7bfb23d641fad9bdd4b0d5cfc300c48ad95aef6315065646bdbb0a172",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "BEAM_REPAIR_HANDOFF.md": {
+      "original_sha256": "b84815b0dc73c513c5ce07e0c33ac009401d7f867f08459a0f7460f50043fd45",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "BEAM_REVIEW_CHECKLIST.md": {
+      "original_sha256": "905aea347b45d01f8ad653644fd6c2930db5b1d2b6fb87a3a333c794786c6fbf",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "BEAM_WORKFLOW_LOG.md": {
+      "original_sha256": "2e4073a3ff5f946cf4293798903d25b42b50682538df0875b53322581330147a",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "FABRICA_ASSISTED_REPAIR_HANDOFF.md": {
+      "original_sha256": "ef0ff44a0659ba8c06bb2217f075ccedac8e02299bc2f425ebabdc7bd9e17110",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "RoboAssemblyBench部署进度.md": {
+      "original_sha256": "e75e80607c1fba0bedd6f657677ef3af1728aa9b528dc52193358e52233e96b9",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "beam_assembly_changes.md": {
+      "original_sha256": "af19500ac08c306cf070980a6b4f06fa0dfefa11667f5e0344c71ee61fa1a3f6",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "beam_grasp_handoff.md": {
+      "original_sha256": "5637ba052114e7d03ffd3df17083d3042b12b1e97d35a248fc27c3b1a8eaa74e",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "beam_routes/assisted/CHECKLIST.md": {
+      "original_sha256": "0418df0d618529cc3f301ea340e1972182adc839090bc5fb08e15c63f01fa622",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "beam_routes/assisted/FINDINGS.md": {
+      "original_sha256": "91fb8cf707400389c8a204d385f2ac58ffa68f387f3058c64fcc4611c32d17bb",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "beam_routes/assisted/PERFORMANCE.md": {
+      "original_sha256": "e611cfaf8a09f927f0d2e74ec09cf1d21e6880e8e821a56dd5ef399c561c07c4",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "beam_routes/docs_manifest.json": {
+      "original_sha256": "c5d72c4120eb0144bd541de5e6bcb4ac34be40a80fa7b59f43a4976b54dc795d",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "beam_routes/registry.json": {
+      "original_sha256": "c0796b419bfca7c4ebc8ff52de96cfed3f3d700ea1f2eba99a97bb1c23534527",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "docs/beam_assisted/PR_BODY.md": {
+      "original_sha256": "bd8dc12f877d3bfc04e37c428fadc586c7cb85dcf764a953c04844e47f82b1f0",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_assisted_D28_closed_20261021/sync_verification.json": {
+      "original_sha256": "10494c5a19fdcd9ede58dbc168644b7fe6fdba0b12f695fe80c4b053b839ebec",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_checkpoint_code_cleanup_20261019/completion_summary.json": {
+      "original_sha256": "a7d7aade87106c11477b694930bb96211679990ef1ba58df9a74cc2fc1090a4a",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/before/AGENTS.md": {
+      "original_sha256": "4d5d8b36c49981511bea635c8fed52b6b5f06f00c31f855f3c1ec9b75007783b",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/before/BEAM_ASSISTED_HANDOFF.md": {
+      "original_sha256": "29626a3134f35abff8fff2628bcf586657a1096e81cf6e5acfb40be859792825",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/before/BEAM_FINDINGS_INDEX.md": {
+      "original_sha256": "dccf2933ffcd6bd1c253361ed6a7a6e34249ad73d351a220c1cfaa942c4b90a9",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/before/BEAM_REPAIR_HANDOFF.md": {
+      "original_sha256": "05909f2ca3f2406c033249c495b6858043ab48b9714c111618886586673bfc4b",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/before/BEAM_REVIEW_CHECKLIST.md": {
+      "original_sha256": "a67ab0d9e351ec53ac0dde0fa5d28398ed613075c61d220f407a3515c8ea64ee",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/before/BEAM_WORKFLOW_LOG.md": {
+      "original_sha256": "5fba901c82b148e7924f395016e3e87926fece4ddfb336ff96a60d81c73a7c61",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/before_manifest.json": {
+      "original_sha256": "c5339af5f91a1b8c03d15616df3c9994057bd23edb41914453f343a8202ae9b3",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/source_verification.json": {
+      "original_sha256": "c7f601ba9226c9f2060ad827dc40f93c033e505bc7b1c3b7df463a29d31d75b5",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_context_reorganization_20261016/validation.json": {
+      "original_sha256": "96c7634deb7dec025722ac90b488bec7255d2c0d9fa04f64bafc7fa22a88fb35",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_output_cleanup_20261019/checkpoint_last_conclusions.json": {
+      "original_sha256": "fd63fa9597eba87cf7832370a0acb7b74fa7868a7842861e59eb3c2f6f06cc93",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_output_cleanup_20261019/cleanup_summary.json": {
+      "original_sha256": "ed2e2a9b81a72abd15ce393429c9cbd41a61773dda818033409236e3cb26afbf",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_optimization_20261016/tools_manifest.json": {
+      "original_sha256": "31f14b344757b41c4967dea55e35747e56d60990d7467b6608828a12079df950",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/beam_performance_evidence.json": {
+      "original_sha256": "23989aacb7a18ede86a79b3261db52391a2323f502598abe47db89ebc868646d",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/before_documents.tar.gz": {
+      "original_sha256": "c22c80890fe051afc8fec2ab4a187bffc9e0282256c3cc78d5b4f62bfc0e8034",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/before_installed_skill.tar.gz": {
+      "original_sha256": "ffc3d2c84b81722554d386e5758221762526e965e26c147245113ffd52403572",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/before_manifest.json": {
+      "original_sha256": "b8d2601cd84564c8254291b53ae396af143ce7b94c2be3002d56380087061d7e",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/final_server_context_receipt.json": {
+      "original_sha256": "3155e9406dae2595175eacc1f047eedfc247035ce6de7f4b0cd7d84da87f3eaa",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/final_server_receipt.json": {
+      "original_sha256": "64acb4f0e03cebf9b23acb40b201940c0b6ddd594cca0c1888c4887dbc31d831",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/receipt_mirror_verification.json": {
+      "original_sha256": "2e0c6c6bf9da0bd6013b58ef545817d0cc9fa7f4e61625e6b6cab5adc793684c",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/skill_install_verification.json": {
+      "original_sha256": "d91e3cfc5a9a7dcf50d1ee079a2c4fbe60b668a981381b35952a82e27bb38ef4",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/sync_verification.json": {
+      "original_sha256": "06167dd321ff35f748118461eab7ffcd838223f866979d48792066998cd3653e",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "outputs/beam_workflow_transfer_20261021/validation.json": {
+      "original_sha256": "820de8cfb819faaff4a0d462e84b0bcc5cb461d010198bb37130361caf8fe6b4",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/fabrica-assisted-repair/SKILL.md": {
+      "original_sha256": "d1d543ca3c58540ecc7b71da0c06cb6ef1664ec66a8a8f17cc082f41c9f563f6",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/fabrica-assisted-repair/agents/openai.yaml": {
+      "original_sha256": "fbf64ef7be848a8bc343444e65035714bedd54798f8ad535e5d955aa93a37c73",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/fabrica-assisted-repair/references/implementation-map.md": {
+      "original_sha256": "a296e5c56a5cf6b3af77f9c62d918526efa2005a0812bb16df3b004a38746ee2",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/fabrica-assisted-repair/references/task-handoff-template.md": {
+      "original_sha256": "93f8392b08e989f1eb50501737c519a8feac34808fbf2f1a2481365ab5f1a7f6",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/simulation-repair-loop/SKILL.md": {
+      "original_sha256": "5a091fb77a794cad52fc6971274a20af52ee73fb22cf2ebe1b127076c94692d4",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/simulation-repair-loop/agents/openai.yaml": {
+      "original_sha256": "9ae6b9f194d91be2d2e1d1b53f82ffc68c9b02931a1f623909d112bcd6234fb3",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/simulation-repair-loop/references/process-retrospective.md": {
+      "original_sha256": "1e744e07243829495ca31a2eb210b083a020f84b6b504b860a687c4162f9ea54",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/simulation-repair-loop/references/review-and-reuse.md": {
+      "original_sha256": "5945a401aba47c4105bd97740b363fd602d97da279a5fcc25fef007dc6f7c3f9",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    },
+    "skills/simulation-repair-loop/scripts/sync_documents.py": {
+      "original_sha256": "03c3cfd2590fd2e61f1d1c8f8202dee1885f9027c5e936fda70e6a7c2d697c77",
+      "reason": "Outdated internal handoff/process document removed from main on 2026-11-26; original bytes remain in commit 34d4333"
+    }
   }
 }

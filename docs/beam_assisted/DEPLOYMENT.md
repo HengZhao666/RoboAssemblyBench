@@ -27,4 +27,4 @@
 
 若本PR只直接加入Beam21资产，canonical `SHA256SUMS` / `HANDOFF_README` 仍描述全部7任务：其他6任务的 bundle 需下载后才能对整份 SHA256SUMS 执行完整校验。不能以本PR Beam资产齐全声称7任务全部资产已经纳入。服务器原始验证文件仅保留其既有结论，不形成新仿真证据。
 
-服务器完整工具在 `outputs/beam_assisted_20261015/tools/`。这些脚本保留原R/P/A部署路径及原账本合同；本次没有改成通用启动器，也不自动修改现有服务器环境。先按根 `BEAM_ASSISTED_PR_HANDOFF.md` 核文件与范围，再在明确指定的任务/运行授权内操作。
+服务器完整工具在 `outputs/beam_assisted_20261015/tools/`。这些脚本保留原R/P/A部署路径及原账本合同；本次没有改成通用启动器，也不自动修改现有服务器环境。先用 `scripts/beam_assisted/verify_publication.py` 核文件与范围，再在明确指定的任务/运行授权内操作。

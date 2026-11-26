@@ -74,10 +74,8 @@
 ### 7. 工具、交接和其他 Fabrica 任务的迁移
 
 - 附服务器实际使用的 worker、原子 ACK/STOP、从头启动、独立短筛、原件后审、几何导出/检查、录像和完整性工具。130 项实际工具与20项关键封存工具分别列明，不因工具原在仓库外就漏传。
-- [`BEAM_REPAIR_HANDOFF.md`](../../BEAM_REPAIR_HANDOFF.md)、[`BEAM_ASSISTED_HANDOFF.md`](../../BEAM_ASSISTED_HANDOFF.md) 与机器注册表将当前状态、源/工具身份、回退、权限及证据路径分开。旧日志、结论和缺测不覆盖。
-- [`simulation-repair-loop`](../../skills/simulation-repair-loop/SKILL.md) 将一轮定义为一组可分别验证的无冲突修复加一次正式验收，按差异检查并复用未变域，减少重复后审、专用脚本和文档同步。
-- [`fabrica-assisted-repair`](../../skills/fabrica-assisted-repair/SKILL.md)、[`FABRICA_ASSISTED_REPAIR_HANDOFF.md`](../../FABRICA_ASSISTED_REPAIR_HANDOFF.md) 与任务模板说明如何迁移机制，哪些需要新任务适配。它们提供流程和实现映射，尚未完成全部 Beam 模块的通用代码抽取；新任务不能继承 Beam 的参数、运行次数、成功结论或授权。
-- [`PERFORMANCE.md`](../../beam_routes/assisted/PERFORMANCE.md) 与机器证据分析已有 59567 步和实际耗时，列出减步、写盘及计算复用候选。这些建议尚不构成已实施提速或动态验证结果。
+- 原交付附带的内部交接（`BEAM_REPAIR_HANDOFF.md`、`BEAM_ASSISTED_HANDOFF.md`）与机器注册表已于 2026-11-26 从 `main` 移除，可在提交 `34d4333` 中查看。
+- 原交付附带的流程技能（`skills/simulation-repair-loop`、`skills/fabrica-assisted-repair`）、`FABRICA_ASSISTED_REPAIR_HANDOFF.md` 与 `beam_routes/assisted/PERFORMANCE.md`（59567 步耗时分析与提速候选，未实施）已于 2026-11-26 从 `main` 移除，可在提交 `34d4333` 中查看。
 
 ## 与当前上游并行的共享改动及合并风险
 
