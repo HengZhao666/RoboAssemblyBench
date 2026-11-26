@@ -1,0 +1,10 @@
+{
+  "full_output_budget_GiB": 14,
+  "reserve_GiB": 5,
+  "runtime_disk_floor_GiB": 5,
+  "runtime_memory_floor_GiB": 2,
+  "encoder_unit_test_passed": true,
+  "changed_storage": "Opt-in full ordered three-view MP4 at original30fps/stride8; original clock everyframe; phase first/last raw plus complete original5second failure tail. No frame dropping or logging cadence change.",
+  "budget_basis": "R35 35,960ticks reached aboutfirst third of165stages. Old20GiB output estimate included full rawPNG (R35 3.4GB raw PNG); streaming eliminates main PNG growth. Retain14GiB output allocation with original5GiB reserve, >2x proportional non-PNG estimate. This is capacity planning, not a bound on unknown dynamics; runtime floors/stop remain active.",
+  "native_performance_pending": true
+}

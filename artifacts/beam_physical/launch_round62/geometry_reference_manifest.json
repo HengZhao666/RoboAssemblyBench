@@ -1,0 +1,18 @@
+{
+  "files": [
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/joint_geometry/scene_geometry.json",
+      "sha256": "91654d521b8b5ee8d99c5603310b46c35d4a2beee36e816ad2a5ff8834b5b46f"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/geometry_tools/sweep_model.py",
+      "sha256": "5de0b140034a08c0424ba91402db7da28a3366d2e1d3407ab4748c679eac5fa2"
+    },
+    {
+      "path": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/geometry_tools/visual_mesh_check.py",
+      "sha256": "f61d61f47ff238febb0908d36fedf8674d06ba888cedff05ed70db2f94005a1d"
+    }
+  ],
+  "screen": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/joint_geometry/joint_path_screen.json",
+  "calibration": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch34_38_20261111/joint_geometry/geometry_calibration.json"
+}

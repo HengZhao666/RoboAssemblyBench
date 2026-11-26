@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "object": "fabrica_beam_0",
+      "asset_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_0.usd",
+      "asset_sha256": "3d6d3856b27db4e1fe74d1b647d6dbc411e62abe75c02da2b5017292c8d0bce8",
+      "points": 3502,
+      "faces": 7004,
+      "points_sha256": "678f168e553bdeb3fdd124af357e43e761cbbdc1a8078de84371eae80bdb24ff",
+      "indices_sha256": "624756d4bb9df72798056b58adc8ea054e7bff0bb290f846feb3eaa629c7bdba",
+      "collision_approximation": "sdf",
+      "sdf_resolution": 512
+    },
+    {
+      "object": "fabrica_beam_1",
+      "asset_path": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/canonical_7_bundles/task_bundles/fabrica_official_beam_fixture_pickup_sdf512_v1/assets/fabrica_parts/beam/fabrica_beam_1.usd",
+      "asset_sha256": "be5bfaf2e843cc186d38f9e3e2370d66b05c535d29bca43ffd504e6f2dbcc367",
+      "points": 3502,
+      "faces": 7004,
+      "points_sha256": "07d3165ce72099ffbc15fedd2b920929092b2ce8dab7d5b8a7b5ed1daa919246",
+      "indices_sha256": "4aa7738aa2e46b648e9addf91cc533f169c237d3d310b1de84bbcd6b4659a902",
+      "collision_approximation": "sdf",
+      "sdf_resolution": 512
+    }
+  ]
+}

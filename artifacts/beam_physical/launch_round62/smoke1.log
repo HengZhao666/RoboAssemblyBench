@@ -1,0 +1,795 @@
+{"passed": true, "source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository", "manifest": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/source_manifest.json", "manifest_sha256": "f173bbde0bb71f6d9808d991b5a43ac18787ec62494117ad06dce7a80b26da72", "files": 900, "differences": []}
+Starting kit application with the following args:  ['/home/user/isaacsim-5.1.0/exts/isaacsim.simulation_app/isaacsim/simulation_app/simulation_app.py', '/home/user/isaacsim-5.1.0/apps/isaacsim.exp.base.python.kit', '--/app/tokens/exe-path=/home/user/isaacsim-5.1.0/kit', '--/persistent/app/viewport/displayOptions=3094', '--/rtx/materialDb/syncLoads=True', '--/rtx/hydra/materialSyncLoads=True', '--/omni.kit.plugin/syncUsdLoads=True', '--/app/renderer/resolution/width=1280', '--/app/renderer/resolution/height=720', '--/app/window/width=1440', '--/app/window/height=900', '--/renderer/multiGpu/enabled=False', '--/app/fastShutdown=True', '--/app/installSignalHandlers=0', '--ext-folder', '/home/user/isaacsim-5.1.0/exts', '--ext-folder', '/home/user/isaacsim-5.1.0/apps', '--/app/extensions/fsWatcherEnabled=0', '--/physics/cudaDevice=0', '--/plugins/carb.tasking.plugin/threadCount=8', '--/plugins/omni.tbb.globalcontrol/maxThreadCount=8', '--portable', '--no-window', '--/app/window/hideUi=False']
+Passing the following args to the base kit application:  ['--worker-mode', 'collect', '--worker-recipe', 'fabrica_beam_ur5e_staged', '--worker-scene-profile', 'taoyuan_grscenes_tabletop', '--worker-results-path', '/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/collect_results.json', '--worker-seeds', '0', '--worker-layout-seeds', '505', '--max-trials', '1', '--start-seed', '0', '--record-live-video', '--live-video-frame-stride', '24', '--live-video-fps', '10', '--output-dir', '/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out', '--domain-randomization', '--skip-episode-steps', '--runtime-constraint-monitor', '--constraint-check-stride', '8', '--assembly-sequence-precheck', '--stage-trajectory-precheck', '--stage-precheck-stride', '64', '--stage-precheck-waypoints', '4', '--headless']
+[Info] [carb] Logging to file: /home/user/isaacsim-5.1.0/kit/logs/Kit/Isaac-Sim Python/5.1/kit_20261124_010855.log
+2026-11-23T17:08:55Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/user/isaacsim-5.1.0/kit/data/Kit/Isaac-Sim Python/5.1/b949d686-ed81-447a-ae8ea781-67bdb792.dmp'
+2026-11-23T17:08:55Z [3ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/user/isaacsim-5.1.0/kit/data/Kit/Isaac-Sim Python/5.1/936970fe-ac86-41b7-cd55b7bc-111f6a78.dmp'
+2026-11-23T17:08:55Z [3ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/user/isaacsim-5.1.0/kit/data/Kit/Isaac-Sim Python/5.1/42027655-1f26-43e7-668301b0-4f4055d1.dmp'
+2026-11-23T17:08:55Z [4ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/user/isaacsim-5.1.0/kit/data/Kit/Isaac-Sim Python/5.1/44306c2f-79bb-4aa0-cb346eb3-b4c40784.dmp'
+2026-11-23T17:08:55Z [4ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/user/isaacsim-5.1.0/kit/data/Kit/Isaac-Sim Python/5.1/378089c0-c0ad-4440-ae9943a7-cce81ecd.dmp'
+[0.070s] [ext: omni.kit.async_engine-0.0.3] startup
+[0.529s] [ext: omni.metrics.core-0.0.3] startup
+[0.529s] [ext: omni.client.lib-1.1.0] startup
+[0.552s] [ext: omni.blobkey-1.1.2] startup
+[0.552s] [ext: omni.stats-1.0.1] startup
+[0.554s] [ext: omni.datastore-0.0.0] startup
+[0.565s] [ext: omni.client-1.3.0] startup
+[0.574s] [ext: omni.ujitso.default-1.0.0] startup
+[0.577s] [ext: omni.hsscclient-1.1.2] startup
+[0.585s] [ext: omni.gpu_foundation.shadercache.vulkan-1.0.0] startup
+[0.587s] [ext: omni.assets.plugins-0.0.0] startup
+[0.590s] [ext: omni.gpu_foundation-0.0.0] startup
+[0.609s] [ext: carb.windowing.plugins-1.0.0] startup
+2026-11-23T17:08:56Z [592ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-11-23T17:08:56Z [592ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
+[0.611s] [ext: omni.kit.renderer.init-0.0.0] startup
+2026-11-23T17:08:56Z [635ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+2026-11-23T17:08:56Z [636ms] [Warning] [carb.cudainterop.plugin] CUDA_VISIBLE_DEVICES environment variable is set.
+2026-11-23T17:08:56Z [636ms] [Warning] [carb.cudainterop.plugin] Note CUDA device enumeration and Omniverse device enumeration are different.
+2026-11-23T17:08:56Z [636ms] [Warning] [carb.cudainterop.plugin] Setting CUDA_VISIBLE_DEVICES can lead to undesired behavior or crashes.
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 580.178.04    | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | NVIDIA L20                       | Yes: 0 |     | 46068   MB | 10de      | 0          |
+|     |                                  |        |     |            | 26ba      | e064bda0.. |
+|     |                                  |        |     |            | 2         |            |
+|=============================================================================================|
+| OS: 22.04.5 LTS (Jammy Jellyfish) ubuntu, Version: 22.04.5, Kernel: 6.8.0-138-generic
+| Processor: AMD EPYC 9554 64-Core Processor
+| Cores: 8 | Logical Cores: 8
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 64210 | Free Memory: 30414
+| Total Page/Swap (MB): 2047 | Free Page/Swap: 0
+|---------------------------------------------------------------------------------------------|
+cat: '/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor': No such file or directory
+2026-11-23T17:08:57Z [1,512ms] [Warning] [gpu.foundation.plugin] ECC is enabled on physical device 0
+[2.005s] [ext: omni.kit.pipapi-0.0.0] startup
+[2.007s] [ext: omni.kit.pip_archive-0.0.0] startup
+[2.007s] [ext: omni.pip.compute-1.6.3] startup
+[2.008s] [ext: omni.materialx.libs-1.0.7] startup
+[2.019s] [ext: omni.pip.cloud-1.4.3] startup
+[2.022s] [ext: omni.isaac.core_archive-3.0.0] startup
+[2.022s] [ext: omni.usd.config-1.0.6] startup
+[2.027s] [ext: omni.gpucompute.plugins-0.0.0] startup
+[2.027s] [ext: omni.usd.libs-1.0.1] startup
+[2.160s] [ext: omni.kit.telemetry-0.5.2] startup
+[2.211s] [ext: omni.mdl-56.0.3] startup
+[2.245s] [ext: omni.iray.libs-0.0.0] startup
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin] [parent]: failed to exec the new image for the child process 3629809 {ignore = 4, error = 13/Permission denied, errno = -1/Unknown error -1}
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin] failed to fork the child process {errno = -1/Unknown error -1, lastErrno = 13/Permission denied}
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin] launch descriptor for '/home/user/isaacsim-5.1.0/extscache/omni.kit.telemetry-0.5.2+69cbf6ad.lx64.r.cp311/omni.telemetry.transmitter/omni.telemetry.transmitter' (51 arguments)
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin]     cmd: /home/user/isaacsim-5.1.0/extscache/omni.kit.telemetry-0.5.2+69cbf6ad.lx64.r.cp311/omni.telemetry.transmitter/omni.telemetry.transmitter --/telemetry/enableAnonymousData=false --/telemetry/enableAnonymousAppName=true "--/telemetry/logging/warnFilter/0="*"" --/telemetry/enableNVDF=false --/telemetry/enableSentry=false --/telemetry/removePIISentry=false "--/telemetry/appRootPath=""" "--/telemetry/dsn="https://b61f14dfc36f4beabadf4d9dba8e492b@sentry.perflab.nvidia.com/834"" "--/telemetry/openEndpointUrl="https://opentelemetry.analytics.nvidiagrid.net/api/v3/topic/omniverse-team.open.omni-open-collector"" "--/telemetry/openTestEndpointUrl="https://opentelemetry.analytics.nvidiagrid.net/api/v3/topic/omniverse-team.open.omni-test-open-collector"" "--/telemetry/enterpriseOpenEndpointUrl="https://opentelemetry.analytics.nvidiagrid.net/api/v3/topic/omniverse-team.open.omni-ove-open-collector"" "--/telemetry/enterpriseOpenTestEndpointUrl="https://opentelemetry.analytics.nvidiagrid.net/api/v3/topic/omniverse-team.open.omni-ove-test-open-collector"" --/telemetry/useOpenEndpoint=false "--/log/outputStreamLevel="Warning"" "--/log/debugConsoleLevel="Warning"" "--/log/fileLogLevel="Info"" --/log/fileMaxCount=30 --/log/includeTimeStamp=true "--/log/setElapsedTimeUnits="milliseconds"" --/log/enabled=true --/log/async=false "--/log/fileFlushLevel="verbose"" --/log/flushStandardStreamOutput=false --/log/enableDebugConsoleOutput=true --/log/enableColorOutput=true --/log/processGroupId=0 --/log/includeSource=true --/log/includeChannel=true --/log/includeFilename=false --/log/includeLineNumber=false --/log/includeFunctionName=false --/log/includeThreadId=false --/log/includeProcessId=false --/log/includeTraceId=false --/log/detail=false --/log/fullDetail=false --/log/forceAnsiColor=false --/log/fileAppend=false --/log/utcTimestamp=true --/log/microsecondTimestamp=false --/log/enableStandardStreamOutput=false --/log/file=/home/user/.nvidia-omniverse/logs/omni.telemetry.transmitter.log --/log/level=Info --/log/file=/home/user/isaacsim-5.1.0/kit/logs/omni.telemetry.transmitter.log --/log/level=Warning --/privacy/personalization=false --/privacy/performance=false --/privacy/usage=false --/privacy/userId= --/telemetry/transmitter/0/eventProtocol=default
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin]     flags = NoInheritEnv, AllowBadEnv, NoStdOut, NoStdErr (0x000005b0)
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin]     env:
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin]       0) 'PXR_MTLX_STDLIB_SEARCH_PATHS=/home/user/isaacsim-5.1.0/extscache/omni.materialx.libs-1.0.7+69cbf6ad.lx64.r.cp311/MaterialX/libraries'
+2026-11-23T17:08:57Z [2,239ms] [Error] [carb.launcher.plugin]       1) 'OMNI_USD_RESOLVER_MDL_BUILTIN_PATHS=df.mdl,OmniUe4Function.mdl,nvidia/support_definitions.mdl,architectural.mdl,iray/environment.mdl,scene.mdl,adobe/annotations.mdl,OmniGlass_Opacity.mdl,materialx/stdlib_1_7.mdl,alg/materials/designer/pbr.mdl,OmniSurface/OmniSurfaceLiteBase.mdl,OmniSurfaceBlend.mdl,alg/materials/physically_metallic_roughness.mdl,vray_materials.mdl,nvidia/aux_definitions.mdl,OmniPBR_ClearCoat.mdl,OmniGlass.mdl,limits.mdl,alg/base/annotations.mdl,OmniSurface/OmniSurfaceBase.mdl,materialx/core.mdl,materialx/pbrlib_1_7.mdl,adobe/mtl.mdl,materialx/stdlib_1_9.mdl,materialx/pbrlib_1_10.mdl,debug.mdl,adobe/util.mdl,vray_maps.mdl,OmniUe4Subsurface.mdl,alg/materials/designer/lights.mdl,alg/materials/asm/standard_scatter.mdl,omni_light.mdl,nvidia/digital_human_tech/random_value.mdl,gltf/pbr.mdl,usd_dome.mdl,tex.mdl,alg/materials/physically_specular_glossiness.mdl,adobe/volume.mdl,materialx/stdlib_1_10.mdl,materialx/stdlib_1_8.mdl,OmniPBR_Opacity.mdl,SimPBR_Translucent.mdl,OmniPBR_ClearCoat_Opacity.mdl,alg/materials/lambert.mdl,alg/materials/designer/legacy/physically_metallic_roughness_sss.mdl,alg/materials/blinn.mdl,OmniVolumeNoise.mdl,nvidia/iray/hosek_wilkie_sky_data.mdl,materialx/stdlib_1_6.mdl,WhiteShadowCatcher.mdl,OmniPBR.mdl,nvidia/iray/hosek_wilkie_sky.mdl,SimPBR.mdl,OmniSurface.mdl,iray/omni_light.mdl,materialx/pbrlib.mdl,materialx/noise.mdl,alg/materials/designer/lambert.mdl,alg/base/core.mdl,OmniSurface/OmniHairBase.mdl,nvidia/core_definitions.mdl,alg/base/normalmapping.mdl,base.mdl,OmniHairPresets.mdl,materialx/hsv.mdl,iray/usd_dome.mdl,anno.mdl,adobe/convert.mdl,UsdPreviewSurface.mdl,alg/materials/designer.mdl,OmniSurface/OmniShared.mdl,nvidia/axf_importer/axf_importer.mdl,materialx/swizzle.mdl,alg/materials/designer/blinn.mdl,nvidia/digital_human_tech/color_correct.mdl,materialx/pbrlib_1_9.mdl,MdlStates.mdl,OmniSurfacePresets.mdl,OmniUe4FunctionExtension17.mdl,OmniEmissive.mdl,OmniPBRBase.mdl,state.mdl,math.mdl,alg/materials/lights.mdl,alg/materials/designer/legacy/physically_metallic_roughness.mdl,OmniSurfaceLite.mdl,UsdPreviewSurfaceLib.mdl,OmniSurface/OmniSurfaceBlendBase.mdl,iray/architectural.mdl,Default.mdl,SimPBR_Model.mdl,materialx/pbrlib_1_6.mdl,ad_3dsmax_materials.mdl,DebugWhiteEmissive.mdl,mdl-builtin.mdl,UsdPreviewSurfaceMonolithic.mdl,adobe/anisotropy.mdl,materialx/sampling.mdl,alg/materials/designer/legacy/physically_metallic_roughness_coated.mdl,environment.mdl,adobe/materials.mdl,OmniUe4Translucent.mdl,alg/materials/designer/legacy/physically_specular_glossiness.mdl,std.mdl,OmniHair.mdl,alg/materials/designer/skin.mdl,OmniVolumeDensity.mdl,UsdPreviewSurfaceMonolithicLite.mdl,materialx/stdlib.mdl,DebugWhite.mdl,ad_3dsmax_maps.mdl,baking_annotations.mdl,OmniUe4Base.mdl,OmniSurface/OmniImage.mdl,materialx/pbrlib_1_8.mdl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       2) 'HD_CHANGETRACKER_USE_CONTIGUOUS_VALUES_MAP=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       3) 'HD_ENABLE_SCENE_INDEX_EMULATION=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       4) 'HD_ENABLE_MULTITHREADED_NON_MATERIAL_SPRIM_SYNC=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       5) 'USDSTAGE_DISABLE_INTERP_NOTICE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       6) 'USDIMAGING_ENABLE_NESTED_GPRIMS=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       7) 'USDIMAGING_ENABLE_SPARSE_LIGHT_UPDATES=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       8) 'TF_ENV_SETTING_ALERTS_ENABLED=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       9) 'GL_NV_RENDER_GPU_LUID=0x00000000 0x00000000'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       10) '__GL_SHADER_DISK_CACHE_PATH=/home/user/isaacsim-5.1.0/kit/cache/nv_shadercache'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       11) '__NV_SIGNED_LOAD_CHECK=none'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       12) '__GL_0x542675=0x4c0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       13) '__GL_0xab9b87=0x76165656'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       14) '__GL_0x410e48=0x00000001'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       15) 'BEAM_PHYSICS_DIAGNOSTICS_PHASES=*'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       16) 'CONDA_PROMPT_MODIFIER=(internutopia311) '
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       17) 'BEAM_CAP0_PICKUP_DEPTH_M=-0.0015'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       18) 'BEAM_IDLE_HOLD_ANCHOR=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       19) 'BEAM_COMMON_POSE_WINDOW=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       20) 'PCP_DISABLE_TIME_SCALING_BY_LAYER_TCPS=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       21) 'BEAM_HANDOVER_UNLOAD_LIFT=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       22) '__GL_0x546312=0x00000001'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       23) 'BEAM_PHYSICS_DIAGNOSTICS_OBJECTS=fabrica_beam_6,fabrica_beam_3,fabrica_beam_2,fabrica_beam_1,fabrica_beam_0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       24) 'BEAM_COLUMN3_SIDE_CLEARANCE_ROUTE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       25) 'CONDA_DEFAULT_ENV=internutopia311'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       26) 'BEAM_RELEASE_JOINT_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/release_joint_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       27) 'BEAM_SUPPORT_CONTACT_TRACE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       28) 'DUAL_FRANKA_ATTACH_DEBUG_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/attach_debug.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       29) 'BEAM_OPT_FULL_TRACE_FROM_STEP=45000'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       30) 'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       31) 'MOTD_SHOWN=pam'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       32) 'MKL_NUM_THREADS=4'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       33) 'BEAM_EXPLORATION_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/exploration_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       34) 'OLDPWD=/home/user/isaacsim-5.1.0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       35) 'BEAM_FINAL_POSE_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/final_pose_window_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       36) '__GL_0xab9b86=0x76165656'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       37) 'BEAM_COLUMN3_TURN_PEAK_FORCE_BAND_N=16,24'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       38) 'PYTHONPATH=/home/user/beam_integration_20261010_upstream6f57dae/runtime_tools/geometry_deps:/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository::/home/user/isaacsim-5.1.0/python_packages:/home/user/isaacsim-5.1.0/exts/isaacsim.simulation_app:/home/user/isaacsim-5.1.0/extsDeprecated/omni.isaac.kit:/home/user/isaacsim-5.1.0/kit/kernel/py:/home/user/isaacsim-5.1.0/kit/plugins/bindings-python:/home/user/isaacsim-5.1.0/exts/isaacsim.robot_motion.lula/pip_prebundle:/home/user/isaacsim-5.1.0/exts/isaacsim.asset.exporter.urdf/pip_prebundle:/home/user/isaacsim-5.1.0/extscache/omni.kit.pip_archive-0.0.0+69cbf6ad.lx64.cp311/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.isaac.core_archive/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.isaac.ml_archive/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.pip.compute/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.pip.cloud/pip_prebundle:/home/user/isaacsim-5.1.0/python_packages:/home/user/isaacsim-5.1.0/exts/isaacsim.simulation_app:/home/user/isaacsim-5.1.0/extsDeprecated/omni.isaac.kit:/home/user/isaacsim-5.1.0/kit/kernel/py:/home/user/isaacsim-5.1.0/kit/plugins/bindings-python:/home/user/isaacsim-5.1.0/exts/isaacsim.robot_motion.lula/pip_prebundle:/home/user/isaacsim-5.1.0/exts/isaacsim.asset.exporter.urdf/pip_prebundle:/home/user/isaacsim-5.1.0/extscache/omni.kit.pip_archive-0.0.0+69cbf6ad.lx64.cp311/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.isaac.core_archive/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.isaac.ml_archive/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.pip.compute/pip_prebundle:/home/user/isaacsim-5.1.0/exts/omni.pip.cloud/pip_prebundle'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       39) 'CONDA_PREFIX=/Embodied_AI/miniconda3/envs/internutopia311'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       40) 'LC_TELEPHONE=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       41) 'VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       42) 'USD_SHADE_WARN_ON_MISSING_MATERIAL_BINDING_API=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       43) 'GIT_PYTHON_GIT_EXECUTABLE=/Embodied_AI/miniconda3/bin/git'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       44) 'XDG_SESSION_TYPE=tty'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       45) 'OPENBLAS_NUM_THREADS=8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       46) 'BEAM_CONTACT_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/contact_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       47) 'SHELL=/bin/bash'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       48) 'LOGNAME=user'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       49) 'LANGUAGE=zh_CN:en'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       50) 'BEAM_LOADED_TARGET_HOLD_SECONDS=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       51) 'BEAM_COLUMN3_PICKUP_DEPTH_M=-0.004'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       52) 'CONDA_EXE=/Embodied_AI/miniconda3/bin/conda'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       53) 'BEAM_PART0_RELEASE_AFTER_CLEAR=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       54) '__GL_0x410ea8=0x00000000'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       55) 'ISAAC_SIM_ROOT=/home/user/isaacsim-5.1.0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       56) 'BEAM_COLUMN3_CARRY_PEAK_FORCE_BAND_N=16,24'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       57) 'BEAM_EXPLORE_POST_SEAT=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       58) 'EXP_PATH=/home/user/isaacsim-5.1.0/apps'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       59) 'BEAM_EXTERNAL_FORCES_EVERY_ITERATION=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       60) 'BEAM_OPT_FULL_TRACE_STRIDE=8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       61) 'LD_LIBRARY_PATH=/home/user/isaacsim-5.1.0/exts/omni.pip.compute/pip_prebundle/cv2/../../lib64::/home/user/isaacsim-5.1.0/.:/home/user/isaacsim-5.1.0/exts/isaacsim.robot.schema/plugins/lib:/home/user/isaacsim-5.1.0/exts/isaacsim.robot_motion.lula/pip_prebundle:/home/user/isaacsim-5.1.0/exts/isaacsim.asset.exporter.urdf/pip_prebundle:/home/user/isaacsim-5.1.0/kit:/home/user/isaacsim-5.1.0/kit/kernel/plugins:/home/user/isaacsim-5.1.0/kit/libs/iray:/home/user/isaacsim-5.1.0/kit/plugins:/home/user/isaacsim-5.1.0/kit/plugins/bindings-python:/home/user/isaacsim-5.1.0/kit/plugins/carb_gfx:/home/user/isaacsim-5.1.0/kit/plugins/rtx:/home/user/isaacsim-5.1.0/kit/plugins/gpu.foundation:/home/user/isaacsim-5.1.0/.:/home/user/isaacsim-5.1.0/exts/isaacsim.robot.schema/plugins/lib:/home/user/isaacsim-5.1.0/exts/isaacsim.robot_motion.lula/pip_prebundle:/home/user/isaacsim-5.1.0/exts/isaacsim.asset.exporter.urdf/pip_prebundle:/home/user/isaacsim-5.1.0/kit:/home/user/isaacsim-5.1.0/kit/kernel/plugins:/home/user/isaacsim-5.1.0/kit/libs/iray:/home/user/isaacsim-5.1.0/kit/plugins:/home/user/isaacsim-5.1.0/kit/plugins/bindings-python:/home/user/isaacsim-5.1.0/kit/plugins/carb_gfx:/home/user/isaacsim-5.1.0/kit/plugins/rtx:/home/user/isaacsim-5.1.0/kit/plugins/gpu.foundation'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       62) '__GL_0x410ea7=0x00000000'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       63) 'BEAM_COLUMN2_SIDE_CLEARANCE_ROUTE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       64) 'BEAM_SMOKE_STOP_STEP=420'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       65) 'BEAM_RELEASE_WITHOUT_STACK_WINDOW=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       66) 'BEAM_FINAL_ASSEMBLY_LOAD=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       67) '_CONDA_EXE=/Embodied_AI/miniconda3/bin/conda'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       68) 'BEAM_PART0_WINDOW_SPEEDUP=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       69) 'CONDA_PYTHON_EXE=/Embodied_AI/miniconda3/bin/python'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       70) 'PYTHONPATH_OLD='
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       71) '_CE_M='
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       72) 'LC_MONETARY=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       73) 'BEAM_ENTITY_GEOMETRY_TRACE_PATH=/dev/null'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       74) 'LC_TIME=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       75) 'HOME=/home/user'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       76) 'BEAM_FINAL_POSE_ACCEPTANCE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       77) 'BEAM_IDLE_HOLD_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/idle_hold_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       78) 'LC_ADDRESS=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       79) 'BEAM_CLOSE_GATE_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/close_gate_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       80) 'BEAM_STREAMING_CAPTURE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       81) 'LC_NAME=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       82) 'BEAM_OPT_PROBE_TRACE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       83) 'PYTHONNOUSERSITE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       84) 'BEAM_OPT_FRAME_CACHE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       85) 'LANG=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       86) '__GL_0x410ea6=0x00000000'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       87) 'USDGEOM_XFORMCOMMONAPI_ALLOW_DOUBLES=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       88) 'INTERNUTOPIA_EXTENSION_PROFILE=ur5e_assembly'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       89) 'BEAM_OPT_FASTCOPY=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       90) 'PWD=/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       91) 'BEAM_FAST_MOTION=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       92) 'PYTHONUNBUFFERED=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       93) 'USDSHADE_OLD_MDL_SCHEMA_SUPPORT=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       94) 'BEAM_HANDOVER_UNLOAD_LIFT_M=0.0002'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       95) 'CONDA_SHLVL=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       96) 'BEAM_PHYSICAL_ACCEPTANCE_PROFILE=plumbers_staged_v2'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       97) 'BEAM_ENTITY_GEOMETRY_CHECK=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       98) 'BEAM_EMPTY_RETREAT_LOCAL_IK=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       99) 'OMNI_USD_RESOLVER_MDL_BUILTIN_BYPASS=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       100) 'HDST_USE_TRANSLUCENT_MATERIAL_TAG=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       101) 'SSH_CONNECTION=172.22.147.31 52004 192.168.251.12 22'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       102) '_CE_CONDA='
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       103) 'OMNI_KIT_ACCEPT_EULA=YES'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       104) 'BEAM_AB_OUT=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       105) 'CUDA_VISIBLE_DEVICES=GPU-e064bda0-b445-2d7f-50d5-c1180deadea2'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       106) 'BEAM_POST_FAILURE_VIDEO_SECONDS=0'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       107) 'LC_PAPER=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       108) 'PAPERSIZE=a4'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       109) '_CONDA_ROOT=/Embodied_AI/miniconda3'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       110) 'BEAM_COLUMN3_TURN_ANGULAR_SPEED_RAD_S=0.20'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       111) 'XDG_SESSION_CLASS=user'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       112) 'LC_IDENTIFICATION=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       113) 'BEAM_PHYSICS_DIAGNOSTICS_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/physics_boundary_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       114) 'USER=user'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       115) 'SHLVL=2'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       116) 'OMP_NUM_THREADS=4'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       117) 'BEAM_PHYSICS_DIAGNOSTICS_UNFILTERED=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       118) 'BEAM_PHYSICS_DIAGNOSTICS=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       119) 'BEAM_OPT_VELOCITY_CACHE=1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       120) '__GL_SHADER_DISK_CACHE_SIZE=4194304000'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       121) 'LC_MEASUREMENT=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       122) 'XDG_SESSION_ID=26908'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       123) 'BEAM_PHYSICS_DIAGNOSTICS_END_STEP=-1'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       124) 'XDG_RUNTIME_DIR=/run/user/1000'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       125) 'BEAM_HOLD_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/hold_trace.jsonl'
+2026-11-23T17:08:57Z [2,240ms] [Error] [carb.launcher.plugin]       126) 'VK_INSTANCE_LAYERS='
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       127) 'BEAM_PHYSICS_DIAGNOSTICS_STRIDE=8'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       128) 'SSH_CLIENT=172.22.147.31 52004 22'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       129) 'USDIMAGING_GPRIMADAPTER_PRIMVAR_INVALIDATION=0'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       130) 'LD_LIBRARY_PATH_OLD='
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       131) 'ISAAC_PATH=/home/user/isaacsim-5.1.0'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       132) 'BEAM_EXPLORE_CONTINUE=0'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       133) 'BEAM_MOTION_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/motion_trace.jsonl'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       134) 'PATH=/home/user/beam_integration_20261010_upstream6f57dae/runtime_tools/bin:/Embodied_AI/miniconda3/envs/internutopia311/bin:/Embodied_AI/miniconda3/bin:/Embodied_AI/miniconda3/envs/internutopia311/bin:/Embodied_AI/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       135) 'BEAM_COLUMN3_TRANSPORT_RAISE_M=0.16'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       136) 'BEAM_GRIPPER_SHELL_VISUALS=1'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       137) 'LC_NUMERIC=zh_CN.UTF-8'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       138) 'BEAM_PHYSICS_DIAGNOSTICS_START_STEP=45000'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       139) '_=/Embodied_AI/miniconda3/envs/internutopia311/bin/python'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       140) 'PXR_WORK_THREAD_LIMIT=8'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       141) 'BEAM_PHYSICS_SOLVER_TYPE=TGS'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       142) 'BEAM_CLOSE_CONTROL_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/close_control_trace.jsonl'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       143) 'VK_LAYER_PATH='
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       144) 'VK_SDK_PATH='
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       145) 'VULKAN_SDK='
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       146) 'VULKAN_HEADERS_INSTALL_DIR='
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       147) 'BEAM_RECENTER_LIFECYCLE_TRACE_PATH=/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/smoke_out/recenter_lifecycle_trace.jsonl'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       148) 'NODEVICE_SELECT=1'
+2026-11-23T17:08:57Z [2,241ms] [Error] [carb.launcher.plugin]       149) '__GL_0x50a159=0x00000000'
+2026-11-23T17:08:57Z [2,241ms] [Warning] [carb.launcher.plugin] failed to launch the new process.
+[2.264s] [ext: omni.mdl.neuraylib-0.2.12] startup
+[2.267s] [ext: omni.kit.usd.mdl-1.1.5] startup
+[2.397s] [ext: omni.isaac.ml_archive-3.0.4] startup
+[2.397s] [ext: omni.kit.loop-isaac-1.3.7] startup
+[2.398s] [ext: omni.kit.test-2.0.1] startup
+[2.448s] [ext: omni.appwindow-1.1.10] startup
+2026-11-23T17:08:57Z [2,432ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-11-23T17:08:57Z [2,432ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
+[2.453s] [ext: omni.kit.renderer.core-1.1.0] startup
+2026-11-23T17:08:57Z [2,452ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-11-23T17:08:57Z [2,453ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
+2026-11-23T17:08:57Z [2,470ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-11-23T17:08:57Z [2,470ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
+[2.490s] [ext: omni.kit.renderer.capture-0.0.0] startup
+[2.493s] [ext: omni.kit.renderer.imgui-2.0.5] startup
+2026-11-23T17:08:57Z [2,482ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-11-23T17:08:57Z [2,482ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
+2026-11-23T17:08:58Z [2,484ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-11-23T17:08:58Z [2,484ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
+2026-11-23T17:08:58Z [2,485ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
+2026-11-23T17:08:58Z [2,485ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
+[2.620s] [ext: omni.ui-2.27.1] startup
+[2.634s] [ext: omni.kit.mainwindow-1.0.3] startup
+[2.635s] [ext: carb.audio-0.1.0] startup
+[2.643s] [ext: omni.uiaudio-1.0.0] startup
+[2.644s] [ext: omni.kit.uiapp-0.0.0] startup
+[2.644s] [ext: omni.usd.schema.metrics.assembler-107.3.1] startup
+[2.647s] [ext: omni.usd.schema.audio-0.0.0] startup
+[2.651s] [ext: omni.anim.graph.schema-107.3.3] startup
+[2.665s] [ext: omni.usd_resolver-1.0.0] startup
+[2.670s] [ext: omni.usd.core-1.5.3] startup
+[2.673s] [ext: omni.usd.schema.render_settings.rtx-0.0.0] startup
+[2.693s] [ext: omni.usd.schema.semantics-0.0.0] startup
+[2.696s] [ext: isaacsim.robot.schema-3.6.0] startup
+[2.705s] [ext: omni.usd.schema.geospatial-0.0.0] startup
+[2.708s] [ext: omni.usd.schema.anim-0.0.0] startup
+[2.727s] [ext: omni.kit.window.popup_dialog-2.0.24] startup
+[2.732s] [ext: usdrt.scenegraph-7.6.1] startup
+[2.779s] [ext: omni.timeline-1.0.14] startup
+[2.782s] [ext: omni.resourcemonitor-107.0.1] startup
+[2.785s] [ext: omni.activity.core-1.0.3] startup
+[2.786s] [ext: omni.kit.widget.nucleus_connector-2.0.1] startup
+[2.789s] [ext: omni.hydra.usdrt_delegate-7.5.1] startup
+[2.798s] [ext: omni.kit.actions.core-1.0.0] startup
+[2.801s] [ext: omni.graph.exec-0.9.6] startup
+[2.802s] [ext: omni.kit.commands-1.4.10] startup
+[2.806s] [ext: omni.kit.usd_undo-0.1.8] startup
+[2.806s] [ext: omni.kit.exec.core-0.13.4] startup
+[2.808s] [ext: omni.kit.audiodeviceenum-1.0.2] startup
+[2.810s] [ext: omni.hydra.scene_delegate-0.3.4] startup
+[2.816s] [ext: omni.usd-1.13.10] startup
+[2.852s] [ext: omni.kit.asset_converter-5.0.17] startup
+[2.872s] [ext: omni.usd.schema.flow-107.1.1] startup
+[2.872s] [ext: omni.usd.schema.omnigraph-1.0.0] startup
+[2.879s] [ext: omni.usd.schema.omni_sensors-0.0.0] startup
+[2.880s] [ext: omni.anim.navigation.schema-107.3.3] startup
+[2.883s] [ext: omni.inspect-1.0.2] startup
+[2.885s] [ext: omni.kit.notification_manager-1.0.10] startup
+[2.887s] [ext: omni.graph.core-2.184.5] startup
+[2.892s] [ext: isaacsim.core.deprecation_manager-0.2.7] startup
+[2.893s] [ext: omni.usd.schema.physx-107.3.26] startup
+[2.938s] [ext: omni.usd.schema.isaac-3.0.5] startup
+[2.939s] [ext: omni.usd.schema.omniscripting-1.0.0] startup
+[2.943s] [ext: omni.usd.schema.omni_lens_distortion-0.0.0] startup
+[2.944s] [ext: omni.kvdb-107.3.26] startup
+[2.946s] [ext: omni.usdphysics-107.3.26] startup
+[2.948s] [ext: omni.physx.foundation-107.3.26] startup
+[2.951s] [ext: omni.localcache-107.3.26] startup
+[2.953s] [ext: omni.convexdecomposition-107.3.26] startup
+[2.956s] [ext: omni.physx.cooking-107.3.26] startup
+[2.960s] [ext: omni.physx-107.3.26] startup
+[2.973s] [ext: omni.physics-107.3.26] startup
+[2.977s] [ext: omni.kit.usd.layers-2.2.11] startup
+[2.987s] [ext: omni.physics.physx-107.3.26] startup
+2026-11-23T17:08:58Z [2,971ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
+[2.989s] [ext: omni.physics.stageupdate-107.3.26] startup
+[2.991s] [ext: omni.kit.numpy.common-0.1.3] startup
+[2.993s] [ext: isaacsim.core.version-2.0.6] startup
+[2.994s] [ext: omni.isaac.dynamic_control-2.0.7] startup
+2026-11-23T17:08:58Z [2,982ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+[3.000s] [ext: isaacsim.storage.native-1.5.1] startup
+[3.002s] [ext: omni.kit.menu.core-1.1.2] startup
+[3.003s] [ext: omni.kit.helper.file_utils-0.1.9] startup
+[3.004s] [ext: omni.usd.metrics.assembler-107.3.1] startup
+[3.010s] [ext: omni.kit.widget.context_menu-1.2.5] startup
+[3.012s] [ext: omni.warp.core-1.8.2] startup
+[3.198s] [ext: omni.usd.metrics.assembler.physics-107.3.26] startup
+[3.200s] [ext: omni.physics.tensors-107.3.26] startup
+[3.208s] [ext: omni.kit.context_menu-1.8.6] startup
+[3.210s] [ext: omni.kit.clipboard-1.0.5] startup
+[3.211s] [ext: isaacsim.core.utils-3.5.1] startup
+[3.215s] [ext: omni.kit.widget.filebrowser-2.12.3] startup
+[3.219s] [ext: omni.kit.widget.options_menu-1.1.6] startup
+[3.222s] [ext: omni.kit.widget.path_field-2.0.11] startup
+[3.223s] [ext: omni.index.libs-380600.8087.0] startup
+[3.223s] [ext: omni.ui.scene-1.11.5] startup
+[3.230s] [ext: omni.kit.widget.options_button-1.0.3] startup
+[3.230s] [ext: omni.kit.widget.browser_bar-2.0.10] startup
+[3.231s] [ext: omni.index-1.0.1] startup
+[3.232s] [ext: omni.hydra.rtx.shadercache.vulkan-1.0.0] startup
+[3.233s] [ext: omni.kit.window.filepicker-2.13.4] startup
+[3.250s] [ext: omni.volume-0.5.2] startup
+[3.255s] [ext: omni.ujitso.client-0.0.0] startup
+[3.255s] [ext: omni.graph.tools-1.79.2] startup
+[2026-11-24 01:08:58,775][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'any' as 'Any'
+[2026-11-24 01:08:58,775][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'bool' as 'Bool' and array 'BoolArray
+[2026-11-24 01:08:58,775][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'bundle' as 'Bundle'
+[2026-11-24 01:08:58,775][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'colord[3]' as 'Color3d' and array 'Color3dArray
+[2026-11-24 01:08:58,775][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'colorf[3]' as 'Color3f' and array 'Color3fArray
+[2026-11-24 01:08:58,776][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'colorh[3]' as 'Color3h' and array 'Color3hArray
+[2026-11-24 01:08:58,776][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'colord[4]' as 'Color4d' and array 'Color4dArray
+[2026-11-24 01:08:58,776][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'colorf[4]' as 'Color4f' and array 'Color4fArray
+[2026-11-24 01:08:58,776][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'colorh[4]' as 'Color4h' and array 'Color4hArray
+[2026-11-24 01:08:58,776][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'double' as 'Double' and array 'DoubleArray
+[2026-11-24 01:08:58,776][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'double[2]' as 'Double2' and array 'Double2Array
+[2026-11-24 01:08:58,777][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'double[3]' as 'Double3' and array 'Double3Array
+[2026-11-24 01:08:58,777][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'double[4]' as 'Double4' and array 'Double4Array
+[2026-11-24 01:08:58,777][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'execution' as 'Execution'
+[2026-11-24 01:08:58,777][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'float' as 'Float' and array 'FloatArray
+[2026-11-24 01:08:58,777][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'float[2]' as 'Float2' and array 'Float2Array
+[2026-11-24 01:08:58,777][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'float[3]' as 'Float3' and array 'Float3Array
+[2026-11-24 01:08:58,778][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'float[4]' as 'Float4' and array 'Float4Array
+[2026-11-24 01:08:58,778][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'frame[4]' as 'Frame' and array 'FrameArray
+[2026-11-24 01:08:58,778][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'half' as 'Half' and array 'HalfArray
+[2026-11-24 01:08:58,778][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'half[2]' as 'Half2' and array 'Half2Array
+[2026-11-24 01:08:58,778][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'half[3]' as 'Half3' and array 'Half3Array
+[2026-11-24 01:08:58,778][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'half[4]' as 'Half4' and array 'Half4Array
+[2026-11-24 01:08:58,778][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'int' as 'Int' and array 'IntArray
+[2026-11-24 01:08:58,779][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'int[2]' as 'Int2' and array 'Int2Array
+[2026-11-24 01:08:58,779][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'int[3]' as 'Int3' and array 'Int3Array
+[2026-11-24 01:08:58,779][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'int[4]' as 'Int4' and array 'Int4Array
+[2026-11-24 01:08:58,779][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'int64' as 'Int64' and array 'Int64Array
+[2026-11-24 01:08:58,779][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'matrixd[2]' as 'Matrix2d' and array 'Matrix2dArray
+[2026-11-24 01:08:58,779][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'matrixd[3]' as 'Matrix3d' and array 'Matrix3dArray
+[2026-11-24 01:08:58,779][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'matrixd[4]' as 'Matrix4d' and array 'Matrix4dArray
+[2026-11-24 01:08:58,780][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'normald[3]' as 'Normal3d' and array 'Normal3dArray
+[2026-11-24 01:08:58,780][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'normalf[3]' as 'Normal3f' and array 'Normal3fArray
+[2026-11-24 01:08:58,780][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'normalh[3]' as 'Normal3h' and array 'Normal3hArray
+[2026-11-24 01:08:58,780][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'objectId' as 'ObjectId' and array 'ObjectIdArray
+[2026-11-24 01:08:58,780][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'path' as 'Path'
+[2026-11-24 01:08:58,780][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'pointd[3]' as 'Point3d' and array 'Point3dArray
+[2026-11-24 01:08:58,781][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'pointf[3]' as 'Point3f' and array 'Point3fArray
+[2026-11-24 01:08:58,781][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'pointh[3]' as 'Point3h' and array 'Point3hArray
+[2026-11-24 01:08:58,781][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'quatd[4]' as 'Quatd' and array 'QuatdArray
+[2026-11-24 01:08:58,781][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'quatf[4]' as 'Quatf' and array 'QuatfArray
+[2026-11-24 01:08:58,781][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'quath[4]' as 'Quath' and array 'QuathArray
+[2026-11-24 01:08:58,781][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'string' as 'String'
+[2026-11-24 01:08:58,781][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'target' as 'Target'
+[2026-11-24 01:08:58,782][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'texcoordd[2]' as 'TexCoord2d' and array 'TexCoord2dArray
+[2026-11-24 01:08:58,782][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'texcoordf[2]' as 'TexCoord2f' and array 'TexCoord2fArray
+[2026-11-24 01:08:58,782][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'texcoordh[2]' as 'TexCoord2h' and array 'TexCoord2hArray
+[2026-11-24 01:08:58,782][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'texcoordd[3]' as 'TexCoord3d' and array 'TexCoord3dArray
+[2026-11-24 01:08:58,782][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'texcoordf[3]' as 'TexCoord3f' and array 'TexCoord3fArray
+[2026-11-24 01:08:58,782][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'texcoordh[3]' as 'TexCoord3h' and array 'TexCoord3hArray
+[2026-11-24 01:08:58,782][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'timecode' as 'Timecode' and array 'TimecodeArray
+[2026-11-24 01:08:58,783][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'token' as 'Token' and array 'TokenArray
+[2026-11-24 01:08:58,783][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'uchar' as 'UChar' and array 'UCharArray
+[2026-11-24 01:08:58,783][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'uint' as 'UInt' and array 'UIntArray
+[2026-11-24 01:08:58,783][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'uint64' as 'UInt64' and array 'UInt64Array
+[2026-11-24 01:08:58,783][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'vectord[3]' as 'Vector3d' and array 'Vector3dArray
+[2026-11-24 01:08:58,783][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'vectorf[3]' as 'Vector3f' and array 'Vector3fArray
+[2026-11-24 01:08:58,784][DEBUG] /home/user/isaacsim-5.1.0/extscache/omni.graph.tools-1.79.2+69cbf6ad/omni/graph/tools/_impl/autonode_generator/ogn_types.py[line:52] -: Defining data type 'vectorh[3]' as 'Vector3h' and array 'Vector3hArray
+[3.289s] [ext: omni.graph.image.core-0.6.1] startup
+[3.290s] [ext: omni.hydra.rtx-1.0.0] startup
+2026-11-23T17:08:58Z [3,305ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+[3.353s] [ext: omni.kit.window.file_importer-1.1.18] startup
+[3.356s] [ext: omni.kit.menu.utils-2.0.5] startup
+[3.365s] [ext: omni.graph.image.nodes-1.3.1] startup
+[3.367s] [ext: omni.kit.widget.searchable_combobox-1.0.6] startup
+[3.368s] [ext: omni.kit.hydra_texture-1.4.6] startup
+[3.373s] [ext: omni.kit.material.library-2.0.7] startup
+[3.378s] [ext: omni.hydra.engine.stats-1.0.3] startup
+[3.381s] [ext: omni.kit.viewport.scene_camera_model-1.0.6] startup
+[3.386s] [ext: omni.kit.widget.settings-1.2.6] startup
+[3.388s] [ext: omni.kit.viewport.legacy_gizmos-1.0.19] startup
+[3.391s] [ext: omni.kit.widget.viewport-107.1.3] startup
+[3.395s] [ext: omni.kit.viewport.registry-104.0.6] startup
+[3.396s] [ext: omni.kit.raycast.query-1.1.0] startup
+[3.402s] [ext: omni.physx.tensors-107.3.26] startup
+[3.407s] [ext: omni.kit.window.drop_support-1.0.5] startup
+[3.408s] [ext: omni.kit.primitive.mesh-1.0.17] startup
+[3.411s] [ext: omni.kit.viewport.window-107.2.0] startup
+[3.434s] [ext: omni.kit.window.preferences-1.8.0] startup
+[3.440s] [ext: isaacsim.core.simulation_manager-1.4.4] startup
+[3.579s] [ext: omni.graph.action_core-1.1.7] startup
+[3.581s] [ext: omni.graph-1.141.2] startup
+[3.628s] [ext: omni.kit.viewport.utility-1.1.2] startup
+[3.630s] [ext: omni.kit.viewport.menubar.core-107.2.1] startup
+[3.647s] [ext: isaacsim.core.prims-0.6.1] startup
+[3.678s] [ext: omni.graph.action_nodes-1.50.4] startup
+[3.683s] [ext: omni.kit.stage_template.core-1.1.22] startup
+[3.687s] [ext: omni.syntheticdata-0.6.13] startup
+[3.725s] [ext: omni.graph.nodes-1.170.10] startup
+[3.759s] [ext: omni.graph.action-1.130.0] startup
+[3.767s] [ext: omni.kit.stage_templates-2.0.0] startup
+[3.786s] [ext: omni.kit.widget.filter-1.1.4] startup
+[3.789s] [ext: omni.kit.widget.graph-2.0.0] startup
+[3.798s] [ext: omni.kit.property.adapter.core-1.0.2] startup
+[3.800s] [ext: omni.kit.window.file_exporter-1.0.33] startup
+[3.803s] [ext: omni.kit.widget.searchfield-1.1.8] startup
+[3.805s] [ext: omni.kit.hotkeys.core-1.3.10] startup
+[3.807s] [ext: omni.kit.graph.delegate.default-1.2.3] startup
+[3.807s] [ext: omni.kit.property.adapter.fabric-1.0.3] startup
+[3.810s] [ext: omni.kit.widget.stage-3.1.4] startup
+[3.824s] [ext: omni.kit.property.adapter.usd-1.0.2] startup
+[3.826s] [ext: omni.kit.graph.editor.core-1.5.3] startup
+[3.830s] [ext: omni.kit.widget.material_preview-1.0.16] startup
+[3.833s] [ext: omni.kit.widget.highlight_label-1.0.3] startup
+[3.834s] [ext: omni.kit.window.file-2.0.5] startup
+[3.839s] [ext: omni.kit.window.content_browser_registry-0.0.6] startup
+[3.840s] [ext: omni.kit.window.property-1.12.1] startup
+[3.844s] [ext: omni.kit.window.content_browser-3.1.3] startup
+[3.858s] [ext: omni.kit.graph.usd.commands-1.3.1] startup
+[3.860s] [ext: omni.kit.property.usd-4.5.12] startup
+[3.874s] [ext: omni.graph.ui_nodes-1.50.5] startup
+[3.880s] [ext: omni.videoencoding-0.1.2] startup
+[3.886s] [ext: omni.kit.window.material_graph-1.9.1] startup
+[3.902s] [ext: omni.warp-1.8.2] startup
+[3.914s] [ext: isaacsim.core.api-4.8.0] startup
+[3.954s] [ext: omni.graph.scriptnode-1.50.0] startup
+[3.963s] [ext: isaacsim.test.docstring-1.1.0] startup
+[3.973s] [ext: isaacsim.core.experimental.utils-0.3.0] startup
+[3.981s] [ext: omni.replicator.core-1.12.27] startup
+2026-11-23T17:08:59Z [3,994ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+Warp 1.8.2 initialized:
+   CUDA Toolkit 12.8, Driver 13.0
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L20" (44 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/user/.cache/warp/1.8.2
+2026-11-23T17:08:59Z [4,203ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
+2026-11-23T17:08:59Z [4,203ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
+2026-11-23T17:08:59Z [4,204ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+[4.226s] [ext: isaacsim.core.experimental.prims-0.8.1] startup
+[4.283s] [ext: omni.kit.window.extensions-1.4.27] startup
+[4.305s] [ext: isaacsim.core.experimental.objects-0.4.0] startup
+[4.330s] [ext: omni.ui_query-1.1.8] startup
+[4.335s] [ext: omni.kit.manipulator.viewport-107.0.1] startup
+[4.341s] [ext: isaacsim.robot.surface_gripper-3.3.1] startup
+[4.351s] [ext: omni.kit.ui_test-1.3.7] startup
+[4.359s] [ext: omni.graph.visualization.nodes-2.1.3] startup
+[4.465s] [ext: isaacsim.robot_motion.lula-4.0.8] startup
+[4.545s] [ext: isaacsim.core.nodes-3.4.3] startup
+[4.577s] [ext: isaacsim.gui.components-1.2.1] startup
+[4.672s] [ext: isaacsim.robot_motion.motion_generation-8.0.26] startup
+[4.890s] [ext: isaacsim.robot.manipulators-3.3.6] startup
+Warp DeprecationWarning: The `warp.sim` module is deprecated and will be removed in v1.10. Please transition to using the forthcoming Newton library instead.
+[4.933s] [ext: isaacsim.core.experimental.materials-0.4.0] startup
+[4.964s] [ext: isaacsim.robot.manipulators.examples-1.1.2] startup
+[4.979s] [ext: isaacsim.cortex.framework-1.0.12] startup
+[4.983s] [ext: isaacsim.cortex.behaviors-2.0.14] startup
+[4.987s] [ext: omni.isaac.cortex.sample_behaviors-2.0.5] startup
+2026-11-23T17:09:00Z [4,972ms] [Warning] [omni.isaac.cortex] omni.isaac.cortex has been deprecated in favor of isaacsim.cortex.framework. Please update your code accordingly.
+2026-11-23T17:09:00Z [4,973ms] [Warning] [omni.isaac.cortex.sample_behaviors] omni.isaac.cortex.sample_behaviors has been deprecated in favor of isaacsim.cortex.behaviors. Please update your code accordingly.
+[5.002s] [ext: omni.kit.widget.zoombar-1.0.6] startup
+[5.009s] [ext: isaacsim.gui.content_browser-0.1.11] startup
+[5.021s] [ext: omni.kit.browser.core-2.3.13] startup
+[5.034s] [ext: omni.kit.widget.stage_icons-1.0.8] startup
+[5.038s] [ext: omni.kit.widget.prompt-1.0.7] startup
+[5.042s] [ext: omni.kit.usd.collect-2.4.5] startup
+[5.048s] [ext: omni.kit.browser.folder.core-1.10.9] startup
+[5.063s] [ext: omni.kit.window.stage-2.6.1] startup
+[5.077s] [ext: omni.kit.usdz_export-1.0.9] startup
+[5.082s] [ext: omni.kit.tool.collect-2.2.18] startup
+[5.087s] [ext: omni.kit.menu.stage-1.2.7] startup
+[5.090s] [ext: omni.kit.tool.asset_importer-4.3.2] startup
+[5.102s] [ext: isaacsim.robot.wheeled_robots-4.0.24] startup
+[5.114s] [ext: isaacsim.examples.browser-0.2.1] startup
+[5.133s] [ext: isaacsim.asset.importer.urdf-2.4.30] startup
+[5.227s] [ext: omni.isaac.wheeled_robots-3.0.7] startup
+2026-11-23T17:09:00Z [5,212ms] [Warning] [omni.isaac.wheeled_robots] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,212ms] [Warning] [omni.isaac.wheeled_robots.controllers] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,212ms] [Warning] [omni.isaac.wheeled_robots.controllers.ackermann_controller] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,212ms] [Warning] [omni.isaac.wheeled_robots.controllers.differential_controller] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,213ms] [Warning] [omni.isaac.wheeled_robots.controllers.holonomic_controller] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,213ms] [Warning] [omni.isaac.wheeled_robots.controllers.quintic_path_planner] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,214ms] [Warning] [omni.isaac.wheeled_robots.controllers.stanley_control] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,215ms] [Warning] [omni.isaac.wheeled_robots.controllers.wheel_base_pose_controller] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,218ms] [Warning] [omni.isaac.wheeled_robots.impl] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,220ms] [Warning] [omni.isaac.wheeled_robots.robots] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,220ms] [Warning] [omni.isaac.wheeled_robots.robots.holonomic_robot_usd_setup] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,220ms] [Warning] [omni.isaac.wheeled_robots.robots.wheeled_robot] omni.isaac.wheeled_robots has been deprecated in favor of isaacsim.robot.wheeled_robots. Please update your code accordingly.
+[5.239s] [ext: isaacsim.simulation_app-2.12.2] startup
+[5.239s] [ext: omni.isaac.franka-1.0.7] startup
+2026-11-23T17:09:00Z [5,221ms] [Warning] [omni.isaac.franka] omni.isaac.franka has been deprecated in favor of isaacsim.robot.manipulators.examples.franka. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,221ms] [Warning] [omni.isaac.franka.franka] omni.isaac.franka has been deprecated in favor of isaacsim.robot.manipulators.examples.franka. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,247ms] [Warning] [omni.isaac.franka.kinematics_solver] omni.isaac.franka has been deprecated in favor of isaacsim.robot.manipulators.examples.franka. Please update your code accordingly.
+[5.266s] [ext: omni.isaac.kit-2.0.6] startup
+2026-11-23T17:09:00Z [5,251ms] [Warning] [omni.isaac.kit] omni.isaac.kit has been deprecated in favor of isaacsim.simulation_app. Please update your code accordingly.
+[5.269s] [ext: omni.kit.selection-0.1.6] startup
+[5.271s] [ext: omni.isaac.lula-4.0.6] startup
+2026-11-23T17:09:00Z [5,254ms] [Warning] [omni.isaac.lula] omni.isaac.lula has been deprecated in favor of isaacsim.robot_motion.lula. Please update your code accordingly.
+[5.272s] [ext: isaacsim.robot_motion.lula_test_widget-1.0.12] startup
+[5.275s] [ext: isaacsim.asset.browser-1.3.23] startup
+[5.333s] [ext: omni.kit.viewport.actions-107.0.2] startup
+[5.340s] [ext: isaacsim.gui.menu-2.4.4] startup
+[5.348s] [ext: omni.isaac.manipulators-3.0.7] startup
+2026-11-23T17:09:00Z [5,332ms] [Warning] [omni.isaac.manipulators] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,333ms] [Warning] [omni.isaac.manipulators.controllers] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,334ms] [Warning] [omni.isaac.manipulators.controllers.pick_place_controller] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,335ms] [Warning] [omni.isaac.manipulators.controllers.stacking_controller] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,335ms] [Warning] [omni.isaac.manipulators.grippers] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,336ms] [Warning] [omni.isaac.manipulators.grippers.gripper] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,336ms] [Warning] [omni.isaac.manipulators.grippers.parallel_gripper] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,336ms] [Warning] [omni.isaac.manipulators.grippers.surface_gripper] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,336ms] [Warning] [omni.isaac.manipulators.manipulators] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,336ms] [Warning] [omni.isaac.manipulators.manipulators.single_manipulator] omni.isaac.manipulators has been deprecated in favor of isaacsim.robot.manipulators. Please update your code accordingly.
+[5.354s] [ext: omni.isaac.lula_test_widget-1.0.6] startup
+2026-11-23T17:09:00Z [5,339ms] [Warning] [omni.isaac.lula_test_widget] omni.isaac.lula_test_widget has been deprecated in favor of isaacsim.robot_motion.lula_test_widget. Please update your code accordingly.
+[5.357s] [ext: omni.isaac.asset_browser-1.0.6] startup
+2026-11-23T17:09:00Z [5,342ms] [Warning] [omni.isaac.asset_browser] omni.isaac.asset_browser has been deprecated in favor of isaacsim.asset.browser. Please update your code accordingly.
+[5.361s] [ext: omni.kit.viewport.menubar.display-107.0.3] startup
+[5.366s] [ext: omni.isaac.menu-1.0.6] startup
+2026-11-23T17:09:00Z [5,349ms] [Warning] [omni.isaac.menu] omni.isaac.menu has been deprecated in favor of isaacsim.gui.menu. Please update your code accordingly.
+[5.368s] [ext: omni.isaac.motion_generation-8.0.7] startup
+2026-11-23T17:09:00Z [5,351ms] [Warning] [omni.isaac.motion_generation] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,353ms] [Warning] [omni.isaac.motion_generation.articulation_kinematics_solver] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,353ms] [Warning] [omni.isaac.motion_generation.articulation_motion_policy] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,353ms] [Warning] [omni.isaac.motion_generation.articulation_trajectory] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,353ms] [Warning] [omni.isaac.motion_generation.kinematics_interface] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,353ms] [Warning] [omni.isaac.motion_generation.lula] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,353ms] [Warning] [omni.isaac.motion_generation.lula.kinematics] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.lula.motion_policies] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.lula.path_planners] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.lula.trajectory_generator] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.motion_policy_controller] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.motion_policy_interface] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.path_planner_visualizer] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.path_planning_interface] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.trajectory] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,354ms] [Warning] [omni.isaac.motion_generation.world_interface] omni.isaac.motion_generation has been deprecated in favor of isaacsim.robot_motion.motion_generation. Please update your code accordingly.
+[5.373s] [ext: omni.isaac.assets_check-0.3.13] startup
+2026-11-23T17:09:00Z [5,356ms] [Warning] [omni.isaac.assets_check] omni.isaac.assets_check has been deprecated in favor of isaacsim.asset.browser. Please update your code accordingly.
+[5.374s] [ext: isaacsim.gui.sensors.icon-2.0.3] startup
+[5.392s] [ext: isaacsim.asset.importer.mjcf-2.5.13] startup
+[5.400s] [ext: omni.sensors.nv.common-3.0.0] startup
+[5.426s] [ext: isaacsim.sensors.physics-0.4.3] startup
+[5.433s] [ext: omni.sensors.net-1.0.0] startup
+[5.440s] [ext: omni.isaac.nucleus-1.0.6] startup
+2026-11-23T17:09:00Z [5,423ms] [Warning] [omni.isaac.nucleus] omni.isaac.nucleus has been deprecated in favor of isaacsim.storage.native. Please update your code accordingly.
+2026-11-23T17:09:00Z [5,423ms] [Warning] [omni.isaac.nucleus.nucleus] omni.isaac.nucleus.nucleus has been deprecated in favor of isaacsim.storage.native. Please update your code accordingly.
+[5.442s] [ext: omni.sensors.nv.materials-2.0.0] startup
+[5.450s] [ext: isaacsim.robot.policy.examples-4.1.11] startup
+[5.452s] [ext: omni.sensors.nv.wpm-3.0.0] startup
+[5.456s] [ext: omni.sensors.nv.lidar-3.0.0] startup
+[5.469s] [ext: isaacsim.util.debug_draw-3.1.0] startup
+[5.473s] [ext: omni.sensors.nv.radar-3.0.0] startup
+[5.480s] [ext: omni.sensors.nv.ids-2.0.0] startup
+[5.483s] [ext: isaacsim.core.cloner-1.4.10] startup
+[5.485s] [ext: isaacsim.sensors.physx-2.3.2] startup
+[5.491s] [ext: isaacsim.sensors.rtx-15.8.4] startup
+[5.505s] [ext: isaacsim.sensors.camera-1.3.6] startup
+[5.519s] [ext: omni.isaac.quadruped-3.0.7] startup
+2026-11-23T17:09:01Z [5,502ms] [Warning] [omni.isaac.quadruped] omni.isaac.quadruped has been deprecated in favor of isaacsim.robot.policy.examples. Please update your code accordingly.
+[5.520s] [ext: omni.isaac.cloner-1.0.7] startup
+2026-11-23T17:09:01Z [5,507ms] [Warning] [omni.isaac.cloner] omni.isaac.cloner has been deprecated in favor of isaacsim.core.cloner. Please update your code accordingly.
+[5.526s] [ext: omni.isaac.range_sensor-4.0.6] startup
+2026-11-23T17:09:01Z [5,512ms] [Warning] [omni.isaac.range_sensor] omni.isaac.range_sensor has been deprecated in favor of isaacsim.sensors.physx. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,512ms] [Warning] [omni.isaac.range_sensor.commands] omni.isaac.range_sensor.commands has been deprecated in favor of isaacsim.sensors.physx.commands. Please update your code accordingly.
+[5.531s] [ext: omni.isaac.sensor-13.0.7] startup
+2026-11-23T17:09:01Z [5,514ms] [Warning] [omni.isaac.sensor] omni.isaac.sensor has been deprecated in favor of isaacsim.sensors.camera, isaacsim.sensors.physics, isaacsim.sensors.physx, and isaacsim.sensors.rtx. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,515ms] [Warning] [omni.isaac.sensor.camera] omni.isaac.sensor.camera has been deprecated in favor of isaacsim.sensors.camera.camera. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,515ms] [Warning] [omni.isaac.sensor.camera_view] omni.isaac.sensor.camera_view has been deprecated in favor of isaacsim.sensors.camera.camera_view. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,516ms] [Warning] [omni.isaac.sensor.commands] omni.isaac.sensor.commands has been deprecated in favor of isaacsim.sensors.physics.commands, isaacsim.sensors.physx.commands, and isaacsim.sensors.rtx.commands. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,519ms] [Warning] [omni.isaac.sensor.contact_sensor] omni.isaac.sensor.contact_sensor has been deprecated in favor of isaacsim.sensors.physics.contact_sensor. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,519ms] [Warning] [omni.isaac.sensor.imu_sensor] omni.isaac.sensor.imu_sensor has been deprecated in favor of isaacsim.sensors.physics.imu_sensor. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,519ms] [Warning] [omni.isaac.sensor.lidar_rtx] omni.isaac.sensor.lidar_rtx has been deprecated in favor of isaacsim.sensors.rtx.lidar_rtx. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,519ms] [Warning] [omni.isaac.sensor.rotating_lidar_physX] omni.isaac.sensor.imu_sensor has been deprecated in favor of isaacsim.sensors.physix.rotating_lidar_physX. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,520ms] [Warning] [omni.isaac.sensor.scripts.samples.contact_sensor] omni.isaac.sensor.scripts.samples.contact_sensor has been deprecated in favor of isaacsim.sensors.physics.scripts.samples.contact_sensor. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,520ms] [Warning] [omni.isaac.sensor.scripts.samples.imu_sensor] omni.isaac.sensor.scripts.samples.imu_sensor has been deprecated in favor of isaacsim.sensors.physics.scripts.samples.imu_sensor. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,520ms] [Warning] [omni.isaac.sensor.scripts.samples.lightbeam_sensor] omni.isaac.sensor.scripts.samples.lightbeam_sensor has been deprecated in favor of isaacsim.sensors.physx.scripts.samples.lightbeam_sensor. Please update your code accordingly.
+[5.539s] [ext: omni.kit.menu.create-2.0.1] startup
+[5.550s] [ext: omni.kit.widget.toolbar-2.0.1] startup
+[5.558s] [ext: omni.kit.manipulator.transform-107.0.0] startup
+[5.564s] [ext: omni.isaac.core-4.0.7] startup
+2026-11-23T17:09:01Z [5,547ms] [Warning] [omni.isaac.core.physics_context.physics_context] omni.isaac.core.physics_context.physics_context has been deprecated in favor of isaacsim.core.api.physics_context.physics_context. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,547ms] [Warning] [omni.isaac.core.simulation_context.simulation_context] omni.isaac.core.simulation_context.simulation_context has been deprecated in favor of isaacsim.core.api.simulation_context.simulation_context. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,548ms] [Warning] [omni.isaac.core.world.world] omni.isaac.core.world.world has been deprecated in favor of isaacsim.core.api.world.world. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,548ms] [Warning] [omni.isaac.core] omni.isaac.core has been deprecated in favor of isaacsim.core.api. Please update your code accordingly.
+[5.566s] [ext: omni.kit.scripting-107.3.2] startup
+[5.573s] [ext: omni.kit.manipulator.tool.snap-1.5.13] startup
+[5.579s] [ext: omni.kit.manipulator.selector-1.1.3] startup
+[5.581s] [ext: isaacsim.app.about-2.0.11] startup
+[5.589s] [ext: isaacsim.replicator.behavior-1.1.16] startup
+[5.590s] [ext: omni.kit.viewport.manipulator.transform-107.0.4] startup
+[5.593s] [ext: omni.isaac.window.about-2.0.7] startup
+2026-11-23T17:09:01Z [5,577ms] [Warning] [omni.isaac.window.about] omni.isaac.window.about has been deprecated in favor of isaacsim.app.about. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,577ms] [Warning] [omni.isaac.window.about.about] omni.isaac.window.about.about has been deprecated in favor of isaacsim.app.about.about. Please update your code accordingly.
+[5.596s] [ext: omni.fabric.commands-1.1.6] startup
+[5.600s] [ext: omni.kit.manipulator.prim.core-107.0.8] startup
+[5.608s] [ext: omni.kit.property.audio-1.0.16] startup
+[5.610s] [ext: omni.kit.property.camera-1.0.10] startup
+[5.612s] [ext: omni.kit.property.geometry-2.0.4] startup
+[5.616s] [ext: omni.hydra.scene_api-0.1.2] startup
+[5.623s] [ext: omni.kit.property.light-1.0.12] startup
+[5.639s] [ext: omni.kit.manipulator.prim.fabric-107.0.4] startup
+[5.642s] [ext: omni.kit.manipulator.prim.usd-107.0.3] startup
+[5.645s] [ext: omni.kit.property.material-1.11.9] startup
+[5.653s] [ext: omni.kit.property.render-1.2.1] startup
+[5.655s] [ext: omni.kit.property.transform-1.5.13] startup
+[5.661s] [ext: isaacsim.gui.property-1.1.3] startup
+[5.664s] [ext: omni.kit.manipulator.camera-106.0.4] startup
+[5.669s] [ext: omni.kit.manipulator.prim-107.0.0] startup
+[5.670s] [ext: omni.isaac.surface_gripper-2.0.6] startup
+2026-11-23T17:09:01Z [5,652ms] [Warning] [omni.isaac.surface_gripper] omni.isaac.surface_gripper has been deprecated in favor of isaacsim.robot.surface_gripper. Please update your code accordingly.
+[5.671s] [ext: omni.kit.manipulator.selection-106.0.1] startup
+[5.675s] [ext: omni.kit.property.bundle-1.4.1] startup
+[5.677s] [ext: omni.kit.property.isaac-1.0.6] startup
+2026-11-23T17:09:01Z [5,660ms] [Warning] [omni.kit.property.isaac] omni.kit.property.isaac has been deprecated in favor of isaacsim.gui.property. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,660ms] [Warning] [omni.kit.property.isaac.widgets] omni.kit.property.isaac.widgets has been deprecated in favor of isaacsim.gui.property.widgets. Please update your code accordingly.
+[5.678s] [ext: omni.isaac.universal_robots-1.0.6] startup
+2026-11-23T17:09:01Z [5,661ms] [Warning] [omni.isaac.universal_robots] omni.isaac.universal_robots has been deprecated in favor of isaacsim.robot.manipulators.examples.universal_robots. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,661ms] [Warning] [omni.isaac.universal_robots.kinematics_solver] omni.isaac.franka has been deprecated in favor of isaacsim.robot.manipulators.examples.universal_robots. Please update your code accordingly.
+2026-11-23T17:09:01Z [5,662ms] [Warning] [omni.isaac.universal_robots.ur10] omni.isaac.franka has been deprecated in favor of isaacsim.robot.manipulators.examples.universal_robots. Please update your code accordingly.
+[5.681s] [ext: omni.isaac.core_nodes-2.0.6] startup
+2026-11-23T17:09:01Z [5,666ms] [Warning] [omni.isaac.core_nodes] omni.isaac.core_nodes has been deprecated in favor of isaacsim.core.nodes. Please update your code accordingly.
+[5.684s] [ext: omni.kit.viewport.menubar.camera-107.0.6] startup
+[5.693s] [ext: omni.kit.viewport.menubar.lighting-107.3.1] startup
+[5.697s] [ext: isaacsim.replicator.writers-1.0.17] startup
+[5.719s] [ext: omni.kit.viewport.menubar.render-107.0.10] startup
+[5.726s] [ext: omni.kit.viewport.menubar.settings-107.0.3] startup
+[5.732s] [ext: omni.kit.window.console-1.1.4] startup
+[5.739s] [ext: isaacsim.replicator.domain_randomization-1.0.16] startup
+[5.745s] [ext: isaacsim.replicator.examples-1.3.6] startup
+[5.749s] [ext: omni.ocio-0.1.1] startup
+[5.754s] [ext: omni.rtx.window.settings-0.6.19] startup
+[5.768s] [ext: omni.kit.window.status_bar-0.1.9] startup
+[5.777s] [ext: omni.kit.window.toolbar-2.0.0] startup
+[5.789s] [ext: omni.replicator.isaac-2.0.8] startup
+2026-11-23T17:09:01Z [5,773ms] [Warning] [omni.replicator.isaac] omni.replicator.isaac has been deprecated in favor of isaacsim.replicator.domain_randomization, isaacsim.replicator.examples, isaacsim.replicator.writers. Please update your code accordingly.
+[5.791s] [ext: omni.replicator.replicator_yaml-2.0.11] startup
+[5.800s] [ext: omni.rtx.settings.core-0.6.5] startup
+[5.807s] [ext: omni.usd.metrics.assembler.ui-107.3.1] startup
+[5.819s] [ext: omni.isaac.utils-2.0.6] startup
+[5.824s] [ext: semantics.schema.editor-2.0.2] startup
+[5.831s] [ext: omni.kit.ui.actions-1.0.5] startup
+[5.833s] [ext: semantics.schema.property-2.0.1] startup
+[5.835s] [ext: omni.isaac.version-2.0.7] startup
+2026-11-23T17:09:01Z [5,819ms] [Warning] [omni.isaac.version] omni.isaac.version has been deprecated in favor of isaacsim.core.version. Please update your code accordingly.
+[5.837s] [ext: omni.isaac.cortex-1.0.5] startup
+[5.838s] [ext: omni.anim.curve.core-1.3.1] startup
+[5.852s] [ext: isaacsim.core.throttling-2.2.2] startup
+[5.855s] [ext: omni.kit.menu.common-2.0.1] startup
+[5.858s] [ext: isaacsim.exp.base-5.1.0] startup
+[5.859s] [ext: isaacsim.exp.base.python-5.1.0] startup
+[5.861s] Simulation App Starting
+2026-11-23T17:09:01Z [6,047ms] [Warning] [omni.fabric.plugin] Warning: attribute viewportHandle not found for bucket id 9
+
+2026-11-23T17:09:01Z [6,141ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:reflection_roughness_constant)
+2026-11-23T17:09:01Z [6,141ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:transmittance_color)
+2026-11-23T17:09:01Z [6,141ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:ior_constant)
+[6.271s] app ready
+[9.649s] Simulation App Startup Complete
+[2026-11-24 01:09:05,148][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:596] -: SimulationApp init done
+[2026-11-24 01:09:05,148][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:504] -: simulator params: physics dt=0.004166666666666667, rendering dt=0.004166666666666667, use_fabric=False
+[2026-11-24 01:09:05,156][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:526] -: Beam solver override: {"applied": true, "changed": false, "isolated_scene": true, "isolation_evidence": "caller_scene_check", "original": "TGS", "readback": "TGS", "reason": "already_requested_solver", "recipe_names": ["fabrica_beam_ur5e_staged"], "requested": "TGS"}
+[2026-11-24 01:09:05,158][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:540] -: Beam external-force iteration override: {"applied": true, "attribute": "physxScene:enableExternalForcesEveryIteration", "changed": false, "configuration_source": "existing_usd_scene_attribute", "gpu_dynamics_enabled": false, "gpu_dynamics_readback_after": false, "gpu_dynamics_source": "physics_context.is_gpu_dynamics_enabled", "isolated_scene": true, "isolation_evidence": "caller_scene_check_and_single_stage_physics_scene", "native_solver_effect_verified": false, "original": false, "readback": false, "readback_source": "World.stage.GetPrimAtPath(physics_context.prim_path).GetAttribute.Get", "reason": "already_requested_value", "recipe_names": ["fabrica_beam_ur5e_staged"], "requested": "0", "requested_enabled": false, "scene_prim_path": "/physicsScene", "scene_prim_source": "World.stage.GetPrimAtPath(physics_context.prim_path)", "scene_schema_source": "physics_context._physx_scene_api.GetPrim", "solver_type": "TGS", "solver_type_readback_after": "TGS", "solver_type_source": "physics_context.get_solver_type", "stage_physics_scene_paths": ["/physicsScene"]}
+[2026-11-24 01:09:05,159][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:51] -: rendering interval: 23
+[2026-11-24 01:09:19,607][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:304] -: ===================== init reset =====================
+[2026-11-24 01:09:19,657][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:65] -: env 0 at [0.0, 0.0, 0]
+[2026-11-24 01:09:22,844][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:852] -: ur5e franka_left_0: position    : [0.5   0.3   0.998]
+[2026-11-24 01:09:22,844][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:853] -: ur5e franka_left_0: orientation : [1. 0. 0. 0.]
+[2026-11-24 01:09:22,845][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:854] -: ur5e franka_left_0: usd_path    : /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda
+[2026-11-24 01:09:22,924][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/controller.py[line:138] -: [create_controllers] arm_ik_controller loaded
+[2026-11-24 01:09:22,924][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/controller.py[line:138] -: [create_controllers] arm_joint_controller loaded
+[2026-11-24 01:09:22,924][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/controller.py[line:138] -: [create_controllers] gripper_controller loaded
+[2026-11-24 01:09:22,924][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/sensor/sensor.py[line:104] -: [create_sensors] third_person_front loaded
+[2026-11-24 01:09:22,924][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/sensor/sensor.py[line:104] -: [create_sensors] left_wrist loaded
+[2026-11-24 01:09:22,924][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/robot.py[line:241] -: [create_robots] franka_left_0 loaded
+[2026-11-24 01:09:22,924][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:852] -: ur5e franka_right_0: position    : [ 0.58  -0.8    0.998]
+[2026-11-24 01:09:22,925][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:853] -: ur5e franka_right_0: orientation : [1. 0. 0. 0.]
+[2026-11-24 01:09:22,925][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:854] -: ur5e franka_right_0: usd_path    : /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda
+[2026-11-24 01:09:22,976][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/controller.py[line:138] -: [create_controllers] arm_ik_controller loaded
+[2026-11-24 01:09:22,976][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/controller.py[line:138] -: [create_controllers] arm_joint_controller loaded
+[2026-11-24 01:09:22,976][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/controller.py[line:138] -: [create_controllers] gripper_controller loaded
+[2026-11-24 01:09:22,976][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/sensor/sensor.py[line:104] -: [create_sensors] right_wrist loaded
+[2026-11-24 01:09:22,976][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/robot.py[line:241] -: [create_robots] franka_right_0 loaded
+[2026-11-24 01:09:23,138][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] optical_board_0 loaded
+[2026-11-24 01:09:23,152][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] fabrica_fixture_0 loaded
+[2026-11-24 01:09:23,163][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] fabrica_beam_0_0 loaded
+[2026-11-24 01:09:23,173][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] fabrica_beam_1_0 loaded
+[2026-11-24 01:09:23,183][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] fabrica_beam_2_0 loaded
+[2026-11-24 01:09:23,194][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] fabrica_beam_3_0 loaded
+[2026-11-24 01:09:23,204][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] fabrica_beam_6_0 loaded
+[2026-11-24 01:09:23,215][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] assembly_support_0 loaded
+[2026-11-24 01:09:23,226][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] fixture_support_0 loaded
+[2026-11-24 01:09:23,236][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] factory_tabletop_visual_0 loaded
+[2026-11-24 01:09:23,242][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] factory_table_leg_front_left_0 loaded
+[2026-11-24 01:09:23,248][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] factory_table_leg_front_right_0 loaded
+[2026-11-24 01:09:23,254][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] factory_table_leg_back_left_0 loaded
+[2026-11-24 01:09:23,260][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] factory_table_leg_back_right_0 loaded
+[2026-11-24 01:09:23,270][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] taoyuan_left_buffer_0 loaded
+[2026-11-24 01:09:23,280][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/object/object.py[line:60] -: [create_objects] taoyuan_right_buffer_0 loaded
+2026-11-23T17:09:25Z [29,805ms] [Warning] [omni.fabric.plugin] Warning: attribute physics:body1 not found for path /World/env_0/episode_000000/robots/ur5e_left/joints/robot_gripper_joint
+
+[2026-11-24 01:09:25,346][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:104] -: ================ create camera ===============
+[2026-11-24 01:09:25,346][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:105] -: camera_prim_path: /World/env_0/episode_000000/cameras/third_person_front
+[2026-11-24 01:09:25,346][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:106] -: name            : third_person_front
+[2026-11-24 01:09:25,346][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:107] -: resolution      : (960, 540)
+[2026-11-24 01:09:25,382][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:104] -: ================ create camera ===============
+[2026-11-24 01:09:25,382][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:105] -: camera_prim_path: /World/env_0/episode_000000/robots/ur5e_left/wrist_3_link/left_wrist_camera
+[2026-11-24 01:09:25,383][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:106] -: name            : left_wrist
+[2026-11-24 01:09:25,383][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:107] -: resolution      : (640, 480)
+[2026-11-24 01:09:25,407][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:956] -: ur5e franka_left_0: using USD prim '/World/env_0/episode_000000/robots/ur5e_left/base_link' as IK base pose source.
+[arm-drive-readback] robot=franka_left_0 {'configured': True, 'strict_request': False, 'kp_requested': 80000.0, 'kd_requested': 4000.0, 'joint_names': ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'], 'errors': {}, 'gain_source': 'native_articulation_view', 'effort_source': 'native_articulation_view', 'changed_properties': ['stiffness', 'damping'], 'joint_indices': [0, 1, 2, 3, 4, 5], 'setter_completed': True, 'native_view_type': 'Articulation', 'physics_handle_valid': True, 'physics_handle_source': 'native_articulation_view.is_physics_handle_valid', 'kp_readback': [80000.0, 80000.0, 80000.0, 80000.0, 80000.0, 80000.0], 'kd_readback': [4000.0, 4000.0, 4000.0, 4000.0, 4000.0, 4000.0], 'gains_match': True, 'max_effort_readback': [150.0, 150.0, 150.0, 28.0, 28.0, 28.0], 'drive_types': [{'joint_name': 'shoulder_pan_joint', 'dof_index': 0, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'shoulder_pan_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_left/joints/shoulder_pan_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'shoulder_lift_joint', 'dof_index': 1, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'shoulder_lift_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_left/joints/shoulder_lift_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'elbow_joint', 'dof_index': 2, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'elbow_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_left/joints/elbow_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'wrist_1_joint', 'dof_index': 3, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'wrist_1_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_left/joints/wrist_1_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'wrist_2_joint', 'dof_index': 4, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'wrist_2_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_left/joints/wrist_2_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'wrist_3_joint', 'dof_index': 5, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'wrist_3_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_left/joints/wrist_3_joint', 'has_angular_drive_api': True, 'type': 'force'}]}
+[gripper-drive-readback] robot=franka_left_0 {'configured': True, 'joint': 'finger_joint', 'kp_requested': 7500.0, 'kd_requested': 173.0, 'kp_readback': [[7500.0]], 'kd_readback': [[173.0]], 'max_effort_readback': [[26.0]], 'legacy_effort_setter_available': False}
+[gripper-material-readback] robot=franka_left_0 {'requested_static_friction': 1.0, 'requested_dynamic_friction': 0.8, 'bound_finger_paths': ['/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger', '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger'], 'binding_errors': [], 'combine_mode': 'max', 'material_path': '/World/Physics_Materials/franka_left_0_robotiq_high_friction', 'static_friction_readback': 1.0, 'dynamic_friction_readback': 0.800000011920929, 'collider_bindings': [{'collider': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_left_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_left_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step'}, {'collider': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_left_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_left_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep'}, {'collider': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_left_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_left_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step'}, {'collider': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_left_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_left_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_left/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep'}]}
+[2026-11-24 01:09:25,418][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:104] -: ================ create camera ===============
+[2026-11-24 01:09:25,418][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:105] -: camera_prim_path: /World/env_0/episode_000000/robots/ur5e_right/wrist_3_link/right_wrist_camera
+[2026-11-24 01:09:25,418][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:106] -: name            : right_wrist
+[2026-11-24 01:09:25,418][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/sensors/rep_camera.py[line:107] -: resolution      : (640, 480)
+[2026-11-24 01:09:25,442][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/robots/ur5e.py[line:956] -: ur5e franka_right_0: using USD prim '/World/env_0/episode_000000/robots/ur5e_right/base_link' as IK base pose source.
+[arm-drive-readback] robot=franka_right_0 {'configured': True, 'strict_request': False, 'kp_requested': 80000.0, 'kd_requested': 4000.0, 'joint_names': ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'], 'errors': {}, 'gain_source': 'native_articulation_view', 'effort_source': 'native_articulation_view', 'changed_properties': ['stiffness', 'damping'], 'joint_indices': [0, 1, 2, 3, 4, 5], 'setter_completed': True, 'native_view_type': 'Articulation', 'physics_handle_valid': True, 'physics_handle_source': 'native_articulation_view.is_physics_handle_valid', 'kp_readback': [80000.0, 80000.0, 80000.0, 80000.0, 80000.0, 80000.0], 'kd_readback': [4000.0, 4000.0, 4000.0, 4000.0, 4000.0, 4000.0], 'gains_match': True, 'max_effort_readback': [150.0, 150.0, 150.0, 28.0, 28.0, 28.0], 'drive_types': [{'joint_name': 'shoulder_pan_joint', 'dof_index': 0, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'shoulder_pan_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_right/joints/shoulder_pan_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'shoulder_lift_joint', 'dof_index': 1, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'shoulder_lift_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_right/joints/shoulder_lift_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'elbow_joint', 'dof_index': 2, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'elbow_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_right/joints/elbow_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'wrist_1_joint', 'dof_index': 3, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'wrist_1_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_right/joints/wrist_1_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'wrist_2_joint', 'dof_index': 4, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'wrist_2_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_right/joints/wrist_2_joint', 'has_angular_drive_api': True, 'type': 'force'}, {'joint_name': 'wrist_3_joint', 'dof_index': 5, 'valid': True, 'source': 'existing_robot_joint_prim:UsdPhysics.DriveAPI(angular).GetTypeAttr', 'native_dof_name': 'wrist_3_joint', 'joint_prim_path': '/World/env_0/episode_000000/robots/ur5e_right/joints/wrist_3_joint', 'has_angular_drive_api': True, 'type': 'force'}]}
+[gripper-drive-readback] robot=franka_right_0 {'configured': True, 'joint': 'finger_joint', 'kp_requested': 7500.0, 'kd_requested': 173.0, 'kp_readback': [[7500.0]], 'kd_readback': [[173.0]], 'max_effort_readback': [[26.0]], 'legacy_effort_setter_available': False}
+[gripper-material-readback] robot=franka_right_0 {'requested_static_friction': 1.0, 'requested_dynamic_friction': 0.8, 'bound_finger_paths': ['/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger', '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger'], 'binding_errors': [], 'combine_mode': 'max', 'material_path': '/World/Physics_Materials/franka_right_0_robotiq_high_friction', 'static_friction_readback': 1.0, 'dynamic_friction_readback': 0.800000011920929, 'collider_bindings': [{'collider': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_right_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_right_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step'}, {'collider': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_right_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_right_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/left_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep'}, {'collider': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_right_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_right_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step'}, {'collider': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep', 'previous_material': '/World/Looks/World_env_0_episode_000000_robots_ur5e_right_robotiq_visible_fingertips', 'previous_static_friction': None, 'previous_dynamic_friction': None, 'material': '/World/Physics_Materials/franka_right_0_robotiq_high_friction', 'binding_prim': '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_fingertipsstep_01/Defeatured_2F_85_PAD_OPEN_fingertipsstep'}]}
+[2026-11-24 01:09:25,451][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:472] -: ===================== episodes ========================
+[2026-11-24 01:09:25,451][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:474] -: Next episode: 0 at 0
+[2026-11-24 01:09:25,451][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:475] -: ======================================================
+2026-11-23T17:09:25Z [29,984ms] [Warning] [omni.physx.plugin] The rigid body at /World/env_0/episode_000000/objects/factory_table_leg_front_left has a possibly invalid inertia tensor of {1.0, 1.0, 1.0} and a negative mass, small sphere approximated inertia was used. Either specify correct values in the mass properties, or add collider(s) to any shape(s) that you wish to automatically compute mass properties for.
+2026-11-23T17:09:25Z [29,995ms] [Warning] [omni.physx.plugin] The rigid body at /World/env_0/episode_000000/objects/factory_table_leg_front_right has a possibly invalid inertia tensor of {1.0, 1.0, 1.0} and a negative mass, small sphere approximated inertia was used. Either specify correct values in the mass properties, or add collider(s) to any shape(s) that you wish to automatically compute mass properties for.
+2026-11-23T17:09:25Z [30,005ms] [Warning] [omni.physx.plugin] The rigid body at /World/env_0/episode_000000/objects/factory_table_leg_back_left has a possibly invalid inertia tensor of {1.0, 1.0, 1.0} and a negative mass, small sphere approximated inertia was used. Either specify correct values in the mass properties, or add collider(s) to any shape(s) that you wish to automatically compute mass properties for.
+2026-11-23T17:09:25Z [30,016ms] [Warning] [omni.physx.plugin] The rigid body at /World/env_0/episode_000000/objects/factory_table_leg_back_right has a possibly invalid inertia tensor of {1.0, 1.0, 1.0} and a negative mass, small sphere approximated inertia was used. Either specify correct values in the mass properties, or add collider(s) to any shape(s) that you wish to automatically compute mass properties for.
+2026-11-23T17:09:25Z [30,142ms] [Warning] [omni.fabric.plugin] getAttributeCount called on non-existent path /World/env_0/episode_000000/robots/ur5e_right/wrist_3_link/collisions/wrist3
+2026-11-23T17:09:25Z [30,142ms] [Warning] [omni.fabric.plugin] getTypes called on non-existent path /World/env_0/episode_000000/robots/ur5e_right/wrist_3_link/collisions/wrist3
+2026-11-23T17:09:32Z [36,636ms] [Warning] [rtx.postprocessing.plugin] DLSS increasing input dimensions: Render resolution of (480, 270) is below minimal input resolution of 300.
+2026-11-23T17:09:32Z [36,915ms] [Warning] [omni.syntheticdata.plugin] OgnSdPostRenderVarToHost : rendervar copy from texture directly to host buffer is counter-performant. Please use copy from texture to device buffer first.
+[rollout-progress] event=loop_enter task=0 step=0
+[rollout-runtime] task_class_file=/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia_extension/tasks/factory_dual_franka_assembly_task.py phase=fixture_parts_settle phase_timeout=720 robot_types=['UR5eRobot', 'UR5eRobot'] robot_usd_paths=['/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda', '/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/roboassemblybench/assets/Fabrica/fabrica_ur5e_cooling_optical_board_black_fullbundle_sdf001/assets/ur5e_robotiq_2f85_wrist_mount_task.usda'] end_effectors=['Gripper/Robotiq_2F_85/base_link', 'Gripper/Robotiq_2F_85/base_link']
+[rollout-progress] event=step_complete task=0 step=1 phase=fixture_parts_settle phase_index=0 phase_step=2 phase_timeout=720 step_wall_seconds=5.720 average_steps_per_second=0.175
+[rollout-progress] event=step_complete task=0 step=2 phase=fixture_parts_settle phase_index=0 phase_step=3 phase_timeout=720 step_wall_seconds=0.039 average_steps_per_second=0.347
+[rollout-progress] event=step_complete task=0 step=3 phase=fixture_parts_settle phase_index=0 phase_step=4 phase_timeout=720 step_wall_seconds=0.039 average_steps_per_second=0.517
+[rollout-progress] event=step_complete task=0 step=4 phase=fixture_parts_settle phase_index=0 phase_step=5 phase_timeout=720 step_wall_seconds=0.040 average_steps_per_second=0.685
+[rollout-progress] event=step_complete task=0 step=5 phase=fixture_parts_settle phase_index=0 phase_step=6 phase_timeout=720 step_wall_seconds=0.041 average_steps_per_second=0.850
+2026-11-23T17:09:44Z [49,446ms] [Warning] [omni.hydra] Mesh '/World/env_0/episode_000000/robots/ur5e_right/Gripper/Robotiq_2F_85/right_inner_finger/visuals/Defeatured_2F_85_PAD_OPEN_finger4step_01/Defeatured_2F_85_PAD_OPEN_finger4step' update topology/point without updating normal, fallback to smooth normal.
+[rollout-progress] event=step_complete task=0 step=60 phase=fixture_parts_settle phase_index=0 phase_step=61 phase_timeout=720 step_wall_seconds=0.059 average_steps_per_second=3.982
+[rollout-progress] event=step_complete task=0 step=120 phase=base_6_move_above phase_index=1 phase_step=25 phase_timeout=3600 step_wall_seconds=0.153 average_steps_per_second=6.201
+[rollout-progress] event=step_complete task=0 step=180 phase=base_6_move_above phase_index=1 phase_step=85 phase_timeout=3600 step_wall_seconds=0.060 average_steps_per_second=7.633
+[rollout-progress] event=step_complete task=0 step=240 phase=base_6_move_above phase_index=1 phase_step=145 phase_timeout=3600 step_wall_seconds=0.147 average_steps_per_second=8.618
+[rollout-progress] event=step_complete task=0 step=300 phase=base_6_move_above phase_index=1 phase_step=205 phase_timeout=3600 step_wall_seconds=0.057 average_steps_per_second=9.369
+[rollout-progress] event=step_complete task=0 step=360 phase=base_6_move_above phase_index=1 phase_step=265 phase_timeout=3600 step_wall_seconds=0.153 average_steps_per_second=9.915
+[rollout-progress] event=step_complete task=0 step=420 phase=base_6_move_above phase_index=1 phase_step=325 phase_timeout=3600 step_wall_seconds=0.058 average_steps_per_second=10.350
+[2026-11-24 01:10:13,263][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:194] -: Task 0 finished.
+2026-11-23T17:10:14Z [78,673ms] [Warning] [omni.physx.tensors.plugin] prim '/World/env_0/episode_000000/objects/optical_board/mesh' was deleted while being used by a shape in a tensor view class. The physics.tensors simulationView was invalidated.
+[2026-11-24 01:10:14,242][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,272][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,300][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,324][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,345][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,369][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,384][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,400][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,415][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,430][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,444][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,459][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,474][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+2026-11-23T17:10:14Z [78,968ms] [Warning] [carb] Client gpu.foundation.plugin has acquired [gpu::unstable::IMemoryBudgetManagerFactory v0.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
+[2026-11-24 01:10:14,490][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,505][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,520][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:272] -: [cleanup] objs cleaned.
+[2026-11-24 01:10:14,520][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:275] -: [cleanup] cleanup robot franka_left_0
+[2026-11-24 01:10:14,527][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/robot.py[line:126] -: [cleanup] robot franka_left_0 clean up
+[2026-11-24 01:10:14,532][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:285] -: [cleanup] robots cleaned.
+[2026-11-24 01:10:14,532][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:275] -: [cleanup] cleanup robot franka_right_0
+[2026-11-24 01:10:14,536][DEBUG] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/robot/robot.py[line:126] -: [cleanup] robot franka_right_0 clean up
+[2026-11-24 01:10:14,542][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/task/task.py[line:285] -: [cleanup] robots cleaned.
+[2026-11-24 01:10:14,542][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:363] -: Clear stage: /World/env_0
+2026-11-23T17:10:14Z [79,027ms] [Warning] [omni.isaac.core.utils.prims] omni.isaac.core.utils.prims has been deprecated in favor of isaacsim.core.utils.prims. Please update your code accordingly.
+2026-11-23T17:10:14Z [79,196ms] [Warning] [omni.fabric.plugin] removePaths called with a non-existent path /__Prototype_17761972527124424878 
+
+[2026-11-24 01:10:14,763][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:472] -: ===================== episodes ========================
+[2026-11-24 01:10:14,763][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/runner.py[line:475] -: ======================================================
+[2026-11-24 01:10:14,764][INFO] /home/user/beam_integration_20261010_upstream6f57dae/candidate_repository/internutopia/core/vec_env.py[line:91] -: No more episodes left
+[80.663s] Simulation App Shutting Down
+{"passed": true, "source": "/home/user/beam_integration_20261010_upstream6f57dae/candidate_repository", "manifest": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round62_v239_unload/source_manifest.json", "manifest_sha256": "f173bbde0bb71f6d9808d991b5a43ac18787ec62494117ad06dce7a80b26da72", "files": 900, "differences": []}

@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "path": "checked_worker.py",
+      "sha256": "915188532e57b12032217b6e2376852d4123093329e063f6c1656ed636f133c8"
+    },
+    {
+      "path": "launch_round62.py",
+      "sha256": "bc5146ca5841c911bef0c4dab596781d6b7c91778be4593d2eb48bcba793fa1d"
+    },
+    {
+      "path": "run_full_assembly.sh",
+      "sha256": "5d852a08e7b76eadd9a929609c44530775d0217b0cb66f1b8bf7eaeaa14e794e"
+    }
+  ]
+}

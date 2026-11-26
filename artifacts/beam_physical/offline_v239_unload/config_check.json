@@ -1,0 +1,31 @@
+{
+  "unset_matches_round60_config": true,
+  "default_value_matches_round60_config": true,
+  "lift04_is_round61_with_tolerance_0p4": true,
+  "candidate_config_sha256": "3bf5d839e72c9d3751d10c265667d377b5efacade3a8ce24b19309c74592f100",
+  "candidate_recipe_fingerprint": "8a437a4145eb9fcad37f1c8ca3f9e975ec79f401ffc4fc6729f9c11d39371d0f",
+  "only_intended_change_vs_round61": true,
+  "lift_skill_after": {
+    "offset": [
+      0.0,
+      0.0,
+      0.0002
+    ],
+    "position_tolerance": 0.0004,
+    "cartesian_position_step": 0.0001
+  },
+  "max_steps": [
+    507682,
+    507682
+  ],
+  "final_verification_unchanged": true,
+  "invalid_value_rejected": {
+    "0.002": true,
+    "0.0001": true,
+    "0": true,
+    "x": true,
+    "nan": true
+  },
+  "phase_contract_issues": [],
+  "passed": true
+}

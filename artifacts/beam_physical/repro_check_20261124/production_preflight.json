@@ -1,0 +1,355 @@
+{
+  "passed": true,
+  "native_started": false,
+  "profile": {
+    "profile": "plumbers_staged_v2",
+    "reference": "baiyu858/RoboAssemblyBench@9497b839",
+    "supported_pose_drift_m": 0.0005,
+    "supported_pose_drift_rad": 0.008726646259971648,
+    "seating_steps": 96,
+    "release_steps": 30,
+    "terminal_steps": 240,
+    "terminal_position_m": 0.003,
+    "terminal_orientation_rad": 0.04,
+    "terminal_linear_speed": 0.01,
+    "terminal_angular_speed": 0.1,
+    "legacy_terminal_linear_speed": 0.002,
+    "legacy_terminal_angular_speed": 0.02,
+    "legacy_success_criteria": [
+      {
+        "object": "fabrica_beam_0",
+        "target": "part_0_assembled",
+        "position_tolerance": 0.015,
+        "orientation_tolerance": 0.15,
+        "require_released": true,
+        "require_static": true,
+        "linear_velocity_threshold": 0.05,
+        "angular_velocity_threshold": 2.0
+      },
+      {
+        "object": "fabrica_beam_1",
+        "target": "part_1_assembled",
+        "position_tolerance": 0.015,
+        "orientation_tolerance": 0.15,
+        "require_released": true,
+        "require_static": true,
+        "linear_velocity_threshold": 0.05,
+        "angular_velocity_threshold": 2.0
+      },
+      {
+        "object": "fabrica_beam_2",
+        "target": "part_2_assembled",
+        "position_tolerance": 0.015,
+        "orientation_tolerance": 0.15,
+        "require_released": true,
+        "require_static": true,
+        "linear_velocity_threshold": 0.05,
+        "angular_velocity_threshold": 2.0
+      },
+      {
+        "object": "fabrica_beam_3",
+        "target": "part_3_assembled",
+        "position_tolerance": 0.015,
+        "orientation_tolerance": 0.15,
+        "require_released": true,
+        "require_static": true,
+        "linear_velocity_threshold": 0.05,
+        "angular_velocity_threshold": 2.0
+      },
+      {
+        "object": "fabrica_beam_6",
+        "target": "part_6_assembled",
+        "position_tolerance": 0.015,
+        "orientation_tolerance": 0.15,
+        "require_released": true,
+        "require_static": true,
+        "linear_velocity_threshold": 0.05,
+        "angular_velocity_threshold": 2.0
+      }
+    ],
+    "exploration_bypass": false,
+    "grasp_slip_reference": "frozen_target_pair_force_patch_midpoint",
+    "grasp_position_slip_m": 0.003,
+    "grasp_orientation_slip_rad": 0.0872664626,
+    "single_contact_recenter_default_step_m": 0.0002,
+    "two_loaded_finger_balance_step_m": 2.5e-05,
+    "legacy_object_origin_diagnostic": true,
+    "final_stability_mode": "fixed_reference_pose_window",
+    "final_raw_velocity_role": "independent_diagnostic"
+  },
+  "phase_count": 169,
+  "worker_config_max_steps": 507682,
+  "worker_robots": [
+    "franka_left",
+    "franka_right"
+  ],
+  "runtime_cameras": 3,
+  "forbidden_mechanisms": [],
+  "weak_side_closing_phases": [
+    {
+      "phase": "base_6_close_and_attach",
+      "robot": "franka_right",
+      "force_low": 4.0,
+      "force_high": 12.0
+    },
+    {
+      "phase": "assemble_00_part_3_close_and_attach",
+      "robot": "franka_left",
+      "force_low": 4.0,
+      "force_high": 12.0
+    },
+    {
+      "phase": "hold_3_close_and_attach",
+      "robot": "franka_right",
+      "force_low": 4.0,
+      "force_high": 12.0
+    },
+    {
+      "phase": "assemble_01_part_2_close_and_attach",
+      "robot": "franka_left",
+      "force_low": 4.0,
+      "force_high": 12.0
+    },
+    {
+      "phase": "assemble_02_part_1_close_and_attach",
+      "robot": "franka_left",
+      "force_low": 4.0,
+      "force_high": 12.0
+    },
+    {
+      "phase": "handover_left_2_close_and_attach",
+      "robot": "franka_left",
+      "force_low": 4.0,
+      "force_high": 12.0
+    },
+    {
+      "phase": "hold_2_close_and_attach",
+      "robot": "franka_right",
+      "force_low": 4.0,
+      "force_high": 12.0
+    },
+    {
+      "phase": "assemble_03_part_0_close_and_attach",
+      "robot": "franka_left",
+      "force_low": 4.0,
+      "force_high": 12.0
+    }
+  ],
+  "both_home_conditions": {
+    "type": "all_of",
+    "min_steps": 24,
+    "conditions": [
+      {
+        "type": "local_skill_complete",
+        "robot": "franka_right",
+        "skill": "move_arm_to_joint_positions"
+      },
+      {
+        "type": "gripper_open",
+        "robot": "franka_right",
+        "minimum_openness": 0.95
+      },
+      {
+        "type": "local_skill_complete",
+        "robot": "franka_left",
+        "skill": "move_arm_to_joint_positions"
+      },
+      {
+        "type": "gripper_open",
+        "robot": "franka_left",
+        "minimum_openness": 0.95
+      }
+    ]
+  },
+  "worker_config_sha256": "3bf5d839e72c9d3751d10c265667d377b5efacade3a8ce24b19309c74592f100",
+  "baseline_worker_sha256": "cb2519d4635a871eab2310e2683bb48a549e46558caa5033568687e9ba6a8f95",
+  "final": {
+    "name": "beam_final_unloaded_verification",
+    "beam_coordinated": true,
+    "timeout_steps": 1200,
+    "robot_targets": {},
+    "gripper_commands": {
+      "franka_left": "open",
+      "franka_right": "open"
+    },
+    "advance": {
+      "type": "all_of",
+      "physics_stable_steps": 240,
+      "conditions": [
+        {
+          "type": "beam_table_supported",
+          "stable_steps": 1,
+          "minimum_vertical_force": 1.962,
+          "verification_mode": "unloaded",
+          "linear_velocity_threshold": 0.01,
+          "angular_velocity_threshold": 0.1,
+          "unloaded_pose_window_acceptance": true,
+          "legacy_minimum_vertical_force": 9.81,
+          "assembly_load_objects": [
+            "fabrica_beam_6",
+            "fabrica_beam_3",
+            "fabrica_beam_2",
+            "fabrica_beam_1",
+            "fabrica_beam_0"
+          ],
+          "minimum_assembly_vertical_force": 9.81
+        },
+        {
+          "type": "objects_detached",
+          "objects": [
+            "fabrica_beam_6",
+            "fabrica_beam_3",
+            "fabrica_beam_2",
+            "fabrica_beam_1",
+            "fabrica_beam_0"
+          ]
+        },
+        {
+          "type": "object_targets_reached",
+          "tolerance": 0.003,
+          "orientation_tolerance": 0.04,
+          "objects": [
+            {
+              "object": "fabrica_beam_6",
+              "target": "part_6_assembled"
+            },
+            {
+              "object": "fabrica_beam_3",
+              "target": "part_3_assembled"
+            },
+            {
+              "object": "fabrica_beam_2",
+              "target": "part_2_assembled"
+            },
+            {
+              "object": "fabrica_beam_1",
+              "target": "part_1_assembled"
+            },
+            {
+              "object": "fabrica_beam_0",
+              "target": "part_0_assembled"
+            }
+          ]
+        },
+        {
+          "type": "beam_staged_objects_stable",
+          "objects": [
+            "fabrica_beam_6",
+            "fabrica_beam_3",
+            "fabrica_beam_2",
+            "fabrica_beam_1",
+            "fabrica_beam_0"
+          ],
+          "linear_velocity_threshold": 0.01,
+          "angular_velocity_threshold": 0.1,
+          "position_drift_tolerance": 0.002,
+          "orientation_drift_tolerance": 0.03,
+          "require_unloaded": true,
+          "common_pose_window": true,
+          "unloaded_pose_window_acceptance": true
+        },
+        {
+          "type": "gripper_open",
+          "robot": "franka_left",
+          "minimum_openness": 0.95
+        },
+        {
+          "type": "gripper_open",
+          "robot": "franka_right",
+          "minimum_openness": 0.95
+        }
+      ]
+    },
+    "beam_installed_parts": [
+      "6",
+      "3",
+      "2",
+      "1",
+      "0"
+    ],
+    "beam_table_support_objects": [
+      "optical_board",
+      "assembly_support",
+      "fixture_support",
+      "factory_tabletop_visual"
+    ],
+    "beam_require_table_support": true,
+    "beam_table_contact_force_relief": {
+      "qualification_force": 0.25,
+      "retain_force": 0.1,
+      "stable_steps": 24,
+      "force_low": 3.0,
+      "force_high": 4.0,
+      "joint_rate": 0.0024
+    },
+    "local_skills": {
+      "franka_left": {
+        "name": "move_arm_to_joint_positions",
+        "robot": "franka_left",
+        "cartesian_servo": false,
+        "reference_mode": "command",
+        "max_joint_step": 0.004,
+        "default_max_command_joint_step": 0.02,
+        "default_max_command_wrist_joint_step": 0.015,
+        "limit_command_to_measured_state": true,
+        "max_command_tracking_error": 0.06,
+        "max_wrist_command_tracking_error": 0.06,
+        "joint_position_tolerance": 0.025,
+        "joint_target_stable_steps": 24,
+        "joint_positions": [
+          0.0,
+          -1.5707963268,
+          1.5707963268,
+          -1.5707963268,
+          -1.5707963268,
+          0.0
+        ],
+        "max_command_joint_step": 0.004,
+        "max_command_wrist_joint_step": 0.004,
+        "empty_arm_phase_handoff": true,
+        "gripper_command": "open",
+        "requires_held_object": false,
+        "require_success": true,
+        "fallback": "fail",
+        "adapter": "toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter",
+        "requires_empty_arm": true,
+        "beam_fast_empty_joint": true
+      },
+      "franka_right": {
+        "name": "move_arm_to_joint_positions",
+        "robot": "franka_right",
+        "cartesian_servo": false,
+        "reference_mode": "command",
+        "max_joint_step": 0.004,
+        "default_max_command_joint_step": 0.02,
+        "default_max_command_wrist_joint_step": 0.015,
+        "limit_command_to_measured_state": true,
+        "max_command_tracking_error": 0.06,
+        "max_wrist_command_tracking_error": 0.06,
+        "joint_position_tolerance": 0.025,
+        "joint_target_stable_steps": 24,
+        "joint_positions": [
+          0.0,
+          -1.5707963268,
+          1.5707963268,
+          -1.5707963268,
+          -1.5707963268,
+          0.0
+        ],
+        "max_command_joint_step": 0.004,
+        "max_command_wrist_joint_step": 0.004,
+        "empty_arm_phase_handoff": true,
+        "gripper_command": "open",
+        "requires_held_object": false,
+        "require_success": true,
+        "fallback": "fail",
+        "adapter": "toolkits.factory_dual_franka_assembly.plumbers_block_ur5e_skills:UR5eAssemblyAtomicSkillAdapter",
+        "requires_empty_arm": true,
+        "beam_fast_empty_joint": true
+      }
+    },
+    "beam_physical_acceptance_profile": "plumbers_staged_v2",
+    "beam_final_pose_acceptance": true,
+    "beam_idle_hold_anchor": true
+  }
+}

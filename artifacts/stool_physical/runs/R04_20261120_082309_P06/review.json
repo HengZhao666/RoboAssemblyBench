@@ -1,0 +1,18 @@
+{
+  "round": 4,
+  "package": "P06",
+  "reviewed_at_utc": "2026-11-20T01:42:02.748317+00:00",
+  "verified_success": false,
+  "steps": 43619,
+  "terminal_reason": "timeout-failure",
+  "terminal_phase": "assemble_06_part_0_insert_09",
+  "wall_seconds": 4703.750414421083,
+  "reached": [
+    "base 2",
+    "legs 3/7/5/1 seated before release (seat gate)",
+    "caps 6/4 seated and released",
+    "cap 0 carried to its seat approach"
+  ],
+  "failure": "cap 0 could not seat on leg 1: leg 1 1.6-2.8 deg tilted; its 95 mm height moves the peg top ~2.7 mm from the base-rebased nominal while the seat gate needs 0.75 mm lateral. Legs also lean further as later parts go in (leg 3 4.7 deg, cap 4 7.85 deg at leg-1 park).",
+  "next": "physical_rebase_targets_to_socket: re-anchor each cap's assembly targets on its real leg before pickup (anchor target kept; success tolerances unchanged)"
+}

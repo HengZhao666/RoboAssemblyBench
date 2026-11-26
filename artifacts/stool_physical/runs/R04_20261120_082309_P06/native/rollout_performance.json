@@ -1,0 +1,4584 @@
+{
+  "finalized": true,
+  "steps": 43619,
+  "physics_fps": 240,
+  "physics_dt": 0.004166666666666667,
+  "rendering_interval": 23,
+  "render_period_steps": 24,
+  "wall_seconds": 4670.40151134599,
+  "simulated_seconds": 181.74583333333334,
+  "real_time_factor": 0.038914391598197935,
+  "phases": {
+    "0:plumbers_fixture_settle": {
+      "steps": 127,
+      "seconds": {
+        "policy": 0.8239050640258938,
+        "precheck": 0.1008323507849127,
+        "env_step_and_dataset": 16.139520165277645,
+        "constraint_monitor": 0.37995530595071614,
+        "recording_and_other": 0.6116270290222019
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0036491209312628004,
+          "max_angular_speed_rad_s": 0.00723839159546338,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003649120931256966,
+          "max_angular_speed_rad_s": 0.007238395129333012,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_move_above": {
+      "steps": 379,
+      "seconds": {
+        "policy": 2.998532288474962,
+        "precheck": 0.30619945749640465,
+        "env_step_and_dataset": 23.905012618517503,
+        "constraint_monitor": 1.127401884412393,
+        "recording_and_other": 1.8783303967211396
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0028361999591291014,
+          "max_angular_speed_rad_s": 0.005636237902071283,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.8976602164083142,
+          "max_angular_speed_rad_s": 3.4523008620106865,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.0967171611264348,
+        "precheck": 0.10126756131649017,
+        "env_step_and_dataset": 0.4902498139999807,
+        "constraint_monitor": 0.09344064421020448,
+        "recording_and_other": 0.00013436167500913143
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.783384665748865e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.4563202913639079,
+          "max_angular_speed_rad_s": 0.2383873339026355,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_descend": {
+      "steps": 111,
+      "seconds": {
+        "policy": 0.931268684566021,
+        "precheck": 0.0007792804390192032,
+        "env_step_and_dataset": 4.632975834188983,
+        "constraint_monitor": 0.28151910379529,
+        "recording_and_other": 0.5908036874607205
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.22673345192986e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.20470237779830283,
+          "max_angular_speed_rad_s": 0.13334090146204491,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_close_and_attach": {
+      "steps": 455,
+      "seconds": {
+        "policy": 6.043238746235147,
+        "precheck": 0.40756907197646797,
+        "env_step_and_dataset": 29.55129342060536,
+        "constraint_monitor": 1.3251581827644259,
+        "recording_and_other": 2.272080045659095
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.783384665748865e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.20432696981712975,
+          "max_angular_speed_rad_s": 0.041744793112418764,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_lift": {
+      "steps": 415,
+      "seconds": {
+        "policy": 17.006552319508046,
+        "precheck": 0.3292910235468298,
+        "env_step_and_dataset": 36.13394812820479,
+        "constraint_monitor": 1.3719567889347672,
+        "recording_and_other": 2.5422061649151146
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.78325606936725e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.06008503305748665,
+          "max_angular_speed_rad_s": 0.004780991068021054,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_pickup_clearance": {
+      "steps": 98,
+      "seconds": {
+        "policy": 3.5700540768448263,
+        "precheck": 0.10901809646748006,
+        "env_step_and_dataset": 7.490587270818651,
+        "constraint_monitor": 0.3173338617198169,
+        "recording_and_other": 0.5999592060688883
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.2266048554937994e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.14813387352710905,
+          "max_angular_speed_rad_s": 0.04296670107170433,
+          "max_published_position_lead_m": 0.0024064265623665814,
+          "max_published_angle_lead_rad": 0.00062798953325897
+        }
+      }
+    },
+    "0:base_2_assembly_clearance": {
+      "steps": 1684,
+      "seconds": {
+        "policy": 59.66992271505296,
+        "precheck": 1.4204068989492953,
+        "env_step_and_dataset": 123.5941776423715,
+        "constraint_monitor": 5.580450488021597,
+        "recording_and_other": 10.50669101323001
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.783384665748865e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.3005916528586706,
+          "max_angular_speed_rad_s": 0.2817053828566303,
+          "max_published_position_lead_m": 0.004769306608507462,
+          "max_published_angle_lead_rad": 0.004549369533349844
+        }
+      }
+    },
+    "0:base_2_transport_hover": {
+      "steps": 165,
+      "seconds": {
+        "policy": 6.0631400449201465,
+        "precheck": 0.10937101929448545,
+        "env_step_and_dataset": 12.277312243822962,
+        "constraint_monitor": 0.5273274073842913,
+        "recording_and_other": 1.0460401750169694
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.2268620489103313e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.15601097289425797,
+          "max_angular_speed_rad_s": 0.03923206864978239,
+          "max_published_position_lead_m": 0.002415478720958774,
+          "max_published_angle_lead_rad": 0.0002996389596350328
+        }
+      }
+    },
+    "0:base_2_place": {
+      "steps": 498,
+      "seconds": {
+        "policy": 17.271004740847275,
+        "precheck": 0.4383028408046812,
+        "env_step_and_dataset": 38.83649254962802,
+        "constraint_monitor": 1.688418870093301,
+        "recording_and_other": 3.1565447512548417
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 3.3401644762942977e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.06007393174912963,
+          "max_angular_speed_rad_s": 0.004294990101929249,
+          "max_published_position_lead_m": 0.000869299928460705,
+          "max_published_angle_lead_rad": 0.0001822519645849015
+        }
+      }
+    },
+    "0:base_2_release": {
+      "steps": 24,
+      "seconds": {
+        "policy": 0.30448967358097434,
+        "precheck": 0.00019656401127576828,
+        "env_step_and_dataset": 1.3910787706263363,
+        "constraint_monitor": 0.09523534402251244,
+        "recording_and_other": 0.1180991125293076
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 1.6700822381471489e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.005189221142131579,
+          "max_angular_speed_rad_s": 0.013049713027647687,
+          "max_published_position_lead_m": 0.00013996162815746078,
+          "max_published_angle_lead_rad": 0.0004775861730466485
+        }
+      }
+    },
+    "0:base_2_retreat": {
+      "steps": 36,
+      "seconds": {
+        "policy": 0.3075849739834666,
+        "precheck": 0.10127607942558825,
+        "env_step_and_dataset": 1.65299141430296,
+        "constraint_monitor": 0.09419106296263635,
+        "recording_and_other": 0.11741643655113876
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 2.783384665748865e-10,
+          "max_angular_speed_rad_s": 7.152557373046875e-06,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.3988607948792683,
+          "max_angular_speed_rad_s": 0.43489598992748113,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_park": {
+      "steps": 1010,
+      "seconds": {
+        "policy": 7.539840307785198,
+        "precheck": 0.814720799215138,
+        "env_step_and_dataset": 41.83648219378665,
+        "constraint_monitor": 2.9283084955532104,
+        "recording_and_other": 4.942803521407768
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.003646303676313543,
+          "max_angular_speed_rad_s": 0.007238426934082064,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.311280820678083,
+          "max_angular_speed_rad_s": 0.5684999669044999,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_unloaded_settle": {
+      "steps": 30,
+      "seconds": {
+        "policy": 0.21468478441238403,
+        "precheck": 0.000228038989007473,
+        "env_step_and_dataset": 1.2921505710110068,
+        "constraint_monitor": 0.09475398319773376,
+        "recording_and_other": 0.23484971560537815
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0027926036810469257,
+          "max_angular_speed_rad_s": 0.005579081864808669,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0036491144686879268,
+          "max_angular_speed_rad_s": 0.00723839159546338,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:base_2_rebase_targets": {
+      "steps": 1,
+      "seconds": {
+        "policy": 0.008296804036945105,
+        "precheck": 8.152099326252937e-06,
+        "env_step_and_dataset": 0.0538339139893651,
+        "constraint_monitor": 9.634066373109818e-06,
+        "recording_and_other": 1.0965857654809952e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 6.271124709643997e-09,
+          "max_angular_speed_rad_s": 0.0,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003648417056397975,
+          "max_angular_speed_rad_s": 0.00723838452771894,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_move_above": {
+      "steps": 421,
+      "seconds": {
+        "policy": 3.3665943432133645,
+        "precheck": 0.3044520360417664,
+        "env_step_and_dataset": 17.356690109707415,
+        "constraint_monitor": 1.2252872509416193,
+        "recording_and_other": 2.0039884282741696
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.902577595879773,
+          "max_angular_speed_rad_s": 2.9715650742895923,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0036483950009326125,
+          "max_angular_speed_rad_s": 0.007238402197067101,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.09792306111194193,
+        "precheck": 8.890172466635704e-05,
+        "env_step_and_dataset": 0.51717468816787,
+        "constraint_monitor": 0.09373639174737036,
+        "recording_and_other": 0.1181540850084275
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3992683043366447,
+          "max_angular_speed_rad_s": 0.026827510289588512,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003639069495298995,
+          "max_angular_speed_rad_s": 0.00723839866320092,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_descend": {
+      "steps": 112,
+      "seconds": {
+        "policy": 0.9478934896178544,
+        "precheck": 0.10159136983565986,
+        "env_step_and_dataset": 5.195028340443969,
+        "constraint_monitor": 0.28398572048172355,
+        "recording_and_other": 0.4715007250197232
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20582411436587916,
+          "max_angular_speed_rad_s": 0.08779108750026758,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003638803132874911,
+          "max_angular_speed_rad_s": 0.007238402197067101,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_close_and_attach": {
+      "steps": 673,
+      "seconds": {
+        "policy": 8.657256067730486,
+        "precheck": 0.5094097501132637,
+        "env_step_and_dataset": 33.8581965318881,
+        "constraint_monitor": 1.9840664758812636,
+        "recording_and_other": 3.302374793216586
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20516348730220074,
+          "max_angular_speed_rad_s": 0.03814841939259677,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003636315761495806,
+          "max_angular_speed_rad_s": 0.0072384304679344435,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_lift": {
+      "steps": 438,
+      "seconds": {
+        "policy": 13.960622183745727,
+        "precheck": 0.4217218542471528,
+        "env_step_and_dataset": 29.130355587927625,
+        "constraint_monitor": 1.4187989954371005,
+        "recording_and_other": 2.6669336536433548
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.060113292498548146,
+          "max_angular_speed_rad_s": 0.005950923435999677,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0036306322107846583,
+          "max_angular_speed_rad_s": 0.007267072209855164,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_pickup_clearance": {
+      "steps": 113,
+      "seconds": {
+        "policy": 3.774649991421029,
+        "precheck": 0.10527671501040459,
+        "env_step_and_dataset": 7.416820224141702,
+        "constraint_monitor": 0.30641335691325366,
+        "recording_and_other": 0.5643385082948953
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.26124144924582976,
+          "max_angular_speed_rad_s": 0.09715175307174576,
+          "max_published_position_lead_m": 0.004372561966985254,
+          "max_published_angle_lead_rad": 0.0017563510002581815
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003626994922351128,
+          "max_angular_speed_rad_s": 0.00726707924969882,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_assembly_clearance": {
+      "steps": 2324,
+      "seconds": {
+        "policy": 66.21288336929865,
+        "precheck": 1.8995178481563926,
+        "env_step_and_dataset": 151.71043249615468,
+        "constraint_monitor": 7.417368670227006,
+        "recording_and_other": 13.685462581459433
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.30029364214582194,
+          "max_angular_speed_rad_s": 0.2790557430543239,
+          "max_published_position_lead_m": 0.004772813906936237,
+          "max_published_angle_lead_rad": 0.0043293784376914205
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0036244387894046265,
+          "max_angular_speed_rad_s": 0.00726717428692071,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_transport_hover": {
+      "steps": 83,
+      "seconds": {
+        "policy": 2.5404991714749485,
+        "precheck": 0.10516483359970152,
+        "env_step_and_dataset": 6.041649281280115,
+        "constraint_monitor": 0.30384735227562487,
+        "recording_and_other": 0.5637105917558074
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.15581295142302906,
+          "max_angular_speed_rad_s": 0.024617593789334525,
+          "max_published_position_lead_m": 0.0024043957837259814,
+          "max_published_angle_lead_rad": 0.0004350083844946266
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003519716636947464,
+          "max_angular_speed_rad_s": 0.0071529257203330745,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_00": {
+      "steps": 425,
+      "seconds": {
+        "policy": 11.573756289668381,
+        "precheck": 0.3154330151155591,
+        "env_step_and_dataset": 28.253622620832175,
+        "constraint_monitor": 1.3211812500376254,
+        "recording_and_other": 2.395909682614729
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.060062591389574004,
+          "max_angular_speed_rad_s": 0.002061748700942144,
+          "max_published_position_lead_m": 0.0008617012429523124,
+          "max_published_angle_lead_rad": 0.0004201283847165546
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0035178672056378345,
+          "max_angular_speed_rad_s": 0.007152972209410794,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_01": {
+      "steps": 22,
+      "seconds": {
+        "policy": 0.5999394163955003,
+        "precheck": 0.0002007016446441412,
+        "env_step_and_dataset": 1.4434192038606852,
+        "constraint_monitor": 0.10162477614358068,
+        "recording_and_other": 0.14060411462560296
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.059699437477330995,
+          "max_angular_speed_rad_s": 0.005806396558914328,
+          "max_published_position_lead_m": 0.0008575118961900261,
+          "max_published_angle_lead_rad": 0.0004246536020474432
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003495402865911672,
+          "max_angular_speed_rad_s": 0.007124392369222632,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_02": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.3261300951708108,
+        "precheck": 0.00011188490316271782,
+        "env_step_and_dataset": 0.8059619038831443,
+        "constraint_monitor": 0.0001396478619426489,
+        "recording_and_other": 0.1399106802418828
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05676207755395362,
+          "max_angular_speed_rad_s": 0.005919137736903236,
+          "max_published_position_lead_m": 0.0008129002110759097,
+          "max_published_angle_lead_rad": 0.000424023442973931
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003494915009335532,
+          "max_angular_speed_rad_s": 0.007124388778804866,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_03": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.3525510258041322,
+        "precheck": 0.00011824816465377808,
+        "env_step_and_dataset": 0.8517036025878042,
+        "constraint_monitor": 0.00014762231148779392,
+        "recording_and_other": 0.00019018328748643398
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.057477845173886405,
+          "max_angular_speed_rad_s": 0.005640457040908341,
+          "max_published_position_lead_m": 0.0008238215757914321,
+          "max_published_angle_lead_rad": 0.0004220791327865823
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003494648732232294,
+          "max_angular_speed_rad_s": 0.007124395959638588,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_04": {
+      "steps": 5,
+      "seconds": {
+        "policy": 0.13684175186790526,
+        "precheck": 4.5968685299158096e-05,
+        "env_step_and_dataset": 0.35550557100214064,
+        "constraint_monitor": 0.10041347239166498,
+        "recording_and_other": 0.14107543462887406
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.04269053575466324,
+          "max_angular_speed_rad_s": 0.005718893434480583,
+          "max_published_position_lead_m": 0.00059712123634889,
+          "max_published_angle_lead_rad": 0.00042282376414074256
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003494360242297825,
+          "max_angular_speed_rad_s": 0.007124392369222632,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_05": {
+      "steps": 17,
+      "seconds": {
+        "policy": 0.4582302973140031,
+        "precheck": 0.00016923388466238976,
+        "env_step_and_dataset": 1.1104132656473666,
+        "constraint_monitor": 0.00019277818500995636,
+        "recording_and_other": 0.00022327410988509655
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0589975804404446,
+          "max_angular_speed_rad_s": 0.003653038701094074,
+          "max_published_position_lead_m": 0.000848064228824821,
+          "max_published_angle_lead_rad": 0.0004185947513967728
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0034942490148771586,
+          "max_angular_speed_rad_s": 0.007124399550052736,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_06": {
+      "steps": 9,
+      "seconds": {
+        "policy": 0.24735554168000817,
+        "precheck": 8.414825424551964e-05,
+        "env_step_and_dataset": 0.6222379519604146,
+        "constraint_monitor": 0.00011455174535512924,
+        "recording_and_other": 0.14193834434263408
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0533997164153986,
+          "max_angular_speed_rad_s": 0.005852321923732733,
+          "max_published_position_lead_m": 0.000761391383562518,
+          "max_published_angle_lead_rad": 0.0004252482873365283
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0034938724998666557,
+          "max_angular_speed_rad_s": 0.007124403140465073,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_07": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.3005622129421681,
+        "precheck": 0.10390850785188377,
+        "env_step_and_dataset": 0.7311504404060543,
+        "constraint_monitor": 0.10177829139865935,
+        "recording_and_other": 0.00015459046699106693
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05591450820514022,
+          "max_angular_speed_rad_s": 0.0052175932795523305,
+          "max_published_position_lead_m": 0.0008002802316891255,
+          "max_published_angle_lead_rad": 0.00042119930178117067
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003493671945999269,
+          "max_angular_speed_rad_s": 0.007124399550052736,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_08": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.3569044633768499,
+        "precheck": 0.00012130942195653915,
+        "env_step_and_dataset": 0.8846919212955981,
+        "constraint_monitor": 0.0001490109134465456,
+        "recording_and_other": 0.14137335843406618
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05745432152481161,
+          "max_angular_speed_rad_s": 0.0055921152694942125,
+          "max_published_position_lead_m": 0.0008244430841215817,
+          "max_published_angle_lead_rad": 0.00042286546085253633
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0034934282968758935,
+          "max_angular_speed_rad_s": 0.007124403140465073,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_insert_09": {
+      "steps": 243,
+      "seconds": {
+        "policy": 6.972812700085342,
+        "precheck": 0.21038004965521395,
+        "env_step_and_dataset": 17.957788914907724,
+        "constraint_monitor": 0.8105870836880058,
+        "recording_and_other": 1.4133138170000166
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.019223202998451358,
+          "max_angular_speed_rad_s": 0.0073060739011086015,
+          "max_published_position_lead_m": 0.00022631394358628657,
+          "max_published_angle_lead_rad": 0.0004260934833218829
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003493140490318982,
+          "max_angular_speed_rad_s": 0.007124431863698636,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_release": {
+      "steps": 60,
+      "seconds": {
+        "policy": 1.0749656616244465,
+        "precheck": 0.0005677458830177784,
+        "env_step_and_dataset": 4.166749226395041,
+        "constraint_monitor": 0.20217485656030476,
+        "recording_and_other": 0.27858894830569625
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.003964551136611898,
+          "max_angular_speed_rad_s": 0.009450466482933732,
+          "max_published_position_lead_m": 0.0010366453482355752,
+          "max_published_angle_lead_rad": 0.0018956183222676815
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0034747724880496533,
+          "max_angular_speed_rad_s": 0.007095848822650137,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_retreat": {
+      "steps": 34,
+      "seconds": {
+        "policy": 0.29166963300667703,
+        "precheck": 0.0002517674583941698,
+        "env_step_and_dataset": 1.664096315158531,
+        "constraint_monitor": 0.09404792310670018,
+        "recording_and_other": 0.23619286553002894
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.39847104969401503,
+          "max_angular_speed_rad_s": 0.354175781536469,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003473450143780427,
+          "max_angular_speed_rad_s": 0.007095852427508785,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_park": {
+      "steps": 161,
+      "seconds": {
+        "policy": 1.372414073208347,
+        "precheck": 0.20179163315333426,
+        "env_step_and_dataset": 6.7046457978431135,
+        "constraint_monitor": 0.47097177733667195,
+        "recording_and_other": 0.7072584426496178
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.5049277886080903,
+          "max_angular_speed_rad_s": 0.07771545648832408,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0034727003019905216,
+          "max_angular_speed_rad_s": 0.007095884871154203,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_00_part_3_unloaded_settle": {
+      "steps": 30,
+      "seconds": {
+        "policy": 0.21395868714898825,
+        "precheck": 0.00022535957396030426,
+        "env_step_and_dataset": 1.3152357963845134,
+        "constraint_monitor": 0.093275475082919,
+        "recording_and_other": 0.23701838427223265
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.4004132802585889,
+          "max_angular_speed_rad_s": 0.034093968525114454,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0034691496222714873,
+          "max_angular_speed_rad_s": 0.007095888475994538,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_move_above": {
+      "steps": 405,
+      "seconds": {
+        "policy": 3.257571440655738,
+        "precheck": 0.3068331766407937,
+        "env_step_and_dataset": 16.819378168089315,
+        "constraint_monitor": 1.1340176919475198,
+        "recording_and_other": 2.0123182479292154
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.7579936673340884,
+          "max_angular_speed_rad_s": 2.972188257124125,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003468486444256232,
+          "max_angular_speed_rad_s": 0.007095964177218526,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.09669814328663051,
+        "precheck": 8.179200813174248e-05,
+        "env_step_and_dataset": 0.4978497519623488,
+        "constraint_monitor": 0.09399151080287993,
+        "recording_and_other": 0.00015492248348891735
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.4305519855070787,
+          "max_angular_speed_rad_s": 0.6101178002617558,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003461531385638307,
+          "max_angular_speed_rad_s": 0.007095964177218526,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_descend": {
+      "steps": 111,
+      "seconds": {
+        "policy": 0.9393198003526777,
+        "precheck": 0.10150862601585686,
+        "env_step_and_dataset": 4.603443127125502,
+        "constraint_monitor": 0.2819364301394671,
+        "recording_and_other": 0.5917833312414587
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20504805615759156,
+          "max_angular_speed_rad_s": 0.06680242689414095,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0034612660149106905,
+          "max_angular_speed_rad_s": 0.007095967782018571,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_close_and_attach": {
+      "steps": 691,
+      "seconds": {
+        "policy": 8.764270042302087,
+        "precheck": 0.50895387516357,
+        "env_step_and_dataset": 29.208064230624586,
+        "constraint_monitor": 2.0822339535225183,
+        "recording_and_other": 3.3027891202364117
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20454806493949532,
+          "max_angular_speed_rad_s": 0.03185078612398978,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003445884830941782,
+          "max_angular_speed_rad_s": 0.007067432493864413,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_lift": {
+      "steps": 485,
+      "seconds": {
+        "policy": 15.381889304611832,
+        "precheck": 0.4218484398443252,
+        "env_step_and_dataset": 32.44684875989333,
+        "constraint_monitor": 1.520543941995129,
+        "recording_and_other": 2.965043789241463
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0600719652030154,
+          "max_angular_speed_rad_s": 0.006409254166516286,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003404934889952728,
+          "max_angular_speed_rad_s": 0.007010319964278872,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_pickup_clearance": {
+      "steps": 110,
+      "seconds": {
+        "policy": 3.036738538648933,
+        "precheck": 0.10467048943974078,
+        "env_step_and_dataset": 7.912198574282229,
+        "constraint_monitor": 0.3023006273433566,
+        "recording_and_other": 0.5646197709720582
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.24154746073380343,
+          "max_angular_speed_rad_s": 0.09262051978504295,
+          "max_published_position_lead_m": 0.004009929566244942,
+          "max_published_angle_lead_rad": 0.001712060827459684
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0033687363395606914,
+          "max_angular_speed_rad_s": 0.006953220245820471,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_assembly_clearance": {
+      "steps": 685,
+      "seconds": {
+        "policy": 18.771327385213226,
+        "precheck": 0.5261119911447167,
+        "env_step_and_dataset": 45.1057132917922,
+        "constraint_monitor": 2.2197920731268823,
+        "recording_and_other": 4.096094403415918
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3005857362328392,
+          "max_angular_speed_rad_s": 0.2794095591562744,
+          "max_published_position_lead_m": 0.004770550807286786,
+          "max_published_angle_lead_rad": 0.0045424736863016015
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003366388429589259,
+          "max_angular_speed_rad_s": 0.006953242318612918,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_transport_hover": {
+      "steps": 85,
+      "seconds": {
+        "policy": 2.577742821536958,
+        "precheck": 0.10441310331225395,
+        "env_step_and_dataset": 5.51027370383963,
+        "constraint_monitor": 0.20246868953108788,
+        "recording_and_other": 0.4207845670171082
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.14895419485888728,
+          "max_angular_speed_rad_s": 0.010176545922363544,
+          "max_published_position_lead_m": 0.0023967041889159492,
+          "max_published_angle_lead_rad": 0.0004780766994899306
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0033261696152533035,
+          "max_angular_speed_rad_s": 0.0068961818769006904,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_00": {
+      "steps": 425,
+      "seconds": {
+        "policy": 12.379051790805534,
+        "precheck": 0.31759095028974116,
+        "env_step_and_dataset": 27.94640367385,
+        "constraint_monitor": 1.4339857525192201,
+        "recording_and_other": 2.575077655026689
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0601423386522022,
+          "max_angular_speed_rad_s": 0.0020573023006548188,
+          "max_published_position_lead_m": 0.0009147587267646031,
+          "max_published_angle_lead_rad": 0.00037707685212883023
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003324377611473505,
+          "max_angular_speed_rad_s": 0.00689619300458771,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_01": {
+      "steps": 23,
+      "seconds": {
+        "policy": 0.6236726397182792,
+        "precheck": 0.0002165050245821476,
+        "env_step_and_dataset": 1.5099716102704406,
+        "constraint_monitor": 0.00026307813823223114,
+        "recording_and_other": 0.14073980040848255
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05974943723786179,
+          "max_angular_speed_rad_s": 0.006634986873043111,
+          "max_published_position_lead_m": 0.0009107339210097742,
+          "max_published_angle_lead_rad": 0.00038079887954290163
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032770649662688216,
+          "max_angular_speed_rad_s": 0.006810477938717659,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_02": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.3009453939739615,
+        "precheck": 0.10455357283353806,
+        "env_step_and_dataset": 0.7257571222726256,
+        "constraint_monitor": 0.10040920949541032,
+        "recording_and_other": 0.0001581565011292696
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05564795935150478,
+          "max_angular_speed_rad_s": 0.006215461240549526,
+          "max_published_position_lead_m": 0.0008477285557376361,
+          "max_published_angle_lead_rad": 0.00038147375508962907
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032765948649090136,
+          "max_angular_speed_rad_s": 0.006810477938717659,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_03": {
+      "steps": 14,
+      "seconds": {
+        "policy": 0.3811594501603395,
+        "precheck": 0.00012569245882332325,
+        "env_step_and_dataset": 0.9372556107118726,
+        "constraint_monitor": 0.0001611046027392149,
+        "recording_and_other": 0.1423673063982278
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05789885761572496,
+          "max_angular_speed_rad_s": 0.0059372215084194475,
+          "max_published_position_lead_m": 0.0008826697269964476,
+          "max_published_angle_lead_rad": 0.0003810193157791995
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032763708672399762,
+          "max_angular_speed_rad_s": 0.006810481694626078,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_04": {
+      "steps": 5,
+      "seconds": {
+        "policy": 0.1360758685041219,
+        "precheck": 4.428671672940254e-05,
+        "env_step_and_dataset": 0.3382179548498243,
+        "constraint_monitor": 5.737436003983021e-05,
+        "recording_and_other": 6.198394112288952e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.0417772679546704,
+          "max_angular_speed_rad_s": 0.006237981443765025,
+          "max_published_position_lead_m": 0.000633939277616573,
+          "max_published_angle_lead_rad": 0.0003813383041993493
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032760810959966366,
+          "max_angular_speed_rad_s": 0.006810481694626078,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_05": {
+      "steps": 17,
+      "seconds": {
+        "policy": 0.46365660219453275,
+        "precheck": 0.00016127130948007107,
+        "env_step_and_dataset": 1.1252426782157272,
+        "constraint_monitor": 0.10037320316769183,
+        "recording_and_other": 0.14148241165094078
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.059014322946234314,
+          "max_angular_speed_rad_s": 0.004091612927600937,
+          "max_published_position_lead_m": 0.0008997671360678026,
+          "max_published_angle_lead_rad": 0.0003788623752766591
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032759790640003576,
+          "max_angular_speed_rad_s": 0.006810489206436705,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_06": {
+      "steps": 10,
+      "seconds": {
+        "policy": 0.2724975235760212,
+        "precheck": 0.00012196088209748268,
+        "env_step_and_dataset": 0.6616838395129889,
+        "constraint_monitor": 0.00011426280252635479,
+        "recording_and_other": 0.0001253550872206688
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.054451874037361514,
+          "max_angular_speed_rad_s": 0.006346491201869369,
+          "max_published_position_lead_m": 0.0008307741035819239,
+          "max_published_angle_lead_rad": 0.00038220594432684056
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032756300875466642,
+          "max_angular_speed_rad_s": 0.00681049296233891,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_07": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.2997495199088007,
+        "precheck": 0.00012192619033157825,
+        "env_step_and_dataset": 0.7429839950054884,
+        "constraint_monitor": 0.10115764383226633,
+        "recording_and_other": 0.14060430228710175
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05562105124852394,
+          "max_angular_speed_rad_s": 0.005854926362378992,
+          "max_published_position_lead_m": 0.0008492197293364391,
+          "max_published_angle_lead_rad": 0.0003815510159558863
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032754230830660514,
+          "max_angular_speed_rad_s": 0.00681049296233891,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_08": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.3544613423291594,
+        "precheck": 0.00011636177077889442,
+        "env_step_and_dataset": 0.8529523692559451,
+        "constraint_monitor": 0.00015453388914465904,
+        "recording_and_other": 0.0005020822864025831
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05733236935931948,
+          "max_angular_speed_rad_s": 0.006120637723122822,
+          "max_published_position_lead_m": 0.0008750002196747852,
+          "max_published_angle_lead_rad": 0.0003818919948989979
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032751975454481494,
+          "max_angular_speed_rad_s": 0.00681049296233891,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_insert_09": {
+      "steps": 245,
+      "seconds": {
+        "policy": 7.022505832370371,
+        "precheck": 0.20995106059126556,
+        "env_step_and_dataset": 18.848319550976157,
+        "constraint_monitor": 0.8085259397048503,
+        "recording_and_other": 1.5562525456771255
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.019260005691733733,
+          "max_angular_speed_rad_s": 0.007783655335758338,
+          "max_published_position_lead_m": 0.0002801206973692772,
+          "max_published_angle_lead_rad": 0.0003863940879225921
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032749298645537387,
+          "max_angular_speed_rad_s": 0.006810541788879099,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_release": {
+      "steps": 61,
+      "seconds": {
+        "policy": 1.088991398923099,
+        "precheck": 0.0005651072133332491,
+        "env_step_and_dataset": 4.424636160256341,
+        "constraint_monitor": 0.10076172626577318,
+        "recording_and_other": 0.2831543528009206
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.001690648219321802,
+          "max_angular_speed_rad_s": 0.007460340211344505,
+          "max_published_position_lead_m": 0.00037590634387336594,
+          "max_published_angle_lead_rad": 0.0009508635957707297
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032571122571539005,
+          "max_angular_speed_rad_s": 0.006781967247463189,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_retreat": {
+      "steps": 34,
+      "seconds": {
+        "policy": 0.2945624382700771,
+        "precheck": 0.1014096459839493,
+        "env_step_and_dataset": 1.754690070869401,
+        "constraint_monitor": 0.18963451008312404,
+        "recording_and_other": 0.23808600543998182
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3989951884003526,
+          "max_angular_speed_rad_s": 0.7121313458617353,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032558700938754605,
+          "max_angular_speed_rad_s": 0.0067819785625504855,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_park": {
+      "steps": 47,
+      "seconds": {
+        "policy": 0.40134461037814617,
+        "precheck": 0.000321775209158659,
+        "env_step_and_dataset": 2.0075047528371215,
+        "constraint_monitor": 0.09394992748275399,
+        "recording_and_other": 0.23562373872846365
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.5096061036713896,
+          "max_angular_speed_rad_s": 0.11131231039747624,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032551759137453926,
+          "max_angular_speed_rad_s": 0.006781989877618904,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_01_part_7_unloaded_settle": {
+      "steps": 30,
+      "seconds": {
+        "policy": 0.21478369017131627,
+        "precheck": 0.0002130127977579832,
+        "env_step_and_dataset": 1.3246367967221886,
+        "constraint_monitor": 0.09380762069486082,
+        "recording_and_other": 0.11794552579522133
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.40194003319757143,
+          "max_angular_speed_rad_s": 0.03638683656448362,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0032542179769182783,
+          "max_angular_speed_rad_s": 0.006781997420987362,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_move_above": {
+      "steps": 380,
+      "seconds": {
+        "policy": 3.0212792751844972,
+        "precheck": 0.3048828816972673,
+        "env_step_and_dataset": 15.718346945708618,
+        "constraint_monitor": 1.1284856502898037,
+        "recording_and_other": 1.891595294000581
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.7575584966248518,
+          "max_angular_speed_rad_s": 3.03984324193661,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003253605698483905,
+          "max_angular_speed_rad_s": 0.006782020051042395,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.09638212411664426,
+        "precheck": 7.958803325891495e-05,
+        "env_step_and_dataset": 0.49593523889780045,
+        "constraint_monitor": 9.390944615006447e-05,
+        "recording_and_other": 0.0001118052750825882
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.41000429576517844,
+          "max_angular_speed_rad_s": 0.029759981122993714,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003220366533782239,
+          "max_angular_speed_rad_s": 0.006724887542229152,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_descend": {
+      "steps": 112,
+      "seconds": {
+        "policy": 0.9538335558027029,
+        "precheck": 0.10128446761518717,
+        "env_step_and_dataset": 4.643263081554323,
+        "constraint_monitor": 0.3762515555135906,
+        "recording_and_other": 0.589113736525178
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20527202606947545,
+          "max_angular_speed_rad_s": 0.11899279053158757,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003220126148671099,
+          "max_angular_speed_rad_s": 0.006724891345940529,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_close_and_attach": {
+      "steps": 704,
+      "seconds": {
+        "policy": 9.112549910089001,
+        "precheck": 0.60991215496324,
+        "env_step_and_dataset": 30.663985467283055,
+        "constraint_monitor": 2.0906780313234776,
+        "recording_and_other": 3.46886338153854
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20460768114515765,
+          "max_angular_speed_rad_s": 0.04936363628684401,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003205148851059537,
+          "max_angular_speed_rad_s": 0.006696371510061881,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_lift": {
+      "steps": 594,
+      "seconds": {
+        "policy": 23.83215119643137,
+        "precheck": 0.4367397795431316,
+        "env_step_and_dataset": 47.25684259436093,
+        "constraint_monitor": 1.894940690137446,
+        "recording_and_other": 4.453058683779091
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06008455903861748,
+          "max_angular_speed_rad_s": 0.005264345394175832,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003153136724636251,
+          "max_angular_speed_rad_s": 0.006610716085700173,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_pickup_clearance": {
+      "steps": 81,
+      "seconds": {
+        "policy": 2.886025074403733,
+        "precheck": 0.10875869472511113,
+        "env_step_and_dataset": 5.806239343713969,
+        "constraint_monitor": 0.3169123965781182,
+        "recording_and_other": 0.4518139441497624
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.24160343846331436,
+          "max_angular_speed_rad_s": 0.06608773247935351,
+          "max_published_position_lead_m": 0.004018041285591086,
+          "max_published_angle_lead_rad": 0.0013695943281019263
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0030911887639331376,
+          "max_angular_speed_rad_s": 0.006496459613159101,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_assembly_clearance": {
+      "steps": 1411,
+      "seconds": {
+        "policy": 50.57999457861297,
+        "precheck": 1.2053290447220206,
+        "env_step_and_dataset": 101.76531355152838,
+        "constraint_monitor": 4.660916620632634,
+        "recording_and_other": 8.85695556178689
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3006764278336644,
+          "max_angular_speed_rad_s": 0.2783270899422508,
+          "max_published_position_lead_m": 0.004769264211032776,
+          "max_published_angle_lead_rad": 0.00444630559065971
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0030644623521396746,
+          "max_angular_speed_rad_s": 0.006439296095598665,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_transport_hover": {
+      "steps": 172,
+      "seconds": {
+        "policy": 5.920499456580728,
+        "precheck": 0.10931569524109364,
+        "env_step_and_dataset": 13.049291594186798,
+        "constraint_monitor": 0.5259361353237182,
+        "recording_and_other": 1.0442813693080097
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.14760252223667883,
+          "max_angular_speed_rad_s": 0.024415609496831345,
+          "max_published_position_lead_m": 0.0024271018855034575,
+          "max_published_angle_lead_rad": 0.0004241044257224334
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003013941642754564,
+          "max_angular_speed_rad_s": 0.006382538392897067,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_00": {
+      "steps": 425,
+      "seconds": {
+        "policy": 15.217012899462134,
+        "precheck": 0.434335877886042,
+        "env_step_and_dataset": 30.281956049846485,
+        "constraint_monitor": 1.4747907144483179,
+        "recording_and_other": 2.6875618933700025
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06008675784871214,
+          "max_angular_speed_rad_s": 0.00208494286985265,
+          "max_published_position_lead_m": 0.0008779469380300031,
+          "max_published_angle_lead_rad": 0.00032608108355610413
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0030108374328516856,
+          "max_angular_speed_rad_s": 0.006382670646864468,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_01": {
+      "steps": 20,
+      "seconds": {
+        "policy": 0.6417366173118353,
+        "precheck": 0.0001901306677609682,
+        "env_step_and_dataset": 1.4432953691575676,
+        "constraint_monitor": 0.00024855369701981544,
+        "recording_and_other": 0.14918547123670578
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.059492528110349815,
+          "max_angular_speed_rad_s": 0.0058973258447051055,
+          "max_published_position_lead_m": 0.0008702778004643611,
+          "max_published_angle_lead_rad": 0.00033283959117327594
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0030031672464515733,
+          "max_angular_speed_rad_s": 0.006382678662168357,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_02": {
+      "steps": 5,
+      "seconds": {
+        "policy": 0.16032082168385386,
+        "precheck": 4.72113024443388e-05,
+        "env_step_and_dataset": 0.371200094697997,
+        "constraint_monitor": 6.418745033442974e-05,
+        "recording_and_other": 6.424589082598686e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.04249137548527302,
+          "max_angular_speed_rad_s": 0.00577700861183139,
+          "max_published_position_lead_m": 0.0006071165218615965,
+          "max_published_angle_lead_rad": 0.00033308610819195834
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003002804995099808,
+          "max_angular_speed_rad_s": 0.006382678662168357,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_03": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.3527594180777669,
+        "precheck": 0.00010370509698987007,
+        "env_step_and_dataset": 0.7942169378511608,
+        "constraint_monitor": 0.10561172175221145,
+        "recording_and_other": 0.00016258098185062408
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.055818075591171155,
+          "max_angular_speed_rad_s": 0.003412969246469669,
+          "max_published_position_lead_m": 0.0008144510316361453,
+          "max_published_angle_lead_rad": 0.00032403749134792616
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003002715051357443,
+          "max_angular_speed_rad_s": 0.0063826826698165275,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_04": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.35433225124143064,
+        "precheck": 0.00010433909483253956,
+        "env_step_and_dataset": 0.813858614070341,
+        "constraint_monitor": 0.00013080635108053684,
+        "recording_and_other": 0.14947446761652827
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.055850567400036494,
+          "max_angular_speed_rad_s": 0.005583458728489801,
+          "max_published_position_lead_m": 0.0008138935203314246,
+          "max_published_angle_lead_rad": 0.00032757346565775563
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0030025153418805606,
+          "max_angular_speed_rad_s": 0.0063826866774621795,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_05": {
+      "steps": 7,
+      "seconds": {
+        "policy": 0.2254757268819958,
+        "precheck": 6.641191430389881e-05,
+        "env_step_and_dataset": 0.5112230251543224,
+        "constraint_monitor": 8.454709313809872e-05,
+        "recording_and_other": 9.100465103983879e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.04912611425247411,
+          "max_angular_speed_rad_s": 0.005444745416731346,
+          "max_published_position_lead_m": 0.000711165982697216,
+          "max_published_angle_lead_rad": 0.0003277370488817211
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0030023181020591263,
+          "max_angular_speed_rad_s": 0.0063826946927459365,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_06": {
+      "steps": 8,
+      "seconds": {
+        "policy": 0.2562863340135664,
+        "precheck": 9.211665019392967e-05,
+        "env_step_and_dataset": 0.5805931815411896,
+        "constraint_monitor": 9.571481496095657e-05,
+        "recording_and_other": 0.00010205176658928394
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05140581564127917,
+          "max_angular_speed_rad_s": 0.004552016984708548,
+          "max_published_position_lead_m": 0.000747544066951719,
+          "max_published_angle_lead_rad": 0.0003220183316892247
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003002191826578023,
+          "max_angular_speed_rad_s": 0.0063826946927459365,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_07": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.4157658212352544,
+        "precheck": 0.00014046183787286282,
+        "env_step_and_dataset": 0.9472654622513801,
+        "constraint_monitor": 0.10441829892806709,
+        "recording_and_other": 0.15003592055290937
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.057426323660765666,
+          "max_angular_speed_rad_s": 0.005106119484918167,
+          "max_published_position_lead_m": 0.0008389084708129256,
+          "max_published_angle_lead_rad": 0.0003222747496098903
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003002046565657714,
+          "max_angular_speed_rad_s": 0.006382698700384041,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_08": {
+      "steps": 8,
+      "seconds": {
+        "policy": 0.25643661385402083,
+        "precheck": 7.599499076604843e-05,
+        "env_step_and_dataset": 0.5800068501848727,
+        "constraint_monitor": 9.570387192070484e-05,
+        "recording_and_other": 0.00011632428504526615
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.051496266639780554,
+          "max_angular_speed_rad_s": 0.0059036855001389265,
+          "max_published_position_lead_m": 0.0007469777000041692,
+          "max_published_angle_lead_rad": 0.00032775233176003535
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0030018113300835855,
+          "max_angular_speed_rad_s": 0.0063826946927459365,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_insert_09": {
+      "steps": 262,
+      "seconds": {
+        "policy": 9.775735064176843,
+        "precheck": 0.2188289612531662,
+        "env_step_and_dataset": 21.232382619054988,
+        "constraint_monitor": 0.8438893633428961,
+        "recording_and_other": 2.4847156046889722
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.019314399921744448,
+          "max_angular_speed_rad_s": 0.006526405836997697,
+          "max_published_position_lead_m": 0.0002423179983781377,
+          "max_published_angle_lead_rad": 0.0003294694257221497
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.003001666876863728,
+          "max_angular_speed_rad_s": 0.006382782860202957,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_release": {
+      "steps": 61,
+      "seconds": {
+        "policy": 1.1847095552366227,
+        "precheck": 0.10490790288895369,
+        "env_step_and_dataset": 4.797024066792801,
+        "constraint_monitor": 0.2038919625338167,
+        "recording_and_other": 0.43314474262297153
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.003114918200624554,
+          "max_angular_speed_rad_s": 0.00643382375868316,
+          "max_published_position_lead_m": 0.0007879799168038995,
+          "max_published_angle_lead_rad": 0.0018755704210849642
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029969280983062284,
+          "max_angular_speed_rad_s": 0.00638279889051884,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_retreat": {
+      "steps": 33,
+      "seconds": {
+        "policy": 0.2843900267034769,
+        "precheck": 0.00028197094798088074,
+        "env_step_and_dataset": 1.8438168826978654,
+        "constraint_monitor": 0.09438992524519563,
+        "recording_and_other": 0.11848141741938889
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3991161918236909,
+          "max_angular_speed_rad_s": 0.3371473392656852,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029958229566034553,
+          "max_angular_speed_rad_s": 0.0063828109132293325,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_park": {
+      "steps": 104,
+      "seconds": {
+        "policy": 0.8907486142124981,
+        "precheck": 0.10103527968749404,
+        "env_step_and_dataset": 4.438906896393746,
+        "constraint_monitor": 0.37558659724891186,
+        "recording_and_other": 0.5898138072807342
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.5073754338669855,
+          "max_angular_speed_rad_s": 0.25081072290168294,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002995224462683642,
+          "max_angular_speed_rad_s": 0.00638283495858238,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_02_part_6_unloaded_settle": {
+      "steps": 30,
+      "seconds": {
+        "policy": 0.21410106448456645,
+        "precheck": 0.00022118515335023403,
+        "env_step_and_dataset": 1.3484324959572405,
+        "constraint_monitor": 0.00025117374025285244,
+        "recording_and_other": 0.11784682050347328
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.400472281048262,
+          "max_angular_speed_rad_s": 0.046111692001007586,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.00299333830423123,
+          "max_angular_speed_rad_s": 0.006382846981224934,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_move_above": {
+      "steps": 402,
+      "seconds": {
+        "policy": 3.2116063481662422,
+        "precheck": 0.306599544826895,
+        "env_step_and_dataset": 16.605706786969677,
+        "constraint_monitor": 1.225318718701601,
+        "recording_and_other": 2.0115365257952362
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.7597427249866822,
+          "max_angular_speed_rad_s": 3.0119239348508815,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029927954239088355,
+          "max_angular_speed_rad_s": 0.006382979228798451,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.09807267156429589,
+        "precheck": 8.717947639524937e-05,
+        "env_step_and_dataset": 0.5055474149994552,
+        "constraint_monitor": 9.910785593092442e-05,
+        "recording_and_other": 0.0001172057818621397
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.4231274862439868,
+          "max_angular_speed_rad_s": 0.44026661885734564,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002985503197866028,
+          "max_angular_speed_rad_s": 0.006382979228798451,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_descend": {
+      "steps": 111,
+      "seconds": {
+        "policy": 0.9383448667358607,
+        "precheck": 0.1011932254768908,
+        "env_step_and_dataset": 4.56671604164876,
+        "constraint_monitor": 0.376137213781476,
+        "recording_and_other": 0.5897289828862995
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20484375209892516,
+          "max_angular_speed_rad_s": 0.04885088455835831,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002971268573383957,
+          "max_angular_speed_rad_s": 0.006354418276986061,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_close_and_attach": {
+      "steps": 710,
+      "seconds": {
+        "policy": 9.100187396397814,
+        "precheck": 0.6108228543307632,
+        "env_step_and_dataset": 31.808061635820195,
+        "constraint_monitor": 2.071189664537087,
+        "recording_and_other": 3.5488193256314844
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.204353646606465,
+          "max_angular_speed_rad_s": 0.0375393727199436,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029692671440480333,
+          "max_angular_speed_rad_s": 0.006354647724798138,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_lift": {
+      "steps": 516,
+      "seconds": {
+        "policy": 20.658306527882814,
+        "precheck": 0.4360842367168516,
+        "env_step_and_dataset": 42.63468938320875,
+        "constraint_monitor": 1.6822155942209065,
+        "recording_and_other": 3.4119493598118424
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.060082167731775445,
+          "max_angular_speed_rad_s": 0.006034380831051853,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002956442389705954,
+          "max_angular_speed_rad_s": 0.006354820811525068,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_pickup_clearance": {
+      "steps": 87,
+      "seconds": {
+        "policy": 3.101551196537912,
+        "precheck": 0.10936882137320936,
+        "env_step_and_dataset": 6.240419318433851,
+        "constraint_monitor": 0.31608673371374607,
+        "recording_and_other": 0.4644066863693297
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.2495676272218157,
+          "max_angular_speed_rad_s": 0.07122288403876005,
+          "max_published_position_lead_m": 0.004127134610046993,
+          "max_published_angle_lead_rad": 0.0013868525897319927
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002947095403892494,
+          "max_angular_speed_rad_s": 0.00635484898798791,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_assembly_clearance": {
+      "steps": 1409,
+      "seconds": {
+        "policy": 48.035838447511196,
+        "precheck": 1.2014194023795426,
+        "env_step_and_dataset": 104.62085048970766,
+        "constraint_monitor": 4.645200089085847,
+        "recording_and_other": 9.181507833302021
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.30096783288326945,
+          "max_angular_speed_rad_s": 0.2783173026654852,
+          "max_published_position_lead_m": 0.004767721995988084,
+          "max_published_angle_lead_rad": 0.004444374176879564
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002945516981356411,
+          "max_angular_speed_rad_s": 0.006355311869136182,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_transport_hover": {
+      "steps": 173,
+      "seconds": {
+        "policy": 6.027815830428153,
+        "precheck": 0.1099361174274236,
+        "env_step_and_dataset": 13.40779467090033,
+        "constraint_monitor": 0.5286910999566317,
+        "recording_and_other": 1.0953491399995983
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.14792890129457822,
+          "max_angular_speed_rad_s": 0.018478872490907784,
+          "max_published_position_lead_m": 0.0024212744554454467,
+          "max_published_angle_lead_rad": 0.0003704703266460714
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002919876632326016,
+          "max_angular_speed_rad_s": 0.006355368217582747,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_00": {
+      "steps": 425,
+      "seconds": {
+        "policy": 15.049127739621326,
+        "precheck": 0.3310199184343219,
+        "env_step_and_dataset": 30.962475031614304,
+        "constraint_monitor": 1.4973585444968194,
+        "recording_and_other": 2.8487814869731665
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06011565716805561,
+          "max_angular_speed_rad_s": 0.001990095461027983,
+          "max_published_position_lead_m": 0.0008858398756586876,
+          "max_published_angle_lead_rad": 0.00029374040561808525
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029167188958117763,
+          "max_angular_speed_rad_s": 0.00635552518562101,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_01": {
+      "steps": 20,
+      "seconds": {
+        "policy": 0.6477576815523207,
+        "precheck": 0.00019379821605980396,
+        "env_step_and_dataset": 1.4666639841161668,
+        "constraint_monitor": 0.00022968929260969162,
+        "recording_and_other": 0.15565304597839713
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05949996104412623,
+          "max_angular_speed_rad_s": 0.00563317818561273,
+          "max_published_position_lead_m": 0.0008781344002747177,
+          "max_published_angle_lead_rad": 0.00030460820344073046
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029089488925334002,
+          "max_angular_speed_rad_s": 0.006355521160847944,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_02": {
+      "steps": 5,
+      "seconds": {
+        "policy": 0.16252750414423645,
+        "precheck": 4.731048829853535e-05,
+        "env_step_and_dataset": 0.3970373102929443,
+        "constraint_monitor": 5.8578792959451675e-05,
+        "recording_and_other": 0.0002747320104390383
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.04238125806395865,
+          "max_angular_speed_rad_s": 0.005756044709988421,
+          "max_published_position_lead_m": 0.0006129040662644373,
+          "max_published_angle_lead_rad": 0.00030264798548341017
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002908583684819999,
+          "max_angular_speed_rad_s": 0.006355517136072329,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_03": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.3597621382214129,
+        "precheck": 0.10858892579562962,
+        "env_step_and_dataset": 0.7999530408997089,
+        "constraint_monitor": 0.10544790327548981,
+        "recording_and_other": 0.0001589660532772541
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.055841921651573506,
+          "max_angular_speed_rad_s": 0.003590434192877345,
+          "max_published_position_lead_m": 0.0008210835945569136,
+          "max_published_angle_lead_rad": 0.00029283132800336965
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029084923820116384,
+          "max_angular_speed_rad_s": 0.006355529210391527,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_04": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.39185261237435043,
+        "precheck": 0.00011037522926926613,
+        "env_step_and_dataset": 0.8895605059806257,
+        "constraint_monitor": 0.00014629890210926533,
+        "recording_and_other": 0.15635833702981472
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05667515007220727,
+          "max_angular_speed_rad_s": 0.005520806017689275,
+          "max_published_position_lead_m": 0.0008351741319857596,
+          "max_published_angle_lead_rad": 0.00029766277059888155
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002908290664752335,
+          "max_angular_speed_rad_s": 0.0063555372599249154,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_05": {
+      "steps": 6,
+      "seconds": {
+        "policy": 0.19494468113407493,
+        "precheck": 5.635409615933895e-05,
+        "env_step_and_dataset": 1.454090123763308,
+        "constraint_monitor": 6.968481466174126e-05,
+        "recording_and_other": 7.784762419760227e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.04608380603868013,
+          "max_angular_speed_rad_s": 0.005383438721688848,
+          "max_published_position_lead_m": 0.0006716119404783338,
+          "max_published_angle_lead_rad": 0.00029659599174995416
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002908070670684384,
+          "max_angular_speed_rad_s": 0.0063555372599249154,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_06": {
+      "steps": 8,
+      "seconds": {
+        "policy": 0.262317021144554,
+        "precheck": 7.365993224084377e-05,
+        "env_step_and_dataset": 0.6043671553488821,
+        "constraint_monitor": 0.10535589372739196,
+        "recording_and_other": 0.1574281258508563
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05143057534746114,
+          "max_angular_speed_rad_s": 0.00405536757360038,
+          "max_published_position_lead_m": 0.0007537789478487732,
+          "max_published_angle_lead_rad": 0.00029080533706886055
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002907961095359376,
+          "max_angular_speed_rad_s": 0.0063555372599249154,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_07": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.4228301150724292,
+        "precheck": 0.0001350517850369215,
+        "env_step_and_dataset": 0.9398386194370687,
+        "constraint_monitor": 0.00014989450573921204,
+        "recording_and_other": 0.00016727088950574398
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05735021252277547,
+          "max_angular_speed_rad_s": 0.00502942283165927,
+          "max_published_position_lead_m": 0.0008464842854956514,
+          "max_published_angle_lead_rad": 0.0002929681467206271
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029078141334595705,
+          "max_angular_speed_rad_s": 0.006355545309448108,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_08": {
+      "steps": 8,
+      "seconds": {
+        "policy": 0.25893087941221893,
+        "precheck": 7.241894491016865e-05,
+        "env_step_and_dataset": 0.5853008553385735,
+        "constraint_monitor": 9.213783778250217e-05,
+        "recording_and_other": 0.00010081171058118343
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05138972131831988,
+          "max_angular_speed_rad_s": 0.0055266223758852736,
+          "max_published_position_lead_m": 0.0007537518752784603,
+          "max_published_angle_lead_rad": 0.00029663952815243625
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029075767067123586,
+          "max_angular_speed_rad_s": 0.006355545309448108,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_insert_09": {
+      "steps": 263,
+      "seconds": {
+        "policy": 10.172964435769245,
+        "precheck": 0.21979541890323162,
+        "env_step_and_dataset": 22.64208286977373,
+        "constraint_monitor": 0.8450391658116132,
+        "recording_and_other": 1.732246812665835
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.019266037635967438,
+          "max_angular_speed_rad_s": 0.006361253878810145,
+          "max_published_position_lead_m": 0.00024880442642942333,
+          "max_published_angle_lead_rad": 0.00029762383787733333
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0029074305966729714,
+          "max_angular_speed_rad_s": 0.006355601655825003,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_release": {
+      "steps": 61,
+      "seconds": {
+        "policy": 1.181774920783937,
+        "precheck": 0.0005790884606540203,
+        "env_step_and_dataset": 5.126169899245724,
+        "constraint_monitor": 0.20647735497914255,
+        "recording_and_other": 0.4619994673412293
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.002805668259750356,
+          "max_angular_speed_rad_s": 0.00620393547156917,
+          "max_published_position_lead_m": 0.0007291375355877204,
+          "max_published_angle_lead_rad": 0.0017888402712915477
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0028891140536452123,
+          "max_angular_speed_rad_s": 0.006327042448295563,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_retreat": {
+      "steps": 33,
+      "seconds": {
+        "policy": 0.2894828771241009,
+        "precheck": 0.10290692350827157,
+        "env_step_and_dataset": 2.0447384954895824,
+        "constraint_monitor": 0.09601670783013105,
+        "recording_and_other": 0.12547462643124163
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3990708912248345,
+          "max_angular_speed_rad_s": 0.3434992419616048,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0028754904452175534,
+          "max_angular_speed_rad_s": 0.006298475581428548,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_park": {
+      "steps": 80,
+      "seconds": {
+        "policy": 0.6886156692635268,
+        "precheck": 0.000576128950342536,
+        "env_step_and_dataset": 3.4972945754416287,
+        "constraint_monitor": 0.28355914261192083,
+        "recording_and_other": 0.49909806810319424
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.5069484328950018,
+          "max_angular_speed_rad_s": 0.17470982518446332,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0028748960059401677,
+          "max_angular_speed_rad_s": 0.006298524315962859,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_03_part_4_unloaded_settle": {
+      "steps": 30,
+      "seconds": {
+        "policy": 0.21436500665731728,
+        "precheck": 0.10140026407316327,
+        "env_step_and_dataset": 1.3820922847371548,
+        "constraint_monitor": 0.09358525881543756,
+        "recording_and_other": 0.12509071617387235
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.40053820585328237,
+          "max_angular_speed_rad_s": 0.037001959446094926,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002873453307963579,
+          "max_angular_speed_rad_s": 0.00629854462190753,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_move_above": {
+      "steps": 440,
+      "seconds": {
+        "policy": 3.545469385571778,
+        "precheck": 0.3063448811881244,
+        "env_step_and_dataset": 18.191081626107916,
+        "constraint_monitor": 1.3191161663271487,
+        "recording_and_other": 2.2444265212398022
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.76458075899415,
+          "max_angular_speed_rad_s": 4.966948301967269,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002872912394489871,
+          "max_angular_speed_rad_s": 0.0062985568054429114,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.09711578767746687,
+        "precheck": 8.432683534920216e-05,
+        "env_step_and_dataset": 0.5193845187313855,
+        "constraint_monitor": 0.00010144338011741638,
+        "recording_and_other": 0.12386339018121362
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.4127904539734426,
+          "max_angular_speed_rad_s": 0.392593075634824,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002840092145720666,
+          "max_angular_speed_rad_s": 0.006241515169981583,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_descend": {
+      "steps": 113,
+      "seconds": {
+        "policy": 0.9634715202264488,
+        "precheck": 0.10113739687949419,
+        "env_step_and_dataset": 4.654268429381773,
+        "constraint_monitor": 0.28203788213431835,
+        "recording_and_other": 0.4974495561327785
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20690422678808434,
+          "max_angular_speed_rad_s": 0.09104782370137326,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002839880885512994,
+          "max_angular_speed_rad_s": 0.006241519268270123,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_close_and_attach": {
+      "steps": 689,
+      "seconds": {
+        "policy": 8.700459541520104,
+        "precheck": 0.5073708398267627,
+        "env_step_and_dataset": 28.910382436122745,
+        "constraint_monitor": 2.0791157013736665,
+        "recording_and_other": 3.4732938439119607
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20641841643443626,
+          "max_angular_speed_rad_s": 0.0508045224025013,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002825427345394967,
+          "max_angular_speed_rad_s": 0.006213016170995342,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_lift": {
+      "steps": 445,
+      "seconds": {
+        "policy": 14.988665933022276,
+        "precheck": 0.41811247332952917,
+        "env_step_and_dataset": 28.709500551456586,
+        "constraint_monitor": 1.4137269032653421,
+        "recording_and_other": 2.677779394434765
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06007053261997681,
+          "max_angular_speed_rad_s": 0.006298573050120092,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.00278863183909927,
+          "max_angular_speed_rad_s": 0.006156033734276421,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_pickup_clearance": {
+      "steps": 103,
+      "seconds": {
+        "policy": 2.7515596619341522,
+        "precheck": 0.10483558243140578,
+        "env_step_and_dataset": 6.577876751776785,
+        "constraint_monitor": 0.30216702725738287,
+        "recording_and_other": 0.5645517476368695
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.29719104169281374,
+          "max_angular_speed_rad_s": 0.08714535698441091,
+          "max_published_position_lead_m": 0.00486253994200566,
+          "max_published_angle_lead_rad": 0.0012540909337468156
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002756335394899376,
+          "max_angular_speed_rad_s": 0.006099034784334108,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_assembly_clearance": {
+      "steps": 1409,
+      "seconds": {
+        "policy": 38.91791523946449,
+        "precheck": 1.1518632553052157,
+        "env_step_and_dataset": 90.17621496855281,
+        "constraint_monitor": 4.445678947959095,
+        "recording_and_other": 8.314113278407604
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.30102171218895146,
+          "max_angular_speed_rad_s": 0.27729417443139537,
+          "max_published_position_lead_m": 0.004771974175957734,
+          "max_published_angle_lead_rad": 0.004656964257563224
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002729924335064381,
+          "max_angular_speed_rad_s": 0.006041929947404009,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_transport_hover": {
+      "steps": 129,
+      "seconds": {
+        "policy": 3.7079051800537854,
+        "precheck": 0.1054666475392878,
+        "env_step_and_dataset": 9.361128733726218,
+        "constraint_monitor": 0.4031152781099081,
+        "recording_and_other": 0.7050197967328131
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.15510068907925811,
+          "max_angular_speed_rad_s": 0.02240103322198489,
+          "max_published_position_lead_m": 0.0023991110437265937,
+          "max_published_angle_lead_rad": 0.0004770550399698638
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002608544513462262,
+          "max_angular_speed_rad_s": 0.005813766532483906,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_00": {
+      "steps": 425,
+      "seconds": {
+        "policy": 11.267380787990987,
+        "precheck": 0.31516615580767393,
+        "env_step_and_dataset": 27.195543995127082,
+        "constraint_monitor": 1.313974334858358,
+        "recording_and_other": 2.5435298127122223
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06010172105903731,
+          "max_angular_speed_rad_s": 0.0017404246000904326,
+          "max_published_position_lead_m": 0.000873476384325367,
+          "max_published_angle_lead_rad": 0.00038478094497595863
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0025944274154686003,
+          "max_angular_speed_rad_s": 0.0057852340683219,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_01": {
+      "steps": 23,
+      "seconds": {
+        "policy": 0.6104447650723159,
+        "precheck": 0.0002197595313191414,
+        "env_step_and_dataset": 1.4866998528596014,
+        "constraint_monitor": 0.1008837535046041,
+        "recording_and_other": 0.14002433768473566
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05974036119408786,
+          "max_angular_speed_rad_s": 0.005220377188149517,
+          "max_published_position_lead_m": 0.000870104677047251,
+          "max_published_angle_lead_rad": 0.0003904144608412564
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002551812419416908,
+          "max_angular_speed_rad_s": 0.005699587498429673,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_02": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.2904817909002304,
+        "precheck": 9.628664702177048e-05,
+        "env_step_and_dataset": 0.7128988143522292,
+        "constraint_monitor": 0.10079283872619271,
+        "recording_and_other": 0.00039770733565092087
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05585970486676473,
+          "max_angular_speed_rad_s": 0.005237928670260871,
+          "max_published_position_lead_m": 0.0008100108775438477,
+          "max_published_angle_lead_rad": 0.0003900436033790312
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002551481298076493,
+          "max_angular_speed_rad_s": 0.005699583010464787,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_03": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.3496924815699458,
+        "precheck": 0.00013508624397218227,
+        "env_step_and_dataset": 0.8904446323867887,
+        "constraint_monitor": 0.00015909038484096527,
+        "recording_and_other": 0.14023563778027892
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05744668975108456,
+          "max_angular_speed_rad_s": 0.005007418524979875,
+          "max_published_position_lead_m": 0.0008348258288540354,
+          "max_published_angle_lead_rad": 0.0003878900093284507
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0025513246050074367,
+          "max_angular_speed_rad_s": 0.005699583010464787,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_04": {
+      "steps": 5,
+      "seconds": {
+        "policy": 0.13265348295681179,
+        "precheck": 4.603923298418522e-05,
+        "env_step_and_dataset": 0.344044883036986,
+        "constraint_monitor": 5.8919889852404594e-05,
+        "recording_and_other": 6.061210297048092e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.04252800904251099,
+          "max_angular_speed_rad_s": 0.0050869267621920745,
+          "max_published_position_lead_m": 0.0006052559965830388,
+          "max_published_angle_lead_rad": 0.0003878487363405372
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002551139420759024,
+          "max_angular_speed_rad_s": 0.005699583010464787,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_05": {
+      "steps": 17,
+      "seconds": {
+        "policy": 0.45019409782253206,
+        "precheck": 0.10414099553599954,
+        "env_step_and_dataset": 1.131945494795218,
+        "constraint_monitor": 0.10043000476434827,
+        "recording_and_other": 0.142331101000309
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.059010647031365646,
+          "max_angular_speed_rad_s": 0.003375021944340191,
+          "max_published_position_lead_m": 0.0008593890528839077,
+          "max_published_angle_lead_rad": 0.0003845560421805685
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.00255106819557359,
+          "max_angular_speed_rad_s": 0.005699587498429673,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_06": {
+      "steps": 9,
+      "seconds": {
+        "policy": 0.23870684928260744,
+        "precheck": 8.321506902575493e-05,
+        "env_step_and_dataset": 0.5896999698597938,
+        "constraint_monitor": 0.000100692268460989,
+        "recording_and_other": 0.00012535881251096725
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05331446256959292,
+          "max_angular_speed_rad_s": 0.005124536571706993,
+          "max_published_position_lead_m": 0.0007714957288172818,
+          "max_published_angle_lead_rad": 0.0003876061160785325
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0025508260282107635,
+          "max_angular_speed_rad_s": 0.005699583010464787,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_07": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.317802919074893,
+        "precheck": 0.00011136755347251892,
+        "env_step_and_dataset": 0.802380065433681,
+        "constraint_monitor": 0.00013583502732217312,
+        "recording_and_other": 0.1405596062541008
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.056739482710327534,
+          "max_angular_speed_rad_s": 0.004631069631452064,
+          "max_published_position_lead_m": 0.0008244721273196007,
+          "max_published_angle_lead_rad": 0.00038710788415750863
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0025506978207297587,
+          "max_angular_speed_rad_s": 0.005699591986391026,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_08": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.3476378978230059,
+        "precheck": 0.0001274410169571638,
+        "env_step_and_dataset": 0.8710999942850322,
+        "constraint_monitor": 0.10062964051030576,
+        "recording_and_other": 0.00019435654394328594
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05745671953288147,
+          "max_angular_speed_rad_s": 0.0050163042409054745,
+          "max_published_position_lead_m": 0.0008352610054154632,
+          "max_published_angle_lead_rad": 0.00038726496328560077
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0025505256584936217,
+          "max_angular_speed_rad_s": 0.005699600962303129,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_insert_09": {
+      "steps": 242,
+      "seconds": {
+        "policy": 6.783900570590049,
+        "precheck": 0.20934108714573085,
+        "env_step_and_dataset": 20.644714768510312,
+        "constraint_monitor": 0.709123254287988,
+        "recording_and_other": 1.40789865818806
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.019224080045885817,
+          "max_angular_speed_rad_s": 0.006708622216063642,
+          "max_published_position_lead_m": 0.0002379224854422228,
+          "max_published_angle_lead_rad": 0.00039062526341928863
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0025503392360980807,
+          "max_angular_speed_rad_s": 0.005699668281193336,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_release": {
+      "steps": 60,
+      "seconds": {
+        "policy": 1.0682833069004118,
+        "precheck": 0.0005668404046446085,
+        "env_step_and_dataset": 5.076648107264191,
+        "constraint_monitor": 0.1996377434115857,
+        "recording_and_other": 0.41836060862988234
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.003430871604897487,
+          "max_angular_speed_rad_s": 0.007887124074818922,
+          "max_published_position_lead_m": 0.000905595363853484,
+          "max_published_angle_lead_rad": 0.0017889073712352092
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002534819417650126,
+          "max_angular_speed_rad_s": 0.005671148131259756,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_retreat": {
+      "steps": 34,
+      "seconds": {
+        "policy": 0.2920048094820231,
+        "precheck": 0.00028590625151991844,
+        "env_step_and_dataset": 2.1573622738942504,
+        "constraint_monitor": 0.09482624428346753,
+        "recording_and_other": 0.11895794421434402
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.39935247834258963,
+          "max_angular_speed_rad_s": 0.3811435494363556,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0025219227253938893,
+          "max_angular_speed_rad_s": 0.00564259262711638,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_park": {
+      "steps": 156,
+      "seconds": {
+        "policy": 1.329038616269827,
+        "precheck": 0.20323579548858106,
+        "env_step_and_dataset": 6.615582117578015,
+        "constraint_monitor": 0.4717992867808789,
+        "recording_and_other": 0.8300911341793835
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.5062227181516942,
+          "max_angular_speed_rad_s": 0.13895830480518767,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002509423117151887,
+          "max_angular_speed_rad_s": 0.005614060461941377,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_04_part_5_unloaded_settle": {
+      "steps": 30,
+      "seconds": {
+        "policy": 0.2133726889733225,
+        "precheck": 0.00020936410874128342,
+        "env_step_and_dataset": 1.400797851383686,
+        "constraint_monitor": 0.09385733096860349,
+        "recording_and_other": 0.11891833716072142
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3992986062013003,
+          "max_angular_speed_rad_s": 0.05198644719042586,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002507281319691253,
+          "max_angular_speed_rad_s": 0.005614051349264583,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_move_above": {
+      "steps": 392,
+      "seconds": {
+        "policy": 3.1354322279803455,
+        "precheck": 0.3057332164607942,
+        "env_step_and_dataset": 17.373971642926335,
+        "constraint_monitor": 1.1326840347610414,
+        "recording_and_other": 1.8971964011434466
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.7577663453188089,
+          "max_angular_speed_rad_s": 2.988869777566713,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0024948672435425204,
+          "max_angular_speed_rad_s": 0.005585515356554945,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.09729769872501493,
+        "precheck": 8.471659384667873e-05,
+        "env_step_and_dataset": 0.516585398465395,
+        "constraint_monitor": 0.09341005701571703,
+        "recording_and_other": 0.11809523752890527
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3886335817165471,
+          "max_angular_speed_rad_s": 2.858795653136158,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0024300398279266952,
+          "max_angular_speed_rad_s": 0.005442767189730806,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_descend": {
+      "steps": 112,
+      "seconds": {
+        "policy": 0.9472663872875273,
+        "precheck": 0.10127766081131995,
+        "env_step_and_dataset": 4.606533071259037,
+        "constraint_monitor": 0.2833518083207309,
+        "recording_and_other": 0.4741435151081532
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.2044683126850447,
+          "max_angular_speed_rad_s": 0.3592741098841378,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002429888673036797,
+          "max_angular_speed_rad_s": 0.0054427765891835135,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_close_and_attach": {
+      "steps": 681,
+      "seconds": {
+        "policy": 8.861285171704367,
+        "precheck": 0.5089239394292235,
+        "env_step_and_dataset": 28.756583901122212,
+        "constraint_monitor": 1.9794779007788748,
+        "recording_and_other": 3.459092869888991
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.2041141417331225,
+          "max_angular_speed_rad_s": 0.046015404618336406,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.00240483522753824,
+          "max_angular_speed_rad_s": 0.0053858662031760025,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_lift": {
+      "steps": 445,
+      "seconds": {
+        "policy": 14.842284266836941,
+        "precheck": 0.4226321284659207,
+        "env_step_and_dataset": 29.81017128471285,
+        "constraint_monitor": 1.4185980907641351,
+        "recording_and_other": 2.5434802116360515
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06011440127938686,
+          "max_angular_speed_rad_s": 0.005264598056944426,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002383250674632888,
+          "max_angular_speed_rad_s": 0.005357508978538685,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_pickup_clearance": {
+      "steps": 86,
+      "seconds": {
+        "policy": 2.5291649056598544,
+        "precheck": 0.0007990752346813679,
+        "env_step_and_dataset": 6.947793523781002,
+        "constraint_monitor": 0.3036094845738262,
+        "recording_and_other": 0.5640403281431645
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.2587537649104081,
+          "max_angular_speed_rad_s": 0.07015944736619215,
+          "max_published_position_lead_m": 0.004258372226012825,
+          "max_published_angle_lead_rad": 0.0010690327039041274
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023778262731982583,
+          "max_angular_speed_rad_s": 0.005357508978538685,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_assembly_clearance": {
+      "steps": 1403,
+      "seconds": {
+        "policy": 41.022215836681426,
+        "precheck": 1.162880887510255,
+        "env_step_and_dataset": 94.17761167720892,
+        "constraint_monitor": 4.472748413914815,
+        "recording_and_other": 8.21135904151015
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3003690684760641,
+          "max_angular_speed_rad_s": 0.2784467706878455,
+          "max_published_position_lead_m": 0.004768186207925594,
+          "max_published_angle_lead_rad": 0.004396372915220826
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023767800444461015,
+          "max_angular_speed_rad_s": 0.005358005505701549,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_transport_hover": {
+      "steps": 94,
+      "seconds": {
+        "policy": 2.93367911526002,
+        "precheck": 0.10513867856934667,
+        "env_step_and_dataset": 6.222766238730401,
+        "constraint_monitor": 0.3030384227167815,
+        "recording_and_other": 0.5661199649330229
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.1478105284625824,
+          "max_angular_speed_rad_s": 0.01823629751733287,
+          "max_published_position_lead_m": 0.002421493586965589,
+          "max_published_angle_lead_rad": 0.00040632836480843836
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023596254918133346,
+          "max_angular_speed_rad_s": 0.005358029376040504,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_00": {
+      "steps": 425,
+      "seconds": {
+        "policy": 11.945693271700293,
+        "precheck": 0.31699557416141033,
+        "env_step_and_dataset": 28.195590489543974,
+        "constraint_monitor": 1.3203992669004947,
+        "recording_and_other": 3.885002151830122
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.060089577742404435,
+          "max_angular_speed_rad_s": 0.0022284779379880882,
+          "max_published_position_lead_m": 0.0008853946429609637,
+          "max_published_angle_lead_rad": 0.00032623066328934874
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023584746374452517,
+          "max_angular_speed_rad_s": 0.005358201239341811,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_01": {
+      "steps": 23,
+      "seconds": {
+        "policy": 0.6493296104017645,
+        "precheck": 0.104533223900944,
+        "env_step_and_dataset": 1.5510920616798103,
+        "constraint_monitor": 0.10384960193186998,
+        "recording_and_other": 0.1422493674326688
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05974163858001333,
+          "max_angular_speed_rad_s": 0.005345722043961914,
+          "max_published_position_lead_m": 0.0008818163619567966,
+          "max_published_angle_lead_rad": 0.0003347901335941321
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023532535750657403,
+          "max_angular_speed_rad_s": 0.005358225108808793,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_02": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.3089554940816015,
+        "precheck": 9.7678042948246e-05,
+        "env_step_and_dataset": 0.742123243631795,
+        "constraint_monitor": 0.0001261732541024685,
+        "recording_and_other": 0.00014379899948835373
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05580172795178899,
+          "max_angular_speed_rad_s": 0.00554810740276813,
+          "max_published_position_lead_m": 0.0008206184608415687,
+          "max_published_angle_lead_rad": 0.00033303815017039345
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023529725225476753,
+          "max_angular_speed_rad_s": 0.005358225108808793,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_03": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.3672351106069982,
+        "precheck": 0.00012107728980481625,
+        "env_step_and_dataset": 0.8927912239450961,
+        "constraint_monitor": 0.10126196406781673,
+        "recording_and_other": 0.13991110329516232
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05738005804737027,
+          "max_angular_speed_rad_s": 0.005192214764175975,
+          "max_published_position_lead_m": 0.0008454826344375308,
+          "max_published_angle_lead_rad": 0.0003277649786532217
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023528381050128993,
+          "max_angular_speed_rad_s": 0.005358225108808793,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_04": {
+      "steps": 6,
+      "seconds": {
+        "policy": 0.17070715501904488,
+        "precheck": 5.6235818192362785e-05,
+        "env_step_and_dataset": 0.411926124477759,
+        "constraint_monitor": 6.799167022109032e-05,
+        "recording_and_other": 7.862923666834831e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.046068935841489245,
+          "max_angular_speed_rad_s": 0.005317665454797432,
+          "max_published_position_lead_m": 0.0006712336366221282,
+          "max_published_angle_lead_rad": 0.00032835398866854973
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.002352679246924432,
+          "max_angular_speed_rad_s": 0.005358220334923903,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_05": {
+      "steps": 16,
+      "seconds": {
+        "policy": 0.4511664747260511,
+        "precheck": 0.0001467673573642969,
+        "env_step_and_dataset": 1.0853029496502131,
+        "constraint_monitor": 0.00020283949561417103,
+        "recording_and_other": 0.14041342725977302
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05873449589259168,
+          "max_angular_speed_rad_s": 0.004176499458438378,
+          "max_published_position_lead_m": 0.0008662346301514217,
+          "max_published_angle_lead_rad": 0.00032167651893186126
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.00235260592749686,
+          "max_angular_speed_rad_s": 0.005358225108808793,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_06": {
+      "steps": 10,
+      "seconds": {
+        "policy": 0.2811324819922447,
+        "precheck": 9.155087172985077e-05,
+        "env_step_and_dataset": 0.6731287792790681,
+        "constraint_monitor": 0.10148164792917669,
+        "recording_and_other": 0.0003831691574305296
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05465180928257785,
+          "max_angular_speed_rad_s": 0.005499339916118823,
+          "max_published_position_lead_m": 0.0008039188247223331,
+          "max_published_angle_lead_rad": 0.00032960582842142685
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023524104078300047,
+          "max_angular_speed_rad_s": 0.0053582442043058195,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_07": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.31055407295934856,
+        "precheck": 0.00010001310147345066,
+        "env_step_and_dataset": 0.7609651270322502,
+        "constraint_monitor": 0.00012525822967290878,
+        "recording_and_other": 0.1407846047077328
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05580183501135621,
+          "max_angular_speed_rad_s": 0.005127046722088773,
+          "max_published_position_lead_m": 0.0008210949725872766,
+          "max_published_angle_lead_rad": 0.00032489382429384253
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023522840866998067,
+          "max_angular_speed_rad_s": 0.005358253752028813,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_08": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.36436478910036385,
+        "precheck": 0.00012243795208632946,
+        "env_step_and_dataset": 0.8683206802234054,
+        "constraint_monitor": 0.00015007704496383667,
+        "recording_and_other": 0.00016977381892502308
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05740435911233356,
+          "max_angular_speed_rad_s": 0.005264865283216342,
+          "max_published_position_lead_m": 0.0008460063625603114,
+          "max_published_angle_lead_rad": 0.0003267231502139662
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.00235214965060491,
+          "max_angular_speed_rad_s": 0.005358248978169443,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_insert_09": {
+      "steps": 244,
+      "seconds": {
+        "policy": 7.289425446651876,
+        "precheck": 0.21230369783006608,
+        "env_step_and_dataset": 22.17671394092031,
+        "constraint_monitor": 0.8127180701121688,
+        "recording_and_other": 1.41588395065628
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.01924166633430975,
+          "max_angular_speed_rad_s": 0.006849917225295424,
+          "max_published_position_lead_m": 0.0002491398674618007,
+          "max_published_angle_lead_rad": 0.00033315243509778617
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023519907705203506,
+          "max_angular_speed_rad_s": 0.005358325359408991,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_release": {
+      "steps": 61,
+      "seconds": {
+        "policy": 1.0979589759372175,
+        "precheck": 0.10364212933927774,
+        "env_step_and_dataset": 5.416774806333706,
+        "constraint_monitor": 0.20042506721802056,
+        "recording_and_other": 0.42033197241835296
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.005070551925554657,
+          "max_angular_speed_rad_s": 0.006650647695639671,
+          "max_published_position_lead_m": 0.0008666786002711081,
+          "max_published_angle_lead_rad": 0.0017892502908443198
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023489952079872043,
+          "max_angular_speed_rad_s": 0.005358349228323064,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_retreat": {
+      "steps": 33,
+      "seconds": {
+        "policy": 0.2846814119257033,
+        "precheck": 0.0002792617306113243,
+        "env_step_and_dataset": 2.298852597363293,
+        "constraint_monitor": 0.09504275629296899,
+        "recording_and_other": 0.11855594534426928
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.39910776161888656,
+          "max_angular_speed_rad_s": 0.43155259275006136,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023482448660368115,
+          "max_angular_speed_rad_s": 0.005358349228323064,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_park": {
+      "steps": 83,
+      "seconds": {
+        "policy": 0.711286811158061,
+        "precheck": 0.0006112586706876755,
+        "env_step_and_dataset": 3.6955886906944215,
+        "constraint_monitor": 0.18816631729714572,
+        "recording_and_other": 0.4729769073892385
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.5067105256865498,
+          "max_angular_speed_rad_s": 0.356151101957488,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023478413128245365,
+          "max_angular_speed_rad_s": 0.005358377870879603,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_05_part_1_unloaded_settle": {
+      "steps": 30,
+      "seconds": {
+        "policy": 0.21410150034353137,
+        "precheck": 0.10101863089948893,
+        "env_step_and_dataset": 1.4252303035464138,
+        "constraint_monitor": 0.09483965579420328,
+        "recording_and_other": 0.11787996906787157
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.4006673855775725,
+          "max_angular_speed_rad_s": 0.02939406349317976,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023468216734812003,
+          "max_angular_speed_rad_s": 0.005358377870879603,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_move_above": {
+      "steps": 429,
+      "seconds": {
+        "policy": 3.455257856519893,
+        "precheck": 0.30430313292890787,
+        "env_step_and_dataset": 17.725961485877633,
+        "constraint_monitor": 1.3175682118162513,
+        "recording_and_other": 2.1283267233520746
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.7632663349729718,
+          "max_angular_speed_rad_s": 4.76974023249084,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023464547466660263,
+          "max_angular_speed_rad_s": 0.005358420834427342,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_preshape": {
+      "steps": 12,
+      "seconds": {
+        "policy": 0.0960210207849741,
+        "precheck": 8.452869951725006e-05,
+        "env_step_and_dataset": 0.5046570473350585,
+        "constraint_monitor": 0.00010510697029531002,
+        "recording_and_other": 0.00012604263611137867
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.47158132771425526,
+          "max_angular_speed_rad_s": 0.49440546592729595,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023282691032111926,
+          "max_angular_speed_rad_s": 0.005329879197769721,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_descend": {
+      "steps": 112,
+      "seconds": {
+        "policy": 0.957160352030769,
+        "precheck": 0.10168330185115337,
+        "env_step_and_dataset": 4.673519617179409,
+        "constraint_monitor": 0.3787097865715623,
+        "recording_and_other": 0.5914390776306391
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20374313273243977,
+          "max_angular_speed_rad_s": 0.08981460439481367,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023281233980202228,
+          "max_angular_speed_rad_s": 0.005329979981522904,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_close_and_attach": {
+      "steps": 742,
+      "seconds": {
+        "policy": 9.617293599294499,
+        "precheck": 0.6100374860689044,
+        "env_step_and_dataset": 35.34154312242754,
+        "constraint_monitor": 2.1890361623372883,
+        "recording_and_other": 3.7093366489280015
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.20287854039608944,
+          "max_angular_speed_rad_s": 0.0727700400444342,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023267422223551383,
+          "max_angular_speed_rad_s": 0.005330315913604296,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_lift": {
+      "steps": 660,
+      "seconds": {
+        "policy": 29.0669055019971,
+        "precheck": 0.546640669927001,
+        "env_step_and_dataset": 52.68163027847186,
+        "constraint_monitor": 2.120532325701788,
+        "recording_and_other": 4.071899136295542
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06008349672660099,
+          "max_angular_speed_rad_s": 0.03447798565100095,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0023176474148270954,
+          "max_angular_speed_rad_s": 0.00533044068298528,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_pickup_clearance": {
+      "steps": 107,
+      "seconds": {
+        "policy": 4.519747087964788,
+        "precheck": 0.1086678768042475,
+        "env_step_and_dataset": 7.739455311791971,
+        "constraint_monitor": 0.4242886332795024,
+        "recording_and_other": 0.7545954864472151
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.15029883719988738,
+          "max_angular_speed_rad_s": 0.07069119424432722,
+          "max_published_position_lead_m": 0.0023885459121384483,
+          "max_published_angle_lead_rad": 0.0009222518107047713
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0010408148907193426,
+          "max_angular_speed_rad_s": 0.004967702123941432,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_assembly_clearance": {
+      "steps": 1341,
+      "seconds": {
+        "policy": 46.79594166553579,
+        "precheck": 1.0933189447969198,
+        "env_step_and_dataset": 99.07131905783899,
+        "constraint_monitor": 4.456870559137315,
+        "recording_and_other": 8.416280329693109
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.3036215062786321,
+          "max_angular_speed_rad_s": 0.27992838907434364,
+          "max_published_position_lead_m": 0.004758511866456319,
+          "max_published_angle_lead_rad": 0.004399662465068818
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0038792111503717142,
+          "max_angular_speed_rad_s": 0.03758763359344164,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_transport_hover": {
+      "steps": 174,
+      "seconds": {
+        "policy": 7.385513050947338,
+        "precheck": 0.2169428337365389,
+        "env_step_and_dataset": 12.48548992862925,
+        "constraint_monitor": 0.530289858346805,
+        "recording_and_other": 1.0516354998108
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.14873068088219082,
+          "max_angular_speed_rad_s": 0.01338005299621671,
+          "max_published_position_lead_m": 0.002398619512763166,
+          "max_published_angle_lead_rad": 0.00046973177741110845
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0038039037891030632,
+          "max_angular_speed_rad_s": 0.021525442868687662,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_00": {
+      "steps": 425,
+      "seconds": {
+        "policy": 13.810040307696909,
+        "precheck": 0.32790475827641785,
+        "env_step_and_dataset": 31.979733128799126,
+        "constraint_monitor": 1.378723846981302,
+        "recording_and_other": 2.711048206780106
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.06011679238972149,
+          "max_angular_speed_rad_s": 0.001988526725144333,
+          "max_published_position_lead_m": 0.0009040479442068498,
+          "max_published_angle_lead_rad": 0.00044557819863092163
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.08551566087520002,
+          "max_angular_speed_rad_s": 0.5260287764022378,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_01": {
+      "steps": 20,
+      "seconds": {
+        "policy": 0.6596410484053195,
+        "precheck": 0.00022694095969200134,
+        "env_step_and_dataset": 1.475576507858932,
+        "constraint_monitor": 0.10608138144016266,
+        "recording_and_other": 0.15045813657343388
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.059488045769411683,
+          "max_angular_speed_rad_s": 0.005822181701695848,
+          "max_published_position_lead_m": 0.0008961753701438503,
+          "max_published_angle_lead_rad": 0.000443954888522499
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.010823960440184684,
+          "max_angular_speed_rad_s": 0.028401410270378135,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_02": {
+      "steps": 6,
+      "seconds": {
+        "policy": 0.19587151799350977,
+        "precheck": 5.559390410780907e-05,
+        "env_step_and_dataset": 0.4476078590378165,
+        "constraint_monitor": 7.028505206108093e-05,
+        "recording_and_other": 7.869885303080082e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.04573529262233906,
+          "max_angular_speed_rad_s": 0.005656072146617776,
+          "max_published_position_lead_m": 0.0006848232993492174,
+          "max_published_angle_lead_rad": 0.0004444093014817806
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.009399065946955042,
+          "max_angular_speed_rad_s": 0.012386500990502532,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_03": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.3584711111616343,
+        "precheck": 0.0001057041808962822,
+        "env_step_and_dataset": 0.8034928278066218,
+        "constraint_monitor": 0.10683722188696265,
+        "recording_and_other": 0.0001614936627447605
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.055749565672344494,
+          "max_angular_speed_rad_s": 0.004194192801264598,
+          "max_published_position_lead_m": 0.0008379020433435468,
+          "max_published_angle_lead_rad": 0.00044482466385247714
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.008945488116739392,
+          "max_angular_speed_rad_s": 0.013959928612480937,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_04": {
+      "steps": 11,
+      "seconds": {
+        "policy": 0.36444965843111277,
+        "precheck": 0.00010414398275315762,
+        "env_step_and_dataset": 0.8249068334698677,
+        "constraint_monitor": 0.00012601050548255444,
+        "recording_and_other": 0.1501506930217147
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05571495307657038,
+          "max_angular_speed_rad_s": 0.0053649282213110725,
+          "max_published_position_lead_m": 0.0008383481224530337,
+          "max_published_angle_lead_rad": 0.00044426789688988054
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0009503608517625274,
+          "max_angular_speed_rad_s": 0.0071489408410512455,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_05": {
+      "steps": 7,
+      "seconds": {
+        "policy": 0.22695833607576787,
+        "precheck": 6.604683585464954e-05,
+        "env_step_and_dataset": 0.517430622363463,
+        "constraint_monitor": 8.129212073981762e-05,
+        "recording_and_other": 9.180582128465176e-05
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.048832378248670955,
+          "max_angular_speed_rad_s": 0.0055756696549353535,
+          "max_published_position_lead_m": 0.0007323187324058886,
+          "max_published_angle_lead_rad": 0.0004443579395319607
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0009345206870008029,
+          "max_angular_speed_rad_s": 0.00706225492142942,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_06": {
+      "steps": 8,
+      "seconds": {
+        "policy": 0.25928642437793314,
+        "precheck": 8.39869026094675e-05,
+        "env_step_and_dataset": 0.5902622467838228,
+        "constraint_monitor": 9.481282904744148e-05,
+        "recording_and_other": 0.00010645342990756035
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.051273781946075216,
+          "max_angular_speed_rad_s": 0.004655847877625886,
+          "max_published_position_lead_m": 0.0007692029874662484,
+          "max_published_angle_lead_rad": 0.0004445689427225931
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0009646917871653474,
+          "max_angular_speed_rad_s": 0.007186562052771694,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_07": {
+      "steps": 13,
+      "seconds": {
+        "policy": 0.42402641428634524,
+        "precheck": 0.10924795223399997,
+        "env_step_and_dataset": 0.9986235818360001,
+        "constraint_monitor": 0.10527728707529604,
+        "recording_and_other": 0.15102300606667995
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05734484116122988,
+          "max_angular_speed_rad_s": 0.005122769247342014,
+          "max_published_position_lead_m": 0.0008641566915336623,
+          "max_published_angle_lead_rad": 0.0004441328676917205
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0009623844170957574,
+          "max_angular_speed_rad_s": 0.0071919595701110325,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_08": {
+      "steps": 8,
+      "seconds": {
+        "policy": 0.2605692557990551,
+        "precheck": 7.283804006874561e-05,
+        "env_step_and_dataset": 0.5907559881452471,
+        "constraint_monitor": 9.52437985688448e-05,
+        "recording_and_other": 0.0003462899476289749
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.05117967255774057,
+          "max_angular_speed_rad_s": 0.005745729962666053,
+          "max_published_position_lead_m": 0.0007689373959330699,
+          "max_published_angle_lead_rad": 0.00044465442515261613
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.0009352210956588813,
+          "max_angular_speed_rad_s": 0.007239829737887791,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    },
+    "0:assemble_06_part_0_insert_09": {
+      "steps": 8274,
+      "seconds": {
+        "policy": 286.2259919582866,
+        "precheck": 6.979847392998636,
+        "env_step_and_dataset": 826.8604690260254,
+        "constraint_monitor": 27.354153459193185,
+        "recording_and_other": 55.07711681793444
+      },
+      "controller_fk_tracking": {
+        "franka_left": {
+          "max_linear_speed_m_s": 0.019229882850403855,
+          "max_angular_speed_rad_s": 0.006646688805812153,
+          "max_published_position_lead_m": 0.0002757214268571157,
+          "max_published_angle_lead_rad": 0.0005762025477796647
+        },
+        "franka_right": {
+          "max_linear_speed_m_s": 0.10089132484764131,
+          "max_angular_speed_rad_s": 0.6238447024058404,
+          "max_published_position_lead_m": 0.0,
+          "max_published_angle_lead_rad": 0.0
+        }
+      }
+    }
+  },
+  "cached_hold_summary": {
+    "fabrica_stool_circular_2": {
+      "max_position_slip": 0.005026604063501499,
+      "max_orientation_slip": 0.004090250160906693,
+      "invalid_samples": 9,
+      "last": {
+        "step": 3952,
+        "phase": "base_2_release",
+        "object": "fabrica_stool_circular_2",
+        "robot": "franka_right",
+        "valid": false,
+        "sample_index": 15078,
+        "validation_stage": "unspecified",
+        "reasons": [
+          "position_slip",
+          "contact_missing"
+        ],
+        "position_slip": 0.005026604063501499,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.003998245436917892,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.04404040426015854,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": false,
+        "strict_contact_ready": false,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.0049928965837887805,
+        "grasp_point_in_tcp": [
+          -0.00955508161910371,
+          2.036223741463953e-05,
+          0.14415263488709829
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          -0.005686299956194685,
+          4.108794425818768e-05,
+          0.14094345316880552
+        ],
+        "grasp_point_in_object": [
+          -0.009310469368179294,
+          5.0477702351497435e-06,
+          0.00933212718798943
+        ],
+        "grasp_reference_capture_step": 1067,
+        "fingers": {
+          "left_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          },
+          "right_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 0.0,
+        "right_finger": 0.0
+      },
+      "max_force_N": {
+        "left_finger": 12.458026719504627,
+        "right_finger": 14.233347949651815
+      },
+      "contact_missing_samples": 9
+    },
+    "fabrica_stool_circular_3": {
+      "max_position_slip": 0.0005362532721572372,
+      "max_orientation_slip": 0.01332467772948379,
+      "invalid_samples": 55,
+      "last": {
+        "step": 10049,
+        "phase": "assemble_00_part_3_release",
+        "object": "fabrica_stool_circular_3",
+        "robot": "franka_left",
+        "valid": false,
+        "sample_index": 34891,
+        "validation_stage": "unspecified",
+        "reasons": [
+          "contact_missing"
+        ],
+        "position_slip": 0.00045703224500078226,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.012472595301023204,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.045643050223588943,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": false,
+        "strict_contact_ready": false,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.0009563447918181007,
+        "grasp_point_in_tcp": [
+          -0.007332008418807576,
+          0.00015173807094105533,
+          0.15662631883704278
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          -0.007348131279213443,
+          4.7174069809478164e-05,
+          0.15707093653350812
+        ],
+        "grasp_point_in_object": [
+          0.02785378931520094,
+          -0.028563825963859955,
+          0.06199043612315863
+        ],
+        "grasp_reference_capture_step": 6246,
+        "fingers": {
+          "left_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          },
+          "right_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 0.0,
+        "right_finger": 0.0
+      },
+      "max_force_N": {
+        "left_finger": 9.696599408990686,
+        "right_finger": 9.504492996745418
+      },
+      "contact_missing_samples": 55
+    },
+    "fabrica_stool_circular_7": {
+      "max_position_slip": 0.0007118253283105948,
+      "max_orientation_slip": 0.00872940182332675,
+      "invalid_samples": 57,
+      "last": {
+        "step": 13693,
+        "phase": "assemble_01_part_7_release",
+        "object": "fabrica_stool_circular_7",
+        "robot": "franka_left",
+        "valid": false,
+        "sample_index": 46682,
+        "validation_stage": "unspecified",
+        "reasons": [
+          "contact_missing"
+        ],
+        "position_slip": 0.0005795200818316373,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.0071246779189047494,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.040491316467523575,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": false,
+        "strict_contact_ready": false,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.00045473132633062376,
+        "grasp_point_in_tcp": [
+          -0.005321053630228823,
+          -0.0003515083589677309,
+          0.15977594837962455
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          -0.00499052148033831,
+          1.2018483822481352e-05,
+          0.15946863704285696
+        ],
+        "grasp_point_in_object": [
+          0.025657964843685932,
+          0.02900707084399526,
+          0.08325751584916065
+        ],
+        "grasp_reference_capture_step": 11478,
+        "fingers": {
+          "left_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          },
+          "right_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 0.0,
+        "right_finger": 0.0
+      },
+      "max_force_N": {
+        "left_finger": 10.191480761437795,
+        "right_finger": 10.432064297858844
+      },
+      "contact_missing_samples": 57
+    },
+    "fabrica_stool_circular_6": {
+      "max_position_slip": 0.0010989893497424198,
+      "max_orientation_slip": 0.014177420291442651,
+      "invalid_samples": 55,
+      "last": {
+        "step": 18101,
+        "phase": "assemble_02_part_6_release",
+        "object": "fabrica_stool_circular_6",
+        "robot": "franka_left",
+        "valid": false,
+        "sample_index": 63118,
+        "validation_stage": "unspecified",
+        "reasons": [
+          "contact_missing"
+        ],
+        "position_slip": 0.0010860786552140684,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.007174867878667844,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.042063403874635696,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": false,
+        "strict_contact_ready": false,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.0010507243238956129,
+        "grasp_point_in_tcp": [
+          -0.003055402738052139,
+          0.00101465535630655,
+          0.16009202759541524
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          -0.003328359659280791,
+          0.0002801545576278904,
+          0.16084407143802376
+        ],
+        "grasp_point_in_object": [
+          0.02203939522613401,
+          -0.0270588860044237,
+          0.11550770273612354
+        ],
+        "grasp_reference_capture_step": 14997,
+        "fingers": {
+          "left_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          },
+          "right_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 0.0,
+        "right_finger": 0.0
+      },
+      "max_force_N": {
+        "left_finger": 13.037006850442722,
+        "right_finger": 11.028596266364335
+      },
+      "contact_missing_samples": 55
+    },
+    "fabrica_stool_circular_4": {
+      "max_position_slip": 0.0009928508664812845,
+      "max_orientation_slip": 0.02464069258266044,
+      "invalid_samples": 55,
+      "last": {
+        "step": 22520,
+        "phase": "assemble_03_part_4_release",
+        "object": "fabrica_stool_circular_4",
+        "robot": "franka_left",
+        "valid": false,
+        "sample_index": 79106,
+        "validation_stage": "unspecified",
+        "reasons": [
+          "contact_missing"
+        ],
+        "position_slip": 0.0009928508664812845,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.02464069258266044,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.041618093848228455,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": false,
+        "strict_contact_ready": false,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.0011732895961638614,
+        "grasp_point_in_tcp": [
+          -0.0032100157041799887,
+          0.0007967240124656938,
+          0.16089525961321258
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          -0.0035995564064529905,
+          7.60823857367031e-05,
+          0.16145622889059832
+        ],
+        "grasp_point_in_object": [
+          0.022857434009370015,
+          0.026961998850027133,
+          0.11499606165492471
+        ],
+        "grasp_reference_capture_step": 19488,
+        "fingers": {
+          "left_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          },
+          "right_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 0.0,
+        "right_finger": 0.0
+      },
+      "max_force_N": {
+        "left_finger": 16.036138791213908,
+        "right_finger": 9.61058196393681
+      },
+      "contact_missing_samples": 55
+    },
+    "fabrica_stool_circular_5": {
+      "max_position_slip": 0.0005604119886302585,
+      "max_orientation_slip": 0.016837499501112234,
+      "invalid_samples": 55,
+      "last": {
+        "step": 26833,
+        "phase": "assemble_04_part_5_release",
+        "object": "fabrica_stool_circular_5",
+        "robot": "franka_left",
+        "valid": false,
+        "sample_index": 94498,
+        "validation_stage": "unspecified",
+        "reasons": [
+          "contact_missing"
+        ],
+        "position_slip": 0.0005196081316302218,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.014599789941588392,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.04742951691150665,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": false,
+        "strict_contact_ready": false,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.0009621258772742966,
+        "grasp_point_in_tcp": [
+          0.008015606215523087,
+          6.550299489420722e-05,
+          0.1594264426515306
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          0.008231542255884176,
+          2.273443502200101e-05,
+          0.15989711779132013
+        ],
+        "grasp_point_in_object": [
+          -0.028820206365281167,
+          -0.03023770010043682,
+          0.054133193797075055
+        ],
+        "grasp_reference_capture_step": 23902,
+        "fingers": {
+          "left_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          },
+          "right_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 0.0,
+        "right_finger": 0.0
+      },
+      "max_force_N": {
+        "left_finger": 9.242628397145142,
+        "right_finger": 9.059336027534332
+      },
+      "contact_missing_samples": 55
+    },
+    "fabrica_stool_circular_1": {
+      "max_position_slip": 0.0049241181572230305,
+      "max_orientation_slip": 0.05595984165149171,
+      "invalid_samples": 56,
+      "last": {
+        "step": 31111,
+        "phase": "assemble_05_part_1_release",
+        "object": "fabrica_stool_circular_1",
+        "robot": "franka_left",
+        "valid": false,
+        "sample_index": 109609,
+        "validation_stage": "unspecified",
+        "reasons": [
+          "position_slip",
+          "contact_missing"
+        ],
+        "position_slip": 0.0049241181572230305,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.05595984165149171,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.04011236131191254,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": false,
+        "strict_contact_ready": false,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.002052829602226952,
+        "grasp_point_in_tcp": [
+          -0.0035837225643084517,
+          0.0035385437280248885,
+          0.1477965797046336
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          -0.0032817194701283805,
+          1.4483746050989246e-06,
+          0.15120901142090507
+        ],
+        "grasp_point_in_object": [
+          -0.02686566586782429,
+          0.02688379527657951,
+          0.07407281714592232
+        ],
+        "grasp_reference_capture_step": 28235,
+        "fingers": {
+          "left_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          },
+          "right_finger": {
+            "force": 0.0,
+            "force_probe_valid": true,
+            "force_contact": false
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 0.0,
+        "right_finger": 0.0
+      },
+      "max_force_N": {
+        "left_finger": 10.52132242282827,
+        "right_finger": 11.05200169362634
+      },
+      "contact_missing_samples": 56
+    },
+    "fabrica_stool_circular_0": {
+      "max_position_slip": 0.001003012719827417,
+      "max_orientation_slip": 0.04687939510177018,
+      "invalid_samples": 0,
+      "last": {
+        "step": 43619,
+        "phase": "failed",
+        "object": "fabrica_stool_circular_0",
+        "robot": "franka_left",
+        "valid": true,
+        "sample_index": 166758,
+        "validation_stage": "unspecified",
+        "reasons": [],
+        "position_slip": 0.0009794798765759979,
+        "max_position_slip": 0.003,
+        "orientation_slip": 0.02496876055731056,
+        "max_orientation_slip": 0.0872664626,
+        "gripper_opening": 0.6769915223121643,
+        "gripper_opening_limit": 0.81,
+        "contact_ready": true,
+        "strict_contact_ready": true,
+        "within_grace": false,
+        "position_slip_reference": "grasp_point",
+        "object_origin_position_slip": 0.001774758198062296,
+        "grasp_point_in_tcp": [
+          -0.005453039165897443,
+          0.0006783228983592814,
+          0.1615360150255688
+        ],
+        "grasp_point_in_tcp_at_attach": [
+          -0.006112897074784001,
+          -1.7160640717709904e-05,
+          0.16133533863041946
+        ],
+        "grasp_point_in_object": [
+          -0.027010787889460923,
+          0.03418502917086855,
+          0.1148529888397046
+        ],
+        "grasp_reference_capture_step": 32537,
+        "fingers": {
+          "left_finger": {
+            "force": 12.041230782012063,
+            "force_probe_valid": true,
+            "force_contact": true
+          },
+          "right_finger": {
+            "force": 10.063439236136757,
+            "force_probe_valid": true,
+            "force_contact": true
+          }
+        }
+      },
+      "min_force_N": {
+        "left_finger": 4.420539259116609,
+        "right_finger": 4.315663845328742
+      },
+      "max_force_N": {
+        "left_finger": 15.184424348075744,
+        "right_finger": 14.177830307442013
+      },
+      "contact_missing_samples": 0
+    }
+  },
+  "physics_read_cache": {
+    "pair_contact": {
+      "hits": 269936,
+      "misses": 73586
+    }
+  },
+  "state_read_caches": {
+    "franka_left": {
+      "robot": {
+        "root_pose": {
+          "hits": 1,
+          "misses": 43620
+        },
+        "physical_eef_pose": {
+          "hits": 299374,
+          "misses": 43620
+        },
+        "joint_positions": {
+          "hits": 317614,
+          "misses": 43620
+        }
+      },
+      "controllers": {
+        "arm_ik_controller": {
+          "measured_fk": {
+            "hits": 67312,
+            "misses": 43620
+          },
+          "command_fk": {
+            "hits": 0,
+            "misses": 26781
+          }
+        },
+        "arm_joint_controller": {},
+        "gripper_controller": {}
+      }
+    },
+    "franka_right": {
+      "robot": {
+        "root_pose": {
+          "hits": 1,
+          "misses": 43620
+        },
+        "physical_eef_pose": {
+          "hits": 108327,
+          "misses": 43620
+        },
+        "joint_positions": {
+          "hits": 110985,
+          "misses": 43620
+        }
+      },
+      "controllers": {
+        "arm_ik_controller": {
+          "measured_fk": {
+            "hits": 6830,
+            "misses": 43620
+          },
+          "command_fk": {
+            "hits": 0,
+            "misses": 2796
+          }
+        },
+        "arm_joint_controller": {},
+        "gripper_controller": {}
+      }
+    }
+  },
+  "image_read_caches": {
+    "franka_left/third_person_front": {
+      "captures": 1818,
+      "hits": 41802,
+      "deferred": 1,
+      "readbacks": 1818
+    },
+    "franka_left/left_wrist": {
+      "captures": 1818,
+      "hits": 41802,
+      "deferred": 1,
+      "readbacks": 1818
+    },
+    "franka_right/right_wrist": {
+      "captures": 1818,
+      "hits": 41802,
+      "deferred": 1,
+      "readbacks": 1818
+    }
+  },
+  "timing_scope": "CPU wall times including synchronization; not an exclusive GPU profile."
+}

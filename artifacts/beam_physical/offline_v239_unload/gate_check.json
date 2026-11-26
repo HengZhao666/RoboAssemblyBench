@@ -1,0 +1,245 @@
+{
+  "round55_condition_identical": {
+    "base_3.3N": {
+      "equal": true,
+      "old": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "new": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      }
+    },
+    "base_10N": {
+      "equal": true,
+      "old": {
+        "ready": true,
+        "count": 6,
+        "legacy_count": 0
+      },
+      "new": {
+        "ready": true,
+        "count": 6,
+        "legacy_count": 0
+      }
+    }
+  },
+  "legacy_base_only_diagnostic": {
+    "base_5N_quiet": {
+      "last": {
+        "ready": true,
+        "count": 6,
+        "legacy_count": 0
+      },
+      "expected_legacy_count": 0,
+      "passed": true
+    },
+    "base_10N_quiet": {
+      "last": {
+        "ready": true,
+        "count": 6,
+        "legacy_count": 6
+      },
+      "expected_legacy_count": 6,
+      "passed": true
+    }
+  },
+  "v233_cases": {
+    "assembly_11.96N_base_3.35N": {
+      "expected_ready": true,
+      "last": {
+        "ready": true,
+        "count": 6,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": true,
+        "vertical_force": 11.96,
+        "ready": true,
+        "error": null,
+        "by_part": {
+          "fabrica_beam_6": 3.35,
+          "fabrica_beam_3": 3.88,
+          "fabrica_beam_2": 4.73,
+          "fabrica_beam_1": 0.0,
+          "fabrica_beam_0": 0.0
+        }
+      },
+      "passed": true
+    },
+    "assembly_9.0N": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": true,
+        "vertical_force": 9.0,
+        "ready": false,
+        "error": null,
+        "by_part": {
+          "fabrica_beam_6": 3.0,
+          "fabrica_beam_3": 3.0,
+          "fabrica_beam_2": 3.0,
+          "fabrica_beam_1": 0.0,
+          "fabrica_beam_0": 0.0
+        }
+      },
+      "passed": true
+    },
+    "base_1.5N": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": true,
+        "vertical_force": 12.5,
+        "ready": true,
+        "error": null,
+        "by_part": {
+          "fabrica_beam_6": 1.5,
+          "fabrica_beam_3": 5.5,
+          "fabrica_beam_2": 5.5,
+          "fabrica_beam_1": 0.0,
+          "fabrica_beam_0": 0.0
+        }
+      },
+      "passed": true
+    },
+    "gap_2mm": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": true,
+        "vertical_force": 11.96,
+        "ready": true,
+        "error": null,
+        "by_part": {
+          "fabrica_beam_6": 3.35,
+          "fabrica_beam_3": 3.88,
+          "fabrica_beam_2": 4.73,
+          "fabrica_beam_1": 0.0,
+          "fabrica_beam_0": 0.0
+        }
+      },
+      "passed": true
+    },
+    "missing_probe": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": false,
+        "vertical_force": null,
+        "ready": false,
+        "error": "ValueError: No existing support probe for fabrica_beam_0/optical_board",
+        "by_part": {
+          "fabrica_beam_6": 3.35,
+          "fabrica_beam_3": 3.88,
+          "fabrica_beam_2": 4.73,
+          "fabrica_beam_1": 0.0
+        }
+      },
+      "passed": true
+    },
+    "nan_tensor": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": false,
+        "vertical_force": null,
+        "ready": false,
+        "error": "ValueError: Invalid support force matrix for fabrica_beam_1/assembly_support",
+        "by_part": {
+          "fabrica_beam_6": 3.35,
+          "fabrica_beam_3": 3.88,
+          "fabrica_beam_2": 4.73
+        }
+      },
+      "passed": true
+    },
+    "clock_change_during_read": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": false,
+        "vertical_force": null,
+        "ready": false,
+        "error": "ValueError: Physics clock changed during assembly load sample",
+        "by_part": {
+          "fabrica_beam_6": 3.35,
+          "fabrica_beam_3": 3.88,
+          "fabrica_beam_2": 4.73,
+          "fabrica_beam_1": 0.0,
+          "fabrica_beam_0": 0.0
+        }
+      },
+      "passed": true
+    },
+    "not_final_phase": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": null,
+      "passed": true
+    },
+    "over_40N": {
+      "expected_ready": false,
+      "last": {
+        "ready": false,
+        "count": 0,
+        "legacy_count": 0
+      },
+      "probes_unchanged": true,
+      "load": {
+        "valid": true,
+        "vertical_force": 47.230000000000004,
+        "ready": false,
+        "error": null,
+        "by_part": {
+          "fabrica_beam_6": 3.35,
+          "fabrica_beam_3": 3.88,
+          "fabrica_beam_2": 40.0,
+          "fabrica_beam_1": 0.0,
+          "fabrica_beam_0": 0.0
+        }
+      },
+      "passed": true
+    }
+  },
+  "passed": true
+}

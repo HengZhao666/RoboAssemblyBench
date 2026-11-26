@@ -1,0 +1,24 @@
+{
+  "round": 1,
+  "package": "P03",
+  "reviewed_at_utc": "2026-11-19T21:00:32.048643+00:00",
+  "verified_success": false,
+  "result": "failed at assemble_03_part_4_close_and_attach: local-skill-failure:close_until_contact_timeout",
+  "steps": 19549,
+  "wall_seconds": 1881.7,
+  "ms_per_step": 96.3,
+  "output_size_mb": 11,
+  "reached": [
+    "base 2 picked/carried/placed/released, right arm home",
+    "leg 3 inserted+released (step 9.8k)",
+    "leg 7 inserted+released (13.3k)",
+    "cap 6 on leg 3 inserted+released (17.6k)"
+  ],
+  "speed_vs_smoke12": "leg 3 released at 9.8k vs 13.3k (rotation lookahead 0.03, faster home)",
+  "not_reached": [
+    "parts 4,5,1,0,8",
+    "terminal both-arm home",
+    "final unloaded settle"
+  ],
+  "next": "reproduce cap 4 close with close traces (debug order cap4_first); formal runs carry no traces"
+}

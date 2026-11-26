@@ -1,5 +1,7 @@
 # RoboAssemblyBench：双 UR5e 数据生成、训练与仿真评测
 
+> **纯物理装配（Beam v239 / Stool P09）复现与交接：** 先读 [PHYSICAL_ASSEMBLY_HANDOFF.md](PHYSICAL_ASSEMBLY_HANDOFF.md)；`python3 roboassemblybench/scripts/prepare_physical_reference.py beam|stool` 重建服务器实际运行的源码树并核 SHA。
+
 > **运行修复后的 Stool 辅助版：** 使用 [Stool 修复总入口](STOOL_REPAIR_README.md)、[仿真说明](docs/stool_assisted/RUN.md)及 `bash roboassemblybench/scripts/run_stool_assisted.sh`；[完整结果与三路录像](docs/stool_assisted/RESULTS.md)。通用 `stool_circular` staged 命令不会自动选择该修复版本。
 
 > **运行修复后的 Beam 辅助版：** 请使用 [专用复现说明](docs/beam_assisted/RUN.md) 和 `bash roboassemblybench/scripts/run_beam_assisted.sh`。下文通用 `beam` 命令选择 `fabrica_beam_ur5e_staged`，不会自动进入已修复的辅助流程。代码差异与 A44 结果见 [BEAM_REPAIR_README.md](BEAM_REPAIR_README.md)。

@@ -1,0 +1,130 @@
+{
+  "profile": "plumbers_staged_v2",
+  "reference": "baiyu858/RoboAssemblyBench@9497b839fc718e8e9594ed69c7e466de5b552a19",
+  "goal": "All five parts from original scene, pure contact physics, releases, both arms home, original common240fresh-native unloaded stability and complete audit zero forbidden writes after initialization; stop on success.",
+  "primary_acceptance": {
+    "position_m": 0.003,
+    "orientation_rad": 0.04,
+    "linear_speed_m_s": 0.01,
+    "angular_speed_rad_s": 0.1,
+    "consecutive_physics_steps": 240
+  },
+  "supported_acceptance": {
+    "position_drift_m": 0.0005,
+    "orientation_drift_rad": 0.008726646259971648,
+    "seating_steps": 96,
+    "release_steps": 30
+  },
+  "legacy_scores": "Original raw support and terminal static comparisons are independent diagnostics, not relabeled historical successes.",
+  "exploration_bypass": false,
+  "forbidden": [
+    "fixed grasp/assembly joints",
+    "object pose following",
+    "velocity clearing to pass",
+    "collision or gravity disabling",
+    "grasp anchor recapture"
+  ],
+  "storage": {
+    "full_output_budget_GiB": 14,
+    "reserve_GiB": 5,
+    "runtime_disk_floor_GiB": 5,
+    "runtime_memory_floor_GiB": 2,
+    "encoder_unit_test_passed": true,
+    "changed_storage": "Optimised worker; inert traces kept (hold, motion, close, release, recenter, idle, attach); bulk contact/physics traces only from step 65,000 (full contact records every 8 steps plus all failure snapshots); entity-geometry trace bytes dropped (monitor kept); three-view MP4 at stride 24 / 10 fps; original 5 s failure tail.",
+    "budget_basis": "R35 35,960ticks reached aboutfirst third of165stages. Old20GiB output estimate included full rawPNG (R35 3.4GB raw PNG); streaming eliminates main PNG growth. Retain14GiB output allocation with original5GiB reserve, >2x proportional non-PNG estimate. This is capacity planning, not a bound on unknown dynamics; runtime floors/stop remain active.",
+    "native_performance_pending": true
+  },
+  "resources": {
+    "gpu_uuid": "GPU-e064bda0-b445-2d7f-50d5-c1180deadea2",
+    "minimum_start_free_bytes": 20401094656,
+    "planned_output_budget_bytes": 15032385536,
+    "stop_request_disk_free_bytes": 5368709120,
+    "prefix_output_budget_bytes": 0,
+    "full_output_budget_bytes": 15032385536,
+    "full_budget_checkpoint_phase_index": 46,
+    "budget_contract": "Streaming14GiBoutput+5GiBreserve; this batch explicitly permits12GiBstartup RAM,2GiBruntime RAM/5GiBdisk floors; other jobs untouched.",
+    "minimum_start_memory_bytes": 12884901888,
+    "shared_memory_contract": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round32_v208_retreat_budget/shared_memory_admission_contract.json",
+    "human_memory_authorization": {
+      "minimum_gib": 12,
+      "scope": "current_batch_only",
+      "previous_human_quote": "本批允许最低12 GiB时启动",
+      "runtime_memory_floor_gib": 2,
+      "runtime_disk_floor_gib": 5,
+      "authorized": true,
+      "batch_round_numbers": [
+        45,
+        49
+      ],
+      "human_instruction": "本批允许最低12 GiB时启动；继续同一Beam任务的新授权45–49共5轮，成功即停。",
+      "human_instruction_source": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch45_49_20261115/human_authorization.json"
+    }
+  },
+  "round": 62,
+  "run": "v230_cap_close",
+  "authorization": "先把代码唤醒修好。CC没额度时按已有指导继续检测和修改，指导都验证完、没有可用信息后就自行诊断调整，不要干等到3点。满足启动条件后再跑45轮。授权5轮；45–49共5轮，成功即停。",
+  "status": "ready_for_native",
+  "native_started": false,
+  "source_manifest": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round53_v230_cap_close/source_manifest.json",
+  "source_manifest_sha256": "757d5e81bf2bdd8540ffdb63b0106919f2288f8926c650c96d5be406fba6a7ef",
+  "tools_manifest": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round53_v230_cap_close/tools_manifest.json",
+  "tools_manifest_sha256": "38ae9ea36b4826816496798c097134b403b0b146c30288b7798c0e4d9ba09144",
+  "config_sha256": "363b1f32b20fb9860327ae665a5543c9f1e435bea24eef10c83b1801e0ebd437",
+  "rollback": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/offline_v230_cap_close/controller_before53.py",
+  "previous_review": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round49_v225_contact_refinement/manual_review.json",
+  "preflight": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round53_v230_cap_close/production_preflight.json",
+  "changes": [
+    "For cap zero translation feedback, preserve prior command tool orientation using local FK and bounded IK. Full CAD, tracking, force and acceptance gates remain active."
+  ],
+  "qualified_candidate_review": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round53_v230_cap_close/candidate_review.json",
+  "geometry": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/offline_v217_cad_increment/close_geometry/G6_tiered_result.json",
+  "hypotheses": [
+    "Conforming midpoint refinement on identical cap surfaces may improve SDF contact manifold support; original solver settings restored. Historical numerical-setting failures retained."
+  ],
+  "evidence_boundaries": [
+    "Not CC approved; explicit human quota-gap autonomy applied after remaining guidance exhausted.",
+    "Offline authored surface/material/mass checks do not prove native cooking/contact stability or physical assembly.",
+    "Entire native trajectory must be checked afresh; no previous stage result inherited."
+  ],
+  "resource_snapshot": null,
+  "capture_output_contract": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/round53_v230_cap_close/capture_output_contract.json",
+  "required_success_evidence": {
+    "original_summary_and_episode_success": true,
+    "state_write_counts_complete": true,
+    "forbidden_calls_after_scene_initialization": 0,
+    "no_automatic_CC_success_review": true
+  },
+  "worker_config_sha256": "363b1f32b20fb9860327ae665a5543c9f1e435bea24eef10c83b1801e0ebd437",
+  "recipe_fingerprint": "3b6a6d650acfb5758d02b6488a2a1f449bf2cd0113ddcffb0efb0170fcce1f9a",
+  "final_acceptance": {
+    "human_answer": "允许改为位姿稳定验收，原始速度单独报告",
+    "at_utc": "2026-11-17T07:09:21.424075+00:00",
+    "scope": "round51 only; 52/53held",
+    "fixed_pose_window": {
+      "consecutive_fresh_physics_steps": 240,
+      "position_drift_m": 0.002,
+      "orientation_drift_rad": 0.03
+    },
+    "preserved": [
+      "five target poses3mm/0.04rad",
+      "real release",
+      "both arms home",
+      "original force/slip/collision/write/resource gates"
+    ],
+    "raw_velocity": "record independently without replacement/zeroing; no longer final acceptance hard gate"
+  },
+  "pause_after_this_round": true,
+  "authorization_record": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch52_56_20261117/human_authorization.json",
+  "workflow_owner": "Codex independent review as explicitly instructed",
+  "download_original_videos_after_finish": true,
+  "candidate": "v239_unload",
+  "final_support_load": {
+    "scope": "summed support-object normal load of installed parts 6,3,2,1,0, existing probes, same frame",
+    "minimum_N": 9.81,
+    "base6_minimum_N": 1.962,
+    "maximum_N": 40.0,
+    "human_instruction": "/home/user/beam_integration_20261010_upstream6f57dae/grasp_repairs_20261012_20rounds/batch54_58_20261119/human_instruction_round56.json"
+  },
+  "part0_release_check": "part-0 target only; no intermediate five-part window after part 0 is placed",
+  "handover_unload_lift": "left hand lifts column 2 by 0.2 mm (unload) after the handover grasp"
+}
